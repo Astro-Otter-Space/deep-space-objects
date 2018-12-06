@@ -1,20 +1,25 @@
 version: '2.2'
 
+networks:
+    default:
+        driver: bridge
+
 services:
     # PHP
     dso_php:
         build:
             context: docker/php7-fpm
             args:
-                TIMEZONE: ${TIMEZONE}
+                TIMEZONE: $TIMEZONE
         container_name: dso_php
         volumes:
-            - "${SYMPHONY_APP_PATH}:/var/www/:rw"
-#            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
-#            - "~/.gitconfig:/home/site/.gitconfig:ro"
-#            - "~/.ssh/config:/home/site/.ssh/config:ro"
+            - ".:/var/www/deep-space-objects/:rw"
+            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
+            - "~/.gitconfig:/home/site/.gitconfig:ro"
+            - "~/.ssh/config:/home/site/.ssh/config:ro"
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
+            - TERM=xterm-color
 
     # NGINX
     dso_nginx:
@@ -50,7 +55,7 @@ services:
         links:
             - dso_elasticsearch
         ports:
-            - 5601: 5601
+            - 5601:5601
 
     # Elk
 #    dso_elk:
@@ -71,7 +76,3 @@ services:
         container_name: dso_redis
         ports:
           - 6379:6379
-
-networks:
-    dso_stack:
-        driver: bridge
