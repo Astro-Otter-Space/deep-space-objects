@@ -10,6 +10,11 @@ services:
         container_name: dso_php
         volumes:
             - "${SYMPHONY_APP_PATH}:/var/www/:rw"
+#            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
+#            - "~/.gitconfig:/home/site/.gitconfig:ro"
+#            - "~/.ssh/config:/home/site/.ssh/config:ro"
+        environment:
+            - SSH_AUTH_SOCK=/ssh-agent
 
     # NGINX
     dso_nginx:
@@ -26,6 +31,7 @@ services:
     dso_elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.0.1
         container_name: dso_elasticsearch
+        hostname: elasticsearch
         environment:
             - cluster.name=demo
             - bootstrap.memory_lock=true
@@ -37,6 +43,7 @@ services:
         ports:
             - 9200:9200
 
+    # Kibana
     dso_kibana:
         image: docker.elastic.co/kibana/kibana:6.0.1
         container_name: dso_kibana
