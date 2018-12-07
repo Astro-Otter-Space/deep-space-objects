@@ -1,0 +1,243 @@
+# Layout
+dso: Deep space objects
+menu.homepage: Homepage
+selectLang: Languages
+astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
+error.message: Error %error%, maybe you fall in a black hole :) ?
+more: More informations
+hem.zo: Zodiac
+hem.no: Northern hemisphere
+hem.su: Southern hemisphere
+#Catalog
+catalogs: Catalogs
+allCatalog: All catalogs
+catalog.messier: Messier's catalog
+catalog.ngc: New General Catalog
+catalog.ic: Index Catalog
+catalog.ldn: Lynds' Catalogue of Dark Nebulae
+catalog.sh: Sharpless catalog
+catalog.cr: Collinder catalog
+catalog.sto : Stock open clusters
+catalog.rcw: RCW Catalog
+catalog.abl: Abell catalog
+catalog.ugc: Uppsala General Catalog
+catalog.dodz: Dolidze-Dzimselejvil catalog
+# Lang:
+fr: French
+en: English (UK)
+pt: Portuguese
+pt_BR: Portuguese (Brazil)
+# Homepage
+homepage.message: Discover beauties and mysteries of the universe
+home.search.placeholder: Research in the catalog...
+dayImage: Image of the day
+# View full
+info: Informations
+magnitude: Apparent magnitude
+const_id: Constellation|Constellations
+dim: Size
+dimExp: Angular dimensions in arcminutes
+distAl: Distance (year-light)
+distPc: Distance (parsec)
+imagesGall: Images gallery
+constImgGall: In the same constellation
+typeImgGall: Objects of type "%type%"
+mag: Magnitude
+ra: Right ascension
+dec: Declination
+# Vue list
+filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
+list.messier: List of Messier objects
+description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
+list.ngc: New General Catalog
+description.ngc:
+list.ic: Index Catalog
+description.ic:
+list.ldn: Lynds' Catalogue of Dark Nebulae
+description.ldn:
+list.sh: Sharpless catalog
+description.sh:
+list.cr: Collinder catalog
+description.cr:
+list.sto : Stock open clusters
+description.sto:
+list.rcw: RCW catalog
+description.rcw:
+list.abl: Abell catalog
+description.abl:
+list.ugc: Uppsala General Catalog
+description.ugc:
+list.dodz: Dolidze-Dzimselejvil catalog
+description.dodz:
+filters: Filters
+listOrderAsc: Sort ascendant
+listOrderDesc: Sort descendant
+listMagnitudeAsc: Lowest magnitude
+listMagnitudeDesc: Highest magnitude
+type: Type of object|Objects type
+range.inf: Less than %to%
+range.between: Between %from% to %to%
+range.sup: More than %from%
+# Type DSO
+type.gg: Galaxy cluster
+type.g:  Generic galaxy
+type.s:  Spiral galaxy
+type.s0: Lenticular galaxy
+type.sd: Dwarf galaxy
+type.e:  Elliptical galaxy
+type.i:  Irregular galaxy
+type.oc: Open cluster
+type.gc: Globular cluster
+type.en: Emission nebula
+type.bn: Generic bright nebula
+type.sfr: Starforming Nebula (with open cluster)
+type.rn: Reflection nebula
+type.pn: Planetary nebula
+type.snr: Supernova remnant
+type.dn:  Dark nebula grey
+type.pos: Asterism
+type.sc: Star clusters
+# Constellations
+const_id.unassigned: Unassigned
+const_id.and: Andromeda
+const_id.ant: Antlia
+const_id.aps: Apus
+const_id.aql: Aquila
+const_id.aqr: Aquarius
+const_id.ara: Ara
+const_id.ari: Aries
+const_id.aur: Auriga
+const_id.boo: Boötes
+const_id.cae: Caelum
+const_id.cam: Camelopardalis
+const_id.cap: Capricornus
+const_id.car: Carina
+const_id.cas: Cassiopeia
+const_id.cen: Centaurus
+const_id.cep: Cepheus
+const_id.cet: Cetus
+const_id.cha: Chamaeleon
+const_id.cir: Circinus
+const_id.cma: Canis Majoris
+const_id.cmi: Canis Minor
+const_id.col: Columba
+const_id.com: Coma Berenice
+const_id.cnc: Cancer
+const_id.cra: Corona Austrina
+const_id.crb: Corona Borealis
+const_id.crt: Crater
+const_id.cru: Crux
+const_id.crv: Corvus
+const_id.cvn: Canes Venatici
+const_id.cyg: Cygnus
+const_id.del: Delphinus
+const_id.dor: Dorado
+const_id.dra: Drago
+const_id.equ: Equuleus
+const_id.eri: Eridanus
+const_id.for: Fornax
+const_id.gem: Gemini
+const_id.gru: Grus
+const_id.her: Hercules
+const_id.hor: Horologium
+const_id.hya: Hydra
+const_id.hyi: Hydrus
+const_id.ind: Indus
+const_id.lac: Lacerta
+const_id.leo: Leo
+const_id.lep: Lepus
+const_id.lib: Libra
+const_id.lmi: Leo Minor
+const_id.lup: Lupus
+const_id.lyn: Lynx
+const_id.lyr: Lyra
+const_id.men: Mensa
+const_id.mic: Microscopium
+const_id.mon: Monoceros
+const_id.mus: Musca
+const_id.nor: Norma
+const_id.oct: Octans
+const_id.oph: Ophiuchus
+const_id.ori: Orion
+const_id.pav: Pavo
+const_id.peg: Pegasus
+const_id.per: Perseus
+const_id.phe: Phoenix
+const_id.pic: Pictor
+const_id.psa: Piscis Austrinus
+const_id.psc: Pisces
+const_id.pup: Puppies
+const_id.pyx: Pyxis
+const_id.ret: Reticulum
+const_id.scl: Sculptor
+const_id.sco: Scorpius
+const_id.sct: Scutum
+const_id.ser: Serpens
+const_id.sex: Sextans
+const_id.sge: Sagitta
+const_id.sgr: Sagittarius
+const_id.tau: Taurus
+const_id.tel: Telescopium
+const_id.tra: Triangulum Australe
+const_id.tri: Triangulum
+const_id.tuc: Tucana
+const_id.uma: Ursa Major
+const_id.umi: Ursa Minor
+const_id.vel: Vela
+const_id.vir: Virgo
+const_id.vol: Volans
+const_id.vul: Vulpecula
+# Messier name (no translation for english):
+m1.label: Crab Nebula
+m4.label: Cat's eye
+m6.label: Butterfly Cluster
+m7.label: Ptolemy´s Cluster
+m8.label: Nébuleuse de la lagune
+m11.label: Wild Duck Cluster
+m13.label: Great Hercules Cluster
+m15.label: Nuage de Pégase
+m16.label: Eagle Nebula
+m17.label: Omega Nebula
+m18.label: Black swan
+m20.label: Trifid Nebula
+m22.label: Saggitarius cluster
+m27.label: Dumbbell Nebula
+m31.label: Andromeda
+m33.label: Galaxie du Triangle
+m42.label: Orion Nebula
+m43.label: Mairan nebula
+m44.label: Praesepe
+m45.label: Pleiades
+m51.label: Whirlpool
+m57.label: Ring nebula
+m63.label: Sunflower Galaxy
+m64.label: Blackeye Galaxy
+m76.label: Little Dumbbell Nebula
+m81.label: Bode´s Galaxy
+m82.label: Cigar Galaxy
+m83.label: Southern Pinwheel
+m97.label: Owl Nebula
+m101.label: Pinwheel
+m102.label: Spindle
+m104.label: Sombrero
+# Form
+select:
+    order:
+        label: Ordering by
+        placeholder: Choose your option
+# Form contact
+contact.title: "Contact us"
+form.error.sending: "A problem has occurred, please try later"
+form.ok.sending: "Message sended"
+form.error.message: "Please fix errors below"
+contact.form.firstname: "Firstname (*)"
+contact.placeholder.firstname: "Please enter your firstname"
+contact.form.lastname: "Lastname (*)"
+contact.placeholder.lastname: "Please enter your lastname"
+contact.form.email: "Email (*)"
+contact.form.confirm_email: "Email confirmation (*)"
+contact.placeholder.email: "Please enter your email (e.g: email@email.com)"
+contact.form.country: "Country (*)"
+contact.form.message: "Message (*)"
+contact.form.submit: "Submit"
+contact.mandatory: "(*) All fields are mandatory"

@@ -1,0 +1,232 @@
+# Layout
+dso: Objetos do céu profundo
+menu.homepage: Página incial
+selectLang: Línguas
+astrobin.message: Esse produto utilisa o API AstroBin mas não é apoiado ou certificado por AstroBin
+error.message: Erro %error%, talvez você caiu num buraco negro
+more: Mais informações
+hem.zo: Zodíaco
+hem.no: Hemisfério Norte
+hem.su: Hemisfério sul
+#Catalog
+catalogs: Catálogos
+allCatalog: Todos os catálogos
+catalog.messier: Messier Catalog
+catalog.ngc: New General Catalog
+catalog.ic: Index Catalog
+catalog.ldn: Lynds' Catalogue of Dark Nebulae
+catalog.sh: Sharpless catalog
+catalog.cr: Collinder catalog
+catalog.sto : Stock open clusters
+catalog.rcw: RCW Catalog
+catalog.abl: Catalogue Abell
+catalog.ugc: Uppsala General Catalog
+catalog.dodz: Dolidze-Dzimselejvil catalog
+# Lang:
+fr: Francês
+en: Inglês (UK)
+pt: Português
+pt_BR: Português (BR)
+# Homepage
+homepage.message: Descobre belezas e mistérios do universo
+home.search.placeholder: Procurar no catálogo
+dayImage: Imagem do dia
+# View full
+info: Informações
+magnitude: Magnitude aparente
+const_id: Constelação|Constelações
+dim: Tamanha
+dimExp: Dimensão angular em arcominutos
+distAl: Distância (ano-luz)
+distPc: Distância (parsec)
+imagesGall: Galeria de imagens
+constImgGall: Na mesma constelação
+typeImgGall: Objetos do tipo "%type%"
+mag: Magnitude
+ra: Ascencão reta
+dec: Declinação
+# Vue list
+filteringList: Filtrar lista de itens por constelação, tipo e magnitude... e descobrir os mais lindos objetos celestes.
+list.messier: Lista dos objetos de Messier
+description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
+list.ngc: New General Catalog
+description.ngc:
+list.ic: Index Catalog
+description.ic:
+list.ldn: Lynds' Catalogue of Dark Nebulae
+description.ldn:
+list.sh: Sharpless catalog
+description.sh:
+list.cr: Collinder catalog
+description.cr:
+list.sto : Stock open clusters
+description.sto:
+list.rcw: RCW catalog
+description.rcw:
+list.abl: Abell catalog
+description.abl:
+list.ugc: Uppsala General Catalog
+description.ugc:
+list.dodz: Dolidze-Dzimselejvil catalog
+description.dodz:
+listOrderAsc: Ordem crescente
+listOrderDesc: Ordem decrescente
+listMagnitudeAsc: Magnitude miníma
+listMagnitudeDesc: Magnitude maxíma
+type: Tipo de objeto|Tipo de objeto
+filters: filtros
+# Type DSO
+type.gg: Aglomerado de galáxias
+type.g: Galáxia genérica
+type.s: Galáxia espiral
+type.s0: Galáxia lenticular
+type.sd: Galáxia anã
+type.e: Galáxia elíptica
+type.i: Galáxia irregular
+type.oc: Aglomerado aberto
+type.gc: Aglomerado globular
+type.en: Nebulosa de emissão
+type.bn: Nebulosa brilhante genérica
+type.sfr: Nebulosa difusa
+type.rn: Nebulosa de reflexão
+type.pn: Nebulosa planetária
+type.snr: Remanescente de supernova
+type.dn: Nebulosa escura
+type.pos: Asterismo
+type.sc: Aglomerado estelar
+# Constellations
+const.unassigned:
+const_id.and: Andrômeda
+const_id.ant:
+const_id.aps:
+const_id.aql:
+const_id.aqr: Aquário
+const_id.ara:
+const_id.ari:
+const_id.aur: Auriga
+const_id.boo:
+const_id.cae:
+const_id.cam:
+const_id.cap: Capricórnio
+const_id.car:
+const_id.cas: Cassiopeia
+const_id.cen:
+const_id.cep:
+const_id.cet: Baleia
+const_id.cha:
+const_id.cir:
+const_id.cma: Cão Maior
+const_id.cmi:
+const_id.col:
+const_id.com: Coma Berenice
+const_id.cnc: Câncer
+const_id.cra:
+const_id.crb:
+const_id.crt:
+const_id.cru:
+const_id.crv:
+const_id.cvn: Canes Venatici
+const_id.cyg: Cygnus
+const_id.del:
+const_id.dor: Doradus
+const_id.dra: Draco
+const_id.equ:
+const_id.eri:
+const_id.for:
+const_id.gem: Gêmeos
+const_id.gru:
+const_id.her: Hércules
+const_id.hor:
+const_id.hya: Hydra
+const_id.hyi:
+const_id.ind:
+const_id.lac:
+const_id.leo: Leo
+const_id.lep: Lebre
+const_id.lib:
+const_id.lmi:
+const_id.lup:
+const_id.lyn:
+const_id.lyr: Lyra
+const_id.men:
+const_id.mic:
+const_id.mon: Unicórnio
+const_id.mus:
+const_id.nor:
+const_id.oct:
+const_id.oph: Serpentário
+const_id.ori: Orion
+const_id.pav:
+const_id.peg: Pegasus
+const_id.per: Perseu
+const_id.phe:
+const_id.pic:
+const_id.psa:
+const_id.psc: Peixes
+const_id.pup: Cão Menor
+const_id.pyx:
+const_id.ret:
+const_id.sco: Escorpião
+const_id.sct: Scutum
+const_id.ser: Serpente
+const_id.sex:
+const_id.sge: Flecha
+const_id.sgr: Sagitário
+const_id.tau: Touro
+const_id.tel:
+const_id.tra:
+const_id.tri: Triângulo
+const_id.tuc:
+const_id.uma: Ursa Maior
+const_id.umi: Ursa Minor
+const_id.vel:
+const_id.vir: Virgem
+const_id.vol:
+const_id.vul: Raposa
+# Messier name (from english traduction):
+m1.label: Nebulosa do Caranguejo
+m4.label: Nebulosa do Olho de gato
+m6.label: Aglomerado da Borboleta
+m7.label: Aglomerado de Ptolomeu
+m8.label: Nebulosa Laguna
+m11.label: Aglomerado do Pato Selvagem
+m13.label: Grande Aglomerado Globular de Hércules
+m15.label: Aglomerado globular de Pégaso
+m16.label: Nebulosa da Águia
+m17.label: Nebulosa Ômega
+m18.label: Cisne Negro
+m20.label: Nebulosa Trífida
+m22.label: Nuvem Estelar de Sagitário
+m27.label: Nebulosa do Haltere
+m31.label: Galáxia de Andrômeda
+m33.label: Galáxia do Triângulo
+m42.label: Nebulosa de Órion
+m43.label: Nebulosa De Mairan
+m44.label: Presépio
+m45.label: Plêiades
+m51.label: Galáxia do Rodamoinho
+m57.label: Nebulosa do Anel
+m63.label: Galáxia do Girassol
+m64.label: Galáxia Olho Negro
+m76.label: Pequena Nebulosa do Haltere
+m81.label: Galáxia de Bode
+m82.label: Galáxia do Charuto
+m83.label: Galáxia Cata-vento do Sul
+m97.label: Nebulosa da Coruja
+m101.label: Galáxia Cata-vento
+m102.label: Galáxia do Fuso
+m104.label: Galáxia do Sombreiro
+# Form
+select:
+    order:
+        label: Ordenar por
+        placeholder: Escolha sua opção
+# Form contact
+contact.form.firstname: Prénom (*)
+contact.placeholder.firstname: Veuillez renseignez votre prénom
+contact.form.lastname:
+contact.placeholder.lastname:
+contact.form.email:
+contact.placeholder.email:
+contact.form.country:
+contact.form.message:
