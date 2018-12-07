@@ -4,5 +4,9 @@
 {% set pageDesc = '' %}
 
 {% block content %}
-  Coucou
+
+  {{ 'homepage.message'|trans }}
+  
+  {% include 'forms/search.html.twig' %}
+
 {% endblock %}

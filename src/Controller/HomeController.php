@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Forms\SearchFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,15 @@ class HomeController extends AbstractController
     {
         $result = [];
 
+        $options = [
+            'method' => 'post',
+            'action' => $this->generateUrl('search_ajax')
+        ];
+        $form = $this->createForm(SearchFormType::class, null, $options);
+        $result['form'] = $form->createView();
+
         return $this->render('pages/home.html.twig', $result);
     }
+
+
 }
