@@ -14,12 +14,14 @@ services:
         container_name: dso_php
         volumes:
             - ".:/var/www/deep-space-objects:rw"
-            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
+            - "./.docker/php7-fpm/php.ini:/usr/local/etc/php/conf.d/030-custom.ini:ro"
+            - "${SSH_AUTH_SOCK}:/ssh-agent:ro"
             - "~/.gitconfig:/home/site/.gitconfig:ro"
             - "~/.ssh/config:/home/site/.ssh/config:ro"
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
+        working_dir: /var/www/deep-space-objects
 
     # NGINX
     nginx:

@@ -3,28 +3,36 @@ Atlas for deep space objects (Symfony 4 / Elastic Search / Vue.js)
 
 Installation
 ==
-Clone project
+### Clone project
  > git clone git@github.com:HamHamFonFon/deep-space-objects.git
  
-Launch docker stack
+### Launch docker stack
  > docker-compose up -d
-  
-Docker stack based on [https://github.com/maxpou/docker-symfony](Maxpou/Docker-Symfony stack)
 
-Add hosts into hosts file
- > sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "dso.dev" >> /etc/hosts
+### Add hosts into hosts file
+ > sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts
 
-Install dependencies
+### Install dependencies
  > cd project
  
  > composer install
 
-Run on :
+### Run on :
 
  > docker-compose up -d
 
 Symfony app :
- - http://dso.local 
+ - http://symfony.local
+
+Use
+==
+
+### Install symfony components
+ > composer require <components>
+
+### Use nodeJs and NPM
+ > WIP
+
 
 Import data in Elastic Search
 ==
@@ -33,6 +41,13 @@ WIP
 Authors
 ==
  Stéphane MEAUDRE <balistik.fonfon@gmail.com>
- 
+
+Sources
+=======
+Docker stack based on stack by :
+https://github.com/maxpou/docker-symfony
+https://framagit.org/3rr0r/docker-sf4
+
+
 Licences
 ==
