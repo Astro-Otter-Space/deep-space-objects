@@ -10,7 +10,7 @@
     }
   },
   "mappings": {
-    "_doc": {
+    "doc": {
       "properties": {
         "id": {
           "type": "text",

@@ -36,15 +36,20 @@ Use
  > WIP
 
 
-Import data in Elastic Search
+Elastic Search
 ==
-### Create index and mappings
+### Create index with mappings and import data
 ```
 curl -X DELETE "elasticsearch:9200/constellations"
-curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: application/json' -d @constellations.mapping.json
+curl -X DELETE "elasticsearch:9200/deepspaceobjects"
+curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/constellations.mapping.json
+curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/dso.mapping.json
 ```
 
 ### Bulk import Data
+```
+curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/json' --data-binary @config/elasticsearch/data/constellations.bulk.json
+```
 
 Authors
 ==
