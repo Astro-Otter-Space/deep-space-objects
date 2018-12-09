@@ -1,34 +1,39 @@
 {% block layout %}
-{% spaceless %}
+  {% spaceless %}
     {% set pageLang = app.request.locale %}
     {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
     {% set pageDesc = pageDesc|default('') %}
     {% set pageUrl = app.request.uri %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
     {% set favicon = favicon|default('') %}
-{% endspaceless %}
-<!DOCTYPE html>
-<html lang="{{ pageLang }}">
+  {% endspaceless %}
+  <!DOCTYPE html>
+  <html lang="{{ pageLang }}">
     <head>
-        <meta charset="UTF-8">
-        {% block meta %}
-            <title>{{ pageTitle }}</title>
-            <meta name="title" content="{{ pageTitle }}">
-            <meta name="description" content="">
-            <link rel="canonical" href="{{ pageUrlCanonical }}">
-            <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-            {% block header %}{% endblock %}
-            {% block content %}{% endblock %}
-            {% block footer %}{% endblock %}
-        {% endblock %}
+      <meta charset="UTF-8">
+      {% block meta %}
+        <title>{{ pageTitle }}</title>
+        <meta name="title" content="{{ pageTitle }}">
+        <meta name="description" content="">
+        <link rel="canonical" href="{{ pageUrlCanonical }}">
+        <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>
+      {% endblock %}
 
-        {% block javascripts %}
-          <script src="{{ asset('build/app.js') }}"></script>
-        {% endblock %}
+      {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+      {% endblock %}
+    </head>
+
+    <body>
+    {% block body %}
+      {% block header %}{% endblock %}
+      {% block content %}{% endblock %}
+      {% block footer %}{% endblock %}
+    {% endblock %}
+
+    {% block javascripts %}
+      <script src="{{ asset('build/app.js') }}"></script>
+    {% endblock %}
     </body>
-</html>
+  </html>
 {% endblock %}

@@ -27,3 +27,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+#    Astrobin\AbstractWebService:
+#      abstract: true
+#      autowire: false
+#      public: true
+    Astrobin\Services\GetImage:
+#      parent: Astrobin\AbstractWebService
+#      autowire: false
+#      public: true
+#      autoconfigure: false

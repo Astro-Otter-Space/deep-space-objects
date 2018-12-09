@@ -22,8 +22,13 @@
         "symfony/twig-bundle": "4.2.*",
         "symfony/validator": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.0",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "hamhamfonfon/astrobin" : "dev-master"
     },
+    "repositories": [{
+        "type" : "vcs",
+        "url" : "https://github.com/HamHamFonFon/Astrobin-API-PHP.git"
+    }],
     "config": {
         "preferred-install": {
             "*": "dist"

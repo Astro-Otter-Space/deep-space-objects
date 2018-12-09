@@ -10,5 +10,12 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "node-sass": "^4.10.0",
+        "sass-loader": "^7.1.0",
+        "vue": "^2.5.18",
+        "vue-loader": "^15.4.2",
+        "vue-template-compiler": "^2.5.18"
     }
 }

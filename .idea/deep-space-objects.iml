@@ -25,6 +25,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/elasticsearch/elasticsearch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/ringphp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/hamhamfonfon/astrobin" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />

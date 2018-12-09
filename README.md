@@ -17,6 +17,8 @@ Installation
  
  > composer install
 
+ > npm install
+
 ### Run on :
 
  > docker-compose up -d
@@ -36,7 +38,13 @@ Use
 
 Import data in Elastic Search
 ==
-WIP
+### Create index and mappings
+```
+curl -X DELETE "elasticsearch:9200/constellations"
+curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: application/json' -d @constellations.mapping.json
+```
+
+### Bulk import Data
 
 Authors
 ==

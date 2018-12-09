@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Forms\SearchFormType;
+use Astrobin\Services\GetImage;
+use Astrobin\Services\GetTodayImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,6 +34,4 @@ class HomeController extends AbstractController
 
         return $this->render('pages/home.html.twig', $result);
     }
-
-
 }
