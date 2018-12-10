@@ -1,0 +1,11 @@
+<header id="Vue-header">
+  <div class="Switch-Lang-List">
+    {% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+    <listLocales lang="en" value="{{ en|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>
+    <listLocales lang="fr" value="{{ fr|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>
+    <listLocales lang="pt" value="{{ pt|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>
+  </div>
+
+  <div id="switch-lang">
+  </div>
+</header>
