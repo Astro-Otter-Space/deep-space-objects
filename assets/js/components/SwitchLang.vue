@@ -1,15 +1,20 @@
 <template>
-  <select>
-    <option v-for="option in dataLangs" ></option>
-  </select>
+  <ul>
+    <li v-for="item in dataLangs" >
+      <a
+        v-bind:href="item.path"
+      >
+        {{item.value}}
+      </a>
+    </li>
+  </ul>
 </template>
 
 <script>
   export default {
-    name: "select-lang",
-    props: ["dataLangs"],
-    data: function () {
-      return {}
+    name: "listLocales",
+    props: {
+      dataLangs: Object
     }
   }
 </script>

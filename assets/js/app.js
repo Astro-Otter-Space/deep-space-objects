@@ -6,5 +6,8 @@ import switchLang from './components/SwitchLang'
 
 new Vue({
   el: '#switch-lang',
-  components: {switchLang}
+  components: {switchLang},
+  data: {
+    dataLangs
+  }
 }).$mount('#switchLang');
