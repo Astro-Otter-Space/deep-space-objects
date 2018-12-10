@@ -4,20 +4,21 @@ Atlas for deep space objects (Symfony 4 / Elastic Search / Vue.js)
 Installation
 ==
 ### Clone project
- > git clone git@github.com:HamHamFonFon/deep-space-objects.git
+`git clone git@github.com:HamHamFonFon/deep-space-objects.git` 
  
 ### Launch docker stack
- > docker-compose up -d
+ `docker-compose build`
 
 ### Add hosts into hosts file
- > sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts
+ `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts`
 
 ### Install dependencies
- > cd project
- 
- > composer install
 
- > npm install
+```
+cd deep-space-objects
+composer install
+npm install
+``` 
 
 ### Run on :
 
