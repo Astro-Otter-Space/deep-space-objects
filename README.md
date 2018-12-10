@@ -7,10 +7,21 @@ Installation
 `git clone git@github.com:HamHamFonFon/deep-space-objects.git` 
  
 ### Launch docker stack
- `docker-compose build`
+ ```
+ cp .env.local.dist .env.local
+ docker-compose build
+ ````
 
 ### Add hosts into hosts file
  `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts`
+
+
+### Start Docker stack on :
+
+```
+docker-compose up -d
+docker exec -ti dso_php bash
+```
 
 ### Install dependencies
 
@@ -19,10 +30,6 @@ cd deep-space-objects
 composer install
 npm install
 ``` 
-
-### Run on :
-
- > docker-compose up -d
 
 Symfony app :
  - http://symfony.local
