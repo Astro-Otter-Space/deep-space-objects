@@ -4,6 +4,8 @@ import Vue from 'vue'
 
 import switchLang from './components/SwitchLang'
 
+const dataLangs = [];
+
 new Vue({
   el: '#switch-lang',
   components: {switchLang},

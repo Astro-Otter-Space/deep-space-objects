@@ -6,6 +6,7 @@
     <listLocales lang="pt" value="{{ pt|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>
   </div>
 
-  <div id="switch-lang">
+  <div id="switch-lang" class="listlocales">
+    <locale-lang v-for="datalocale in listlocales" :locale="locale" />
   </div>
 </header>
