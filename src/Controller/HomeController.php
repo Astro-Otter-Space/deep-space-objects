@@ -27,7 +27,7 @@ class HomeController extends AbstractController
 
         $options = [
             'method' => 'post',
-//            'action' => $this->generateUrl('search_ajax')
+            'action' => $this->generateUrl('search_ajax')
         ];
         $form = $this->createForm(SearchFormType::class, null, $options);
         $result['form'] = $form->createView();

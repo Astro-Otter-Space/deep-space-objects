@@ -20,7 +20,7 @@
       {% endblock %}
 
       {% block stylesheets %}
-        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+        <link href="{{ 'build/css/app.css' }}" rel="stylesheet">
         {#{{ encore_entry_link_tags('app') }}#}
       {% endblock %}
     </head>
@@ -33,7 +33,7 @@
     {% endblock %}
 
     {% block javascripts %}
-      <script src="{{ asset('build/app.js') }}"></script>
+      <script src="{{ 'build/app.js' }}"></script>
     {% endblock %}
     </body>
   </html>

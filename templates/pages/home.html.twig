@@ -4,9 +4,13 @@
 {% set pageDesc = '' %}
 
 {% block content %}
-
-  {{ 'homepage.message'|trans }}
-
+  <div data-home-widget data-home-title="{{ 'homepage.message'|trans }}"></div>
+  <div id="app-homepage">
+  </div>
   {% include 'forms/search.html.twig' %}
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ 'build/home.js' }}"></script>
 {% endblock %}
