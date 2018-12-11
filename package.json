@@ -12,6 +12,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "copy-webpack-plugin": "^4.6.0",
         "node-sass": "^4.10.0",
         "sass-loader": "^7.1.0",
         "vue": "^2.5.18",

@@ -20,7 +20,8 @@
       {% endblock %}
 
       {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
+        <link href="{{ asset('build/css/app.css') }}" rel="stylesheet">
+        {#{{ encore_entry_link_tags('app') }}#}
       {% endblock %}
     </head>
 

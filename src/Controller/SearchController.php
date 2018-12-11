@@ -18,7 +18,7 @@ class SearchController extends AbstractController
 
     /**
      * @Route(
-     *     "/{_locale}/_research",
+     *     "/_research",
      *     options={"expose"=true},
      *     name="search_ajax"
      * )
