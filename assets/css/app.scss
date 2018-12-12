@@ -1,7 +1,14 @@
+// Colors
 $bgd-color: lightgray;
-$font: Lato,sans-serif;
 
-body {
-  font-family: $font;
-  background-color: $bgd-color;
-}
+$color-success: #3c763d;
+$color-error: #a94442;
+
+
+// Fonts
+$font-lato: Lato,sans-serif;
+
+// line height
+$lineheight: 1rem;
+
+@import "default";

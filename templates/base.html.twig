@@ -4,20 +4,33 @@
     {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
     {% set pageDesc = pageDesc|default('') %}
     {% set pageUrl = app.request.uri %}
+    {% set pageImage = pageImage|default(null) %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
     {% set favicon = favicon|default('') %}
+    {% set facebookId = ''|default(null) %}
   {% endspaceless %}
   <!DOCTYPE html>
   <html lang="{{ pageLang }}">
     <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
       {% block meta %}
+        {#Meta#}
         <title>{{ pageTitle }}</title>
         <meta name="title" content="{{ pageTitle }}">
-        <meta name="description" content="">
+        <meta name="description" content="{{ pageDesc }}">
         <link rel="canonical" href="{{ pageUrlCanonical }}">
-        <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>
+
+        {#OpenGraph#}
+        <meta property="fb:app_id"        content="{{ facebookId }}" />
+        <meta property="og:url"           content="{{ pageUrl }}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="{{ pageTitle }}" />
+        <meta property="og:description"   content="{{ pageDesc }}" />
+        <meta property="og:image"         content="{{ pageImage }}" />
       {% endblock %}
+      {#Favicon#}
+      <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>
 
       {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
