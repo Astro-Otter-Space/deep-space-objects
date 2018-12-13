@@ -13,7 +13,7 @@ services:
                 TIMEZONE: ${TIMEZONE}
         container_name: dso_php
         hostname: php
-        user: ${SITE_UID:-1000}:${SITE_GID:-1000}
+        #user: ${SITE_UID:-1000}:${SITE_GID:-1000}
         volumes:
             - ".:/var/www/deep-space-objects:rw,cached"
             - ${COMPOSER_CACHE_DIR}:/home/site/.composer:rw,cached
@@ -26,8 +26,6 @@ services:
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
-            - SITE_UID
-            - SITE_GID
         working_dir: /var/www/deep-space-objects
 
     # NGINX

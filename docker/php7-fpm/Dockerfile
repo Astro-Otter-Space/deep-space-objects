@@ -1,5 +1,6 @@
 FROM php:7.2-fpm
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
+USER root
 
 # Utils
 RUN apt-get update \
@@ -34,7 +35,7 @@ RUN apt-get remove -y cmdtest
 RUN apt-get update
 RUN apt-get install -y yarn
 
-EXPOSE 9000
+#EXPOSE 9000
 
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -42,4 +43,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]
+ENTRYPOINT ["docker-entrypoint"]
