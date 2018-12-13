@@ -9,6 +9,7 @@ Installation
 ### Launch docker stack
  ```
  cp .env.local.dist .env.local
+ cp .env.dist .env
  docker-compose build
  ````
 
