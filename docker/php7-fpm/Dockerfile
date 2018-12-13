@@ -1,11 +1,11 @@
 FROM php:7.2-fpm
-
-MAINTAINER HamHamFonFon
+MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
+USER root
 
 # Utils
 RUN apt-get update \
   && apt-get upgrade -y \
-  && apt-get install -y curl less vim libpq-dev wget gnupg libicu-dev libpng-dev zlib1g-dev \
+  && apt-get install -y curl less vim libpq-dev wget gnupg libicu-dev libpng-dev zlib1g-dev sudo wget unzip \
   && docker-php-ext-install mysqli \
   && docker-php-ext-install pdo_mysql \
   && docker-php-ext-install intl \
@@ -40,9 +40,7 @@ EXPOSE 9000
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["docker-entrypoint"]
-
-
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

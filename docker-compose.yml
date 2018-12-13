@@ -13,19 +13,19 @@ services:
                 TIMEZONE: ${TIMEZONE}
         container_name: dso_php
         hostname: php
-        user: ${SITE_UID:-1000}:${SITE_GUID:-1000}
+        user: ${SITE_UID:-1000}:${SITE_GID:-1000}
         volumes:
             - ".:/var/www/deep-space-objects:rw,cached"
             - "./docker/php7-fpm/php.ini:/usr/local/etc/php/conf.d/030-custom.ini:ro"
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
-            - "${SSH_AUTH_SOCK}:/ssh-agent:ro"
+            - "${SSH_AUTH_SOCK}:/ssh-agent"
         env_file:
           - .env
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
             - SITE_UID
-            - SITE_GUID
+            - SITE_GID
         working_dir: /var/www/deep-space-objects
 
     # NGINX

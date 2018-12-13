@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+            <state relative-caret-position="486">
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -38,16 +38,16 @@
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
-              <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+              <caret line="26" column="8" selection-start-line="26" selection-end-line="26" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docker/php7-fpm/Dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+            <state relative-caret-position="791">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
@@ -101,6 +101,7 @@
       <find>Pé</find>
       <find>serpent</find>
       <find>1101</find>
+      <find>cmdtest</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;_type&quot;: &quot;_doc&quot;</replace>
@@ -154,16 +155,16 @@
         <option value="$PROJECT_DIR$/docker/nginx/default.template" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/docker/php7-fpm/service.sh" />
-        <option value="$PROJECT_DIR$/docker/php7-fpm/Dockerfile" />
         <option value="$PROJECT_DIR$/docker/php7-fpm/docker-entrypoint.sh" />
         <option value="$PROJECT_DIR$/docker/php7-fpm/www.conf" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/.env.local" />
         <option value="$PROJECT_DIR$/.env.local.dist" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/docker/php7-fpm/php.ini" />
         <option value="$PROJECT_DIR$/config/elasticsearch/data/dso20.bulk.src.json" />
+        <option value="$PROJECT_DIR$/docker/php7-fpm/Dockerfile" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
       </list>
     </option>
   </component>
@@ -294,6 +295,17 @@
             <path>
               <item name="deep-space-objects" type="b2602c69:ProjectViewProjectNode" />
               <item name="deep-space-objects" type="462c0819:PsiDirectoryNode" />
+              <item name="docker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deep-space-objects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deep-space-objects" type="462c0819:PsiDirectoryNode" />
+              <item name="docker" type="462c0819:PsiDirectoryNode" />
+              <item name="php7-fpm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deep-space-objects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deep-space-objects" type="462c0819:PsiDirectoryNode" />
               <item name="translations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -365,12 +377,12 @@
       <workItem from="1544542190750" duration="5207000" />
       <workItem from="1544611507042" duration="6171000" />
       <workItem from="1544628713333" duration="6071000" />
-      <workItem from="1544692426105" duration="1914000" />
+      <workItem from="1544692426105" duration="5281000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73023000" />
+    <option name="totallyTimeSpent" value="76390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3840" y="-1" width="1920" height="1080" extended-state="6" />
@@ -667,20 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env.local">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -716,8 +714,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker/php7-fpm/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+        <state relative-caret-position="791">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="8" selection-start-line="26" selection-end-line="26" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
         </state>
       </provider>
     </entry>
