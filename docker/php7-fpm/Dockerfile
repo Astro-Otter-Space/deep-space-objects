@@ -1,39 +1,23 @@
 FROM php:7.2-fpm
 
+MAINTAINER HamHamFonFon
+
+# Utils
 RUN apt-get update \
   && apt-get upgrade -y \
-  && apt-get install -y libpq-dev wget gnupg libicu-dev libpng-dev zlib1g-dev \
+  && apt-get install -y curl less vim libpq-dev wget gnupg libicu-dev libpng-dev zlib1g-dev \
   && docker-php-ext-install mysqli \
   && docker-php-ext-install pdo_mysql \
   && docker-php-ext-install intl \
   && docker-php-ext-install opcache \
   && docker-php-ext-install zip \
   && docker-php-ext-install gd
-#utils
 
 RUN apt-get install -y zip
-
-# curl
-RUN apt-get install -y curl
-
-# install xdebug
-#RUN pecl install xdebug \
-#&& docker-php-ext-enable xdebug \
-#&& echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-# curl
-RUN apt-get install -y curl
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 && composer --version
-
 
 # npm & node
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
@@ -51,5 +35,14 @@ RUN apt-get remove -y cmdtest
 RUN apt-get update
 RUN apt-get install -y yarn
 
-
 EXPOSE 9000
+
+# Clear archives in apt cache folder
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
+
+

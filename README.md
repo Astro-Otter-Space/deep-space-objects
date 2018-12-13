@@ -65,10 +65,10 @@ Authors
 
 Sources
 =======
-Docker stack based on stack by :
-https://github.com/maxpou/docker-symfony
-https://framagit.org/3rr0r/docker-sf4
-
+Docker stack based on stacks by :
+> https://github.com/maxpou/docker-symfony
+> https://framagit.org/3rr0r/docker-sf4
+> https://github.com/neiluJ/api-vue-boilerplate
 
 Licences
 ==
