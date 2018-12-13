@@ -1,6 +1,6 @@
 <template>
   <agile :options="options">
-    <div class="slide slide--1"><h3>{{title}}</h3></div>
+    <div class="slide slide--1"><h3 v-html="title"></h3></div>
     <div class="slide slide--2"><h3>{{title}}</h3></div>
     <div class="slide slide--3"><h3>{{title}}</h3></div>
     <div class="slide slide--4"><h3>{{title}}</h3></div>
