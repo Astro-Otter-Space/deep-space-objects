@@ -35,11 +35,14 @@ services:
         hostname: nginx
         ports:
             - 80:80
+            - 443:443
         depends_on:
             - php
         volumes:
             - ./docker/nginx/default.template:/etc/nginx/conf.d/default.template
             - ./logs/nginx/:/var/log/nginx
+            - ${SSL_CERTIFICATE_CRT}:/etc/nginx/ssl/localhost.crt
+            - ${SSL_CERTIFICATE_KEY}:/etc/nginx/ssl/localhost.key
         env_file:
             - .env
         environment:

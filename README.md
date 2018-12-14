@@ -6,12 +6,24 @@ Installation
 ### Clone project
 `git clone git@github.com:HamHamFonFon/deep-space-objects.git` 
  
-### Launch docker stack
- ```
+### Init .env files
+```
  cp .env.local.dist .env.local
  cp .env.dist .env
+``` 
+ 
+### Generate SSL certificate for HTTPS
+```
+openssl req -x509 -out localhost.crt -keyout localhost.key   -newkey rsa:2048 -nodes -sha256   -subj '/CN=localhost' -extensions EXT -config <( \
+    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+``` 
+Copy path of localhost.crt and localhost.key in .env file.
+
+ 
+### Launch docker stack
+ ```
  docker-compose build
- ````
+ ```
 
 ### Add hosts into hosts file
  `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts`

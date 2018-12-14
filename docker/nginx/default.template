@@ -35,3 +35,39 @@ server {
     error_log /var/log/nginx/symfony_error.log;
     access_log /var/log/nginx/symfony_access.log;
 }
+
+# LATER FOR HTTPS
+#server {
+#    listen 443 ssl;
+#    listen [::]:443 ssl;
+
+#    root var/www/deep-space-objects/public;
+
+#    ssl_certificate /etc/nginx/ssl/localhost.crt;
+#    ssl_certificate_key /etc/nginx/ssl/localhost.key;
+#    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+#    ssl_ciphers         HIGH:!aNULL:!MD5;
+
+#   location / {
+#        try_files $uri /index.php$is_args$args;
+
+#        proxy_pass http://127.0.0.1:80;
+#        proxy_set_header X-Real-IP  $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_set_header X-Forwarded-Proto https;
+#        proxy_set_header X-Forwarded-Port 443;
+#        proxy_set_header Host $host;
+#   }
+
+#    location ~ ^/.+\.php(/|$) {
+#        fastcgi_pass php:9000;
+#        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+#        include fastcgi_params;
+#        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+#        fastcgi_param DOCUMENT_ROOT $realpath_root;
+#        internal;
+#    }
+
+#    error_log /var/log/nginx/project_error.log;
+#    access_log /var/log/nginx/project_access.log;
+#}
