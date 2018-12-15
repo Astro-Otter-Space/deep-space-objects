@@ -1,6 +1,10 @@
+# https://symfony.com/doc/current/routing.html#localized-routing-i18n
 controllers:
     resource: ../../src/Controller/
     type: annotation
+#    prefix:
+#        en: ''
+#        fr: 'fr'
     prefix: /{_locale}
     requirements:
         _locale: '%app.locales%'

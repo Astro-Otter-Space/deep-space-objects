@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Forms\SearchFormType;
-use Astrobin\Services\GetImage;
-use Astrobin\Services\GetTodayImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,10 +16,9 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/", name="homepage")
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function homepage(Request $request)
+    public function homepage()
     {
         $result = [];
 
@@ -32,6 +29,12 @@ class HomeController extends AbstractController
         $form = $this->createForm(SearchFormType::class, null, $options);
         $result['form'] = $form->createView();
 
-        return $this->render('pages/home.html.twig', $result);
+        /** @var Response $response */
+        $response = $this->render('pages/home.html.twig', $result);
+        $response->setSharedMaxAge(0);
+        $response->setPublic();
+
+        return $response;
     }
+
 }

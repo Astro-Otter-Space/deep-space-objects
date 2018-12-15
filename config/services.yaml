@@ -5,13 +5,14 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    app.locales: en|fr|de|es|pt|pt_BZ|
+    app.locales: en|fr|
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -25,20 +26,20 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # Client Elastic Search
+    Elastica\Client:
+        bind:
+            $config:
+                host: 'elasticsearch'
+
     # Exception listener
     App\EventListener\ExceptionListener:
-        arguments: ["@templating"]
+        arguments: ['@templating.engine.twig']
         tags:
-            - {name: kernel.event_listener, event: kernel.exception }
+          - { name: kernel.event_listener, event: kernel.exception }
+
+    App\Repository\ConstellationRepository:
+      public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-#    Astrobin\AbstractWebService:
-#      abstract: true
-#      autowire: false
-#      public: true
-    Astrobin\Services\GetImage:
-#      parent: Astrobin\AbstractWebService
-#      autowire: false
-#      public: true
-#      autoconfigure: false

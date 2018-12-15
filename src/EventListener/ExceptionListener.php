@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  */
 class ExceptionListener
 {
-
     private $twigEngine;
 
     /**
@@ -32,13 +31,17 @@ class ExceptionListener
     {
         $exception = $event->getException();
 
-        /** @var Response $response */
-        $response = $this->twigEngine->renderResponse('exceptions/exceptions.html.twig', ['exception' => $exception]);
-
         if ($exception instanceof HttpExceptionInterface) {
+            /** @var Response $response */
+            $response = $this->twigEngine->renderResponse('pages/blackhole.html.twig', ['exception' => $exception]);
+
             $response->setStatusCode($exception->getStatusCode());
             $response->headers->replace($exception->getHeaders());
         } else {
+
+            /** @var Response $response */
+            $response = new Response();
+            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
             $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

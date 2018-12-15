@@ -16,4 +16,4 @@ yarn-error.log
 
 /logs/
 /.idea/
-
+/.env

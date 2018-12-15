@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\AbstractEntity;
 use App\Entity\Constellation;
+use Elastica\Client;
 use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Search;
@@ -17,20 +18,15 @@ abstract class AbstractRepository
     protected $locale;
 
     /** @var Search  */
-    protected $search;
-
-    /** @var Query  */
-    protected $query;
+    protected $client;
 
     /**
      * AbstractRepository constructor.
      * @param Search $search
-     * @param Query $query
      */
-    public function __construct(Search $search, Query $query)
+    public function __construct(Client $client)
     {
-        $this->search = $search;
-        $this->query = $query;
+        $this->client = $client;
     }
 
     /**
@@ -59,13 +55,12 @@ abstract class AbstractRepository
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
-        $this->search->addIndex($entity::getIndex());
+        $this->client->addIndex($entity::getIndex());
 
-        $query = $this->query->setFrom(0)
-            ->setSize(1)
-            ->setQuery(['id' => $id]);
+        $term = new Query\Term();
+        $term->setTerm('id', $id);
 
-        $this->search->setQuery($query);
+        $this->client->setQuery($term);
 
         /** @var ResultSet $resultSet */
         return $this->search->search();
