@@ -11,6 +11,7 @@ final class ConstellationRepository extends AbstractRepository
 {
 
     const INDEX_NAME = 'constellations';
+
     const SEARCH_SIZE = 15;
 
     /**
@@ -20,7 +21,6 @@ final class ConstellationRepository extends AbstractRepository
     public function getObjectById($id)
     {
         $document = $this->findById(ucfirst($id));
-        dump($document);
         return $this->buildEntityFromDocument($document->getDocuments()[0]);
     }
 

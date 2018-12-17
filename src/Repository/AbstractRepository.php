@@ -22,7 +22,7 @@ abstract class AbstractRepository
 
     /**
      * AbstractRepository constructor.
-     * @param Search $search
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -55,17 +55,20 @@ abstract class AbstractRepository
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
-        $this->client->addIndex($entity::getIndex());
+        $this->client->getIndex($entity::getIndex());
 
+        /** @var Query\Term $term */
         $term = new Query\Term();
         $term->setTerm('id', $id);
 
-        $this->client->setQuery($term);
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $search->setQuery($term);
 
         /** @var ResultSet $resultSet */
-        return $this->search->search();
+        return $search->search();
     }
 
-
+    /**  */
     abstract protected function getEntity();
 }

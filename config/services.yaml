@@ -32,9 +32,10 @@ services:
     # Client Elastic Search
     Elastica\Client:
         public: true
-        $config:
-            host: elasticsearch
-            port: 9200
+        bind:
+            $config:
+                host: elasticsearch
+                port: 9200
 
     # Exception listener
     App\EventListener\ExceptionListener:

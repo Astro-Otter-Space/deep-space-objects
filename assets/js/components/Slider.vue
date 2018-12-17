@@ -12,7 +12,7 @@
     import VueAgile from 'vue-agile'
 
     export default {
-      name: "slider",
+      name: 'Slider',
       components: {VueAgile},
       props: {
         title: homeTitle
