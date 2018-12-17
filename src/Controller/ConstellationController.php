@@ -18,16 +18,13 @@ class ConstellationController extends AbstractController
 
     /**
      * @Route("/constellation/{id}", name="constellation_show")
-     * @Cache()
      * @param string $id
+     * @param ConstellationRepository $constellationRepository
      * @return Response
      */
-    public function show(string $id): Response
+    public function show(string $id, ConstellationRepository $constellationRepository): Response
     {
         $result = [];
-
-        /** @var ConstellationRepository $constellationRepository */
-        $constellationRepository = $this->get(ConstellationRepository::class);
 
         /** @var Constellation $constellation */
         $constellation = $constellationRepository->getObjectById($id);

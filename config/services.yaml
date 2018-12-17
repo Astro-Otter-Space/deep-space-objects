@@ -26,11 +26,15 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Repository\:
+        resource: '../src/Repository'
+
     # Client Elastic Search
     Elastica\Client:
-        bind:
-            $config:
-                host: 'elasticsearch'
+        public: true
+        $config:
+            host: elasticsearch
+            port: 9200
 
     # Exception listener
     App\EventListener\ExceptionListener:
@@ -38,8 +42,8 @@ services:
         tags:
           - { name: kernel.event_listener, event: kernel.exception }
 
-    App\Repository\ConstellationRepository:
-      public: true
+#    App\Repository\ConstellationRepository:
+#      public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
