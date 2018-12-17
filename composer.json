@@ -76,6 +76,7 @@
         }
     },
     "require-dev": {
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "symfony/var-dumper": "4.2.*"
     }
 }
