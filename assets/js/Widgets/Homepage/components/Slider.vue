@@ -12,12 +12,12 @@
 
 <script>
     let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
-    import agile from 'vue-agile'
+    import Agile from 'vue-agile'
     import SearchAutocomplete from './SearchAutocomplete'
 
     export default {
       name: 'Slider',
-      components: {agile, SearchAutocomplete},
+      components: {Agile, SearchAutocomplete},
       props: {
         title: homeTitle
       },

@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import slider from './components/Slider'
+import App from './Widgets/Homepage/App'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   el: '#app',
-  components: {slider},
   template: '<App/>',
+  components: { App },
 });
