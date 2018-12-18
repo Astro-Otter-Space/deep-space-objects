@@ -6,18 +6,17 @@
       <div class="slide slide--3"><h3>{{title}}</h3></div>
       <div class="slide slide--4"><h3>{{title}}</h3></div>
     </agile>
-    <SearchAutocomplete/>
   </div>
 </template>
 
 <script>
-    let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
     import Agile from 'vue-agile'
-    import SearchAutocomplete from './SearchAutocomplete'
+
+    let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
 
     export default {
       name: 'Slider',
-      components: {Agile, SearchAutocomplete},
+      components: {Agile},
       props: {
         title: homeTitle
       },
