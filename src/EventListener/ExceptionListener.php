@@ -19,6 +19,7 @@ class ExceptionListener
     /**
      * ExceptionListener constructor.
      * @param EngineInterface $twigEngine
+     * @param string $env
      */
     public function __construct(EngineInterface $twigEngine, $env)
     {
@@ -50,7 +51,6 @@ class ExceptionListener
 
             $event->setResponse($response);
         }
-
     }
 
 }

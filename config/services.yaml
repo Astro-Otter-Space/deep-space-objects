@@ -5,14 +5,18 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    app.locales: en|fr|
+    app_locales: en|fr|de|es|pt|pt_BZ|
+    app.notifications.email_sender: balistik.fonfon@gmail.com
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false
+#        bind:
+#            $locales: '%app_locales%'
+#            $defaultLocale: '%locale%'
+#            $emailSender: '%app.notifications.email_sender%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -31,7 +35,7 @@ services:
 
     # Client Elastic Search
     Elastica\Client:
-        public: true
+#        public: true
         bind:
             $config:
                 host: elasticsearch
@@ -42,9 +46,6 @@ services:
         arguments: ['@templating.engine.twig', '%kernel.environment%']
         tags:
           - { name: kernel.event_listener, event: kernel.exception }
-
-#    App\Repository\ConstellationRepository:
-#      public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
