@@ -1,19 +1,23 @@
 <template>
-  <agile :options="options">
-    <div class="slide slide--1"><h3 v-html="title"></h3></div>
-    <div class="slide slide--2"><h3>{{title}}</h3></div>
-    <div class="slide slide--3"><h3>{{title}}</h3></div>
-    <div class="slide slide--4"><h3>{{title}}</h3></div>
-  </agile>
+  <div id="app">
+    <agile :options="options">
+      <div class="slide slide--1"><h3 v-html="title"></h3></div>
+      <div class="slide slide--2"><h3>{{title}}</h3></div>
+      <div class="slide slide--3"><h3>{{title}}</h3></div>
+      <div class="slide slide--4"><h3>{{title}}</h3></div>
+    </agile>
+    <SearchAutocomplete/>
+  </div>
 </template>
 
 <script>
     let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
-    import VueAgile from 'vue-agile'
+    import agile from 'vue-agile'
+    import SearchAutocomplete from './SearchAutocomplete'
 
     export default {
       name: 'Slider',
-      components: {VueAgile},
+      components: {agile, SearchAutocomplete},
       props: {
         title: homeTitle
       },
