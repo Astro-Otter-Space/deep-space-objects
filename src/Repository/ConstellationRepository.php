@@ -21,7 +21,12 @@ final class ConstellationRepository extends AbstractRepository
     public function getObjectById($id)
     {
         $document = $this->findById(ucfirst($id));
-        return $this->buildEntityFromDocument($document->getDocuments()[0]);
+//        if (0 < $document->count()) {
+//            return $this->buildEntityFromDocument($document->getDocuments());
+//        } else {
+//            return null;
+//        }
+        return null;
     }
 
 

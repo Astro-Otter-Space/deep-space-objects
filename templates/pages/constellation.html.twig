@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+  <div id="app">
+    {% set label = "const_id." ~ id %}
+    <h1>{{ label|trans }}</h1>
+  </div>
 
 {% endblock %}

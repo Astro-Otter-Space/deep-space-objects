@@ -56,6 +56,7 @@ abstract class AbstractRepository
         $entity = new $entityName;
 
         $this->client->getIndex($entity::getIndex());
+        dump($this->client);
 
         /** @var Query\Term $term */
         $term = new Query\Term();
