@@ -15,13 +15,15 @@ class ExceptionListener
 {
     private $twigEngine;
 
+    private $env;
     /**
      * ExceptionListener constructor.
      * @param EngineInterface $twigEngine
      */
-    public function __construct(EngineInterface $twigEngine)
+    public function __construct(EngineInterface $twigEngine, $env)
     {
         $this->twigEngine = $twigEngine;
+        $this->env = $env;
     }
 
     /**
@@ -29,23 +31,26 @@ class ExceptionListener
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $exception = $event->getException();
+        if ('dev' !== $this->env) {
+            $exception = $event->getException();
 
-        if ($exception instanceof HttpExceptionInterface) {
-            /** @var Response $response */
-            $response = $this->twigEngine->renderResponse('pages/blackhole.html.twig', ['exception' => $exception]);
+            if ($exception instanceof HttpExceptionInterface) {
+                /** @var Response $response */
+                $response = $this->twigEngine->renderResponse('pages/blackhole.html.twig', ['exception' => $exception]);
 
-            $response->setStatusCode($exception->getStatusCode());
-            $response->headers->replace($exception->getHeaders());
-        } else {
+                $response->setStatusCode($exception->getStatusCode());
+                $response->headers->replace($exception->getHeaders());
+            } else {
 
-            /** @var Response $response */
-            $response = new Response();
-            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+                /** @var Response $response */
+                $response = new Response();
+                $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
+                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+
+            $event->setResponse($response);
         }
 
-        $event->setResponse($response);
     }
 
 }
