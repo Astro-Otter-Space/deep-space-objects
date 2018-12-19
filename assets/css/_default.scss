@@ -1,7 +1,9 @@
 // Components
+@import "components/Homeslider.scss";
 @import "components/Slider";
 
 body {
   font-family: $font-lato;
   background-color: $bgd-color;
+  margin: 0;
 }
