@@ -1,6 +1,8 @@
 // https://www.cloudways.com/blog/symfony-vuejs-app/
 // https://fr.vuejs.org/v2/examples/select2.html
 import '../css/app.scss';
+import VueRouter from 'vue-router';
+
 //
 // import Vue from 'vue'
 //

@@ -1,0 +1,15 @@
+.AppSearch {
+
+  &__wrapper {
+
+  }
+
+  &__input {
+    padding: .400rem .400rem;
+    width: 500px;
+    border: 1px lightgray;
+    border-radius: 0.25rem;
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+}
