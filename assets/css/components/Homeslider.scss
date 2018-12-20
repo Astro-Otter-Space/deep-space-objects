@@ -1,15 +1,34 @@
 .AppSlider {
+  &__title,
+  &__subTitle {
+    overflow: visible;
+    color: lightgray;
+    font-family: $font-lato;
+  }
+
   &__slides {
     position: relative;
     overflow: hidden;
   }
 
   &__image {
-    //position: absolute;
-    max-width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
+    position: absolute;
+    width: 100%;
+    //height: auto;
+    background-repeat: no-repeat;
+    //background-size: contain;
+    @media (min-width: 42em) {
+      animation: kenburns 8s;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &__dImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
     @media (min-width: 42em) {
       animation: kenburns 8s;
       animation-fill-mode: forwards;
