@@ -29,7 +29,6 @@
       >
       </div>
     </transition-group>
-    <h2 class="AppSlider__subTitle">{{ subTitle }}</h2>
   </div>
 </template>
 

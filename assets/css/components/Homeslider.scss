@@ -50,4 +50,14 @@
       transform: scale3d(1.25, 1.25, 1.25) translate3d(-10%, -5%, 0);
     }
   }
+
+  &__research {
+    position: fixed;
+    width: 500px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+  }
 }
