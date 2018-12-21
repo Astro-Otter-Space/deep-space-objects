@@ -1,17 +1,14 @@
 import Vue from 'vue'
+import Vue2TouchEvents from "vue2-touch-events";
+
 import App from './Widgets/Homepage/App'
-import VueRouter from 'vue-router';
+// import VueRouter from 'vue-router';
 
 Vue.config.productionTip = false;
+Vue.use(Vue2TouchEvents);
 
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App },
-});
-
-// new Vue({
-//   render: h => h(App)
-// }).$mount(`#app`);
+  render: h => h(App)
+}).$mount(`#app`);

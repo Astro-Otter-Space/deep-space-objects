@@ -3,15 +3,14 @@
     <div class="AppSlider">
       <slider
         :images="[
-          '/assets/images/build/images/background/bg-1.jpg',
-          '/assets/images/build/images/background/bg-2.jpg',
-          '/assets/images/build/images/background/bg-3.jpg',
-          '/assets/images/build/images/background/bg-4.jpg'
+          '/build/images/background/bg-1.jpg',
+          '/build/images/background/bg-2.jpg',
+          '/build/images/background/bg-3.jpg',
+          '/build/images/background/bg-4.jpg'
         ]"
-        :sub-title="${subTitle}"
       />
       <div class="AppSlider__Research">
-        <h2 class="AppSlider__subTitle">{{subTitle}}</h2>
+        <h2 class="AppSlider__subTitle">{{ subTitle }}</h2>
         <searchautocomplete
           :searchPlaceholder="searchPlaceholder"
         />
@@ -22,16 +21,16 @@
 
 <script>
   import Slider from './components/Slider'
-  import SearchAutocomplete from "./components/SearchAutocomplete";
+  import Searchautocomplete from "./components/Searchautocomplete"
 
   let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
-  let searchPlaceholder = "Reasearch in the catalogue...";
+  let searchPlaceholder = "Search in catalogs...";
 
   export default {
     name: "App",
     components: {
-      SearchAutocomplete,
-      Slider
+      Slider,
+      Searchautocomplete
     },
     data() {
       return {

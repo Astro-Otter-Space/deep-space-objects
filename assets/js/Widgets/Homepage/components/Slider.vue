@@ -1,35 +1,24 @@
 <template>
-  <div class="AppSlider">
-    <transition-group
-      v-touch:swipe.right="next"
-      v-touch:swipe.left="prev"
-      :duration="1000"
-      :style="{ paddingBottom: `${aspectRatio}%` }"
-      tag="div"
-      enter-active-class="AppSlider__enterActive"
-      enter-class="AppSlider__enter"
-      leave-active-class="AppSlider__leaveActive"
-      leave-to-class="AppSlider__leaveTo"
-      class="AppSlider__slides"
-    >
-      <!--<img-->
-        <!--v-for="(image, index) in images"-->
-        <!--v-show="activeIndex !== index"-->
-        <!--:key="index"-->
-        <!--class="AppSlider__image"-->
-        <!--:src="image"-->
-        <!--:alt="subTitle"-->
-      <!--/>-->
-      <div
-        v-for="(image, index) in images"
-        :key="index"
-        :style="{ backgroundImage: `url(${image})` }"
-        v-show="activeIndex === index"
-        class="AppSlider__dImage"
-      >
-      </div>
-    </transition-group>
-  </div>
+  <transition-group
+    v-touch:swipe.right="next"
+    v-touch:swipe.left="prev"
+    :duration="1000"
+    :style="{ paddingBottom: `${aspectRatio}%` }"
+    tag="div"
+    enter-active-class="AppSlider__enterActive"
+    enter-class="AppSlider__enter"
+    leave-active-class="AppSlider__leaveActive"
+    leave-to-class="AppSlider__leaveTo"
+    class="AppSlider__slides"
+  >
+    <div
+      v-for="(image, index) in images"
+      v-bind:key="image"
+      :style="{ backgroundImage: `url(${image})` }"
+      v-show="activeIndex === index"
+      class="AppSlider__dImage"
+    ></div>
+  </transition-group>
 </template>
 
 <script>
@@ -53,7 +42,7 @@
         type: Number
       },
       subTitle: {
-        default: '',
+        default: "",
         type: String
       }
     },
@@ -61,8 +50,7 @@
       return {
         activeIndex: 0,
         paused: false,
-        time: this.interval,
-        subTitle: "Discover beauties and mysteries of the universe"
+        time: this.interval
       };
     },
     computed: {

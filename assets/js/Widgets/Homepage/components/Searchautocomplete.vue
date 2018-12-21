@@ -1,18 +1,22 @@
 <template>
   <autocomplete
-    url=""
+    url="/_search"
     :placeholder="searchPlaceholder"
     :min="3"
-    :param="search"
+    param="q"
+    anchor="value"
+    label="label"
+    :classes="{ wrapper: 'AppSearch__wrapper', input: 'AppSearch__inputText', list: 'AppSearch__list' }"
     :onSelect="callbackDemo"
   >
   </autocomplete>
 </template>
 <script>
   import Autocomplete from 'vue2-autocomplete-js'
+  require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css')
 
   export default {
-    'name': 'Search',
+    name: 'Searchautocomplete',
     components: {
       Autocomplete
     },
@@ -20,6 +24,11 @@
       searchPlaceholder: {
         default: '',
         type: String
+      }
+    },
+    methods: {
+      callbackDemo(obj) {
+        console.log(obj.id);
       }
     }
   }

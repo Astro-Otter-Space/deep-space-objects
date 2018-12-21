@@ -19,7 +19,9 @@
         "vue-agile": "^0.3.7",
         "vue-i18n": "^8.4.0",
         "vue-loader": "^15.4.2",
+        "vue-router": "^3.0.2",
         "vue-template-compiler": "^2.5.18",
+        "vue2-autocomplete-js": "^0.2.2",
         "vue2-touch-events": "^1.1.1"
     }
 }
