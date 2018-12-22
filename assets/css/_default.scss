@@ -2,6 +2,7 @@
 @import "base/init";
 
 // Components
+@import "components/Header";
 @import "components/Homeslider.scss";
 @import "components/Searchautocomplete.scss";
 @import "components/Slider";
@@ -10,8 +11,4 @@ body {
   font-family: $font;
   background-color: $bgd-color;
   margin: 0;
-}
-
-header {
-  overflow: hidden;
 }

@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-  <div id="app">
-    <h1>{{ 'error.message'|trans({'%error%': exception.statusCode}) }}</h1>
-  </div>
-
+  <section>
+    <div id="app">
+      <h1>{{ 'error.message'|trans({'%error%': exception.statusCode}) }}</h1>
+    </div>
+  </section>
 {% endblock %}

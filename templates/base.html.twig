@@ -40,12 +40,14 @@
     <body>
     {% block body %}
       {% block header %}
-        <header>
-          <h1>{{ 'dso'|trans }}</h1>
-        </header>
+        {{ render_esi(controller('App\\Controller\\LayoutController::header')) }}
       {% endblock %}
+
       {% block content %}{% endblock %}
-      {% block footer %}{% endblock %}
+
+      {% block footer %}
+        {{ render_esi(controller('App\\Controller\\LayoutController::footer')) }}
+      {% endblock %}
     {% endblock %}
 
     {% block javascripts %}

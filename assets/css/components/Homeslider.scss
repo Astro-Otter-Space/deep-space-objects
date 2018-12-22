@@ -6,7 +6,7 @@
     font-family: $font;
     font-weight: 500;
     font-size: 2rem;
-
+    margin-bottom: 0.5em;
   }
 
   &__slides {
@@ -14,17 +14,17 @@
     overflow: hidden;
   }
 
-  &__image {
-    position: absolute;
-    width: 100%;
-    //height: auto;
-    background-repeat: no-repeat;
-    //background-size: contain;
-    @media (min-width: 42em) {
-      animation: kenburns 8s;
-      animation-fill-mode: forwards;
-    }
-  }
+  //&__image {
+  //  position: absolute;
+  //  width: 100%;
+  //  //height: auto;
+  //  background-repeat: no-repeat;
+  //  //background-size: contain;
+  //  @media (min-width: 42em) {
+  //    animation: kenburns 8s;
+  //    animation-fill-mode: forwards;
+  //  }
+  //}
 
   &__dImage {
     position: absolute;
