@@ -61,13 +61,44 @@ class ConvertSrcToBulkCommand extends Command
             $inputFilename = sprintf('%s.src.json', $type);
             $inputFile = $this->kernel . self::PATH_SOURCE . $inputFilename;
 
+            $outputFilename = $this->kernel . self::BULK_SOURCE . sprintf('%s.bulk.json', $type);
+
             if (file_exists($inputFile) && is_readable($inputFile)) {
                 $data = $this->openFile($inputFile);
-                dump(json_last_error_msg());
+                if (JSON_ERROR_NONE === json_last_error()) {
+                    $handle = fopen($outputFilename, 'w');
+
+                    foreach ($data as $key=>$inputData) {
+                        $line = json_encode($inputData);
+
+                        $mapping = [
+                            'randId' => 'md5ForId',
+                            'catalog' => 'getCatalog',
+                            'order' => 'getItemOrder'
+                        ];
+                        $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping) {
+                            $findKey = $match[1];
+                            if (in_array($findKey, array_keys($mapping))) {
+                                $method = $mapping[$findKey];
+                                return self::$method();
+                            } else {
+                                return "%s".$findKey."%s";
+                            }
+                        }, $line);
+                        dump($lineReplace);
+
+//                        fwrite($handle, $line . PHP_EOL);
+                        if (1 == $key) {
+                            die();
+                        }
+                    }
+                    fclose($handle);
+                } else {
+                    $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));
+                }
             } else {
                 $output->writeln(sprintf("File %s not exist or not readable", $inputFile));
             }
-
         } else {
             $output->writeln(sprintf("Argument %s not available", $input->getArgument('type')));
         }
@@ -82,10 +113,26 @@ class ConvertSrcToBulkCommand extends Command
         return json_decode(file_get_contents($file), true);
     }
 
-    private function sanitizeData($data)
+    /**
+     * @return string
+     */
+    public static function md5ForId() {
+        return md5(uniqid() . microtime());
+    }
+
+    /**
+     * @return null
+     */
+    public static function getCatalog()
     {
+        return null;
+    }
 
-
-
+    /**
+     * @return null
+     */
+    public static function getItemOrder()
+    {
+        return null;
     }
 }
