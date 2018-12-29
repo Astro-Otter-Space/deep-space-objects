@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Classes\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -69,6 +70,7 @@ class ConvertSrcToBulkCommand extends Command
                     $handle = fopen($outputFilename, 'w');
 
                     foreach ($data as $key=>$inputData) {
+                        $id = (array_key_exists('id', $inputData)) ? $inputData['id']: null;
                         $line = json_encode($inputData);
 
                         $mapping = [
@@ -76,18 +78,17 @@ class ConvertSrcToBulkCommand extends Command
                             'catalog' => 'getCatalog',
                             'order' => 'getItemOrder'
                         ];
-                        $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping) {
+                        $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping, $id) {
                             $findKey = $match[1];
                             if (in_array($findKey, array_keys($mapping))) {
                                 $method = $mapping[$findKey];
-                                return self::$method();
+                                return self::$method($id);
                             } else {
                                 return "%s".$findKey."%s";
                             }
                         }, $line);
-                        dump($lineReplace);
 
-//                        fwrite($handle, $line . PHP_EOL);
+                        fwrite($handle, $lineReplace . PHP_EOL);
                         if (1 == $key) {
                             die();
                         }
@@ -109,23 +110,24 @@ class ConvertSrcToBulkCommand extends Command
      * @param $file
      * @return mixed
      */
-    private function openFile($file) {
+    private function openFile($file): array {
         return json_decode(file_get_contents($file), true);
     }
 
     /**
      * @return string
      */
-    public static function md5ForId() {
-        return md5(uniqid() . microtime());
+    public static function md5ForId($id): string {
+        return md5(uniqid($id) . microtime());
     }
 
     /**
-     * @return null
+     * @param $id
+     * @return string
      */
-    public static function getCatalog()
+    public static function getCatalog($id): string
     {
-        return null;
+        return Utils::getCatalogMapping()[substr($id, 0, 2)];
     }
 
     /**
