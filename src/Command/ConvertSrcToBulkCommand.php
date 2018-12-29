@@ -88,10 +88,10 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
-                        fwrite($handle, $lineReplace . PHP_EOL);
-                        if (1 == $key) {
-                            die();
-                        }
+                        fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+//                        if (1 == $key) {
+//                            die();
+//                        }
                     }
                     fclose($handle);
                 } else {
