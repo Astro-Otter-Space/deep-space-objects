@@ -1,13 +1,32 @@
-FROM nginx:latest
+FROM debian:jessie
+ARG NGINX_HOST
 
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 
-# install openssl
-#RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openssl
-#
-#RUN mkdir /etc/nginx/ssl
-#RUN cd /etc/nginx/ssl
+# Install nginx
+RUN apt-get update && apt-get install -y nginx
+
+# Configure Nginx
+ADD nginx.conf /etc/nginx/
+
+ADD symfony.conf /etc/nginx/conf.d/
+#RUN envsubst "${NGINX_HOST}" < /etc/nginx/sites-available/default.template > /etc/nginx/sites-available/symfony.conf && nginx -g 'daemon off;'
+RUN sed "/server_name nginx_host;/c\    server_name ${NGINX_HOST};" -i /etc/nginx/conf.d/symfony.conf
+RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
+RUN usermod -u 1000 www-data
+
+# Install OpenSSL
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends openssl
+
+# Add certificate SSL
+
+# Run Nginx
+CMD ["nginx"]
+
+# Expose ports
+EXPOSE 80
+EXPOSE 443
 
 # generate certificate
 #RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -subj "/C=FR/ST=Montpellier/L=Montpellier/O=Global Security/OU=IT Department/CN=example.com"
@@ -16,8 +35,3 @@ MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 #RUN openssl req -x509 -out localhost.crt -keyout localhost.key \
 #      -newkey rsa:2048 -nodes -days 365 -sha256 \
 #      -subj '/CN=localhost'
-
-#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-#RUN chmod +x /usr/local/bin/docker-entrypoint
-
-#ENTRYPOINT ["docker-entrypoint"]

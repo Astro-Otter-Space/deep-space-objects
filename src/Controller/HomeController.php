@@ -20,18 +20,9 @@ class HomeController extends AbstractController
      */
     public function homepage()
     {
-        $result = [];
-//        dump(sprintf('Test : %d', microtime()));
-//        $options = [
-//            'method' => 'post',
-//            'action' => $this->generateUrl('search_ajax')
-//        ];
-//        $form = $this->createForm(SearchFormType::class, null, $options);
-//        $result['form'] = $form->createView();
-
         /** @var Response $response */
-        $response = $this->render('pages/home.html.twig', $result);
-        $response->setSharedMaxAge(10);
+        $response = $this->render('pages/home.html.twig', []);
+        $response->setSharedMaxAge(15);
 
         return $response;
     }
