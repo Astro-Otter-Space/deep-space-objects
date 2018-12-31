@@ -52,10 +52,8 @@ Elastic Search
 ==
 ### Create index with mappings and import data
 ```
-curl -X DELETE "elasticsearch:9200/constellations"
 curl -X DELETE "elasticsearch:9200/deepspaceobjects"
-curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/constellations.mapping.json
-curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/dso.mapping.json
+curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/deepspaceobjects.mapping.json
 ```
 
 ### Create bulk from source
