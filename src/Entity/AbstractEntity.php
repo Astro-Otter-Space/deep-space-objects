@@ -16,17 +16,15 @@ abstract class AbstractEntity
      * @param $document
      * @return $this
      */
-    public function buildObject(Result $document)
+    public function buildObject($document)
     {
-        if ($document instanceof Result) {
-            $this->setElasticId($document->getId());
-            foreach ($document->getData() as $field=>$data) {
+        $this->setElasticId($document->getId());
+        foreach ($document->getData() as $field=>$data) {
 
-                $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
+            $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
 
-                if (true == method_exists($this, $method)) {
-                    $this->$method($data);
-                }
+            if (true == method_exists($this, $method)) {
+                $this->$method($data);
             }
         }
         return $this;

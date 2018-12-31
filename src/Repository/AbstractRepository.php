@@ -23,10 +23,12 @@ abstract class AbstractRepository
     /**
      * AbstractRepository constructor.
      * @param Client $client
+     * @param $locale
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, $locale)
     {
         $this->client = $client;
+        $this->locale = $locale;
     }
 
     /**
@@ -46,30 +48,29 @@ abstract class AbstractRepository
     }
 
     /**
+     * Return document by Id
      * @param $id
      * @return ResultSet
      */
-    protected function findById($id)
+    protected function findById($id): ResultSet
     {
         /** @var Constellation|AbstractEntity $entity */
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
         $this->client->getIndex($entity::getIndex());
-        dump($this->client);
 
         /** @var Query\Term $term */
-        $term = new Query\Term();
-        $term->setTerm('id', $id);
+        $matchQuery = new Query\Match();
+        $matchQuery->setField('id', $id);
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search->setQuery($term);
+        $search->setQuery($matchQuery);
 
         /** @var ResultSet $resultSet */
-        return $search->search();
+        return $search->search($matchQuery);
     }
 
-    /**  */
     abstract protected function getEntity();
 }

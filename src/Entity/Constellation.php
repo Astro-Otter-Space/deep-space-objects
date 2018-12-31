@@ -10,7 +10,7 @@ use App\Repository\ConstellationRepository;
  */
 class Constellation extends AbstractEntity
 {
-    protected $locale;
+    private $locale;
 
     private $elasticId;
 
@@ -45,12 +45,10 @@ class Constellation extends AbstractEntity
 
     /**
      * @param $locale
-     * @return Constellation
      */
-    public function setLocale($locale): Constellation
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
-        return $this;
     }
 
     /**

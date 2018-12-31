@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Entity\Constellation;
+use Elastica\Client;
 
 /**
  * Class ConstellationRepository
@@ -15,27 +16,28 @@ final class ConstellationRepository extends AbstractRepository
     const SEARCH_SIZE = 15;
 
     /**
+     * ConstellationRepository constructor.
+     * @param Client $client
+     * @param $locale
+     */
+    public function __construct(Client $client, $locale)
+    {
+        parent::__construct($client, $locale);
+    }
+
+    /**
      * @param $id
      * @return Constellation
      */
     public function getObjectById($id)
     {
         $document = $this->findById(ucfirst($id));
-//        if (0 < $document->count()) {
-//            return $this->buildEntityFromDocument($document->getDocuments());
-//        } else {
-//            return null;
-//        }
-        return null;
-    }
-
-
-    /**
-     *
-     */
-    public function getList()
-    {
-
+        if (0 < $document->getTotalHits()) {
+            $dataDocument = $document->getResults()[0]->getDocument()->getData();
+            return $this->buildEntityFromDocument($dataDocument);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -46,8 +48,10 @@ final class ConstellationRepository extends AbstractRepository
     private function buildEntityFromDocument($document)
     {
         /** @var Constellation $entity */
-        $entity = $this->getEntity();
-        $constellation = $entity->setLocale($this->getLocale())->buildObject($document);
+        $constellation = $this->getEntity();
+        dump($this->getLocale());
+//        $locale = $this->getLocale();
+        $constellation = $constellation->buildObject($document);
 
         // Todo : add gerateurlhelper;
 
@@ -60,5 +64,12 @@ final class ConstellationRepository extends AbstractRepository
     public function getEntity(): string
     {
         return 'App\Entity\Constellation';
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string {
+        return self::TYPE_NAME;
     }
 }
