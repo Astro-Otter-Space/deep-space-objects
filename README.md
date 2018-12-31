@@ -50,9 +50,13 @@ Symfony app :
 
 Elastic Search
 ==
+
+Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create two indexes, each got his own mapping. 
+
 ### Create index with mappings and import data
 ```
 curl -X DELETE "elasticsearch:9200/deepspaceobjects"
+curl -X DELETE "elasticsearch:9200/constellations"
 curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/deepspaceobjects.mapping.json
 ```
 

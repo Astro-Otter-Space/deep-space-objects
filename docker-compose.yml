@@ -52,7 +52,7 @@ services:
 
     # ElasticSearch
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.0.1
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
         container_name: dso_elasticsearch
         hostname: elasticsearch
         environment:
@@ -68,7 +68,7 @@ services:
 
     # Kibana
     kibana:
-        image: docker.elastic.co/kibana/kibana:6.0.1
+        image: docker.elastic.co/kibana/kibana:6.5.4
         container_name: dso_kibana
         links:
             - elasticsearch
