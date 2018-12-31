@@ -13,7 +13,7 @@ class Utils
 {
 
     const UNASSIGNED = 'unassigned';
-    
+
     private static $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',
@@ -52,11 +52,49 @@ class Utils
         'J3' => self::UNASSIGNED, 'J9' => self::UNASSIGNED,
         'Vd' => self::UNASSIGNED, 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
     ];
-    
-    
+
+
     public static function getCatalogMapping()
     {
         return self::$catalogMapping;
     }
-    
+
+    /**
+     * @param $array
+     * @return mixed
+     */
+    public static function utf8_converter($array)
+    {
+        array_walk_recursive($array, function (&$item, $key) {
+            if (!mb_detect_encoding($item, 'utf-8', true)) {
+                $item = utf8_encode($item);
+            }
+        });
+
+        return $array;
+    }
+
+    /**
+     * @param $input
+     * @return bool|string
+     */
+    public static function utf8_encode_deep(&$input)
+    {
+        if (is_string($input)) {
+            $input = utf8_encode($input);
+        } else if (is_array($input)) {
+            foreach ($input as &$value) {
+                self::utf8_encode_deep($value);
+            }
+
+            unset($value);
+        } else if (is_object($input)) {
+            $vars = array_keys(get_object_vars($input));
+
+            foreach ($vars as $var) {
+                self::utf8_encode_deep($input->$var);
+            }
+        }
+        return $input;
+    }
 }

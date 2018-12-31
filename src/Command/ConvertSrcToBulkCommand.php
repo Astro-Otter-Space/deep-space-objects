@@ -20,7 +20,7 @@ class ConvertSrcToBulkCommand extends Command
 
     protected static $defaultName = "dso:convert-bulk";
 
-    protected static $listType = ['dso20', 'constellations', 'constellations'];
+    protected static $listType = ['dso20', 'constellations'];
 
     const PATH_SOURCE = '/config/elasticsearch/sources/';
     const BULK_SOURCE = '/config/elasticsearch/bulk/';
@@ -71,7 +71,7 @@ class ConvertSrcToBulkCommand extends Command
 
                     foreach ($data as $key=>$inputData) {
                         $id = (array_key_exists('id', $inputData)) ? $inputData['id']: null;
-                        $line = json_encode($inputData);
+                        $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 
                         $mapping = [
                             'randId' => 'md5ForId',
@@ -89,9 +89,6 @@ class ConvertSrcToBulkCommand extends Command
                         }, $line);
 
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
-//                        if (1 == $key) {
-//                            die();
-//                        }
                     }
                     fclose($handle);
                 } else {
@@ -127,7 +124,10 @@ class ConvertSrcToBulkCommand extends Command
      */
     public static function getCatalog($id): string
     {
-        return Utils::getCatalogMapping()[substr($id, 0, 2)];
+        if (!is_null($id)) {
+            return Utils::getCatalogMapping()[substr($id, 0, 2)];
+        }
+        return null;
     }
 
     /**

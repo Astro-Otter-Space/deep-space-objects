@@ -47,15 +47,6 @@ npm install
 Symfony app :
  - http://symfony.local
 
-Use
-==
-
-### Install symfony components
- > composer require <components>
-
-### Use nodeJs and NPM
- > WIP
-
 
 Elastic Search
 ==
@@ -67,9 +58,15 @@ curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: appl
 curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/dso.mapping.json
 ```
 
+### Create bulk from source
+```
+php bin/console dso:convert-bulk <type>
+```
+List of values for <type> : dso20, constellations
+
 ### Bulk import Data
 ```
-curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/json' --data-binary @config/elasticsearch/data/constellations.bulk.json
+curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/json' --data-binary @config/elasticsearch/bulk/<type>.bulk.json
 ```
 
 Authors
