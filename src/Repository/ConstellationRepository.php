@@ -3,6 +3,7 @@ namespace App\Repository;
 
 use App\Entity\Constellation;
 use Elastica\Client;
+use Elastica\Document;
 
 /**
  * Class ConstellationRepository
@@ -31,9 +32,9 @@ final class ConstellationRepository extends AbstractRepository
      */
     public function getObjectById($id)
     {
-        $document = $this->findById(ucfirst($id));
-        if (0 < $document->getTotalHits()) {
-            $dataDocument = $document->getResults()[0]->getDocument()->getData();
+        $resultDocument = $this->findById(ucfirst($id));
+        if (0 < $resultDocument->getTotalHits()) {
+            $dataDocument = $resultDocument->getResults()[0]->getDocument();
             return $this->buildEntityFromDocument($dataDocument);
         } else {
             return null;
@@ -45,11 +46,12 @@ final class ConstellationRepository extends AbstractRepository
      * @param $document
      * @return Constellation
      */
-    private function buildEntityFromDocument($document)
+    private function buildEntityFromDocument(Document $document)
     {
+        dump(get_class($document));
         /** @var Constellation $entity */
         $constellation = $this->getEntity();
-        dump($this->getLocale());
+        
 //        $locale = $this->getLocale();
         $constellation = $constellation->buildObject($document);
 
