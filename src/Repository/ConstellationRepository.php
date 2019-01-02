@@ -48,12 +48,11 @@ final class ConstellationRepository extends AbstractRepository
      */
     private function buildEntityFromDocument(Document $document)
     {
-        dump(get_class($document));
-        /** @var Constellation $entity */
-        $constellation = $this->getEntity();
-        
-//        $locale = $this->getLocale();
-        $constellation = $constellation->buildObject($document);
+        /** @var Constellation $constellation */
+        $entity = $this->getEntity();
+        $constellation = new $entity;
+
+        $constellation = $constellation->setLocale($this->getLocale())->buildObject($document);
 
         // Todo : add gerateurlhelper;
 

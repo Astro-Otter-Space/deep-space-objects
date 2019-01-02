@@ -1,0 +1,67 @@
+{#
+    Generate the HTML code for using a SVG symbol from a SVG sprite
+        icon(name[, alt[, size]])
+
+    IMPORTANT: Modify the sprite variable in the macro with the path
+    to your main SVG sprite file. If you're inlining your SVG sprite
+    (generally after the opening <body> tag), set sprite to ''.
+
+    USAGE:
+
+    You will need to import the macro in each file that uses it:
+        {% from 'macros.twig' import icon %}
+
+    Using the main sprite:
+        {{ icon('home') }}
+        {{ icon('my-symbol-id') }}
+    You can configure the macro below to say
+
+    Using an explicit sprite path (first param is a URL with a '#'):
+        {{ icon('#icon-home') }}
+        {{ icon('/other/sprite.svg#some-icon') }}
+
+    Providing accessible text (e.g. for icon-only buttons):
+    {{ icon('search', 'Search this site') }}
+
+#}
+{% macro icon(name, alt, width, height, option) %}
+  {% spaceless %}
+    {#
+        Config: change defaultUrl.
+        This is where the browser should look for symbols.
+        If your icons are inlined in the HTML document, use ''
+    #}
+    {#{% set defaultUrl = _base ~ icon_sprite %}#}
+    {% set defaultUrl = icon_sprite %}
+    {#
+        Private variables: don't touch unless you want to change the macro's behavior
+    #}
+    {% set name = name|default('test') %}
+    {% set alt  = alt|default('') %}
+
+    {% if height %}
+      {% set width = width|default('100px') %}
+      {% set height = height|default('100px') %}
+      {% set size = '' %}
+    {% else %}
+      {% set size = width|default('16') %}
+      {% set width = '' %}
+      {% set height = '' %}
+    {% endif %}
+
+    {% if '#' in name %}
+      {% set url = name|split('#')|first %}
+      {% set key = name|split('#')|last %}
+    {% else %}
+      {% set url = defaultUrl %}
+      {% set key = name %}
+    {% endif %}
+
+    <svg {% if width %}width="{{ width }}" {% endif %}{% if width %}height="{{ height }}"
+         {% endif %}class="{% if size %}icon icon--{{ size }} icon--{{ key }}{% endif %} {% if option %}icon--{{ option }}{% endif %}"{% if not alt %} aria-hidden="true"{% endif %}>
+      {% if alt %}<title>{{ alt }}</title>{% endif %}
+      <use xlink:href="{{ url ~ '#' ~ key }}"></use>
+    </svg>
+
+  {% endspaceless %}
+{% endmacro %}

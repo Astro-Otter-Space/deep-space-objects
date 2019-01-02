@@ -45,10 +45,12 @@ class Constellation extends AbstractEntity
 
     /**
      * @param $locale
+     * @return Constellation
      */
-    public function setLocale($locale): void
+    public function setLocale($locale): Constellation
     {
         $this->locale = $locale;
+        return $this;
     }
 
     /**
@@ -96,13 +98,12 @@ class Constellation extends AbstractEntity
      */
     public function setAlt($alt): void
     {
-        if (!$this->locale || 'en' !== $this->locale) {
+        dump($alt, $this->locale);
+        if (!$this->locale || 'en' === $this->locale) {
             $this->alt = $alt['alt'];
         } else {
             $this->alt = $alt[sprintf('alt_%s', $this->locale)];
         }
-
-        $this->alt = $alt;
     }
 
     /**
