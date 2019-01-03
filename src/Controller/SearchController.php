@@ -26,7 +26,8 @@ class SearchController extends AbstractController
      * )
      *
      * @param Request $request
-     * @param  DsoRepository $dsoRepository
+     * @param DsoRepository $dsoRepository
+     * @param TranslatorInterface $translatorInterface
      * @return JsonResponse
      */
     public function searchAjax(Request $request, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
@@ -40,8 +41,9 @@ class SearchController extends AbstractController
             $data = call_user_func("array_merge", array_map(function(Dso $dso) use ($translatorInterface) {
                 return [
                     "id" => $dso->getId(),
-                    "value" => (!empty($dso->getAlt())) ? $dso->getAlt() : $dso->getId(),
-                    "description" => $translatorInterface->trans('type.' . $dso->getType()) . ' - ' . $dso->getConstId()
+                    "value" => (!empty($dso->getAlt())) ? $dso->getAlt() . ' - ' . $dso->getId() : $dso->getId(),
+                    "label" => $translatorInterface->trans('type.' . $dso->getType()) . ' - ' . $translatorInterface->trans('const_id.' . strtolower($dso->getConstId())),
+                    "full_url" => null
                 ];
             }, $result));
         }

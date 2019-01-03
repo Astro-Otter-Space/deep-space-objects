@@ -16,6 +16,22 @@ services:
         bind:
             $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
 
+    # Astrobin
+#    Astrobin\:
+#        resource: '../vendor/hamhamfonfon/astrobin/src/Services/*'
+#        autoconfigure: true
+#        public: true
+#    Astrobin\GetCollection:
+#        class: Astrobin\GetCollection
+#        autowire: true
+#        public: true
+#    Astrobin\GetImage:
+#        class: Astrobin\GetImage
+#        autowire: true
+#        public: true
+
+
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -30,6 +46,9 @@ services:
 
     App\Repository\:
         resource: '../src/Repository'
+
+    App\Managers\:
+        resource: '../src/Managers'
 
     # Client Elastic Search
     Elastica\Client:

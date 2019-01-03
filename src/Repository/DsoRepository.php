@@ -20,8 +20,7 @@ class DsoRepository extends AbstractRepository
     private static $listSearchFields = [
         'id',
         'data.desigs',
-        'data.alt*',
-       // sprintf('data.alt_%s', $this->getLocale()),
+        'data.alt',
         "data.const_id"
     ];
 
@@ -40,13 +39,13 @@ class DsoRepository extends AbstractRepository
 
     /**
      * @param $id
-     * @return null
+     * @return Dso|null
      */
     public function getObjectById($id)
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-
+            return $this->buildEntityFromDocument($resultDocument->getDocuments()[0]);
         } else {
             return null;
         }
@@ -99,6 +98,8 @@ class DsoRepository extends AbstractRepository
     {
         $list = [];
         $this->client->getIndex(self::INDEX_NAME);
+
+        array_push(self::$listSearchFields, sprintf('data.alt_%s', $this->getLocale()));
 
         /** @var Query\QueryString $query */
         $query = new Query\QueryString();

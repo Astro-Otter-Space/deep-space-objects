@@ -3,6 +3,8 @@
 
 namespace App\Entity;
 
+use App\Repository\DsoRepository;
+
 /**
  * Class Dso
  * @package App\Entity
@@ -25,6 +27,8 @@ class Dso extends AbstractEntity
     private $ra;
     private $dec;
     private $astrobinId;
+    private $image;
+    private $fullUrl;
 
     /**
      * @return mixed
@@ -288,4 +292,44 @@ class Dso extends AbstractEntity
         $this->astrobinId = $astrobinId;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getIndex()
+    {
+        return DsoRepository::INDEX_NAME;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullUrl()
+    {
+        return $this->fullUrl;
+    }
+
+    /**
+     * @param mixed $fullUrl
+     */
+    public function setFullUrl($fullUrl): void
+    {
+        $this->fullUrl = $fullUrl;
+    }
 }

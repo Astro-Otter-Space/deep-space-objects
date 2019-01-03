@@ -29,6 +29,7 @@
     methods: {
       callbackDemo(obj) {
         console.log(obj.id);
+        // router.push({ name: 'dso_show', params: {id: obj.id}})
       }
     }
   }

@@ -37,6 +37,8 @@ class Constellation extends AbstractEntity
 
     private $listDso;
 
+    private $fullUrl;
+
     /**
      * @return mixed
      */
@@ -209,6 +211,22 @@ class Constellation extends AbstractEntity
     public function setListDso(ListDso $listDso): void
     {
         $this->listDso = $listDso;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullUrl()
+    {
+        return $this->fullUrl;
+    }
+
+    /**
+     * @param mixed $fullUrl
+     */
+    public function setFullUrl($fullUrl): void
+    {
+        $this->fullUrl = $fullUrl;
     }
 
 }
