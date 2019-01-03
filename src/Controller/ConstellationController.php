@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Constellation;
 use App\Repository\ConstellationRepository;
+use App\Repository\DsoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +23,17 @@ class ConstellationController extends AbstractController
      * @param ConstellationRepository $constellationRepository
      * @return Response
      */
-    public function show(string $id, ConstellationRepository $constellationRepository): Response
+    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository): Response
     {
         $result = [];
 
         /** @var Constellation $constellation */
         $constellation = $constellationRepository->getObjectById($id);
+
+        $listDsoPerConst = $dsoRepository->getObjectsByConstId($constellation->getId(), 10);
+        $constellation->setListDso($listDsoPerConst);
+
+        dump($constellation);
 
         $result['constellation'] = $constellation;
 

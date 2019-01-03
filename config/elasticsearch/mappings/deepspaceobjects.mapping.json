@@ -18,7 +18,8 @@
             "raw": {
               "type": "keyword"
             }
-          }
+          },
+          "copy_to": "suggest"
         },
         "catalog": {
           "type": "text",
@@ -34,21 +35,12 @@
         "geometry": {
           "type": "geo_shape"
         },
-        "vote": {
-          "properties": {
-            "nb_vote": {
-              "type": "integer"
-            },
-            "value_vote": {
-              "type": "integer"
-            }
-          }
-        },
         "data": {
           "properties": {
             "desigs": {
               "type": "keyword",
-              "normalizer": "lowercase_normalizer"
+              "normalizer": "lowercase_normalizer",
+              "copy_to": "suggest"
             },
             "alt": {
               "properties": {
@@ -127,6 +119,9 @@
               "type": "integer"
             }
           }
+        },
+        "suggest": {
+          "type" : "completion"
         }
       }
     }

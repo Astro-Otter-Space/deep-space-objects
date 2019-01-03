@@ -66,7 +66,6 @@ abstract class AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search->setQuery($matchQuery);
 
         /** @var ResultSet $resultSet */
         return $search->search($matchQuery);

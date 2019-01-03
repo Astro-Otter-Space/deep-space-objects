@@ -42,7 +42,7 @@ final class ConstellationRepository extends AbstractRepository
     }
 
     /**
-     * Build an entityfrom result
+     * Build an entity from result
      * @param $document
      * @return Constellation
      */

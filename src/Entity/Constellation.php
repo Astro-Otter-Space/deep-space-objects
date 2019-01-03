@@ -35,6 +35,8 @@ class Constellation extends AbstractEntity
     /** @var  */
     private $geometryLine;
 
+    private $listDso;
+
     /**
      * @return mixed
      */
@@ -193,5 +195,20 @@ class Constellation extends AbstractEntity
         $this->elasticId = $elasticId;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getListDso()
+    {
+        return $this->listDso;
+    }
+
+    /**
+     * @param mixed $listDso
+     */
+    public function setListDso(ListDso $listDso): void
+    {
+        $this->listDso = $listDso;
+    }
 
 }
