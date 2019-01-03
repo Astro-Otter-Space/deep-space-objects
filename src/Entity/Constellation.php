@@ -98,7 +98,6 @@ class Constellation extends AbstractEntity
      */
     public function setAlt($alt): void
     {
-        dump($alt, $this->locale);
         if (!$this->locale || 'en' === $this->locale) {
             $this->alt = $alt['alt'];
         } else {

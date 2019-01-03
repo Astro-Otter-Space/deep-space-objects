@@ -2,8 +2,10 @@
 
 {% block content %}
   <div id="app">
-    {% set label = "const_id." ~ constellation.id %}
-    <h1>{{ label|trans }}</h1>
+    {% set label = "const_id." ~ constellation.id|lower %}
+    <h2>{{ label|trans }}</h2>
+
+    <img src="{{ asset('build/images/const_maps/' ~ constellation.id|upper ~ '.gif') }}" alt="{{ constellation.gen }}">
   </div>
 
 {% endblock %}

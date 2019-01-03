@@ -29,8 +29,8 @@ class ConstellationController extends AbstractController
         /** @var Constellation $constellation */
         $constellation = $constellationRepository->getObjectById($id);
 
-        dump($constellation);
         $result['constellation'] = $constellation;
+
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
         $response->headers->set('X-Constellation-Id', $constellation->getElasticId());

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Elastica\Document;
-use Elastica\Result;
 
 /**
  * Class AbstractEntity
