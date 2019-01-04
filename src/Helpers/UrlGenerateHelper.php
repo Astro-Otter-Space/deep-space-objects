@@ -36,7 +36,7 @@ class UrlGenerateHelper
     public function generateUrl($entity)
     {
         $url = '';
-        if ($entity instanceof Dso or $entity instanceof Constellation) {
+        if ($entity instanceof Dso || $entity instanceof Constellation) {
             switch ($entity::getIndex()) {
                 case DsoRepository::INDEX_NAME:
                     $url = $this->router->generate('dso_show', ['id' => $entity->getId()]);

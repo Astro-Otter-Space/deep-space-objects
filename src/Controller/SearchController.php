@@ -55,4 +55,20 @@ class SearchController extends AbstractController
         return $response;
     }
 
+/*{
+    "_source": "suggest",
+    "suggest": {
+        "dso-suggest": {
+            "prefix": "<searchterm>",
+            "completion": {
+                "field": "suggest",
+                "size": 10,
+                "fuzzy": {
+                    "prefix_length": 8
+                }
+            }
+        }
+    }
+}*/
+
 }

@@ -20,6 +20,7 @@ class DsoController extends AbstractController
 
     /**
      * @Route("/catalog/{id}", name="dso_show")
+     *
      * @param string $id
      * @param DsoManager $dsoManager
      * @return Response
