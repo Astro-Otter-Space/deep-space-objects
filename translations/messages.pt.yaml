@@ -9,6 +9,7 @@ hem.zo: Zodíaco
 hem.no: Hemisfério Norte
 hem.su: Hemisfério sul
 #Catalog
+catalog: Catálogo
 catalogs: Catálogos
 allCatalog: Todos os catálogos
 catalog.messier: Messier Catalog
@@ -33,8 +34,10 @@ home.search.placeholder: Procurar no catálogo
 dayImage: Imagem do dia
 # View full
 info: Informações
+desigs: Outras designações
 magnitude: Magnitude aparente
 const_id: Constelação|Constelações
+constId: Constelação|Constelações
 dim: Tamanha
 dimExp: Dimensão angular em arcominutos
 distAl: Distância (ano-luz)
@@ -45,6 +48,8 @@ typeImgGall: Objetos do tipo "%type%"
 mag: Magnitude
 ra: Ascencão reta
 dec: Declinação
+discover: Discover
+discoverYear: Year
 # Vue list
 filteringList: Filtrar lista de itens por constelação, tipo e magnitude... e descobrir os mais lindos objetos celestes.
 list.messier: Lista dos objetos de Messier

@@ -2,5 +2,17 @@
 
 {#https://coxpi.draftium.site/#}
 {% block content %}
+
+  <div data-dso-widget data-dso="{{ dso|json_encode }}"></div>
+  <div data-dso-widget data-images="{{ images|json_encode }}"></div>
+
+  <section>
+    <div id="app"></div>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('home') }}
 {% endblock %}
 

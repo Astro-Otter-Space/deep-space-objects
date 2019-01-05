@@ -10,6 +10,8 @@ use Elastica\Document;
  */
 abstract class AbstractEntity
 {
+    const DATA_GLUE = '.';
+
     /**
      * Transform a Result item from ES into Entity
      *

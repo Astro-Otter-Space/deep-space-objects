@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Dso;
 use App\Managers\DsoManager;
+use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,11 @@ class DsoController extends AbstractController
 {
 
     /**
-     * @Route("/catalog/{id}", name="dso_show")
+     * @Route({
+     *  "en": "/catalog/{id}",
+     *  "fr": "/catalogue/{id}",
+     *  "pt": "/catalogo/{id}"
+     * }, name="dso_show")
      *
      * @param string $id
      * @param DsoManager $dsoManager
@@ -40,17 +45,18 @@ class DsoController extends AbstractController
             $astrobinWs = new GetImage();
             $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
 
-            $params['dso'] = $dso;
+            $params['dso'] = $dsoManager->formatVueData($dso);
             if (0 < $listImages->count) {
-                $params['images'] = $listImages;
+                $params['images'] = array_map(function (Image $image) {
+                    return $image->url_regular;
+                }, iterator_to_array($listImages));
             }
         }
-
-        dump($dso);
 
         /** @var Response $response */
         $response = new Response();
         $response->setSharedMaxAge(0);
+
         return $this->render('pages/dso.html.twig', $params, $response);
     }
 

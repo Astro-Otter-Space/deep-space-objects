@@ -27,4 +27,21 @@ class HomeController extends AbstractController
         return $response;
     }
 
+
+    /**
+     * @ Route({
+     *     "fr": "/contactez-nous",
+     *     "en": "/contact-us"
+     * }, name="contact")
+     *
+     * @return Response
+     */
+    public function contact()
+    {
+        /** @var Response $response */
+        $response = new Response();
+        $response->setSharedMaxAge(0);
+
+        return $response;
+    }
 }

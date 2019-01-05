@@ -9,6 +9,7 @@ hem.zo: Zodiaque
 hem.no: Hémisphère nord
 hem.su: Hémisphère sud
 #Catalog
+catalog: Catalogue
 catalogs: Catalogues
 allCatalog: Tous les catalogues
 catalog.messier: Catalogue de Messier
@@ -33,8 +34,10 @@ home.search.placeholder: Rechercher dans les catalogues...
 dayImage: L'image du jour
 # View full
 info: Informations
+desigs: Autre désignations
 magnitude: Magnitude apparente
 const_id: Constellation|Constellations
+constId: Constellation|Constellations
 dim: Dimension
 dimExp: Dimension angulaire en minutes d'arcs
 distAl: Distance (années-lumière)
@@ -45,6 +48,8 @@ typeImgGall: Objects de type "%type%"
 mag: Magnitude
 ra: Ascension droite
 dec: Déclinaison
+discover: Découvreur
+discoverYear: Année découverte
 # Vue list
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 list.messier: Liste des objects de Messier
