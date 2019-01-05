@@ -332,4 +332,26 @@ class Dso extends AbstractEntity
     {
         $this->fullUrl = $fullUrl;
     }
+
+
+    /**
+     * Serialize data
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'name' => $this->getAlt(),
+            'catalog' => implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
+            'type' => implode(self::DATA_GLUE, ['type', $this->getType()]),
+            'desigs' => $this->getDesigs(),
+            'constId' => implode(self::DATA_GLUE, ['const_id', strtolower($this->getConstId())]),
+            'mag' => $this->getMag(),
+            'distAl' => $this->getDistAl(),
+            'discover' => $this->getDiscover(),
+            'discoverYear' => $this->getDiscoverYear(),
+            'ra' => $this->getRa(),
+            'dec' => $this->getDec(),
+        ];
+    }
 }
