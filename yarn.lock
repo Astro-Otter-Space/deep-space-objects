@@ -6775,6 +6775,11 @@ vue-i18n@^8.4.0:
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.4.0.tgz#bc3437ff8f5f389c57235ced602e9d7bfd87995c"
   integrity sha512-MiBI1v2pY22aAEbNrcy7GX9qigoUQE9PbmrAydrBuYNRwn0RbD1RZpMemtmGW3Ju6LBA1yn7TZOPa3lxWrT0Eg==
 
+vue-lazy-image-loading@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/vue-lazy-image-loading/-/vue-lazy-image-loading-1.1.5.tgz#248902dfbbbf9c7235e097b14e6d97c323431983"
+  integrity sha512-d6N1BRMHEkEuxlWdvGYpl4IfdzH4C9olBVjFjc7su4VD2DFdhIbsuQQlRwXWHRlD6F+YtBsnCkLEzPQ4WnB2ug==
+
 vue-loader@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.4.2.tgz#812bb26e447dd3b84c485eb634190d914ce125e2"

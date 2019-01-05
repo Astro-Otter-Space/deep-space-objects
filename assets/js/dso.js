@@ -1,13 +1,8 @@
 import Vue from 'vue';
-import App from 'Widgets/Dso/App'
-import Agile from "vue-agile";
+import App from './Widgets/Dso/App'
 
 Vue.config.productionTip = false;
 
-Vue.use(Agile);
-
 new Vue({
-  el: "#app",
-  template: "<App/>",
-  components: { App }
-});
+  render: h => h(App)
+}).$mount(`#app`);

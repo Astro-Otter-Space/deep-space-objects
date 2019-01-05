@@ -18,6 +18,7 @@
         "vue": "^2.5.18",
         "vue-agile": "^0.3.7",
         "vue-i18n": "^8.4.0",
+        "vue-lazy-image-loading": "^1.1.5",
         "vue-loader": "^15.4.2",
         "vue-router": "^3.0.2",
         "vue-template-compiler": "^2.5.18",
