@@ -1,23 +1,32 @@
 <template>
   <div id="app">
     <div class="dso_header">
-      <imageheader/>
+      <image-header/>
     </div>
     <div class="dso_slider">
-      <slider/>
+      <images-dso-slider
+        :flux-images="imagesDso"
+      />
     </div>
   </div>
 </template>
 
 <script>
-  import Imageheader from './components/Imageheader'
-  import Slider from './components/Slider'
+  import ImageHeader from './components/Imageheader'
+  import ImagesDsoSlider from './components/ImageSlider'
+
+  let images = document.querySelector('div[data-dso-widget]').dataset.images;
 
   export default {
     name: "App",
     components: {
-      Imageheader,
-      Slider
+      ImageHeader,
+      ImagesDsoSlider
+    },
+    data () {
+      return {
+        imagesDso: images
+      }
     }
   }
 </script>

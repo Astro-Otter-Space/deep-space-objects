@@ -5,6 +5,7 @@
     {% set label = "const_id." ~ constellation.id|lower %}
     <h2>{{ label|trans }}</h2>
 
+    {##https://vuejsexamples.com/a-vue2-plugin-for-images-show-in-gallery-or-carousel/#}
     <img src="{{ asset('build/images/const_maps/' ~ constellation.id|upper ~ '.gif') }}" alt="{{ constellation.gen }}">
   </div>
 

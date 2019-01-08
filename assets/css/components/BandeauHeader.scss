@@ -1,0 +1,31 @@
+.AppHeader {
+  &__background {
+    height: 300px;
+  }
+
+  &__LazyBackgroundImage {
+    opacity: 0.5;
+  }
+
+  &__imgCover {
+    position: relative;
+    //width: "100%",
+    //height: "100%",
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+}
+
+.lazy-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -2;
+}
+.lazy-background-image {
+  opacity: 0.5;
+}

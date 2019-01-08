@@ -2,9 +2,7 @@
 
 {#https://coxpi.draftium.site/#}
 {% block content %}
-
-  <div data-dso-widget data-dso="{{ dso|json_encode }}"></div>
-  <div data-dso-widget data-images="{{ images|json_encode }}"></div>
+  <div data-dso-widget data-dso="{{ dso|json_encode }}" data-images="{{ images|json_encode }}"></div>
 
   <section>
     <div id="app"></div>
@@ -13,6 +11,6 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {{ encore_entry_script_tags('home') }}
+  {{ encore_entry_script_tags('dso') }}
 {% endblock %}
 
