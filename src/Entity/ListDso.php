@@ -11,7 +11,7 @@ use Traversable;
 class ListDso implements \IteratorAggregate
 {
 
-    private $listDso = [];
+    protected $listDso = [];
 
     /**
      * @return \ArrayIterator|Traversable
@@ -19,5 +19,13 @@ class ListDso implements \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->listDso);
+    }
+
+    /**
+     * @param Dso $dso
+     */
+    public function addDso(Dso $dso)
+    {
+        $this->listDso[] = $dso;
     }
 }

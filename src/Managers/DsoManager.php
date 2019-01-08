@@ -5,8 +5,11 @@ namespace App\Managers;
 
 
 use App\Entity\Dso;
+use App\Entity\ListDso;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\DsoRepository;
+use Astrobin\Exceptions\WsResponseException;
+use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -57,23 +60,44 @@ class DsoManager
         /** @var Dso $dso */
         $dso = $this->dsoRepository->getObjectById($id);
 
-        // Add image
-        if ($dso->getAstrobinId()) {
-            $imageAstrobin = $this->astrobinImage->getImageById($dso->getAstrobinId());
-            $dso->setImage($imageAstrobin->url_hd);
-        } else {
-            $imageAstrobin = $this->astrobinImage->getImagesBySubject($dso->getId(), 1);
-            if (!is_null($imageAstrobin)) {
-                $dso->setImage($imageAstrobin->url_hd);
-            }
-        }
+        // Add astrobin image
+        $astrobinImage = $this->getAstrobinImage($dso);
+        $dso->setImage($astrobinImage);
 
         // Add URl
-        $dso->setFullUrl($this->urlGenerateHelper->generateUrl($dso));
+        $dso->setFullUrl($this->getDsoUrl($dso));
 
         return $dso;
     }
 
+
+    /**
+     * @param Dso $dso
+     * @return string|null
+     * @throws \Astrobin\Exceptions\WsException
+     * @throws \Astrobin\Exceptions\WsResponseException
+     * @throws \ReflectionException
+     */
+    public function getAstrobinImage(Dso $dso)
+    {
+        try {
+            $imageAstrobin = (!is_null($dso->getAstrobinId())) ? $this->astrobinImage->getImageById($dso->getAstrobinId()) : $this->astrobinImage->getImagesBySubject($dso->getId(), 1);
+            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+                return $imageAstrobin->url_hd;
+            }
+        } catch(WsResponseException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * @param Dso $dso
+     * @return string
+     */
+    public function getDsoUrl(Dso $dso)
+    {
+        return $this->urlGenerateHelper->generateUrl($dso);
+    }
 
     /**
      * Translate data vor display in VueJs
@@ -85,7 +109,6 @@ class DsoManager
     {
         /** @var TranslatorInterface $translate */
         $translate = $this->translatorInterface;
-        $array = $dso->toArray();
         $listFields = self::$listFieldToTranslate;
 
         $serialize = array_map(function($value, $key) use($translate, $listFields) {

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Constellation;
+use App\Entity\Dso;
+use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -21,17 +23,28 @@ class ConstellationController extends AbstractController
      * @Route("/constellation/{id}", name="constellation_show")
      * @param string $id
      * @param ConstellationRepository $constellationRepository
+     * @param DsoRepository $dsoRepository
+     * @param DsoManager $dsoManager
      * @return Response
+     * @throws \Astrobin\Exceptions\WsException
+     * @throws \Astrobin\Exceptions\WsResponseException
+     * @throws \ReflectionException
      */
-    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository): Response
+    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager): Response
     {
         $result = [];
 
         /** @var Constellation $constellation */
         $constellation = $constellationRepository->getObjectById($id);
 
-        $listDsoPerConst = $dsoRepository->getObjectsByConstId($constellation->getId(), 10);
-        $constellation->setListDso($listDsoPerConst);
+        // Retrieve list of Dso from the constellation
+        $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), 10);
+        /** @var Dso $dso */
+        foreach ($listDso->getIterator() as $dso) {
+            $dso->setImage($dsoManager->getAstrobinImage($dso));
+            $dso->setFullUrl($dsoManager->getDsoUrl($dso));
+        }
+        $constellation->setListDso($listDso);
 
         dump($constellation);
 

@@ -4,10 +4,12 @@ namespace App\Repository;
 
 use App\Entity\Dso;
 use App\Entity\ListDso;
+use App\Managers\DsoManager;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
+use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
@@ -29,6 +31,7 @@ class DsoRepository extends AbstractRepository
     /**
      * DsoRepository constructor.
      * @param Client $client
+     * @param DsoManager $dsoManager
      * @param $locale
      */
     public function __construct(Client $client, $locale)
@@ -38,6 +41,8 @@ class DsoRepository extends AbstractRepository
 
 
     /**
+     * Retrieve object by his Id
+     *
      * @param $id
      * @return Dso|null
      */
@@ -55,10 +60,12 @@ class DsoRepository extends AbstractRepository
      * Retrieve list of Dso objects in a constellation
      * @param $constId
      * @param $limit
-     * @return ListDso|null
+     * @return ListDso $dsoList
      */
-    public function getObjectsByConstId($constId, $limit)
+    public function getObjectsByConstId($constId, $limit): ListDso
     {
+        /** @var ListDso $dsoList */
+        $dsoList = new ListDso();
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query\Term $term */
@@ -73,18 +80,14 @@ class DsoRepository extends AbstractRepository
         $search->setQuery($matchQuery);
 
         $result = $search->search($matchQuery);
-        if (0 < $result->getTotalHits()) {
-            $listDso = new ListDso();
-            foreach ($result->getResults() as $result) {
-                /** @var Dso $dso */
-                $dso = $this->buildEntityFromDocument($result->getDocument());
-                $listDso->getIterator()->append($dso);
+        if (0 < $result->count()) {
+            foreach ($result->getDocuments() as $document) {
+                $dso = $this->buildEntityFromDocument($document);
+                $dsoList->addDso($dso);
             }
-            dump($listDso);
-            return $listDso;
-        } else {
-            return null;
         }
+
+        return $dsoList;
     }
 
 
