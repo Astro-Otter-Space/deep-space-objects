@@ -3,9 +3,12 @@
 
 // Components
 @import "components/Header";
+// Components Homepage
 @import "components/Homeslider.scss";
 @import "components/Searchautocomplete.scss";
+// Components DSO pages
 @import "components/BandeauHeader";
+@import "components/VueFlux";
 
 body {
   font-family: $font;

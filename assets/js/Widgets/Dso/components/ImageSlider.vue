@@ -2,21 +2,22 @@
   <vue-flux
     :options="fluxOptions"
     :images="fluxImages"
-    :transition="fluxTransitions"
+    :transitions="fluxTransitions"
     ref="slider"
   >
+    <flux-pagination slot="pagination"></flux-pagination>
   </vue-flux>
 </template>
 
 <script>
-
+  // https://deulos.github.io/vue-flux/
   import { VueFlux, FluxPagination, Transitions } from 'vue-flux';
-  //import 'vue-flux/dist/vue-flux.css';
 
   export default {
     name: 'ImageSlider',
     components: {
-      'vue-flux': VueFlux
+      VueFlux,
+      FluxPagination
     },
     data: () => ({
       fluxOptions: {
@@ -34,3 +35,7 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

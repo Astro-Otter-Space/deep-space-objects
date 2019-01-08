@@ -5,7 +5,7 @@
     </div>
     <div class="dso_slider">
       <images-dso-slider
-        :flux-images="imagesDso"
+        :fluxImages="imagesDso"
       />
     </div>
   </div>
@@ -15,7 +15,7 @@
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
 
-  let images = document.querySelector('div[data-dso-widget]').dataset.images;
+  let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
 
   export default {
     name: "App",
