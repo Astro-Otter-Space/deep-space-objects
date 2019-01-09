@@ -12,6 +12,10 @@
           :fluxImages="imagesDso"
         />
       </div>
+      <div class="Dso__map">
+        <h3>Map</h3>
+        <div class="map"></div>
+      </div>
     </section>
   </div>
 </template>
@@ -19,6 +23,8 @@
 <script>
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
+
+  import Map from './../../celestial.js'
 
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;

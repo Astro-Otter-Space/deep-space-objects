@@ -2068,6 +2068,11 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
+d3-celestial@^0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/d3-celestial/-/d3-celestial-0.6.7.tgz#366d2c1c348029c24c213ed80515b6cae0e2cfca"
+  integrity sha512-966/AUD/yI9VWrZKqHTAZLVHtaE7iyOOM8Rd3KFVIubEH8PlUT3mIV6HmVe3YejMsrn7NuWxxR6wf7y5CSZ6CA==
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -6765,6 +6770,13 @@ vue-agile@^0.3.7:
   dependencies:
     vue "2.*.*"
 
+vue-flux@^5.1.9:
+  version "5.1.9"
+  resolved "https://registry.yarnpkg.com/vue-flux/-/vue-flux-5.1.9.tgz#027e12431b6a0d86502aa68231f2657fb28b41f0"
+  integrity sha512-wnkCJ8PlGkXT42TFOizEjV6Nxt2CjPLy01flRPLeL5bdoTrKoOHAZ+o+fqVg9GZuLxcf0HyVYaU4rsuwQE7nCA==
+  dependencies:
+    vue "^2.5.21"
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
@@ -6834,7 +6846,7 @@ vue@2.*.*:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.20.tgz#79fff9ccaa10cc37e7a7239b4c7adfac94df81ba"
   integrity sha512-kVLZi8RWOk8qwAt+a0bVDy9VV5Zzcnj0fLCMyKLx1dmEBjqmYJYRWHvPwiypiJBtJkdmROy5NP5hyDqTdfBcvQ==
 
-vue@^2.4.2:
+vue@^2.4.2, vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
