@@ -120,4 +120,17 @@ class DsoManager
 
         return $serialize;
     }
+
+
+    /**
+     * Return a formated title
+     *
+     * @param Dso $dso
+     * @return string
+     */
+    public function buildTitle(Dso $dso): string
+    {
+        $title = (empty($dso->getAlt())) ? current($dso->getDesigs()) : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), current($dso->getDesigs())]);
+        return $title;
+    }
 }

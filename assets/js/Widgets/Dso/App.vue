@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <div class="dso_header">
+    <div class="Dso_header">
       <image-header/>
     </div>
-    <div class="dso_slider">
-      <images-dso-slider
-        :fluxImages="imagesDso"
-      />
-    </div>
+    <section class="Dso__container">
+      <h2 class="Dso__title">{{ titleDso }}</h2>
+      <div class="Dso__table">
+      </div>
+      <div class="Dso__slider">
+        <images-dso-slider
+          :fluxImages="imagesDso"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -16,6 +21,7 @@
   import ImagesDsoSlider from './components/ImageSlider'
 
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
+  let title = document.querySelector('div[data-dso-widget]').dataset.title;
 
   export default {
     name: "App",
@@ -25,7 +31,8 @@
     },
     data () {
       return {
-        imagesDso: images
+        imagesDso: images,
+        titleDso: title
       }
     }
   }

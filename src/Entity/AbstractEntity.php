@@ -12,6 +12,8 @@ abstract class AbstractEntity
 {
     const DATA_GLUE = '.';
 
+    const DATA_CONCAT_GLUE = ' - ';
+
     /**
      * Transform a Result item from ES into Entity
      *

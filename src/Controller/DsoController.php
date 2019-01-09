@@ -46,6 +46,7 @@ class DsoController extends AbstractController
             $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
 
             $params['dso'] = $dsoManager->formatVueData($dso);
+            $params['title'] = $dsoManager->buildTitle($dso);
             if (0 < $listImages->count) {
                 $params['images'] = array_map(function (Image $image) {
                     return $image->url_regular;

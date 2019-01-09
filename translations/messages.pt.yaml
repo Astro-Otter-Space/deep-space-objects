@@ -1,5 +1,6 @@
 # Layout
-dso: Objetos do céu profundo
+dso: Deep-sky objects
+dso_tr: Objetos do céu profundo
 menu.homepage: Página incial
 selectLang: Línguas
 astrobin.message: Esse produto utilisa o API AstroBin mas não é apoiado ou certificado por AstroBin
