@@ -7,6 +7,16 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: inherit;
 }
 
+h2 {
+  font-size: 3rem;
+  line-height: 1.5em;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 1em;
+}
+
 header {
   overflow: visible;
   height: 60px;
@@ -15,4 +25,19 @@ header {
 
 input {
   padding: 2px
+}
+
+table {
+  border-radius: 3px;
+  background-color: $bgd-white;
+}
+
+td {
+  background-color: $bgd-grey;
+  color: $color-text;
+}
+
+th, td {
+  min-width: 200px;
+  padding: 1em;
 }

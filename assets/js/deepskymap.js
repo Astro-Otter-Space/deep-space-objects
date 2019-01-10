@@ -1,3 +1,4 @@
+import * as d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
 import Celestial from 'd3-celestial';
 
 export default function deepskymap(jsonConstellation, jsonDso)
@@ -99,7 +100,7 @@ export default function deepskymap(jsonConstellation, jsonDso)
     }
   };
 
-  Celestial.add({
+  /*Celestial.add({
     type: "dso", callback: function (jsonDso, err) {
       if (err) return console.warn(err);
       let dso = Celestial.getData(jsonDso, config.transform);
@@ -136,7 +137,7 @@ export default function deepskymap(jsonConstellation, jsonDso)
         }
       });
     }
-  });
+  });*/
 
   Celestial.display(config);
 };

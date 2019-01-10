@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Dso;
 use App\Managers\DsoManager;
+use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,16 +43,24 @@ class DsoController extends AbstractController
         $dso = $dsoManager->buildDso($id);
 
         if (!is_null($dso)) {
-            /** @var GetImage $astrobinWs */
-            $astrobinWs = new GetImage();
-            $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
-
             $params['dso'] = $dsoManager->formatVueData($dso);
             $params['title'] = $dsoManager->buildTitle($dso);
-            if (0 < $listImages->count) {
-                $params['images'] = array_map(function (Image $image) {
-                    return $image->url_regular;
-                }, iterator_to_array($listImages));
+            $params['imgCover'] = $dso->getImage();
+            $params['images'] = [];
+            try {
+                /** @var GetImage $astrobinWs */
+                $astrobinWs = new GetImage();
+                $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
+
+                if (0 < $listImages->count) {
+                    $params['images'] = array_map(function (Image $image) {
+                        return $image->url_regular;
+                    }, iterator_to_array($listImages));
+                } else {
+
+                }
+            } catch(WsResponseException $e) {
+                dump($e->getMessage());
             }
 
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);

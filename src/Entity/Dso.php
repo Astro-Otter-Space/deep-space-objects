@@ -357,10 +357,9 @@ class Dso extends AbstractEntity
     public function toArray()
     {
         return [
-            'name' => $this->getAlt(),
             'catalog' => implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
             'type' => implode(self::DATA_GLUE, ['type', $this->getType()]),
-            'desigs' => $this->getDesigs(),
+            'desigs' => implode(self::DATA_CONCAT_GLUE, $this->getDesigs()),
             'constId' => implode(self::DATA_GLUE, ['const_id', strtolower($this->getConstId())]),
             'mag' => $this->getMag(),
             'distAl' => $this->getDistAl(),
