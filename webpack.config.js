@@ -34,7 +34,8 @@ Encore
     //.autoProvidejQuery()
 
     .addPlugin(new CopyWebpackPlugin([
-      { from: './assets/images', to: 'images' }
+      { from: './assets/images', to: 'images' },
+      { from: './node_modules/d3-celestial/data', to: 'data'}
     ]))
 
     .enableVueLoader();

@@ -11,12 +11,11 @@
     border-radius: 0.3rem;
     line-height: 2;
     font-size: 1.25rem;
-    font-size: 1rem;
   }
 
   &__list {
-    background-color: #F5F5F5;
-    color: $bgd-color;
+    background-color: $bgd-white;
+    color: $color-text-dark;
     > li {
       text-decoration: none;
       line-height: 2em;

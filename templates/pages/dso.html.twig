@@ -4,11 +4,15 @@
 {% set pageImage = '' %}
 {#https://coxpi.draftium.site/#}
 {% block content %}
-  <div data-dso-widget data-dso="{{ dso|json_encode }}" data-title="{{ title }}" data-images="{{ images|json_encode }}"></div>
+  <div
+    data-dso-widget
+    data-dso="{{ dso|json_encode }}"
+    data-title="{{ title }}"
+    data-images="{{ images|json_encode }}"
+    data-geojson-dso="{{ geojsonDso }}"
+  ></div>
 
-  <section>
-    <div id="app"></div>
-  </section>
+  <div id="app"></div>
 {% endblock %}
 
 {% block javascripts %}

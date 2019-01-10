@@ -29,6 +29,7 @@ class Dso extends AbstractEntity
     private $astrobinId;
     private $image;
     private $fullUrl;
+    private $geometry;
 
     /**
      * @return mixed
@@ -333,6 +334,21 @@ class Dso extends AbstractEntity
         $this->fullUrl = $fullUrl;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getGeometry()
+    {
+        return $this->geometry;
+    }
+
+    /**
+     * @param mixed $geometry
+     */
+    public function setGeometry($geometry): void
+    {
+        $this->geometry = $geometry;
+    }
 
     /**
      * Serialize data

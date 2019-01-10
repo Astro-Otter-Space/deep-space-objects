@@ -9,7 +9,6 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
-use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
@@ -31,7 +30,6 @@ class DsoRepository extends AbstractRepository
     /**
      * DsoRepository constructor.
      * @param Client $client
-     * @param DsoManager $dsoManager
      * @param $locale
      */
     public function __construct(Client $client, $locale)

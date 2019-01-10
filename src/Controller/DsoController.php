@@ -8,6 +8,7 @@ use App\Managers\DsoManager;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -52,6 +53,8 @@ class DsoController extends AbstractController
                     return $image->url_regular;
                 }, iterator_to_array($listImages));
             }
+
+            $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
         }
 
         /** @var Response $response */
@@ -61,4 +64,28 @@ class DsoController extends AbstractController
         return $this->render('pages/dso.html.twig', $params, $response);
     }
 
+
+    /**
+     * @Route("/geodata/dso/{id}", name="dso_geo_data", options={"expose": true})
+     * @param string $id
+     * @param DsoManager $dsoManager
+     * @return JsonResponse
+     * @throws \Astrobin\Exceptions\WsException
+     * @throws \Astrobin\Exceptions\WsResponseException
+     * @throws \ReflectionException
+     */
+    public function geoJson(string $id, DsoManager $dsoManager)
+    {
+        /** @var Dso $dso */
+        $dso = $dsoManager->buildDso($id);
+
+        $geoJsonData = $dsoManager->buildgeoJson($dso);
+
+        /** @var JsonResponse $jsonResponse */
+        $jsonResponse = new JsonResponse($geoJsonData, Response::HTTP_OK);
+        $jsonResponse->setPublic();
+        $jsonResponse->setSharedMaxAge(0);
+
+        return $jsonResponse;
+    }
 }

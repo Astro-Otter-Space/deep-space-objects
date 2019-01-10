@@ -27,7 +27,7 @@ abstract class AbstractEntity
         foreach ($document->getData() as $field=>$data) {
 
             $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
-            if (is_array($data) && "geometry" != $field) {
+            if (is_array($data) /*&& "geometry" != $field*/) {
                 $object = $this;
                 array_walk($data, function($value, $field) use (&$object) {
                     $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
@@ -35,7 +35,9 @@ abstract class AbstractEntity
                         $object->$method($value);
                     }
                 });
-            }
+            } /*else {
+
+            }*/
             if (true == method_exists($this, $method)) {
                 $this->$method($data);
             }

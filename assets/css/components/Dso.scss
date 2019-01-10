@@ -1,5 +1,13 @@
 .Dso {
 
+  &__main {
+    background-color: $bgd-white;
+  }
+
+  &__title {
+    color: $color-text-dark;
+  }
+
   &__container {
     max-width: 1200px;
     margin-left: auto;
@@ -7,7 +15,7 @@
   }
 
   &__table {
-
+    background-color: $bgd-grey;
   }
 
   // Slider VueFlux
@@ -17,3 +25,4 @@
     padding-right: .5rem;
   }
 }
+

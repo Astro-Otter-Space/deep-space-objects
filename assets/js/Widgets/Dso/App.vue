@@ -3,20 +3,23 @@
     <div class="Dso_header">
       <image-header/>
     </div>
-    <section class="Dso__container">
-      <h2 class="Dso__title">{{ titleDso }}</h2>
-      <div class="Dso__table">
-      </div>
-      <div class="Dso__slider">
-        <images-dso-slider
-          :fluxImages="imagesDso"
-        />
-      </div>
-      <div class="Dso__map">
-        <h3>Map</h3>
-        <div class="map"></div>
+    <section class="Dso__main">
+      <div class="Dso__container">
+        <h2 class="Dso__title">{{ titleDso }}</h2>
+        <div class="Dso__table">
+        </div>
+        <div class="Dso__slider">
+          <images-dso-slider
+            :fluxImages="imagesDso"
+          />
+        </div>
+        <div class="Dso__map">
+          <h3 class="Dso__title">{{ titleMap }}</h3>
+          <div class="map"></div>
+        </div>
       </div>
     </section>
+
   </div>
 </template>
 
@@ -24,7 +27,7 @@
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
 
-  import Map from './../../celestial.js'
+  // import Map from './../../celestial.js'
 
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
@@ -38,7 +41,8 @@
     data () {
       return {
         imagesDso: images,
-        titleDso: title
+        titleDso: title,
+        titleMap: "Map"
       }
     }
   }

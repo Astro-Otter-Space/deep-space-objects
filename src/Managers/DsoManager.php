@@ -133,4 +133,22 @@ class DsoManager
         $title = (empty($dso->getAlt())) ? current($dso->getDesigs()) : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), current($dso->getDesigs())]);
         return $title;
     }
+
+
+    /**
+     * @param Dso $dso
+     * @return string
+     */
+    public function buildgeoJson(Dso $dso): string
+    {
+        $data = [
+            "type" => "Feature",
+            "geometry" => $dso->getGeometry(),
+            "properties" => [
+                "name" => $this->buildTitle($dso)
+            ]
+        ];
+
+        return json_encode($data);
+    }
 }

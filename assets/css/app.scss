@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,600,600i');
 
-// Colors
-$bgd-color: #3e3d40;
+// Background Colors
+$bgd-dark: #3e3d40;
+$bgd-white: #ffffff;
+$bgd-grey: #595959;
 
+// Text colors
 $color-text: #e9e9e9;
+$color-text-dark: $bgd-dark;
 $color-success: #3c763d;
 $color-error: #a94442;
 
