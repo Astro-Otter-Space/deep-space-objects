@@ -22,6 +22,8 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addEntry('dso', './assets/js/dso.js')
 
+    .addStyleEntry('celestial', './node_modules/d3-celestial/celestial.css')
+
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
