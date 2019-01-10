@@ -137,4 +137,6 @@ export default function deepskymap(jsonConstellation, jsonDso)
       });
     }
   });
+
+  Celestial.display(config);
 };
