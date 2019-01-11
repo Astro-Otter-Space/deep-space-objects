@@ -14,7 +14,7 @@ h2 {
 
 h3 {
   font-size: 2rem;
-  line-height: 1em;
+  line-height: 1.5em;
 }
 
 header {
@@ -40,4 +40,9 @@ td {
 th, td {
   min-width: 200px;
   padding: 1em;
+}
+
+p {
+  font: $font;
+  line-height: 1.5em;
 }

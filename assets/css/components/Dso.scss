@@ -7,6 +7,7 @@
   &__title {
     color: $color-text-dark;
     border-bottom: 1px solid $bgd-dark;
+    margin-bottom: 0.5em;
   }
 
   &__container {
@@ -15,6 +16,11 @@
     margin-right: auto;
   }
 
+  &__description {
+    p {
+      line-height: 1.5em;
+    }
+  }
 
   // Data
   &__data {
@@ -41,9 +47,7 @@
 
   // Slider VueFlux
   &__slider {
-    margin: 1em;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    margin-bottom: 1em;
   }
 }
 

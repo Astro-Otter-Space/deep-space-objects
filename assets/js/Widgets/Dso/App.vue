@@ -1,12 +1,17 @@
 <template>
   <div id="app">
     <div class="Dso_header">
-      <image-header/>
+      <image-header
+        :cover-image="imageCover"
+      />
     </div>
     <section class="Dso__main">
       <div class="Dso__container">
         <h2 class="Dso__title">{{ titleDso }}</h2>
 
+        <div class="Dso__description">
+          <p>Lorem ipsum dolor sit amet, interdum aenean semper egestas imperdiet quisque. Diam lacus, nulla nibh quisque neque at. Velit nec maecenas quam phasellus ac et, malesuada vitae lectus. Adipiscing suspendisse, molestie sed viverra malesuada pellentesque convallis. Risus pharetra.</p>
+        </div>
         <div class="Dso__data">
           <Table
             :columns="gridColumns"
@@ -18,6 +23,7 @@
           </Table>
         </div>
         <div class="Dso__slider">
+          <h3 class="Dso__title">Gallery</h3>
           <images-dso-slider
             :fluxImages="imagesDso"
           />
@@ -39,6 +45,7 @@
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
 
+  let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
@@ -52,6 +59,7 @@
     },
     data () {
       return {
+        imageCover: coverImage,
         imagesDso: images,
         titleDso: title,
         titleMap: "Map",
