@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.6.3",
         "@symfony/webpack-encore": "^0.22.0",
         "webpack-notifier": "^1.6.0"
     },
@@ -24,6 +25,7 @@
         "vue-lazy-image-loading": "^1.1.5",
         "vue-loader": "^15.4.2",
         "vue-router": "^3.0.2",
+        "vue-social-sharing": "^2.3.3",
         "vue-template-compiler": "^2.5.18",
         "vue2-autocomplete-js": "^0.2.2",
         "vue2-touch-events": "^1.1.1"

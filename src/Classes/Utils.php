@@ -109,7 +109,6 @@ class Utils
     public static function numberFormatByLocale($number)
     {
         $localeInfo = localeconv();
-//        dump($localeInfo);
         if (!is_null($number)) {
             $number = number_format($number, 2, $localeInfo['decimal_point'], $localeInfo['thousands_sep']);
         }
