@@ -11,7 +11,7 @@ namespace App\Classes;
 
 class Utils
 {
-
+    const PARSEC = 0.3066020852;
     const UNASSIGNED = 'unassigned';
 
     private static $catalogMapping = [
@@ -53,7 +53,9 @@ class Utils
         'Vd' => self::UNASSIGNED, 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
     ];
 
-
+    /**
+     * @return array
+     */
     public static function getCatalogMapping()
     {
         return self::$catalogMapping;
@@ -96,5 +98,21 @@ class Utils
             }
         }
         return $input;
+    }
+
+
+    /**
+     * Format number from locale
+     * @param $number
+     * @return string
+     */
+    public static function numberFormatByLocale($number)
+    {
+        $localeInfo = localeconv();
+//        dump($localeInfo);
+        if (!is_null($number)) {
+            $number = number_format($number, 2, $localeInfo['decimal_point'], $localeInfo['thousands_sep']);
+        }
+        return $number;
     }
 }

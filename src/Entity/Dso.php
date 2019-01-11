@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use App\Classes\Utils;
 use App\Repository\DsoRepository;
 
 /**
@@ -362,7 +363,8 @@ class Dso extends AbstractEntity
             'desigs' => implode(self::DATA_CONCAT_GLUE, $this->getDesigs()),
             'constId' => implode(self::DATA_GLUE, ['const_id', strtolower($this->getConstId())]),
             'mag' => $this->getMag(),
-            'distAl' => $this->getDistAl(),
+            'distAl' => Utils::numberFormatByLocale($this->getDistAl()),
+            'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $this->getDistAl()),
             'discover' => $this->getDiscover(),
             'discoverYear' => $this->getDiscoverYear(),
             'ra' => $this->getRa(),

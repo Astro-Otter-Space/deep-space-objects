@@ -31,6 +31,8 @@ services:
 #        public: true
 
 
+    App\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

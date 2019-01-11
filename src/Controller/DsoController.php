@@ -56,8 +56,6 @@ class DsoController extends AbstractController
                     $params['images'] = array_map(function (Image $image) {
                         return $image->url_regular;
                     }, iterator_to_array($listImages));
-                } else {
-
                 }
             } catch(WsResponseException $e) {
                 dump($e->getMessage());
