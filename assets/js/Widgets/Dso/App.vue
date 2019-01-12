@@ -13,12 +13,29 @@
         </h2>
 
         <!--Social network share-->
-        <SocialSharing
-          :list-networks="listNetworks"
-          :url-share="urlShare"
-          :title-share="titleDso"
-          :desc-share="descShare"
-        ></SocialSharing>
+        <!--<custom-social-sharing-->
+          <!--:list-networks="listNetworks"-->
+          <!--:url-share="urlShare"-->
+          <!--:title-share="titleDso"-->
+          <!--:desc-share="descShare"-->
+        <!--&gt;</custom-social-sharing>-->
+        <social-sharing
+          :url="urlShare"
+          :title="titleDso"
+          :description="descShare"
+          hashtags=""
+          twitter-user=""
+          inline-template
+        >
+          <div>
+            <network network="facebook">
+              <i class="fa fa-facebook"></i> Facebook
+            </network>
+            <network network="twitter">
+              <i class="fa fa-twitter"></i> Twitter
+            </network>
+          </div>
+        </social-sharing>
 
         <!--Description-->
         <div class="Dso__description">
@@ -52,14 +69,12 @@
         </div>
       </div>
 
-
     </section>
-
   </div>
 </template>
 
 <script>
-  import SocialSharing from './../App/SocialSharing'
+  // import CustomSocialSharing from '../App/CustomSocialSharing'
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
@@ -72,7 +87,7 @@
   export default {
     name: "App",
     components: {
-      SocialSharing,
+      //CustomSocialSharing,
       ImageHeader,
       ImagesDsoSlider,
       Table
@@ -88,21 +103,25 @@
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",
-        urlShare: "http://symfony.local/test/url",
-        listNetworks: [
+        urlShare: document.querySelector("link[rel='canonical']").href,
+        descShare: "",
+        /*listNetworks: [
           {
-            key: "facebook",
+            id: 1,
+            name: "facebook",
             label: "Facebook"
           },
           {
-            key: "twitter",
+            id: 2,
+            name: "twitter",
             label: "Twitter"
           },
           {
-            key: "googleplus",
+            id: 3,
+            name: "googleplus",
             label: "Google +"
           }
-        ]
+        ]*/
       }
     }
   }
