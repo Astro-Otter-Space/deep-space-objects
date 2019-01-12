@@ -3,4 +3,9 @@
     color: $color-text;
     font-weight: 500;
   }
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+  }
 }
