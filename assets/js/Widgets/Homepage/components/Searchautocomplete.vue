@@ -8,6 +8,7 @@
     label="label"
     :classes="{ wrapper: 'AppSearch__wrapper', input: 'AppSearch__inputText', list: 'AppSearch__list',  }"
     :onSelect="redirectToItem"
+    :onInput="showDeleteEntry"
   >
   </autocomplete>
 </template>
@@ -30,7 +31,44 @@
       redirectToItem(obj) {
         console.log(obj.url);
         // router.push({ name: 'dso_show', params: {id: obj.id}})
-      }
+      },
+      showDeleteEntry() {
+
+        // https://stackoverflow.com/questions/6258521/clear-icon-inside-input-text https://jsbin.com/qirurohila/edit?html,css,js,console,output
+        let elInput = this.$el.querySelector('.AppSearch__inputText'); //this.$refs.autocomplete
+        let valueText = elInput.value;
+
+        // TODO : a toggle function
+        if (1 < valueText.length) {
+          if (!elInput.classList.contains('AppSearch__inputText__x')) {
+            elInput.classList.add('AppSearch__inputText__x');
+          }
+        } else {
+          elInput.classList.remove('AppSearch__inputText__x');
+        }
+
+        elInput.addEventListener('mousemove', function(e){
+          if (e.target.matches('AppSearch__inputText__x')) {
+            this.classList.add('AppSearch__inputText__onX');
+          }
+        }, false);
+
+        elInput.addEventListener('touchstart click', function(ev) {
+          if (ev.target.matches('AppSearch__inputText__onX')) {
+            this.deleteList();
+          }
+        }, false);
+
+
+      },
+      deleteList() {
+        let elInput = this.$el.querySelector('.AppSearch__inputText');
+        elInput.classList.remove('AppSearch__inputText__x AppSearch__inputText__onX');
+        elInput.value = '';
+      },
+      /*changeAttribute() {
+        this.$el.querySelector('.AppSearch__inputText').setAttribute("type", "search");
+      }*/
     }
   }
 </script>

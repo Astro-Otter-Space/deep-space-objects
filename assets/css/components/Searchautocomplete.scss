@@ -11,6 +11,19 @@
     border-radius: 0.3rem;
     line-height: 2;
     font-size: 1.25rem;
+    background: $bgd-white url(http://i.stack.imgur.com/mJotv.gif) no-repeat right -1em center;
+    transition: background 0.4s;
+
+    &__x {
+      background-position: right 5px center;
+    }
+    &__onX {
+      cursor: pointer;
+    }
+
+    &::-ms-clear {
+      display: none; width:0; height:0;
+    }
   }
 
   &__list {

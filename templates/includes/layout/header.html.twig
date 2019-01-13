@@ -1,18 +1,19 @@
-<header id="Vue-header">
+<header class="header">
+  <div class="header__container">
+    <h1 class="h1 h1__title">
+      <a href="{{ path('homepage') }}">{{ 'dso'|trans }}</a>
+    </h1>
 
-  <h1 class="h1 h1__title">
-    <a href="{{ path('homepage') }}">{{ 'dso'|trans }}</a>
-  </h1>
-
-  <nav></nav>
-  {#<div class="Switch-Lang-List">#}
+    <nav></nav>
+    {#<div class="Switch-Lang-List">#}
     {#{% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}#}
     {#<listLocales lang="en" value="{{ en|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>#}
     {#<listLocales lang="fr" value="{{ fr|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>#}
     {#<listLocales lang="pt" value="{{ pt|trans }}" path="{{ path(app.request.get('_route'), params) }}"></listLocales>#}
-  {#</div>#}
+    {#</div>#}
 
-  {#<div id="switch-lang" class="listlocales">#}
+    {#<div id="switch-lang" class="listlocales">#}
     {#<locale-lang v-for="datalocale in listlocales" :locale="locale" />#}
-  {#</div>#}
+    {#</div>#}
+  </div>
 </header>

@@ -1,3 +1,13 @@
+.header {
+  position: relative;
+
+  &__container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 .h1 {
   &__title {
     color: $color-text;
