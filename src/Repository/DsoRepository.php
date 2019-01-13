@@ -10,6 +10,7 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Search;
+use Elastica\Suggest;
 
 /**
  * Class DsoRepository
@@ -20,6 +21,7 @@ class DsoRepository extends AbstractRepository
 
     private static $listSearchFields = [
         'id',
+        'id.keyword',
         'data.desigs',
         'data.alt',
         "data.const_id"
@@ -95,21 +97,26 @@ class DsoRepository extends AbstractRepository
      * @param $searchTerm
      * @return array
      */
-    public function gteObjectsBySearchTerms($searchTerm)
+    public function getObjectsBySearchTerms($searchTerm)
     {
         $list = [];
         $this->client->getIndex(self::INDEX_NAME);
 
-        array_push(self::$listSearchFields, sprintf('data.alt_%s', $this->getLocale()));
+        if ('en' !== $this->getLocale()) {
+            array_push(self::$listSearchFields, sprintf('data.alt_%s', $this->getLocale()));
+        }
 
-        /** @var Query\QueryString $query */
-        $query = new Query\QueryString();
+
+        /** @var Query\MultiMatch $query */
+        $query = new Query\MultiMatch();
         $query->setFields(self::$listSearchFields);
         $query->setQuery($searchTerm);
 
         /** @var Search $search */
         $search = new Search($this->client);
         $result = $search->search($query);
+
+//        dump(json_encode($result->getQuery()->toArray()));
 
         if (0 < $result->getTotalHits()) {
             $list = array_map(function(Result $doc) {
@@ -139,9 +146,7 @@ class DsoRepository extends AbstractRepository
         /** @var Dso $dso */
         $dso = new $entity;
 
-        $dso = $dso->setLocale($this->getLocale())->buildObject($document);
-
-        return $dso;
+        return $dso->setLocale($this->getLocale())->buildObject($document);
     }
 
     /**

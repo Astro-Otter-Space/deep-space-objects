@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Dso;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,24 +28,19 @@ class SearchController extends AbstractController
      *
      * @param Request $request
      * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translatorInterface
+     * @param DsoManager $dsoManager
      * @return JsonResponse
      */
-    public function searchAjax(Request $request, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    public function searchAjax(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager)
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = $request->query->get('q');
 
-            $result = $dsoRepository->gteObjectsBySearchTerms($searchTerm);
+            $result = $dsoRepository->getObjectsBySearchTerms($searchTerm);
 
-            $data = call_user_func("array_merge", array_map(function(Dso $dso) use ($translatorInterface) {
-                return [
-                    "id" => $dso->getId(),
-                    "value" => (!empty($dso->getAlt())) ? $dso->getAlt() . ' - ' . $dso->getId() : $dso->getId(),
-                    "label" => $translatorInterface->trans('type.' . $dso->getType()) . ' - ' . $translatorInterface->trans('const_id.' . strtolower($dso->getConstId())),
-                    "full_url" => null
-                ];
+            $data = call_user_func("array_merge", array_map(function(Dso $dso) use ($dsoManager) {
+                return $dsoManager->buildSearchData($dso);
             }, $result));
         }
 

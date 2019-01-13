@@ -2,12 +2,12 @@
   <autocomplete
     url="/_search"
     :placeholder="searchPlaceholder"
-    :min="3"
+    :min="2"
     param="q"
     anchor="value"
     label="label"
-    :classes="{ wrapper: 'AppSearch__wrapper', input: 'AppSearch__inputText', list: 'AppSearch__list' }"
-    :onSelect="callbackDemo"
+    :classes="{ wrapper: 'AppSearch__wrapper', input: 'AppSearch__inputText', list: 'AppSearch__list',  }"
+    :onSelect="redirectToItem"
   >
   </autocomplete>
 </template>
@@ -27,8 +27,8 @@
       }
     },
     methods: {
-      callbackDemo(obj) {
-        console.log(obj.id);
+      redirectToItem(obj) {
+        console.log(obj.url);
         // router.push({ name: 'dso_show', params: {id: obj.id}})
       }
     }

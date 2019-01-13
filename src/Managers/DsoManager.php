@@ -72,6 +72,22 @@ class DsoManager
 
 
     /**
+     * Data returned for autocomplete search
+     *
+     * @param Dso $dso
+     * @return array
+     */
+    public function buildSearchData(Dso $dso): array
+    {
+        return [
+            'id' => $dso->getId(),
+            'value' => $this->buildTitle($dso),
+            'label' => $this->translatorInterface->trans('type.' . $dso->getType()) . ' - ' . $this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())),
+            'url' => $this->getDsoUrl($dso)
+        ];
+    }
+
+    /**
      * @param Dso $dso
      * @return string|null
      * @throws \Astrobin\Exceptions\WsException
@@ -130,7 +146,8 @@ class DsoManager
      */
     public function buildTitle(Dso $dso): string
     {
-        $title = (empty($dso->getAlt())) ? current($dso->getDesigs()) : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), current($dso->getDesigs())]);
+        $desig = (is_array($dso->getDesigs())) ? current($dso->getDesigs()) : $dso->getDesigs();
+        $title = (empty($dso->getAlt())) ? $desig : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), $desig]);
         return $title;
     }
 
@@ -151,4 +168,7 @@ class DsoManager
 
         return json_encode($data);
     }
+
+
+
 }

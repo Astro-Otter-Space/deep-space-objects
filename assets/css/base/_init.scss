@@ -46,3 +46,18 @@ p {
   font: $font;
   line-height: 1.5em;
 }
+
+ul {
+  padding: 0em 1em;
+  margin-top: 0.2em;
+  width: 100%;
+}
+
+li {
+  list-style-type: none;
+  line-height: 2em;
+
+  a {
+    text-decoration: none;
+  }
+}
