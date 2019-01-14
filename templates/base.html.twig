@@ -40,13 +40,13 @@
     <body>
     {% block body %}
       {% block header %}
-        {{ render_esi(controller('App\\Controller\\LayoutController::header')) }}
+        {{ render(controller('App\\Controller\\LayoutController::header')) }}
       {% endblock %}
 
       {% block content %}{% endblock %}
 
       {% block footer %}
-        {{ render_esi(controller('App\\Controller\\LayoutController::footer')) }}
+        {{ render(controller('App\\Controller\\LayoutController::footer')) }}
       {% endblock %}
     {% endblock %}
 
