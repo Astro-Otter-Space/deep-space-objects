@@ -26,6 +26,8 @@ class LayoutController extends AbstractController
     {
         $result = [];
 
+        dump($request->get('_route'), $request->get('_route_params'));
+
         /** @var Response $response */
         $response = new Response();
         $response->setSharedMaxAge(0);
