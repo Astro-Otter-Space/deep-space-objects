@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './Widgets/Dso/App'
-//import Deepskymap from './deepskymap'
+import Deepskymap from './deepskymap'
 
 Vue.config.productionTip = false;
 // Import libraries
@@ -16,4 +16,4 @@ new Vue({
 
 // Map
 let jsonDso = document.querySelector('div[data-dso-widget]').dataset.geojsonDso;
-//Deepskymap({}, jsonDso);
+Deepskymap({}, jsonDso);

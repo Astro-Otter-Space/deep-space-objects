@@ -11,26 +11,30 @@
 
   &__switchLang {
     float: right;
-    display: none;
     position: absolute;
+    color: $color-text;
   }
 
   &__dropdown {
     display: none;
     position: absolute;
     z-index: 1;
+    background-color: $bgd-grey;
+
+    &:hover {
+      cursor: pointer;
+      display: block;
+    }
 
     a {
       text-decoration: none;
       display: block;
+      color: $color-text;
     }
 
     a:hover {
-
-    }
-
-    &:hover {
-      display: block;
+      background-color: $bgd-white;
+      color: $color-text-dark;
     }
   }
 }
