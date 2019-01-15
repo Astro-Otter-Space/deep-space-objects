@@ -8,11 +8,11 @@
     <div class="header__switchLang">
       {#Search#}
       {% if _route != 'homepage' %}
-        <span class="header__icon" id="search"><i class="fas fa-search"></i></span>
+        <button class="" id="btn_search"><i class="fas fa-search"></i></button>
       {% endif %}
 
       {#Languages#}
-      <span class="header__switchLang__icon header__icon"><i class="far fa-flag"></i></span>
+      <button class="header__switchLang__icon" id="btn_lang"><i class="far fa-flag"></i></button>
       <div class="header__dropdown">
         {% for locale in listLocales %}
           <a href="{{ path(_route ~ '.' ~ locale, params|merge({'_locale': locale})) }}" lang="{{ locale }}" title="{{ locale|trans }}">{{ locale|trans }}</a>
