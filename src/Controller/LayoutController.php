@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,13 +21,20 @@ class LayoutController extends AbstractController
      * Header
      *
      * @param Request $request
+     * @param String $listLocales
      * @return Response
      */
-    public function header(Request $request)
+    public function header(Request $request, String $listLocales): Response
     {
-        $result = [];
+        /** @var Request $mainRequest */
+        $mainRequest = $this->get('request_stack')->getMasterRequest();
 
-        dump($request->get('_route'), $request->get('_route_params'));
+        $result = [
+            '_route' => $mainRequest->get('_route'),
+            'params' => array_merge($mainRequest->get('_route_params'), $mainRequest->query->all()),
+            'listLocales' => array_filter(explode('|', $listLocales), function($value) { return !empty($value); })
+        ];
+
 
         /** @var Response $response */
         $response = new Response();

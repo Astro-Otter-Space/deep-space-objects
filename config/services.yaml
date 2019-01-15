@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    app_locales: en|fr|de|es|pt|pt_BZ|
+    app_locales: en|fr|de|es|pt|
     app.notifications.email_sender: balistik.fonfon@gmail.com
 
 services:
@@ -15,6 +15,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
+            $listLocales: '%app_locales%'
 
     # Astrobin
 #    Astrobin\:

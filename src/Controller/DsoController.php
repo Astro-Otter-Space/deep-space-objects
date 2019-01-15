@@ -25,7 +25,9 @@ class DsoController extends AbstractController
      * @Route({
      *  "en": "/catalog/{id}",
      *  "fr": "/catalogue/{id}",
-     *  "pt": "/catalogo/{id}"
+     *  "es": "/catalogo/{id}",
+     *  "pt": "/catalogo/{id}",
+     *  "de": "/katalog/{id}"
      * }, name="dso_show")
      *
      * @param string $id
