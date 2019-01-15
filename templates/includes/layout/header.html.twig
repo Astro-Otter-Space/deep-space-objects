@@ -5,15 +5,28 @@
       <a href="{{ path('homepage') }}">{{ 'dso'|trans }}</a>
     </h1>
 
-    <nav></nav>
-
     <div class="header__switchLang">
-      <i class="far fa-flag"></i> {{ 'selectLang'|trans }}
+      {#Search#}
+      {% if _route != 'homepage' %}
+        <span class="header__icon" id="search"><i class="fas fa-search"></i></span>
+      {% endif %}
+
+      {#Languages#}
+      <span class="header__switchLang__icon header__icon"><i class="far fa-flag"></i></span>
       <div class="header__dropdown">
         {% for locale in listLocales %}
           <a href="{{ path(_route ~ '.' ~ locale, params|merge({'_locale': locale})) }}" lang="{{ locale }}" title="{{ locale|trans }}">{{ locale|trans }}</a>
         {% endfor %}
       </div>
+      <span class="header__currentLang">{{ currentLocale|upper }}</span>
     </div>
   </div>
 </header>
+
+{#Search, hidden in homepage#}
+<div class="header__search">
+  <div id="app_search"></div>
+</div>
+
+{#Menu#}
+<nav></nav>

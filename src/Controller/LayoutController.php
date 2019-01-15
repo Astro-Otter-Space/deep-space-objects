@@ -32,9 +32,9 @@ class LayoutController extends AbstractController
         $result = [
             '_route' => $mainRequest->get('_route'),
             'params' => array_merge($mainRequest->get('_route_params'), $mainRequest->query->all()),
-            'listLocales' => array_filter(explode('|', $listLocales), function($value) { return !empty($value); })
+            'listLocales' => array_filter(explode('|', $listLocales), function($value) { return !empty($value); }),
+            'currentLocale' => $mainRequest->getLocale()
         ];
-
 
         /** @var Response $response */
         $response = new Response();

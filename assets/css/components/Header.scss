@@ -13,6 +13,12 @@
     float: right;
     position: absolute;
     color: $color-text;
+    font-size: 1.5em;
+
+    &__icon:hover .header__dropdown{
+      cursor: pointer;
+      display: block;
+    }
   }
 
   &__dropdown {
@@ -20,11 +26,7 @@
     position: absolute;
     z-index: 1;
     background-color: $bgd-grey;
-
-    &:hover {
-      cursor: pointer;
-      display: block;
-    }
+    width: 150px;
 
     a {
       text-decoration: none;
@@ -36,6 +38,10 @@
       background-color: $bgd-white;
       color: $color-text-dark;
     }
+  }
+
+  &__currentLang {
+    color: $color-text;
   }
 }
 
