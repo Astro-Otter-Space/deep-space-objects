@@ -1,32 +1,7 @@
-<header class="header">
-  <div class="header__container">
-    <h1 class="h1 h1__title">
-      <i class="fas fa-bars"></i>
-      <a href="{{ path('homepage') }}">{{ 'dso'|trans }}</a>
-    </h1>
-
-    <div class="header__switchLang">
-      {#Search#}
-      {% if _route != 'homepage' %}
-        <button class="" id="btn_search"><i class="fas fa-search"></i></button>
-      {% endif %}
-
-      {#Languages#}
-      <button class="header__switchLang__icon" id="btn_lang"><i class="far fa-flag"></i></button>
-      <div class="header__dropdown">
-        {% for locale in listLocales %}
-          <a href="{{ path(_route ~ '.' ~ locale, params|merge({'_locale': locale})) }}" lang="{{ locale }}" title="{{ locale|trans }}">{{ locale|trans }}</a>
-        {% endfor %}
-      </div>
-      <span class="header__currentLang">{{ currentLocale|upper }}</span>
-    </div>
-  </div>
-</header>
-
-{#Search, hidden in homepage#}
-<div class="header__search">
-  <div id="app_search"></div>
+<div id="appHeader"
+ data-route="{{ _route }}"
+ data-locales="{{ listLocales|json_encode }}"
+ data-currentlocale="{{ currentLocale }}"
+ data-title="{{ 'dso'|trans }}"
+>
 </div>
-
-{#Menu#}
-<nav></nav>

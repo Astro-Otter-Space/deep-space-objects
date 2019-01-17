@@ -32,6 +32,7 @@ class ConstellationController extends AbstractController
      */
     public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager): Response
     {
+//        https://vuejsexamples.com/a-multi-item-card-carousel-in-vue/
         $result = [];
 
         /** @var Constellation $constellation */

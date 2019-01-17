@@ -1,54 +1,96 @@
 .header {
-  position: relative;
+  //position: relative;
+  display: flex;
+  height: 60px;
+  z-index: 1;
+  background-color: $bgd-dark;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  justify-content: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+  transition: 0.33s;
 
-  &__container {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  &__wrap {
+    //position: relative;
+    //top: 50%;
+    //transform: translateY(-50%);
+    display: flex;
     padding: 0.5em;
-    width: 100%
+    width: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+    opacity: 0.7;
   }
 
-  &__switchLang {
-    float: right;
-    position: absolute;
-    color: $color-text;
-    font-size: 1.5em;
+  &__menu {
+    display: flex;
+    flex-direction: row;
 
-    &__icon:hover .header__dropdown{
-      cursor: pointer;
-      display: block;
+    li {
+      position: relative;
+      user-select: none;
+      margin-left: 20px;
+      background-color: $bgd-dark;
+
+      &:hover {
+        background-color: $bgd-grey;
+        color: $color-text-dark;
+      }
+
+      a {
+        color: $color-text;
+        cursor: pointer;
+        font-size: 1.15em;
+        border: none;
+        transition: 0.15s;
+        background: $bgd-dark;
+
+      }
     }
   }
 
-  &__dropdown {
-    display: none;
+  &__drop_menu {
     position: absolute;
-    z-index: 1;
-    background-color: $bgd-grey;
-    width: 150px;
-
+    display: block;
+    top: 149%;
+    transform: scaleY(0);
+    width: auto;
+    transform-origin: top;
+    background-color: $bgd-dark;
+    transition: 0.25s;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     a {
-      text-decoration: none;
+      margin-left: 20px;
       display: block;
-      color: $color-text;
+      transition: 0.45s;
+      opacity: 0;
+      margin-right: 20px;
+      padding: 10px 0 0 0;
     }
 
-    a:hover {
-      background-color: $bgd-white;
-      color: $color-text-dark;
+  }
+
+  &__display {
+    transform: scaleY(1);
+    a {
+      opacity: 1;
     }
   }
 
   &__currentLang {
     color: $color-text;
+    &:hover {
+      color: $color-text-dark;
+      background-color: $bgd-grey;
+    }
   }
 
   &__search {
-    background-color: $bgd-white;
-    width: 100%;
-    height: 400px;
-    display: none;
+    background-color: $bgd-grey;
+    width: inherit;
+    padding: 0 0.5em;
   }
 }
 
