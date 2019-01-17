@@ -16,7 +16,7 @@
           <a v-on:click="displayDropMenu()">
             <i class="far fa-flag"></i>
           </a>
-          <ul class="header__drop_menu" >
+          <ul class="header__drop_menu">
             <a v-for="locale in listLocales" v-bind:href="locale.path" :key="locale.locale">
               {{ locale.label }}
             </a>
@@ -43,6 +43,11 @@
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
 
+  window.addEventListener("resize", function(event) {
+    closeAllMenu();
+    // document.getElementsByTagName("body")[0].classList.remove("display_menu");
+  });
+
   export default {
     name: "Header",
     components: {
@@ -59,12 +64,8 @@
       }
     },
     methods: {
-      displayMenu: function() {
-        var body = document.getElementsByTagName("body")[0];
-        (!body.classList.contains("header__menu")) ? body.classList.add("header__menu") : body.classList.remove("display_menu");
-      },
       displayDropMenu: function() {
-        var drop_menu = event.target.parentElement.getElementsByClassName("header__drop_menu")[0];
+        var drop_menu = event.target.parentElement.parentElement.getElementsByClassName("header__drop_menu")[0];
         var drop_menus = document.getElementsByClassName("header__drop_menu");
 
         Array.from(drop_menus).forEach(function(e){
@@ -83,5 +84,17 @@
         }
       }
     }
+  }
+
+  function closeAllMenu() {
+    var lis = document.getElementById("headerMenu").getElementsByTagName("li");
+    Array.from(lis).forEach(function(e){
+      e.style.marginTop = 0;
+    });
+
+    var drop_menus = document.getElementsByClassName("header__drop_menu");
+    Array.from(drop_menus).forEach(function(e){
+      e.classList.remove("header__display");
+    });
   }
 </script>

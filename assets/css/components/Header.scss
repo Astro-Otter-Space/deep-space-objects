@@ -15,12 +15,13 @@
     //position: relative;
     //top: 50%;
     //transform: translateY(-50%);
-    display: flex;
     padding: 0.5em;
     width: 100%;
+    display: flex;
     align-items: flex-end;
     justify-content: space-between;
     opacity: 0.7;
+    min-width: 320px;
   }
 
   &__menu {
@@ -59,15 +60,24 @@
     transform-origin: top;
     background-color: $bgd-dark;
     transition: 0.25s;
+    padding-left: 0;
+    padding-right: 0;
     padding-bottom: 10px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    margin: 0;
+    left: -5em;
+
     a {
-      margin-left: 20px;
       display: block;
       transition: 0.45s;
       opacity: 0;
       margin-right: 20px;
-      padding: 10px 0 0 0;
+      width: max-content;
+      padding: 0.5em 1em;
+      &:hover {
+        color: $color-text;
+        background-color: $bgd-grey;
+      }
     }
 
   }
@@ -82,8 +92,8 @@
   &__currentLang {
     color: $color-text;
     &:hover {
-      color: $color-text-dark;
-      background-color: $bgd-grey;
+      color: $color-text !important;
+      background-color: $bgd-dark !important;
     }
   }
 
