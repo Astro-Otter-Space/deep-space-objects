@@ -6,7 +6,7 @@
     param="q"
     anchor="value"
     label="label"
-    :classes="{ wrapper: 'AppSearch__wrapper', input: 'AppSearch__inputText', list: 'AppSearch__list',  }"
+    :classes="customClasses"
     :onSelect="redirectToItem"
     :onInput="showDeleteEntry"
   >
@@ -14,7 +14,7 @@
 </template>
 <script>
   import Autocomplete from 'vue2-autocomplete-js'
-  require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css')
+  // require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css')
 
   export default {
     name: 'Searchautocomplete',
@@ -25,6 +25,9 @@
       searchPlaceholder: {
         default: '',
         type: String
+      },
+      customClasses: {
+        type: Object
       }
     },
     methods: {

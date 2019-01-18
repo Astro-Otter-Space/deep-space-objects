@@ -1,12 +1,32 @@
+.transition, .autocomplete, .showAll-transition, .autocomplete ul, .autocomplete ul li a{
+  transition:all 0.3s ease-out;
+  -moz-transition:all 0.3s ease-out;
+  -webkit-transition:all 0.3s ease-out;
+  -o-transition:all 0.3s ease-out;
+}
+
+.autocomplete ul:before{
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border: 10px solid transparent;
+  border-bottom: 10px solid #f8f8f8;
+  left: 46%;
+  top: -20px
+}
+
+// Homepage
 .AppSearch {
 
   &__wrapper {
-
+    width: 100%;
   }
 
   &__inputText {
     padding: .5rem 1rem;
-    width: 100%;
+    width: inherit;
     border: 1px lightgray;
     border-radius: 0.3rem;
     line-height: 2;
@@ -33,9 +53,10 @@
       background-color: $bgd-grey;
       position: absolute;
       list-style: none;
+      padding: 10px 0;
+      display: inline-block;
       min-width: 15%;
       margin-top: 10px;
-      padding: 0;
     }
 
     li {
@@ -48,14 +69,8 @@
 
         .autocomplete-anchor-label {
           display: block;
-          color: $color-text;
-
-          &:hover {
-            color: $color-text-dark;
-          }
         }
       }
-
 
       &:hover {
         background-color: $bgd-white;
@@ -66,3 +81,46 @@
     }
   }
 }
+
+// Header
+.AppHeader {
+  &__wrapper {
+    width: 98%;
+    padding: 1em;
+    margin: 0;
+  }
+
+  &__inputText {
+
+  }
+
+  &__list {
+    color: $color-text;
+
+    ul {
+      list-style: none;
+      padding: 10px 0;
+      display: inline-block;
+      min-width: 15%;
+      margin: 0px
+    }
+
+    li {
+      line-height: 2.2em;
+      padding-left: 1em;
+
+      a {
+        text-decoration: none;
+        color: $color-text;
+      }
+
+      &:hover {
+        background-color: $bgd-white;
+      }
+      a:hover {
+        color: $color-text-dark;
+      }
+    }
+  }
+}
+

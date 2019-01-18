@@ -14,6 +14,8 @@ class Utils
     const PARSEC = 0.3066020852;
     const UNASSIGNED = 'unassigned';
 
+    const GLUE_DASH = ' - ';
+
     private static $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',

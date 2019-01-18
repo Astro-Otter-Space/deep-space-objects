@@ -1,7 +1,7 @@
 .header {
   //position: relative;
   display: flex;
-  height: 60px;
+  flex-wrap: wrap;
   z-index: 1;
   background-color: $bgd-dark;
   position: fixed;
@@ -98,8 +98,8 @@
   &__search {
     background-color: $bgd-grey;
     width: inherit;
-    padding: 0 0.5em;
   }
+
 }
 
 .h1 {

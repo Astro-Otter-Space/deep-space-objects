@@ -4,6 +4,7 @@
 namespace App\Managers;
 
 
+use App\Classes\Utils;
 use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Helpers\UrlGenerateHelper;
@@ -79,10 +80,12 @@ class DsoManager
      */
     public function buildSearchData(Dso $dso): array
     {
+        $constellation = ('unassigned' !== $dso->getConstId()) ?$this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())) : null;
+
         return [
             'id' => $dso->getId(),
             'value' => $this->buildTitle($dso),
-            'label' => $this->translatorInterface->trans('type.' . $dso->getType()) . ' - ' . $this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())),
+            'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
             'url' => $this->getDsoUrl($dso)
         ];
     }

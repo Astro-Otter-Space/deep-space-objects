@@ -13,6 +13,7 @@
         <h2 class="AppSlider__subTitle">{{ subTitle }}</h2>
         <searchautocomplete
           :searchPlaceholder="searchPlaceholder"
+          :customClasses="classesSearchAutocomplete"
         />
       </div>
     </div>
@@ -35,7 +36,12 @@
     data() {
       return {
         subTitle: homeTitle,
-        searchPlaceholder: searchPlaceholder
+        searchPlaceholder: searchPlaceholder,
+        classesSearchAutocomplete: {
+          wrapper: 'AppSearch__wrapper',
+          input: 'AppSearch__inputText',
+          list: 'AppSearch__list'
+        }
       }
     }
   }

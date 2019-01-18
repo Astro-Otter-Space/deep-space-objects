@@ -7,7 +7,7 @@
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
-          <a v-on:click="hide = !hide">
+          <a v-on:click="(hide = !hide); setFocus();">
             <i class="fas fa-search"></i>
           </a>
         </li>
@@ -29,7 +29,8 @@
 
     <div class="header__search" v-if="hide">
       <searchautocomplete
-        searchPlaceholder="Test..."
+        :searchPlaceholder="searchPlaceholder"
+        :customClasses="autoCompleteClasse"
       ></searchautocomplete>
     </div>
   </header>
@@ -40,6 +41,7 @@
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
   let title = document.getElementById('appHeader').dataset.title;
+  let placeholder = document.getElementById('appHeader').dataset.placeholder;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
 
@@ -60,7 +62,13 @@
         listLocales: listLocales,
         currentRoute: routeSf,
         homeRoute: 'homepage',
-        hide: false
+        hide: false,
+        autoCompleteClasse: {
+          wrapper: 'AppHeader__wrapper',
+          input: 'AppSearch__inputText',
+          list: 'AppHeader__list'
+        },
+        searchPlaceholder: placeholder,
       }
     },
     methods: {
@@ -82,6 +90,12 @@
         if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
           event.target.parentElement.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
         }
+      },
+      setFocus: function() {
+        console.log('Try to focus .AppSearch__inputText');
+        // this.$refs.input['#AppSearch__inputText'].focus();
+        // https://codepen.io/CSWApps/pen/mmvJKE
+        this.$el.querySelector('.AppSearch__inputText').focus();
       }
     }
   }
@@ -98,3 +112,4 @@
     });
   }
 </script>
+<!--https://vuejsexamples.com/vue-js-header-responsive-dropdown-menu/-->
