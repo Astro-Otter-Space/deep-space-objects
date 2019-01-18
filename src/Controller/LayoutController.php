@@ -35,8 +35,10 @@ class LayoutController extends AbstractController
         /** @var Router $router */
         $router = $this->get('router');
 
-        $listLocales = array_filter(explode('|', $listLocales), function($value) {
-            return !empty($value);
+        $currentLocale = $mainRequest->getLocale();
+
+        $listLocales = array_filter(explode('|', $listLocales), function($value) use ($currentLocale) {
+            return !empty($value) && ($value !== $currentLocale);
         });
 
         $mainRoute = $mainRequest->get('_route');
@@ -51,7 +53,7 @@ class LayoutController extends AbstractController
                     'path' => $router->generate(sprintf('%s.%s', $mainRoute, $locale), $paramsRoute)
                 ];
             }, $listLocales),
-            'currentLocale' => $mainRequest->getLocale()
+            'currentLocale' => $currentLocale
         ];
 
         /** @var Response $response */
