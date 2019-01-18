@@ -231,9 +231,9 @@ m102.label: Spindle
 m104.label: Sombrero
 # Form
 select:
-    order:
-        label: Ordering by
-        placeholder: Choose your option
+  order:
+    label: Ordering by
+    placeholder: Choose your option
 # Form contact
 contact.title: "Contact us"
 form.error.sending: "A problem has occurred, please try later"
