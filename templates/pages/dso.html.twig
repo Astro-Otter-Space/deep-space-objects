@@ -5,16 +5,15 @@
 {#https://coxpi.draftium.site/#}
 
 {% block content %}
-  <div
+  <div id="appDso"
     data-dso-widget
     data-imgcover="{{ imgCover }}"
     data-dso="{{ dso|json_encode }}"
     data-title="{{ title }}"
     data-images="{{ images|json_encode }}"
     data-geojson-dso="{{ geojsonDso }}"
-  ></div>
-
-  <div id="app"></div>
+  >
+  </div>
 {% endblock %}
 
 {% block javascripts %}

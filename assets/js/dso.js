@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './Widgets/Dso/App'
+import AppDso from './Widgets/Dso/App'
 import Deepskymap from './deepskymap'
 
 Vue.config.productionTip = false;
@@ -11,8 +11,8 @@ Vue.use(VueLazyImageLoading);
 Vue.use(SocialSharing);
 
 new Vue({
-  render: h => h(App)
-}).$mount(`#app`);
+  render: h => h(AppDso)
+}).$mount(`#appDso`);
 
 // Map
 let jsonDso = document.querySelector('div[data-dso-widget]').dataset.geojsonDso;

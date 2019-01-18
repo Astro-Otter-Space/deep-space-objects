@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <div class="Dso_header">
       <image-header
         :cover-image="imageCover"
@@ -29,20 +29,22 @@
         >
           <div>
             <network network="facebook">
-              <i class="fa fa-facebook"></i> Facebook
+              <i class="fab fa-facebook"></i>
             </network>
             <network network="twitter">
-              <i class="fa fa-twitter"></i> Twitter
+              <i class="fab fa-twitter"></i>
             </network>
           </div>
         </social-sharing>
 
         <!--Description-->
+        <a id="#description"></a>
         <div class="Dso__description">
           <p>Lorem ipsum dolor sit amet, interdum aenean semper egestas imperdiet quisque. Diam lacus, nulla nibh quisque neque at. Velit nec maecenas quam phasellus ac et, malesuada vitae lectus. Adipiscing suspendisse, molestie sed viverra malesuada pellentesque convallis. Risus pharetra.</p>
         </div>
 
         <!--Table data-->
+        <a id="#information"></a>
         <div class="Dso__data">
           <Table
             :columns="gridColumns"
@@ -55,6 +57,7 @@
         </div>
 
         <!--Slider-->
+        <a id="#gallery"></a>
         <div class="Dso__slider">
           <h3 class="Dso__title">Gallery</h3>
           <images-dso-slider
@@ -63,6 +66,7 @@
         </div>
 
         <!--Sky Map-->
+        <a id="#map"></a>
         <div class="Dso__map">
           <h3 class="Dso__title">{{ titleMap }}</h3>
           <div class="map"></div>
@@ -105,23 +109,6 @@
         classTd: "Dso__td",
         urlShare: document.querySelector("link[rel='canonical']").href,
         descShare: "",
-        /*listNetworks: [
-          {
-            id: 1,
-            name: "facebook",
-            label: "Facebook"
-          },
-          {
-            id: 2,
-            name: "twitter",
-            label: "Twitter"
-          },
-          {
-            id: 3,
-            name: "googleplus",
-            label: "Google +"
-          }
-        ]*/
       }
     }
   }
