@@ -8,4 +8,4 @@ Vue.use(Vue2TouchEvents);
 
 new Vue({
   render: h => h(App)
-}).$mount(`#app`);
+}).$mount(`#appHome`);

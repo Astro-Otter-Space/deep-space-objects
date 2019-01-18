@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__wrap">
       <h1 class="h1 h1__title">
-        <i class="fas fa-bars"></i>&nbsp;<a href="/">{{title}}</a>
+        <i class="fas fa-bars"></i>&nbsp;<a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
@@ -31,17 +31,20 @@
       <searchautocomplete
         :searchPlaceholder="searchPlaceholder"
         :customClasses="autoCompleteClasse"
+        :url="searchUrl"
       ></searchautocomplete>
     </div>
   </header>
 </template>
 
 <script>
+  let homeRoute = document.getElementById('appHeader').dataset.homeRoute;
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
   let title = document.getElementById('appHeader').dataset.title;
-  let placeholder = document.getElementById('appHeader').dataset.placeholder;
+  let placeholder = document.getElementById('appHeader').dataset.searchPlaceholder;
+  let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
 
@@ -57,9 +60,11 @@
     },
     data() {
       return {
+        homepageRoute: homeRoute,
         title: title,
-        currentLocale: currentLocale,
         listLocales: listLocales,
+        currentLocale: currentLocale,
+
         currentRoute: routeSf,
         homeRoute: 'homepage',
         hide: false,
@@ -69,6 +74,7 @@
           list: 'AppHeader__list'
         },
         searchPlaceholder: placeholder,
+        searchUrl: urlSearch
       }
     },
     methods: {

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = 'menu.homepage'|trans %}
-{% set pageDesc = '' %}
+{% set pageDesc = 'homepage.message'|trans %}
 
 {% block content %}
-  <div data-home-widget data-home-title="{{ 'homepage.message'|trans }}"></div>
-
-  <section>
-    <div id="app"></div>
-  </section>
+  <div id="appHome"
+     data-home-title="{{ 'homepage.message'|trans }}"
+     data-search-route="{{ path('search_ajax') }}"
+     data-search-placeholder="{{ 'home.search.placeholder'|trans }}"
+  ></div>
 {% endblock %}
 
 {% block javascripts %}

@@ -1,6 +1,6 @@
 <template>
   <autocomplete
-    url="/_search"
+    :url="url"
     :placeholder="searchPlaceholder"
     :min="2"
     param="q"
@@ -28,12 +28,15 @@
       },
       customClasses: {
         type: Object
+      },
+      url: {
+        default: '/_search',
+        type: String
       }
     },
     methods: {
       redirectToItem(obj) {
-        console.log(obj.url);
-        // router.push({ name: 'dso_show', params: {id: obj.id}})
+        window.location.replace(obj.url);
       },
       showDeleteEntry() {
 

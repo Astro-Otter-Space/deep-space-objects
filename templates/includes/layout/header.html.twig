@@ -1,8 +1,10 @@
 <div id="appHeader"
+ data-home-route="{{ path('homepage') }}"
  data-route="{{ _route }}"
  data-locales="{{ listLocales|json_encode }}"
  data-currentlocale="{{ currentLocale }}"
  data-title="{{ 'dso'|trans }}"
- data-placeholder="{{ 'home.search.placeholder'|trans }}"
+ data-search-route="{{ path('search_ajax') }}"
+ data-search-placeholder="{{ 'home.search.placeholder'|trans }}"
 >
 </div>

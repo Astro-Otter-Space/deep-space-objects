@@ -2,7 +2,7 @@
   {% spaceless %}
     {% set pageLang = app.request.locale %}
     {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
-    {% set pageDesc = pageDesc|default('') %}
+    {% set pageDesc = 'dso_tr'|trans ~ ' - ' ~ pageDesc|default('') %}
     {% set pageUrl = app.request.uri %}
     {% set pageImage = pageImage|default(null) %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
@@ -28,6 +28,8 @@
         <meta property="og:title"         content="{{ pageTitle }}" />
         <meta property="og:description"   content="{{ pageDesc }}" />
         <meta property="og:image"         content="{{ pageImage }}" />
+        <meta property="og:locale"        content="{{ pageLang }}" />
+        <meta property="og:site_name"     content="{{ 'dso'|trans }}" />
       {% endblock %}
       {#Favicon#}
       <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>

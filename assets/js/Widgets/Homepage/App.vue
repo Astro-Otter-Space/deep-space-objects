@@ -14,6 +14,7 @@
         <searchautocomplete
           :searchPlaceholder="searchPlaceholder"
           :customClasses="classesSearchAutocomplete"
+          :url="urlSearchHome"
         />
       </div>
     </div>
@@ -24,8 +25,9 @@
   import Slider from './components/Slider'
   import Searchautocomplete from "./components/Searchautocomplete"
 
-  let homeTitle = document.querySelector('div[data-home-widget]').dataset.homeTitle;
-  let searchPlaceholder = "Search in catalogs...";
+  let homeTitle = document.getElementById('appHome').dataset.homeTitle;
+  let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
+  let urlSearchHome = document.getElementById('appHome').dataset.searchRoute;
 
   export default {
     name: "App",
@@ -41,7 +43,8 @@
           wrapper: 'AppSearch__wrapper',
           input: 'AppSearch__inputText',
           list: 'AppSearch__list'
-        }
+        },
+        urlSearchHome: urlSearchHome
       }
     }
   }
