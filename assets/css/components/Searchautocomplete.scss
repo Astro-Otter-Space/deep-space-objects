@@ -59,6 +59,10 @@
       margin-top: 10px;
     }
 
+    ul:before {
+      content: none !important;
+    }
+
     li {
       line-height: 1.8em;
       padding-left: 1em;
