@@ -1,8 +1,8 @@
-import * as d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
+import d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
 import Celestial from 'd3-celestial';
 
-export default function deepskymap(jsonConstellation, jsonDso)
-{
+var MAP_MODULE = (function(c) {
+
   let config = {
     width: 0,
     projection: "aitoff",
@@ -100,7 +100,24 @@ export default function deepskymap(jsonConstellation, jsonDso)
     }
   };
 
-  /*Celestial.add({
+  function buildMap(jsonConstellation, jsonDso) {
+
+      // c.add();
+      // c.add();
+      c.display(config);
+  }
+
+  return {
+    map: buildMap
+  };
+})(Celestial);
+
+
+/*export default function (jsonConstellation, jsonDso)
+{
+
+
+  Celestial.add({
     type: "dso", callback: function (jsonDso, err) {
       if (err) return console.warn(err);
       let dso = Celestial.getData(jsonDso, config.transform);
@@ -137,7 +154,7 @@ export default function deepskymap(jsonConstellation, jsonDso)
         }
       });
     }
-  });*/
+  });
 
   Celestial.display(config);
-};
+};*/

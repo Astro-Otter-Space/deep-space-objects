@@ -12,6 +12,7 @@
       <div class="AppSlider__Research">
         <h2 class="AppSlider__subTitle">{{ subTitle }}</h2>
         <searchautocomplete
+          ref="homesearch"
           :searchPlaceholder="searchPlaceholder"
           :customClasses="classesSearchAutocomplete"
           :url="urlSearchHome"

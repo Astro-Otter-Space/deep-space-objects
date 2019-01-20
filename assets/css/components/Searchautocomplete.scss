@@ -34,12 +34,12 @@
     background: $bgd-white url(http://i.stack.imgur.com/mJotv.gif) no-repeat right -1em center;
     transition: background 0.4s;
 
-    &__x {
+    /*&__x {
       background-position: right 5px center;
     }
     &__onX {
       cursor: pointer;
-    }
+    }*/
 
     &::-ms-clear {
       display: none; width:0; height:0;

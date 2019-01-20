@@ -7,7 +7,7 @@
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
-          <a v-on:click="(hide = !hide); setFocus();">
+          <a v-on:click="displaySearch(hide);">
             <i class="fas fa-search"></i>
           </a>
         </li>
@@ -29,6 +29,7 @@
 
     <div class="header__search" v-if="hide">
       <searchautocomplete
+        ref="search"
         :searchPlaceholder="searchPlaceholder"
         :customClasses="autoCompleteClasse"
         :url="searchUrl"
@@ -97,11 +98,13 @@
           event.target.parentElement.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
         }
       },
-      setFocus: function() {
-        console.log('Try to focus .AppSearch__inputText');
-        // this.$refs.input['#AppSearch__inputText'].focus();
-        // https://codepen.io/CSWApps/pen/mmvJKE
-        this.$el.querySelector('.AppSearch__inputText').focus();
+      displaySearch: function(hide) {
+        this.hide = !hide;
+        if (true === this.hide) {
+          this.$nextTick(() => {
+            this.$refs.search.$children[0].$refs.input.focus();
+          });
+        }
       }
     }
   }

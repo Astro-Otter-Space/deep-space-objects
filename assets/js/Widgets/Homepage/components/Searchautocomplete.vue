@@ -44,8 +44,9 @@
         let elInput = this.$el.querySelector('.AppSearch__inputText'); //this.$refs.autocomplete
         let valueText = elInput.value;
 
+        elInput.setAttribute('type', 'search');
         // TODO : a toggle function
-        if (1 < valueText.length) {
+        /*if (1 < valueText.length) {
           if (!elInput.classList.contains('AppSearch__inputText__x')) {
             elInput.classList.add('AppSearch__inputText__x');
           }
@@ -58,23 +59,19 @@
             this.classList.add('AppSearch__inputText__onX');
           }
         }, false);
+        */
 
         elInput.addEventListener('touchstart click', function(ev) {
-          if (ev.target.matches('AppSearch__inputText__onX')) {
+          //if (ev.target.matches('AppSearch__inputText__onX')) {
             this.deleteList();
-          }
+          //}
         }, false);
-
-
       },
       deleteList() {
         let elInput = this.$el.querySelector('.AppSearch__inputText');
-        elInput.classList.remove('AppSearch__inputText__x AppSearch__inputText__onX');
+        // elInput.classList.remove('AppSearch__inputText__x AppSearch__inputText__onX');
         elInput.value = '';
       },
-      /*changeAttribute() {
-        this.$el.querySelector('.AppSearch__inputText').setAttribute("type", "search");
-      }*/
     }
   }
 </script>

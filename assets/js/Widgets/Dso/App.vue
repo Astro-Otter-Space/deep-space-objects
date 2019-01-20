@@ -52,10 +52,11 @@
         <!--Slider-->
         <a id="#gallery"></a>
         <div class="Dso__slider" v-if="0 < imagesDso.length">
-          <h3 class="Dso__title">Gallery</h3>
+          <h3 class="Dso__title">{{ titleGallery }}</h3>
           <images-dso-slider
             :fluxImages="imagesDso"
           />
+          <div v-html="astrobinMsg"></div>
         </div>
 
         <!--Sky Map-->
@@ -79,6 +80,7 @@
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
+  let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
 
   export default {
     name: "App",
@@ -92,6 +94,7 @@
         imageCover: coverImage,
         imagesDso: images,
         titleDso: title,
+        titleGallery: "Gallery",
         titleMap: "Map",
         gridColumns: ['col0', 'col1'],
         gridData: tabData,
@@ -100,6 +103,7 @@
         classTd: "Dso__td",
         urlShare: document.querySelector("link[rel='canonical']").href,
         descShare: "",
+        astrobinMsg: astrobinMsg
       }
     }
   }
