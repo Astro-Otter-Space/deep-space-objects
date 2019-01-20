@@ -3,4 +3,4 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        favicon: /build/favicon.ico
+        favicon: /favicon.ico

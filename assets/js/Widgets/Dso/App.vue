@@ -12,13 +12,6 @@
           {{ titleDso }}
         </h2>
 
-        <!--Social network share-->
-        <!--<custom-social-sharing-->
-          <!--:list-networks="listNetworks"-->
-          <!--:url-share="urlShare"-->
-          <!--:title-share="titleDso"-->
-          <!--:desc-share="descShare"-->
-        <!--&gt;</custom-social-sharing>-->
         <social-sharing
           :url="urlShare"
           :title="titleDso"
@@ -58,7 +51,7 @@
 
         <!--Slider-->
         <a id="#gallery"></a>
-        <div class="Dso__slider">
+        <div class="Dso__slider" v-if="0 < imagesDso.length">
           <h3 class="Dso__title">Gallery</h3>
           <images-dso-slider
             :fluxImages="imagesDso"
@@ -78,7 +71,6 @@
 </template>
 
 <script>
-  // import CustomSocialSharing from '../App/CustomSocialSharing'
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
@@ -91,7 +83,6 @@
   export default {
     name: "App",
     components: {
-      //CustomSocialSharing,
       ImageHeader,
       ImagesDsoSlider,
       Table

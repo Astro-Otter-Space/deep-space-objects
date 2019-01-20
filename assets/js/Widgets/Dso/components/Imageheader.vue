@@ -27,7 +27,7 @@
     },
     props: {
       coverImage: {
-        default: '',
+        default: '/build/images/default.jpg',
         type: String
       }
     }

@@ -15,5 +15,5 @@ new Vue({
 }).$mount(`#appDso`);
 
 // Map
-let jsonDso = document.querySelector('div[data-dso-widget]').dataset.geojsonDso;
+let jsonDso = document.querySelector('div[data-dso-map]').dataset.geojsonDso;
 Deepskymap({}, jsonDso);

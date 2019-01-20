@@ -48,6 +48,7 @@ class DsoController extends AbstractController
             $params['dso'] = $dsoManager->formatVueData($dso);
             $params['title'] = $dsoManager->buildTitle($dso);
             $params['imgCover'] = $dso->getImage();
+            $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
             $params['images'] = [];
             try {
                 /** @var GetImage $astrobinWs */
@@ -60,10 +61,8 @@ class DsoController extends AbstractController
                     }, iterator_to_array($listImages));
                 }
             } catch(WsResponseException $e) {
-                dump($e->getMessage());
+//                dump($e->getMessage());
             }
-
-            $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
         }
 
         /** @var Response $response */
