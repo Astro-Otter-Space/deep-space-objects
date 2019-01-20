@@ -110,10 +110,8 @@ class Utils
      */
     public static function numberFormatByLocale($number)
     {
-        $localeInfo = localeconv();
-        if (!is_null($number)) {
-            $number = number_format($number, 2, $localeInfo['decimal_point'], $localeInfo['thousands_sep']);
-        }
-        return $number;
+        /** @var \NumberFormatter $numberFormat */
+        $numberFormat = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::DECIMAL);
+        return $numberFormat->format($number);
     }
 }
