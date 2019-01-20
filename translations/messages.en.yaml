@@ -25,6 +25,7 @@ catalog.rcw: RCW Catalog
 catalog.abl: Abell catalog
 catalog.ugc: Uppsala General Catalog
 catalog.dodz: Dolidze-Dzimselejvil catalog
+catalog.unassigned: Unassigned
 # Lang:
 fr: French
 en: English (UK)

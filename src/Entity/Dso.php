@@ -87,6 +87,9 @@ class Dso extends AbstractEntity
      */
     public function getCatalog()
     {
+        if (empty($this->catalog)) {
+            $this->catalog = parent::UNASSIGNED;
+        }
         return $this->catalog;
     }
 
@@ -103,6 +106,9 @@ class Dso extends AbstractEntity
      */
     public function getDesigs()
     {
+        if (!is_array($this->desigs)) {
+            $this->desigs = [$this->desigs];
+        }
         return $this->desigs;
     }
 
@@ -357,10 +363,10 @@ class Dso extends AbstractEntity
      */
     public function toArray()
     {
-        return [
+        $data = [
             'catalog' => implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
             'type' => implode(self::DATA_GLUE, ['type', $this->getType()]),
-            'desigs' => implode(self::DATA_CONCAT_GLUE, $this->getDesigs()),
+            'desigs' => implode(self::DATA_CONCAT_GLUE, array_filter($this->getDesigs())),
             'constId' => implode(self::DATA_GLUE, ['const_id', strtolower($this->getConstId())]),
             'mag' => $this->getMag(),
             'distAl' => Utils::numberFormatByLocale($this->getDistAl()),
@@ -370,5 +376,9 @@ class Dso extends AbstractEntity
             'ra' => $this->getRa(),
             'dec' => $this->getDec(),
         ];
+
+        return array_filter($data, function($value) {
+            return (false === empty($value));
+        });
     }
 }

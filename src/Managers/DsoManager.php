@@ -130,12 +130,14 @@ class DsoManager
         $translate = $this->translatorInterface;
         $listFields = self::$listFieldToTranslate;
 
+        $dsoToArray = $dso->toArray();
+
         $serialize = array_map(function($value, $key) use($translate, $listFields) {
             return [
                 'col0' => $translate->trans($key, ['%count%' => 1]),
                 'col1' => (in_array($key, $listFields)) ? $translate->trans($value, ['%count%' => 1]): $value
             ];
-        }, $dso->toArray(), array_keys($dso->toArray()));
+        }, $dsoToArray, array_keys($dsoToArray));
 
         return $serialize;
     }
@@ -149,8 +151,14 @@ class DsoManager
      */
     public function buildTitle(Dso $dso): string
     {
+        // Fist we retrieve desigs
         $desig = (is_array($dso->getDesigs())) ? current($dso->getDesigs()) : $dso->getDesigs();
+        // If Alt is set, we merge desig and alt
         $title = (empty($dso->getAlt())) ? $desig : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), $desig]);
+
+        // If title still empty, we put Id
+        $title = (empty($title))? $dso->getId() : $title;
+
         return $title;
     }
 
