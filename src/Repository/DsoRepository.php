@@ -23,8 +23,9 @@ class DsoRepository extends AbstractRepository
         'id',
         'id.keyword',
         'data.desigs',
-        'data.alt',
-        "data.const_id"
+        'data.desigs.keyword',
+        'data.alt.alt',
+        'data.const_id'
     ];
 
     const INDEX_NAME = 'deepspaceobjects';
@@ -103,7 +104,7 @@ class DsoRepository extends AbstractRepository
         $this->client->getIndex(self::INDEX_NAME);
 
         if ('en' !== $this->getLocale()) {
-            array_push(self::$listSearchFields, sprintf('data.alt_%s', $this->getLocale()));
+            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
         }
 
 
