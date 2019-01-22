@@ -21,12 +21,13 @@ abstract class AbstractEntity
      *
      * @param $document
      * @return $this
+     * @throws \ReflectionException
      */
     public function buildObject(Document $document)
     {
-        $this->setElasticId($document->getId());
 
-        foreach ($document->getData() as $field=>$data) {
+
+        /*foreach ($document->getData() as $field=>$data) {
 
             $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
             if (is_array($data) && "geometry" != $field) {
@@ -37,13 +38,41 @@ abstract class AbstractEntity
                         $object->$method($value);
                     }
                 });
-            } /*elseif ("geometry" === $field) {
-                $object->setGeometry()
-            }*/
+            }
+
             if (true == method_exists($this, $method)) {
                 $this->$method($data);
             }
+
+        }*/
+        $listNotFields = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data'];
+
+        $dataDocument = (array)$document->getData();
+        $dataDocument = array_merge($dataDocument, $dataDocument['data']);
+        unset($dataDocument['data']);
+
+        array_walk_recursive($dataDocument, function($value, &$key) {
+            $key = str_replace(' ', '', ucwords(str_replace('_', '', $key)));
+        });
+        dump($dataDocument);
+
+        /** @var \ReflectionClass $reflector */
+        $reflector = new \ReflectionClass($this);
+        foreach ($reflector->getProperties() as $property) {
+            if (!array_key_exists($property->getName(), $dataDocument)) {
+                continue;
+            }
+
+            if (in_array($property->getName(), $listNotFields)) {
+                $property->setAccessible(true);
+                $property->setValue($this, null);
+                continue;
+            }
+
+            $property->setAccessible(true);
+            $property->setValue($this, $dataDocument[$property->getName()]);
         }
+        $this->setElasticId($document->getId());
         return $this;
     }
 

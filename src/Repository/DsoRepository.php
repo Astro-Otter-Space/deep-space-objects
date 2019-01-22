@@ -83,8 +83,7 @@ class DsoRepository extends AbstractRepository
         $result = $search->search($matchQuery);
         if (0 < $result->count()) {
             foreach ($result->getDocuments() as $document) {
-                $dso = $this->buildEntityFromDocument($document);
-                $dsoList->addDso($dso);
+                $dsoList->addDso($this->buildEntityFromDocument($document));
             }
         }
 
@@ -106,7 +105,6 @@ class DsoRepository extends AbstractRepository
         if ('en' !== $this->getLocale()) {
             array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
         }
-
 
         /** @var Query\MultiMatch $query */
         $query = new Query\MultiMatch();
@@ -146,8 +144,9 @@ class DsoRepository extends AbstractRepository
         $entity = $this->getEntity();
         /** @var Dso $dso */
         $dso = new $entity;
+        $dso->setLocale($this->getLocale());
 
-        return $dso->setLocale($this->getLocale())->buildObject($document);
+        return $dso->buildObject($document)->setLocale($this->getLocale());
     }
 
     /**

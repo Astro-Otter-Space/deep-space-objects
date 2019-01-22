@@ -68,7 +68,29 @@ class DsoManager
         // Add URl
         $dso->setFullUrl($this->getDsoUrl($dso));
 
+        dump($dso);
         return $dso;
+    }
+
+
+    /**
+     * @param Dso $dso
+     * @param $limit
+     * @return array
+     */
+    public function buildListDso(Dso $dso, $limit): array
+    {
+        $dsoList = [];
+
+        /** @var ListDso $listDso */
+        $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $limit);
+
+        $dsoList = array_map(function(Dso $dso) {
+            $astrobinImage = $this->getAstrobinImage($dso);
+            return array_merge($this->buildSearchData($dso), ['image' => $astrobinImage]);
+        }, iterator_to_array($listDso->getIterator()));
+
+        return $dsoList;
     }
 
 
@@ -179,7 +201,4 @@ class DsoManager
 
         return json_encode($data);
     }
-
-
-
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Dso;
 use App\Managers\DsoManager;
+use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
@@ -12,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 
 /**
@@ -43,18 +45,19 @@ class DsoController extends AbstractController
 
         /** @var Dso $dso */
         $dso = $dsoManager->buildDso($id);
-
         if (!is_null($dso)) {
             $params['dso'] = $dsoManager->formatVueData($dso);
             $params['title'] = $dsoManager->buildTitle($dso);
             $params['imgCover'] = $dso->getImage();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
+
+            //$params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
+
             $params['images'] = [];
             try {
                 /** @var GetImage $astrobinWs */
                 $astrobinWs = new GetImage();
                 $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
-
                 if (0 < $listImages->count) {
                     $params['images'] = array_map(function (Image $image) {
                         return $image->url_regular;
@@ -66,10 +69,12 @@ class DsoController extends AbstractController
         }
 
         /** @var Response $response */
-        $response = new Response();
-        $response->setSharedMaxAge(0);
+        $response = $this->render('pages/dso.html.twig', $params);
+        $response->setSharedMaxAge(3600);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->set('x-dso-id', $dso->getElasticId());
 
-        return $this->render('pages/dso.html.twig', $params, $response);
+        return $response;
     }
 
 
