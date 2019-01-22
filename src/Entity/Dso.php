@@ -32,6 +32,8 @@ class Dso extends AbstractEntity
     private $fullUrl;
     private $geometry;
 
+    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data'];
+
     /**
      * @return mixed
      */
@@ -380,5 +382,13 @@ class Dso extends AbstractEntity
         return array_filter($data, function($value) {
             return (false === empty($value));
         });
+    }
+
+    /**
+     * @return array
+     */
+    public function getListFieldsNoMapping()
+    {
+        return self::$listFieldsNoMapping;
     }
 }

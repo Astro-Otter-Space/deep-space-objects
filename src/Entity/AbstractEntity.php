@@ -18,17 +18,14 @@ abstract class AbstractEntity
 
     /**
      * Transform a Result item from ES into Entity
-     *
-     * @param $document
+     * @param Document $document
      * @return $this
-     * @throws \ReflectionException
      */
     public function buildObject(Document $document)
     {
+        $this->setElasticId($document->getId());
 
-
-        /*foreach ($document->getData() as $field=>$data) {
-
+        foreach ($document->getData() as $field=>$data) {
             $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
             if (is_array($data) && "geometry" != $field) {
                 $object = $this;
@@ -38,23 +35,39 @@ abstract class AbstractEntity
                         $object->$method($value);
                     }
                 });
-            }
-
+            } /*elseif ("geometry" === $field) {
+                $object->setGeometry()
+            }*/
             if (true == method_exists($this, $method)) {
                 $this->$method($data);
             }
+        }
+        return $this;
+    }
 
-        }*/
-        $listNotFields = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data'];
 
-        $dataDocument = (array)$document->getData();
-        $dataDocument = array_merge($dataDocument, $dataDocument['data']);
+    /**
+     * Same method as above but with ReflectionClass
+     * @deprecated
+     *
+     * @param Document $document
+     * @return $this
+     * @throws \ReflectionException
+     */
+    public function buildObjectR(Document $document)
+    {
+        $this->setElasticId($document->getId());
+
+        $dataDocument = array_merge($document->getData(), $document->getData()['data']);
         unset($dataDocument['data']);
 
-        array_walk_recursive($dataDocument, function($value, &$key) {
-            $key = str_replace(' ', '', ucwords(str_replace('_', '', $key)));
-        });
-        dump($dataDocument);
+        // Transform snake_case keys into CamelCase keys
+        $keys = array_map(function ($i) {
+            $parts = explode('_', $i);
+            return array_shift($parts). implode('', array_map('ucfirst', $parts));
+        }, array_keys($dataDocument));
+
+        $dataDocument = array_combine($keys, $dataDocument);
 
         /** @var \ReflectionClass $reflector */
         $reflector = new \ReflectionClass($this);
@@ -63,7 +76,7 @@ abstract class AbstractEntity
                 continue;
             }
 
-            if (in_array($property->getName(), $listNotFields)) {
+            if (in_array($property->getName(), $this->getListFieldsNoMapping())) {
                 $property->setAccessible(true);
                 $property->setValue($this, null);
                 continue;
@@ -72,8 +85,11 @@ abstract class AbstractEntity
             $property->setAccessible(true);
             $property->setValue($this, $dataDocument[$property->getName()]);
         }
-        $this->setElasticId($document->getId());
+        // TODO verifier quand même ce truc...
+        $this->setAlt($dataDocument['alt']);
+
         return $this;
     }
 
+    abstract protected function getListFieldsNoMapping();
 }

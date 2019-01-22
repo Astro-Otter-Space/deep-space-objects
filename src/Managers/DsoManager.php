@@ -68,7 +68,6 @@ class DsoManager
         // Add URl
         $dso->setFullUrl($this->getDsoUrl($dso));
 
-        dump($dso);
         return $dso;
     }
 
@@ -77,6 +76,7 @@ class DsoManager
      * @param Dso $dso
      * @param $limit
      * @return array
+     * @throws \ReflectionException
      */
     public function buildListDso(Dso $dso, $limit): array
     {

@@ -46,6 +46,7 @@ class DsoRepository extends AbstractRepository
      *
      * @param $id
      * @return Dso|null
+     * @throws \ReflectionException
      */
     public function getObjectById($id)
     {
@@ -58,10 +59,11 @@ class DsoRepository extends AbstractRepository
     }
 
     /**
-     * Retrieve list of Dso objects in a constellation
+     * Retrieve  list of Dso objects in a constellation
      * @param $constId
      * @param $limit
      * @return ListDso $dsoList
+     * @throws \ReflectionException
      */
     public function getObjectsByConstId($constId, $limit): ListDso
     {
@@ -138,15 +140,15 @@ class DsoRepository extends AbstractRepository
      * Build a Dso entity from document ElasticSearch
      * @param Document $document
      * @return Dso
+     * @throws \ReflectionException
      */
     private function buildEntityFromDocument(Document $document)
     {
         $entity = $this->getEntity();
         /** @var Dso $dso */
         $dso = new $entity;
-        $dso->setLocale($this->getLocale());
 
-        return $dso->buildObject($document)->setLocale($this->getLocale());
+        return $dso->setLocale($this->getLocale())->buildObjectR($document);
     }
 
     /**
@@ -155,4 +157,5 @@ class DsoRepository extends AbstractRepository
     public function getType(): string {
         return self::INDEX_NAME;
     }
+
 }

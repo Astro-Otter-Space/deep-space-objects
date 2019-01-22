@@ -52,7 +52,7 @@ final class ConstellationRepository extends AbstractRepository
         $entity = $this->getEntity();
         $constellation = new $entity;
 
-        $constellation = $constellation->setLocale($this->getLocale())->buildObject($document);
+        $constellation = $constellation->setLocale($this->getLocale())->buildObjectR($document);
 
         // Todo : add gerateurlhelper;
 
