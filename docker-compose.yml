@@ -18,8 +18,8 @@ services:
         container_name: dso_php
         volumes:
             - ".:/var/www/deep-space-objects"
-            - ${COMPOSER_CACHE_DIR}:/home/site/.composer:rw
-            - ${NPM_CACHE_DIR}:/home/site/.npm:rw,cached
+            - "${COMPOSER_CACHE_DIR}:/home/site/.composer:rw"
+            - "${NPM_CACHE_DIR}:/home/site/.npm:rw,cached"
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "./docker/php7-fpm/php.ini:/usr/local/etc/php/conf.d/030-custom.ini"
             - "${SSH_AUTH_SOCK}:/ssh-agent"
