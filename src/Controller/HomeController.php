@@ -22,7 +22,8 @@ class HomeController extends AbstractController
     {
         /** @var Response $response */
         $response = $this->render('pages/home.html.twig', []);
-        $response->setSharedMaxAge(15);
+        $response->setSharedMaxAge(3600);
+        $response->setPublic();
 
         return $response;
     }
