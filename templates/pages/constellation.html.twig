@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-  <div id="app">
-    {% set label = "const_id." ~ constellation.id|lower %}
-    <h2>{{ label|trans }}</h2>
+  {% set title = "const_id." ~ constellation.id|lower %}
+  <div id="appConst"
+       data-const-widget
+       data-title="{{ title|trans }}"
+       data-imgcover="{{ asset('build/images/const_thumbs/' ~ constellation.id|lower ~ '.jpg') }}"
+  ></div>
 
-    {##https://vuejsexamples.com/a-vue2-plugin-for-images-show-in-gallery-or-carousel/#}
-    <img src="{{ asset('build/images/const_maps/' ~ constellation.id|upper ~ '.gif') }}" alt="{{ constellation.gen }}">
-  </div>
+    {#<img src="{{ asset('build/images/const_thumbs/' ~ constellation.id ~ '.jpg') }}" alt="{{ constellation.gen }}">#}
+{% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('const') }}
 {% endblock %}

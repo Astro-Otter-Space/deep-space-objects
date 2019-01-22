@@ -21,7 +21,7 @@ Encore
   .addEntry('app', './assets/js/app.js')
   .addEntry('home', './assets/js/home.js')
   .addEntry('dso', './assets/js/dso.js')
-
+  .addEntry('const', './assets/js/constellation.js')
   //D3-celestial
   // .addEntry('celestial', './node_modules/d3-celestial/celestial.js')
   // .addEntry('d3', './node_modules/d3-celestial/lib/d3.js')

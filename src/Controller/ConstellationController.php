@@ -47,7 +47,6 @@ class ConstellationController extends AbstractController
         }
         $constellation->setListDso($listDso);
 
-        dump($constellation);
 
         $result['constellation'] = $constellation;
 
