@@ -53,7 +53,6 @@ class DsoController extends AbstractController
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
 
             $params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
-            dump($params['dso_by_const']);
 
             $params['images'] = [];
             try {

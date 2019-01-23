@@ -75,27 +75,33 @@ class DsoManager
     /**
      * @param Dso $dso
      * @param $limit
-     * @return array
+     * @return array $dataDsoList
      * @throws \ReflectionException
      */
     public function buildListDso(Dso $dso, $limit): array
     {
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $limit);
+        $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
 
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
-        $dsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
-            $imageAstrobin = null;
-            $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : $astrobinImage->getImagesBySubject($dsoChild->getId(), 1);
-            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                $imageAstrobin = $imageAstrobin->url_regular;
-            }
+        $dataDsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
+            $imgUrl = null;
+//            try {
+//                /** TODO : this part is too long time */
+//                /** @var Image $imageAstrobin */
+//                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : $astrobinImage->getImagesBySubject($dsoChild->getId(), 1);
+//                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+//                    $imgUrl = $imageAstrobin->url_regular;
+//                }
+//            } catch (WsResponseException $e) {
+//                $imgUrl = '';
+//            }
 
-            return array_merge($this->buildSearchData($dsoChild), ['image' => $imageAstrobin]);
+            return array_merge($this->buildSearchData($dsoChild), ['image' => $imgUrl]);
         }, iterator_to_array($listDso->getIterator()));
 
-        return $dsoList;
+        return $dataDsoList;
     }
 
 

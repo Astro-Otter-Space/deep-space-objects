@@ -61,30 +61,40 @@ class DsoRepository extends AbstractRepository
     /**
      * Retrieve  list of Dso objects in a constellation
      * @param $constId
+     * @param null $excludedId
      * @param $limit
-     * @return ListDso $dsoList
+     * @return ListDso
      * @throws \ReflectionException
      */
-    public function getObjectsByConstId($constId, $limit): ListDso
+    public function getObjectsByConstId($constId, $excludedId = null, $limit): ListDso
     {
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
         $this->client->getIndex(self::INDEX_NAME);
 
-        /** @var Query\Term $term */
-        $matchQuery = new Query\Match();
-        $matchQuery->setField('data.const_id', $constId);
+        /** @var Query $query */
+        $query = new Query();
 
-        /** @var Query\Limit $limitQuery */
-        $limitQuery = new Query\Limit($limit);
+        /** @var Query\Term $mustQuery */
+        $mustQuery = new Query\Term();
+        $mustQuery->setTerm('data.const_id', strtolower($constId));
 
-        /** @var Search $search */
+        $mustNotQuery = new Query\Term();
+        $mustNotQuery->setTerm('id', strtolower($excludedId));
+
+        /** @var Query\BoolQuery $boolQuery */
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery->addMust($mustQuery)
+            ->addMustNot($mustNotQuery);
+
+        $query->setQuery($boolQuery);
+        $query->setFrom(0)->setSize($limit);
+
         $search = new Search($this->client);
-        $search->setQuery($matchQuery);
+        $search = $search->search($query);
 
-        $result = $search->search($matchQuery);
-        if (0 < $result->count()) {
-            foreach ($result->getDocuments() as $document) {
+        if (0 < $search->count()) {
+            foreach ($search->getDocuments() as $document) {
                 $dsoList->addDso($this->buildEntityFromDocument($document));
             }
         }
