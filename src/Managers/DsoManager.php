@@ -62,7 +62,7 @@ class DsoManager
         $dso = $this->dsoRepository->getObjectById($id);
 
         // Add astrobin image
-        $astrobinImage = $this->getAstrobinImage($dso);
+        $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
         $dso->setImage($astrobinImage);
 
         // Add URl
@@ -80,14 +80,19 @@ class DsoManager
      */
     public function buildListDso(Dso $dso, $limit): array
     {
-        $dsoList = [];
-
         /** @var ListDso $listDso */
         $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $limit);
 
-        $dsoList = array_map(function(Dso $dso) {
-            $astrobinImage = $this->getAstrobinImage($dso);
-            return array_merge($this->buildSearchData($dso), ['image' => $astrobinImage]);
+        /** @var GetImage $astrobinImage */
+        $astrobinImage = new GetImage();
+        $dsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
+            $imageAstrobin = null;
+            $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : $astrobinImage->getImagesBySubject($dsoChild->getId(), 1);
+            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+                $imageAstrobin = $imageAstrobin->url_regular;
+            }
+
+            return array_merge($this->buildSearchData($dsoChild), ['image' => $imageAstrobin]);
         }, iterator_to_array($listDso->getIterator()));
 
         return $dsoList;
@@ -113,18 +118,22 @@ class DsoManager
     }
 
     /**
-     * @param Dso $dso
+     * Get image from Astrobin
+     *
+     * @param $astrobinId
+     * @param $id
+     * @param string $param
      * @return string|null
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Astrobin\Exceptions\WsResponseException
      * @throws \ReflectionException
      */
-    public function getAstrobinImage(Dso $dso)
+    public function getAstrobinImage($astrobinId, $id,  $param = 'url_hd')
     {
         try {
-            $imageAstrobin = (!is_null($dso->getAstrobinId())) ? $this->astrobinImage->getImageById($dso->getAstrobinId()) : $this->astrobinImage->getImagesBySubject($dso->getId(), 1);
+            /** @var Image $imageAstrobin */
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : $this->astrobinImage->getImagesBySubject($id, 1);
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                return $imageAstrobin->url_hd;
+                return $imageAstrobin->$param;
             }
         } catch(WsResponseException $e) {
             return null;

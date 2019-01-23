@@ -8,6 +8,7 @@ use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
+use Astrobin\Response\ListImages;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -51,12 +52,14 @@ class DsoController extends AbstractController
             $params['imgCover'] = $dso->getImage();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
 
-//            $params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
+            $params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
+            dump($params['dso_by_const']);
 
             $params['images'] = [];
             try {
                 /** @var GetImage $astrobinWs */
                 $astrobinWs = new GetImage();
+                /** @var ListImages $listImages */
                 $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
                 if (0 < $listImages->count) {
                     $params['images'] = array_map(function (Image $image) {

@@ -14,8 +14,9 @@ framework:
     php_errors:
         log: true
 
+    trusted_hosts: '%env(TRUSTED_HOSTS)%'
     cache:
-        app: cache.adapter.filesystem
+        #app: cache.adapter.filesystem
         # Put the unique name of your app here: the prefix seed
         # is used to compute stable namespaces for cache keys.
         prefix_seed: dso
@@ -28,7 +29,7 @@ framework:
         #default_redis_provider: redis://localhost
 
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
-        #app: cache.adapter.apcu
+        app: cache.adapter.apcu
     form: true
     templating:
         engines:
