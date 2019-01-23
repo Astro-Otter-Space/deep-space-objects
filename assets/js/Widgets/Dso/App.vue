@@ -59,6 +59,15 @@
           <div v-html="astrobinMsg"></div>
         </div>
 
+        <!--Constellation-->
+        <a id="#constellation"></a>
+        <div class="Dso__list" v-if="0 < itemsDso.length">
+          <h3 class="Dso__title">Constellations</h3>
+          <cards
+            :items="itemsDso"
+          ></cards>
+        </div>
+
         <!--Sky Map-->
         <a id="#map"></a>
         <div class="Dso__map">
@@ -75,19 +84,22 @@
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
+  import Cards from './components/Cards';
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
   let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
+  let dsoList = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dsoConst);
 
   export default {
     name: "App",
     components: {
       ImageHeader,
       ImagesDsoSlider,
-      Table
+      Table,
+      Cards
     },
     data () {
       return {
@@ -103,7 +115,8 @@
         classTd: "Dso__td",
         urlShare: document.querySelector("link[rel='canonical']").href,
         descShare: "",
-        astrobinMsg: astrobinMsg
+        astrobinMsg: astrobinMsg,
+        itemsDso: dsoList
       }
     }
   }
