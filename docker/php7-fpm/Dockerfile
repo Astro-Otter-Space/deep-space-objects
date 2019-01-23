@@ -3,17 +3,36 @@ MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 USER root
 
 # Utils
-RUN apt-get update \
-  && apt-get upgrade -y \
-  && apt-get install -y curl less vim libpq-dev wget gnupg libicu-dev libpng-dev zlib1g-dev sudo wget \
-  && docker-php-ext-install mysqli \
-  && docker-php-ext-install pdo_mysql \
-  && docker-php-ext-install intl \
-  && docker-php-ext-install opcache \
-  && docker-php-ext-install zip \
-  && docker-php-ext-install gd
+RUN set -eux; \
+  apt-get -y update; \
+  apt-get -y install curl less vim libicu-dev zlib1g-dev libc-client-dev \
+  wget nano libzip-dev pax-utils sudo gnupg unzip libpng-dev
 
-RUN apt-get install -y zip unzip
+#  && docker-php-ext-install mysqli \
+#  && docker-php-ext-install pdo_mysql \
+#  && docker-php-ext-install intl \
+#  && docker-php-ext-install apcu \
+#  && docker-php-ext-install opcache \
+#  && docker-php-ext-install zip \
+#  && docker-php-ext-install gd
+
+ARG APCU_VERSION=5.1.12
+RUN set -eux; \
+    docker-php-ext-configure zip --with-libzip; \
+    docker-php-ext-install -j$(nproc) intl mbstring pdo pdo_mysql zip; \
+    pecl install apcu-${APCU_VERSION}; \
+    pecl clear-cache; \
+    docker-php-ext-enable \
+        apcu \
+        opcache \
+    ; \
+    \
+    runDeps="$( \
+        scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+            | tr ',' '\n' \
+            | sort -u \
+            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+    )";
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \

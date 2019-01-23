@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3'
 
 networks:
     default:
@@ -16,9 +16,10 @@ services:
             args:
                 TIMEZONE: ${TIMEZONE}
         container_name: dso_php
+        hostname: php
         volumes:
             - ".:/var/www/deep-space-objects"
-            - "${COMPOSER_CACHE_DIR}:/home/site/.composer:rw"
+            - "${COMPOSER_CACHE_DIR}:/home/site/.composer:rw,cached"
             - "${NPM_CACHE_DIR}:/home/site/.npm:rw,cached"
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "./docker/php7-fpm/php.ini:/usr/local/etc/php/conf.d/030-custom.ini"
@@ -37,6 +38,7 @@ services:
             args:
                 NGINX_HOST: ${NGINX_HOST}
         container_name: dso_nginx
+        hostname: nginx
         ports:
             - 80:80
             - 443:443
