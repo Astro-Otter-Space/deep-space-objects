@@ -86,6 +86,7 @@ class DsoManager
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
         $dataDsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
+            $imgUrl = Utils::IMG_DEFAULT;
             try {
                 /** TODO : this part is too long time */
                 /** @var Image $imageAstrobin */

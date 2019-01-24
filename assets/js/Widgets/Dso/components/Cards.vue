@@ -7,7 +7,7 @@
         <div class="card-carousel-cards" :style="{ transform: 'translateX' + '(' + currentOffset + 'px' + ')'}">
 
           <div class="card-carousel--card" v-for="item in items">
-            <a href="{{ item.url }}">
+            <a v-bind:href="item.url">
               <img v-bind:src="item.image" />
               <div class="card-carousel--card--footer">
                 <p>{{ item.label }}</p>
