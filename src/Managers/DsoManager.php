@@ -86,17 +86,16 @@ class DsoManager
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
         $dataDsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
-            $imgUrl = null;
-//            try {
-//                /** TODO : this part is too long time */
-//                /** @var Image $imageAstrobin */
-//                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : $astrobinImage->getImagesBySubject($dsoChild->getId(), 1);
-//                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-//                    $imgUrl = $imageAstrobin->url_regular;
-//                }
-//            } catch (WsResponseException $e) {
-//                $imgUrl = '';
-//            }
+            try {
+                /** TODO : this part is too long time */
+                /** @var Image $imageAstrobin */
+                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
+                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+                    $imgUrl = $imageAstrobin->url_regular;
+                }
+            } catch (WsResponseException $e) {
+                $imgUrl = Utils::IMG_DEFAULT;
+            }
 
             return array_merge($this->buildSearchData($dsoChild), ['image' => $imgUrl]);
         }, iterator_to_array($listDso->getIterator()));
@@ -142,8 +141,9 @@ class DsoManager
                 return $imageAstrobin->$param;
             }
         } catch(WsResponseException $e) {
-            return null;
+            return Utils::IMG_DEFAULT;
         }
+        return Utils::IMG_DEFAULT;
     }
 
     /**

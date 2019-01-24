@@ -16,6 +16,8 @@ class Utils
 
     const GLUE_DASH = ' - ';
 
+    const IMG_DEFAULT = '/build/images/default.jpg';
+
     private static $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',
