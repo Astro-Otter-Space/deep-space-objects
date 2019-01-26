@@ -62,7 +62,7 @@
         <!--Constellation-->
         <a id="#constellation"></a>
         <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3 class="Dso__title">Constellations</h3>
+          <h3 class="Dso__title">{{ titleConst }}</h3>
           <cards
             :items="itemsDso"
           ></cards>
@@ -89,6 +89,7 @@
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
+  let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
   let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
   let dsoList = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dsoConst);
@@ -107,6 +108,7 @@
         imagesDso: images,
         titleDso: title,
         titleGallery: "Gallery",
+        titleConst: titleConst,
         titleMap: "Map",
         gridColumns: ['col0', 'col1'],
         gridData: tabData,

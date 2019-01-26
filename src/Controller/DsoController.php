@@ -48,12 +48,12 @@ class DsoController extends AbstractController
         $dso = $dsoManager->buildDso($id);
         if (!is_null($dso)) {
             $params['dso'] = $dsoManager->formatVueData($dso);
+            $params['constTitle'] = $dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $dsoManager->buildTitle($dso);
             $params['imgCover'] = $dso->getImage();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
 
             $params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
-            dump($params['dso_by_const']);
             $params['images'] = [];
             try {
                 /** @var GetImage $astrobinWs */

@@ -100,6 +100,7 @@ type.oc: Open cluster
 type.gc: Globular cluster
 type.en: Emission nebula
 type.bn: Generic bright nebula
+type.bpn: Nebulosa bipolar
 type.sfr: Starforming Nebula (with open cluster)
 type.rn: Reflection nebula
 type.pn: Planetary nebula

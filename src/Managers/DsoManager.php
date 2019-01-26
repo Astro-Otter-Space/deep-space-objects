@@ -202,6 +202,20 @@ class DsoManager
 
 
     /**
+     * TODO : move to ConstellationManager
+     * @param $constId
+     * @return string|null
+     */
+    public function buildTitleConstellation($constId)
+    {
+        if (!is_null($constId)) {
+            return $this->translatorInterface->trans('constId', ['%count%' => 1]) . ' “' . $this->translatorInterface->trans(sprintf('const_id.%s', strtolower($constId))) . '”';
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @param Dso $dso
      * @return string
      */

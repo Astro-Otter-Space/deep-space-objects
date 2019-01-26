@@ -10,8 +10,8 @@
             <a v-bind:href="item.url">
               <img v-bind:src="item.image" />
               <div class="card-carousel--card--footer">
+                <p>{{ item.value }}</p>
                 <p>{{ item.label }}</p>
-                <p>{{ item.tag }}</p>
               </div>
             </a>
           </div>

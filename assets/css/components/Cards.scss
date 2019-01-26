@@ -9,12 +9,13 @@ $vue-teal-light: #42b983;
   justify-content: center;
   margin: 20px 0 40px;
   color: $bgd-grey;
+  width: 100%;
 }
 
 .card-carousel {
   display: flex;
   justify-content: center;
-  width: 640px;
+  width: inherit;
 
   &--overflow-container {
     overflow: hidden;
@@ -82,10 +83,16 @@ $vue-teal-light: #42b983;
       border-top-right-radius: 4px;
       transition: opacity 150ms linear;
       user-select: none;
+      height: 150px;
+      width: 200px;
 
       &:hover {
         opacity: 0.5;
       }
+    }
+
+    a {
+      text-decoration: none;
     }
 
     &--footer {
@@ -96,10 +103,11 @@ $vue-teal-light: #42b983;
         padding: 3px 0;
         margin: 0;
         margin-bottom: 2px;
-        font-size: 19px;
+        font-size: 1.5rem;
         font-weight: 500;
-        color: $vue-navy;
+        color: $color-text-dark;
         user-select: none;
+        text-decoration: none;
 
         &:nth-of-type(2) {
           font-size: 12px;
@@ -109,7 +117,7 @@ $vue-teal-light: #42b983;
           display: inline-block;
           position: relative;
           margin-left: 4px;
-          color: $gray;
+          color: $bgd-grey;
 
           &:before {
             content: "";

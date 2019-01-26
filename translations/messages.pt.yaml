@@ -97,6 +97,7 @@ type.oc: Aglomerado aberto
 type.gc: Aglomerado globular
 type.en: Nebulosa de emissão
 type.bn: Nebulosa brilhante genérica
+type.bpn: Nebulosa bipolar
 type.sfr: Nebulosa difusa
 type.rn: Nebulosa de reflexão
 type.pn: Nebulosa planetária
