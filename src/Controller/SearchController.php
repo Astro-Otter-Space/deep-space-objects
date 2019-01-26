@@ -35,7 +35,7 @@ class SearchController extends AbstractController
     {
         $data = [];
         if ($request->query->has('q')) {
-            $searchTerm = $request->query->get('q');
+            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
 
             $result = $dsoRepository->getObjectsBySearchTerms($searchTerm);
 
