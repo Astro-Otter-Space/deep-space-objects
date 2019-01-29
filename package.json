@@ -20,6 +20,7 @@
         "sass-loader": "^7.1.0",
         "vue": "^2.5.18",
         "vue-agile": "^0.3.7",
+        "vue-burger-menu": "^2.0.0",
         "vue-flux": "^5.1.9",
         "vue-i18n": "^8.4.0",
         "vue-lazy-image-loading": "^1.1.5",

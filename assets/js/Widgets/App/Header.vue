@@ -1,9 +1,29 @@
 <template>
   <header class="header">
+
+    <Slide :burgerIcon="false" ref="slideMenu">
+      <a id="test" href="#">
+        <i class="far fa-newspaper"></i>
+        <span>Blog</span>
+      </a>
+      <a id="catalog" href="#">
+        <i class="fas fa-search-location"></i>
+        <span>Catalog</span>
+      </a>
+      <a id="map" href="#">
+        <i class="fas fa-globe"></i>
+        <span>Sky map</span>
+      </a>
+    </Slide>
+
     <div class="header__wrap">
-      <h1 class="h1 h1__title">
-        <i class="fas fa-bars"></i>&nbsp;<a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
+      <h1 class="h1 h1__title" >
+        <span v-on:click="openSlideMenu">
+          <i class="fas fa-bars"></i>
+        </span>&nbsp;
+        <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
+
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
@@ -48,6 +68,7 @@
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
+  import { Slide } from 'vue-burger-menu'
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
@@ -57,7 +78,8 @@
   export default {
     name: "Header",
     components: {
-      searchautocomplete
+      searchautocomplete,
+      Slide
     },
     data() {
       return {
@@ -105,6 +127,10 @@
             this.$refs.search.$children[0].$refs.input.focus();
           });
         }
+      },
+      openSlideMenu: function () {
+        console.log('Test open menu');
+        this.$refs.slideMenu.openMenu();
       }
     }
   }

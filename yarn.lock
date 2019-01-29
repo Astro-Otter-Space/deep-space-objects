@@ -7242,6 +7242,13 @@ vue-agile@^0.3.7:
   dependencies:
     vue "2.*.*"
 
+vue-burger-menu@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-2.0.0.tgz#c7b1b2c8c4d9eb2553aef291db0fdc064c639cce"
+  integrity sha512-d4cKgeiWu7NA9IXdZd43hzSmpwWVUc/Lr3K8hT/b/I2F30f62D/zTZ/wRQy2s3f3TAOSPbYY9rsrY6lllJUxcw==
+  dependencies:
+    vue "^2.5.17"
+
 vue-flux@^5.1.9:
   version "5.1.9"
   resolved "https://registry.yarnpkg.com/vue-flux/-/vue-flux-5.1.9.tgz#027e12431b6a0d86502aa68231f2657fb28b41f0"
@@ -7329,6 +7336,11 @@ vue@^2.4.2, vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
+
+vue@^2.5.17:
+  version "2.5.22"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
+  integrity sha512-pxY3ZHlXNJMFQbkjEgGVMaMMkSV1ONpz+4qB55kZuJzyJOhn6MSy/YZdzhdnumegNzVTL/Dn3Pp4UrVBYt1j/g==
 
 vue@^2.5.18:
   version "2.5.18"
