@@ -18,7 +18,7 @@
 
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
-        <span v-on:click="openSlideMenu">
+        <span v-on:click="openSlideMenu" class="header__barSlideMenu" title="Open menu">
           <i class="fas fa-bars"></i>
         </span>&nbsp;
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
@@ -129,8 +129,7 @@
         }
       },
       openSlideMenu: function () {
-        console.log('Test open menu');
-        this.$refs.slideMenu.openMenu();
+        this.$refs.slideMenu.$children[0].openMenu();
       }
     }
   }
