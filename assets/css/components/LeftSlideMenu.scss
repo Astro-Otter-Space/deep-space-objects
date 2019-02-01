@@ -47,6 +47,7 @@
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /*0.5 second transition effect to slide in the sidenav*/
+  opacity: 0.9;
 }
 
 .bm-overlay {
@@ -61,9 +62,10 @@
   display: flex;
   text-decoration: none;
   padding: 0.7em;
+  color: $color-text !important;
 }
 .bm-item-list > * > span {
   margin-left: 10px;
-  font-weight: 700;
-  color: $color-text;
+  color: $color-text !important;
+  font-weight: 100 !important;
 }

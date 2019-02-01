@@ -1,19 +1,38 @@
 <template>
   <header class="header">
 
-    <Slide :burgerIcon="false" ref="slideMenu">
-      <a id="test" href="#">
-        <i class="far fa-newspaper"></i>
-        <span>Blog</span>
-      </a>
+    <Slide :burgerIcon="false" ref="slideMenu" width="300">
+
       <a id="catalog" href="#">
         <i class="fas fa-search-location"></i>
         <span>Catalog</span>
       </a>
+
+
       <a id="map" href="#">
         <i class="fas fa-globe"></i>
         <span>Sky map</span>
       </a>
+
+      <a id="news" href="#">
+        <i class="far fa-newspaper"></i>
+        <span>News / Update</span>
+      </a>
+
+
+      <a id="contact" href="#">
+        <i class="fas fa-edit"></i>
+        <span>Contact-us</span>
+      </a>
+
+      <hr />
+      <a id="github" href="https://github.com/HamHamFonFon/deep-space-objects" title="Github" target="_blank">
+        <i class="fab fa-github"></i>
+        <span>Github</span>
+      </a>
+      <p>
+        2019 - {{title}}
+      </p>
     </Slide>
 
     <div class="header__wrap">
