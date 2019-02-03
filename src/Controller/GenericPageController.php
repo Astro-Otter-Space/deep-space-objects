@@ -20,8 +20,10 @@ class GenericPageController extends AbstractController
      */
     public function skymap()
     {
+        $params = [];
+
         /** @var Response $response */
-        $response = new Response();
+        $response = $this->render('pages/skymap.html.twig', $params);
 
         return $response;
     }

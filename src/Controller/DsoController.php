@@ -119,7 +119,7 @@ class DsoController extends AbstractController
     public function catalog()
     {
         /** @var Response $response */
-        $response = $this->render();
+        $response = $this->render('pages/catalog.html.twig');
 
         return $response;
     }
