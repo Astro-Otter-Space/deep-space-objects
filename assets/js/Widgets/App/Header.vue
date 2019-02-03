@@ -2,27 +2,9 @@
   <header class="header">
 
     <Slide :burgerIcon="false" ref="slideMenu" width="300">
-
-      <a id="catalog" href="#">
-        <i class="fas fa-search-location"></i>
-        <span>Catalog</span>
-      </a>
-
-
-      <a id="map" href="#">
-        <i class="fas fa-globe"></i>
-        <span>Sky map</span>
-      </a>
-
-      <a id="news" href="#">
-        <i class="far fa-newspaper"></i>
-        <span>News / Update</span>
-      </a>
-
-
-      <a id="contact" href="#">
-        <i class="fas fa-edit"></i>
-        <span>Contact-us</span>
+      <a v-for="menu in leftSideMenu" v-bind:href="menu.path">
+        <i v-bind:class="menu.icon_class"></i>
+        <span>{{menu.label}}</span>
       </a>
 
       <hr />
@@ -79,6 +61,7 @@
 
 <script>
   let homeRoute = document.getElementById('appHeader').dataset.homeRoute;
+  let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuSide);
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
@@ -103,6 +86,7 @@
     data() {
       return {
         homepageRoute: homeRoute,
+        leftSideMenu: leftSideMenu,
         title: title,
         listLocales: listLocales,
         currentLocale: currentLocale,

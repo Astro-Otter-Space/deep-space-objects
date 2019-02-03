@@ -54,7 +54,7 @@ class LayoutController extends AbstractController
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-            'leftSideMenu' => $this->leftSideMenu($currentLocale)
+            'leftSideMenu' => $this->leftSideMenu($currentLocale, $translatorInterface)
         ];
 
         /** @var Response $response */
@@ -69,13 +69,13 @@ class LayoutController extends AbstractController
      * @param string $locale
      * @return array
      */
-    private function leftSideMenu($locale = 'en')
+    private function leftSideMenu($locale = 'en', TranslatorInterface $translatorInterface)
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
         /** @var TranslatorInterface $translateInterface */
-        $translatorInterface = $this->get('translator');
+        //$translatorInterface = $this->get('translator');
 
         return [
             'catalog' => [
@@ -95,7 +95,7 @@ class LayoutController extends AbstractController
             ],
             'contact' => [
                 'label' => $translatorInterface->trans('contact.title'),
-                'path' => $routerInterface->generate('contact.%s', $locale),
+                'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
                 'icon_class' => 'fas fa-edit'
             ]
         ];

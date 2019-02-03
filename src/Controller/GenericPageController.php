@@ -12,7 +12,10 @@ class GenericPageController extends AbstractController
     /**
      * @Route({
      *   "en": "/skymap",
-     *   "fr": "/carte-du-ciel"
+     *   "fr": "/carte-du-ciel",
+     *   "es": "/skymap",
+     *   "de": "/skymap",
+     *   "pt": "/skymap"
      * }, name="skymap")
      */
     public function skymap()
@@ -27,7 +30,10 @@ class GenericPageController extends AbstractController
     /**
      * @Route({
      *  "en": "/news",
-     *  "fr": "/actualites"
+     *  "fr": "/actualites",
+     *  "es": "/news",
+     *  "de": "/news",
+     *  "pt": "/news"
      * }, name="news")
      */
     public function blog()

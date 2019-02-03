@@ -32,7 +32,10 @@ class HomeController extends AbstractController
     /**
      * @Route({
      *     "fr": "/contactez-nous",
-     *     "en": "/contact-us"
+     *     "en": "/contact-us",
+     *     "de": "/kontaktiere-uns",
+     *     "es": "/cont ctenos",
+     *     "pt": "/contate-nos"
      * }, name="contact")
      *
      * @return Response
