@@ -53,7 +53,8 @@ class LayoutController extends AbstractController
                     'path' => $router->generate(sprintf('%s.%s', $mainRoute, $locale), $paramsRoute)
                 ];
             }, $listLocales),
-            'currentLocale' => $currentLocale
+            'currentLocale' => $currentLocale,
+            'leftSideMenu' => $this->leftSideMenu($currentLocale)
         ];
 
         /** @var Response $response */
@@ -62,9 +63,47 @@ class LayoutController extends AbstractController
         return $this->render('includes/layout/header.html.twig', $result, $response);
     }
 
+
+    /**
+     * Build left side menu
+     * @param string $locale
+     * @return array
+     */
+    private function leftSideMenu($locale = 'en')
+    {
+        /** @var Router $routerInterface */
+        $routerInterface = $this->get('router');
+
+        /** @var TranslatorInterface $translateInterface */
+        $translatorInterface = $this->get('translator');
+
+        return [
+            'catalog' => [
+                'label' => $translatorInterface->trans('catalog'),
+                'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
+                'icon_class' => 'fas fa-search-location'
+            ],
+            'map' => [
+                'label' => 'skymap', // $translatorInterface->trans('skymap'),
+                'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
+                'icon_class' => 'fas fa-globe'
+            ],
+            'news' => [
+                'label' => 'news', // $translatorInterface->trans('news'),
+                'path' => $routerInterface->generate(sprintf('news.%s', $locale)),
+                'icon_class' => 'far fa-newspaper'
+            ],
+            'contact' => [
+                'label' => $translatorInterface->trans('contact.title'),
+                'path' => $routerInterface->generate('contact.%s', $locale),
+                'icon_class' => 'fas fa-edit'
+            ]
+        ];
+    }
+
     /**
      * Footer
-     *
+     * @deprecated
      * @param Request $request
      * @return Response
      */

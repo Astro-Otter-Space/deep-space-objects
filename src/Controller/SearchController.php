@@ -36,7 +36,6 @@ class SearchController extends AbstractController
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-
             $result = $dsoRepository->getObjectsBySearchTerms($searchTerm);
 
             $data = call_user_func("array_merge", array_map(function(Dso $dso) use ($dsoManager) {

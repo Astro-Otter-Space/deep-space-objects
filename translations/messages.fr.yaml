@@ -237,7 +237,7 @@ select:
         label: Trier par
         placeholder: Sélectionnez votre option
 # Form contact
-contact.title: "Contactez-moi"
+contact.title: "Contactez-nous"
 form.error.sending: "Problème d'envoi du message, veuillez réassayer plus tard"
 form.ok.sending: "Votre message a bien été envoyé"
 form.error.message: "Veuillez corriger les erreurs"

@@ -168,4 +168,40 @@ class DsoRepository extends AbstractRepository
         return self::INDEX_NAME;
     }
 
+    /**
+    $aggregates = [
+        'aggregates' => [
+            'type' => [
+                'terms' => [
+                    'field' => 'data.type.keyword',
+                    'size' => 20
+                ]
+            ],
+            'const_id' => [
+                'terms' => [
+                'field' => 'data.const_id.keyword',
+                'size' => 100
+                ]
+            ],
+            'mag' => [
+                'range' => [
+                    'field' => 'data.mag',
+                    'ranges' => [
+                        ['to' => 5],
+                        ['from' => 5, 'to' => 10],
+                        ['from' => 10]
+                    ]
+                ]
+            ]
+        ],
+        'filter' => [
+            'term' => [
+                'catalog' => $typeCatalog
+            ]
+        ]
+    ];   
+**/
+
 }
+
+

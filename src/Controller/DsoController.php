@@ -104,4 +104,23 @@ class DsoController extends AbstractController
 
         return $jsonResponse;
     }
+
+
+    /**
+     * @Route({
+     *  "en": "/catalog",
+     *  "fr": "/catalogue",
+     *  "es": "/catalogo",
+     *  "pt": "/catalogo",
+     *  "de": "/katalog"
+     * }, name="dso_catalog")
+     * @return Response
+     */
+    public function catalog()
+    {
+        /** @var Response $response */
+        $response = $this->render();
+
+        return $response;
+    }
 }
