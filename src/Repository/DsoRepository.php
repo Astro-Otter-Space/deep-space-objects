@@ -91,13 +91,15 @@ class DsoRepository extends AbstractRepository
         $query->setFrom(0)->setSize($limit);
 
         $search = new Search($this->client);
-        $search = $search->search($query);
+        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+
 
         if (0 < $search->count()) {
             foreach ($search->getDocuments() as $document) {
                 $dsoList->addDso($this->buildEntityFromDocument($document));
             }
         }
+
 
         return $dsoList;
     }
@@ -125,9 +127,8 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
+        $search->addIndex(self::INDEX_NAME);
         $result = $search->search($query);
-
-//        dump(json_encode($result->getQuery()->toArray()));
 
         if (0 < $result->getTotalHits()) {
             $list = array_map(function(Result $doc) {

@@ -39,16 +39,17 @@ class ConstellationController extends AbstractController
         $constellation = $constellationRepository->getObjectById($id);
 
         // Retrieve list of Dso from the constellation
-        $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), 10);
+        $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), null,10);
         /** @var Dso $dso */
         foreach ($listDso->getIterator() as $dso) {
-            $dso->setImage($dsoManager->getAstrobinImage($dso));
+            $dso->setImage($dsoManager->getAstrobinImage($dso->getAstrobinId(), $dso->getId(), 'url_regular'));
             $dso->setFullUrl($dsoManager->getDsoUrl($dso));
         }
+
         $constellation->setListDso($listDso);
 
-
         $result['constellation'] = $constellation;
+        $result['list_dso'] = iterator_to_array($constellation->getListDso());
 
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);

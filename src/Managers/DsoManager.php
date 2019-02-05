@@ -113,7 +113,7 @@ class DsoManager
      */
     public function buildSearchData(Dso $dso): array
     {
-        $constellation = ('unassigned' !== $dso->getConstId()) ?$this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())) : null;
+        $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())) : null;
 
         return [
             'id' => $dso->getId(),
@@ -133,11 +133,11 @@ class DsoManager
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function getAstrobinImage($astrobinId, $id,  $param = 'url_hd')
+    public function getAstrobinImage($astrobinId, $id, $param = 'url_hd')
     {
         try {
             /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : $this->astrobinImage->getImagesBySubject($id, 1);
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : Utils::IMG_DEFAULT /*$this->astrobinImage->getImagesBySubject($id, 1)*/;
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
                 return $imageAstrobin->$param;
             }

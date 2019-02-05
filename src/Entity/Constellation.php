@@ -200,11 +200,11 @@ class Constellation extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return ListDso
      */
     public function getListDso()
     {
-        return $this->listDso;
+        return $this->listDso->getIterator();
     }
 
     /**

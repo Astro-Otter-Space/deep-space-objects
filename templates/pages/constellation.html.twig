@@ -6,9 +6,8 @@
        data-const-widget
        data-title="{{ title|trans }}"
        data-imgcover="{{ asset('build/images/const_thumbs/' ~ constellation.id|lower ~ '.jpg') }}"
+       data-list="{{ list_dso|json_encode }}"
   ></div>
-
-    {#<img src="{{ asset('build/images/const_thumbs/' ~ constellation.id ~ '.jpg') }}" alt="{{ constellation.gen }}">#}
 {% endblock %}
 
 {% block javascripts %}
