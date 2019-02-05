@@ -18,6 +18,7 @@ abstract class AbstractEntity
 
     /**
      * Transform a Result item from ES into Entity
+     * @deprecated
      * @param Document $document
      * @return $this
      */
@@ -48,7 +49,6 @@ abstract class AbstractEntity
 
     /**
      * Same method as above but with ReflectionClass
-     * @deprecated
      *
      * @param Document $document
      * @return $this

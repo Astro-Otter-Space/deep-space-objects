@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Constellation;
 use App\Entity\Dso;
+use App\Helpers\UrlGenerateHelper;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
@@ -30,7 +31,7 @@ class ConstellationController extends AbstractController
      * @throws \Astrobin\Exceptions\WsResponseException
      * @throws \ReflectionException
      */
-    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager): Response
+    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager, UrlGenerateHelper $urlGeneratorHelper): Response
     {
 //        https://vuejsexamples.com/a-multi-item-card-carousel-in-vue/
         $result = [];
@@ -47,6 +48,7 @@ class ConstellationController extends AbstractController
         }
 
         $constellation->setListDso($listDso);
+        $constellation->setFullUrl($urlGeneratorHelper->generateUrl($constellation));
 
         $result['constellation'] = $constellation;
         $result['list_dso'] = iterator_to_array($constellation->getListDso());

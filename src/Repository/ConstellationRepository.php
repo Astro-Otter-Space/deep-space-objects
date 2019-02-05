@@ -29,6 +29,7 @@ final class ConstellationRepository extends AbstractRepository
     /**
      * @param $id
      * @return Constellation
+     * @throws \ReflectionException
      */
     public function getObjectById($id)
     {
@@ -43,8 +44,9 @@ final class ConstellationRepository extends AbstractRepository
 
     /**
      * Build an entity from result
-     * @param $document
+     * @param Document $document
      * @return Constellation
+     * @throws \ReflectionException
      */
     private function buildEntityFromDocument(Document $document)
     {
