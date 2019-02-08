@@ -112,6 +112,7 @@ type.snr: Remanescente de supernova
 type.dn: Nebulosa escura
 type.pos: Asterismo
 type.sc: Aglomerado estelar
+type.vn:
 # Constellations
 const.unassigned:
 const_id.and: Andrômeda

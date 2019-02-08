@@ -115,6 +115,7 @@ type.snr: Supernova remnant
 type.dn:  Dark nebula grey
 type.pos: Asterism
 type.sc: Star clusters
+type.vn: Variable nebula
 # Constellations
 const_id.unassigned: Unassigned
 const_id.and: Andromeda

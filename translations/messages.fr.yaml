@@ -114,6 +114,7 @@ type.snr: Rémanant de supernova
 type.dn: Nébuleuse sombre
 type.pos: Asterism
 type.sc: Amas stellaires
+type.vn: Nébuleuse variable
 # Constellations
 const_id.unassigned: Non attribué
 const_id.and: Andromède
