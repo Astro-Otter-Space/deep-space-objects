@@ -12,9 +12,9 @@ use Astrobin\Response\ListImages;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 
 /**
@@ -116,8 +116,23 @@ class DsoController extends AbstractController
      * }, name="dso_catalog")
      * @return Response
      */
-    public function catalog()
+    public function catalog(Request $request, DsoRepository $dsoRepository)
     {
+        $page = 1;
+        $from = DsoRepository::FROM;
+        $filters = [];
+
+        if ($request->request->all()) {
+            // retrieve search parameters
+
+            if ($request->request->has('page')) {
+                $page = $request->request->get('page');
+                $from = DsoRepository::SIZE * ($page-1);
+            }
+        }
+
+        $items = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
+
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig');
 

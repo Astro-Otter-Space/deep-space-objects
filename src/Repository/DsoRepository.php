@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Managers\DsoManager;
+use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\Terms;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
@@ -68,6 +70,9 @@ class DsoRepository extends AbstractRepository
      */
     public function getObjectsByConstId($constId, $excludedId = null, $limit): ListDso
     {
+        if (empty($limit)) {
+            $limit = parent::SIZE;
+        }
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
         $this->client->getIndex(self::INDEX_NAME);
@@ -88,18 +93,16 @@ class DsoRepository extends AbstractRepository
             ->addMustNot($mustNotQuery);
 
         $query->setQuery($boolQuery);
-        $query->setFrom(0)->setSize($limit);
+        $query->setFrom(parent::FROM)->setSize($limit);
 
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
-
 
         if (0 < $search->count()) {
             foreach ($search->getDocuments() as $document) {
                 $dsoList->addDso($this->buildEntityFromDocument($document));
             }
         }
-
 
         return $dsoList;
     }
@@ -137,6 +140,64 @@ class DsoRepository extends AbstractRepository
         }
 
         return $list;
+    }
+
+
+    /**
+     * Catalog Research, with|without filters
+     * Get aggregates
+     *
+     * @param $from
+     * @param $size
+     * @param $filters
+     */
+    public function getObjectsCatalogByFilters($from, $filters)
+    {
+        $this->client->getIndex(self::INDEX_NAME);
+
+        /** @var Query $query */
+        $query = new Query();
+
+        if (0 < count($filters)) {
+            /** @var Query\BoolQuery $query */
+            $boolQuery = new Query\BoolQuery();
+
+            $query->setQuery($boolQuery);
+        }
+
+        $query->setFrom($from)->setSize(parent::SIZE);
+
+        // Aggregates
+        $listAggregations = [
+            'type' => [
+                'field' => 'data.type.keyword',
+                'size' => 100
+            ],
+            'catalog' => [
+                'field' => 'catalog.keyword',
+                'size' => 100
+            ],
+            'constellation' => [
+                'field' => 'data.const_id.keyword',
+                'size' => 100
+            ]
+        ];
+
+        array_walk($listAggregations, function($tab, $type) use($query) {
+            /** @var Terms $aggregation */
+           $aggregation = new Terms($type);
+           $aggregation->setField($tab['field']);
+           $aggregation->setSize($tab['size']);
+
+           $query->addAggregation($aggregation);
+        });
+
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        dump(json_encode($search->getQuery()->toArray()));
     }
 
     /**

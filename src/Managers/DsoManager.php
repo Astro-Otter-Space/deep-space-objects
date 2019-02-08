@@ -171,9 +171,18 @@ class DsoManager
         $dsoToArray = $dso->toArray();
 
         $serialize = array_map(function($value, $key) use($translate, $listFields) {
+
+            if (!is_array($value)) {
+                $valueTranslated = $translate->trans($value, ['%count%' => 1]);
+            } else {
+                $valueTranslated = implode(Dso::DATA_CONCAT_GLUE, array_map(function($item) use($translate) {
+                    return $translate->trans($item, ['%count%' => 1]);
+                }, $value));
+            }
+
             return [
                 'col0' => $translate->trans($key, ['%count%' => 1]),
-                'col1' => (in_array($key, $listFields)) ? $translate->trans($value, ['%count%' => 1]): $value
+                'col1' => (in_array($key, $listFields)) ? $valueTranslated: $value
             ];
         }, $dsoToArray, array_keys($dsoToArray));
 

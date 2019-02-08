@@ -18,6 +18,7 @@ catalog.messier: Messier's catalog
 catalog.ngc: New General Catalog
 catalog.ic: Index Catalog
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
+catalog.lbn: Lynds' Catalogue of Bright Nebulae
 catalog.sh: Sharpless catalog
 catalog.cr: Collinder catalog
 catalog.sto : Stock open clusters
@@ -25,6 +26,8 @@ catalog.rcw: RCW Catalog
 catalog.abl: Abell catalog
 catalog.ugc: Uppsala General Catalog
 catalog.dodz: Dolidze-Dzimselejvil catalog
+catalog.pgc: Catalogue of Principal Galaxies
+catalog.cld: Caldwell catalogue
 catalog.unassigned: Unassigned
 # Lang:
 fr: French
@@ -65,6 +68,8 @@ list.ic: Index Catalog
 description.ic:
 list.ldn: Lynds' Catalogue of Dark Nebulae
 description.ldn:
+list.lbn: Lynds' Catalogue of Bright Nebulae
+description.lbn:
 list.sh: Sharpless catalog
 description.sh:
 list.cr: Collinder catalog
@@ -76,6 +81,8 @@ description.rcw:
 list.abl: Abell catalog
 description.abl:
 list.ugc: Uppsala General Catalog
+list.cld: Catalogue de Caldwell
+description.cld: Caldwell catalogue
 description.ugc:
 list.dodz: Dolidze-Dzimselejvil catalog
 description.dodz:

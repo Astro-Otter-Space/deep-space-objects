@@ -20,6 +20,10 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
+
+    const FROM = 0;
+    const SIZE = 20;
+
     /**
      * AbstractRepository constructor.
      * @param Client $client

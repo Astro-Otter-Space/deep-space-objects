@@ -18,13 +18,16 @@ catalog.messier: Catalogue de Messier
 catalog.ngc: New General Catalog
 catalog.ic: Index Catalog
 catalog.ldn: Catalogue de Lynd des nébuleuses sombres
-catalog.sh: Catalog Sharpless
+catalog.lbn: Catalogue de Lynd des nébuleuses brillantes
+catalog.sh: Catalogue de Sharpless
 catalog.cr: Catalogue Collinder
 catalog.sto : Stock open clusters
 catalog.rcw: Catalogue RCW
 catalog.abl: Catalogue Abell
 catalog.ugc: Catalogue général d'Uppsala
 catalog.dodz: Catalogue Dolidze-Dzimselejvili
+catalog.pgc: Catalogue of Principal Galaxies
+catalog.cld: Catalogue de Caldwell
 catalog.unassigned: Non assigné
 # Lang:
 fr: Français
@@ -39,7 +42,6 @@ home.search.placeholder: Rechercher dans les catalogues...
 dayImage: L'image du jour
 # View full
 info: Informations
-desigs: Autre désignations
 magnitude: Magnitude apparente
 const_id: Constellation|Constellations
 constId: Constellation|Constellations
@@ -64,7 +66,9 @@ description.ngc: Compilation de 7840 objets découverts par divers observateurs.
 list.ic: Liste du "Index Catalog"
 description.ic: Catalogues IC1 et 2 complémentaires du NGC. Il englobe 5387 objets compilés par Jean-Louis Dreyer entre 1888 et 1907.
 list.ldn: Catlogue de Lynds des Nébuleuses sombres
-description.ldn: Catalogue de nébuleuses obscures publié par l'astronome américain Beverly T. Lynds en 1962. Il s'agit d'un astronome de l'Observatoire Stewart affilié à l'Université d'Arizona.
+description.ldn: Catalogue de nébuleuses lumineuses publié par l'astronome américain Beverly T. Lynds en 1962. Il s'agit d'un astronome de l'Observatoire Stewart affilié à l'Université d'Arizona.
+list.lbn: Catlogue de Lynds des Nébuleuses lumineuses
+description.lbn:
 list.sh: Catalogue Sharpless
 description.sh: Catalogue répertoriant 313 nébuleuses diffuses (régions HII) publié par l'astronome américain Stewart Sharpless en 1953 et finalisé dans une seconde version en 1959.
 list.cr: Catalogue Collinder
@@ -77,6 +81,8 @@ list.abl: Catalogue Abell
 description.abl: Catalogue rassemblant 86 nébuleuses planétaires découvertes par l'astronome américain Georges Abell en étudiant les plaques du POSS entre 1955 et 1966.
 list.ugc: Catalogue UGC
 description.ugc: Edité par l'astronome suédois Peter Nilson en 1973, il englobe 12921 objets situés dans le ciel boréal.
+list.cld: Catalogue de Caldwell
+description.cld:
 list.dodz: Catalogue Dolidze-Dzimselejvili
 description.dodz: Catalogue des astronomes de Georgie Madona V. Dolidze et G. Dzinselejvili comportant 11 objets. Il fut publié en 1966.
 filters: Filtres
