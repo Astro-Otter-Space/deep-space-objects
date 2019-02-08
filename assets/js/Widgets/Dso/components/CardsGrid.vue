@@ -1,7 +1,7 @@
 <template>
   <div id="appGrid">
     <transition-group tag="main" name="card">
-      <article v-for="(item, index) in items" v-bind:key="item" class="card">
+      <article v-for="(item, index) in items" :key="index + 0" class="card">
         <a v-bind:href="item.url" target="_blank">
           <div class="image">
             <img :src="item.image" :alt="item.value" v-on:load="isLoaded()" v-bind:class="{ active: isActive }">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Dso_header">
+     EN<div class="Dso_header">
       <image-header
         :cover-image="imageCover"
       />

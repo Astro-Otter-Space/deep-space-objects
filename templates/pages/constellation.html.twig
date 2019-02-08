@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% set title = "const_id." ~ constellation.id|lower %}
+{% set constellation = constellation|json_decode %}
+{% set title = constellation.alt %}
+{% set pageTitle = "const_id"|transchoice(0) ~ ' - ' ~ title %}
+{% set pageImage = asset('build/images/const_thumbs/' ~ constellation.id|lower ~ '.jpg') %}
 
 {% block content %}
   <div id="appConst"
-       data-const-widget
-       data-title="{{ title|trans }}"
-       data-imgcover="{{ asset('build/images/const_thumbs/' ~ constellation.id|lower ~ '.jpg') }}"
-       data-list-dso="{{ list_dso|json_encode }}"
+     data-const-widget
+     data-title="{{ title|trans }}"
+     data-imgcover="{{ pageImage }}"
+     data-map="{{ constellation.map }}"
+     data-list-dso="{{ list_dso|json_encode }}"
+     data-link="{{ link_download }}"
   ></div>
 {% endblock %}
 

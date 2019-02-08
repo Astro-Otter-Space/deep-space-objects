@@ -16,6 +16,8 @@ final class ConstellationRepository extends AbstractRepository
 
     const SEARCH_SIZE = 15;
 
+    const URL_MAP = '/build/images/const_maps/%s.gif';
+
     /**
      * ConstellationRepository constructor.
      * @param Client $client
@@ -54,7 +56,10 @@ final class ConstellationRepository extends AbstractRepository
         $entity = $this->getEntity();
         $constellation = new $entity;
 
-        $constellation = $constellation->setLocale($this->getLocale())->buildObjectR($document);
+        $constellation = $constellation->setLocale($this->getLocale())
+            ->buildObjectR($document);
+
+        $constellation->setMap(sprintf(self::URL_MAP, strtoupper($constellation->getId())));
 
         // Todo : add gerateurlhelper;
 

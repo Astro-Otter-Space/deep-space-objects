@@ -10,8 +10,15 @@ use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class ConstellationController
@@ -22,6 +29,7 @@ class ConstellationController extends AbstractController
 
     /**
      * @Route("/constellation/{id}", name="constellation_show")
+     *
      * @param string $id
      * @param ConstellationRepository $constellationRepository
      * @param DsoRepository $dsoRepository
@@ -33,8 +41,13 @@ class ConstellationController extends AbstractController
      */
     public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager, UrlGenerateHelper $urlGeneratorHelper): Response
     {
-//        https://vuejsexamples.com/a-multi-item-card-carousel-in-vue/
         $result = [];
+
+        /** @var Router $router */
+        $router = $this->get('router');
+
+        /** @var Serializer $serializer */
+        $serializer = $this->container->get('serializer');
 
         /** @var Constellation $constellation */
         $constellation = $constellationRepository->getObjectById($id);
@@ -50,12 +63,14 @@ class ConstellationController extends AbstractController
         $constellation->setListDso($listDso);
         $constellation->setFullUrl($urlGeneratorHelper->generateUrl($constellation));
 
-        $result['constellation'] = $constellation;
+        $result['constellation'] = $serializer->serialize($constellation, 'json');
 
         // TODO : refactor this with DsoManager::buildListDso()
         $result['list_dso'] = array_map(function(Dso $dsoChild) use ($dsoManager) {
             return array_merge($dsoManager->buildSearchData($dsoChild), ['image' => $dsoChild->getImage()]);
         }, iterator_to_array($constellation->getListDso()));
+
+        $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
 
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
@@ -73,6 +88,39 @@ class ConstellationController extends AbstractController
     public function list()
     {
         return new Response("coucou");
+    }
+
+
+    /**
+     * @Route("/download/map/{id}",name="download_map")
+     * Download map constellation
+     * @param string $id
+     * @return BinaryFileResponse|NotFoundHttpException
+     */
+    public function getMapConstellation(string $id): BinaryFileResponse
+    {
+        $webPath = $this->getParameter('kernel.project_dir') . '/public/';
+
+        $file = $webPath . sprintf('build/images/const_maps/%s.gif', strtoupper($id));
+
+        if (!file_exists($file)) {
+            return new NotFoundHttpException();
+        }
+
+        /** @var FileinfoMimeTypeGuesser $typeMimeGuesser */
+        $typeMimeGuesser = new FileinfoMimeTypeGuesser();
+
+
+        /** @var BinaryFileResponse $response */
+        $response = new BinaryFileResponse($file);
+        $response->headers->set('Content-Type', $typeMimeGuesser->guess($file));
+
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            basename($file)
+        );
+
+        return $response;
     }
 
 }

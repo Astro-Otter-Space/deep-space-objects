@@ -19,7 +19,8 @@ class DsoExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('convert_ly_pc', [$this, 'convertLyToPc']),
             new \Twig_SimpleFilter('is_instance_of', [$this, 'isInstanceOf']),
-            new \Twig_SimpleFilter('number_format_by_locale', [$this, 'numberFormatByLocale'])
+            new \Twig_SimpleFilter('number_format_by_locale', [$this, 'numberFormatByLocale']),
+            new \Twig_SimpleFilter('json_decode', [$this, 'jsonDecode'])
         ];
     }
 
@@ -62,6 +63,15 @@ class DsoExtension extends \Twig_Extension
     public function numberFormatByLocale($number)
     {
         return Utils::numberFormatByLocale($number);
+    }
+
+    /**
+     * @param $str
+     * @return mixed
+     */
+    public function jsonDecode($str)
+    {
+        return json_decode($str, true);
     }
 
     /**

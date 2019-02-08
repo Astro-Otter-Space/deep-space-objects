@@ -39,7 +39,9 @@ class Constellation extends AbstractEntity
 
     private $fullUrl;
 
-    private static $listFieldsNoMapping = ['elasticId', 'locale', 'geometry', 'geometryLine', 'fullUrl', 'listDso'];
+    private $map;
+
+    private static $listFieldsNoMapping = ['elasticId', 'locale', 'geometry', 'geometryLine', 'fullUrl', 'listDso', 'map'];
 
     /**
      * @return mixed
@@ -229,6 +231,22 @@ class Constellation extends AbstractEntity
     public function setFullUrl($fullUrl): void
     {
         $this->fullUrl = $fullUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMap()
+    {
+        return $this->map;
+    }
+
+    /**
+     * @param mixed $map
+     */
+    public function setMap($map): void
+    {
+        $this->map = $map;
     }
 
     /**

@@ -11,6 +11,13 @@
           {{ title }}
         </h2>
 
+        <!--Map-->
+        <div>
+          <a v-bind:href="linkDownload" target="_blank" alt="Download map">
+            <img v-bind:src="map" v-bind:title="title">
+          </a>
+        </div>
+
         <!--List DSo-->
         <div class="Dso__slider" v-if="0 < itemsDso.length">
           <cards-grid
@@ -28,9 +35,11 @@
   import ImageHeader from './../Dso/components/Imageheader';
   import CardsGrid from './../Dso/components/CardsGrid';
 
+  let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
   let title = document.querySelector('div[data-const-widget]').dataset.title;
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
+  let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
 
   export default {
     name: "App",
@@ -40,9 +49,11 @@
     },
     data () {
       return {
+        map: map,
         imageCover: coverImage,
         title: title,
-        itemsDso: dsoList
+        itemsDso: dsoList,
+        linkDownload: linkDownload
       }
     }
   }
