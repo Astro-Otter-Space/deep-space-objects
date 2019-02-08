@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% set title = "const_id." ~ constellation.id|lower %}
+
 {% block content %}
-  {% set title = "const_id." ~ constellation.id|lower %}
   <div id="appConst"
        data-const-widget
        data-title="{{ title|trans }}"
        data-imgcover="{{ asset('build/images/const_thumbs/' ~ constellation.id|lower ~ '.jpg') }}"
-       data-list="{{ list_dso|json_encode }}"
+       data-list-dso="{{ list_dso|json_encode }}"
   ></div>
 {% endblock %}
 

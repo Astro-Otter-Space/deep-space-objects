@@ -63,10 +63,6 @@
         <a id="#constellation"></a>
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3 class="Dso__title">{{ titleConst }}</h3>
-          <!--<cards-->
-            <!--:items="itemsDso"-->
-          <!--&gt;</cards>-->
-          <hr/>
           <cards-grid
             :items="itemsDso"
           >
@@ -89,7 +85,6 @@
   import ImageHeader from './components/Imageheader'
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
-  import Cards from './components/Cards';
   import CardsGrid from './components/CardsGrid'
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
@@ -106,7 +101,6 @@
       ImageHeader,
       ImagesDsoSlider,
       Table,
-      Cards,
       CardsGrid
     },
     data () {
