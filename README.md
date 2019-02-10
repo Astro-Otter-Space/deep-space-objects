@@ -72,6 +72,19 @@ List of values for <type> : dso20, constellations
 curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/json' --data-binary @config/elasticsearch/bulk/<type>.bulk.json
 ```
 
+### Status data
+Messier : 110/110
+NGC : 7233/7840
+UGC: 257/?
+Sharpless : 93/313
+RCW : 20/182
+Index Catalog : 202/5386
+Collinder : 73/471
+Caldwell : 5/109
+Abell: 103/
+ldn: 17/?
+lbn: 12/?
+
 Authors
 ==
  Stéphane MEAUDRE <balistik.fonfon@gmail.com>
