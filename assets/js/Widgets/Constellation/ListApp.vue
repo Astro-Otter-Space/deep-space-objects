@@ -2,7 +2,7 @@
   <div>
     <div class="Dso_header">
       <image-header
-          :cover-image="imageCover"
+        :cover-image="imageCover"
       />
     </div>
     <section class="Dso__main">
@@ -29,16 +29,17 @@
 
   let title = document.querySelector('div[data-constellations]').dataset.titleConst;
   let listConstellations = JSON.parse(document.querySelector('div[data-constellations]').dataset.listConst);
+  let coverImage = document.querySelector('div[data-constellations]').dataset.imgcover;
 
   export default {
-    name: 'ListApp',
+    name: "ListApp",
     components: {
       ImageHeader,
       CardsGrid
     },
     data() {
       return {
-        imageCover: '/build/images/ursa_major_illustration.jpg',
+        imageCover: coverImage,
         title: title,
         listConstellations: listConstellations
       }

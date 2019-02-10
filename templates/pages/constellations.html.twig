@@ -1,11 +1,15 @@
 {% extends'base.html.twig' %}
 
+{% set pageTitle = 'constId'|transchoice(list_constellation|length)  %}
+{% set pageImage = asset('/build/images/ursa_major_illustration.jpg') %}
+
 {% block content %}
   <div
       id="appListConst"
       data-constellations
       data-title-const="{{ 'constId'|transchoice(list_constellation|length) }}"
       data-list-const="{{ list_constellation|json_encode }}"
+      data-imgcover="{{ pageImage }}"
     >
   </div>
 {% endblock %}
