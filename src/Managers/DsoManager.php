@@ -53,7 +53,6 @@ class DsoManager
      * @param $id
      * @return Dso
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Astrobin\Exceptions\WsResponseException
      * @throws \ReflectionException
      */
     public function buildDso($id): Dso
@@ -73,22 +72,32 @@ class DsoManager
 
 
     /**
+     * Get Dso from a constellation identifier and build list
      * @param Dso $dso
      * @param $limit
-     * @return array $dataDsoList
+     * @return array
      * @throws \ReflectionException
      */
-    public function buildListDso(Dso $dso, $limit): array
+    public function getListDsoFromConst(Dso $dso, $limit)
     {
         /** @var ListDso $listDso */
         $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
 
+        return $this->buildListDso($listDso);
+    }
+
+    /**
+     * Format a list of Dso
+     * @param $listDso
+     * @return array $dataDsoList
+     */
+    public function buildListDso($listDso): array
+    {
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
-        $dataDsoList = array_map(function(Dso $dsoChild) use ($astrobinImage) {
+        return array_map(function(Dso $dsoChild) use ($astrobinImage) {
             $imgUrl = Utils::IMG_DEFAULT;
             try {
-                /** TODO : this part is too long time */
                 /** @var Image $imageAstrobin */
                 $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
                 if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
@@ -100,8 +109,6 @@ class DsoManager
 
             return array_merge($this->buildSearchData($dsoChild), ['image' => $imgUrl]);
         }, iterator_to_array($listDso->getIterator()));
-
-        return $dataDsoList;
     }
 
 

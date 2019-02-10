@@ -81,12 +81,17 @@ class LayoutController extends AbstractController
             'catalog' => [
                 'label' => $translatorInterface->trans('catalog'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
-                'icon_class' => 'fas fa-search-location'
+                'icon_class' => 'fab fa-hornbill'
+            ],
+            'constellation' => [
+                'label' => $translatorInterface->trans('constId', ['%count%' => 2]),
+                'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
+                'icon_class' => 'far fa-star'
             ],
             'map' => [
                 'label' => 'skymap', // $translatorInterface->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
-                'icon_class' => 'fas fa-globe'
+                'icon_class' => 'fas fa-space-shuttle'
             ],
             'news' => [
                 'label' => 'news', // $translatorInterface->trans('news'),

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Constellation;
 use App\Entity\Dso;
+use App\Entity\ListDso;
 use App\Helpers\UrlGenerateHelper;
+use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
@@ -31,15 +33,14 @@ class ConstellationController extends AbstractController
      * @Route("/constellation/{id}", name="constellation_show")
      *
      * @param string $id
-     * @param ConstellationRepository $constellationRepository
+     * @param ConstellationManager $constellationManager
      * @param DsoRepository $dsoRepository
      * @param DsoManager $dsoManager
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Astrobin\Exceptions\WsResponseException
      * @throws \ReflectionException
      */
-    public function show(string $id, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, DsoManager $dsoManager, UrlGenerateHelper $urlGeneratorHelper): Response
+    public function show(string $id, ConstellationManager $constellationManager, DsoRepository $dsoRepository, DsoManager $dsoManager): Response
     {
         $result = [];
 
@@ -50,26 +51,18 @@ class ConstellationController extends AbstractController
         $serializer = $this->container->get('serializer');
 
         /** @var Constellation $constellation */
-        $constellation = $constellationRepository->getObjectById($id);
+        $constellation = $constellationManager->buildConstellation($id);
 
         // Retrieve list of Dso from the constellation
+        /** @var ListDso $listDso */
         $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
-        /** @var Dso $dso */
-        foreach ($listDso->getIterator() as $dso) {
-            $dso->setImage($dsoManager->getAstrobinImage($dso->getAstrobinId(), $dso->getId(), 'url_regular'));
-            $dso->setFullUrl($dsoManager->getDsoUrl($dso));
-        }
-
         $constellation->setListDso($listDso);
-        $constellation->setFullUrl($urlGeneratorHelper->generateUrl($constellation));
+        $result['list_dso'] = $dsoManager->buildListDso($constellation->getListDso());
 
+        // Serialize Collection entity
         $result['constellation'] = $serializer->serialize($constellation, 'json');
 
-        // TODO : refactor this with DsoManager::buildListDso()
-        $result['list_dso'] = array_map(function(Dso $dsoChild) use ($dsoManager) {
-            return array_merge($dsoManager->buildSearchData($dsoChild), ['image' => $dsoChild->getImage()]);
-        }, iterator_to_array($constellation->getListDso()));
-
+        // Link to download map
         $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
 
         /** @var Response $response */
@@ -82,12 +75,24 @@ class ConstellationController extends AbstractController
 
 
     /**
+     *
      * @Route("/constellations", name="constellation_list")
+     * @param ConstellationManager $constellationManager
      * @return Response
+     * @throws \ReflectionException
      */
-    public function list()
+    public function list(ConstellationManager $constellationManager): Response
     {
-        return new Response("coucou");
+        $result = [];
+
+        $listConstellation = $constellationManager->buildListConstellation();
+        $result['list_constellation'] = $listConstellation;
+
+        /** @var Response $response */
+        $response = $this->render('pages/constellations.html.twig', $result);
+        $response->setPublic();
+
+        return $response;
     }
 
 

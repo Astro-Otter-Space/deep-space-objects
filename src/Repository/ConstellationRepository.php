@@ -2,8 +2,12 @@
 namespace App\Repository;
 
 use App\Entity\Constellation;
+use App\Entity\ListConstellation;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Query;
+use Elastica\Query\MatchAll;
+use Elastica\Search;
 
 /**
  * Class ConstellationRepository
@@ -17,6 +21,8 @@ final class ConstellationRepository extends AbstractRepository
     const SEARCH_SIZE = 15;
 
     const URL_MAP = '/build/images/const_maps/%s.gif';
+
+    const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
     /**
      * ConstellationRepository constructor.
@@ -44,6 +50,36 @@ final class ConstellationRepository extends AbstractRepository
         }
     }
 
+
+    /**
+     * Build a list of all constellation (88)
+     * @throws \ReflectionException
+     */
+    public function getAllConstellation()
+    {
+        /** @var ListConstellation $listConstellation */
+        $listConstellation = new ListConstellation();
+        $this->client->getIndex(self::INDEX_NAME);
+
+        /** @var Query $query */
+        $query = new Query();
+        $query->setSize(100);
+        $query->addSort(['data.rank' => ['order' => 'asc']]);
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $result = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $result->count()) {
+            foreach ($result->getDocuments() as $document) {
+                $constellation = $this->buildEntityFromDocument($document);
+                $listConstellation->addConstellation($constellation);
+            }
+        }
+
+        return $listConstellation;
+    }
+
     /**
      * Build an entity from result
      * @param Document $document
@@ -60,8 +96,7 @@ final class ConstellationRepository extends AbstractRepository
             ->buildObjectR($document);
 
         $constellation->setMap(sprintf(self::URL_MAP, strtoupper($constellation->getId())));
-
-        // Todo : add gerateurlhelper;
+        $constellation->setImage(sprintf(self::URL_IMG, strtolower($constellation->getId())));
 
         return $constellation;
     }

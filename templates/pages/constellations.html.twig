@@ -1,0 +1,16 @@
+{% extends'base.html.twig' %}
+
+{% block content %}
+  <div
+      id="appListConst"
+      data-constellations
+      data-title-const="{{ 'constId'|transchoice(list_constellation|length) }}"
+      data-list-const="{{ list_constellation|json_encode }}"
+    >
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('const_list') }}
+{% endblock %}

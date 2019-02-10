@@ -41,7 +41,9 @@ class Constellation extends AbstractEntity
 
     private $map;
 
-    private static $listFieldsNoMapping = ['elasticId', 'locale', 'geometry', 'geometryLine', 'fullUrl', 'listDso', 'map'];
+    private $image;
+
+    private static $listFieldsNoMapping = ['elasticId', 'locale', 'geometry', 'geometryLine', 'fullUrl', 'listDso', 'map', 'image'];
 
     /**
      * @return mixed
@@ -206,7 +208,7 @@ class Constellation extends AbstractEntity
      */
     public function getListDso()
     {
-        return $this->listDso->getIterator();
+        return $this->listDso;
     }
 
     /**
@@ -247,6 +249,22 @@ class Constellation extends AbstractEntity
     public function setMap($map): void
     {
         $this->map = $map;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
     /**

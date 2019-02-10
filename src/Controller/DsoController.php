@@ -53,7 +53,9 @@ class DsoController extends AbstractController
             $params['imgCover'] = $dso->getImage();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
 
-            $params['dso_by_const'] = $dsoManager->buildListDso($dso, 20);
+            // List of Dso from same constellation
+            $params['dso_by_const'] = $dsoManager->getListDsoFromConst($dso, 20);
+
             $params['images'] = [];
             try {
                 /** @var GetImage $astrobinWs */
