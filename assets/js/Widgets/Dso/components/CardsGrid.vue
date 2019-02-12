@@ -1,5 +1,16 @@
 <template>
   <div id="appGrid">
+    <div v-if="showControls == true" >
+      <div v-for="(control, index) in listControls" v-if="listControls.length" key="index + 0">
+        <input
+          type="radio"
+          v-model="showItem"
+          :id="control.value"
+          :value="control.value"
+        /> <label :for="control.value">{{ control.label }}</label>
+      </div>
+    </div>
+
     <transition-group tag="main" name="card">
       <article v-for="(item, index) in items" :key="index + 0" class="card">
         <a v-bind:href="item.url" target="_blank">
@@ -33,6 +44,14 @@
     },
     props: {
       items: {
+        default: () => [],
+        type: Array
+      },
+      showControls: {
+        default: false,
+        type: Boolean
+      },
+      listControls: {
         default: () => [],
         type: Array
       }

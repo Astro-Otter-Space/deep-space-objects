@@ -15,6 +15,8 @@
         <div class="Dso__slider" v-if="0 < listConstellations.length">
           <cards-grid
             :items="listConstellations"
+            :show-controls="true"
+            :list-controls="controls"
           >
           </cards-grid>
         </div>
@@ -41,7 +43,21 @@
       return {
         imageCover: coverImage,
         title: title,
-        listConstellations: listConstellations
+        listConstellations: listConstellations,
+        controls: [
+          {
+            value: '1',
+            label: 'All'
+          },
+          {
+            value: 'north',
+            label: 'North'
+          },
+          {
+            value: 'south',
+            label: 'South'
+          }
+        ]
       }
     }
   }

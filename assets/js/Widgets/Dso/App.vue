@@ -1,6 +1,6 @@
 <template>
   <div>
-     EN<div class="Dso_header">
+     <div class="Dso_header">
       <image-header
         :cover-image="imageCover"
       />
@@ -64,6 +64,7 @@
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3 class="Dso__title">{{ titleConst }}</h3>
           <cards-grid
+            :show-controls="false"
             :items="itemsDso"
           >
           </cards-grid>

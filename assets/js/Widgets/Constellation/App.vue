@@ -22,6 +22,7 @@
         <div class="Dso__slider" v-if="0 < itemsDso.length">
           <cards-grid
             :items="itemsDso"
+            :show-controls="false"
           >
           </cards-grid>
         </div>
