@@ -64,7 +64,8 @@ class ConstellationManager
                 'value' => $constellation->getAlt(),
                 'label' => $constellation->getGen(),
                 'url' => $this->buildUrl($constellation),
-                'image' => $constellation->getImage()
+                'image' => $constellation->getImage(),
+                'filter' => $constellation->getLoc()
             ];
         }, iterator_to_array($listConstellation->getIterator()));
     }

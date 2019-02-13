@@ -64,7 +64,7 @@ final class ConstellationRepository extends AbstractRepository
         /** @var Query $query */
         $query = new Query();
         $query->setSize(100);
-        $query->addSort(['data.rank' => ['order' => 'asc']]);
+        $query->addSort(['data.order' => ['order' => 'asc']]);
 
         /** @var Search $search */
         $search = new Search($this->client);

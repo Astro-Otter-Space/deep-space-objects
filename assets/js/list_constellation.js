@@ -1,6 +1,11 @@
 import Vue from 'vue';
-import AppListConst from './Widgets/Constellation/ListApp';
+import AppList from './Widgets/Constellation/ListApp';
+
+Vue.config.productionTip = false;
+
+import VueLazyImageLoading from "vue-lazy-image-loading";
+Vue.use(VueLazyImageLoading);
 
 new Vue({
-  render: h => h(AppListConst)
+  render: h => h(AppList)
 }).$mount(`#appListConst`);

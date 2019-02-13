@@ -15,8 +15,6 @@
 </template>
 
 <script>
-
-
   export default {
     name: 'CustomSocialSharing',
     props: {

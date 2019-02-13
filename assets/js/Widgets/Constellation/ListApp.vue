@@ -56,6 +56,10 @@
           {
             value: 'south',
             label: 'South'
+          },
+          {
+            value: 'zodiac',
+            label: 'Zodiac'
           }
         ]
       }
