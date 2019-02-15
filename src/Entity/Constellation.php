@@ -24,6 +24,9 @@ class Constellation extends AbstractEntity
     private $alt;
 
     /** @var  */
+    private $desc;
+
+    /** @var  */
     private $rank;
 
     /** @var  */
@@ -114,6 +117,27 @@ class Constellation extends AbstractEntity
             $this->alt = $alt[sprintf('alt_%s', $this->locale)];
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDesc()
+    {
+        return $this->desc;
+    }
+
+    /**
+     * @param mixed $desc
+     */
+    public function setDesc($desc): void
+    {
+        if (!$this->locale || 'en' === $this->locale) {
+            $this->desc = $desc['alt'];
+        } else {
+            $this->desc = $desc[sprintf('alt_%s', $this->locale)];
+        }
+    }
+
 
     /**
      * @return mixed

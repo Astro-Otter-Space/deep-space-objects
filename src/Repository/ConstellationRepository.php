@@ -80,6 +80,11 @@ final class ConstellationRepository extends AbstractRepository
         return $listConstellation;
     }
 
+    public function getConstellationBySearchTerms()
+    {
+
+    }
+
     /**
      * Build an entity from result
      * @param Document $document

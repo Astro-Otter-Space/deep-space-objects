@@ -54,6 +54,39 @@
                 }
               }
             },
+            "desc": {
+              "properties": {
+                "alt": {
+                  "desc": "text",
+                  "fields": {
+                    "en": {
+                      "type": "text",
+                      "analyzer": "english"
+                    },
+                    "fr": {
+                      "type": "text",
+                      "analyzer": "french"
+                    },
+                    "es": {
+                      "type": "text",
+                      "analyzer": "spanish"
+                    },
+                    "de": {
+                      "type": "text",
+                      "analyzer": "german"
+                    },
+                    "pt": {
+                      "type": "text",
+                      "analyzer": "portuguese"
+                    },
+                    "it": {
+                      "type": "text",
+                      "analyzer": "italian"
+                    }
+                  }
+                }
+              }
+            },
             "rank": {
               "type": "integer"
             },

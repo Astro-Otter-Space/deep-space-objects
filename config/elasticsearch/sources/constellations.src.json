@@ -12,6 +12,14 @@
         "alt_pt": "Andrômeda",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "2",
       "loc": "north"
@@ -136,6 +144,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "52",
       "loc": "south"
@@ -179,6 +195,14 @@
         "alt_de": "Paradiesvogel",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "53",
@@ -227,6 +251,14 @@
         "alt_de": "Adler",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "1",
@@ -299,6 +331,14 @@
         "alt_de": "Wassermann",
         "alt_pt": "Aquário",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "86",
@@ -416,6 +456,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "3",
       "loc": "south"
@@ -476,6 +524,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "6",
       "loc": "zodiac"
@@ -523,6 +579,14 @@
         "alt_de": "Fuhrmann",
         "alt_pt": "Auriga",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "19",
@@ -599,6 +663,14 @@
         "alt_de": "Bärenhüter",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "8",
@@ -694,6 +766,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "9",
       "loc": "south"
@@ -741,6 +821,14 @@
         "alt_de": "Giraffe",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "10",
@@ -811,6 +899,14 @@
         "alt_de": "Steinbock",
         "alt_pt": "Capricórnio",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "12",
@@ -887,6 +983,14 @@
         "alt_de": "Kiel",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "13",
@@ -1002,6 +1106,14 @@
         "alt_pt": "Cassiopeia",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "14",
       "loc": "north"
@@ -1053,6 +1165,14 @@
         "alt_de": "",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "15",
@@ -1168,6 +1288,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "16",
       "loc": "north"
@@ -1253,6 +1381,14 @@
         "alt_de": "Wal",
         "alt_pt": "Baleia",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "5",
@@ -1350,6 +1486,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "10",
       "loc": "south"
@@ -1406,6 +1550,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "21",
       "loc": "south"
@@ -1449,6 +1601,14 @@
         "alt_de": "Großer Hund",
         "alt_pt": "Cão Maior",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "37",
@@ -1542,7 +1702,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
-
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "64",
       "loc": "north"
@@ -1582,6 +1749,14 @@
         "alt_de": "Krebs",
         "alt_pt": "Câncer",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "11",
@@ -1641,6 +1816,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "20",
       "loc": "south"
@@ -1665,6 +1848,14 @@
         "alt_de": "Haar der Berenike",
         "alt_pt": "Coma Berenice",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "17",
@@ -1709,6 +1900,14 @@
         "alt_de": "Südl. Krone",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "24",
@@ -1774,6 +1973,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "25",
       "loc": "south"
@@ -1833,6 +2040,14 @@
         "alt_de": "Becher",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "23",
@@ -1912,6 +2127,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "26",
       "loc": "south"
@@ -1961,6 +2184,14 @@
         "alt_de": "Rabe",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "22",
@@ -2018,6 +2249,14 @@
         "alt_pt": "Canes Venatici",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "18",
       "loc": "north"
@@ -2057,6 +2296,14 @@
         "alt_de": "Schwan",
         "alt_pt": "Cygnus",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "27",
@@ -2132,6 +2379,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "28",
       "loc":"south"
@@ -2187,6 +2442,14 @@
         "alt_de": "Schwertfisch",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "29",
@@ -2251,6 +2514,14 @@
         "alt_de": "",
         "alt_pt": "Draco",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "30",
@@ -2360,6 +2631,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "63",
       "loc": "north"
@@ -2404,7 +2683,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
-
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "32",
       "loc": "south"
@@ -2545,6 +2831,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "34",
       "loc": "south"
@@ -2588,6 +2882,14 @@
         "alt_de": "Zwillinge",
         "alt_pt": "Gêmeos",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "35",
@@ -2675,6 +2977,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "39",
       "loc": "south"
@@ -2748,6 +3058,14 @@
         "alt_de": "Herkules",
         "alt_pt": "Hércules",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "40",
@@ -2877,6 +3195,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "41",
       "loc": "south"
@@ -2933,7 +3259,14 @@
         "alt_pt": "Hydra",
         "alt_it": ""
       },
-
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "42",
       "loc": "north"
@@ -3042,6 +3375,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "43",
       "loc": "south"
@@ -3098,6 +3439,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "44",
       "loc": "south"
@@ -3153,6 +3502,14 @@
         "alt_de": "Eidechse",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "45",
@@ -3236,6 +3593,14 @@
         "alt_pt": "Leo",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "48",
       "loc": "zodiac"
@@ -3313,6 +3678,14 @@
         "alt_de": "Hase",
         "alt_pt": "Lebre",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "47",
@@ -3396,6 +3769,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "4",
       "loc": "zodiac"
@@ -3462,6 +3843,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "65",
       "loc": "north"
@@ -3517,6 +3906,14 @@
         "alt_de": "Wolf",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "49",
@@ -3608,6 +4005,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "50",
       "loc": "north"
@@ -3667,6 +4072,14 @@
         "alt_de": "Leier",
         "alt_pt": "Lyra",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "51",
@@ -3732,6 +4145,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "80",
       "loc": "south"
@@ -3779,6 +4200,14 @@
         "alt_de": "Mikroskop",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "53",
@@ -3835,6 +4264,14 @@
         "alt_de": "Einhorn",
         "alt_pt": "Unicórnio",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "46",
@@ -3910,6 +4347,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "50",
       "loc": "south"
@@ -3970,6 +4415,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "73",
       "loc": "south"
@@ -4022,6 +4475,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "55",
       "loc": "south"
@@ -4069,6 +4530,14 @@
         "alt_de": "Schlangenträger",
         "alt_pt": "Serpentário",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "57",
@@ -4185,6 +4654,14 @@
         "alt_de": "Orion",
         "alt_pt": "Órion",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "58",
@@ -4336,6 +4813,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "59",
       "loc": "south"
@@ -4411,6 +4896,14 @@
         "alt_de": "Pegasus",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "60",
@@ -4509,6 +5002,14 @@
         "alt_de": "Perseus",
         "alt_pt": "Perseu",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "62",
@@ -4650,6 +5151,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "68",
       "loc": "south"
@@ -4714,6 +5223,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "61",
       "loc": "south"
@@ -4757,6 +5274,14 @@
         "alt_de": "",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "69",
@@ -4829,6 +5354,14 @@
         "alt_de": "Fische",
         "alt_pt": "Peixes",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "71",
@@ -4964,6 +5497,14 @@
         "alt_pt": "Cão Menor",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "72",
       "loc": "north"
@@ -5050,6 +5591,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "7",
       "loc": "south"
@@ -5097,6 +5646,14 @@
         "alt_de": "Netz",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "74",
@@ -5149,6 +5706,14 @@
         "alt_de": "Skorpion",
         "alt_pt": "Escorpião",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "76",
@@ -5244,6 +5809,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "77",
       "loc": "south"
@@ -5291,6 +5864,14 @@
         "alt_de": "Schild",
         "alt_pt": "Scutum",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "31",
@@ -5343,6 +5924,14 @@
         "alt_de": "Schlange",
         "alt_pt": "Serpente",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "78",
@@ -5412,6 +6001,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "79",
       "loc": "south"
@@ -5459,6 +6056,14 @@
         "alt_de": "Pfeil",
         "alt_pt": "Flecha",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "33",
@@ -5513,6 +6118,14 @@
         "alt_de": "Schütze",
         "alt_pt": "Sagitário",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "75",
@@ -5684,6 +6297,14 @@
         "alt_pt": "Touro",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "1",
       "order": "81",
       "loc": "zodiac"
@@ -5776,6 +6397,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "82",
       "loc": "south"
@@ -5819,6 +6448,14 @@
         "alt_de": "Südl. Dreieck",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "2",
       "order": "85",
@@ -5868,6 +6505,14 @@
         "alt_pt": "Triângulo",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "84",
       "loc": "north"
@@ -5915,6 +6560,14 @@
         "alt_de": "Tukan",
         "alt_pt": "",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "83",
@@ -5975,6 +6628,14 @@
         "alt_de": "Großer Bär",
         "alt_pt": "Ursa Maior",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "38",
@@ -6132,6 +6793,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "67",
       "loc": "north"
@@ -6196,7 +6865,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
-
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "2",
       "order": "88",
       "loc": "south"
@@ -6260,6 +6936,14 @@
         "alt_de": "Jungfrau",
         "alt_pt": "Virgem",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "1",
       "order": "87",
@@ -6357,6 +7041,14 @@
         "alt_pt": "",
         "alt_it": ""
       },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
+      },
       "rank": "3",
       "order": "70",
       "loc": "south"
@@ -6416,6 +7108,14 @@
         "alt_de": "Fuchs",
         "alt_pt": "Raposa",
         "alt_it": ""
+      },
+      "desc": {
+        "desc": "",
+        "desc_fr": "",
+        "desc_es": "",
+        "desc_de": "",
+        "desc_pt": "",
+        "desc_it": ""
       },
       "rank": "3",
       "order": "66",

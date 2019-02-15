@@ -11,6 +11,11 @@
           {{ title }}
         </h2>
 
+        <a id="#description"></a>
+        <div class="Dso__description" v-show="0 < description.length">
+          {{ description }}
+        </div>
+
         <!--Map-->
         <div>
           <a v-bind:href="linkDownload" target="_blank" alt="Download map">
@@ -39,6 +44,7 @@
   let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
   let title = document.querySelector('div[data-const-widget]').dataset.title;
+  let description = document.querySelector('div[data-const-widget]').dataset.desc;
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
   let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
 
@@ -53,6 +59,7 @@
         map: map,
         imageCover: coverImage,
         title: title,
+        description: description,
         itemsDso: dsoList,
         linkDownload: linkDownload
       }
