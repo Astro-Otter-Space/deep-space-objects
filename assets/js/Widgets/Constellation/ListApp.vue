@@ -31,6 +31,7 @@
 
   let title = document.querySelector('div[data-constellations]').dataset.titleConst;
   let listConstellations = JSON.parse(document.querySelector('div[data-constellations]').dataset.listConst);
+  let listFilter = JSON.parse(document.querySelector('div[data-constellations]').dataset.filter);
   let coverImage = document.querySelector('div[data-constellations]').dataset.imgcover;
 
   export default {
@@ -44,24 +45,7 @@
         imageCover: coverImage,
         title: title,
         listConstellations: listConstellations,
-        controls: [
-          {
-            value: '1',
-            label: 'All'
-          },
-          {
-            value: 'north',
-            label: 'North'
-          },
-          {
-            value: 'south',
-            label: 'South'
-          },
-          {
-            value: 'zodiac',
-            label: 'Zodiac'
-          }
-        ]
+        controls: listFilter
       }
     }
   }

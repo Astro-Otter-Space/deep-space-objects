@@ -6,6 +6,7 @@ selectLang: Línguas
 astrobin.message: Esse produto utilisa o API AstroBin mas não é apoiado ou certificado por AstroBin
 error.message: Erro %error%, talvez você caiu num buraco negro
 more: Mais informações
+hem.all: All
 hem.zo: Zodíaco
 hem.no: Hemisfério Norte
 hem.su: Hemisfério sul

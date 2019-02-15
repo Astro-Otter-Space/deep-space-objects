@@ -6,6 +6,7 @@ selectLang: Languages
 astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
 error.message: Error %error%, maybe you fall in a black hole :) ?
 more: More informations
+hem.all: All
 hem.zo: Zodiac
 hem.no: Northern hemisphere
 hem.su: Southern hemisphere
