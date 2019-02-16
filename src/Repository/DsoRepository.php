@@ -20,7 +20,6 @@ use Elastica\Suggest;
  */
 class DsoRepository extends AbstractRepository
 {
-
     private static $listSearchFields = [
         'id',
         'id.raw',
@@ -29,16 +28,6 @@ class DsoRepository extends AbstractRepository
     ];
 
     const INDEX_NAME = 'deepspaceobjects';
-
-    /**
-     * DsoRepository constructor.
-     * @param Client $client
-     * @param $locale
-     */
-    public function __construct(Client $client, $locale)
-    {
-        parent::__construct($client, $locale);
-    }
 
 
     /**
@@ -115,25 +104,12 @@ class DsoRepository extends AbstractRepository
     public function getObjectsBySearchTerms($searchTerm)
     {
         $list = [];
-        $this->client->getIndex(self::INDEX_NAME);
-
         if ('en' !== $this->getLocale()) {
             array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
             array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
         }
 
-        /** @var Query\MultiMatch $query */
-        $query = new Query\MultiMatch();
-        $query->setFields(self::$listSearchFields);
-        $query->setQuery($searchTerm);
-        $query->setType('phrase_prefix');
-
-        /** @var Search $search */
-        $search = new Search($this->client);
-        $search->addIndex(self::INDEX_NAME);
-
-        $result = $search->search($query);
-
+        $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
         if (0 < $result->getTotalHits()) {
             $list = array_map(function(Result $doc) {
                 return $this->buildEntityFromDocument($doc->getDocument());

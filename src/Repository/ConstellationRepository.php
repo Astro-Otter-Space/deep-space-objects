@@ -7,6 +7,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
+use Elastica\Result;
 use Elastica\Search;
 
 /**
@@ -24,15 +25,12 @@ final class ConstellationRepository extends AbstractRepository
 
     const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
-    /**
-     * ConstellationRepository constructor.
-     * @param Client $client
-     * @param $locale
-     */
-    public function __construct(Client $client, $locale)
-    {
-        parent::__construct($client, $locale);
-    }
+    private static $listSearchFields = [
+        'id',
+        'id.raw',
+        'data.gen',
+        'data.alt.alt'
+    ];
 
     /**
      * @param $id
@@ -80,9 +78,29 @@ final class ConstellationRepository extends AbstractRepository
         return $listConstellation;
     }
 
-    public function getConstellationBySearchTerms()
+    /**
+     * Search autocomplete
+     *
+     * @param $searchTerm
+     * @return array
+     */
+    public function getConstellationsBySearchTerms($searchTerm)
     {
+        $list = [];
 
+        if ('en' !== $this->getLocale()) {
+            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
+            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
+        }
+
+        $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
+        if (0 < $result->getTotalHits()) {
+            $list = array_map(function(Result $doc) {
+                return $this->buildEntityFromDocument($doc->getDocument());
+            }, $result->getResults());
+        }
+
+        return $list;
     }
 
     /**
@@ -118,6 +136,6 @@ final class ConstellationRepository extends AbstractRepository
      * @return string
      */
     public function getType(): string {
-        return self::TYPE_NAME;
+        return self::INDEX_NAME;
     }
 }

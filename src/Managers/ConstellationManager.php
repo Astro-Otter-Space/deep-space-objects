@@ -2,6 +2,7 @@
 
 namespace App\Managers;
 
+use App\Classes\Utils;
 use App\Entity\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
@@ -68,6 +69,37 @@ class ConstellationManager
                 'filter' => $constellation->getLoc()
             ];
         }, iterator_to_array($listConstellation->getIterator()));
+    }
+
+
+    /**
+     * Build search by terms
+     * @param $searchTerms
+     * @return mixed
+     */
+    public function searchConstellationsByTerms($searchTerms)
+    {
+        $resultConstellation = $this->constellationRepository->getConstellationsBySearchTerms($searchTerms);
+
+        return call_user_func("array_merge", array_map(function(Constellation $constellation) {
+            return $this->buildSearchListConst($constellation);
+        }, $resultConstellation));
+    }
+
+
+    /**
+     * Format data constellation for Ajax research
+     * @param Constellation $constellation
+     * @return array
+     */
+    public function buildSearchListConst(Constellation $constellation)
+    {
+        return [
+            'id' => $constellation->getId(),
+            'value' => $constellation->getAlt(),
+            'label' => implode(Utils::GLUE_DASH, [$this->translatorInterface->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
+            'url' => $this->buildUrl($constellation),
+        ];
     }
 
     /**

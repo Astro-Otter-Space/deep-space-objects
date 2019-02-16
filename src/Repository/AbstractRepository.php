@@ -75,5 +75,31 @@ abstract class AbstractRepository
         return $search->search($matchQuery);
     }
 
+
+    /**
+     * @param $searchTerm
+     * @param $listSearchFields
+     * @return ResultSet
+     */
+    public function requestBySearchTerms($searchTerm, $listSearchFields)
+    {
+
+        $this->client->getIndex($this->getType());
+
+        /** @var Query\MultiMatch $query */
+        $query = new Query\MultiMatch();
+        $query->setFields($listSearchFields);
+        $query->setQuery($searchTerm);
+        $query->setType('phrase_prefix');
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $search->addIndex($this->getType());
+
+        return $search->search($query);
+    }
+
     abstract protected function getEntity();
+
+    abstract protected function getType();
 }

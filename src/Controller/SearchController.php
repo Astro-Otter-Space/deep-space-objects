@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Dso;
+use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,23 +28,19 @@ class SearchController extends AbstractController
      * )
      *
      * @param Request $request
-     * @param DsoRepository $dsoRepository
      * @param DsoManager $dsoManager
+     * @param ConstellationManager $constellationManager
      * @return JsonResponse
      */
-    public function searchAjax(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager)
+    public function searchAjax(Request $request, DsoManager $dsoManager, ConstellationManager $constellationManager)
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-            $resultDso = $dsoRepository->getObjectsBySearchTerms($searchTerm);
+            $dataDso = $dsoManager->searchDsoByTerms($searchTerm);
 
-            $dataDso = call_user_func("array_merge", array_map(function(Dso $dso) use ($dsoManager) {
-                return $dsoManager->buildSearchData($dso);
-            }, $resultDso));
-
-
-            $data = array_merge($dataDso, []);
+            $dataConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
+            $data = array_merge($dataDso, $dataConstellation);
         }
 
         /** @var JsonResponse $response */
@@ -52,21 +49,4 @@ class SearchController extends AbstractController
 
         return $response;
     }
-
-/*{
-    "_source": "suggest",
-    "suggest": {
-        "dso-suggest": {
-            "prefix": "<searchterm>",
-            "completion": {
-                "field": "suggest",
-                "size": 10,
-                "fuzzy": {
-                    "prefix_length": 8
-                }
-            }
-        }
-    }
-}*/
-
 }

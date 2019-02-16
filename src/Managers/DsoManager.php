@@ -49,7 +49,7 @@ class DsoManager
 
 
     /**
-     * Build a complete Dso Entity
+     * Build a complete Dso Entity, with Astrobin image and URL
      * @param $id
      * @return Dso
      * @throws \Astrobin\Exceptions\WsException
@@ -73,6 +73,7 @@ class DsoManager
 
     /**
      * Get Dso from a constellation identifier and build list
+     *
      * @param Dso $dso
      * @param $limit
      * @return array
@@ -107,10 +108,23 @@ class DsoManager
                 $imgUrl = Utils::IMG_DEFAULT;
             }
 
-            return array_merge($this->buildSearchData($dsoChild), ['image' => $imgUrl]);
+            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl]);
         }, iterator_to_array($listDso->getIterator()));
     }
 
+
+    /**
+     * @param $searchTerms
+     * @return mixed
+     */
+    public function searchDsoByTerms($searchTerms)
+    {
+        $resultDso = $this->dsoRepository->getObjectsBySearchTerms($searchTerms);
+
+        return call_user_func("array_merge", array_map(function(Dso $dso) {
+            return $this->buildSearchListDso($dso);
+        }, $resultDso));
+    }
 
     /**
      * Data returned for autocomplete search
@@ -118,7 +132,7 @@ class DsoManager
      * @param Dso $dso
      * @return array
      */
-    public function buildSearchData(Dso $dso): array
+    public function buildSearchListDso(Dso $dso): array
     {
         $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())) : null;
 
