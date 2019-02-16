@@ -4,13 +4,13 @@
 {% set title = constellation.alt %}
 {% set pageTitle = "const_id"|transchoice(0) ~ ' - ' ~ title %}
 {% set pageImage = constellation.image %}
-{% set pageDesc = constellation.desc|raw %}
+{% set pageDesc = constellation.description|raw %}
 
 {% block content %}
   <div id="appConst"
      data-const-widget
      data-title="{{ title|trans }}"
-     data-desc="{{ constellation.desc|raw }}"
+     data-desc="{{ constellation.description|raw }}"
      data-imgcover="{{ constellation.image }}"
      data-map="{{ constellation.map }}"
      data-list-dso="{{ list_dso|json_encode }}"

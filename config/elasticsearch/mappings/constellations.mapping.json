@@ -54,10 +54,10 @@
                 }
               }
             },
-            "desc": {
+            "description": {
               "properties": {
-                "alt": {
-                  "desc": "text",
+                "description": {
+                  "type": "text",
                   "fields": {
                     "en": {
                       "type": "text",
