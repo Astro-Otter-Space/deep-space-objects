@@ -23,11 +23,9 @@ class DsoRepository extends AbstractRepository
 
     private static $listSearchFields = [
         'id',
-        'id.keyword',
+        'id.raw',
         'data.desigs',
-        'data.desigs.keyword',
-        'data.alt.alt',
-        'data.const_id'
+        'data.alt.alt'
     ];
 
     const INDEX_NAME = 'deepspaceobjects';
@@ -121,16 +119,19 @@ class DsoRepository extends AbstractRepository
 
         if ('en' !== $this->getLocale()) {
             array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
+            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
         }
 
         /** @var Query\MultiMatch $query */
         $query = new Query\MultiMatch();
         $query->setFields(self::$listSearchFields);
         $query->setQuery($searchTerm);
+        $query->setType('phrase_prefix');
 
         /** @var Search $search */
         $search = new Search($this->client);
         $search->addIndex(self::INDEX_NAME);
+
         $result = $search->search($query);
 
         if (0 < $result->getTotalHits()) {
