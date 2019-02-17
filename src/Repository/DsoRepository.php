@@ -174,6 +174,15 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
+        foreach ($search->getDocuments() as $doc) {
+            dump($doc);
+        }
+
+        dump($search->getAggregations());
+        foreach ($search->getAggregations() as $aggregations) {
+
+        }
+
         dump(json_encode($search->getQuery()->toArray()));
     }
 

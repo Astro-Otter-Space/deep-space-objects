@@ -6,19 +6,17 @@ Installation
 ### Clone project
 `git clone git@github.com:HamHamFonFon/deep-space-objects.git` 
  
+### Generate SSL certificate for HTTPS
+```
+openssl req -new -newkey rsa:2048 -nodes -out deepskyobjects_local.csr -keyout deepskyobjects_local.key -subj "/C=FR/ST=/L=Montpellier/O=/OU=Montpellier/CN=deepskyobjects.local"
+``` 
+Copy path of deepskyobjects_local.csr and deepskyobjects_local.key in .env file.
+
 ### Init .env files
 ```
  cp .env.local.dist .env.local
  cp .env.dist .env
 ``` 
- 
-### Generate SSL certificate for HTTPS
-```
-openssl req -x509 -out localhost.crt -keyout localhost.key   -newkey rsa:2048 -nodes -sha256   -subj '/CN=localhost' -extensions EXT -config <( \
-    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
-``` 
-Copy path of localhost.crt and localhost.key in .env file.
-
  
 ### Launch docker stack
  ```
@@ -26,7 +24,7 @@ Copy path of localhost.crt and localhost.key in .env file.
  ```
 
 ### Add hosts into hosts file
- `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts`
+ `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "deepskyobjects.local" >> /etc/hosts`
 
 
 ### Start Docker stack on :
@@ -73,17 +71,18 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 ```
 
 ### Status data
-Messier : 110/110
-NGC : 7233/7840
-UGC: 257/?
-Sharpless : 93/313
-RCW : 20/182
-Index Catalog : 202/5386
-Collinder : 73/471
-Caldwell : 5/109
-Abell: 103/
-ldn: 17/?
-lbn: 12/?
+- Messier : 110/110
+- NGC : 7233/7840
+- UGC: 258/12 921
+- Sharpless : 94/313
+- RCW : 20/182
+- Index Catalog : 202/5386
+- Collinder : 73/471
+- Caldwell : 25/109
+- Abell: 103/
+- ldn: 17/?
+- lbn: 12/?
+- Dolidze-Dzimselejvili: 11/11
 
 Authors
 ==
