@@ -138,7 +138,6 @@ class Constellation extends AbstractEntity
         }
     }
 
-
     /**
      * @return mixed
      */
