@@ -22,7 +22,7 @@
     <div id="appGrid">
       <transition-group tag="main" name="card">
         <article v-for="(item, index) in items" :key="index + 0" class="card" v-show="(itemselect === item.filter) || (itemselect == 1)">
-          <a v-bind:href="item.url" target="_blank">
+          <a v-bind:href="item.url" v-bind:title="item.value">
             <div class="image">
               <img :src="item.image" :alt="item.value" v-on:load="isLoaded()" v-bind:class="{ active: isActive }">
             </div>
