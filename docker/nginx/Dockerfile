@@ -1,10 +1,13 @@
-FROM debian:jessie
+FROM debian:stretch
 ARG NGINX_HOST
 
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 
 # Install nginx
-RUN apt-get update && apt-get install -y nginx
+RUN apt-get update && apt-get install -y nginx wget
+
+# Instal certbot for SSL
+#RUN apt-get install certbot python-certbot-nginx -t stretch-backports
 
 # Configure Nginx
 ADD nginx.conf /etc/nginx/
@@ -19,12 +22,8 @@ RUN usermod -u 1000 www-data
 RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony
 RUN rm /etc/nginx/sites-enabled/default
 
-
-# Install OpenSSL
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends openssl
-
 # Add certificate SSL
+#RUN certbot --nginx certonly
 
 # Run Nginx
 CMD ["nginx"]
@@ -33,6 +32,7 @@ CMD ["nginx"]
 EXPOSE 80
 EXPOSE 443
 
+
 # generate certificate
 #RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -subj "/C=FR/ST=Montpellier/L=Montpellier/O=Global Security/OU=IT Department/CN=example.com"
 
@@ -40,3 +40,5 @@ EXPOSE 443
 #RUN openssl req -x509 -out localhost.crt -keyout localhost.key \
 #      -newkey rsa:2048 -nodes -days 365 -sha256 \
 #      -subj '/CN=localhost'
+
+

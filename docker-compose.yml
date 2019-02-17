@@ -8,6 +8,7 @@ volumes:
     es_data:
         driver: local
 
+
 services:
     # PHP
     php:
@@ -51,8 +52,7 @@ services:
         volumes:
             - .:/var/www/deep-space-objects:cached
             - ./logs/nginx/:/var/log/nginx:cached
-            - ${SSL_CERTIFICATE_CRT}:/etc/nginx/ssl/localhost.crt
-            - ${SSL_CERTIFICATE_KEY}:/etc/nginx/ssl/localhost.key
+            #- /etc/letsencrypt/:/etc/letsencrypt/
         env_file:
             - .env
         environment:
