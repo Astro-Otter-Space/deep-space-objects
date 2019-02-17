@@ -9,10 +9,16 @@ RUN apt-get update && apt-get install -y nginx
 # Configure Nginx
 ADD nginx.conf /etc/nginx/
 
-ADD symfony.conf /etc/nginx/conf.d/
+ADD symfony.conf /etc/nginx/sites-available/
 #RUN envsubst "${NGINX_HOST}" < /etc/nginx/sites-available/default.template > /etc/nginx/sites-available/symfony.conf && nginx -g 'daemon off;'
-RUN sed "/server_name nginx_host;/c\    server_name ${NGINX_HOST};" -i /etc/nginx/conf.d/symfony.conf
+RUN sed "/server_name nginx_host;/c\    server_name ${NGINX_HOST};" -i /etc/nginx/sites-available/symfony.conf
+RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
 RUN usermod -u 1000 www-data
+
+# Configure the virtual host
+RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony
+RUN rm /etc/nginx/sites-enabled/default
+
 
 # Install OpenSSL
 RUN apt-get update \
