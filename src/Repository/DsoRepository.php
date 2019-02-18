@@ -24,7 +24,8 @@ class DsoRepository extends AbstractRepository
         'id',
         'id.raw',
         'data.desigs',
-        'data.alt.alt'
+        'data.alt.alt',
+        'data.discover'
     ];
 
     const INDEX_NAME = 'deepspaceobjects';
