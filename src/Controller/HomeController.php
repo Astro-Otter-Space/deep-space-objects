@@ -34,11 +34,12 @@ class HomeController extends AbstractController
      *     "fr": "/contactez-nous",
      *     "en": "/contact-us",
      *     "de": "/kontaktiere-uns",
-     *     "es": "/cont ctenos",
+     *     "es": "/contactenos",
      *     "pt": "/contate-nos"
      * }, name="contact")
      *
      * @return Response
+     * @throws \Exception
      */
     public function contact()
     {
@@ -47,5 +48,14 @@ class HomeController extends AbstractController
         $response->setSharedMaxAge(0);
 
         return $response;
+    }
+
+
+    /**
+     * @Route("/phpinfo", name="phpinfo")
+     */
+    public function phpinfo()
+    {
+        echo phpinfo();
     }
 }

@@ -24,8 +24,7 @@ services:
             - .:/var/www/deep-space-objects:cached
             - "${COMPOSER_CACHE_DIR}:/home/site/.composer:rw,cached"
             - "${NPM_CACHE_DIR}:/home/site/.npm:rw,cached"
-            - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
-            - "./docker/php7-fpm/php.ini:/usr/local/etc/php/conf.d/030-custom.ini"
+            #- "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "${SSH_AUTH_SOCK}:/ssh-agent"
         env_file:
           - .env
