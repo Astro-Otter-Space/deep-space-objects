@@ -25,6 +25,7 @@
         "vue-i18n": "^8.4.0",
         "vue-lazy-image-loading": "^1.1.5",
         "vue-loader": "^15.4.2",
+        "vue-plain-pagination": "^0.3.0",
         "vue-router": "^3.0.2",
         "vue-social-sharing": "^2.3.3",
         "vue-template-compiler": "^2.5.18",
