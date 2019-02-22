@@ -116,27 +116,40 @@ class DsoController extends AbstractController
      *  "pt": "/catalogo",
      *  "de": "/katalog"
      * }, name="dso_catalog")
+     *
+     * @param Request $request
+     * @param DsoRepository $dsoRepository
+     * @param DsoManager $dsoManager
+     *
      * @return Response
+     * @throws \ReflectionException
      */
-    public function catalog(Request $request, DsoRepository $dsoRepository)
+    public function catalog(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager)
     {
         $page = 1;
         $from = DsoRepository::FROM;
         $filters = [];
 
-        if ($request->request->all()) {
-            // retrieve search parameters
-
-            if ($request->request->has('page')) {
-                $page = $request->request->get('page');
+        if ($request->query->has('page')) {
+            $page = filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
+            if (is_int($page)) {
                 $from = DsoRepository::SIZE * ($page-1);
             }
+
         }
 
-        $items = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
+        list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
+
+        $result['list_dso'] = $dsoManager->buildListDso($listDso);
+        $result['list_facets'] = $listAggregates;
+        $result['nb_items'] = $nbItems;
+        $result['current_page'] = $page;
+        $result['nb_pages'] = ceil($nbItems/DsoRepository::SIZE);
 
         /** @var Response $response */
-        $response = $this->render('pages/catalog.html.twig');
+        $response = $this->render('pages/catalog.html.twig', $result);
+        $response->setPublic();
+        $response->setSharedMaxAge(0);
 
         return $response;
     }

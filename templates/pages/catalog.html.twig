@@ -1,4 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% set pageTitle = 'allCatalog'|trans %}
+{% set pageDesc = '' %}
+
 {% block content %}
+  <div id="appCatalog" data-list-dso
+     data-title="{{ 'allCatalog'|trans }}"
+     data-list-dso="{{ list_dso|json_encode }}"
+     data-count="{{ nb_items }}"
+     data-page="{{ current_page }}"
+     data-count-page="{{ nb_pages }}"
+  >
+  </div>
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('catalog') }}
+{% endblock%}

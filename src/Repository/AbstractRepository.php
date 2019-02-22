@@ -20,7 +20,6 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
-
     const FROM = 0;
     const SIZE = 20;
 

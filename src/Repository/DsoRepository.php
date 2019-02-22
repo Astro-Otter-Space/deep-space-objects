@@ -28,6 +28,21 @@ class DsoRepository extends AbstractRepository
         'data.discover'
     ];
 
+    private static $listAggregates = [
+        'type' => [
+            'field' => 'data.type.keyword',
+            'size' => 100
+        ],
+        'catalog' => [
+            'field' => 'catalog.keyword',
+            'size' => 100
+        ],
+        'constellation' => [
+            'field' => 'data.const_id.keyword',
+            'size' => 100
+        ]
+    ];
+
     const INDEX_NAME = 'deepspaceobjects';
 
 
@@ -126,8 +141,9 @@ class DsoRepository extends AbstractRepository
      * Get aggregates
      *
      * @param $from
-     * @param $size
      * @param $filters
+     * @return array
+     * @throws \ReflectionException
      */
     public function getObjectsCatalogByFilters($from, $filters)
     {
@@ -146,22 +162,7 @@ class DsoRepository extends AbstractRepository
         $query->setFrom($from)->setSize(parent::SIZE);
 
         // Aggregates
-        $listAggregations = [
-            'type' => [
-                'field' => 'data.type.keyword',
-                'size' => 100
-            ],
-            'catalog' => [
-                'field' => 'catalog.keyword',
-                'size' => 100
-            ],
-            'constellation' => [
-                'field' => 'data.const_id.keyword',
-                'size' => 100
-            ]
-        ];
-
-        array_walk($listAggregations, function($tab, $type) use($query) {
+        array_walk(self::$listAggregates, function($tab, $type) use($query) {
             /** @var Terms $aggregation */
            $aggregation = new Terms($type);
            $aggregation->setField($tab['field']);
@@ -175,16 +176,22 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
+        /** @var ListDso $listDso */
+        $listDso = new ListDso();
         foreach ($search->getDocuments() as $doc) {
-            dump($doc);
+            $listDso->addDso($this->buildEntityFromDocument($doc));
         }
 
-        dump($search->getAggregations());
-        foreach ($search->getAggregations() as $aggregations) {
-
+//        dump($search->getAggregations());
+        foreach ($search->getAggregations() as $type=>$aggregations) {
+            $listAggregations[$type] = array_map(function($item) {
+                return [$item['key'] => $item['doc_count']];
+            }, $aggregations['buckets']);
         }
 
-        dump(json_encode($search->getQuery()->toArray()));
+//        dump(json_encode($search->getQuery()->toArray()));
+
+        return [$listDso, $listAggregations, $search->getTotalHits()];
     }
 
     /**
