@@ -62,7 +62,10 @@ class DsoController extends AbstractController
                 $astrobinWs = new GetImage();
                 /** @var ListImages $listImages */
                 $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
-                if (0 < $listImages->count) {
+                if ($listImages instanceof Image) {
+                    $params['images'][] = $listImages->url_regular;
+
+                } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
                     $params['images'] = array_map(function (Image $image) {
                         return $image->url_regular;
                     }, iterator_to_array($listImages));
@@ -71,6 +74,8 @@ class DsoController extends AbstractController
 //                dump($e->getMessage());
             }
         }
+
+        dump($params);
 
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
@@ -135,7 +140,6 @@ class DsoController extends AbstractController
             if (is_int($page)) {
                 $from = DsoRepository::SIZE * ($page-1);
             }
-
         }
 
         list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);

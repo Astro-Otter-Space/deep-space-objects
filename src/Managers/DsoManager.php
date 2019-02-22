@@ -59,7 +59,7 @@ class DsoManager
     {
         /** @var Dso $dso */
         $dso = $this->dsoRepository->getObjectById($id);
-        dump('couocu.HONkHONK');
+        
         // Add astrobin image
         $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
         $dso->setImage($astrobinImage);

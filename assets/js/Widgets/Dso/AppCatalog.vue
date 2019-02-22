@@ -6,7 +6,7 @@
       <div class="Dso__container">
 
         <h2 class="Dso__title">
-          {{ titleDso }}
+          {{ title }}
         </h2>
 
         <div class="Dso__list" v-if="0 < itemsDso.length">
@@ -15,6 +15,8 @@
             :items="itemsDso"
           >
           </cards-grid>
+
+          <v-pagination v-model="currentPage" :page-count="475"></v-pagination>
         </div>
       </div>
 
@@ -28,9 +30,9 @@
   import CardsGrid from './components/CardsGrid'
   import vPagination from 'vue-plain-pagination'
 
-  let title = document.querySelector('div[data-list-dso]').dataset.title;
-  let dsoList = JSON.parse(document.querySelector('div[data-list-dso]').dataset.listDso);
-
+  let title = document.querySelector('div[data-catalog-widget]').dataset.title;
+  let dsoList = JSON.parse(document.querySelector('div[data-catalog-widget]').dataset.listDso);
+  let currentPage = document.querySelector('div[data-catalog-widget]').dataset.page;
   export default {
     name: "AppCatalog",
     components: {
@@ -41,7 +43,8 @@
     data() {
       return {
         title: title,
-        itemsDso: dsoList
+        itemsDso: dsoList,
+        currentPage: currentPage
       }
     }
   }
