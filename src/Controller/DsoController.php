@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Router;
 
 
 /**
@@ -133,6 +134,9 @@ class DsoController extends AbstractController
         $from = DsoRepository::FROM;
         $filters = [];
 
+        /** @var Router $router */
+        $router = $this->get('router');
+
         if ($request->query->has('page')) {
             $page = (int)filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
             if (is_int($page)) {
@@ -148,7 +152,7 @@ class DsoController extends AbstractController
                 return in_array($key, $authorizedFilters);
             }, ARRAY_FILTER_USE_KEY);
 
-            // Sanitize data (todo : try better ,)
+            // Sanitize data (todo : try better)
             array_walk($filters, function (&$value, $key) {
                 $value = filter_var($value, FILTER_SANITIZE_STRING);
             });
@@ -156,8 +160,20 @@ class DsoController extends AbstractController
 
         // Search results
         list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
-        dump($listAggregates);
+        dump($listDso);
+        // List facets
+        $allQueryParameters = $request->query->all();
+        foreach ($listAggregates as $type => $listFacets) {
+            $listAggregates[$type] = array_map(function($facet) use ($router, $allQueryParameters, $type) {
+                return [
+                    'value' => key($facet),
+                    'number' => reset($facet),
+                    'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
+                ];
+            }, $listFacets);
+        }
 
+        // Params
         $result['list_dso'] = $dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregates;
         $result['nb_items'] = $nbItems;

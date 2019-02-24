@@ -21,7 +21,7 @@ abstract class AbstractRepository
     protected $client;
 
     const FROM = 0;
-    const SIZE = 20;
+    const SIZE = 120;
 
     /**
      * AbstractRepository constructor.
