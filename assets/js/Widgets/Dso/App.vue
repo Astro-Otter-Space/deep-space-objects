@@ -32,7 +32,7 @@
 
         <!--Description-->
         <a id="#description"></a>
-        <div class="Dso__description">
+        <div class="Dso__description" v-if="0 < descShare.length">
           <p>Lorem ipsum dolor sit amet, interdum aenean semper egestas imperdiet quisque. Diam lacus, nulla nibh quisque neque at. Velit nec maecenas quam phasellus ac et, malesuada vitae lectus. Adipiscing suspendisse, molestie sed viverra malesuada pellentesque convallis. Risus pharetra.</p>
         </div>
 

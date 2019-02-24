@@ -93,6 +93,8 @@ listMagnitudeAsc: Magnitude miníma
 listMagnitudeDesc: Magnitude maxíma
 type: Tipo de objeto|Tipo de objeto
 filters: filtros
+filterBy: Filtering by
+nbResults: "%count% result found|]1,Inf[%count% results found"
 # Type DSO
 type.gg: Aglomerado de galáxias
 type.g: Galáxia genérica

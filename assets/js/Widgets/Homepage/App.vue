@@ -4,7 +4,7 @@
       <slider
         :images="[
           '/build/images/background/bg-1.jpg',
-          '/build/images/background/bg-2.jpg',
+          '/build/images/background/bg-6.jpg',
           '/build/images/background/bg-3.jpg',
           '/build/images/background/bg-4.jpg'
         ]"

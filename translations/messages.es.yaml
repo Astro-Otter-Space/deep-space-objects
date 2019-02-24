@@ -94,6 +94,8 @@ type: Type of object|Objects type
 range.inf: Less than %to%
 range.between: Between %from% to %to%
 range.sup: More than %from%
+filterBy: Filtering by
+nbResults: "%count% result found|]1,Inf[%count% results found"
 # Type DSO
 type.gg: Galaxy cluster
 type.g:  Generic galaxy

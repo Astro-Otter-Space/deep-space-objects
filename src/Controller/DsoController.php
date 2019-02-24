@@ -75,8 +75,6 @@ class DsoController extends AbstractController
             }
         }
 
-        dump($params);
-
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
         $response->setPublic();
@@ -136,19 +134,36 @@ class DsoController extends AbstractController
         $filters = [];
 
         if ($request->query->has('page')) {
-            $page = filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
+            $page = (int)filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
             if (is_int($page)) {
-                $from = DsoRepository::SIZE * ($page-1);
+                $from = (DsoRepository::SIZE)*($page-1);
             }
         }
 
+        if (0 < $request->query->count()) {
+            $authorizedFilters = $dsoRepository->getListAggregates(true);
+
+            // Removed unauthorized keys
+            $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
+                return in_array($key, $authorizedFilters);
+            }, ARRAY_FILTER_USE_KEY);
+
+            // Sanitize data (todo : try better ,)
+            array_walk($filters, function (&$value, $key) {
+                $value = filter_var($value, FILTER_SANITIZE_STRING);
+            });
+        }
+
+        // Search results
         list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
+        dump($listAggregates);
 
         $result['list_dso'] = $dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregates;
         $result['nb_items'] = $nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = ceil($nbItems/DsoRepository::SIZE);
+        $result['filters'] = $filters;
 
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig', $result);

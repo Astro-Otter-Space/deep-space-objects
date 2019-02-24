@@ -2,6 +2,7 @@
 
   &__main {
     background-color: $bgd-white;
+    min-height: 50em;
   }
 
   &__title {
@@ -14,6 +15,11 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  &__noHeader {
+    position: relative;
+    top: 5em;
   }
 
   &__description {

@@ -9,6 +9,7 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Terms;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Processor\Sort;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Search;
@@ -45,6 +46,19 @@ class DsoRepository extends AbstractRepository
 
     const INDEX_NAME = 'deepspaceobjects';
 
+
+    /**
+     * Get aggregates proprieties
+     * @return array
+     */
+    public function getListAggregates($onlyKeys = false)
+    {
+        if ($onlyKeys) {
+            return array_keys(self::$listAggregates);
+        } else {
+            return self::$listAggregates;
+        }
+    }
 
     /**
      * Retrieve object by his Id
@@ -110,7 +124,6 @@ class DsoRepository extends AbstractRepository
         return $dsoList;
     }
 
-
     /**
      * Search autocomplete
      *
@@ -135,7 +148,6 @@ class DsoRepository extends AbstractRepository
         return $list;
     }
 
-
     /**
      * Catalog Research, with|without filters
      * Get aggregates
@@ -156,10 +168,31 @@ class DsoRepository extends AbstractRepository
             /** @var Query\BoolQuery $query */
             $boolQuery = new Query\BoolQuery();
 
+            // Add filters
+            foreach ($filters as $type => $val) {
+                /** @var Query\Term $mustQuery */
+                $mustQuery = new Query\Term();
+                $field = self::$listAggregates[$type]['field'];
+
+                // truc à la con, à modifer ds les données sources
+                $val = ("constellation" === $type) ? ucfirst($val): $val;
+                $mustQuery->setTerm($field, $val);
+
+                $boolQuery->addMust($mustQuery);
+            }
+
             $query->setQuery($boolQuery);
         }
 
+        // From and size
         $query->setFrom($from)->setSize(parent::SIZE);
+
+        // Sort
+        $query->addSort([
+            'order' => [
+                'order' => 'asc'
+            ]
+        ]);
 
         // Aggregates
         array_walk(self::$listAggregates, function($tab, $type) use($query) {
@@ -182,14 +215,12 @@ class DsoRepository extends AbstractRepository
             $listDso->addDso($this->buildEntityFromDocument($doc));
         }
 
-//        dump($search->getAggregations());
+        $listAggregations = [];
         foreach ($search->getAggregations() as $type=>$aggregations) {
             $listAggregations[$type] = array_map(function($item) {
                 return [$item['key'] => $item['doc_count']];
             }, $aggregations['buckets']);
         }
-
-//        dump(json_encode($search->getQuery()->toArray()));
 
         return [$listDso, $listAggregations, $search->getTotalHits()];
     }

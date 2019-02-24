@@ -58,12 +58,19 @@ RUN docker-php-ext-install -j$(nproc) intl mbstring ; \
 RUN echo "realpath_cache_size = 4096k; realpath_cache_ttl = 7200;" > /usr/local/etc/php/conf.d/php.ini
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
+# Errors
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "error_log = /var/log/php-app/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+# XDEBUG
+RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
+# Custom options
 RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
 RUN echo "memory_limit= 512M" >> /usr/local/etc/php/conf.d/030-custom.ini
 

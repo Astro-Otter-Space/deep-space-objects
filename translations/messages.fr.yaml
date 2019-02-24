@@ -59,7 +59,7 @@ dec: Déclinaison
 discover: Découvreur
 discoverYear: Année découverte
 # Vue list
-filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
+filteringList: Filtrer la liste par constellations, type de catalogues, type d'objets, magnitude...et découvrez les plus beaux objets du ciel.
 list.messier: Liste des objects de Messier
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 list.ngc: Liste du "New General Catalog"
@@ -95,6 +95,8 @@ type: Type d'objet|Type d'objets
 range.inf: Moins de %to%
 range.between: Entre %from% et %to%
 range.sup: Plus de %from%
+filterBy: Filtrer par
+nbResults: "%count% résultat trouvé|]1,Inf[%count% résultats trouvés"
 # Type DSO
 type.gg: Amas de galaxies
 type.g: Galaxie générique
