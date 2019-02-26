@@ -1411,12 +1411,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/HamHamFonFon/Astrobin-API-PHP.git",
-                "reference": "114eee3c07c67156d1b8e43bc84c0d0eef7205f3"
+                "reference": "4e1844cd1d09957b90f39024cd0dec6f36af9680"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-API-PHP/zipball/114eee3c07c67156d1b8e43bc84c0d0eef7205f3",
-                "reference": "114eee3c07c67156d1b8e43bc84c0d0eef7205f3",
+                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-API-PHP/zipball/4e1844cd1d09957b90f39024cd0dec6f36af9680",
+                "reference": "4e1844cd1d09957b90f39024cd0dec6f36af9680",
                 "shasum": ""
             },
             "require": {
@@ -1460,7 +1460,7 @@
                 "issues": "https://github.com/HamHamFonFon/Astrobin-API-PHP/issues",
                 "source": "https://github.com/HamHamFonFon/Astrobin-API-PHP/tree/master"
             },
-            "time": "2018-12-09T18:00:03+00:00"
+            "time": "2019-02-26T12:59:28+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
