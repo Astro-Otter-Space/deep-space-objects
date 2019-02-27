@@ -93,6 +93,9 @@ RUN apt-get install -y yarn
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Scalingo
+RUN curl -O https://cli-dl.scalingo.io/install && bash install
+
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 

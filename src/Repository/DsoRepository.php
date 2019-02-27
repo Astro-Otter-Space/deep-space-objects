@@ -225,6 +225,57 @@ class DsoRepository extends AbstractRepository
         return [$listDso, $listAggregations, $search->getTotalHits()];
     }
 
+
+    /**
+     * Get list of AstrobinId
+     * @return array
+     *
+     * Query :
+     * {
+     *    "query": {
+     *      "bool": {
+     *        "must": {
+     *          "exists": {
+     *            "field": "data.astrobin_id"
+     *          }
+     *        }
+     *      }
+     *   }
+     * }
+     */
+    public function getAstrobinId()
+    {
+        $this->client->addIndex(self::INDEX_NAME);
+
+        $listAstrobinId = [];
+
+        /** @var Query $query */
+        $query = new Query();
+
+        /** @var Query\BoolQuery $boolQuery */
+        $boolQuery = new Query\BoolQuery();
+
+        /** @var Query\Exists $mustQuery */
+        $mustQuery = new Query\Exists("data.astrobin_id");
+        $boolQuery->addMust($mustQuery);
+
+        $query->setQuery($boolQuery);
+        $query->setFrom(0)->setSize(1000000);
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $results->getTotalHits()) {
+            /** @var Document $document */
+            foreach($results->getDocuments() as $document) {
+                $listAstrobinId = $document->getData()['data']['astrobin_id'];
+            }
+        }
+
+        return $listAstrobinId;
+    }
+
     /**
      * @return string
      */
