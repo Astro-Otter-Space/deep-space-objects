@@ -28,7 +28,7 @@ abstract class AbstractRepository
      * @param Client $client
      * @param $locale
      */
-    public function __construct(Client $client, $locale)
+    public function __construct(Client $client, $locale = 'en')
     {
         $this->client = $client;
         $this->locale = $locale;
