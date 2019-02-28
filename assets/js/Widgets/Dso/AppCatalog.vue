@@ -9,9 +9,6 @@
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3>{{ nbItems }}</h3>
-          <p>
-           {{ 'filterBy' }} :
-          </p>
 
           <!--Facet-->
           <div>
