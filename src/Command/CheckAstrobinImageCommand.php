@@ -11,6 +11,7 @@ use Astrobin\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CheckAstrobinImageCommand
@@ -54,19 +55,16 @@ class CheckAstrobinImageCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        dump(__CLASS__);
         $failedAstrobinId = [];
         $listAstrobinId = $this->dsoRepository->getAstrobinId();
         if (0 < count($listAstrobinId)) {
             foreach ($listAstrobinId as $astrobinId) {
-                try {
-                    /** @var GetImage $image */
-                    $image = new GetImage();
+                /** @var GetImage $image */
+                $image = new GetImage();
 
-                    $result = $image->getImageById($astrobinId);
-                } catch (WsResponseException $e) {
-                    $failedAstrobinId[] = $astrobinId;
-                    continue;
+                $result = $image->debugImageById($astrobinId);
+                if (property_exists($result, 'http_code') && Response::HTTP_NOT_FOUND === $result->http_code) {
+                    $failedAstrobinId[] = $result->data;
                 }
             }
         }

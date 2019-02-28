@@ -3,19 +3,27 @@
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
 
-        <h2 class="Dso__title">
-          {{ title }}
-        </h2>
+        <h2 class="Dso__title">{{ title }}</h2>
+        <div>{{ desc }}</div>
 
-        <div>
-          {{ desc }}
-        </div>
-
+        <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3>{{ nbItems }}</h3>
           <p>
-           {{ 'filterBy'|trans }} :
+           {{ 'filterBy' }} :
           </p>
+
+          <!--Facet-->
+          <div>
+            <ul v-for="(facets, type) in listFacets">
+              <li>{{type}}</li>
+              <ul v-for="facet in facets">
+                <li>
+                  <a v-bind:href="facet.full_url">{{facet.value}} - {{facet.number}}</a>
+                </li>
+              </ul>
+            </ul>
+          </div>
           <cards-grid
             :show-controls="false"
             :items="itemsDso"
@@ -59,7 +67,7 @@
         itemsDso: dsoList,
         nbItems: nbItems,
         currentPage: currentPage,
-        facets: listFacets
+        listFacets: listFacets
       }
     },
     methods: {

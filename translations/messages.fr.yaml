@@ -119,95 +119,95 @@ type.pos: Asterism
 type.sc: Amas stellaires
 type.vn: Nébuleuse variable
 # Constellations
-const_id.unassigned: Non attribué
-const_id.and: Andromède
-const_id.ant: Machine pneumatique
-const_id.aps: Oiseau de paradis
-const_id.aql: L'aigle
-const_id.aqr: Verseau
-const_id.ara: Autel
-const_id.ari: Bélier
-const_id.aur: Le Cocher
-const_id.boo: Bouvier
-const_id.cae: Burin
-const_id.cam: Giraffe
-const_id.cap: Le Capricorne
-const_id.car: Carène
-const_id.cas: Cassiopée
-const_id.cen: Centaure
-const_id.cep: Céphée
-const_id.cet: La Baleine
-const_id.cha: Caméléon
-const_id.cir: Compas
-const_id.cma: Le Grand Chien
-const_id.cmi: Le Petit Chien
-const_id.col: Colombe
-const_id.com: Chevelure de Bérénice
-const_id.cnc: Cancer
-const_id.cra: Couronne australe
-const_id.crb: Couronne boréale
-const_id.crt: Coupe
-const_id.cru: Croix du Sud
-const_id.crv: Corbeau
-const_id.cvn: Chiens de chasse
-const_id.cyg: Cygne
-const_id.del: Dauphin
-const_id.dor: Dorade
-const_id.dra: Dragon
-const_id.equ: Petit Cheval
-const_id.eri: Éridan
-const_id.for: Fourneau
-const_id.gem: Les Gemeaux
-const_id.gru: Grue
-const_id.her: Hercule
-const_id.hor: Horloge
-const_id.hya: L'Hydre
-const_id.hyi: Hydre mâle
-const_id.ind: Indien
-const_id.lac: Lézard
-const_id.leo: Le Lion
-const_id.lep: Le Lièvre
-const_id.lib: Balance
-const_id.lmi: Petit Lion
-const_id.lup: Loup
-const_id.lyn: Lynx
-const_id.lyr: Lyre
-const_id.men: Table
-const_id.mic: Microscope
-const_id.mon: La Licorne
-const_id.mus: Mouche
-const_id.nor: Règle
-const_id.oct: Octant
-const_id.oph: Ophiuchus
-const_id.ori: Orion
-const_id.pav: Paon
-const_id.peg: Pégase
-const_id.per: Persée
-const_id.phe: Phénix
-const_id.pic: Peintre
-const_id.psa: Poisson austral
-const_id.psc: Les Poissons
-const_id.pup: Petit Chien
-const_id.pyx: Boussole
-const_id.ret: Réticule
-const_id.scl: Sculpteur
-const_id.sco: Scorpion
-const_id.sct: Écu de Sobieski
-const_id.ser: Le Serpent
-const_id.sex: Sextant
-const_id.sge: La Flèche
-const_id.sgr: Sagittaire
-const_id.tau: Taureau
-const_id.tel: Téléscope
-const_id.tra: Triangle australe
-const_id.tri: Le Triangle
-const_id.tuc: Toucan
-const_id.uma: Grande Ourse
-const_id.umi: Petite Ourse
-const_id.vel: Voiles
-const_id.vir: Vièrge
-const_id.vol: Poisson volant
-const_id.vul: Le Petit Renard
+constellation.unassigned: Non attribué
+constellation.and: Andromède
+constellation.ant: Machine pneumatique
+constellation.aps: Oiseau de paradis
+constellation.aql: L'aigle
+constellation.aqr: Verseau
+constellation.ara: Autel
+constellation.ari: Bélier
+constellation.aur: Le Cocher
+constellation.boo: Bouvier
+constellation.cae: Burin
+constellation.cam: Giraffe
+constellation.cap: Le Capricorne
+constellation.car: Carène
+constellation.cas: Cassiopée
+constellation.cen: Centaure
+constellation.cep: Céphée
+constellation.cet: La Baleine
+constellation.cha: Caméléon
+constellation.cir: Compas
+constellation.cma: Le Grand Chien
+constellation.cmi: Le Petit Chien
+constellation.col: Colombe
+constellation.com: Chevelure de Bérénice
+constellation.cnc: Cancer
+constellation.cra: Couronne australe
+constellation.crb: Couronne boréale
+constellation.crt: Coupe
+constellation.cru: Croix du Sud
+constellation.crv: Corbeau
+constellation.cvn: Chiens de chasse
+constellation.cyg: Cygne
+constellation.del: Dauphin
+constellation.dor: Dorade
+constellation.dra: Dragon
+constellation.equ: Petit Cheval
+constellation.eri: Éridan
+constellation.for: Fourneau
+constellation.gem: Les Gemeaux
+constellation.gru: Grue
+constellation.her: Hercule
+constellation.hor: Horloge
+constellation.hya: L'Hydre
+constellation.hyi: Hydre mâle
+constellation.ind: Indien
+constellation.lac: Lézard
+constellation.leo: Le Lion
+constellation.lep: Le Lièvre
+constellation.lib: Balance
+constellation.lmi: Petit Lion
+constellation.lup: Loup
+constellation.lyn: Lynx
+constellation.lyr: Lyre
+constellation.men: Table
+constellation.mic: Microscope
+constellation.mon: La Licorne
+constellation.mus: Mouche
+constellation.nor: Règle
+constellation.oct: Octant
+constellation.oph: Ophiuchus
+constellation.ori: Orion
+constellation.pav: Paon
+constellation.peg: Pégase
+constellation.per: Persée
+constellation.phe: Phénix
+constellation.pic: Peintre
+constellation.psa: Poisson austral
+constellation.psc: Les Poissons
+constellation.pup: Petit Chien
+constellation.pyx: Boussole
+constellation.ret: Réticule
+constellation.scl: Sculpteur
+constellation.sco: Scorpion
+constellation.sct: Écu de Sobieski
+constellation.ser: Le Serpent
+constellation.sex: Sextant
+constellation.sge: La Flèche
+constellation.sgr: Sagittaire
+constellation.tau: Taureau
+constellation.tel: Téléscope
+constellation.tra: Triangle australe
+constellation.tri: Le Triangle
+constellation.tuc: Toucan
+constellation.uma: Grande Ourse
+constellation.umi: Petite Ourse
+constellation.vel: Voiles
+constellation.vir: Vièrge
+constellation.vol: Poisson volant
+constellation.vul: Le Petit Renard
 # Messier name (from english traduction):
 m1.label: Nébuleuse du crabe
 m4.label: Oeil du chat

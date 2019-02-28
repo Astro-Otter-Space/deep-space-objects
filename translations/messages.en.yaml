@@ -120,95 +120,95 @@ type.pos: Asterism
 type.sc: Star clusters
 type.vn: Variable nebula
 # Constellations
-const_id.unassigned: Unassigned
-const_id.and: Andromeda
-const_id.ant: Antlia
-const_id.aps: Apus
-const_id.aql: Aquila
-const_id.aqr: Aquarius
-const_id.ara: Ara
-const_id.ari: Aries
-const_id.aur: Auriga
-const_id.boo: Boötes
-const_id.cae: Caelum
-const_id.cam: Camelopardalis
-const_id.cap: Capricornus
-const_id.car: Carina
-const_id.cas: Cassiopeia
-const_id.cen: Centaurus
-const_id.cep: Cepheus
-const_id.cet: Cetus
-const_id.cha: Chamaeleon
-const_id.cir: Circinus
-const_id.cma: Canis Majoris
-const_id.cmi: Canis Minor
-const_id.col: Columba
-const_id.com: Coma Berenice
-const_id.cnc: Cancer
-const_id.cra: Corona Austrina
-const_id.crb: Corona Borealis
-const_id.crt: Crater
-const_id.cru: Crux
-const_id.crv: Corvus
-const_id.cvn: Canes Venatici
-const_id.cyg: Cygnus
-const_id.del: Delphinus
-const_id.dor: Dorado
-const_id.dra: Drago
-const_id.equ: Equuleus
-const_id.eri: Eridanus
-const_id.for: Fornax
-const_id.gem: Gemini
-const_id.gru: Grus
-const_id.her: Hercules
-const_id.hor: Horologium
-const_id.hya: Hydra
-const_id.hyi: Hydrus
-const_id.ind: Indus
-const_id.lac: Lacerta
-const_id.leo: Leo
-const_id.lep: Lepus
-const_id.lib: Libra
-const_id.lmi: Leo Minor
-const_id.lup: Lupus
-const_id.lyn: Lynx
-const_id.lyr: Lyra
-const_id.men: Mensa
-const_id.mic: Microscopium
-const_id.mon: Monoceros
-const_id.mus: Musca
-const_id.nor: Norma
-const_id.oct: Octans
-const_id.oph: Ophiuchus
-const_id.ori: Orion
-const_id.pav: Pavo
-const_id.peg: Pegasus
-const_id.per: Perseus
-const_id.phe: Phoenix
-const_id.pic: Pictor
-const_id.psa: Piscis Austrinus
-const_id.psc: Pisces
-const_id.pup: Puppies
-const_id.pyx: Pyxis
-const_id.ret: Reticulum
-const_id.scl: Sculptor
-const_id.sco: Scorpius
-const_id.sct: Scutum
-const_id.ser: Serpens
-const_id.sex: Sextans
-const_id.sge: Sagitta
-const_id.sgr: Sagittarius
-const_id.tau: Taurus
-const_id.tel: Telescopium
-const_id.tra: Triangulum Australe
-const_id.tri: Triangulum
-const_id.tuc: Tucana
-const_id.uma: Ursa Major
-const_id.umi: Ursa Minor
-const_id.vel: Vela
-const_id.vir: Virgo
-const_id.vol: Volans
-const_id.vul: Vulpecula
+constellation.unassigned: Unassigned
+constellation.and: Andromeda
+constellation.ant: Antlia
+constellation.aps: Apus
+constellation.aql: Aquila
+constellation.aqr: Aquarius
+constellation.ara: Ara
+constellation.ari: Aries
+constellation.aur: Auriga
+constellation.boo: Boötes
+constellation.cae: Caelum
+constellation.cam: Camelopardalis
+constellation.cap: Capricornus
+constellation.car: Carina
+constellation.cas: Cassiopeia
+constellation.cen: Centaurus
+constellation.cep: Cepheus
+constellation.cet: Cetus
+constellation.cha: Chamaeleon
+constellation.cir: Circinus
+constellation.cma: Canis Majoris
+constellation.cmi: Canis Minor
+constellation.col: Columba
+constellation.com: Coma Berenice
+constellation.cnc: Cancer
+constellation.cra: Corona Austrina
+constellation.crb: Corona Borealis
+constellation.crt: Crater
+constellation.cru: Crux
+constellation.crv: Corvus
+constellation.cvn: Canes Venatici
+constellation.cyg: Cygnus
+constellation.del: Delphinus
+constellation.dor: Dorado
+constellation.dra: Drago
+constellation.equ: Equuleus
+constellation.eri: Eridanus
+constellation.for: Fornax
+constellation.gem: Gemini
+constellation.gru: Grus
+constellation.her: Hercules
+constellation.hor: Horologium
+constellation.hya: Hydra
+constellation.hyi: Hydrus
+constellation.ind: Indus
+constellation.lac: Lacerta
+constellation.leo: Leo
+constellation.lep: Lepus
+constellation.lib: Libra
+constellation.lmi: Leo Minor
+constellation.lup: Lupus
+constellation.lyn: Lynx
+constellation.lyr: Lyra
+constellation.men: Mensa
+constellation.mic: Microscopium
+constellation.mon: Monoceros
+constellation.mus: Musca
+constellation.nor: Norma
+constellation.oct: Octans
+constellation.oph: Ophiuchus
+constellation.ori: Orion
+constellation.pav: Pavo
+constellation.peg: Pegasus
+constellation.per: Perseus
+constellation.phe: Phoenix
+constellation.pic: Pictor
+constellation.psa: Piscis Austrinus
+constellation.psc: Pisces
+constellation.pup: Puppies
+constellation.pyx: Pyxis
+constellation.ret: Reticulum
+constellation.scl: Sculptor
+constellation.sco: Scorpius
+constellation.sct: Scutum
+constellation.ser: Serpens
+constellation.sex: Sextans
+constellation.sge: Sagitta
+constellation.sgr: Sagittarius
+constellation.tau: Taurus
+constellation.tel: Telescopium
+constellation.tra: Triangulum Australe
+constellation.tri: Triangulum
+constellation.tuc: Tucana
+constellation.uma: Ursa Major
+constellation.umi: Ursa Minor
+constellation.vel: Vela
+constellation.vir: Virgo
+constellation.vol: Volans
+constellation.vul: Vulpecula
 # Messier name (no translation for english):
 m1.label: Crab Nebula
 m4.label: Cat's eye

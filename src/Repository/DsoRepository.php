@@ -245,8 +245,6 @@ class DsoRepository extends AbstractRepository
      */
     public function getAstrobinId()
     {
-        $this->client->addIndex(self::INDEX_NAME);
-
         $listAstrobinId = [];
 
         /** @var Query $query */
@@ -260,7 +258,7 @@ class DsoRepository extends AbstractRepository
         $boolQuery->addMust($mustQuery);
 
         $query->setQuery($boolQuery);
-        $query->setFrom(0)->setSize(1000000);
+        $query->setFrom(0)->setSize(500);
 
         /** @var Search $search */
         $search = new Search($this->client);
@@ -269,10 +267,9 @@ class DsoRepository extends AbstractRepository
         if (0 < $results->getTotalHits()) {
             /** @var Document $document */
             foreach($results->getDocuments() as $document) {
-                $listAstrobinId = $document->getData()['data']['astrobin_id'];
+                $listAstrobinId[] = $document->getData()['data']['astrobin_id'];
             }
         }
-
         return $listAstrobinId;
     }
 
