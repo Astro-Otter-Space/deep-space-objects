@@ -34,14 +34,18 @@ RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
 
 RUN { \
-		echo 'opcache.memory_consumption=256'; \
-		echo 'opcache.interned_strings_buffer=16'; \
-		echo 'opcache.max_accelerated_files=20000'; \
-		echo 'opcache.revalidate_freq=1'; \
-		echo 'opcache.validate_timestamps=0'; \
-		echo 'opcache.fast_shutdown=1'; \
-		echo 'opcache.enable_cli=1'; \
 		echo 'opcache.enable= 1'; \
+		echo 'opcache.enable_cli=1'; \
+		# Symfony requirements
+		echo 'opcache.memory_consumption=256'; \
+        echo 'opcache.max_wasted_percentage=10'; \
+		echo 'opcache.validate_timestamps=0'; \
+		# Optimize
+		echo 'opcache.max_accelerated_files=10000'; \
+		echo 'opcache.interned_strings_buffer=8'; \
+		echo 'opcache.save_comments=1'; \
+		echo 'opcache.revalidate_freq=1'; \
+		#echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 # Others
@@ -55,9 +59,15 @@ RUN docker-php-ext-install -j$(nproc) intl mbstring ; \
     )";
 
 # Conf PHP
-RUN echo "realpath_cache_size = 4096k; realpath_cache_ttl = 7200;" > /usr/local/etc/php/conf.d/php.ini
+RUN { \
+		echo 'realpath_cache_size=4096k'; \
+		echo 'realpath_cache_ttl=7200'; \
+    } > /usr/local/etc/php/conf.d/php.ini
+
+# Install XDebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
+
 # Errors
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

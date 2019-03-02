@@ -4,6 +4,7 @@
 namespace App\Command;
 
 
+use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
@@ -25,14 +26,19 @@ class CheckAstrobinImageCommand extends Command
     /** @var DsoRepository */
     protected $dsoRepository;
 
+    /** @var MailHelper */
+    protected $mailHelper;
+
     /**
      * CheckAstrobinImageCommand constructor.
      *
      * @param DsoRepository $dsoRepository
+     * @param MailHelper $mailHelper
      */
-    public function __construct(DsoRepository $dsoRepository)
+    public function __construct(DsoRepository $dsoRepository, MailHelper $mailHelper)
     {
         $this->dsoRepository = $dsoRepository;
+        $this->mailHelper = $mailHelper;
         parent::__construct();
     }
 
@@ -50,8 +56,7 @@ class CheckAstrobinImageCommand extends Command
      * @param OutputInterface $output
      *
      * @return int|void|null
-     * @throws \Astrobin\Exceptions\WsException
-     * @throws \ReflectionException
+     * @throws WsResponseException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -68,7 +73,18 @@ class CheckAstrobinImageCommand extends Command
                 }
             }
         }
-        $output->write(implode(' - ', $failedAstrobinId));
+
+        $template = [
+            'html' => 'includes/emails/check_astrobin_id.html.twig'
+        ];
+        $content['listAstrobinId'] = $failedAstrobinId;
+
+        try {
+            $this->mailHelper->sendMail('noreply@deepskyobjects.com', 'balistik.fonfon@gmail.com', 'Astrobin Id 404', $template, $content);
+        } catch (\Swift_TransportException $e) {
+            $output->writeln($e->getMessage());
+        }
+
     }
 
 
