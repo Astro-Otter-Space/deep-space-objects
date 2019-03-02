@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Forms\ContactFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,9 @@ class PageController extends AbstractController
             'action' => $router->generate('contact')
         ];
 
-        $contactForm = $this->createForm(ContactFormType::class, null, $optionsForm);
+        /** @var Contact $contact */
+        $contact = new Contact();
+        $contactForm = $this->createForm(ContactFormType::class, $contact, $optionsForm);
 
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {

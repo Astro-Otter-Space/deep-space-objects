@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\Classes\Utils;
+use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -128,7 +129,7 @@ class ContactFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'csrf_protection' => true,
+            'csrf_protection' => false,
             'validation_groups' => null,
         ]);
     }
@@ -139,7 +140,7 @@ class ContactFormType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'contact';
+        return 'contactus';
     }
 
 }
