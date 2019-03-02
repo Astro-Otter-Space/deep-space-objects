@@ -1,0 +1,5 @@
+contact.constraint.not_blank: Veuillez remplir le champ
+contact.constraint.email: Veuillez saisir une adresse email correcte
+contact.constraint.country: Veuillez saisir un pays
+contact.constraint.invalid_form: Le formulaire n'est pas valide
+contact.constraint.topic: Veuillez sélectionner un sujet

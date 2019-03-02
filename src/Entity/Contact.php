@@ -41,7 +41,7 @@ class Contact
     /**
      * @var
      * @Assert\NotBlank(message="contact.constraint.not_blank")
-     * @Assert\Choice(callback="getValidTopics", message="")
+     * @Assert\Choice(callback="getValidTopics", message="contact.constraint.topic")
      */
     private $topic;
 
