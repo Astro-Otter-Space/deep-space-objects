@@ -2,6 +2,7 @@
   &__Form {
     background-color: $bgd-white;
     color: $color-text-dark;
+    width: 66%;
   }
 }
 
@@ -11,31 +12,35 @@
     vertical-align: top;
     align-self: center;
     font-size: 1.25em;
-    margin-bottom: 10px;
+    margin-bottom: 1.5em;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
   &__label {
     display: block;
     font-weight: 300;
     margin-left: 0.2em;
-    padding: 0.2em 0em;
-    line-height: 1.5em;
+    line-height: 2.5em;
   }
 
-  &__input {
+  &__input, &__select, &__textarea {
     display: inline-block;
     width: 100%;
-    border: 1px solid $bgd-grey;
+    border: 1px solid $border-light-grey;
+    border-radius: 2px;
     padding: 1em 0.5em;
     margin-left: 0.2em;
-    background: transparent;
+    background-color: $bgd-white;
+    color: $color-text-dark;
     font-size: 0.8em;
     line-height: 20px;
   }
 
-  &__select {
-
-  }
 
   &__submit {
     color: $color-text;

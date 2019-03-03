@@ -30,18 +30,6 @@ class ContactFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname', TextType::class, [
-            'label' => 'contact.form.firstname',
-            'label_attr' => [
-                'class' => self::CLASS_LABEL
-            ],
-            'required' => true,
-            'attr' => [
-                'class' => 'Form__input',
-                'placeholder' => 'contact.placeholder.firstname'
-            ]
-        ]);
-
         $builder->add('lastname', TextType::class, [
             'label' => 'contact.form.lastname',
             'label_attr' => [
@@ -51,6 +39,18 @@ class ContactFormType extends AbstractType
             'attr' => [
                 'class' => 'Form__input',
                 'placeholder' => 'contact.placeholder.lastname'
+            ]
+        ]);
+
+        $builder->add('firstname', TextType::class, [
+            'label' => 'contact.form.firstname',
+            'label_attr' => [
+                'class' => self::CLASS_LABEL
+            ],
+            'required' => true,
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'contact.placeholder.firstname'
             ]
         ]);
 
@@ -97,6 +97,7 @@ class ContactFormType extends AbstractType
 
         $builder->add('topic', ChoiceType::class, [
             'choices' => array_flip(Utils::listTopicsContact()),
+            'label' => 'contact.form.topic',
             'expanded' => true,
             'multiple' => false,
             'required' => true,
@@ -112,6 +113,10 @@ class ContactFormType extends AbstractType
             'label' => 'contact.form.message',
             'label_attr' => [
                 'class' => self::CLASS_LABEL
+            ],
+            'attr' => [
+                'class' => 'Form__textarea',
+                'rows' => 6
             ]
         ]);
 

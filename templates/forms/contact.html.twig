@@ -3,6 +3,7 @@
   <div class="Form__group">
     {{ form_label(form.firstname) }}
     {{ form_widget(form.firstname) }}
+    <small>{{ form_help(form.firstname) }}</small>
     {{ form_errors(form.firstname) }}
   </div>
 
@@ -13,18 +14,8 @@
   </div>
 
   <div class="Form__group">
-    {{ form_label(form.email) }}
     {{ form_widget(form.email) }}
-    {{ form_errors(form.email) }}
   </div>
-
-  {% for emailField in form.email %}
-    <div class="Form__group">
-      {{ form_label(emailField) }}
-      {{ form_widget(emailField) }}
-      {{ form_errors(emailField) }}
-    </div>
-  {% endfor %}
 
   <div class="Form__group">
     {{ form_label(form.country) }}
@@ -34,10 +25,11 @@
 
   <div class="Form__group">
     {{ form_label(form.topic) }}
+    {% form_theme form 'forms/extends/radio.html.twig' %}
     {{ form_widget(form.topic) }}
-    {{ form_errors(form.topic) }}
   </div>
 
+  {% form_theme form _self %}
   <div class="Form__group">
     {{ form_label(form.message) }}
     {{ form_widget(form.message) }}
@@ -52,4 +44,6 @@
   <button type="submit" class="Form__submit" id="btn_contact_submit">
     {{ 'contact.form.submit'|trans }}
   </button>
+
+  {{ form_rest(form) }}
 {{ form_end(form) }}
