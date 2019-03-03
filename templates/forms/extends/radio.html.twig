@@ -1,11 +1,11 @@
-{% block radio_widget  %}
-  {% spaceless %}
+{% block choice_widget  %}
+  {#{% spaceless %}#}
     {% if expanded %}
       <div class="Form__list">
         {% for group_label, choice in choices %}
           {% set child = choice %}
 
-          <label for="{{ form.vars.id }}_{{ loop.index0 }}" class="appGridFilter__btn-radio">
+          <label for="{{ form.vars.id }}_{{ loop.index0 }}" class="appGridFilter__btn-radio" style="margin-left: 0px;">
             {#Input#}
             <input
                 type="radio"
@@ -23,11 +23,11 @@
 
             {#Label#}
             <span>
-               {{ choice.label }}
+               {{ choice.label|trans({}, translation_domain)|raw }}
             </span>
           </label>
         {% endfor %}
       </div>
     {% endif %}
-  {% endpsaceless %}
-{% endblock radio_widget %}
+  {#{% endspaceless %}#}
+{% endblock choice_widget %}
