@@ -65,10 +65,11 @@ RUN { \
     } > /usr/local/etc/php/conf.d/php.ini
 
 # Install XDebug
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 
 # Errors
+
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -106,7 +107,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Scalingo
 RUN curl -O https://cli-dl.scalingo.io/install && bash install
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+RUN usermod -u 1000 www-data
+CMD ["php-fpm", "-F"]
+EXPOSE 9000
 
-ENTRYPOINT ["docker-entrypoint"]
+#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+#RUN chmod +x /usr/local/bin/docker-entrypoint
+#ENTRYPOINT ["docker-entrypoint"]

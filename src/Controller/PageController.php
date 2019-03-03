@@ -49,7 +49,7 @@ class PageController extends AbstractController
 
         }
 
-        $result['form'] = $contactForm->createView();
+        $result['formContact'] = $contactForm->createView();
 
         /** @var Response $response */
         $response = $this->render('pages/contact.html.twig', $result);

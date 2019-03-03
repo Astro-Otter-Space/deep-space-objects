@@ -3,12 +3,12 @@
 namespace App\Forms;
 
 use App\Classes\Utils;
-use App\Entity\Contact;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ContactFormType extends AbstractType
 {
 
-    const CLASS_LABEL = 'Form-label';
+    const CLASS_LABEL = 'Form__label';
 
     /**
      * @param FormBuilderInterface $builder
@@ -37,7 +37,7 @@ class ContactFormType extends AbstractType
             ],
             'required' => true,
             'attr' => [
-                'class' => 'Form-input',
+                'class' => 'Form__input',
                 'placeholder' => 'contact.placeholder.firstname'
             ]
         ]);
@@ -49,6 +49,7 @@ class ContactFormType extends AbstractType
             ],
             'required' => true,
             'attr' => [
+                'class' => 'Form__input',
                 'placeholder' => 'contact.placeholder.lastname'
             ]
         ]);
@@ -69,13 +70,14 @@ class ContactFormType extends AbstractType
                     'class' => self::CLASS_LABEL
                 ],
                 'attr' => [
-                    'placeholder' => 'contact.placeholder.email'
+                    'placeholder' => 'contact.placeholder.email',
+                    'class' => 'Form__input'
                 ]
             ],
             'options' => [
                 'attr' => [
                     'placeholder' => 'contact.placeholder.email',
-                    'class' => ''
+                    'class' => 'Form__input',
                 ]
             ]
         ]);
@@ -86,7 +88,7 @@ class ContactFormType extends AbstractType
                 'class' => self::CLASS_LABEL
             ],
             'attr' => [
-                'class' => ''
+                'class' => 'Form__select'
             ],
 //            'empty_value' => 'contact.country.placeholder',
             'preferred_choices' => [\Locale::getRegion(\Locale::getDefault())],
@@ -99,7 +101,7 @@ class ContactFormType extends AbstractType
             'multiple' => false,
             'required' => true,
             'attr' => [
-                'class' => ''
+                'class' => 'Form__radio'
             ],
             'label_attr' => [
                 'class' => self::CLASS_LABEL
@@ -118,6 +120,28 @@ class ContactFormType extends AbstractType
             'attr' => [
                 'aria-hidden' => "true",
                 'style' => 'display: none;'
+            ]
+        ]);
+
+        $builder->add('recaptcha', EWZRecaptchaType::class, [
+            'mapped' => false,
+            'error_bubbling' => false,
+            'attr' => [
+                'options' => [
+                    'theme' => 'light',
+                    'type'  => 'image',
+                    'size' => 'invisible',              // set size to invisible
+                    'defer' => true,
+                    'async' => true,
+                    'callback' => 'onReCaptchaSuccess', // callback will be set by default if not defined (along with JS function that validate the form on success)
+                    'bind' => 'btn_contact_submit',
+                ]
+            ],
+            'invalid_message' => 'contact.constraint',
+            'constraints' => [
+                new IsTrue([
+                    'message' => 'contact.constraint.recaptcha'
+                ])
             ]
         ]);
     }

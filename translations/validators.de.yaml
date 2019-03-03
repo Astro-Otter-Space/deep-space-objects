@@ -2,3 +2,4 @@ contact.constraint.not_blank:
 contact.constraint.email:
 contact.constraint.country:
 contact.constraint.invalid_form:
+form.constraint.recaptchat: Recaptcha invalid

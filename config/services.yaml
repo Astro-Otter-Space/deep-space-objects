@@ -7,6 +7,7 @@ parameters:
     locale: 'en'
     app_locales: en|fr|de|es|pt|
     app.notifications.email_sender: balistik.fonfon@gmail.com
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file
