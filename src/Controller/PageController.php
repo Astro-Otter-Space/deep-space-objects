@@ -9,6 +9,7 @@ use App\Helpers\MailHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 
@@ -38,7 +39,7 @@ class PageController extends AbstractController
     {
         /** @var Router $router */
         $router = $this->get('router');
-
+        $isValid = null;
         $optionsForm = [
             'method' => 'POST',
             'action' => $router->generate('contact')
@@ -49,21 +50,33 @@ class PageController extends AbstractController
         $contactForm = $this->createForm(ContactFormType::class, $contact, $optionsForm);
 
         $contactForm->handleRequest($request);
-        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
-            /** @var Contact $contactData */
-            $contactData = $contactForm->getData();
+        if ($contactForm->isSubmitted()) {
+            if ($contactForm->isValid()) {
+                /** @var Contact $contactData */
+                $contactData = $contactForm->getData();
 
-            $template = [
-                'html' => 'includes/emails/contact.html.twig',
-                'text' => 'includes/emails/contact.txt.twig'
-            ];
+                $contactData->label_country = Intl::getRegionBundle()->getCountryNames($contactData->getCountry());
 
-            $subject = Utils::listTopicsContact()[$contactData->getTopic()];
+                $template = [
+                    'html' => 'includes/emails/contact.html.twig',
+                    'text' => 'includes/emails/contact.txt.twig'
+                ];
 
-            $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $contactData);
+                $subject = Utils::listTopicsContact()[$contactData->getTopic()];
+
+                $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $contactData);
+                if (true === $sendMail) {
+                    $isValid = true;
+                } else {
+                    $isValid = false;
+                }
+            } else {
+                $isValid = false;
+            }
         }
 
         $result['formContact'] = $contactForm->createView();
+        $result['is_valid'] = $isValid;
 
         /** @var Response $response */
         $response = $this->render('pages/contact.html.twig', $result);

@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Locale\Locale;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -88,9 +90,9 @@ class ContactFormType extends AbstractType
                 'class' => self::CLASS_LABEL
             ],
             'attr' => [
-                'class' => 'Form__select'
+                'class' => 'Form__select',
+                'placeholder' => 'contact.placeholder.country',
             ],
-//            'empty_value' => 'contact.country.placeholder',
             'preferred_choices' => [\Locale::getRegion(\Locale::getDefault())],
         ]);
 

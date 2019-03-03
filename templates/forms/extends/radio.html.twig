@@ -11,7 +11,7 @@
                 type="radio"
                 {{ block('widget_attributes') }}
                 {#value="{{ child.value }}" name="{{ form.vars.full_name }}[]"#}
-                {#{% if form.vars.value == child.data %} checked="checked"{% endif %}#}
+                {% if form.vars.value == child.data %} checked="checked"{% endif %}
             />
 
             {#SVG#}
