@@ -2,7 +2,7 @@
 FROM php:7.2-fpm
 USER root
 ARG TIMEZONE
-ARG SITE_UID
+ARG UID
 
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 
@@ -15,6 +15,10 @@ RUN set -eux; \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 && composer --version
+
+# Add user
+RUN usermod -u ${UID} www-data
+#RUN useradd -mu ${UID} www-data
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
@@ -107,7 +111,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Scalingo
 RUN curl -O https://cli-dl.scalingo.io/install && bash install
 
-RUN usermod -u 1000 www-data
 CMD ["php-fpm", "-F"]
 EXPOSE 9000
 

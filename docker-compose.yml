@@ -16,6 +16,7 @@ services:
             context: docker/php7-fpm
             args:
                 TIMEZONE: ${TIMEZONE}
+                UID: ${SITE_UID}
         container_name: dso_php
         hostname: php
         ports:
@@ -26,6 +27,7 @@ services:
             #- "${NPM_CACHE_DIR}:/home/site/.npm:rw,cached"
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "${SSH_AUTH_SOCK}:/ssh-agent"
+        user: ${SITE_UID}
         env_file:
           - .env
         environment:
@@ -41,6 +43,7 @@ services:
             context: docker/nginx
             args:
                 NGINX_HOST: ${NGINX_HOST}
+                UID: ${SITE_UID}
         container_name: dso_nginx
         hostname: nginx
         ports:
