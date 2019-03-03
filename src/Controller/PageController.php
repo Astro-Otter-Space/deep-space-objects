@@ -63,8 +63,8 @@ class PageController extends AbstractController
                 ];
 
                 $subject = Utils::listTopicsContact()[$contactData->getTopic()];
-
-                $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $contactData);
+                $content['contact'] = $contactData;
+                $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
                 if (true === $sendMail) {
                     $isValid = true;
                 } else {

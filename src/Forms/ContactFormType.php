@@ -93,7 +93,7 @@ class ContactFormType extends AbstractType
                 'class' => 'Form__select',
                 'placeholder' => 'contact.placeholder.country',
             ],
-            'preferred_choices' => [\Locale::getRegion(\Locale::getDefault())],
+            'preferred_choices' => 'FR' // [\Locale::getRegion(\Locale::getDefault())],
         ]);
 
 
