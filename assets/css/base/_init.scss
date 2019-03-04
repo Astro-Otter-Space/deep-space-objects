@@ -18,7 +18,8 @@ h3 {
 }
 
 input {
-  padding: 2px
+  padding: 2px;
+  overflow: visible;
 }
 
 table {
@@ -61,4 +62,13 @@ hr {
   border-top: 1px $bgd-white;
   padding: 0;
   margin: 0;
+}
+
+button {
+  padding: 2px;
+  cursor: pointer;
+}
+
+textarea {
+  overflow: auto;
 }

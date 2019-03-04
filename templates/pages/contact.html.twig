@@ -1,4 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% set pageTitle = 'contact.title'|trans %}
+
 {% block content %}
+  <div>
+    <section class="Dso__main">
+      <div class="Dso__container Dso__noHeader">
+        <h2 class="Dso__title">{{ 'contact.title'|trans }}</h2>
+
+        <div class="Dso__Form">
+          {% include 'forms/contact.html.twig' with {form: formContact} %}
+        </div>
+      </div>
+    </section>
+  </div>
+
+
 {% endblock %}

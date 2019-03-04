@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Managers;
-
 
 use App\Classes\Utils;
 use App\Entity\Dso;
@@ -98,14 +96,11 @@ class DsoManager
         $astrobinImage = new GetImage();
         return array_map(function(Dso $dsoChild) use ($astrobinImage) {
             $imgUrl = Utils::IMG_DEFAULT;
-            try {
-                /** @var Image $imageAstrobin */
-                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
-                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                    $imgUrl = $imageAstrobin->url_regular;
-                }
-            } catch (WsResponseException $e) {
-                $imgUrl = Utils::IMG_DEFAULT;
+
+            /** @var Image $imageAstrobin */
+            $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
+            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+                $imgUrl = $imageAstrobin->url_regular;
             }
 
             return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl]);
@@ -134,7 +129,7 @@ class DsoManager
      */
     public function buildSearchListDso(Dso $dso): array
     {
-        $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('const_id.' . strtolower($dso->getConstId())) : null;
+        $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstId())) : null;
 
         return [
             'id' => $dso->getId(),
@@ -239,7 +234,7 @@ class DsoManager
     public function buildTitleConstellation($constId)
     {
         if (!is_null($constId)) {
-            return $this->translatorInterface->trans('constId', ['%count%' => 1]) . ' “' . $this->translatorInterface->trans(sprintf('const_id.%s', strtolower($constId))) . '”';
+            return $this->translatorInterface->trans('constId', ['%count%' => 1]) . ' “' . $this->translatorInterface->trans(sprintf('constellation.%s', strtolower($constId))) . '”';
         } else {
             return null;
         }

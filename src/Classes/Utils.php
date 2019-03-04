@@ -58,6 +58,16 @@ class Utils
     ];
 
     /**
+     * @var array
+     */
+    private static $listTopics = [
+        'contact' => 'contact.option.contact', // Simple contact
+        'data' => 'contact.option.data', // Modifier/ajouter une donnée
+        'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
+        'other' => 'contact.option.other'
+    ];
+
+    /**
      * @return array
      */
     public static function getCatalogMapping()
@@ -115,5 +125,13 @@ class Utils
         /** @var \NumberFormatter $numberFormat */
         $numberFormat = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::DECIMAL);
         return $numberFormat->format($number);
+    }
+
+    /**
+     *
+     */
+    public static function listTopicsContact()
+    {
+        return self::$listTopics;
     }
 }

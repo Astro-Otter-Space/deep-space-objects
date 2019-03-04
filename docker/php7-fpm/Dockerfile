@@ -2,7 +2,7 @@
 FROM php:7.2-fpm
 USER root
 ARG TIMEZONE
-ARG SITE_UID
+ARG UID
 
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 
@@ -15,6 +15,10 @@ RUN set -eux; \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 && composer --version
+
+# Add user
+RUN usermod -u ${UID} www-data
+#RUN useradd -mu ${UID} www-data
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
@@ -34,14 +38,18 @@ RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
 
 RUN { \
-		echo 'opcache.memory_consumption=256'; \
-		echo 'opcache.interned_strings_buffer=16'; \
-		echo 'opcache.max_accelerated_files=20000'; \
-		echo 'opcache.revalidate_freq=1'; \
-		echo 'opcache.validate_timestamps=0'; \
-		echo 'opcache.fast_shutdown=1'; \
-		echo 'opcache.enable_cli=1'; \
 		echo 'opcache.enable= 1'; \
+		echo 'opcache.enable_cli=1'; \
+		# Symfony requirements
+		echo 'opcache.memory_consumption=256'; \
+        echo 'opcache.max_wasted_percentage=10'; \
+		echo 'opcache.validate_timestamps=0'; \
+		# Optimize
+		echo 'opcache.max_accelerated_files=10000'; \
+		echo 'opcache.interned_strings_buffer=8'; \
+		echo 'opcache.save_comments=1'; \
+		echo 'opcache.revalidate_freq=1'; \
+		#echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 # Others
@@ -55,17 +63,24 @@ RUN docker-php-ext-install -j$(nproc) intl mbstring ; \
     )";
 
 # Conf PHP
-RUN echo "realpath_cache_size = 4096k; realpath_cache_ttl = 7200;" > /usr/local/etc/php/conf.d/php.ini
+RUN { \
+		echo 'realpath_cache_size=4096k'; \
+		echo 'realpath_cache_ttl=7200'; \
+    } > /usr/local/etc/php/conf.d/php.ini
+
+# Install XDebug
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
+
 # Errors
+
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "error_log = /var/log/php-app/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 # XDEBUG
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -96,7 +111,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Scalingo
 RUN curl -O https://cli-dl.scalingo.io/install && bash install
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+CMD ["php-fpm", "-F"]
+EXPOSE 9000
 
-ENTRYPOINT ["docker-entrypoint"]
+#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+#RUN chmod +x /usr/local/bin/docker-entrypoint
+#ENTRYPOINT ["docker-entrypoint"]

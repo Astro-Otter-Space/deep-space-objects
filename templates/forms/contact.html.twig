@@ -1,0 +1,49 @@
+{{ form_start(form) }}
+
+  <div class="Form__group">
+    {{ form_label(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+    <small>{{ form_help(form.firstname) }}</small>
+    {{ form_errors(form.firstname) }}
+  </div>
+
+  <div class="Form__group">
+    {{ form_label(form.lastname) }}
+    {{ form_widget(form.lastname) }}
+    {{ form_errors(form.lastname) }}
+  </div>
+
+  <div class="Form__group">
+    {{ form_widget(form.email) }}
+  </div>
+
+  <div class="Form__group">
+    {{ form_label(form.country) }}
+    {{ form_widget(form.country) }}
+    {{ form_errors(form.country) }}
+  </div>
+
+  <div class="Form__group">
+    {% form_theme form 'forms/extends/radio.html.twig' %}
+    {{ form_label(form.topic) }}
+    {{ form_widget(form.topic) }}
+  </div>
+
+  {% form_theme form _self %}
+  <div class="Form__group">
+    {{ form_label(form.message) }}
+    {{ form_widget(form.message) }}
+    {{ form_errors(form.message) }}
+  </div>
+
+  {{ form_widget(form.pot2Miel) }}
+
+  {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+  {{ form_widget(form.recaptcha) }}
+
+  <button type="submit" class="Form__submit" id="btn_contact_submit">
+    {{ 'contact.form.submit'|trans }}
+  </button>
+
+  {{ form_rest(form) }}
+{{ form_end(form) }}

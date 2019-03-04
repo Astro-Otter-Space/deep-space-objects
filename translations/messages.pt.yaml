@@ -117,94 +117,94 @@ type.pos: Asterismo
 type.sc: Aglomerado estelar
 type.vn:
 # Constellations
-const.unassigned:
-const_id.and: Andrômeda
-const_id.ant:
-const_id.aps:
-const_id.aql:
-const_id.aqr: Aquário
-const_id.ara:
-const_id.ari:
-const_id.aur: Auriga
-const_id.boo:
-const_id.cae:
-const_id.cam:
-const_id.cap: Capricórnio
-const_id.car:
-const_id.cas: Cassiopeia
-const_id.cen:
-const_id.cep:
-const_id.cet: Baleia
-const_id.cha:
-const_id.cir:
-const_id.cma: Cão Maior
-const_id.cmi:
-const_id.col:
-const_id.com: Coma Berenice
-const_id.cnc: Câncer
-const_id.cra:
-const_id.crb:
-const_id.crt:
-const_id.cru:
-const_id.crv:
-const_id.cvn: Canes Venatici
-const_id.cyg: Cygnus
-const_id.del:
-const_id.dor: Doradus
-const_id.dra: Draco
-const_id.equ:
-const_id.eri:
-const_id.for:
-const_id.gem: Gêmeos
-const_id.gru:
-const_id.her: Hércules
-const_id.hor:
-const_id.hya: Hydra
-const_id.hyi:
-const_id.ind:
-const_id.lac:
-const_id.leo: Leo
-const_id.lep: Lebre
-const_id.lib:
-const_id.lmi:
-const_id.lup:
-const_id.lyn:
-const_id.lyr: Lyra
-const_id.men:
-const_id.mic:
-const_id.mon: Unicórnio
-const_id.mus:
-const_id.nor:
-const_id.oct:
-const_id.oph: Serpentário
-const_id.ori: Orion
-const_id.pav:
-const_id.peg: Pegasus
-const_id.per: Perseu
-const_id.phe:
-const_id.pic:
-const_id.psa:
-const_id.psc: Peixes
-const_id.pup: Cão Menor
-const_id.pyx:
-const_id.ret:
-const_id.sco: Escorpião
-const_id.sct: Scutum
-const_id.ser: Serpente
-const_id.sex:
-const_id.sge: Flecha
-const_id.sgr: Sagitário
-const_id.tau: Touro
-const_id.tel:
-const_id.tra:
-const_id.tri: Triângulo
-const_id.tuc:
-const_id.uma: Ursa Maior
-const_id.umi: Ursa Minor
-const_id.vel:
-const_id.vir: Virgem
-const_id.vol:
-const_id.vul: Raposa
+const.unassigned: unassigned
+constellation.and: Andrômeda
+constellation.ant:
+constellation.aps:
+constellation.aql:
+constellation.aqr: Aquário
+constellation.ara:
+constellation.ari:
+constellation.aur: Auriga
+constellation.boo:
+constellation.cae:
+constellation.cam:
+constellation.cap: Capricórnio
+constellation.car:
+constellation.cas: Cassiopeia
+constellation.cen:
+constellation.cep:
+constellation.cet: Baleia
+constellation.cha:
+constellation.cir:
+constellation.cma: Cão Maior
+constellation.cmi:
+constellation.col:
+constellation.com: Coma Berenice
+constellation.cnc: Câncer
+constellation.cra:
+constellation.crb:
+constellation.crt:
+constellation.cru:
+constellation.crv:
+constellation.cvn: Canes Venatici
+constellation.cyg: Cygnus
+constellation.del:
+constellation.dor: Doradus
+constellation.dra: Draco
+constellation.equ:
+constellation.eri:
+constellation.for:
+constellation.gem: Gêmeos
+constellation.gru:
+constellation.her: Hércules
+constellation.hor:
+constellation.hya: Hydra
+constellation.hyi:
+constellation.ind:
+constellation.lac:
+constellation.leo: Leo
+constellation.lep: Lebre
+constellation.lib:
+constellation.lmi:
+constellation.lup:
+constellation.lyn:
+constellation.lyr: Lyra
+constellation.men:
+constellation.mic:
+constellation.mon: Unicórnio
+constellation.mus:
+constellation.nor:
+constellation.oct:
+constellation.oph: Serpentário
+constellation.ori: Orion
+constellation.pav:
+constellation.peg: Pegasus
+constellation.per: Perseu
+constellation.phe:
+constellation.pic:
+constellation.psa:
+constellation.psc: Peixes
+constellation.pup: Cão Menor
+constellation.pyx:
+constellation.ret:
+constellation.sco: Escorpião
+constellation.sct: Scutum
+constellation.ser: Serpente
+constellation.sex:
+constellation.sge: Flecha
+constellation.sgr: Sagitário
+constellation.tau: Touro
+constellation.tel:
+constellation.tra:
+constellation.tri: Triângulo
+constellation.tuc:
+constellation.uma: Ursa Maior
+constellation.umi: Ursa Minor
+constellation.vel:
+constellation.vir: Virgem
+constellation.vol:
+constellation.vul: Raposa
 # Messier name (from english traduction):
 m1.label: Nebulosa do Caranguejo
 m4.label: Nebulosa do Olho de gato

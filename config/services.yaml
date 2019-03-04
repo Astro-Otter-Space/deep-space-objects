@@ -7,6 +7,7 @@ parameters:
     locale: 'en'
     app_locales: en|fr|de|es|pt|
     app.notifications.email_sender: balistik.fonfon@gmail.com
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -14,7 +15,7 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
+            $locale: "en" #"@=service('request_stack').getCurrentRequest().getLocale()"
             $listLocales: '%app_locales%'
 
     # Astrobin

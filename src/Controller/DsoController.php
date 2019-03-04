@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Dso;
@@ -16,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
-
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class DsoController
@@ -47,6 +46,7 @@ class DsoController extends AbstractController
 
         /** @var Dso $dso */
         $dso = $dsoManager->buildDso($id);
+
         if (!is_null($dso)) {
             $params['dso'] = $dsoManager->formatVueData($dso);
             $params['constTitle'] = $dsoManager->buildTitleConstellation($dso->getConstId());
@@ -124,11 +124,12 @@ class DsoController extends AbstractController
      * @param Request $request
      * @param DsoRepository $dsoRepository
      * @param DsoManager $dsoManager
+     * @param TranslatorInterface $translatorInterface
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function catalog(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager)
+    public function catalog(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
     {
         $page = 1;
         $from = DsoRepository::FROM;
@@ -160,13 +161,13 @@ class DsoController extends AbstractController
 
         // Search results
         list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
-        dump($listDso);
+
         // List facets
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
-            $listAggregates[$type] = array_map(function($facet) use ($router, $allQueryParameters, $type) {
+            $listAggregates[$type] = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
                 return [
-                    'value' => key($facet),
+                    'value' => $translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
                     'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
                 ];
