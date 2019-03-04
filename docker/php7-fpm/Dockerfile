@@ -16,9 +16,10 @@ RUN set -eux; \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
 && composer --version
 
-# Add user
-RUN usermod -u ${UID} www-data
-#RUN useradd -mu ${UID} www-data
+# Change uid and gid nginx user
+RUN usermod -u ${UID} www-data \
+    && groupmod -g ${UID} www-data \
+    && chown -R www-data:www-data /var/www
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone

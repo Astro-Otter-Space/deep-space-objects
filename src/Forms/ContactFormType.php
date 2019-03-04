@@ -147,7 +147,7 @@ class ContactFormType extends AbstractType
             'invalid_message' => 'contact.constraint',
             'constraints' => [
                 new IsTrue([
-                    'message' => 'contact.constraint.recaptcha'
+                    'message' => 'form.constraint.recaptcha'
                 ])
             ]
         ]);

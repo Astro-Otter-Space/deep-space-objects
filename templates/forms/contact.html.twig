@@ -4,13 +4,17 @@
     {{ form_label(form.firstname) }}
     {{ form_widget(form.firstname) }}
     <small>{{ form_help(form.firstname) }}</small>
-    {{ form_errors(form.firstname) }}
+    <div class="Form__error">
+      {{ form_errors(form.firstname) }}
+    </div>
   </div>
 
   <div class="Form__group">
     {{ form_label(form.lastname) }}
     {{ form_widget(form.lastname) }}
-    {{ form_errors(form.lastname) }}
+    <div class="Form__error">
+      {{ form_errors(form.lastname) }}
+    </div>
   </div>
 
   <div class="Form__group">
@@ -20,26 +24,37 @@
   <div class="Form__group">
     {{ form_label(form.country) }}
     {{ form_widget(form.country) }}
-    {{ form_errors(form.country) }}
+    <div class="Form__error">
+      {{ form_errors(form.country) }}
+    </div>
   </div>
 
   <div class="Form__group">
     {% form_theme form 'forms/extends/radio.html.twig' %}
     {{ form_label(form.topic) }}
     {{ form_widget(form.topic) }}
+    <div class="Form__error">
+      {{ form_errors(form.topic) }}
+    </div>
   </div>
 
   {% form_theme form _self %}
   <div class="Form__group">
     {{ form_label(form.message) }}
     {{ form_widget(form.message) }}
-    {{ form_errors(form.message) }}
+    <div class="Form__error">
+      {{ form_errors(form.message) }}
+    </div>
   </div>
 
   {{ form_widget(form.pot2Miel) }}
 
   {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
   {{ form_widget(form.recaptcha) }}
+
+  <div class="Form__group">
+    {{ 'contact.mandatory'|trans }}
+  </div>
 
   <button type="submit" class="Form__submit" id="btn_contact_submit">
     {{ 'contact.form.submit'|trans }}

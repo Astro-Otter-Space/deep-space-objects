@@ -42,7 +42,10 @@ class PageController extends AbstractController
         $isValid = null;
         $optionsForm = [
             'method' => 'POST',
-            'action' => $router->generate('contact')
+            'action' => $router->generate('contact'),
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
         ];
 
         /** @var Contact $contact */
