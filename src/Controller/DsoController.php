@@ -10,6 +10,7 @@ use Astrobin\Response\Image;
 use Astrobin\Response\ListImages;
 use Astrobin\Services\GetImage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,17 +36,24 @@ class DsoController extends AbstractController
      *
      * @param string $id
      * @param DsoManager $dsoManager
+     * @param MemcachedAdapter $cacheAdapter
+     *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Astrobin\Exceptions\WsResponseException
+     * @throws \Psr\Cache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function show(string $id, DsoManager $dsoManager)
+    public function show(string $id, DsoManager $dsoManager, MemcachedAdapter $cacheAdapter)
     {
         $params = [];
 
-        /** @var Dso $dso */
-        $dso = $dsoManager->buildDso($id);
+        if ($cacheAdapter->hasItem(md5($id))) {
+            $dso = $cacheAdapter->getItem(md5($id));
+        } else {
+            /** @var Dso $dso */
+            $dso = $dsoManager->buildDso($id);
+//            $cacheAdapter->save();
+        }
 
         if (!is_null($dso)) {
             $params['dso'] = $dsoManager->formatVueData($dso);
