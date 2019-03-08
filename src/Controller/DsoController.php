@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Classes\CacheInterface;
 use App\Entity\Dso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use App\Service\MemcacheService;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Response\ListImages;
@@ -36,23 +38,27 @@ class DsoController extends AbstractController
      *
      * @param string $id
      * @param DsoManager $dsoManager
-     * @param MemcachedAdapter $cacheAdapter
+     * @param CacheInterface $cacheUtil
      *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
      * @throws \Psr\Cache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function show(string $id, DsoManager $dsoManager, MemcachedAdapter $cacheAdapter)
+    public function show(string $id, DsoManager $dsoManager, CacheInterface $cacheUtil)
     {
         $params = [];
+        $memcachedKey = md5($id);
 
-        if ($cacheAdapter->hasItem(md5($id))) {
-            $dso = $cacheAdapter->getItem(md5($id));
+        if ($cacheUtil->has($memcachedKey)) {
+            $dsoCached = $cacheUtil->get($memcachedKey);
+
+            /** @var Dso $dso */
+            $dso = unserialize($dsoCached);
         } else {
             /** @var Dso $dso */
             $dso = $dsoManager->buildDso($id);
-//            $cacheAdapter->save();
+            $cacheUtil->set($memcachedKey, serialize($dso));
         }
 
         if (!is_null($dso)) {

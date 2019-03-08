@@ -62,6 +62,10 @@ services:
                 host: '%env(ELK_HOST)%'
                 port: '%env(ELK_PORT)%'
 
+    # Cache pool
+    App\Service\MemcacheService:
+        arguments: '@app.cache.dso'
+
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@templating.engine.twig', '%kernel.environment%']
