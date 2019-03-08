@@ -42,7 +42,6 @@ class DsoController extends AbstractController
      *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Psr\Cache\InvalidArgumentException
      * @throws \ReflectionException
      */
     public function show(string $id, DsoManager $dsoManager, CacheInterface $cacheUtil)
@@ -50,15 +49,15 @@ class DsoController extends AbstractController
         $params = [];
         $memcachedKey = md5($id);
 
-        if ($cacheUtil->has($memcachedKey)) {
-            $dsoCached = $cacheUtil->get($memcachedKey);
+        if ($cacheUtil->hasItem($memcachedKey)) {
+            $dsoCached = $cacheUtil->getItem($memcachedKey);
 
             /** @var Dso $dso */
             $dso = unserialize($dsoCached);
         } else {
             /** @var Dso $dso */
             $dso = $dsoManager->buildDso($id);
-            $cacheUtil->set($memcachedKey, serialize($dso));
+            $cacheUtil->saveItem($memcachedKey, serialize($dso));
         }
 
         if (!is_null($dso)) {
@@ -67,27 +66,17 @@ class DsoController extends AbstractController
             $params['title'] = $dsoManager->buildTitle($dso);
             $params['imgCover'] = $dso->getImage();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
-
+            $params['images'] = [];
             // List of Dso from same constellation
             $params['dso_by_const'] = $dsoManager->getListDsoFromConst($dso, 20);
 
-            $params['images'] = [];
             try {
-                /** @var GetImage $astrobinWs */
-                $astrobinWs = new GetImage();
-                /** @var ListImages $listImages */
-                $listImages = $astrobinWs->getImagesBySubject($dso->getId(), 5);
-                if ($listImages instanceof Image) {
-                    $params['images'][] = $listImages->url_regular;
-
-                } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
-                    $params['images'] = array_map(function (Image $image) {
-                        return $image->url_regular;
-                    }, iterator_to_array($listImages));
+                if ($cacheUtil->hasItem(md5($id . '_list_images'))) {
+                    $params['images'] = unserialize($cacheUtil->getItem(md5($id . '_list_images')));
+                } else {
+                    $params['images'] = $this->getListImages($dso->getId(), $cacheUtil);
                 }
-            } catch(WsResponseException $e) {
-//                dump($e->getMessage());
-            }
+            } catch (WsResponseException $e) {}
         }
 
         /** @var Response $response */
@@ -102,12 +91,46 @@ class DsoController extends AbstractController
 
 
     /**
+     * Retrieve list of images for carousel
+
+     * @param $dsoId
+     * @param CacheInterface $cacheUtil
+     *
+     * @return array
+     * @throws WsResponseException
+     * @throws \Astrobin\Exceptions\WsException
+     * @throws \ReflectionException
+     */
+    private function getListImages($dsoId, CacheInterface $cacheUtil)
+    {
+        $tabImages = [];
+
+        /** @var GetImage $astrobinWs */
+        $astrobinWs = new GetImage();
+
+        /** @var ListImages|Image $listImages */
+        $listImages = $astrobinWs->getImagesBySubject($dsoId, 5);
+
+        if ($listImages instanceof Image) {
+            $tabImages = $listImages->url_regular;
+
+        } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
+            $tabImages = array_map(function (Image $image) {
+                return $image->url_regular;
+            }, iterator_to_array($listImages));
+        }
+
+        $cacheUtil->saveItem(md5($dsoId . '_list_images'), serialize($tabImages));
+        return $tabImages;
+    }
+
+    /**
      * @Route("/geodata/dso/{id}", name="dso_geo_data", options={"expose": true})
      * @param string $id
      * @param DsoManager $dsoManager
+     *
      * @return JsonResponse
      * @throws \Astrobin\Exceptions\WsException
-     * @throws \Astrobin\Exceptions\WsResponseException
      * @throws \ReflectionException
      */
     public function geoJson(string $id, DsoManager $dsoManager)

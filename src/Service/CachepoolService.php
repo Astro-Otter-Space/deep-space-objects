@@ -20,7 +20,7 @@ class CachepoolService implements CacheInterface
      *
      * @param MemcachedAdapter $cachePool
      */
-    public function __construct(MemcachedAdapter $cachePool)
+    public function __construct($cachePool)
     {
         $this->cachePool = $cachePool;
     }
@@ -51,7 +51,7 @@ class CachepoolService implements CacheInterface
         $cacheItem = $this->cachePool->getItem($key);
         $cacheItem->set($value);
 
-        $this->cachePool->save($cacheItem);
+        return $this->cachePool->save($cacheItem);
     }
 
     /**

@@ -11,7 +11,7 @@
     data-imgcover="{{ imgCover }}"
     data-dso="{{ dso|json_encode }}"
     data-title="{{ title }}"
-    data-images="{{ images|json_encode }}"
+    data-images="{{ images|json_encode|default({}) }}"
     data-geojson-dso="{{ geojsonDso }}"
     data-astrobin-msg="{{ 'astrobin.message'|trans }}"
     data-title-const="{{ constTitle }}"
