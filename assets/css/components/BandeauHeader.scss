@@ -8,12 +8,12 @@
   }
 
   &__imgCover {
-    width: 25%;
-    height: auto;
+    //width: 25%;
+    height: 100%;
     max-width: none;
     max-height: none;
     display: block;
-    position: relative;
+    position: absolute;
     left: 35%; /* WTF ?? */
   }
 }
@@ -26,6 +26,13 @@
   left: 0;
   overflow: hidden;
   z-index: -2;
+}
+
+.lazy-background-slot {
+  position: absolute !important;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .lazy-background-image {
