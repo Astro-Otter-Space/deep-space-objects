@@ -63,8 +63,9 @@ services:
                 port: '%env(ELK_PORT)%'
 
     # Cache pool
-    App\Service\MemcacheService:
-        arguments: '@app.cache.dso'
+    App\Service\CachepoolService:
+        arguments:
+            $cachePool: '@app.cache.dso'
 
     # Exception listener
     App\EventListener\ExceptionListener:
