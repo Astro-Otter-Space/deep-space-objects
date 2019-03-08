@@ -31,8 +31,9 @@ class Dso extends AbstractEntity
     private $image;
     private $fullUrl;
     private $geometry;
+    private $hash;
 
-    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data'];
+    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data', 'hash'];
 
     /**
      * @return mixed
@@ -386,6 +387,7 @@ class Dso extends AbstractEntity
             'discoverYear' => $this->getDiscoverYear(),
             'ra' => $this->getRa(),
             'dec' => $this->getDec(),
+            'alt' => $this->getAlt()
         ];
 
         return array_filter($data, function($value) {
@@ -400,4 +402,22 @@ class Dso extends AbstractEntity
     {
         return self::$listFieldsNoMapping;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param mixed $hash
+     */
+    public function setHash($hash): void
+    {
+        $this->hash = $hash;
+    }
+
+
 }

@@ -15,7 +15,7 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            $locale: "en" #"@=service('request_stack').getCurrentRequest().getLocale()"
+            $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
             $listLocales: '%app_locales%'
 
     # Astrobin

@@ -27,7 +27,7 @@ framework:
             app.cache.dso:
                 adapter: cache.adapter.memcached
                 public: false
-                default_lifetime: 120
+                default_lifetime: 31536000 # 1 year
 
         # Redis
         #app: cache.adapter.redis

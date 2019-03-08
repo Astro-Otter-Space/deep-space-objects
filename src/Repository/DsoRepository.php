@@ -293,7 +293,10 @@ class DsoRepository extends AbstractRepository
         /** @var Dso $dso */
         $dso = new $entity;
 
-        return $dso->setLocale($this->getLocale())->buildObjectR($document);
+        $dso->setLocale($this->getLocale())->buildObjectR($document);
+        $dso->setHash(md5($dso->toArray()));
+
+        return $dso;
     }
 
     /**

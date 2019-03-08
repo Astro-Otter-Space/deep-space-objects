@@ -115,7 +115,7 @@ class ConvertSrcToBulkCommand extends Command
      * @return string
      */
     public static function md5ForId($id): string {
-        return md5(uniqid($id) . microtime());
+        return md5($id);
     }
 
     /**

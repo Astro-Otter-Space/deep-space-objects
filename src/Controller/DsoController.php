@@ -47,18 +47,9 @@ class DsoController extends AbstractController
     public function show(string $id, DsoManager $dsoManager, CacheInterface $cacheUtil)
     {
         $params = [];
-        $memcachedKey = md5($id);
 
-        if ($cacheUtil->hasItem($memcachedKey)) {
-            $dsoCached = $cacheUtil->getItem($memcachedKey);
-
-            /** @var Dso $dso */
-            $dso = unserialize($dsoCached);
-        } else {
-            /** @var Dso $dso */
-            $dso = $dsoManager->buildDso($id);
-            $cacheUtil->saveItem($memcachedKey, serialize($dso));
-        }
+        /** @var Dso $dso */
+        $dso = $dsoManager->buildDso($id);
 
         if (!is_null($dso)) {
             $params['dso'] = $dsoManager->formatVueData($dso);

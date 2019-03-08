@@ -2,6 +2,7 @@
 
 namespace App\Managers;
 
+use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\Entity\Dso;
 use App\Entity\ListDso;
@@ -29,6 +30,10 @@ class DsoManager
     private $urlGenerateHelper;
     /** @var TranslatorInterface */
     private $translatorInterface;
+    /** @var CacheInterface */
+    private $cacheUtils;
+    /** @var  */
+    private $locale;
 
     /**
      * DsoManager constructor.
@@ -36,34 +41,53 @@ class DsoManager
      * @param DsoRepository $dsoRepository
      * @param UrlGenerateHelper $urlGenerateHelper
      * @param TranslatorInterface $translatorInterface
+     * @param CacheInterface $cacheUtils
+     * @param string $locale
      */
-    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface)
+    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
         $this->urlGenerateHelper = $urlGenerateHelper;
         $this->translatorInterface = $translatorInterface;
+        $this->cacheUtils = $cacheUtils;
+        $this->locale = $locale;
     }
 
 
     /**
      * Build a complete Dso Entity, with Astrobin image and URL
+     *
      * @param $id
+     *
      * @return Dso
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
     public function buildDso($id): Dso
     {
-        /** @var Dso $dso */
-        $dso = $this->dsoRepository->getObjectById($id);
+        $idMd5 = md5(sprintf('%s_%s', $id, $this->locale));
+        $idMd5Cover = md5(sprintf('%s_cover', $id));
 
-        // Add astrobin image
-        $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
-        $dso->setImage($astrobinImage);
+        if ($this->cacheUtils->hasItem($idMd5)) {
+            $dsoSerialized = $this->cacheUtils->getItem($idMd5);
+            /** @var Dso $dso */
+            $dso = unserialize($dsoSerialized);
+        } else {
+            /** @var Dso $dso */
+            $dso = $this->dsoRepository->getObjectById($id);
 
-        // Add URl
-        $dso->setFullUrl($this->getDsoUrl($dso));
+            // Add astrobin image
+            $astrobinImageUrl = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
+            $dso->setImage($astrobinImageUrl);
+
+            // Add URl
+            $dso->setFullUrl($this->getDsoUrl($dso));
+
+            $this->cacheUtils->saveItem($idMd5, serialize($dso));
+            $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+        }
+
 
         return $dso;
     }
@@ -94,13 +118,23 @@ class DsoManager
     {
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
-        return array_map(function(Dso $dsoChild) use ($astrobinImage) {
-            $imgUrl = Utils::IMG_DEFAULT;
+        /** @var CacheInterface $cacheUtils */
+        $cacheUtils = $this->cacheUtils;
+        return array_map(function(Dso $dsoChild) use ($astrobinImage, $cacheUtils) {
 
-            /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
-            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                $imgUrl = $imageAstrobin->url_regular;
+            $imgUrl = Utils::IMG_DEFAULT;
+            $idCover = md5(sprintf('%s_cover', $dsoChild->getId()));
+
+            if ($cacheUtils->hasItem($idCover)) {
+                $imgUrl = unserialize($cacheUtils->getItem($idCover));
+
+            } else {
+                /** @var Image $imageAstrobin */
+                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
+                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+                    $imgUrl = $imageAstrobin->url_regular;
+                }
+                $cacheUtils->saveItem($idCover, serialize($imgUrl));
             }
 
             return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl]);
