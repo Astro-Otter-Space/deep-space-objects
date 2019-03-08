@@ -3,6 +3,7 @@
     <div class="Dso_header">
       <image-header
         :cover-image="imageCover"
+        :alt-image="title"
       />
     </div>
     <section class="Dso__main">
