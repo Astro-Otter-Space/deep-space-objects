@@ -189,7 +189,7 @@ class DsoController extends AbstractController
         }
 
         // Search results
-        list($listDso, $listAggregates, $nbItems) = $dsoRepository->getObjectsCatalogByFilters($from, $filters);
+        list($listDso, $listAggregates, $nbItems) = $dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters);
 
         // List facets
         $allQueryParameters = $request->query->all();

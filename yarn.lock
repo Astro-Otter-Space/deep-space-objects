@@ -7289,6 +7289,13 @@ vue-plain-pagination@^0.3.0:
   dependencies:
     vue "^2.5.17"
 
+vue-pure-lightbox@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/vue-pure-lightbox/-/vue-pure-lightbox-2.1.8.tgz#b5df18ffd6a09716552040f2308f3b4affb3fc42"
+  integrity sha512-9xY0VM9jOfNGBuoKrGD/ou4eeUj3xQm8eD1pPFg+DmPDpM74YhGyrqNsuGPRv0oVdwGuWrVn7UK9W35gt06Yfg==
+  dependencies:
+    vue "^2.3.3"
+
 vue-router@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
@@ -7338,6 +7345,11 @@ vue@2.*.*:
   version "2.5.20"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.20.tgz#79fff9ccaa10cc37e7a7239b4c7adfac94df81ba"
   integrity sha512-kVLZi8RWOk8qwAt+a0bVDy9VV5Zzcnj0fLCMyKLx1dmEBjqmYJYRWHvPwiypiJBtJkdmROy5NP5hyDqTdfBcvQ==
+
+vue@^2.3.3:
+  version "2.6.8"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.8.tgz#f21cbc536bfc14f7d1d792a137bb12f69e60ea91"
+  integrity sha512-+vp9lEC2Kt3yom673pzg1J7T1NVGuGzO9j8Wxno+rQN2WYVBX2pyo/RGQ3fXCLh2Pk76Skw/laAPCuBuEQ4diw==
 
 vue@^2.4.2, vue@^2.5.21:
   version "2.5.21"

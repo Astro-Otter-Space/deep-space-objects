@@ -116,7 +116,7 @@ class DsoManager
      * @param $listDso
      * @return array $dataDsoList
      */
-    public function buildListDso($listDso): array
+    public function buildListDso(ListDso $listDso): array
     {
         /** @var GetImage $astrobinImage */
         $astrobinImage = new GetImage();
@@ -125,6 +125,7 @@ class DsoManager
         return array_map(function(Dso $dsoChild) use ($astrobinImage, $cacheUtils) {
 
             $imgUrl = Utils::IMG_DEFAULT;
+            $astrobinUser = '';
             $idCover = md5(sprintf('%s_cover', $dsoChild->getId()));
 
             if ($cacheUtils->hasItem($idCover)) {
@@ -135,11 +136,12 @@ class DsoManager
                 $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
                 if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
                     $imgUrl = $imageAstrobin->url_regular;
+                    $astrobinUser = $imageAstrobin->user;
                 }
                 $cacheUtils->saveItem($idCover, serialize($imgUrl));
             }
 
-            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl]);
+            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl, 'user' => $astrobinUser]);
         }, iterator_to_array($listDso->getIterator()));
     }
 
@@ -196,7 +198,7 @@ class DsoManager
         } catch(WsResponseException $e) {
             return [basename(Utils::IMG_DEFAULT), ''];
         }
-        return [basename(Utils::IMG_DEFAULT)];
+        return [basename(Utils::IMG_DEFAULT), ''];
     }
 
     /**

@@ -39,7 +39,7 @@
 
   import ImageHeader from './components/Imageheader'
   import CardsGrid from './components/CardsGrid'
-  import vPagination from 'vue-plain-pagination'
+ // import vPagination from 'vue-plain-pagination'
   import badge from './../App/Badge'
 
   let title = document.querySelector('div[data-catalog-widget]').dataset.title;
@@ -54,8 +54,8 @@
     components: {
       ImageHeader,
       CardsGrid,
-      vPagination,
-      badge
+      // vPagination,
+      // badge
     },
     data() {
       return {
