@@ -49,6 +49,8 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Get aggregates proprieties
+     * @param bool $onlyKeys
+     *
      * @return array
      */
     public function getListAggregates($onlyKeys = false)
@@ -294,7 +296,7 @@ class DsoRepository extends AbstractRepository
         $dso = new $entity;
 
         $dso->setLocale($this->getLocale())->buildObjectR($document);
-        $dso->setHash(md5($dso->toArray()));
+        //$dso->setHash(md5($dso->toArray()));
 
         return $dso;
     }

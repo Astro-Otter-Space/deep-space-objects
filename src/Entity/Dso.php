@@ -386,8 +386,7 @@ class Dso extends AbstractEntity
             'discover' => $this->getDiscover(),
             'discoverYear' => $this->getDiscoverYear(),
             'ra' => $this->getRa(),
-            'dec' => $this->getDec(),
-            'alt' => $this->getAlt()
+            'dec' => $this->getDec()
         ];
 
         return array_filter($data, function($value) {

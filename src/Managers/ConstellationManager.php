@@ -20,6 +20,8 @@ class ConstellationManager
     private $urlGeneratorHelper;
     /** @var TranslatorInterface  */
     private $translatorInterface;
+    /** @var string */
+    private $locale;
 
     /**
      * ConstellationManager constructor.
@@ -27,11 +29,12 @@ class ConstellationManager
      * @param $urlGeneratorHelper
      * @param $translatorInterface
      */
-    public function __construct(ConstellationRepository $constellationRepository, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translatorInterface)
+    public function __construct(ConstellationRepository $constellationRepository, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translatorInterface, $locale)
     {
         $this->constellationRepository = $constellationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
         $this->translatorInterface = $translatorInterface;
+        $this->locale = $locale;
     }
 
 
@@ -44,7 +47,7 @@ class ConstellationManager
     public function buildConstellation($id): Constellation
     {
         /** @var Constellation $constellation */
-        $constellation = $this->constellationRepository->getObjectById($id);
+        $constellation = $this->constellationRepository->setlocale($this->locale)->getObjectById($id);
         $constellation->setFullUrl($this->urlGeneratorHelper->generateUrl($constellation));
 
         return $constellation;
@@ -57,7 +60,7 @@ class ConstellationManager
      */
     public function buildListConstellation()
     {
-        $listConstellation = $this->constellationRepository->getAllConstellation();
+        $listConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
 
         return array_map(function(Constellation $constellation) {
             return [
@@ -79,7 +82,7 @@ class ConstellationManager
      */
     public function searchConstellationsByTerms($searchTerms)
     {
-        $resultConstellation = $this->constellationRepository->getConstellationsBySearchTerms($searchTerms);
+        $resultConstellation = $this->constellationRepository->setLocale($this->locale)->getConstellationsBySearchTerms($searchTerms);
 
         return call_user_func("array_merge", array_map(function(Constellation $constellation) {
             return $this->buildSearchListConst($constellation);

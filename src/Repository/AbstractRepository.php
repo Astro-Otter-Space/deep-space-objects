@@ -28,10 +28,9 @@ abstract class AbstractRepository
      * @param Client $client
      * @param $locale
      */
-    public function __construct(Client $client, $locale = 'en')
+    public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->locale = $locale;
     }
 
     /**
@@ -39,15 +38,21 @@ abstract class AbstractRepository
      */
     public function getLocale()
     {
+        if (is_null($this->locale)) {
+            $this->locale = 'en';
+        }
         return $this->locale;
     }
 
     /**
-     * @param mixed $locale
+     * @param $locale
+     *
+     * @return $this
      */
-    public function setLocale($locale): void
+    public function setLocale($locale)
     {
         $this->locale = $locale;
+        return $this;
     }
 
     /**

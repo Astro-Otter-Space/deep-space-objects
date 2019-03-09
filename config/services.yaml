@@ -16,22 +16,8 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
+            $defaultLocale: "%locale%"
             $listLocales: '%app_locales%'
-
-    # Astrobin
-#    Astrobin\:
-#        resource: '../vendor/hamhamfonfon/astrobin/src/Services/*'
-#        autoconfigure: true
-#        public: true
-#    Astrobin\GetCollection:
-#        class: Astrobin\GetCollection
-#        autowire: true
-#        public: true
-#    Astrobin\GetImage:
-#        class: Astrobin\GetImage
-#        autowire: true
-#        public: true
-
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']

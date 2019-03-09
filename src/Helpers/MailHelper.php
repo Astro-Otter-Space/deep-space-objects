@@ -20,19 +20,21 @@ class MailHelper
     private $templateEngine;
 
     /** @var string  */
-    private $locale;
+    private $defaultLocale;
+
 
     /**
      * MailHelper constructor.
+     *
      * @param \Swift_Mailer $mailer
      * @param EngineInterface $templateEngine
-     * @param string $locale
+     * @param string $defaultLocale
      */
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templateEngine, $locale = 'en')
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templateEngine, $defaultLocale)
     {
         $this->mailer = $mailer;
         $this->templateEngine = $templateEngine;
-        $this->locale = $locale;
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**

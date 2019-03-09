@@ -75,7 +75,7 @@ class DsoManager
             $dso = unserialize($dsoSerialized);
         } else {
             /** @var Dso $dso */
-            $dso = $this->dsoRepository->getObjectById($id);
+            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
 
             // Add astrobin image
             $astrobinImageUrl = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
@@ -85,9 +85,10 @@ class DsoManager
             $dso->setFullUrl($this->getDsoUrl($dso));
 
             $this->cacheUtils->saveItem($idMd5, serialize($dso));
-            $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+            if ($dso->getImage() !== basename(Utils::IMG_DEFAULT)) {
+                $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+            }
         }
-
 
         return $dso;
     }
@@ -104,7 +105,7 @@ class DsoManager
     public function getListDsoFromConst(Dso $dso, $limit)
     {
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
+        $listDso = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
 
         return $this->buildListDso($listDso);
     }
@@ -148,7 +149,7 @@ class DsoManager
      */
     public function searchDsoByTerms($searchTerms)
     {
-        $resultDso = $this->dsoRepository->getObjectsBySearchTerms($searchTerms);
+        $resultDso = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
 
         return call_user_func("array_merge", array_map(function(Dso $dso) {
             return $this->buildSearchListDso($dso);
@@ -187,14 +188,14 @@ class DsoManager
     {
         try {
             /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : Utils::IMG_DEFAULT /*$this->astrobinImage->getImagesBySubject($id, 1)*/;
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_DEFAULT);
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
                 return $imageAstrobin->$param;
             }
         } catch(WsResponseException $e) {
-            return Utils::IMG_DEFAULT;
+            return basename(Utils::IMG_DEFAULT);
         }
-        return Utils::IMG_DEFAULT;
+        return basename(Utils::IMG_DEFAULT);
     }
 
     /**

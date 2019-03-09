@@ -1,13 +1,13 @@
 <template>
   <div>
-     <div class="Dso_header">
+    <div v-if="imageCover !== 'default.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
         :alt-image="titleDso"
       />
     </div>
     <section class="Dso__main">
-      <div class="Dso__container">
+      <div v-bind:class="getHeaderClass()">
         <!--Title-->
         <h2 class="Dso__title">
           {{ titleDso }}
@@ -122,6 +122,15 @@
         descShare: "",
         astrobinMsg: astrobinMsg,
         itemsDso: dsoList
+      }
+    },
+    methods: {
+      getHeaderClass() {
+        if (this.imageCover !== 'default.jpg') {
+          return 'Dso__container';
+        } else {
+          return 'Dso__container Dso__noHeader';
+        }
       }
     }
   }
