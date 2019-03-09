@@ -8,7 +8,10 @@
       v-bind:class="headerLazyBackground"
     >
       <div slot="content" slot-scope="{ visible }">
-        <img :src="coverImage" v-bind:class="headerImgCover" :alt="altImage" />
+        <figure>
+          <img :src="coverImage" v-bind:class="headerImgCover" :alt="altImage" />
+          <figcaption>An astrobin image from {{ownerImg}}</figcaption>
+        </figure>
       </div>
     </lazy-background>
   </div>
@@ -31,6 +34,10 @@
         type: String
       },
       altImage: {
+        default: '',
+        type: String
+      },
+      ownerImg: {
         default: '',
         type: String
       }

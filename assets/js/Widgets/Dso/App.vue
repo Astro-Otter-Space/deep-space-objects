@@ -3,7 +3,8 @@
     <div v-if="imageCover !== 'default.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
-        :alt-image="titleDso"
+        :alt-image="titleDso + ' - ' + imageCoverUser"
+        :owner-img="imageCoverUser"
       />
     </div>
     <section class="Dso__main">
@@ -90,6 +91,7 @@
   import CardsGrid from './components/CardsGrid'
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
+  let coverImageUser = document.querySelector('div[data-dso-widget]').dataset.imgcoveruser;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
@@ -108,6 +110,7 @@
     data () {
       return {
         imageCover: coverImage,
+        imageCoverUser: coverImageUser,
         imagesDso: images,
         titleDso: title,
         titleGallery: "Gallery",

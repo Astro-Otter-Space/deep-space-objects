@@ -3,11 +3,9 @@
 
 namespace App\Command;
 
-
 use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
-use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -73,7 +71,7 @@ class CheckAstrobinImageCommand extends Command
                 }
             }
         }
-
+        $output->writeln(dump($failedAstrobinId));
         $template = [
             'html' => 'includes/emails/check_astrobin_id.html.twig'
         ];

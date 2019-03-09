@@ -28,12 +28,13 @@ class Dso extends AbstractEntity
     private $ra;
     private $dec;
     private $astrobinId;
+    private $astrobinUser;
     private $image;
     private $fullUrl;
     private $geometry;
     private $hash;
 
-    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'fullUrl', 'elasticId', 'order', 'data', 'hash'];
+    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'astrobinUser' ,'fullUrl', 'elasticId', 'order', 'data', 'hash'];
 
     /**
      * @return mixed
@@ -322,6 +323,26 @@ class Dso extends AbstractEntity
     public function setImage($image): void
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAstrobinUser()
+    {
+        return $this->astrobinUser;
+    }
+
+
+    /**
+     * @param $astrobinUser
+     *
+     * @return Dso
+     */
+    public function setAstrobinUser($astrobinUser)
+    {
+        $this->astrobinUser = $astrobinUser;
+        return $this;
     }
 
 

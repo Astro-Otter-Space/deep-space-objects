@@ -78,8 +78,9 @@ class DsoManager
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
 
             // Add astrobin image
-            $astrobinImageUrl = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
+            list($astrobinImageUrl, $astrobinImageUser) = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
             $dso->setImage($astrobinImageUrl);
+            $dso->setAstrobinUser($astrobinImageUser);
 
             // Add URl
             $dso->setFullUrl($this->getDsoUrl($dso));
@@ -175,7 +176,7 @@ class DsoManager
     }
 
     /**
-     * Get image from Astrobin
+     * Get image (and his owner) from Astrobin
      *
      * @param $astrobinId
      * @param $id
@@ -184,18 +185,18 @@ class DsoManager
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function getAstrobinImage($astrobinId, $id, $param = 'url_hd')
+    public function getAstrobinImage($astrobinId, $id, $param = 'url_hd'): array
     {
         try {
             /** @var Image $imageAstrobin */
             $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_DEFAULT);
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                return $imageAstrobin->$param;
+                return [$imageAstrobin->$param, $imageAstrobin->user];
             }
         } catch(WsResponseException $e) {
-            return basename(Utils::IMG_DEFAULT);
+            return [basename(Utils::IMG_DEFAULT), ''];
         }
-        return basename(Utils::IMG_DEFAULT);
+        return [basename(Utils::IMG_DEFAULT)];
     }
 
     /**

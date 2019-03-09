@@ -56,6 +56,7 @@ class DsoController extends AbstractController
             $params['constTitle'] = $dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $dsoManager->buildTitle($dso);
             $params['imgCover'] = $dso->getImage();
+            $params['imgCoverUser'] = $dso->getAstrobinUser();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
             $params['images'] = [];
             // List of Dso from same constellation
