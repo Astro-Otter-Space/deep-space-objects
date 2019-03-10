@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ContactFormType
@@ -21,8 +22,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ContactFormType extends AbstractType
 {
+    /** @var TranslatorInterface  */
+    private $translatorInterface;
 
     const CLASS_LABEL = 'Form__label';
+
+    /**
+     * ContactFormType constructor.
+     *
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function __construct(TranslatorInterface $translatorInterface)
+    {
+        $this->translatorInterface = $translatorInterface;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -96,9 +109,13 @@ class ContactFormType extends AbstractType
         ]);
 
 
+        $translate = $this->translatorInterface;
         $builder->add('topic', ChoiceType::class, [
             'choices' => array_flip(Utils::listTopicsContact()),
             'label' => 'contact.form.topic',
+//            'choice_label' => function($value, $key) use($translate){
+//                return $translate->trans($key);
+//            },
             'expanded' => true,
             'multiple' => false,
             'required' => true,

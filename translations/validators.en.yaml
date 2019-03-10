@@ -1,5 +1,6 @@
 contact.constraint.not_blank: Field must not be empty
 contact.constraint.email: Email is not correct
+contact.constraint.email_note_same: Email are not both identical
 contact.constraint.country: Pick a country
 contact.constraint.invalid_form: The form is invalid
 contact.constraint.topic: Please, select a topic

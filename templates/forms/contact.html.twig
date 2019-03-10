@@ -17,11 +17,26 @@
     </div>
   </div>
 
+  {#<div class="Form__group">#}
+    {#{{ form_label(form.email.first) }}#}
+    {#{{ form_widget(form.email.first) }}#}
+
+    {#{{ form_label(form.email.second) }}#}
+    {#{{ form_widget(form.email.second) }}#}
+    {#<div class="Form__input-error">#}
+      {#{{ form_errors(form.email) }}#}
+    {#</div>#}
+  {#</div>#}
+
   <div class="Form__group">
-    {{ form_widget(form.email) }}
-    <div class="Form__input-error">
-      {{ form_errors(form.email) }}
-    </div>
+    {% for emailField in form.email %}
+      {{ form_label(emailField) }}
+      {{ form_widget(emailField) }}
+
+      <div class="Form__input-error">
+        {{ form_errors(emailField) }}
+      </div>
+    {% endfor %}
   </div>
 
   <div class="Form__group">

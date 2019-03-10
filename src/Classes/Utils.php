@@ -62,6 +62,7 @@ class Utils
         'contact' => 'contact.option.contact', // Simple contact
         'data' => 'contact.option.data', // Modifier/ajouter une donnée
         'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
+        'language' => 'contact.option.language', // Ajout d une langue
         //'account' => 'Problem with my account',
         'other' => 'contact.option.other'
     ];
