@@ -25,6 +25,8 @@ class ContactFormType extends AbstractType
     /** @var TranslatorInterface  */
     private $translatorInterface;
 
+    private $locale;
+
     const CLASS_LABEL = 'Form__label';
 
     /**
@@ -32,9 +34,10 @@ class ContactFormType extends AbstractType
      *
      * @param TranslatorInterface $translatorInterface
      */
-    public function __construct(TranslatorInterface $translatorInterface)
+    public function __construct(TranslatorInterface $translatorInterface, $locale)
     {
         $this->translatorInterface = $translatorInterface;
+        $this->locale = $locale;
     }
 
     /**
@@ -103,9 +106,9 @@ class ContactFormType extends AbstractType
             ],
             'attr' => [
                 'class' => 'Form__select',
-                'placeholder' => 'contact.placeholder.country',
             ],
-            'preferred_choices' => 'FR' // [\Locale::getRegion(\Locale::getDefault())],
+            'placeholder' => 'contact.placeholder.country',
+            'preferred_choices' => [\Locale::getRegion(\Locale::getDefault())],
         ]);
 
 
@@ -129,6 +132,7 @@ class ContactFormType extends AbstractType
 
         $builder->add('message', TextareaType::class, [
             'label' => 'contact.form.message',
+            'required' => true,
             'label_attr' => [
                 'class' => self::CLASS_LABEL
             ],
