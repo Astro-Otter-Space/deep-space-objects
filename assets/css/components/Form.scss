@@ -62,4 +62,32 @@
     border: none;
     padding: 0.5em 1.2em;
   }
+
+  &__message {
+    border-radius: 0.25em;
+    position: relative;
+    padding: 1em 1.5em;
+    margin-bottom: 1em;
+    border: 1px solid transparent;
+  }
+
+  &__input-error {
+    color: $color-error;
+    font-size: initial;
+    ul {
+      padding: 0;
+    }
+  }
+
+  &__error {
+    color: $color-error;
+    background-color: $bgd-error;
+    border: 1px solid $border-error;
+  }
+  &__success {
+    color: $color-success;
+    background-color: $bgd-success;
+    border: 1px solid $border-success;
+  }
+
 }

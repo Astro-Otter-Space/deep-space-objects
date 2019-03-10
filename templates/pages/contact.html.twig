@@ -8,12 +8,25 @@
       <div class="Dso__container Dso__noHeader">
         <h2 class="Dso__title">{{ 'contact.title'|trans }}</h2>
 
-        <div class="Dso__Form">
-          {% include 'forms/contact.html.twig' with {form: formContact} %}
-        </div>
+        {% for messages in app.flashes("form.failed") %}
+          <div class="Form__message Form__error">
+            {{ messages|trans }}
+          </div>
+        {% endfor %}
+
+        {% for messages in app.flashes("form.success") %}
+          <div class="Form__message Form__success">
+            {{ messages|trans }}
+          </div>
+        {% endfor %}
+
+        {% if false == is_valid %}
+          <div class="Dso__Form">
+            {% include 'forms/contact.html.twig' with {form: formContact} %}
+          </div>
+        {% endif %}
       </div>
     </section>
   </div>
-
 
 {% endblock %}

@@ -39,7 +39,8 @@ class PageController extends AbstractController
     {
         /** @var Router $router */
         $router = $this->get('router');
-        $isValid = null;
+
+        $isValid = false;
         $optionsForm = [
             'method' => 'POST',
             'action' => $router->generate('contact'),
@@ -54,6 +55,7 @@ class PageController extends AbstractController
 
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted()) {
+
             if ($contactForm->isValid()) {
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
@@ -69,12 +71,13 @@ class PageController extends AbstractController
                 $content['contact'] = $contactData;
                 $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
                 if (true === $sendMail) {
+                    $this->addFlash('form.success','form.ok.sending');
                     $isValid = true;
                 } else {
-                    $isValid = false;
+                    $this->addFlash('form.failed','form.error.send_mail');
                 }
             } else {
-                $isValid = false;
+                $this->addFlash('form.failed','form.error.message');
             }
         }
 
@@ -84,6 +87,7 @@ class PageController extends AbstractController
         /** @var Response $response */
         $response = $this->render('pages/contact.html.twig', $result);
         $response->setSharedMaxAge(3600);
+        $response->setPublic();
 
         return $response;
     }

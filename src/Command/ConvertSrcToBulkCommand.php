@@ -101,11 +101,11 @@ class ConvertSrcToBulkCommand extends Command
                         }, $line);
 
                         // After import, we delete cache
-//                        $idMd5 = self::md5ForId($id);
-//                        if ($this->cacheUtil->hasItem($idMd5)) {
-//                            $this->cacheUtil->deleteItem($idMd5);
-//                        }
-//
+                        $idMd5 = self::md5ForId($id);
+                        if ($this->cacheUtil->hasItem($idMd5)) {
+                            $this->cacheUtil->deleteItem($idMd5);
+                        }
+
                         fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                     }

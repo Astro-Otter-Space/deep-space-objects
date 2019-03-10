@@ -13,8 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Intl\Intl;
-use Symfony\Component\Intl\Locale\Locale;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -86,6 +84,7 @@ class ContactFormType extends AbstractType
 
         $builder->add('country', CountryType::class, [
             'label' => 'contact.form.country',
+            'empty_data' => 'Coucou',
             'label_attr' => [
                 'class' => self::CLASS_LABEL
             ],
@@ -140,7 +139,7 @@ class ContactFormType extends AbstractType
                     'size' => 'invisible',              // set size to invisible
                     'defer' => true,
                     'async' => true,
-                    'callback' => 'onReCaptchaSuccess', // callback will be set by default if not defined (along with JS function that validate the form on success)
+                    //'callback' => 'onReCaptchaSuccess', // callback will be set by default if not defined (along with JS function that validate the form on success)
                     'bind' => 'btn_contact_submit',
                 ]
             ],
