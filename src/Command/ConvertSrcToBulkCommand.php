@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,22 +18,30 @@ class ConvertSrcToBulkCommand extends Command
 {
     /** @var KernelInterface */
     private $kernel;
-
+    /** @var CacheInterface */
+    private $cacheUtil;
     protected static $defaultName = "dso:convert-bulk";
 
     protected static $listType = ['dso20', 'constellations'];
 
+    protected static $mapping = [
+        'dso20' => 'deepspaceobjects',
+        'constellations' => 'constellations'
+    ];
+
     const PATH_SOURCE = '/config/elasticsearch/sources/';
     const BULK_SOURCE = '/config/elasticsearch/bulk/';
 
-
     /**
      * ConvertSrcToBulkCommand constructor.
+     *
      * @param KernelInterface $kernel
+     * @param CacheInterface $cacheUtil
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil)
     {
         $this->kernel = $kernel->getProjectDir();
+        $this->cacheUtil = $cacheUtil;
         parent::__construct();
     }
 
@@ -69,10 +78,13 @@ class ConvertSrcToBulkCommand extends Command
                 if (JSON_ERROR_NONE === json_last_error()) {
                     $handle = fopen($outputFilename, 'w');
 
-                    foreach ($data as $key=>$inputData) {
-                        $id = (array_key_exists('id', $inputData)) ? $inputData['id']: null;
-                        $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                    foreach ($data as $inputData) {
+                        if (!array_key_exists('id', $inputData)) {
+                            continue;
+                        }
 
+                        $id = $inputData['id'];
+                        $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
                         $mapping = [
                             'randId' => 'md5ForId',
                             'catalog' => 'getCatalog',
@@ -88,6 +100,13 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
+                        // After import, we delete cache
+//                        $idMd5 = self::md5ForId($id);
+//                        if ($this->cacheUtil->hasItem($idMd5)) {
+//                            $this->cacheUtil->deleteItem($idMd5);
+//                        }
+//
+                        fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                     }
                     fclose($handle);
@@ -109,6 +128,19 @@ class ConvertSrcToBulkCommand extends Command
      */
     private function openFile($file): array {
         return json_decode(file_get_contents($file), true);
+    }
+
+
+    /**
+     * @param $type
+     * @param $id
+     *
+     * @return string
+     */
+    public function buildCreateLine($type, $id): string
+    {
+        // {"create": {"_index": "<type>", "_type": "_doc", "_id": "<md5 id>"}},
+        return  sprintf('{"create": {"_index": "%s", "_type": "_doc", "_id": "%s"}}',self::$mapping[$type], self::md5ForId($id));
     }
 
     /**

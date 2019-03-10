@@ -1,14 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stephane
- * Date: 29/12/18
- * Time: 18:25
- */
 
 namespace App\Classes;
 
-
+/**
+ * Class Utils
+ *
+ * @package App\Classes
+ */
 class Utils
 {
     const PARSEC = 0.3066020852;
@@ -64,6 +62,7 @@ class Utils
         'contact' => 'contact.option.contact', // Simple contact
         'data' => 'contact.option.data', // Modifier/ajouter une donnée
         'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
+        //'account' => 'Problem with my account',
         'other' => 'contact.option.other'
     ];
 
@@ -117,8 +116,10 @@ class Utils
 
     /**
      * Format number from locale
+     *
      * @param $number
-     * @return string
+     *
+     * @return bool|string
      */
     public static function numberFormatByLocale($number)
     {
