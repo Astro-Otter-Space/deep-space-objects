@@ -162,7 +162,7 @@ class DsoRepository extends AbstractRepository
     public function getObjectsCatalogByFilters($from, $filters)
     {
         $this->client->getIndex(self::INDEX_NAME);
-
+        $nbItems = 0;
         /** @var Query $query */
         $query = new Query();
 
@@ -210,7 +210,7 @@ class DsoRepository extends AbstractRepository
         /** @var Search $search */
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
-
+        $nbItems = $search->getTotalHits();
         /** @var ListDso $listDso */
         $listDso = new ListDso();
         foreach ($search->getDocuments() as $doc) {
@@ -224,7 +224,7 @@ class DsoRepository extends AbstractRepository
             }, $aggregations['buckets']);
         }
 
-        return [$listDso, $listAggregations, $search->getTotalHits()];
+        return [$listDso, $listAggregations, $nbItems];
     }
 
 
