@@ -3,7 +3,8 @@
     <div class="AppSlider">
       <slider
         :images="[
-          '/build/images/interstellar-black-hole.jpg'
+          '/build/images/notfound/interstellar-black-hole.jpg',
+          '/build/images/notfound/interstellar-black-hole2.jpg'
         ]"
       />
       <div class="AppSlider__Research">
