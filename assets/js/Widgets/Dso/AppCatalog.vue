@@ -10,20 +10,10 @@
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3>{{ nbItems }}</h3>
 
-          <!--Facet-->
-          <div>
-            <ul v-for="(facets, type) in listFacets">
-              <li>{{type}}</li>
-              <ul v-for="facet in facets">
-                <li>
-                  <a v-bind:href="facet.full_url">{{facet.value}} - {{facet.number}}</a>
-                </li>
-              </ul>
-            </ul>
-          </div>
           <cards-grid
             :show-controls="false"
             :items="itemsDso"
+            :list-facets="listFacets"
           >
           </cards-grid>
 

@@ -194,6 +194,21 @@ $card: #2B2A34;
   }
 }
 
+.appGridFacet {
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+     a {
+       color: $color-text-dark;
+       text-decoration: none;
+       cursor: pointer;
+     } 
+    
+  }
+}
+
 // ANIMATIONS
 @keyframes mouseOver {
   0% {
