@@ -21,11 +21,11 @@
 
     <div id="appGrid">
       <div class="appGridFacet__list" v-if="0 < Object.keys(listFacets).length">
-        <ul v-for="(facets, type) in listFacets">
-          <li>{{type}}</li>
-          <ul v-for="facet in facets">
+        <ul v-for="facets in listFacets">
+          <h3 class="Dso__title">{{facets.name}} <i class="fas fa-times"></i></h3>
+          <ul v-for="facet in facets.list" v-if="0 < facets.list.length">
             <li class="appGridFacet__item">
-              <a v-bind:href="facet.full_url" v-bind:title="facet.value">{{facet.value}} - {{facet.number}}</a>
+              <a v-bind:href="facet.full_url" v-bind:title="facet.value">{{facet.value}} <span class="appGridFacet__badge">{{facet.number}}</span></a>
             </li>
           </ul>
         </ul>
