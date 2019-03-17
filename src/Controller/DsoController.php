@@ -195,7 +195,8 @@ class DsoController extends AbstractController
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
             $typeTr = $translatorInterface->trans($type, ['%count%' => count($listFacets)]);
-            /*$listAggregations[$typeTr]*/ $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
+
+            $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
                 return [
                     'value' => $translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
@@ -203,14 +204,23 @@ class DsoController extends AbstractController
                 ];
             }, $listFacets);
 
+            $routeDelete = '';
+            if (in_array($type, array_keys($filters))) {
+                $routeDelete = $router->generate(
+                  'dso_catalog',
+                    array_diff_key(
+                        $request->query->all(),
+                        [$type => $filters[$type]]
+                    )
+                );
+            }
+
             $listAggregations[$type] = [
                 'name' => $typeTr,
-                'delete_url' => null,
+                'delete_url' => $routeDelete,
                 'list' => $listFacetsByType
             ];
         }
-
-        dump($listAggregations);
 
         // Params
         $result['list_dso'] = $dsoManager->buildListDso($listDso);
