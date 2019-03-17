@@ -73,10 +73,10 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 ### Status data
 - Messier : 110/110
 - NGC : 7239/7840
-- UGC : 258/12921
+- UGC : 261/12921
 - PGC : 18/? 
 - Sharpless : 99/313
-- RCW : 25/182
+- RCW : 27/182
 - Index Catalog : 204/5386
 - Collinder : 78/471
 - Caldwell : 30/109

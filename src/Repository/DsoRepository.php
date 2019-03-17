@@ -114,6 +114,14 @@ class DsoRepository extends AbstractRepository
         $query->setQuery($boolQuery);
         $query->setFrom(parent::FROM)->setSize($limit);
 
+        $query->addSort(
+            [
+                'data.mag' => ['order' => 'asc', 'mode' => 'avg'],
+            ]
+
+        );
+        // TODO : add sort by magnitude
+
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 

@@ -209,6 +209,13 @@
      }
   }
 
+  &__removeFilter {
+    text-decoration: none;
+    color: $color-text-dark;
+    cursor: pointer;
+    float: right;
+  }
+
   &__badge {
     background: $bgd-dark;
     color: #1ed760;

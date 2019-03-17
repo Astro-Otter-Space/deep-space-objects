@@ -23,7 +23,10 @@
       <div class="appGridFacet__list" v-if="0 < Object.keys(listFacets).length">
         <ul v-for="facets in listFacets">
           <h3 class="Dso__title">
-            {{facets.name}} <a v-bind:href="facets.delete_url" v-if="0 < facets.delete_url.length" title="Remove filters"></a><i class="fas fa-times"></i>
+            {{facets.name}}
+            <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
+              <i class="fas fa-times"></i>
+            </a>
           </h3>
           <ul v-for="facet in facets.list" v-if="0 < facets.list.length">
             <li class="appGridFacet__item">
