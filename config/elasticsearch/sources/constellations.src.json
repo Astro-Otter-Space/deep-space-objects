@@ -578,7 +578,7 @@
         "alt_es": "Cochero",
         "alt_de": "Fuhrmann",
         "alt_pt": "Auriga",
-        "alt_it": ""
+        "alt_it": "Auriga"
       },
       "desc": {
         "desc": "",
@@ -819,8 +819,8 @@
         "alt_fr": "Giraffe",
         "alt_es": "Jirafa",
         "alt_de": "Giraffe",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Camelopardalis",
+        "alt_it": "Giraffa"
       },
       "desc": {
         "desc": "",
@@ -1161,10 +1161,10 @@
       "alt": {
         "alt": "Centaurus",
         "alt_fr": "Centaure",
-        "alt_es": "",
-        "alt_de": "",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_es": "Centaurus",
+        "alt_de": "Zentaur",
+        "alt_pt": "Centaurus",
+        "alt_it": "Centauro"
       },
       "desc": {
         "desc": "",
@@ -1380,7 +1380,7 @@
         "alt_es": "Ballena",
         "alt_de": "Wal",
         "alt_pt": "Baleia",
-        "alt_it": ""
+        "alt_it": "Balena"
       },
       "desc": {
         "desc": "",
@@ -1748,7 +1748,7 @@
         "alt_es": "Cangrejo",
         "alt_de": "Krebs",
         "alt_pt": "Câncer",
-        "alt_it": ""
+        "alt_it": "Cancro"
       },
       "desc": {
         "desc": "",
@@ -2295,7 +2295,7 @@
         "alt_es": "Cisne",
         "alt_de": "Schwan",
         "alt_pt": "Cygnus",
-        "alt_it": ""
+        "alt_it": "Cigno"
       },
       "desc": {
         "desc": "",
@@ -2881,7 +2881,7 @@
         "alt_es": "Gemelos",
         "alt_de": "Zwillinge",
         "alt_pt": "Gêmeos",
-        "alt_it": ""
+        "alt_it": "Gemelli"
       },
       "desc": {
         "desc": "",
@@ -4263,7 +4263,7 @@
         "alt_es": "Unicorno",
         "alt_de": "Einhorn",
         "alt_pt": "Unicórnio",
-        "alt_it": ""
+        "alt_it": "Unicorno"
       },
       "desc": {
         "desc": "",
@@ -4653,7 +4653,7 @@
         "alt_es": "Orión",
         "alt_de": "Orion",
         "alt_pt": "Órion",
-        "alt_it": ""
+        "alt_it": "Orione"
       },
       "desc": {
         "desc": "",
@@ -5001,7 +5001,7 @@
         "alt_es": "Perseo",
         "alt_de": "Perseus",
         "alt_pt": "Perseu",
-        "alt_it": ""
+        "alt_it": "Perseo"
       },
       "desc": {
         "desc": "",
@@ -5705,7 +5705,7 @@
         "alt_es": "Escorpión",
         "alt_de": "Skorpion",
         "alt_pt": "Escorpião",
-        "alt_it": ""
+        "alt_it": "Scorpione"
       },
       "desc": {
         "desc": "",
@@ -5863,7 +5863,7 @@
         "alt_es": "Escudo",
         "alt_de": "Schild",
         "alt_pt": "Scutum",
-        "alt_it": ""
+        "alt_it": "Scudo"
       },
       "desc": {
         "desc": "",
@@ -5923,7 +5923,7 @@
         "alt_es": "Serpiente",
         "alt_de": "Schlange",
         "alt_pt": "Serpente",
-        "alt_it": ""
+        "alt_it": "Serpente"
       },
       "desc": {
         "desc": "",
@@ -6055,7 +6055,7 @@
         "alt_es": "Flecha",
         "alt_de": "Pfeil",
         "alt_pt": "Flecha",
-        "alt_it": ""
+        "alt_it": "Freccia"
       },
       "desc": {
         "desc": "",
@@ -6117,7 +6117,7 @@
         "alt_es": "Sagitario",
         "alt_de": "Schütze",
         "alt_pt": "Sagitário",
-        "alt_it": ""
+        "alt_it": "Sagittario"
       },
       "desc": {
         "desc": "",
@@ -7107,7 +7107,7 @@
         "alt_es": "Zorra",
         "alt_de": "Fuchs",
         "alt_pt": "Raposa",
-        "alt_it": ""
+        "alt_it": "Volpetta"
       },
       "desc": {
         "desc": "",

@@ -159,7 +159,7 @@ class ConvertSrcToBulkCommand extends Command
         if (!is_null($id)) {
             return Utils::getCatalogMapping()[substr($id, 0, 2)];
         }
-        return null;
+        return Utils::UNASSIGNED;
     }
 
     /**
