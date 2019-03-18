@@ -72,16 +72,17 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 
 ### Status data
 - Messier : 110/110
-- NGC : 7233/7840
-- UGC: 258/12 921
-- Sharpless : 94/313
-- RCW : 20/182
-- Index Catalog : 202/5386
-- Collinder : 73/471
-- Caldwell : 25/109
+- NGC : 7239/7840
+- UGC : 261/12921
+- PGC : 18/? 
+- Sharpless : 99/313
+- RCW : 27/182
+- Index Catalog : 204/5386
+- Collinder : 78/471
+- Caldwell : 30/109
 - Abell: 103/
-- ldn: 17/?
-- lbn: 12/?
+- ldn: 18/?
+- lbn: 29/?
 - Dolidze-Dzimselejvili: 11/11
 
 Authors

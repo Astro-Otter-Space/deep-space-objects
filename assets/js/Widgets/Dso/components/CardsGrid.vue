@@ -20,6 +20,22 @@
     </div>
 
     <div id="appGrid">
+      <div class="appGridFacet__list" v-if="0 < Object.keys(listFacets).length">
+        <ul v-for="facets in listFacets">
+          <h3 class="Dso__title">
+            {{facets.name}}
+            <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
+              <i class="fas fa-times"></i>
+            </a>
+          </h3>
+          <ul v-for="facet in facets.list" v-if="0 < facets.list.length">
+            <li class="appGridFacet__item">
+              <a v-bind:href="facet.full_url" v-bind:title="facet.value">{{facet.value}} <span class="appGridFacet__badge">{{facet.number}}</span></a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+
       <transition-group tag="main" name="card">
         <article v-for="(item, index) in items" :key="index + 0" class="card" v-show="(itemselect === item.filter) || (itemselect == 1)">
           <a v-bind:href="item.url" v-bind:title="item.value">
@@ -68,6 +84,10 @@
       listControls: {
         default: () => [],
         type: Array
+      },
+      listFacets: {
+        default: () => ({}),
+        type: Object
       }
     },
     methods: {

@@ -11,6 +11,7 @@ use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -76,18 +77,22 @@ class DsoManager
         } else {
             /** @var Dso $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
+            if (!is_null($dso)) {
 
-            // Add astrobin image
-            list($astrobinImageUrl, $astrobinImageUser) = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
-            $dso->setImage($astrobinImageUrl);
-            $dso->setAstrobinUser($astrobinImageUser);
+                // Add astrobin image
+                list($astrobinImageUrl, $astrobinImageUser) = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
+                $dso->setImage($astrobinImageUrl);
+                $dso->setAstrobinUser($astrobinImageUser);
 
-            // Add URl
-            $dso->setFullUrl($this->getDsoUrl($dso));
+                // Add URl
+                $dso->setFullUrl($this->getDsoUrl($dso));
 
-            $this->cacheUtils->saveItem($idMd5, serialize($dso));
-            if ($dso->getImage() !== basename(Utils::IMG_DEFAULT)) {
-                $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+                $this->cacheUtils->saveItem($idMd5, serialize($dso));
+                if ($dso->getImage() !== basename(Utils::IMG_DEFAULT)) {
+                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+                }
+            } else {
+                throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
             }
         }
 

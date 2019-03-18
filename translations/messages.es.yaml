@@ -30,6 +30,7 @@ catalog.dodz: Dolidze-Dzimselejvil catalog
 catalog.pgc: Catalogue of Principal Galaxies
 catalog.cld: Catálogo Caldwell
 catalog.unassigned: Unassigned
+catalog.ddo: David Dunlap Observatory Catalogue
 # Lang:
 fr: French
 en: English (UK)
@@ -45,6 +46,7 @@ dayImage: Image of the day
 info: Informations
 desigs: Other designations
 magnitude: Apparent magnitude
+constellation: Constellation|Constellations
 const_id: Constellation|Constellations
 constId: Constellation|Constellations
 dim: Size

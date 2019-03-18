@@ -162,7 +162,7 @@ class DsoController extends AbstractController
     {
         $page = 1;
         $from = DsoRepository::FROM;
-        $filters = [];
+        $filters = $listAggregations = [];
 
         /** @var Router $router */
         $router = $this->get('router');
@@ -194,18 +194,37 @@ class DsoController extends AbstractController
         // List facets
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
-            $listAggregates[$type] = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
+            $typeTr = $translatorInterface->trans($type, ['%count%' => count($listFacets)]);
+
+            $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
                 return [
                     'value' => $translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
                     'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
                 ];
             }, $listFacets);
+
+            $routeDelete = '';
+            if (in_array($type, array_keys($filters))) {
+                $routeDelete = $router->generate(
+                  'dso_catalog',
+                    array_diff_key(
+                        $request->query->all(),
+                        [$type => $filters[$type]]
+                    )
+                );
+            }
+
+            $listAggregations[$type] = [
+                'name' => $typeTr,
+                'delete_url' => $routeDelete,
+                'list' => $listFacetsByType
+            ];
         }
 
         // Params
         $result['list_dso'] = $dsoManager->buildListDso($listDso);
-        $result['list_facets'] = $listAggregates;
+        $result['list_facets'] = $listAggregations;
         $result['nb_items'] = $nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = ceil($nbItems/DsoRepository::SIZE);

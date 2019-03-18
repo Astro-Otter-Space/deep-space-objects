@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = 'allCatalog'|trans %}
-{% set pageDesc = '' %}
+{% set pageDesc = 'filteringList'|trans%}
 
 {% block content %}
   <div id="appCatalog" data-catalog-widget
@@ -12,7 +12,6 @@
      data-total-dso="{{ 'nbResults'|transchoice(nb_items) }}"
      data-page="{{ current_page }}"
      data-total-page="{{ nb_pages }}"
-
   >
   </div>
 {% endblock %}

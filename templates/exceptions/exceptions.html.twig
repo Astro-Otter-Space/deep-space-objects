@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = exception.statusCode ~ ' Error' %}
+{% set pageDesc = '' %}
+
+{% block content %}
+  <div id="app"
+     data-title="{{ 'error.message'|trans({'%error%': exception.statusCode}) }}"
+  ></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('notfound') }}
+{% endblock %}
