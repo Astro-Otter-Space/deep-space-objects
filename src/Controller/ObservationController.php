@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 /**
  * Class Observation
+ *
  * @package App\Controller
  */
 class ObservationController extends AbstractController
