@@ -1,0 +1,42 @@
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "id": {
+          "type": "text",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "username": {
+          "type": "text"
+        },
+        "name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        },
+        "created_at": {
+          "type": "date"
+        },
+        "is_public": {
+          "type": "boolean"
+        },
+        "observation_date": {
+          "type": "date"
+        },
+        "location": {
+          "type": "geo_shape"
+        },
+        "dso_list": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}
