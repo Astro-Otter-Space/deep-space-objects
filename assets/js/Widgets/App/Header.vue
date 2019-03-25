@@ -2,25 +2,18 @@
   <header class="header">
 
     <Slide :burgerIcon="false" ref="slideMenu" width="300">
-      <a v-for="menu in leftSideMenu" v-bind:href="menu.path">
-        <i v-bind:class="menu.icon_class"></i>
+      <!--TODO : target blank-->
+      <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
+        <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
       </a>
-
-      <hr />
-      <a id="github" href="https://github.com/HamHamFonFon/deep-space-objects" title="Github" target="_blank">
-        <i class="fab fa-github"></i>
-        <span>Github</span>
-      </a>
-      <p>
-        2019 - {{title}}
-      </p>
     </Slide>
 
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
         <span v-on:click="openSlideMenu" class="header__barSlideMenu" title="Open menu">
-          <i class="fas fa-bars"></i>
+          <font-awesome-icon icon="bars" />
+          <!--<svgicon name="bars" width="30" height="30" color="#B6B5B7"></svgicon>-->
         </span>&nbsp;
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
@@ -28,17 +21,17 @@
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
-          <a v-on:click="displaySearch(hide);">
-            <i class="fas fa-search"></i>
+          <a v-on:click="displaySearch(hide);" v-bind:title="searchPlaceholder">
+            <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
-        <!--Menu-->
+        <!--Languages-->
         <li class="header__drop">
-          <a v-on:click="displayDropMenu()">
-            <i class="far fa-flag"></i>
+          <a v-on:click="displayDropMenu()" title="Switch language">
+            <svgicon name="language" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
-            <a v-for="locale in listLocales" v-bind:href="locale.path" :key="locale.locale">
+            <a v-for="locale in listLocales" v-bind:href="locale.path" :key="locale.locale" v-bind:title="locale.label">
               {{ locale.label }}
             </a>
           </ul>
@@ -49,12 +42,14 @@
     </div>
 
     <div class="header__search" v-if="hide">
-      <searchautocomplete
-        ref="search"
-        :searchPlaceholder="searchPlaceholder"
-        :customClasses="autoCompleteClasse"
-        :url="searchUrl"
-      ></searchautocomplete>
+      <transition>
+        <searchautocomplete
+          ref="search"
+          :searchPlaceholder="searchPlaceholder"
+          :customClasses="autoCompleteClasse"
+          :url="searchUrl"
+        ></searchautocomplete>
+      </transition>
     </div>
   </header>
 </template>
@@ -70,7 +65,8 @@
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
-  import { Slide } from 'vue-burger-menu'
+  import { Slide } from 'vue-burger-menu';
+  import './../Icons/index';
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
@@ -105,11 +101,11 @@
     },
     methods: {
       displayDropMenu: function() {
-        var drop_menu = event.target.parentElement.parentElement.getElementsByClassName("header__drop_menu")[0];
+        var drop_menu = event.currentTarget.parentElement.parentElement.getElementsByClassName("header__drop_menu")[0];
         var drop_menus = document.getElementsByClassName("header__drop_menu");
 
         Array.from(drop_menus).forEach(function(e){
-          if(e != drop_menu){
+          if(e !== drop_menu){
             e.classList.remove("header__display");
           }
         });
@@ -118,7 +114,10 @@
         Array.from(lis).forEach(function(e){
           e.style.marginTop = 0;
         });
+
         (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
+
+
         if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
           event.target.parentElement.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
         }

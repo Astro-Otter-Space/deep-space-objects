@@ -22,12 +22,14 @@
     <div id="appGrid">
       <div class="appGridFacet__list" v-if="0 < Object.keys(listFacets).length">
         <ul v-for="facets in listFacets">
+
           <h3 class="Dso__title">
             {{facets.name}}
             <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
-              <i class="fas fa-times"></i>
+              <font-awesome-icon icon="times" />
             </a>
           </h3>
+
           <ul v-for="facet in facets.list" v-if="0 < facets.list.length">
             <li class="appGridFacet__item">
               <a v-bind:href="facet.full_url" v-bind:title="facet.value">{{facet.value}} <span class="appGridFacet__badge">{{facet.number}}</span></a>
@@ -60,6 +62,13 @@
 </template>
 
 <script>
+  // import { library } from '@fortawesome/fontawesome-svg-core';
+  // import { faTimes } from '@fortawesome/free-solid-svg-icons';
+  // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+  // library.add(faTimes);
+  // Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+
   export default {
     name: "CardsGrid",
     data() {

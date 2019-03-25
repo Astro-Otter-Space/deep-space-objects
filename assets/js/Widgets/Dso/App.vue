@@ -24,10 +24,10 @@
         >
           <div>
             <network network="facebook">
-              <i class="fab fa-facebook"></i>
+              <font-awesome-icon icon="facebook"/>
             </network>
             <network network="twitter">
-              <i class="fab fa-twitter"></i>
+              <font-awesome-icon icon="twitter"/>
             </network>
           </div>
         </social-sharing>

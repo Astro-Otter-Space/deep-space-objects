@@ -8,6 +8,13 @@ import SocialSharing from "vue-social-sharing";
 import VueLazyImageLoading from "vue-lazy-image-loading";
 import Lightbox from 'vue-pure-lightbox'
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faTwitter, faFacebook);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.use(VueLazyImageLoading);
 Vue.use(SocialSharing);
 Vue.use(Lightbox);

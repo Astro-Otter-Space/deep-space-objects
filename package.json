@@ -1,7 +1,7 @@
 {
     "devDependencies": {
-        "@fortawesome/fontawesome-free": "^5.6.3",
         "@symfony/webpack-encore": "^0.22.0",
+        "vue-svgicon": "^3.2.4",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -10,9 +10,15 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "build": "encore production --progress",
+        "generate-icons": "vsvg -s ./assets/svg -t ./assets/js/Widgets/Icons"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.17",
+        "@fortawesome/free-brands-svg-icons": "^5.8.1",
+        "@fortawesome/free-regular-svg-icons": "^5.8.1",
+        "@fortawesome/free-solid-svg-icons": "^5.8.1",
+        "@fortawesome/vue-fontawesome": "^0.1.6",
         "copy-webpack-plugin": "^4.6.0",
         "d3": "^5.7.0",
         "d3-celestial": "^0.6.7",

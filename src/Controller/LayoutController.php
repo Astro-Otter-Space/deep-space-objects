@@ -74,34 +74,32 @@ class LayoutController extends AbstractController
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
-        /** @var TranslatorInterface $translateInterface */
-        //$translatorInterface = $this->get('translator');
-
         return [
             'catalog' => [
                 'label' => $translatorInterface->trans('catalog'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
-                'icon_class' => 'fas fa-atom-alt'
+                'icon_class' => 'galaxy-cluster' //'fas fa-atom-alt'
             ],
             'constellation' => [
                 'label' => $translatorInterface->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
-                'icon_class' => 'far fa-star' //far fa-chart-network
+                'icon_class' => 'constellation' // 'far fa-star' //far fa-chart-network
             ],
             'map' => [
                 'label' => 'skymap', // $translatorInterface->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
-                'icon_class' => 'fas fa-space-shuttle'
-            ],
-            'news' => [
-                'label' => 'news', // $translatorInterface->trans('news'),
-                'path' => $routerInterface->generate(sprintf('news.%s', $locale)),
-                'icon_class' => 'far fa-newspaper'
+                'icon_class' => 'planet' // 'fas fa-space-shuttle'
             ],
             'contact' => [
                 'label' => $translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
-                'icon_class' => 'fas fa-edit'
+                'icon_class' => 'contact' // 'fas fa-edit'
+            ],
+            'github' => [
+                'label' => ucfirst('github'),
+                'path' => 'https://github.com/HamHamFonFon/deep-space-objects',
+                'blank' => true,
+                'icon_class' => 'github'
             ]
         ];
     }
