@@ -28,8 +28,12 @@
           >
           </cards-grid>
 
-          <svgicon name="left" width="20" height="20" color="#e9e9e9"></svgicon>
-          <svgicon name="right" width="20" height="20" color="#e9e9e9"></svgicon>
+          <div class="pagination">
+            <svgicon name="left" width="20" height="20" color="#e9e9e9" v-if="1 < currentPage"></svgicon>
+            {{currentPage}} / {{totalPage}}
+            <svgicon name="right" width="20" height="20" color="#e9e9e9" v-if="currentPage < totalPage"></svgicon>
+          </div>
+
         </div>
       </div>
 
@@ -53,6 +57,7 @@
   let listFacets = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.listFacets);
   let listFilters = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.selectedFilters);
   let currentPage = document.querySelector(DATA_SELECTOR).dataset.page;
+  let totalPage = document.querySelector(DATA_SELECTOR).dataset.totalPage;
   let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
   let showFacets = false;
 
@@ -69,6 +74,7 @@
         itemsDso: dsoList,
         nbItems: nbItems,
         currentPage: currentPage,
+        totalPage: totalPage,
         listFilters: listFilters,
         listFacets: listFacets,
         showFacets: showFacets
