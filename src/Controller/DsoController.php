@@ -226,7 +226,14 @@ class DsoController extends AbstractController
         $result['nb_items'] = $nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = ceil($nbItems/DsoRepository::SIZE);
-        $result['filters'] = $filters;
+
+        $queryAll = $request->query->all();
+        $result['filters'] = call_user_func("array_merge", array_map(function($val, $key) use($translatorInterface, $router, $queryAll) {
+            return [
+                'label' => $translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))),
+                'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))
+            ];
+        }, $filters, array_keys($filters)));
 
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig', $result);

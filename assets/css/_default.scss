@@ -14,7 +14,8 @@
 @import "components/Cards";
 @import "components/CardsGrid";
 @import "components/VueFlux";
-
+// List
+@import "components/Filters";
 body {
   font-family: $font;
   background-color: $bgd-dark;

@@ -13,6 +13,13 @@
             <svgicon name="up" width="20" height="20" v-if="showFacets" v-on:click="toggleFacets()"></svgicon>
           </h3>
 
+          <ul v-if="listFilters.length" class="Filters__list">
+            <li v-for="filter in listFilters" class="Filters__badge">
+              {{filter.label}}
+              <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
+            </li>
+          </ul>
+
           <cards-grid
             :show-controls="false"
             :items="itemsDso"
@@ -20,7 +27,9 @@
             :show-facets="showFacets"
           >
           </cards-grid>
-          <!--<v-pagination v-model="currentPage" :page-count="475"></v-pagination>-->
+
+          <svgicon name="left" width="20" height="20" color="#e9e9e9"></svgicon>
+          <svgicon name="right" width="20" height="20" color="#e9e9e9"></svgicon>
         </div>
       </div>
 
@@ -30,18 +39,21 @@
 
 <script>
 
+  const DATA_SELECTOR = 'div[data-catalog-widget]';
+
   import ImageHeader from './components/Imageheader'
   import CardsGrid from './components/CardsGrid'
   import './../Icons/cross';
   import './../Icons/up';
   import './../Icons/down';
 
-  let title = document.querySelector('div[data-catalog-widget]').dataset.title;
-  let desc = document.querySelector('div[data-catalog-widget]').dataset.desc;
-  let dsoList = JSON.parse(document.querySelector('div[data-catalog-widget]').dataset.listDso);
-  let listFacets = JSON.parse(document.querySelector('div[data-catalog-widget]').dataset.listFacets);
-  let currentPage = document.querySelector('div[data-catalog-widget]').dataset.page;
-  let nbItems = document.querySelector('div[data-catalog-widget]').dataset.totalDso;
+  let title = document.querySelector(DATA_SELECTOR).dataset.title;
+  let desc = document.querySelector(DATA_SELECTOR).dataset.desc;
+  let dsoList = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.listDso);
+  let listFacets = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.listFacets);
+  let listFilters = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.selectedFilters);
+  let currentPage = document.querySelector(DATA_SELECTOR).dataset.page;
+  let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
   let showFacets = false;
 
   export default {
@@ -57,6 +69,7 @@
         itemsDso: dsoList,
         nbItems: nbItems,
         currentPage: currentPage,
+        listFilters: listFilters,
         listFacets: listFacets,
         showFacets: showFacets
       }

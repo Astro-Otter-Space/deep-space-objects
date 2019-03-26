@@ -1,0 +1,16 @@
+.Filters {
+  &__list {
+    list-style: none;
+    overflow: auto;
+  }
+
+  &__badge {
+    background: $bgd-dark;
+    color: #1ed760;
+    border-radius: 10px;
+    font-size: 0.5em;
+    padding: 0.2em 0.5em;
+    margin-left: 1em;
+    float: left;
+  }
+}
