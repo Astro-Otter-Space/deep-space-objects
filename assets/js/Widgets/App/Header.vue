@@ -12,8 +12,7 @@
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
         <span v-on:click="openSlideMenu" class="header__barSlideMenu" title="Open menu">
-          <font-awesome-icon icon="bars" />
-          <!--<svgicon name="bars" width="30" height="30" color="#B6B5B7"></svgicon>-->
+          <svgicon name="bars" width="30" height="30"></svgicon>
         </span>&nbsp;
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
@@ -70,7 +69,6 @@
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
-    // document.getElementsByTagName("body")[0].classList.remove("display_menu");
   });
 
   export default {

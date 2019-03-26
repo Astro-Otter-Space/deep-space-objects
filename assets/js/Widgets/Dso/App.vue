@@ -24,10 +24,10 @@
         >
           <div>
             <network network="facebook">
-              <font-awesome-icon icon="facebook"/>
+              <svgicon name="facebook" width="15" height="15"></svgicon>
             </network>
             <network network="twitter">
-              <font-awesome-icon icon="twitter"/>
+              <svgicon name="twitter" width="15" height="15"></svgicon>
             </network>
           </div>
         </social-sharing>
@@ -89,6 +89,8 @@
   import ImagesDsoSlider from './components/ImageSlider'
   import Table from './../App/SimpleTable'
   import CardsGrid from './components/CardsGrid'
+  import './../Icons/facebook';
+  import './../Icons/twitter';
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let coverImageUser = document.querySelector('div[data-dso-widget]').dataset.imgcoveruser;
