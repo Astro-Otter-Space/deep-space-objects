@@ -8,7 +8,10 @@
 
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3>{{ nbItems }} <svgicon name="down" width="20" height="20" v-on:click="toggleFacets"></svgicon></h3>
+          <h3>{{ nbItems }}
+            <svgicon name="down" width="20" height="20" v-if="!showFacets" v-on:click="toggleFacets()"></svgicon>
+            <svgicon name="up" width="20" height="20" v-if="showFacets" v-on:click="toggleFacets()"></svgicon>
+          </h3>
 
           <cards-grid
             :show-controls="false"
