@@ -21,7 +21,7 @@
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
           <a v-on:click="displaySearch(hide);" v-bind:title="searchPlaceholder">
-            <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
         <!--Languages-->

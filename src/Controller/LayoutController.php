@@ -66,7 +66,10 @@ class LayoutController extends AbstractController
 
     /**
      * Build left side menu
+     *
      * @param string $locale
+     * @param TranslatorInterface $translatorInterface
+     *
      * @return array
      */
     private function leftSideMenu($locale = 'en', TranslatorInterface $translatorInterface)
@@ -78,22 +81,27 @@ class LayoutController extends AbstractController
             'catalog' => [
                 'label' => $translatorInterface->trans('catalog'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
-                'icon_class' => 'galaxy-cluster' //'fas fa-atom-alt'
+                'icon_class' => 'galaxy-cluster'
             ],
             'constellation' => [
                 'label' => $translatorInterface->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
-                'icon_class' => 'constellation' // 'far fa-star' //far fa-chart-network
+                'icon_class' => 'constellation'
+            ],
+            'observations' => [
+                'label' => $translatorInterface->trans('listObservations'),
+                'path' => $routerInterface->generate(sprintf('observation_list.%s', $locale)),
+                'icon_class' => 'telescop'
             ],
             'map' => [
                 'label' => 'skymap', // $translatorInterface->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
-                'icon_class' => 'planet' // 'fas fa-space-shuttle'
+                'icon_class' => 'planet'
             ],
             'contact' => [
                 'label' => $translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
-                'icon_class' => 'contact' // 'fas fa-edit'
+                'icon_class' => 'contact'
             ],
             'github' => [
                 'label' => ucfirst('github'),

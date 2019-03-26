@@ -26,7 +26,7 @@
           <h3 class="Dso__title">
             {{facets.name}}
             <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
-              <font-awesome-icon icon="times" />
+              <svgicon name="cross" width="20" height="20"></svgicon>
             </a>
           </h3>
 
@@ -62,12 +62,7 @@
 </template>
 
 <script>
-  // import { library } from '@fortawesome/fontawesome-svg-core';
-  // import { faTimes } from '@fortawesome/free-solid-svg-icons';
-  // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-  // library.add(faTimes);
-  // Vue.component('font-awesome-icon', FontAwesomeIcon);
-
+  import './../../Icons/cross';
 
   export default {
     name: "CardsGrid",
