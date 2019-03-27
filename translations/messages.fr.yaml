@@ -31,6 +31,7 @@ catalog.pgc: Catalogue of Principal Galaxies
 catalog.cld: Catalogue de Caldwell
 catalog.unassigned: Non assigné
 catalog.ddo: Catalogue de l'observatoire David Dunlap
+catalog.vdb: Catalogue van den Bergh
 # Lang:
 fr: Français
 en: Anglais (UK)
