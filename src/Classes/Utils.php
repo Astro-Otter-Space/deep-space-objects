@@ -54,7 +54,27 @@ class Utils
         'Ro' => self::UNASSIGNED,
         'Jo' => self::UNASSIGNED,
         'J3' => self::UNASSIGNED, 'J9' => self::UNASSIGNED,
-        'Vd' => self::UNASSIGNED, 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
+        'Vd' => 'vdb', 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
+    ];
+
+    private static $orderCatalog = [
+        'messier',
+        'ngc',
+        'ic',
+        'sh',
+        'ugc',
+        'pgc',
+        'abl',
+        'cr',
+        'cld',
+        'ldn',
+        'lbn',
+        'rcw',
+        'sto',
+        'dodz',
+        'ddo',
+        'vdb',
+        self::UNASSIGNED
     ];
 
     /**
@@ -75,6 +95,14 @@ class Utils
     public static function getCatalogMapping()
     {
         return self::$catalogMapping;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getOrderCatalog()
+    {
+        return self::$orderCatalog;
     }
 
     /**
