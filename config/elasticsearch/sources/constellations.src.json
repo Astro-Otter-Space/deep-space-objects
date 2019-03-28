@@ -10,7 +10,7 @@
         "alt_es": "Andrómeda",
         "alt_de": "Andromeda",
         "alt_pt": "Andrômeda",
-        "alt_it": ""
+        "alt_it": "Andromeda"
       },
       "desc": {
         "desc": "",
@@ -142,7 +142,7 @@
         "alt_es": "Máquina Neumática",
         "alt_de": "Luftpumpe",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Macchina Pneumatica"
       },
       "desc": {
         "desc": "",
@@ -194,7 +194,7 @@
         "alt_es": "Ave del Paraíso",
         "alt_de": "Paradiesvogel",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Uccello del Paradiso"
       },
       "desc": {
         "desc": "",
@@ -249,8 +249,8 @@
         "alt_fr": "L'aigle",
         "alt_es": "Águila",
         "alt_de": "Adler",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Aquila",
+        "alt_it": "Aquila"
       },
       "desc": {
         "desc": "",
@@ -330,7 +330,7 @@
         "alt_es": "Acuario",
         "alt_de": "Wassermann",
         "alt_pt": "Aquário",
-        "alt_it": ""
+        "alt_it": "Aquario"
       },
       "desc": {
         "desc": "",
@@ -453,8 +453,8 @@
         "alt_fr": "Autel",
         "alt_es": "Altar",
         "alt_de": "Altar",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Altar",
+        "alt_it": "Altare"
       },
       "desc": {
         "desc": "",
@@ -521,8 +521,8 @@
         "alt_fr": "Bélier",
         "alt_es": "Carnero",
         "alt_de": "Widder",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Carneiro",
+        "alt_it": "Ariete"
       },
       "desc": {
         "desc": "",
@@ -661,8 +661,8 @@
         "alt_fr": "Bouvier",
         "alt_es": "Boyero",
         "alt_de": "Bärenhüter",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Boieiro",
+        "alt_it": "Boote"
       },
       "desc": {
         "desc": "",
@@ -763,8 +763,8 @@
         "alt_fr": "Burin",
         "alt_es": "Cincel",
         "alt_de": "Grabstichel",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Cinzel",
+        "alt_it": "Bulino"
       },
       "desc": {
         "desc": "",
@@ -898,7 +898,7 @@
         "alt_es": "Capricornio",
         "alt_de": "Steinbock",
         "alt_pt": "Capricórnio",
-        "alt_it": ""
+        "alt_it": "Capricorno"
       },
       "desc": {
         "desc": "",
@@ -982,7 +982,7 @@
         "alt_es": "Quilla",
         "alt_de": "Kiel",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Carena"
       },
       "desc": {
         "desc": "",
@@ -1104,7 +1104,7 @@
         "alt_es": "Cassiopea",
         "alt_de": "Kassiopeia",
         "alt_pt": "Cassiopeia",
-        "alt_it": ""
+        "alt_it": "Cassiopea"
       },
       "desc": {
         "desc": "",
@@ -1286,7 +1286,7 @@
         "alt_es": "Cefeo",
         "alt_de": "Kepheus",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Cefeo"
       },
       "desc": {
         "desc": "",
@@ -1484,7 +1484,7 @@
         "alt_es": "Camaleón",
         "alt_de": "Chamäleon",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Camaleonte"
       },
       "desc": {
         "desc": "",
@@ -1546,9 +1546,9 @@
         "alt": "Circinus",
         "alt_fr": "Compas",
         "alt_es": "Compás",
-        "alt_de": "",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_de": "Zirkel",
+        "alt_pt": "Compasso",
+        "alt_it": "Compasso"
       },
       "desc": {
         "desc": "",
@@ -1600,7 +1600,7 @@
         "alt_es": "Can Mayor",
         "alt_de": "Großer Hund",
         "alt_pt": "Cão Maior",
-        "alt_it": ""
+        "alt_it": "Cane Maggiore"
       },
       "desc": {
         "desc": "",
@@ -1700,7 +1700,7 @@
         "alt_es": "Can Menor",
         "alt_de": "Kleiner Hund",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Cane Minore"
       },
       "desc": {
         "desc": "",
@@ -1814,7 +1814,7 @@
         "alt_es": "Paloma",
         "alt_de": "Taube",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Colomba"
       },
       "desc": {
         "desc": "",
@@ -1847,7 +1847,7 @@
         "alt_es": "Cabellera de Berenice",
         "alt_de": "Haar der Berenike",
         "alt_pt": "Coma Berenice",
-        "alt_it": ""
+        "alt_it": "Chioma di Berenice"
       },
       "desc": {
         "desc": "",
@@ -1899,7 +1899,7 @@
         "alt_es": "Corona Austral",
         "alt_de": "Südl. Krone",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Corona Australe"
       },
       "desc": {
         "desc": "",
@@ -1971,7 +1971,7 @@
         "alt_es": "Corona Boreal",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Corona Boreale"
       },
       "desc": {
         "desc": "",
@@ -2039,7 +2039,7 @@
         "alt_es": "Copa",
         "alt_de": "Becher",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Cratere"
       },
       "desc": {
         "desc": "",
@@ -2122,10 +2122,10 @@
       "alt": {
         "alt": "Crux",
         "alt_fr": "Croix du Sud",
-        "alt_es": "",
-        "alt_de": "",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_es": "Cruz del Sur",
+        "alt_de": "Kreuz des Südens",
+        "alt_pt": "Cruzeiro do Sul",
+        "alt_it": "Croce del Sud"
       },
       "desc": {
         "desc": "",
@@ -2183,7 +2183,7 @@
         "alt_es": "Cuervo",
         "alt_de": "Rabe",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Corvo"
       },
       "desc": {
         "desc": "",
@@ -2247,7 +2247,7 @@
         "alt_es": "Lebreles",
         "alt_de": "Jagdhunde",
         "alt_pt": "Canes Venatici",
-        "alt_it": ""
+        "alt_it": "Cani da Caccia"
       },
       "desc": {
         "desc": "",
@@ -2377,7 +2377,7 @@
         "alt_es": "Delfin",
         "alt_de": "Delphin",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Delfino"
       },
       "desc": {
         "desc": "",
@@ -2441,7 +2441,7 @@
         "alt_es": "Dorada",
         "alt_de": "Schwertfisch",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Dorado"
       },
       "desc": {
         "desc": "",
@@ -2511,9 +2511,9 @@
         "alt": "Draco",
         "alt_fr": "Dragon",
         "alt_es": "Dragón",
-        "alt_de": "",
+        "alt_de": "Drache",
         "alt_pt": "Draco",
-        "alt_it": ""
+        "alt_it": "Dragone"
       },
       "desc": {
         "desc": "",
@@ -2629,7 +2629,7 @@
         "alt_es": "Caballito",
         "alt_de": "Füllen",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Cavallino"
       },
       "desc": {
         "desc": "",
@@ -2681,7 +2681,7 @@
         "alt_es": "Eridano",
         "alt_de": "Eridanus",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Eridano"
       },
       "desc": {
         "desc": "",
@@ -2829,7 +2829,7 @@
         "alt_es": "Hornillo",
         "alt_de": "Chem. Ofen",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Fornace"
       },
       "desc": {
         "desc": "",
@@ -2975,7 +2975,7 @@
         "alt_es": "Gulla",
         "alt_de": "Kranich",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Gru"
       },
       "desc": {
         "desc": "",
@@ -3057,7 +3057,7 @@
         "alt_es": "Hércules",
         "alt_de": "Herkules",
         "alt_pt": "Hércules",
-        "alt_it": ""
+        "alt_it": "Ercole"
       },
       "desc": {
         "desc": "",
@@ -3193,7 +3193,7 @@
         "alt_es": "Reloj",
         "alt_de": "Pendeluhr",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Orologio"
       },
       "desc": {
         "desc": "",
@@ -3257,7 +3257,7 @@
         "alt_es": "Hidra",
         "alt_de": "Wasserschlange",
         "alt_pt": "Hydra",
-        "alt_it": ""
+        "alt_it": "Idra"
       },
       "desc": {
         "desc": "",
@@ -3373,7 +3373,7 @@
         "alt_es": "Hidra Austral",
         "alt_de": "Kl. Wasserschlange",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Idra Maschio"
       },
       "desc": {
         "desc": "",
@@ -3437,7 +3437,7 @@
         "alt_es": "Indio",
         "alt_de": "Inder",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Indiano"
       },
       "desc": {
         "desc": "",
@@ -3501,7 +3501,7 @@
         "alt_es": "Lagarto",
         "alt_de": "Eidechse",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Lucertola"
       },
       "desc": {
         "desc": "",
@@ -3591,7 +3591,7 @@
         "alt_es": "León",
         "alt_de": "Löwe",
         "alt_pt": "Leo",
-        "alt_it": ""
+        "alt_it": "Leone"
       },
       "desc": {
         "desc": "",
@@ -3677,7 +3677,7 @@
         "alt_es": "Liebre",
         "alt_de": "Hase",
         "alt_pt": "Lebre",
-        "alt_it": ""
+        "alt_it": "Lepre"
       },
       "desc": {
         "desc": "",
@@ -3766,8 +3766,8 @@
         "alt_fr": "Balance",
         "alt_es": "Balanza",
         "alt_de": "Waage",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Balança",
+        "alt_it": "Bilancia"
       },
       "desc": {
         "desc": "",
@@ -3841,7 +3841,7 @@
         "alt_es": "León Menor",
         "alt_de": "Kleiner Löwe",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Leone Minore"
       },
       "desc": {
         "desc": "",
@@ -3905,7 +3905,7 @@
         "alt_es": "Lobo",
         "alt_de": "Wolf",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Lupo"
       },
       "desc": {
         "desc": "",
@@ -4003,7 +4003,7 @@
         "alt_es": "Lince",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Lince"
       },
       "desc": {
         "desc": "",
@@ -4071,7 +4071,7 @@
         "alt_es": "Lira",
         "alt_de": "Leier",
         "alt_pt": "Lyra",
-        "alt_it": ""
+        "alt_it": "Lira"
       },
       "desc": {
         "desc": "",
@@ -4143,7 +4143,7 @@
         "alt_es": "Mesa",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Mensa"
       },
       "desc": {
         "desc": "",
@@ -4199,7 +4199,7 @@
         "alt_es": "Microscopio",
         "alt_de": "Mikroskop",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Microscopio"
       },
       "desc": {
         "desc": "",
@@ -4345,7 +4345,7 @@
         "alt_es": "Mosca",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Mosca"
       },
       "desc": {
         "desc": "",
@@ -4413,7 +4413,7 @@
         "alt_es": "Escuadra",
         "alt_de": "Winkelmaß",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Regolo"
       },
       "desc": {
         "desc": "",
@@ -4473,7 +4473,7 @@
         "alt_es": "Octante",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Ottante"
       },
       "desc": {
         "desc": "",
@@ -4529,7 +4529,7 @@
         "alt_es": "Ofiuco",
         "alt_de": "Schlangenträger",
         "alt_pt": "Serpentário",
-        "alt_it": ""
+        "alt_it": "Ofiuco"
       },
       "desc": {
         "desc": "",
@@ -4811,7 +4811,7 @@
         "alt_es": "Pavo",
         "alt_de": "Pfau",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Pavone"
       },
       "desc": {
         "desc": "",
@@ -4895,7 +4895,7 @@
         "alt_es": "Pegaso",
         "alt_de": "Pegasus",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Pegaso"
       },
       "desc": {
         "desc": "",
@@ -5149,7 +5149,7 @@
         "alt_es": "Fénix",
         "alt_de": "Phönix",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Fenice"
       },
       "desc": {
         "desc": "",
@@ -5221,7 +5221,7 @@
         "alt_es": "Pintor",
         "alt_de": "Maler",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Pittore"
       },
       "desc": {
         "desc": "",
@@ -5273,7 +5273,7 @@
         "alt_es": "Pez Austral",
         "alt_de": "",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Pesce Australe"
       },
       "desc": {
         "desc": "",
@@ -5353,7 +5353,7 @@
         "alt_es": "Peces",
         "alt_de": "Fische",
         "alt_pt": "Peixes",
-        "alt_it": ""
+        "alt_it": "Pesci"
       },
       "desc": {
         "desc": "",
@@ -5495,7 +5495,7 @@
         "alt_es": "Popa",
         "alt_de": "Achterdeck",
         "alt_pt": "Cão Menor",
-        "alt_it": ""
+        "alt_it": "Poppa"
       },
       "desc": {
         "desc": "",
@@ -5588,8 +5588,8 @@
         "alt_fr": "Boussole",
         "alt_es": "Brújula",
         "alt_de": "Schiffskompass",
-        "alt_pt": "",
-        "alt_it": ""
+        "alt_pt": "Bússola",
+        "alt_it": "Bussola"
       },
       "desc": {
         "desc": "",
@@ -5645,7 +5645,7 @@
         "alt_es": "Retículo",
         "alt_de": "Netz",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Reticolo"
       },
       "desc": {
         "desc": "",
@@ -5807,7 +5807,7 @@
         "alt_es": "Escultor",
         "alt_de": "Bildhauer",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Scultore"
       },
       "desc": {
         "desc": "",
@@ -5999,7 +5999,7 @@
         "alt_es": "Sextante",
         "alt_de": "Sextant",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Sestante"
       },
       "desc": {
         "desc": "",
@@ -6295,7 +6295,7 @@
         "alt_es": "Toro",
         "alt_de": "Stier",
         "alt_pt": "Touro",
-        "alt_it": ""
+        "alt_it": "Toro"
       },
       "desc": {
         "desc": "",
@@ -6395,7 +6395,7 @@
         "alt_es": "Telescopio",
         "alt_de": "Teleskop",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Telescopio"
       },
       "desc": {
         "desc": "",
@@ -6447,7 +6447,7 @@
         "alt_es": "Triángulo Austral",
         "alt_de": "Südl. Dreieck",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Triangolo Australe"
       },
       "desc": {
         "desc": "",
@@ -6503,7 +6503,7 @@
         "alt_es": "Triángulo",
         "alt_de": "Dreieck",
         "alt_pt": "Triângulo",
-        "alt_it": ""
+        "alt_it": "Triangolo"
       },
       "desc": {
         "desc": "",
@@ -6559,7 +6559,7 @@
         "alt_es": "Tucán",
         "alt_de": "Tukan",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Tucano"
       },
       "desc": {
         "desc": "",
@@ -6627,7 +6627,7 @@
         "alt_es": "Osa Mayor",
         "alt_de": "Großer Bär",
         "alt_pt": "Ursa Maior",
-        "alt_it": ""
+        "alt_it": "Orsa Maggiore"
       },
       "desc": {
         "desc": "",
@@ -6791,7 +6791,7 @@
         "alt_es": "Osa Menor",
         "alt_de": "Kleiner Bär",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Orsa Minore"
       },
       "desc": {
         "desc": "",
@@ -6863,7 +6863,7 @@
         "alt_es": "Velas",
         "alt_de": "Segel",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Vele"
       },
       "desc": {
         "desc": "",
@@ -6935,7 +6935,7 @@
         "alt_es": "Virgen",
         "alt_de": "Jungfrau",
         "alt_pt": "Virgem",
-        "alt_it": ""
+        "alt_it": "Vergine"
       },
       "desc": {
         "desc": "",
@@ -7039,7 +7039,7 @@
         "alt_es": "Pez Volador",
         "alt_de": "Fliegender Fisch",
         "alt_pt": "",
-        "alt_it": ""
+        "alt_it": "Pesce Volante"
       },
       "desc": {
         "desc": "",
