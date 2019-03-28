@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\CacheInterface;
+use App\Classes\Utils;
 use App\Entity\Dso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
@@ -161,6 +162,7 @@ class DsoController extends AbstractController
         $page = 1;
         $from = DsoRepository::FROM;
         $filters = $listAggregations = [];
+        $ordering = Utils::getOrderCatalog();
 
         /** @var Router $router */
         $router = $this->get('router');
@@ -196,6 +198,7 @@ class DsoController extends AbstractController
 
             $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
                 return [
+                    'code' => key($facet),
                     'value' => $translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
                     'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
@@ -211,6 +214,19 @@ class DsoController extends AbstractController
                         [$type => $filters[$type]]
                     )
                 );
+            }
+
+
+            // Sort here because dont know ho to do in aggregates query...
+            // Specific sort for catalog
+            if ('catalog' === $type) {
+                usort($listFacetsByType, function($facetA, $facetB) use ($ordering) {
+                    return (array_search($facetA['code'], $ordering) > array_search($facetB['code'], $ordering));
+                });
+            } elseif ('constellation' === $type) {
+                usort($listFacetsByType, function($kFacetA, $kFacetB) {
+                    return strcmp($kFacetA['code'], $kFacetB['code']);
+                });
             }
 
             $listAggregations[$type] = [

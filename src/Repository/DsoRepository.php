@@ -116,12 +116,12 @@ class DsoRepository extends AbstractRepository
 
         $query->addSort(
             [
-                'data.mag' => ['order' => 'asc', 'mode' => 'avg'],
+                'data.mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
             ]
 
         );
-        // TODO : add sort by magnitude
 
+        /** @var Search $search */
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
@@ -200,18 +200,18 @@ class DsoRepository extends AbstractRepository
         // Sort
         $query->addSort([
             'order' => [
-                'order' => 'asc'
+                'order' => parent::SORT_ASC
             ]
         ]);
 
         // Aggregates
         array_walk(self::$listAggregates, function($tab, $type) use($query) {
             /** @var Terms $aggregation */
-           $aggregation = new Terms($type);
-           $aggregation->setField($tab['field']);
-           $aggregation->setSize($tab['size']);
+            $aggregation = new Terms($type);
+            $aggregation->setField($tab['field']);
+            $aggregation->setSize($tab['size']);
 
-           $query->addAggregation($aggregation);
+            $query->addAggregation($aggregation);
         });
 
 

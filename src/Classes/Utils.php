@@ -98,7 +98,7 @@ class Utils
     }
 
     /**
-     * @return array
+     * @return array, bien rentré :) ? ALors
      */
     public static function getOrderCatalog()
     {
