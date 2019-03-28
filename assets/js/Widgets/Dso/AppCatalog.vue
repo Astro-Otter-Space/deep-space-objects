@@ -27,16 +27,14 @@
             :show-facets="showFacets"
           >
           </cards-grid>
-
-          <div class="pagination">
-            <svgicon name="left" width="20" height="20" color="#e9e9e9" v-if="1 < currentPage"></svgicon>
-            {{currentPage}} / {{totalPage}}
-            <svgicon name="right" width="20" height="20" color="#e9e9e9" v-if="currentPage < totalPage"></svgicon>
-          </div>
-
+          <pagination
+            :current-page="currentPage"
+            :last-page="totalPage"
+            :link-previous="pagination.prev"
+            :link-next="pagination.next"
+          ></pagination>
         </div>
       </div>
-
     </section>
   </div>
 </template>
@@ -47,6 +45,7 @@
 
   import ImageHeader from './components/Imageheader'
   import CardsGrid from './components/CardsGrid'
+  import Pagination from './../App/Pagination'
   import './../Icons/cross';
   import './../Icons/up';
   import './../Icons/down';
@@ -56,16 +55,18 @@
   let dsoList = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.listDso);
   let listFacets = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.listFacets);
   let listFilters = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.selectedFilters);
-  let currentPage = document.querySelector(DATA_SELECTOR).dataset.page;
-  let totalPage = document.querySelector(DATA_SELECTOR).dataset.totalPage;
-  let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
+  let currentPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.page);
+  let totalPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.totalPage);
+  let nbItems = parseInt(document.querySelector(DATA_SELECTOR).dataset.totalDso);
   let showFacets = false;
+  let pagination = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.pagination);
 
   export default {
     name: "AppCatalog",
     components: {
       ImageHeader,
       CardsGrid,
+      Pagination
     },
     data() {
       return {
@@ -77,7 +78,8 @@
         totalPage: totalPage,
         listFilters: listFilters,
         listFacets: listFacets,
-        showFacets: showFacets
+        showFacets: showFacets,
+        pagination: pagination
       }
     },
     methods: {

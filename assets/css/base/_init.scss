@@ -67,6 +67,10 @@ hr {
 button {
   padding: 2px;
   cursor: pointer;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
 }
 
 textarea {

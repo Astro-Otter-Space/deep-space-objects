@@ -54,7 +54,7 @@ class LayoutController extends AbstractController
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-            'leftSideMenu' => $this->leftSideMenu($currentLocale, $translatorInterface)
+            'leftSideMenu' => $this->leftSideMenu($currentLocale, $translatorInterface),
         ];
 
         /** @var Response $response */

@@ -25,6 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DsoController extends AbstractController
 {
+    const DEFAULT_PAGE = 1;
 
     /**
      * @Route({
@@ -159,7 +160,7 @@ class DsoController extends AbstractController
      */
     public function catalog(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
     {
-        $page = 1;
+        $page = self::DEFAULT_PAGE;
         $from = DsoRepository::FROM;
         $filters = $listAggregations = [];
         $ordering = Utils::getOrderCatalog();
@@ -241,7 +242,7 @@ class DsoController extends AbstractController
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = $nbItems;
         $result['current_page'] = $page;
-        $result['nb_pages'] = ceil($nbItems/DsoRepository::SIZE);
+        $result['nb_pages'] = $nbPages = ceil($nbItems/DsoRepository::SIZE);
 
         $queryAll = $request->query->all();
         $result['filters'] = call_user_func("array_merge", array_map(function($val, $key) use($translatorInterface, $router, $queryAll) {
@@ -250,6 +251,12 @@ class DsoController extends AbstractController
                 'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))
             ];
         }, $filters, array_keys($filters)));
+
+        unset($queryAll['page']);
+        $result['pagination'] = [
+          'prev' => (self::DEFAULT_PAGE < $page) ? $router->generate('dso_catalog', array_merge($queryAll, ['page' => $page-1])): null,
+          'next' => ($nbPages > $page) ? $router->generate('dso_catalog', array_merge($queryAll, ['page' => $page+1])): null
+        ];
 
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig', $result);

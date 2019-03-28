@@ -13,6 +13,7 @@
      data-total-dso="{{ 'nbResults'|transchoice(nb_items) }}"
      data-page="{{ current_page }}"
      data-total-page="{{ nb_pages }}"
+     data-pagination="{{ pagination|json_encode }}"
   >
   </div>
 {% endblock %}
