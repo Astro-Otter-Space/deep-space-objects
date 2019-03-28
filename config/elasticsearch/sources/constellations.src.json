@@ -1897,7 +1897,7 @@
         "alt": "Corona Austrina",
         "alt_fr": "Couronne australe",
         "alt_es": "Corona Austral",
-        "alt_de": "Südl. Krone",
+        "alt_de": "Südliche Krone",
         "alt_pt": "",
         "alt_it": "Corona Australe"
       },
@@ -1969,7 +1969,7 @@
         "alt": "Corona Borealis",
         "alt_fr": "Couronne boréale",
         "alt_es": "Corona Boreal",
-        "alt_de": "",
+        "alt_de": "Nördliche Krone",
         "alt_pt": "",
         "alt_it": "Corona Boreale"
       },
@@ -4001,7 +4001,7 @@
         "alt": "Lynx",
         "alt_fr": "Lynx",
         "alt_es": "Lince",
-        "alt_de": "",
+        "alt_de": "Luchs",
         "alt_pt": "",
         "alt_it": "Lince"
       },
@@ -4141,7 +4141,7 @@
         "alt": "Mensa",
         "alt_fr": "Table",
         "alt_es": "Mesa",
-        "alt_de": "",
+        "alt_de": "Tafelberg",
         "alt_pt": "",
         "alt_it": "Mensa"
       },
@@ -4343,7 +4343,7 @@
         "alt": "Musca",
         "alt_fr": "Mouche",
         "alt_es": "Mosca",
-        "alt_de": "",
+        "alt_de": "Fliege",
         "alt_pt": "",
         "alt_it": "Mosca"
       },
@@ -4471,7 +4471,7 @@
         "alt": "Octans",
         "alt_fr": "Octant",
         "alt_es": "Octante",
-        "alt_de": "",
+        "alt_de": "Oktant",
         "alt_pt": "",
         "alt_it": "Ottante"
       },
@@ -5271,7 +5271,7 @@
         "alt": "Piscis Austrinus",
         "alt_fr": "Poisson austral",
         "alt_es": "Pez Austral",
-        "alt_de": "",
+        "alt_de": "Südlicher Fisch",
         "alt_pt": "",
         "alt_it": "Pesce Australe"
       },
@@ -6445,7 +6445,7 @@
         "alt": "Triangulum Australe",
         "alt_fr": "Triangle australe",
         "alt_es": "Triángulo Austral",
-        "alt_de": "Südl. Dreieck",
+        "alt_de": "Südliches Dreieck",
         "alt_pt": "",
         "alt_it": "Triangolo Australe"
       },
