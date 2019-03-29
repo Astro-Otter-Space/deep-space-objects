@@ -57,7 +57,7 @@
   let listFilters = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.selectedFilters);
   let currentPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.page);
   let totalPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.totalPage);
-  let nbItems = parseInt(document.querySelector(DATA_SELECTOR).dataset.totalDso);
+  let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
   let showFacets = false;
   let pagination = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.pagination);
 
