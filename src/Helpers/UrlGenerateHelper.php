@@ -43,7 +43,7 @@ class UrlGenerateHelper
                     break;
 
                 case ConstellationRepository::INDEX_NAME:
-                    $url = $this->router->generate('constellation_show', ['id' => $entity->getId()]);
+                    $url = $this->router->generate('constellation_show', ['id' => strtolower($entity->getId())]);
                     break;
 
                 default:
