@@ -15,8 +15,10 @@ class HomeController extends AbstractController
 {
 
     /**
+     * Homepage
+     *
      * @Route("/", name="homepage")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function homepage()
     {

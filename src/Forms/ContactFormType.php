@@ -100,7 +100,7 @@ class ContactFormType extends AbstractType
 
         $builder->add('country', CountryType::class, [
             'label' => 'contact.form.country',
-            'empty_data' => 'Coucou',
+            'empty_data' => '',
             'label_attr' => [
                 'class' => self::CLASS_LABEL
             ],
@@ -112,19 +112,12 @@ class ContactFormType extends AbstractType
         ]);
 
 
-        $translate = $this->translatorInterface;
         $builder->add('topic', ChoiceType::class, [
             'choices' => array_flip(Utils::listTopicsContact()),
             'label' => 'contact.form.topic',
-//            'choice_label' => function($value, $key) use($translate){
-//                return $translate->trans($key);
-//            },
             'expanded' => true,
             'multiple' => false,
             'required' => true,
-            'attr' => [
-                'class' => 'Form__radio'
-            ],
             'label_attr' => [
                 'class' => self::CLASS_LABEL
             ]

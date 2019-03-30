@@ -28,20 +28,4 @@ class GenericPageController extends AbstractController
         return $response;
     }
 
-
-    /**
-     * @Route({
-     *  "en": "/news",
-     *  "fr": "/actualites",
-     *  "es": "/news",
-     *  "de": "/news",
-     *  "pt": "/news"
-     * }, name="news")
-     */
-    public function blog()
-    {
-       $response = new Response();
-
-       return $response;
-    }
 }

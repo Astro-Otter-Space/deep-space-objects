@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LayoutController extends AbstractController
 {
     const HTTP_TTL = 31556952;
-    
+
     /**
      * Header
      *

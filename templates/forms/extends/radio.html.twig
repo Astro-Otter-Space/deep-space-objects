@@ -1,5 +1,5 @@
 {% block choice_widget  %}
-  {#{% spaceless %}#}
+  {% spaceless %}
     {% if expanded %}
       <div class="Form__list appGridFilter__filter">
         {% for group_label, choice in choices %}
@@ -9,8 +9,9 @@
             {#Input#}
             <input
                 type="radio"
-                {{ block('widget_attributes') }}
-                {#value="{{ child.value }}" name="{{ form.vars.full_name }}[]"#}
+                value="{{ child.value }}"
+                name="{{ form.vars.full_name }}[]"
+                id="{{ form.vars.id }}_{{ loop.index0 }}"
                 {% if form.vars.value == child.data %} checked="checked"{% endif %}
             />
 
@@ -29,5 +30,5 @@
         {% endfor %}
       </div>
     {% endif %}
-  {#{% endspaceless %}#}
+  {% endspaceless %}
 {% endblock choice_widget %}

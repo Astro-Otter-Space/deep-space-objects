@@ -60,7 +60,7 @@ class PageController extends AbstractController
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
 
-                $contactData->label_country = Intl::getRegionBundle()->getCountryNames($contactData->getCountry());
+                $contactData->label_country = Intl::getRegionBundle()->getCountryNames()[$contactData->getCountry()];
 
                 $template = [
                     'html' => 'includes/emails/contact.html.twig',
@@ -69,12 +69,13 @@ class PageController extends AbstractController
 
                 $subject = Utils::listTopicsContact()[$contactData->getTopic()];
                 $content['contact'] = $contactData;
+
                 $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
                 if (true === $sendMail) {
                     $this->addFlash('form.success','form.ok.sending');
                     $isValid = true;
                 } else {
-                    $this->addFlash('form.failed','form.error.send_mail');
+                    $this->addFlash('form.failed','form.error.sending');
                 }
             } else {
                 $this->addFlash('form.failed','form.error.message');
