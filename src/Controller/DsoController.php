@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\Entity\AbstractEntity;
 use App\Entity\Dso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
@@ -47,6 +48,9 @@ class DsoController extends AbstractController
     public function show(string $id, DsoManager $dsoManager, CacheInterface $cacheUtil)
     {
         $params = [];
+
+        $id = explode(trim(AbstractEntity::DATA_CONCAT_GLUE), $id);
+        $id = reset($id);
 
         /** @var Dso $dso */
         $dso = $dsoManager->buildDso($id);

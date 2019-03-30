@@ -159,6 +159,26 @@ class Utils
         return $numberFormat->format($number);
     }
 
+
+    /**
+     * Transform a string name into URL name
+     * @param $input
+     *
+     * @return string
+     */
+    public static function camelCaseUrlTransform($input)
+    {
+        /** @var \Transliterator $transliterator */
+        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+
+        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $transliterator->transliterate($input), $matches);
+        $ret = $matches[0];
+        foreach ($ret as &$match) {
+            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+        }
+        return implode(trim(self::GLUE_DASH), $ret);
+    }
+
     /**
      *
      */
