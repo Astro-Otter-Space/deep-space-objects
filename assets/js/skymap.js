@@ -16,7 +16,7 @@ var MAP_MODULE = (function(c) {
     location: false,
     controls: false,
     container: "map",
-    datapath: "build/data/",
+    datapath: "/build/data/",
     // STARS
     stars: {
       colors: false,
@@ -24,7 +24,7 @@ var MAP_MODULE = (function(c) {
       style: { fill: "#000", opacity: 1 },
       limit: 6,
       size: 5,
-      data: 'stars.6.json'
+      data: 'stars.8.json'
     },
     // DEEP SKY OBJECTS
     dsos: {
@@ -32,6 +32,7 @@ var MAP_MODULE = (function(c) {
       show: true,
       size: null,
       exponent: 1.4,
+      //data: 'dsos.6.json',
       symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
         gg: { shape: "circle", fill: "#ff0000" },          // Galaxy cluster
         g: { shape: "ellipse", fill: "#ff0000" },         // Generic galaxy
@@ -83,13 +84,13 @@ var MAP_MODULE = (function(c) {
         // grid values: "outline", "center", or [lon,...] specific position
         lat: { pos: [""], fill: "#eee", font: "10px Helvetica, Arial, sans-serif" }
       },
-      equatorial: { show: true, stroke: "#aaaaaa", width: 1.3, opacity: 0.7 },
+      equatorial: { show: false, stroke: "#aaaaaa", width: 1.3, opacity: 0.7 },
     },
     // BACKGROUND
     background: {
-      fill: "#3e3d40",   // Area fill
+      fill: "#171717",   // Area fill
       opacity: 1,
-      stroke: "#3e3d40", // Outline
+      stroke: "#2B2A34", // Outline
       width: 1.5
     },
     // HORIZON
@@ -115,49 +116,3 @@ var MAP_MODULE = (function(c) {
 })(Celestial);
 
 MAP_MODULE.map([], []);
-
-/*export default function (jsonConstellation, jsonDso)
-{
-
-
-  Celestial.add({
-    type: "dso", callback: function (jsonDso, err) {
-      if (err) return console.warn(err);
-      let dso = Celestial.getData(jsonDso, config.transform);
-
-      Celestial.container.selectAll(".dsos")
-        .data(dso.features)
-        .enter().append("path")
-        .attr("class", "dso");
-    }, redraw: function () {
-      Celestial.container.selectAll(".dso").each(function (d) {
-        if (Celestial.clip(d.geometry.coordinates)) {
-          // get point coordinates
-          var pt = Celestial.mapProjection(d.geometry.coordinates);
-          // object radius in pixel, could be varable depending on e.g. magnitude
-          var r = Math.pow(parseInt(d.properties.dim) * 0.25, 0.5);
-
-          // draw on canvas
-          // Set object styles
-          Celestial.setStyle(pointStyle);
-          // Start the drawing path
-          Celestial.context.beginPath();
-          // Thats a circle in html5 canvas
-          Celestial.context.arc(pt[0], pt[1], r, 0, 2 * Math.PI);
-          // Finish the drawing path
-          Celestial.context.closePath();
-          // Draw a line along the path with the prevoiusly set stroke color and line width
-          Celestial.context.stroke();
-          // Fill the object path with the prevoiusly set fill color
-          Celestial.context.fill();
-          // Set text styles
-          Celestial.setTextStyle(textStyle);
-          // and draw text on canvas
-          Celestial.context.fillText(d.properties.name, pt[0] + r, pt[1] + r);
-        }
-      });
-    }
-  });
-
-  Celestial.display(config);
-};*/
