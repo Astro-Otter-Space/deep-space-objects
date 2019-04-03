@@ -4,8 +4,15 @@
 
 {% block content %}
   <section class="Dso__main">
-    <h2 class="Dso__title">{{ 'skymap'|trans }}</h2>
-    <div class="Dso__map">
+    <div class="Dso__container Dso__noHeader">
+      <h2 class="Dso__title">{{ 'skymap'|trans }}</h2>
+      <div class="Dso__map" id="map">
+      </div>
     </div>
   </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('skymap') }}
 {% endblock %}

@@ -1,4 +1,7 @@
-import Celestial from 'd3-celestial';
+import * as d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
+import geo from './../../node_modules/d3-celestial/lib/d3.geo.projection.min';
+
+import Celestial from 'd3-celestial/celestial';
 
 var MAP_MODULE = (function(c) {
 
@@ -111,6 +114,7 @@ var MAP_MODULE = (function(c) {
   };
 })(Celestial);
 
+MAP_MODULE.map([], []);
 
 /*export default function (jsonConstellation, jsonDso)
 {

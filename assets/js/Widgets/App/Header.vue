@@ -24,6 +24,10 @@
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
+        <!-- Dark/day mod -->
+        <li>
+          <svgicon name="moon" width="30" height="30" color="#e9e9e9"></svgicon>
+        </li>
         <!--Languages-->
         <li class="header__drop">
           <a v-on:click="displayDropMenu()" title="Switch language">

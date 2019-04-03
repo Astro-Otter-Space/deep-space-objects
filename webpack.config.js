@@ -27,8 +27,7 @@ Encore
   .addEntry('notfound', './assets/js/notfound.js')
 
   //D3-celestial
-  // .addEntry('celestial', './node_modules/d3-celestial/celestial.js')
-  // .addEntry('d3', './node_modules/d3-celestial/lib/d3.js')
+  .addEntry('skymap', './assets/js/skymap.js')
   // .addStyleEntry('celestial', './node_modules/d3-celestial/celestial.css')
 
   // will require an extra script tag for runtime.js

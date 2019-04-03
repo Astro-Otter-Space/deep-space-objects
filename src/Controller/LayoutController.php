@@ -78,7 +78,7 @@ class LayoutController extends AbstractController
 
         return [
             'catalog' => [
-                'label' => $translatorInterface->trans('catalog'),
+                'label' => $translatorInterface->trans('catalogs'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
                 'icon_class' => 'galaxy-cluster'
             ],
@@ -93,7 +93,7 @@ class LayoutController extends AbstractController
                 'icon_class' => 'telescop'
             ],
             'map' => [
-                'label' => 'skymap', // $translatorInterface->trans('skymap'),
+                'label' => $translatorInterface->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
                 'icon_class' => 'planet'
             ],
