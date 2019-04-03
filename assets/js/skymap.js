@@ -1,4 +1,3 @@
-import d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
 import Celestial from 'd3-celestial';
 
 var MAP_MODULE = (function(c) {
