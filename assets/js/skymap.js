@@ -130,75 +130,81 @@ var MAP_MODULE = (function(c) {
    * @param jsonDso
    */
   function buildMap(jsonConstellation, jsonDso) {
-    var pointStyle = {
-        stroke: "rgba(255, 0, 204, 1)",
-        fill: "rgba(255, 0, 204, 0.15)"
-      },
-      textStyle = {
-        fill:"rgba(255, 0, 204, 1)",
-        font: "normal bold 15px Helvetica, Arial, sans-serif",
-        align: "left",
-        baseline: "bottom"
-      };
 
-    c.add({
-      type: "json",
-      callback: function(error, json) {
-        if (error) return console.warn(error.message);
+    if (jsonDso !== undefined && 0 < jsonDso.features.length) {
+      var pointStyle = {
+          stroke: "rgba(255, 0, 204, 1)",
+          fill: "rgba(255, 0, 204, 0.15)"
+        },
+        textStyle = {
+          fill:"rgba(255, 0, 204, 1)",
+          font: "normal bold 15px Helvetica, Arial, sans-serif",
+          align: "left",
+          baseline: "bottom"
+        };
 
-        var dso = c.getData(jsonDso, config.transform);
-        c.container
-          .data(dso.features)
-          .enter().append("path")
-          .attr("class", "dso");
-        c.redraw();
-      },
-      redraw: function() {
-        //var m = c.metrics(),
+      c.add({
+        type: "json",
+        callback: function(error, json) {
+          if (error) return console.warn(error.message);
+
+          var dso = c.getData(jsonDso, config.transform);
+          c.container
+            .data(dso.features)
+            .enter().append("path")
+            .attr("class", "dso");
+          c.redraw();
+        },
+        redraw: function() {
+          //var m = c.metrics(),
           //quadtree = d3.geom.quadtree().extent([[-1, -1], [m.width + 1, m. height + 1]])([]);
 
-        c.container.selectAll(".dsos").each(function(d) {
-          if (c.clip(d.geometry.coordinates)) {
-            // get point coordinates
-            var pt = c.mapProjection(d.geometry.coordinates);
-            // object radius in pixel, could be varable depending on e.g. magnitude
-            var r = Math.pow(20 - d.properties.mag, 0.7);
+          c.container.selectAll(".dsos").each(function(d) {
+            if (c.clip(d.geometry.coordinates)) {
+              // get point coordinates
+              var pt = c.mapProjection(d.geometry.coordinates);
+              // object radius in pixel, could be varable depending on e.g. magnitude
+              var r = Math.pow(20 - d.properties.mag, 0.7);
 
-            c.setStyle(pointStyle);
-            // Start the drawing path
-            c.context.beginPath();
-            // Thats a circle in html5 canvas
-            c.context.arc(pt[0], pt[1], r, 0, 2 * Math.PI);
-            // Finish the drawing path
-            c.context.closePath();
-            // Draw a line along the path with the prevoiusly set stroke color and line width
-            c.context.stroke();
-            // Fill the object path with the prevoiusly set fill color
-            c.context.fill();
+              c.setStyle(pointStyle);
+              // Start the drawing path
+              c.context.beginPath();
+              // Thats a circle in html5 canvas
+              c.context.arc(pt[0], pt[1], r, 0, 2 * Math.PI);
+              // Finish the drawing path
+              c.context.closePath();
+              // Draw a line along the path with the prevoiusly set stroke color and line width
+              c.context.stroke();
+              // Fill the object path with the prevoiusly set fill color
+              c.context.fill();
 
-            // Set text styles
-            //c.setTextStyle(textStyle);
-            // and draw text on canvas
-            //c.context.fillText(d.properties.name, pt[0] + r - 1, pt[1] - r + 1);
-
-            // Find nearest neighbor
-            var nearest = quadtree.find(pt);
-
-            // If neigbor exists, check distance limit
-            if (!nearest || distance(nearest, pt) > PROXIMITY_LIMIT) {
-              // Nothing too close, add it and go on
-              quadtree.add(pt)
               // Set text styles
-              c.setTextStyle(textStyle);
-              // and draw text on canvas with offset
-              c.context.fillText(d.properties.name, pt[0] + r + 2, pt[1] + r + 2);
+              //c.setTextStyle(textStyle);
+              // and draw text on canvas
+              //c.context.fillText(d.properties.name, pt[0] + r - 1, pt[1] - r + 1);
+
+              // Find nearest neighbor
+              var nearest = quadtree.find(pt);
+
+              // If neigbor exists, check distance limit
+              if (!nearest || distance(nearest, pt) > PROXIMITY_LIMIT) {
+                // Nothing too close, add it and go on
+                quadtree.add(pt)
+                // Set text styles
+                c.setTextStyle(textStyle);
+                // and draw text on canvas with offset
+                c.context.fillText(d.properties.name, pt[0] + r + 2, pt[1] + r + 2);
+              }
             }
-          }
-        });
-      }
-    });
-    c.display(config);
-    c.zoomBy(5);
+          });
+        }
+      });
+      c.display(config);
+      c.zoomBy(5);
+    } else {
+      c.display(config);
+    }
+
   }
 
   return {
