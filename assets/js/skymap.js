@@ -3,10 +3,11 @@ import geo from './../../node_modules/d3-celestial/lib/d3.geo.projection.min';
 
 import Celestial from 'd3-celestial/celestial.min';
 
-var MAP_MODULE = (function(c) {
+var MAP_MODULE = (function(c, constId) {
 
   let PROXIMITY_LIMIT = 20;
 
+  let starFile = 'stars.' + constId + '.json'
   let config = {
     width: 0,
     projection: "aitoff",
@@ -21,14 +22,14 @@ var MAP_MODULE = (function(c) {
     datapath: "/build/data/",
     // STARS
     stars: {
-      colors: false,
-      names: false,
+      colors: true,
+      names: true,
+      proper: true,
       style: { fill: "#ffffff", opacity: 1 },
-      name: true,
-      namelimit: 4,
+      namelimit: 2,
       limit: 8,
       size: 5,
-      data: 'stars.6.json'
+      data: starFile
     },
     // DEEP SKY OBJECTS
     dsos: {
@@ -131,7 +132,7 @@ var MAP_MODULE = (function(c) {
    */
   function buildMap(jsonConstellation, jsonDso) {
 
-    if (jsonDso !== undefined && 0 < jsonDso.features.length) {
+    if (jsonDso !== undefined && "" !== jsonDso) {
       var pointStyle = {
           stroke: "rgba(255, 0, 204, 1)",
           fill: "rgba(255, 0, 204, 0.15)"
@@ -210,7 +211,7 @@ var MAP_MODULE = (function(c) {
   return {
     map: buildMap
   };
-})(Celestial);
+})(Celestial, document.getElementById("geojson").dataset.const);
 
 let jsonDso = JSON.parse(document.getElementById("geojson").dataset.dso);
 MAP_MODULE.map([], jsonDso);

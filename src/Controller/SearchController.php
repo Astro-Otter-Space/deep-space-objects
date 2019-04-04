@@ -49,4 +49,39 @@ class SearchController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route(
+     *     "/build/data/stars.{id}.json",
+     *     options={"expose"=true},
+     *     name="list_stars"
+     * )
+     * @param Request $request
+     * @param $id
+     *
+     * @return JsonResponse
+     */
+    public function starsFiltered(Request $request, $id)
+    {
+        $webPath = $this->getParameter('kernel.project_dir') . '/public/';
+        $file = $webPath . 'build/data/stars.8.json';
+
+        if (file_exists($file)) {
+
+            $jsonContent = $starsData = json_decode(file_get_contents($file), true)['features'];
+
+            if (isset($id) && !empty($id)) {
+                $jsonContent = array_filter($jsonContent, function($tab) use ($id) {
+                    return strtolower($tab['properties']['con']) === strtolower($id);
+                });
+
+                $starsData = [
+                    "type"  => "FeatureCollection",
+                    "features" => array_values($jsonContent)
+                ];
+            }
+        }
+
+        return new JsonResponse($starsData, Response::HTTP_OK);
+    }
 }
