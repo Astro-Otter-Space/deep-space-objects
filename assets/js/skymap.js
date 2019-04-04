@@ -3,7 +3,7 @@ import geo from './../../node_modules/d3-celestial/lib/d3.geo.projection.min';
 
 import Celestial from 'd3-celestial/celestial.min';
 
-var MAP_MODULE = (function(c, constId) {
+var MAP_MODULE = (function(c, constId, zoom) {
 
   let PROXIMITY_LIMIT = 20;
 
@@ -14,7 +14,7 @@ var MAP_MODULE = (function(c, constId) {
     transform: "equatorial",
     center: JSON.parse(document.getElementById("geojson").dataset.center),
     adaptable: true,
-    interactive: false,
+    interactive: true,
     form: false,
     location: false,
     controls: false,
@@ -34,30 +34,32 @@ var MAP_MODULE = (function(c, constId) {
     // DEEP SKY OBJECTS
     dsos: {
       show: true,
-      data: "",
-      size: 10
-      // names: true,
+      data: "nodata.json",
+      //size: 10
+      names: true,
+      limit: 15,
+      namelimit: 15,
       // size: null,
       // exponent: 1.4,
-      // symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
-      //   gg: { shape: "circle", fill: "#ff0000" },          // Galaxy cluster
-      //   g: { shape: "ellipse", fill: "#ff0000" },         // Generic galaxy
-      //   s: { shape: "ellipse", fill: "#ff0000" },         // Spiral galaxy
-      //   s0: { shape: "ellipse", fill: "#ff0000" },         // Lenticular galaxy
-      //   sd: { shape: "ellipse", fill: "#ff0000" },         // Dwarf galaxy
-      //   e: { shape: "ellipse", fill: "#ff0000" },         // Elliptical galaxy
-      //   i: { shape: "ellipse", fill: "#ff0000" },         // Irregular galaxy
-      //   oc: { shape: "circle", fill: "#ffcc00", stroke: "#ffcc00", width: 1.5 },             // Open cluster
-      //   gc: { shape: "circle", fill: "#ff9900" },          // Globular cluster
-      //   en: { shape: "square", fill: "#ff00cc" },          // Emission nebula
-      //   bn: { shape: "square", fill: "#ff00cc", stroke: "#ff00cc", width: 2 },               // Generic bright nebula
-      //   sfr: { shape: "square", fill: "#cc00ff", stroke: "#cc00ff", width: 2 },               // Star forming region
-      //   rn: { shape: "square", fill: "#00ooff" },          // Reflection nebula
-      //   pn: { shape: "diamond", fill: "#00cccc" },         // Planetary nebula
-      //   snr: { shape: "diamond", fill: "#ff00cc" },         // Supernova remnant
-      //   dn: { shape: "square", fill: "#999999", stroke: "#999999", width: 2 },               // Dark nebula grey
-      //   pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
-      // }
+      symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
+         gg: { shape: "circle", fill: "#ff0000" },          // Galaxy cluster
+         g: { shape: "ellipse", fill: "#ff0000" },         // Generic galaxy
+         s: { shape: "ellipse", fill: "#ff0000" },         // Spiral galaxy
+         s0: { shape: "ellipse", fill: "#ff0000" },         // Lenticular galaxy
+         sd: { shape: "ellipse", fill: "#ff0000" },         // Dwarf galaxy
+         e: { shape: "ellipse", fill: "#ff0000" },         // Elliptical galaxy
+         i: { shape: "ellipse", fill: "#ff0000" },         // Irregular galaxy
+         oc: { shape: "circle", fill: "#ffcc00", stroke: "#ffcc00", width: 1.5 },             // Open cluster
+         gc: { shape: "circle", fill: "#ff9900" },          // Globular cluster
+         en: { shape: "square", fill: "#ff00cc" },          // Emission nebula
+         bn: { shape: "square", fill: "#ff00cc", stroke: "#ff00cc", width: 2 },               // Generic bright nebula
+         sfr: { shape: "square", fill: "#cc00ff", stroke: "#cc00ff", width: 2 },               // Star forming region
+         rn: { shape: "square", fill: "#10ff00" },          // Reflection nebula
+         pn: { shape: "diamond", fill: "#00cccc" },         // Planetary nebula
+         snr: { shape: "diamond", fill: "#ff00cc" },         // Supernova remnant
+         dn: { shape: "square", fill: "#999999", stroke: "#999999", width: 2 },               // Dark nebula grey
+         pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
+       }
     },
     // CONSTELLATIONS
     constellations: {
@@ -130,7 +132,7 @@ var MAP_MODULE = (function(c, constId) {
    * @param jsonConstellation
    * @param jsonDso
    */
-  function buildMap(jsonConstellation, jsonDso) {
+  function buildMap(zoom, jsonDso) {
 
     if (jsonDso !== undefined && "" !== jsonDso) {
       var pointStyle = {
@@ -144,17 +146,15 @@ var MAP_MODULE = (function(c, constId) {
           baseline: "bottom"
         };
 
-      c.add({
-        type: "json",
-        callback: function(error, json) {
-          if (error) return console.warn(error.message);
+      c.add({type: "raw", callback: function(error, json) {
+        if (error) return console.warn("WARNING CELESTAL : " + error.message);
 
-          var dso = c.getData(jsonDso, config.transform);
-          c.container
-            .data(dso.features)
-            .enter().append("path")
-            .attr("class", "dso");
-          c.redraw();
+        var dso = c.getData(jsonDso, config.transform);
+        c.container.selectAll(".dsos")
+          .data(dso.features)
+          .enter().append("path")
+          .attr("class", "dso");
+        c.redraw();
         },
         redraw: function() {
           //var m = c.metrics(),
@@ -201,7 +201,7 @@ var MAP_MODULE = (function(c, constId) {
         }
       });
       c.display(config);
-      c.zoomBy(5);
+      c.zoomBy(zoom);
     } else {
       c.display(config);
     }
@@ -214,4 +214,5 @@ var MAP_MODULE = (function(c, constId) {
 })(Celestial, document.getElementById("geojson").dataset.const);
 
 let jsonDso = JSON.parse(document.getElementById("geojson").dataset.dso);
-MAP_MODULE.map([], jsonDso);
+let zoom = document.getElementById("geojson").dataset.zoom;
+MAP_MODULE.map(zoom, jsonDso);

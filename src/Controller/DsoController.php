@@ -12,12 +12,14 @@ use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Response\ListImages;
 use Astrobin\Services\GetImage;
+use Elastica\Exception\NotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -56,15 +58,26 @@ class DsoController extends AbstractController
         $dso = $dsoManager->buildDso($id);
 
         if (!is_null($dso)) {
-            $params['dso'] = $dsoManager->formatVueData($dso);
+            $params['dsoData'] = $dsoManager->formatVueData($dso);
             $params['constTitle'] = $dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $dsoManager->buildTitle($dso);
+
+            // Image cover
             $params['imgCover'] = $dso->getImage();
             $params['imgCoverUser'] = $dso->getAstrobinUser();
-            $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
+
             // List of Dso from same constellation
             $params['dso_by_const'] = $dsoManager->getListDsoFromConst($dso, 20);
 
+            // Map
+            $params['geojsonDso'] = [
+                "type" => "FeatureCollection",
+                "features" =>  [$dsoManager->buildgeoJson($dso)]
+            ];
+            $params['constId'] = 8; //$dso->getConstId();
+            $params['centerMap'] = $dso->getGeometry()['coordinates'];
+
+            // Images
             try {
                 $params['images'] = [];
                 if ($cacheUtil->hasItem(md5($id . '_list_images'))) {
@@ -73,6 +86,8 @@ class DsoController extends AbstractController
                     $params['images'] = $this->getListImages($dso->getId(), $cacheUtil);
                 }
             } catch (WsResponseException $e) {}
+        } else {
+            throw new NotFoundException();
         }
 
         /** @var Response $response */

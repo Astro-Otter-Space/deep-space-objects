@@ -3,7 +3,7 @@
 {% set pageTitle = 'skymap'|trans %}
 
 {% block content %}
-  <div id="geojson" data-dso="{{ ""|json_encode }}" data-center="{{ [0,0]|json_encode }}" data-const="8" aria-hidden="true"></div>
+  <div id="geojson" data-dso="{{ ""|json_encode }}" data-center="{{ [0,0]|json_encode }}" data-const="8" data-zoom="0" aria-hidden="true"></div>
   <section class="Dso__main">
     <div class="Dso__container Dso__noHeader">
       <h2 class="Dso__title">{{ 'skymap'|trans }}</h2>

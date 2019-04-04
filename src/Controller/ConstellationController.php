@@ -61,11 +61,13 @@ class ConstellationController extends AbstractController
         $result['list_dso'] = $dsoManager->buildListDso($constellation->getListDso());
 
 
-        $geoJsonDso =[
+        $listDsoFeatures = array_map(function(Dso $dso) use($dsoManager) {
+            return ($dso->getGeometry()) ? $dsoManager->buildgeoJson($dso): null;
+        }, iterator_to_array($constellation->getListDso()->getIterator()));
+
+        $geoJsonDso = [
             "type" => "FeatureCollection",
-            "features" => array_map(function(Dso $dso) use($dsoManager) {
-                                return $dsoManager->buildgeoJson($dso);
-                            }, iterator_to_array($constellation->getListDso()->getIterator()) )
+            "features" => array_filter($listDsoFeatures)
         ];
 
         // Serialize Collection entity

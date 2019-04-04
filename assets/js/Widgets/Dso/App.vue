@@ -76,7 +76,7 @@
         <a id="#map"></a>
         <div class="Dso__map">
           <h3 class="Dso__title">{{ titleMap }}</h3>
-          <div class="map"></div>
+          <div class="map" id="map"></div>
         </div>
       </div>
 

@@ -10,7 +10,7 @@
     data-dso-widget
     data-imgcover="{{ imgCover|default('default') }}"
     data-imgcoveruser="{{ imgCoverUser|default('') }}"
-    data-dso="{{ dso|json_encode }}"
+    data-dso="{{ dsoData|json_encode }}"
     data-title="{{ title }}"
     data-images="{{ images|json_encode|default({}) }}"
     data-astrobin-msg="{{ 'astrobin.message'|trans }}"
@@ -18,11 +18,15 @@
     data-dso-const="{{ dso_by_const|json_encode }}"
   >
   </div>
-  <div id="geojson" data-dso="{{ geojsonDso|json_encode }}" aria-hidden="true"></div>
+  <div id="geojson"
+       data-dso="{{ geojsonDso|json_encode }}"
+       data-center="{{ centerMap|json_encode }}"
+       data-const="{{ constId|raw }}"
+       data-zoom="10" aria-hidden="true"></div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   {{ encore_entry_script_tags('dso') }}
-  {#{{ encore_entry_script_tags('celestial') }}#}
+  {{ encore_entry_script_tags('skymap') }}
 {% endblock %}

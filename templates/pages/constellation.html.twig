@@ -16,7 +16,7 @@
      data-list-dso="{{ list_dso|json_encode }}"
      data-link="{{ link_download }}"
   ></div>
-  <div id="geojson" data-dso="{{ geojsonDso|json_encode }}" data-center="{{ centerMap|json_encode }}" data-const="{{ constellation.id }}" aria-hidden="true"></div>
+  <div id="geojson" data-dso="{{ geojsonDso|json_encode }}" data-center="{{ centerMap|json_encode }}" data-const="{{ constellation.id }}" data-zoom="5" aria-hidden="true"></div>
 {% endblock %}
 
 {% block javascripts %}
