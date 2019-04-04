@@ -74,7 +74,7 @@ class DsoController extends AbstractController
                 "type" => "FeatureCollection",
                 "features" =>  [$dsoManager->buildgeoJson($dso)]
             ];
-            $params['constId'] = 8; //$dso->getConstId();
+            $params['constId'] = $dso->getConstId();
             $params['centerMap'] = $dso->getGeometry()['coordinates'];
 
             // Images

@@ -37,8 +37,8 @@ var MAP_MODULE = (function(c, constId, zoom) {
       data: "nodata.json",
       //size: 10
       names: true,
-      limit: 15,
-      namelimit: 15,
+      limit: 1000,
+      namelimit: 1000,
       // size: null,
       // exponent: 1.4,
       symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
@@ -57,7 +57,7 @@ var MAP_MODULE = (function(c, constId, zoom) {
          rn: { shape: "square", fill: "#10ff00" },          // Reflection nebula
          pn: { shape: "diamond", fill: "#00cccc" },         // Planetary nebula
          snr: { shape: "diamond", fill: "#ff00cc" },         // Supernova remnant
-         dn: { shape: "square", fill: "#999999", stroke: "#999999", width: 2 },               // Dark nebula grey
+         dn: { shape: "square", fill: "#4b42f4", stroke: "#4b42f4", width: 2 },               // Dark nebula grey
          pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
        }
     },
