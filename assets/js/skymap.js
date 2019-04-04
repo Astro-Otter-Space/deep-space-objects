@@ -1,17 +1,19 @@
 import * as d3 from './../../node_modules/d3-celestial/lib/d3.min.js'
 import geo from './../../node_modules/d3-celestial/lib/d3.geo.projection.min';
 
-import Celestial from 'd3-celestial/celestial';
+import Celestial from 'd3-celestial/celestial.min';
 
 var MAP_MODULE = (function(c) {
+
+  let PROXIMITY_LIMIT = 20;
 
   let config = {
     width: 0,
     projection: "aitoff",
     transform: "equatorial",
-    center: null, // TODO : Fix it to const ID
+    center: JSON.parse(document.getElementById("geojson").dataset.center),
     adaptable: true,
-    interactive: true,
+    interactive: false,
     form: false,
     location: false,
     controls: false,
@@ -21,37 +23,40 @@ var MAP_MODULE = (function(c) {
     stars: {
       colors: false,
       names: false,
-      style: { fill: "#000", opacity: 1 },
-      limit: 6,
+      style: { fill: "#ffffff", opacity: 1 },
+      name: true,
+      namelimit: 4,
+      limit: 8,
       size: 5,
-      data: 'stars.8.json'
+      data: 'stars.6.json'
     },
     // DEEP SKY OBJECTS
     dsos: {
-      names: true,
       show: true,
-      size: null,
-      exponent: 1.4,
-      //data: 'dsos.6.json',
-      symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
-        gg: { shape: "circle", fill: "#ff0000" },          // Galaxy cluster
-        g: { shape: "ellipse", fill: "#ff0000" },         // Generic galaxy
-        s: { shape: "ellipse", fill: "#ff0000" },         // Spiral galaxy
-        s0: { shape: "ellipse", fill: "#ff0000" },         // Lenticular galaxy
-        sd: { shape: "ellipse", fill: "#ff0000" },         // Dwarf galaxy
-        e: { shape: "ellipse", fill: "#ff0000" },         // Elliptical galaxy
-        i: { shape: "ellipse", fill: "#ff0000" },         // Irregular galaxy
-        oc: { shape: "circle", fill: "#ffcc00", stroke: "#ffcc00", width: 1.5 },             // Open cluster
-        gc: { shape: "circle", fill: "#ff9900" },          // Globular cluster
-        en: { shape: "square", fill: "#ff00cc" },          // Emission nebula
-        bn: { shape: "square", fill: "#ff00cc", stroke: "#ff00cc", width: 2 },               // Generic bright nebula
-        sfr: { shape: "square", fill: "#cc00ff", stroke: "#cc00ff", width: 2 },               // Star forming region
-        rn: { shape: "square", fill: "#00ooff" },          // Reflection nebula
-        pn: { shape: "diamond", fill: "#00cccc" },         // Planetary nebula
-        snr: { shape: "diamond", fill: "#ff00cc" },         // Supernova remnant
-        dn: { shape: "square", fill: "#999999", stroke: "#999999", width: 2 },               // Dark nebula grey
-        pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
-      }
+      data: "",
+      size: 10
+      // names: true,
+      // size: null,
+      // exponent: 1.4,
+      // symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
+      //   gg: { shape: "circle", fill: "#ff0000" },          // Galaxy cluster
+      //   g: { shape: "ellipse", fill: "#ff0000" },         // Generic galaxy
+      //   s: { shape: "ellipse", fill: "#ff0000" },         // Spiral galaxy
+      //   s0: { shape: "ellipse", fill: "#ff0000" },         // Lenticular galaxy
+      //   sd: { shape: "ellipse", fill: "#ff0000" },         // Dwarf galaxy
+      //   e: { shape: "ellipse", fill: "#ff0000" },         // Elliptical galaxy
+      //   i: { shape: "ellipse", fill: "#ff0000" },         // Irregular galaxy
+      //   oc: { shape: "circle", fill: "#ffcc00", stroke: "#ffcc00", width: 1.5 },             // Open cluster
+      //   gc: { shape: "circle", fill: "#ff9900" },          // Globular cluster
+      //   en: { shape: "square", fill: "#ff00cc" },          // Emission nebula
+      //   bn: { shape: "square", fill: "#ff00cc", stroke: "#ff00cc", width: 2 },               // Generic bright nebula
+      //   sfr: { shape: "square", fill: "#cc00ff", stroke: "#cc00ff", width: 2 },               // Star forming region
+      //   rn: { shape: "square", fill: "#00ooff" },          // Reflection nebula
+      //   pn: { shape: "diamond", fill: "#00cccc" },         // Planetary nebula
+      //   snr: { shape: "diamond", fill: "#ff00cc" },         // Supernova remnant
+      //   dn: { shape: "square", fill: "#999999", stroke: "#999999", width: 2 },               // Dark nebula grey
+      //   pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
+      // }
     },
     // CONSTELLATIONS
     constellations: {
@@ -66,7 +71,7 @@ var MAP_MODULE = (function(c) {
       },// ranked constellations
       lines: true,   // Show constellation lines, style below
       linestyle: { stroke: "#cccccc", width: 1, opacity: 0.6 },
-      bounds: false, // Show constellation boundaries, style below
+      bounds: true, // Show constellation boundaries, style below
       boundstyle: { stroke: "#cccc00", width: 0.5, opacity: 0.8, dash: [2, 4] }
     },
     // MILKY WAY
@@ -74,6 +79,10 @@ var MAP_MODULE = (function(c) {
       show: true,
       data: 'mw.json',
       style: { fill: "#ffffff", opacity: 0.15 }
+    },
+    planets: {
+      show: false,
+      data: ""
     },
     // LINES
     lines: {
@@ -103,11 +112,93 @@ var MAP_MODULE = (function(c) {
     }
   };
 
-  function buildMap(jsonConstellation, jsonDso) {
+  /**
+   * Mesure a distance between two points
+   * @param p1
+   * @param p2
+   * @returns {number}
+   */
+  function distance(p1, p2) {
+    var d1 = p2[0] - p1[0],
+      d2 = p2[1] - p1[1];
+    return Math.sqrt(d1 * d1 + d2 * d2);
+  }
 
-      // c.add();
-      // c.add();
-      c.display(config);
+  /**
+   *
+   * @param jsonConstellation
+   * @param jsonDso
+   */
+  function buildMap(jsonConstellation, jsonDso) {
+    var pointStyle = {
+        stroke: "rgba(255, 0, 204, 1)",
+        fill: "rgba(255, 0, 204, 0.15)"
+      },
+      textStyle = {
+        fill:"rgba(255, 0, 204, 1)",
+        font: "normal bold 15px Helvetica, Arial, sans-serif",
+        align: "left",
+        baseline: "bottom"
+      };
+
+    c.add({
+      type: "json",
+      callback: function(error, json) {
+        if (error) return console.warn(error.message);
+
+        var dso = c.getData(jsonDso, config.transform);
+        c.container
+          .data(dso.features)
+          .enter().append("path")
+          .attr("class", "dso");
+        c.redraw();
+      },
+      redraw: function() {
+        //var m = c.metrics(),
+          //quadtree = d3.geom.quadtree().extent([[-1, -1], [m.width + 1, m. height + 1]])([]);
+
+        c.container.selectAll(".dsos").each(function(d) {
+          if (c.clip(d.geometry.coordinates)) {
+            // get point coordinates
+            var pt = c.mapProjection(d.geometry.coordinates);
+            // object radius in pixel, could be varable depending on e.g. magnitude
+            var r = Math.pow(20 - d.properties.mag, 0.7);
+
+            c.setStyle(pointStyle);
+            // Start the drawing path
+            c.context.beginPath();
+            // Thats a circle in html5 canvas
+            c.context.arc(pt[0], pt[1], r, 0, 2 * Math.PI);
+            // Finish the drawing path
+            c.context.closePath();
+            // Draw a line along the path with the prevoiusly set stroke color and line width
+            c.context.stroke();
+            // Fill the object path with the prevoiusly set fill color
+            c.context.fill();
+
+            // Set text styles
+            //c.setTextStyle(textStyle);
+            // and draw text on canvas
+            //c.context.fillText(d.properties.name, pt[0] + r - 1, pt[1] - r + 1);
+
+            // Find nearest neighbor
+            var nearest = quadtree.find(pt);
+
+            // If neigbor exists, check distance limit
+            if (!nearest || distance(nearest, pt) > PROXIMITY_LIMIT) {
+              // Nothing too close, add it and go on
+              quadtree.add(pt)
+              // Set text styles
+              c.setTextStyle(textStyle);
+              // and draw text on canvas with offset
+              c.context.fillText(d.properties.name, pt[0] + r + 2, pt[1] + r + 2);
+            }
+          }
+        });
+      }
+    });
+    c.display(config);
+    c.zoomBy(5);
   }
 
   return {
@@ -115,4 +206,5 @@ var MAP_MODULE = (function(c) {
   };
 })(Celestial);
 
-MAP_MODULE.map([], []);
+let jsonDso = JSON.parse(document.getElementById("geojson").dataset.dso);
+MAP_MODULE.map([], jsonDso);

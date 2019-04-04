@@ -285,18 +285,19 @@ class DsoManager
 
     /**
      * @param Dso $dso
-     * @return string
+     * @return array
      */
-    public function buildgeoJson(Dso $dso): string
+    public function buildgeoJson(Dso $dso): array
     {
-        $data = [
+        return [
             "type" => "Feature",
+            "id" => $dso->getId(),
             "geometry" => $dso->getGeometry(),
             "properties" => [
-                "name" => $this->buildTitle($dso)
+                "name" => $this->buildTitle($dso),
+                "type" => $dso->getType(),
+                "mag" => $dso->getMag()
             ]
         ];
-
-        return json_encode($data);
     }
 }

@@ -17,22 +17,29 @@
           {{ description }}
         </div>
 
-        <!--Map-->
-        <div>
-          <a v-bind:href="linkDownload" target="_blank" alt="Download map">
-            <img v-bind:src="map" v-bind:title="title">
-          </a>
-        </div>
-
         <!--List DSo-->
-        <div class="Dso__slider" v-if="0 < itemsDso.length">
+        <div class="Dso__list" v-if="0 < itemsDso.length">
           <cards-grid
             :items="itemsDso"
             :show-controls="false"
           >
           </cards-grid>
         </div>
+
+        <!--Sky Map-->
+        <a id="#map"></a>
+        <div class="Dso__map">
+          <h3 class="Dso__title">{{ titleMap }}</h3>
+          <div class="map" id="map"></div>
+        </div>
+        <!--Map-->
+        <div>
+          <a v-bind:href="linkDownload" target="_blank" alt="Download map">
+            <img v-bind:src="map" v-bind:title="title">
+          </a>
+        </div>
       </div>
+
     </section>
   </div>
 </template>
@@ -62,7 +69,8 @@
         title: title,
         description: description,
         itemsDso: dsoList,
-        linkDownload: linkDownload
+        linkDownload: linkDownload,
+        titleMap: "Map"
       }
     }
   }

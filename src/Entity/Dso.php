@@ -34,7 +34,7 @@ class Dso extends AbstractEntity
     private $geometry;
     private $hash;
 
-    private static $listFieldsNoMapping = ['locale', 'geometry', 'image', 'astrobinUser' ,'fullUrl', 'elasticId', 'order', 'data', 'hash'];
+    private static $listFieldsNoMapping = ['locale', 'image', 'astrobinUser' ,'fullUrl', 'elasticId', 'order', 'data', 'hash'];
 
     /**
      * @return mixed

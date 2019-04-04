@@ -56,14 +56,25 @@ class ConstellationController extends AbstractController
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
         $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
+
         $constellation->setListDso($listDso);
         $result['list_dso'] = $dsoManager->buildListDso($constellation->getListDso());
+
+
+        $geoJsonDso =[
+            "type" => "FeatureCollection",
+            "features" => array_map(function(Dso $dso) use($dsoManager) {
+                                return $dsoManager->buildgeoJson($dso);
+                            }, iterator_to_array($constellation->getListDso()->getIterator()) )
+        ];
 
         // Serialize Collection entity
         $result['constellation'] = $serializer->serialize($constellation, 'json');
 
         // Link to download map
         $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
+        $result['geojsonDso'] = $geoJsonDso;
+        $result['centerMap'] = $constellation->getGeometry()['coordinates'];
 
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);

@@ -16,9 +16,11 @@
      data-list-dso="{{ list_dso|json_encode }}"
      data-link="{{ link_download }}"
   ></div>
+  <div id="geojson" data-dso="{{ geojsonDso|json_encode }}" data-center="{{ centerMap|json_encode }}" aria-hidden="true"></div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   {{ encore_entry_script_tags('const') }}
+  {{ encore_entry_script_tags('skymap') }}
 {% endblock %}

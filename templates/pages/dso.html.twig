@@ -19,18 +19,11 @@
     data-dso-const="{{ dso_by_const|json_encode }}"
   >
   </div>
-  <div data-dso-map data-geojson-dso="{{ geojsonDso }}" aria-hidden="true"></div>
+  <div id="geojson" data-dso="{{ geojsonDso|json_encode }}" aria-hidden="true"></div>
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
   {{ encore_entry_script_tags('dso') }}
-  {#{{ encore_entry_script_tags('d3') }}#}
   {#{{ encore_entry_script_tags('celestial') }}#}
 {% endblock %}
-
-{#{% block stylesheets %}#}
-  {#{{ parent() }}#}
-  {#{{ encore_entry_link_tags('celestial') }}#}
-{#{% endblock %}#}
-
