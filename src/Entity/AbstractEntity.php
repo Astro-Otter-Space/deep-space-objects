@@ -14,6 +14,8 @@ abstract class AbstractEntity
 
     const DATA_CONCAT_GLUE = ' - ';
 
+    const URL_CONCAT_GLUE = '--';
+
     const UNASSIGNED = 'unassigned';
 
     /**

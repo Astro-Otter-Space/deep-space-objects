@@ -49,7 +49,7 @@ class DsoController extends AbstractController
     {
         $params = [];
 
-        $id = explode(trim(AbstractEntity::DATA_CONCAT_GLUE), $id);
+        $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $id);
         $id = reset($id);
 
         /** @var Dso $dso */
@@ -62,11 +62,11 @@ class DsoController extends AbstractController
             $params['imgCover'] = $dso->getImage();
             $params['imgCoverUser'] = $dso->getAstrobinUser();
             $params['geojsonDso'] = $dsoManager->buildgeoJson($dso);
-            $params['images'] = [];
             // List of Dso from same constellation
             $params['dso_by_const'] = $dsoManager->getListDsoFromConst($dso, 20);
 
             try {
+                $params['images'] = [];
                 if ($cacheUtil->hasItem(md5($id . '_list_images'))) {
                     $params['images'] = unserialize($cacheUtil->getItem(md5($id . '_list_images')));
                 } else {

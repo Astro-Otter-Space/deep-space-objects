@@ -48,7 +48,7 @@ class UrlGenerateHelper
 
                     if (!empty($entity->getAlt())) {
                         $name = Utils::camelCaseUrlTransform($entity->getAlt());
-                        $id = implode(trim($entity::DATA_CONCAT_GLUE), [$id, $name]);
+                        $id = implode(trim($entity::URL_CONCAT_GLUE), [$id, $name]);
                     }
 
                     $url = $this->router->generate('dso_show', ['id' => $id]);
