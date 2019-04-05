@@ -72,20 +72,20 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 
 ### Status data
 - Messier : 110/110
-- NGC : 7249/7840
+- NGC : 7250/7840
 - UGC : 265/12921
 - PGC : 25/? 
 - Sharpless : 99/313
 - RCW : 27/182
-- Index Catalog : 204/5386
-- Collinder : 81/471
-- Caldwell : 33/109
-- Abell: 103/
+- Index Catalog : 205/5386
+- Collinder : 83/471
+- Caldwell : 34/109
+- Abell: 104/
 - ldn: 18/?
-- lbn: 41/?
+- lbn: 44/?
 - Dolidze-Dzimselejvili: 11/11
 - David Dunlap: 3/?  
-- vdB : 39/158
+- vdB : 40/158
 
 Authors
 ==
