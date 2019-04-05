@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import AppDso from './Widgets/Dso/App'
-// import Deepskymap from './deepskymap'
 
 Vue.config.productionTip = false;
 // Import libraries
@@ -17,9 +16,6 @@ Vue.use(SvgIcon, {
 });
 
 new Vue({
-  render: h => h(AppDso)
-}).$mount(`#appDso`);
-
-// Map
-// let jsonDso = document.querySelector('div[data-dso-map]').dataset.geojsonDso;
-// Deepskymap.map({}, jsonDso);
+  el: '#appDso',
+  render: h => h(AppDso),
+}); //.$mount(`#appDso`);

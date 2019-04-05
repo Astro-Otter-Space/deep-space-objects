@@ -13,6 +13,10 @@ hem.su: Southern hemisphere
 about.us: About us
 skymap: SkyMap
 listObservations: Observations list
+openMenu: Open menu
+switchLang: Switch language
+nightMode: Night mode ON
+dayMode: Night mode OFF
 #Catalog
 catalog: Catalog
 catalogs: Catalogs

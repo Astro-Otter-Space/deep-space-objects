@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ConstellationController
@@ -40,7 +41,7 @@ class ConstellationController extends AbstractController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function show(string $id, ConstellationManager $constellationManager, DsoRepository $dsoRepository, DsoManager $dsoManager): Response
+    public function show(string $id, ConstellationManager $constellationManager, DsoRepository $dsoRepository, DsoManager $dsoManager, TranslatorInterface $translatorInterface): Response
     {
         $result = [];
 
@@ -60,7 +61,14 @@ class ConstellationController extends AbstractController
         $constellation->setListDso($listDso);
         $result['list_dso'] = $dsoManager->buildListDso($constellation->getListDso());
 
+        // List types of DSO for map legend
+        $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) use ($translatorInterface){
+            return [$dso->getType() => $translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
+        }, iterator_to_array($listDso)));
+        asort($listTypes);
+        $result['list_types'] = $listTypes;
 
+        // GeoJson for display dso on map
         $listDsoFeatures = array_map(function(Dso $dso) use($dsoManager) {
             return ($dso->getGeometry()) ? $dsoManager->buildgeoJson($dso): null;
         }, iterator_to_array($constellation->getListDso()->getIterator()));

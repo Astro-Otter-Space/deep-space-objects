@@ -1,5 +1,6 @@
 /* eslint-disable */
 require('./bars')
+require('./circle')
 require('./constellation')
 require('./contact')
 require('./cross')

@@ -11,7 +11,7 @@
 
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
-        <span v-on:click="openSlideMenu" class="header__barSlideMenu" title="Open menu">
+        <span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
         </span>&nbsp;
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
@@ -26,11 +26,13 @@
         </li>
         <!-- Dark/day mod -->
         <li>
-          <svgicon name="moon" width="30" height="30" color="#e9e9e9"></svgicon>
+          <span v-on:click="" v-bind:title="titleNightMode">
+            <svgicon name="moon" width="30" height="30" color="#e9e9e9"></svgicon>
+          </span>
         </li>
         <!--Languages-->
         <li class="header__drop">
-          <a v-on:click="displayDropMenu()" title="Switch language">
+          <a v-on:click="displayDropMenu()" v-bind:title="titleSwitchLang">
             <svgicon name="language" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
@@ -67,6 +69,11 @@
   let placeholder = document.getElementById('appHeader').dataset.searchPlaceholder;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
 
+  let titleOpenMenu = "Open menu";
+  let titleSwitchLang = "Switch language";
+  let titleNightMode = "Night mode ON";
+  let titleDayMode = "Night mode OFF";
+
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
   import { Slide } from 'vue-burger-menu';
   import './../Icons/index';
@@ -98,7 +105,10 @@
           list: 'AppHeader__list'
         },
         searchPlaceholder: placeholder,
-        searchUrl: urlSearch
+        searchUrl: urlSearch,
+        titleOpenMenu: titleOpenMenu,
+        titleSwitchLang: titleSwitchLang,
+        titleNightMode: titleNightMode
       }
     },
     methods: {

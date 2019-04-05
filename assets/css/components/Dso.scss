@@ -56,5 +56,12 @@
     margin-bottom: 1em;
     min-height: 800px;
   }
+
+  &__map {
+    li {
+      display: inline;
+      padding: 0 0.5em;
+    }
+  }
 }
 

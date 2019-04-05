@@ -31,13 +31,19 @@
         <div class="Dso__map">
           <h3 class="Dso__title">{{ titleMap }}</h3>
           <div class="map" id="map"></div>
-        </div>
-        <!--Map-->
-        <div>
+          <div class="Dso__map-legend" v-if="0 < legendMap.length">
+            <ul>
+              <li v-for="(legend, type) in legendMap">
+                <svgicon name="circle" width="10" height="10" :color="listColors[type]"></svgicon> {{legend}} - {{type}}
+              </li>
+            </ul>
+          </div>
           <a v-bind:href="linkDownload" target="_blank" alt="Download map">
-            <img v-bind:src="map" v-bind:title="title">
+            Download map
+<!--            <img v-bind:src="map" v-bind:title="title">-->
           </a>
         </div>
+
       </div>
 
     </section>
@@ -48,14 +54,16 @@
 
   import ImageHeader from './../Dso/components/Imageheader';
   import CardsGrid from './../Dso/components/CardsGrid';
+  import { color } from './../../legendSkyMap';
 
   let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
   let title = document.querySelector('div[data-const-widget]').dataset.title;
-  let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
+  let titleMap = document.querySelector('div[data-const-widget]').dataset.titleMap;
   let description = document.querySelector('div[data-const-widget]').dataset.desc;
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
   let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
+  let legendMap = JSON.parse(document.querySelector('div[data-const-widget]').dataset.legendMap);
 
   export default {
     name: "App",
@@ -71,7 +79,9 @@
         description: description,
         itemsDso: dsoList,
         linkDownload: linkDownload,
-        titleMap: titleMap
+        titleMap: titleMap,
+        legendMap: Object.keys(legendMap).map((key) => legendMap[key]),
+        listColors: color
       }
     }
   }
