@@ -52,6 +52,7 @@
   let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
   let title = document.querySelector('div[data-const-widget]').dataset.title;
+  let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
   let description = document.querySelector('div[data-const-widget]').dataset.desc;
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
   let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
@@ -70,7 +71,7 @@
         description: description,
         itemsDso: dsoList,
         linkDownload: linkDownload,
-        titleMap: "Map"
+        titleMap: titleMap
       }
     }
   }

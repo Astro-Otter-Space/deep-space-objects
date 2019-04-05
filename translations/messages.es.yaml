@@ -64,6 +64,7 @@ ra: Right ascension
 dec: Declination
 discover: Discover
 discoverYear: Year
+galery: Gallery
 # Vue list
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 list.messier: List of Messier objects

@@ -63,6 +63,7 @@ ra: Ascencão reta
 dec: Declinação
 discover: Discover
 discoverYear: Year
+galery: Gallery
 # Vue list
 filteringList: Filtrar lista de itens por constelação, tipo e magnitude... e descobrir os mais lindos objetos celestes.
 list.messier: Lista dos objetos de Messier

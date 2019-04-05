@@ -3,7 +3,7 @@
     <div v-if="imageCover !== 'default.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
-        :alt-image="titleDso + ' - ' + imageCoverUser"
+        :alt-image="title + ' - ' + imageCoverUser"
         :owner-img="imageCoverUser"
       />
     </div>
@@ -11,12 +11,12 @@
       <div v-bind:class="getHeaderClass()">
         <!--Title-->
         <h2 class="Dso__title">
-          {{ titleDso }}
+          {{ title }}
         </h2>
 
         <social-sharing
           :url="urlShare"
-          :title="titleDso"
+          :title="title"
           :description="descShare"
           hashtags=""
           twitter-user=""
@@ -97,6 +97,8 @@
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
+  let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
+  let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
   let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
   let dsoList = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dsoConst);
@@ -114,10 +116,10 @@
         imageCover: coverImage,
         imageCoverUser: coverImageUser,
         imagesDso: images,
-        titleDso: title,
-        titleGallery: "Gallery",
+        title: title,
+        titleGallery: titleGallery,
         titleConst: titleConst,
-        titleMap: "Map",
+        titleMap: titleMap,
         gridColumns: ['col0', 'col1'],
         gridData: tabData,
         classTable: "Dso__table",
