@@ -31,10 +31,10 @@
         <div class="Dso__map">
           <h3 class="Dso__title">{{ titleMap }}</h3>
           <div class="map" id="map"></div>
-          <div class="Dso__map-legend" v-if="0 < legendMap.length">
+          <div class="Dso__map-legend" v-if="0 <  Object.keys(legendMap).length">
             <ul>
-              <li v-for="(legend, type) in legendMap">
-                <svgicon name="circle" width="10" height="10" :color="listColors[type]"></svgicon> {{legend}} - {{type}}
+              <li v-for="(value, key) in legendMap">
+                <svgicon name="circle" width="10" height="10" :color="listColors[key]"></svgicon> {{value}}
               </li>
             </ul>
           </div>
@@ -80,7 +80,7 @@
         itemsDso: dsoList,
         linkDownload: linkDownload,
         titleMap: titleMap,
-        legendMap: Object.keys(legendMap).map((key) => legendMap[key]),
+        legendMap: legendMap, //Object.keys(legendMap).map((key) => legendMap[key]),
         listColors: color
       }
     }
