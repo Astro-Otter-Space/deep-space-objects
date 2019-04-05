@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Classes\Utils;
 use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Managers\DsoManager;
@@ -185,7 +186,7 @@ class DsoRepository extends AbstractRepository
                 $field = self::$listAggregates[$type]['field'];
 
                 // truc à la con, à modifer ds les données sources
-                $val = ("constellation" === $type) ? ucfirst($val): $val;
+                $val = ("constellation" === $type && $val !== Utils::UNASSIGNED) ? ucfirst($val): $val;
                 $mustQuery->setTerm($field, $val);
 
                 $boolQuery->addMust($mustQuery);
@@ -219,6 +220,7 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
         $nbItems = $search->getTotalHits();
+
         /** @var ListDso $listDso */
         $listDso = new ListDso();
         foreach ($search->getDocuments() as $doc) {
