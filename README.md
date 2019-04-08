@@ -39,7 +39,7 @@ docker exec -ti dso_php bash
 ```
 cd deep-space-objects
 composer install
-npm install
+yarn install
 ``` 
 
 Symfony app :

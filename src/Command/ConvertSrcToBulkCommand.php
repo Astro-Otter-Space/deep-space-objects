@@ -73,8 +73,20 @@ class ConvertSrcToBulkCommand extends Command
 
             $outputFilename = $this->kernel . self::BULK_SOURCE . sprintf('%s.bulk.json', $type);
 
-            if (file_exists($inputFile) && is_readable($inputFile)) {
+            $outputDirName = dirname($outputFilename);
+
+            if (!file_exists($outputDirName)) {
+                mkdir(dirname($outputFilename), '0755');
+            }
+
+            if (!file_exists($outputFilename)) {
+                $fp = fopen($outputFilename, 'w+');
+                fclose($fp);
+            }
+
+            if (is_readable($inputFile)) {
                 $data = $this->openFile($inputFile);
+
                 if (JSON_ERROR_NONE === json_last_error()) {
                     $handle = fopen($outputFilename, 'w');
 
@@ -114,7 +126,7 @@ class ConvertSrcToBulkCommand extends Command
                     $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));
                 }
             } else {
-                $output->writeln(sprintf("File %s not exist or not readable", $inputFile));
+                $output->writeln(sprintf("File %s not readable", $inputFile));
             }
         } else {
             $output->writeln(sprintf("Argument %s not available", $input->getArgument('type')));
