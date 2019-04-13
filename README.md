@@ -45,6 +45,13 @@ yarn install
 Symfony app :
  - http://symfony.local
 
+### Instal dependencies - PROD
+```
+cd /path/to/project
+php72 composer.phar install --no-dev --optimize-autoloader
+yarn install
+yarn encore prod
+```
 
 Elastic Search
 ==
