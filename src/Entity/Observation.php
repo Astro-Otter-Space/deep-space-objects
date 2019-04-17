@@ -249,7 +249,4 @@ class Observation extends AbstractEntity
     {
         return self::$listFieldsNoMapping;
     }
-
-
-
 }
