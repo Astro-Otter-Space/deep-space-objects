@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "excelwebzone/recaptcha-bundle": "^1.5",
+        "friendsofsymfony/rest-bundle": "^2.5",
         "hamhamfonfon/astrobin": "dev-master",
         "ruflin/elastica": "^6.0",
         "sensio/framework-extra-bundle": "^5.2",

@@ -1,0 +1,18 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+#fos_rest:
+#    routing_loader:
+#        include_format: false
+#    view:
+#        view_response_listener: 'force'
+#        formats:
+#            json: true
+#    exception:
+#        exception_controller: 'fos_rest.exception.controller:showAction'
+#        codes:
+#            Elastica\Exception\NotFoundException: 404
+#    format_listener:
+#        rules:
+#            - { path: '^/api', prefer_extension: false, fallback_format: json, priorities: [ json ] }
+#    param_fetcher_listener: true
+#    access_denied_listener:
+#        json: true
