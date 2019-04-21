@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = 'skymap'|trans %}
+{% set pageDesc = 'skymapDesc'|trans %}
 
 {% block content %}
   <div id="geojson" data-dso="{{ ""|json_encode }}" data-center="{{ [0,0]|json_encode }}" data-const="8" data-zoom="0" aria-hidden="true"></div>

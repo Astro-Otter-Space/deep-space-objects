@@ -40,12 +40,11 @@ class ExceptionListener
             $response->setStatusCode($exception->getStatusCode());
             $response->headers->replace($exception->getHeaders());
         } else {
-//
-//            /** @var Response $response */
-//            $response = new Response();
-//            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
-//            $response->setContent($exception->getTrace());
-//            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            /** @var Response $response */
+            $response = new Response();
+            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
+            $response->setContent($exception->getTrace());
+            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         $event->setResponse($response);

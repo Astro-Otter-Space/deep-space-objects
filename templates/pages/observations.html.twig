@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = 'listObservations'|trans %}
+{% set pageDesc = 'listObservationsDesc'|trans %}
+{% set pageImage = '' %}
+
+{% block content %}
+  <div id="app"
+     data-observations-list
+     data-title="{{ pageTitle }}"
+  >
+  </div>
+{% endblock %}

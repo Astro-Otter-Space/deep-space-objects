@@ -1,8 +1,8 @@
 # Layout
-dso: Deep-sky objects
+dso: Weltraumotter
 dso_tr: Deep-sky objects
-menu.homepage: Homepage
-selectLang: Languages
+menu.homepage: Startseite
+selectLang: Sprachen
 astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
 error.message: Error %error%, maybe you fall in a black hole :) ?
 more: More informations
@@ -278,4 +278,12 @@ contact.option.other: "Other"
 contact.form.message: "Message (*)"
 contact.form.submit: "Submit"
 contact.mandatory: "(*) All fields are mandatory"
+# desc
+constellationListDesc: List of celestial constellations
+dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
+listObservationsDesc:
+dsoDesc:
+constellationDesc:
+contactDesc:
+skymapDesc:
 

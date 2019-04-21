@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -276,6 +275,17 @@ class DsoController extends AbstractController
           'prev' => (self::DEFAULT_PAGE < $page) ? $router->generate('dso_catalog', array_merge($queryAll, ['page' => $page-1])): null,
           'next' => ($nbPages > $page) ? $router->generate('dso_catalog', array_merge($queryAll, ['page' => $page+1])): null
         ];
+
+        // Description
+        $result['pageDesc'] = $translatorInterface->trans('filteringList');
+        if ($request->query->has('catalog')) {
+            $catalog = $request->query->get('catalog');
+            $desc = $translatorInterface->trans('description.' . $catalog);
+//            dump($desc);
+            if (!empty($desc) && $desc !== 'description.' . $catalog) {
+                $result['pageDesc'] = $desc;
+            }
+        }
 
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig', $result);

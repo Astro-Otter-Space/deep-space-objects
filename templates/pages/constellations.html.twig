@@ -1,6 +1,7 @@
-{% extends'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% set pageTitle = 'constId'|transchoice(list_constellation|length)  %}
+{% set pageDesc = 'constellationListDesc'|trans %}
 {% set pageImage = asset('/build/images/constellation_list.jpg') %}
 
 {% block content %}

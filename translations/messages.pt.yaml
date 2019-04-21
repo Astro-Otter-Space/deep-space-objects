@@ -275,3 +275,11 @@ contact.option.other: "Other"
 contact.form.message: "Message (*)"
 contact.form.submit: "Submit"
 contact.mandatory: "(*) All fields are mandatory"
+# desc
+constellationListDesc: List of celestial constellations
+dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
+listObservationsDesc:
+dsoDesc:
+constellationDesc:
+contactDesc:
+skymapDesc:
