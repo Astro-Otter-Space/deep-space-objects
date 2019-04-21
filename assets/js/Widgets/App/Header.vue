@@ -33,7 +33,7 @@
         <!--Languages-->
         <li class="header__drop">
           <a v-on:click="displayDropMenu()" v-bind:title="titleSwitchLang">
-            <svgicon name="language" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="globe" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
             <a v-for="locale in listLocales" v-bind:href="locale.path" :key="locale.locale" v-bind:title="locale.label">

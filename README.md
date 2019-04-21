@@ -14,7 +14,6 @@ Copy path of deepskyobjects_local.csr and deepskyobjects_local.key in .env file.
 
 ### Init .env files
 ```
- cp .env.local.dist .env.local
  cp .env.dist .env
 ``` 
  
@@ -79,11 +78,11 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 
 ### Status data
 - Messier : 110/110
-- NGC : 7250/7840
-- UGC : 265/12921
-- PGC : 25/? 
-- Sharpless : 99/313
-- RCW : 27/182
+- NGC : 7251/7840
+- UGC : 268/12921
+- PGC : 29/? 
+- Sharpless : 100/313
+- RCW : 29/182
 - Index Catalog : 205/5386
 - Collinder : 83/471
 - Caldwell : 34/109
