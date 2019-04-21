@@ -7,6 +7,7 @@ use App\Entity\Constellation;
 use App\Entity\Dso;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
+use App\Repository\ObservationRepository;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -56,6 +57,10 @@ class UrlGenerateHelper
 
                 case ConstellationRepository::INDEX_NAME:
                     $url = $this->router->generate('constellation_show', ['id' => $id]);
+                    break;
+
+                case ObservationRepository::INDEX_NAME:
+                    $url = $this->router->generate('', ['id' => null]);
                     break;
 
                 default:
