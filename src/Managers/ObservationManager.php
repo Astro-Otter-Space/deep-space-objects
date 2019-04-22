@@ -53,20 +53,23 @@ class ObservationManager
     {
         /** @var Observation $observation */
         $observation = $this->observationRepository->setLocale($this->locale)->getObservationById($id);
-        $observation->setFullUrl($this->urlGeneratorHelper->generateUrl($observation));
+        if ($observation instanceof Observation) {
+            $observation->setFullUrl($this->urlGeneratorHelper->generateUrl($observation));
 
-        if (0 < count($observation->getDsoList())) {
-            /** @var ListDso $dsoList */
-            $dsoList = new ListDso();
+            if (0 < count($observation->getDsoList())) {
+                /** @var ListDso $dsoList */
+                $dsoList = new ListDso();
 
-            $listIdDso = array_values($observation->getDsoList());
-            array_walk($listIdDso, function($id) use ($dsoList) {
-                $dso = $this->dsoManager->buildDso($id);
-                $dsoList->addDso($dso);
-            });
+                $listIdDso = array_values($observation->getDsoList());
+                array_walk($listIdDso, function($id) use ($dsoList) {
+                    $dso = $this->dsoManager->buildDso($id);
+                    $dsoList->addDso($dso);
+                });
 
-            $observation->setDsoList($dsoList);
+                $observation->setDsoList($dsoList);
+            }
         }
+
 
         return $observation;
     }

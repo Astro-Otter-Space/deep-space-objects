@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = observation.name %}
+{% set pageDesc = "" %}
 
 {% block content %}
   <div id="app"
      data-observation-widget
-     data-title="{{ pageTitle }}"
+     data-title="{{ observation.name }}"
+     data-description="{{ observation.name }}"
      data-list-dso="{{ list_dso|json_encode }}"
   ></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('observation') }}
 {% endblock %}
