@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\ObservationRepository;
+
 /**
  * Class Observation
+ *
  * @package App\Entity
  */
 class Observation extends AbstractEntity
@@ -20,11 +23,11 @@ class Observation extends AbstractEntity
     private $username;
     /** @var  */
     private $name;
-    /** @var  */
+    /** @var \DateTime */
     private $createdAt;
     /** @var  */
     private $isPublic;
-    /** @var  */
+    /** @var \DateTime */
     private $observationDate;
     /** @var  */
     private $location;
@@ -162,8 +165,7 @@ class Observation extends AbstractEntity
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-        return $this;
+        $this->createdAt = \DateTime::createFromFormat("Y-m-dTH:i:sZ" ,$createdAt);
     }
 
     /**
@@ -200,8 +202,8 @@ class Observation extends AbstractEntity
      */
     public function setObservationDate($observationDate)
     {
-        $this->observationDate = $observationDate;
-        return $this;
+        dump($observationDate);
+        $this->observationDate = \DateTime::createFromFormat("Y-m-d", $observationDate);
     }
 
     /**
@@ -248,5 +250,13 @@ class Observation extends AbstractEntity
     public function getListFieldsNoMapping()
     {
         return self::$listFieldsNoMapping;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getIndex()
+    {
+        return ObservationRepository::INDEX_NAME;
     }
 }

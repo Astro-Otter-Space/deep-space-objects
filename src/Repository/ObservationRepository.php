@@ -6,10 +6,14 @@ namespace App\Repository;
 use App\Entity\Observation;
 use Elastica\ResultSet;
 
+/**
+ * Class ObservationRepository
+ *
+ * @package App\Repository
+ */
 final class ObservationRepository extends AbstractRepository
 {
     const INDEX_NAME = 'observations';
-
 
     /**
      * @param $id
@@ -21,9 +25,11 @@ final class ObservationRepository extends AbstractRepository
     {
         /** @var ResultSet $observationDoc */
         $document = $this->findById($id);
+
         if (0 < $document->getTotalHits()) {
             $observationDoc = $document->getResults()[0]->getDocument();
-            return $this->buildEntityFromDocument($document);
+
+            return $this->buildEntityFromDocument($observationDoc);
         } else {
             return null;
         }

@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\AbstractEntity;
 use App\Entity\Constellation;
+use App\Entity\Dso;
+use App\Entity\Observation;
 use Elastica\Client;
 use Elastica\Query;
 use Elastica\ResultSet;
@@ -59,12 +61,13 @@ abstract class AbstractRepository
 
     /**
      * Return document by Id
+     *
      * @param $id
      * @return ResultSet
      */
     protected function findById($id): ResultSet
     {
-        /** @var Constellation|AbstractEntity $entity */
+        /** @var Constellation|Observation|Dso|AbstractEntity $entity */
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
@@ -78,7 +81,7 @@ abstract class AbstractRepository
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
-        return $search->search($matchQuery);
+        return $search->addIndex($this->getType())->search($matchQuery);
     }
 
 
@@ -89,7 +92,6 @@ abstract class AbstractRepository
      */
     public function requestBySearchTerms($searchTerm, $listSearchFields)
     {
-
         $this->client->getIndex($this->getType());
 
         /** @var Query\MultiMatch $query */

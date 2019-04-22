@@ -38,12 +38,16 @@ class Constellation extends AbstractEntity
     /** @var  */
     private $geometryLine;
 
+    /** @var  */
     private $listDso;
 
+    /** @var  */
     private $fullUrl;
 
+    /** @var  */
     private $map;
 
+    /** @var  */
     private $image;
 
     private static $listFieldsNoMapping = ['elasticId', 'locale', 'fullUrl', 'listDso', 'map', 'image'];

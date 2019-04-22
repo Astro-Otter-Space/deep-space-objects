@@ -52,6 +52,7 @@ abstract class AbstractEntity
     /**
      * Same method as above but with ReflectionClass
      *
+     * @TODO : try with Symfony Serializer, ObjectNormalizer
      * @param Document $document
      * @return $this
      * @throws \ReflectionException
@@ -60,8 +61,12 @@ abstract class AbstractEntity
     {
         $this->setElasticId($document->getId());
 
-        $dataDocument = array_merge($document->getData(), $document->getData()['data']);
-        unset($dataDocument['data']);
+        if (array_key_exists('data', $document->getData())) {
+            $dataDocument = array_merge($document->getData(), $document->getData()['data']);
+            unset($dataDocument['data']);
+        } else {
+            $dataDocument = $document->getData();
+        }
 
         // Transform snake_case keys into CamelCase keys
         $keys = array_map(function ($i) {
@@ -87,9 +92,11 @@ abstract class AbstractEntity
             $property->setAccessible(true);
             $property->setValue($this, $dataDocument[$property->getName()]);
         }
-        // TODO verifier quand même ce truc...
-        $this->setAlt($dataDocument['alt']);
 
+        if (array_key_exists('alt', $dataDocument)) {
+            // TODO verifier quand même ce truc...
+            $this->setAlt($dataDocument['alt']);
+        }
         return $this;
     }
 

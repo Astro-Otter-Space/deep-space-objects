@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = observation.name %}
+
+{% block content %}
+  <div id="app"
+     data-observation-widget
+     data-title="{{ pageTitle }}"
+     data-list-dso="{{ list_dso|json_encode }}"
+  ></div>
+{% endblock %}

@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Observation;
+use App\Managers\DsoManager;
+use App\Managers\ObservationManager;
+use App\Repository\ObservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,11 +41,30 @@ class ObservationController extends AbstractController
     }
 
     /**
-     * @param $name
+     * @Route("/observation/{id}", name="observation_show")
+     *
+     * @param $id
+     *
+     * @param ObservationManager $observationManager
+     *
+     * @return Response
+     * @throws \ReflectionException
      */
-    public function show($name)
+    public function show($id, ObservationManager $observationManager, DsoManager $dsoManager)
     {
+        $params = [];
 
+        /** @var Observation $observation */
+        $observation = $observationManager->buildObservation($id);
+
+        $params["observation"] = $observation;
+        $params['list_dso'] = $dsoManager->buildListDso($observation->getDsoList());
+
+        /** @var Response $response */
+        $response = $this->render('pages/observation.html.twig', $params);
+        $response->setPublic();
+
+        return $response;
     }
 
     /**

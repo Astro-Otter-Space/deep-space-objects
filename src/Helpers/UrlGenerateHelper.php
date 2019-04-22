@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Classes\Utils;
 use App\Entity\Constellation;
 use App\Entity\Dso;
+use App\Entity\Observation;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use App\Repository\ObservationRepository;
@@ -41,12 +42,10 @@ class UrlGenerateHelper
     public function generateUrl($entity)
     {
         $url = '';
-
-        if ($entity instanceof Dso || $entity instanceof Constellation) {
+        if ($entity instanceof Dso || $entity instanceof Constellation || $entity instanceof Observation) {
             $id = strtolower($entity->getId());
             switch ($entity::getIndex()) {
                 case DsoRepository::INDEX_NAME:
-
                     if (!empty($entity->getAlt())) {
                         $name = Utils::camelCaseUrlTransform($entity->getAlt());
                         $id = implode(trim($entity::URL_CONCAT_GLUE), [$id, $name]);
@@ -60,7 +59,7 @@ class UrlGenerateHelper
                     break;
 
                 case ObservationRepository::INDEX_NAME:
-                    $url = $this->router->generate('', ['id' => null]);
+                    $url = $this->router->generate('observation_show', ['id' => $entity->getId()]);
                     break;
 
                 default:
