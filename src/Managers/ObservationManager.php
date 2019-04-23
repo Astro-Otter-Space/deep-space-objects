@@ -16,6 +16,8 @@ use App\Repository\ObservationRepository;
  */
 class ObservationManager
 {
+    use ManagerTrait;
+
     /** @var ObservationRepository  */
     private $observationRepository;
     /** @var UrlGenerateHelper  */

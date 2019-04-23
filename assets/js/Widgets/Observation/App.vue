@@ -27,7 +27,8 @@
           <p>{{ description }}</p>
         </div>
 
-<!--        <div id="map">-->
+        <div id="map" style="height: 25rem;">
+          <h3 class="Dso__title">Location</h3>
           <l-map
             :zoom="zoom"
             :center="marker"
@@ -40,7 +41,7 @@
               :lat-lng="marker"
             ></l-marker>
           </l-map>
-<!--        </div>-->
+        </div>
 
         <!--List DSo-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
@@ -67,6 +68,7 @@
   let title = document.querySelector('div[data-observation-widget]').dataset.title;
   let desc = document.querySelector('div[data-observation-widget]').dataset.description;
   let dsoList = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.listDso);
+  let coordinates = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.coordinates);
 
   export default {
     name: "App",
@@ -85,7 +87,7 @@
         zoom: 15,
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        marker: L.latLng(47.413220, -1.219482),
+        marker: L.latLng(coordinates.lat, coordinates.lon)
       }
     }
   }

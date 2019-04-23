@@ -21,6 +21,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class DsoManager
 {
 
+    use ManagerTrait;
+
     private static $listFieldToTranslate = ['catalog', 'type', 'constId'];
 
     /** @var DsoRepository  */
@@ -223,29 +225,7 @@ class DsoManager
      */
     public function formatVueData(Dso $dso): array
     {
-        /** @var TranslatorInterface $translate */
-        $translate = $this->translatorInterface;
-        $listFields = self::$listFieldToTranslate;
-
-        $dsoToArray = $dso->toArray();
-
-        $serialize = array_map(function($value, $key) use($translate, $listFields) {
-
-            if (!is_array($value)) {
-                $valueTranslated = $translate->trans($value, ['%count%' => 1]);
-            } else {
-                $valueTranslated = implode(Dso::DATA_CONCAT_GLUE, array_map(function($item) use($translate) {
-                    return $translate->trans($item, ['%count%' => 1]);
-                }, $value));
-            }
-
-            return [
-                'col0' => $translate->trans($key, ['%count%' => 1]),
-                'col1' => (in_array($key, $listFields)) ? $valueTranslated: $value
-            ];
-        }, $dsoToArray, array_keys($dsoToArray));
-
-        return $serialize;
+        return $this->formatEntityData($dso, self::$listFieldToTranslate);
     }
 
 

@@ -59,6 +59,10 @@ class ObservationController extends AbstractController
 
         $params["observation"] = $observation;
         $params['list_dso'] = $dsoManager->buildListDso($observation->getDsoList());
+        $params['coordinates'] = [
+            'lon' => $observation->getLocation()['coordinates'][0],
+            'lat' => $observation->getLocation()['coordinates'][1]
+        ];
 
         /** @var Response $response */
         $response = $this->render('pages/observation.html.twig', $params);

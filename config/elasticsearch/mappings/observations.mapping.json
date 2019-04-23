@@ -21,6 +21,9 @@
             }
           }
         },
+        "description": {
+          "type": "text"
+        },
         "created_at": {
           "type": "date"
         },
@@ -29,6 +32,9 @@
         },
         "observation_date": {
           "type": "date"
+        },
+        "location_label": {
+          "type": "text"
         },
         "location": {
           "type": "geo_shape"

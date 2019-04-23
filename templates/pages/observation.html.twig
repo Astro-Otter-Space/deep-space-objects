@@ -8,6 +8,7 @@
      data-observation-widget
      data-title="{{ observation.name }}"
      data-description="{{ observation.name }}"
+     data-coordinates="{{ coordinates|json_encode }}"
      data-list-dso="{{ list_dso|json_encode }}"
   ></div>
 {% endblock %}
