@@ -72,7 +72,17 @@ class ObservationManager
             }
         }
 
-
         return $observation;
+    }
+
+
+    /**
+     * @param Observation $observation
+     *
+     * @return array
+     */
+    public function formatVueData(Observation $observation)
+    {
+        return $this->formatEntityData($observation, []);
     }
 }

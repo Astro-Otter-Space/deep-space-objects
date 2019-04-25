@@ -252,6 +252,13 @@ m97.label: Owl Nebula
 m101.label: Pinwheel
 m102.label: Spindle
 m104.label: Sombrero
+# Observation : setup page
+instrument: Instrument
+diameter: Diameter (mm)
+focal: Focal (mm)
+report: Report (f/D)
+mount: Equatorial mount
+ocular: Ocular|Oculars
 # Form
 select:
     order:

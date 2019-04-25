@@ -4,6 +4,8 @@
 namespace App\Managers;
 
 use App\Entity\AbstractEntity;
+use App\Entity\Dso;
+use App\Entity\Observation;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -28,7 +30,7 @@ trait ManagerTrait
 
     /**
      * Build a "table" of data (translated if needed) from Entity with translated label
-     * @param $entity
+     * @param Dso|Observation $entity
      * @param $listFields
      *
      * @return array
@@ -39,7 +41,7 @@ trait ManagerTrait
         $translate = $this->translatorInterface;
 
         $entityToArray = $entity->toArray();
-
+        dump($entityToArray);
         return array_map(function($value, $key) use($translate, $listFields) {
 
             if (!is_array($value)) {

@@ -27,6 +27,18 @@
           <p>{{ description }}</p>
         </div>
 
+        <a id="#information"></a>
+        <div class="Dso__data">
+          <Table
+            :columns="gridColumns"
+            :data="gridData"
+            :classTable="classTable"
+            :classTr="classTr"
+            :classTd="classTd"
+          >
+          </Table>
+        </div>
+
         <div id="map" style="height: 25rem;">
           <h3 class="Dso__title">Location</h3>
           <l-map
@@ -60,6 +72,7 @@
 <script>
 
   import CardsGrid from './../Dso/components/CardsGrid';
+  import Table from './../App/SimpleTable';
   import './../Icons/facebook';
   import './../Icons/twitter';
 
@@ -67,6 +80,7 @@
 
   let title = document.querySelector('div[data-observation-widget]').dataset.title;
   let desc = document.querySelector('div[data-observation-widget]').dataset.description;
+  let data = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.observation);
   let dsoList = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.listDso);
   let coordinates = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.coordinates);
 
@@ -74,6 +88,7 @@
     name: "App",
     components: {
       CardsGrid,
+      Table,
       LMap,
       LTileLayer,
       LMarker
@@ -83,6 +98,11 @@
         pageTitle: title,
         description: desc,
         urlShare: document.querySelector("link[rel='canonical']").href,
+        gridColumns: ['col0', 'col1'],
+        gridData: tabData,
+        classTable: "Dso__table",
+        classTr: "Dso__tr",
+        classTd: "Dso__td",
         itemsDso: dsoList,
         zoom: 15,
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',

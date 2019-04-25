@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Classes\Utils;
 use App\Repository\ObservationRepository;
 
 /**
@@ -37,9 +38,8 @@ class Observation extends AbstractEntity
     private $instrument;
     private $diameter;
     private $focal;
-    private $rapport;
     private $mount;
-    private $occular;
+    private $ocular;
 
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
@@ -298,14 +298,6 @@ class Observation extends AbstractEntity
         $this->focal = $focal;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getRapport(): int
-    {
-        return ($this->getDiameter()/$this->getFocal());
-    }
-
 
     /**
      * @return mixed
@@ -326,20 +318,21 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getOccular()
+    public function getOcular()
     {
-        return $this->occular;
+        if (!is_array($this->ocular)) {
+            $this->ocular = [$this->ocular];
+        }
+        return $this->ocular;
     }
 
     /**
-     * @param mixed $occular
+     * @param mixed $ocular
      */
-    public function setOccular($occular): void
+    public function setOcular($ocular): void
     {
-        $this->occular = $occular;
+        $this->ocular = $ocular;
     }
-
-
 
     /**
      * @return array
@@ -367,9 +360,9 @@ class Observation extends AbstractEntity
             'instrument' => $this->getInstrument(),
             'diameter' => $this->getDiameter(),
             'focal' => $this->getFocal(),
-            'rapport' => $this->getRapport(),
+            'rapport' => Utils::numberFormatByLocale($this->getDiameter()/$this->getFocal()),
             'mount' => $this->getMount(),
-            'occular' => implode(self::DATA_CONCAT_GLUE, $this->getOccular())
+            'ocular' => $this->getOcular()
         ];
 
         return array_filter($data, function($value) {

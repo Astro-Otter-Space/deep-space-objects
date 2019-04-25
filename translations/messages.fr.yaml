@@ -252,6 +252,13 @@ m97.label: Nébuleuse du hibou
 m101.label: Galaxie du moulinet
 m102.label: Galaxie du fuseau
 m104.label: Galaxie du sombrero
+# Observation : setup page
+instrument: Instrument
+diameter: Diamètre (mm)
+focal: Focale (mm)
+report: Rapport (f/D)
+mount: Monture équatoriale
+ocular: Oculaire|Oculaires
 # Form
 select:
     order:
