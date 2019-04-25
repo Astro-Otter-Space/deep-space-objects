@@ -41,6 +41,22 @@
         },
         "dso_list": {
           "type": "text"
+        },
+
+        "instrument": {
+          "type": "text"
+        },
+        "diameter": {
+          "type": "integer"
+        },
+        "focal": {
+          "type": "integer"
+        },
+        "mount": {
+          "type": "text"
+        },
+        "ocular": {
+          "type": "text"
         }
       }
     }

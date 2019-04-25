@@ -34,6 +34,13 @@ class Observation extends AbstractEntity
     /** @var  */
     private $dsoList;
 
+    private $instrument;
+    private $diameter;
+    private $focal;
+    private $rapport;
+    private $mount;
+    private $occular;
+
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
     /**
@@ -202,7 +209,6 @@ class Observation extends AbstractEntity
      */
     public function setObservationDate($observationDate)
     {
-        dump($observationDate);
         $this->observationDate = \DateTime::createFromFormat("Y-m-d", $observationDate);
     }
 
@@ -245,6 +251,97 @@ class Observation extends AbstractEntity
     }
 
     /**
+     * @return mixed
+     */
+    public function getInstrument()
+    {
+        return $this->instrument;
+    }
+
+    /**
+     * @param mixed $instrument
+     */
+    public function setInstrument($instrument): void
+    {
+        $this->instrument = $instrument;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiameter(): int
+    {
+        return $this->diameter;
+    }
+
+    /**
+     * @param mixed $diameter
+     */
+    public function setDiameter($diameter): void
+    {
+        $this->diameter = $diameter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFocal(): int
+    {
+        return $this->focal;
+    }
+
+    /**
+     * @param mixed $focal
+     */
+    public function setFocal($focal): void
+    {
+        $this->focal = $focal;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRapport(): int
+    {
+        return ($this->getDiameter()/$this->getFocal());
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getMount()
+    {
+        return $this->mount;
+    }
+
+    /**
+     * @param mixed $mount
+     */
+    public function setMount($mount): void
+    {
+        $this->mount = $mount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOccular()
+    {
+        return $this->occular;
+    }
+
+    /**
+     * @param mixed $occular
+     */
+    public function setOccular($occular): void
+    {
+        $this->occular = $occular;
+    }
+
+
+
+    /**
      * @return array
      */
     public function getListFieldsNoMapping()
@@ -258,5 +355,25 @@ class Observation extends AbstractEntity
     public static function getIndex()
     {
         return ObservationRepository::INDEX_NAME;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = [
+            'instrument' => $this->getInstrument(),
+            'diameter' => $this->getDiameter(),
+            'focal' => $this->getFocal(),
+            'rapport' => $this->getRapport(),
+            'mount' => $this->getMount(),
+            'occulat' => implode(self::DATA_CONCAT_GLUE, $this->getOccular())
+        ];
+
+        return array_filter($data, function($value) {
+            return (false === empty($value));
+        });
     }
 }
