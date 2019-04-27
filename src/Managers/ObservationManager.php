@@ -126,7 +126,8 @@ class ObservationManager
                 'type' => 'Feature',
                 'properties' => [
                     'name' => $observation->getName(),
-                    'full_url' => $urlGenerator->generateUrl($observation)
+                    'full_url' => $urlGenerator->generateUrl($observation),
+                    'date' => \DateTime::createFromFormat('d/m/Y', $observation->getObservationDate())
                 ],
                 'geometry' => $observation->getLocation()
             ];

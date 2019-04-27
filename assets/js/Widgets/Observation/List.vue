@@ -3,7 +3,7 @@
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
 
-        <h2 class="Dso__title">Observations list</h2>
+        <h2 class="Dso__title">{{ pageTitle }}</h2>
 
         <searchautocomplete
           ref="observationsearch"
@@ -12,7 +12,7 @@
           :url="urlSearch"
         />
 
-        <h3 class="Dso__title">Location des observations</h3>
+        <h3 class="Dso__title">{{ listMapTitle }}</h3>
         <div class="Dso__leaflet">
           <l-map
             :zoom="zoom"
@@ -40,6 +40,8 @@
   import axios from 'axios';
   import popupContent from './GeojsonPopup';
 
+  let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
+  let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
   // let geojson = document.querySelector('div[data-observations-list]').dataset.geojson;
 
@@ -54,6 +56,8 @@
     },
     data () {
       return {
+        pageTitle: pageTitle,
+        mapTitle: mapTitle,
         urlSearch: urlSearchObs,
         autoCompleteClasse: {
           wrapper: 'AppHeader__wrapper',
