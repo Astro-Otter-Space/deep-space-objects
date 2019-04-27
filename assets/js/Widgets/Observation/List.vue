@@ -11,9 +11,10 @@
           :customClasses="autoCompleteClasse"
           :url="urlSearch"
         />
-      </div>
 
-      <h3 class="Dso__title">Location des observations</h3>
+        <h3 class="Dso__title">Location des observations</h3>
+
+      </div>
     </section>
   </div>
 </template>

@@ -385,7 +385,7 @@ class Observation extends AbstractEntity
             'focal' => $this->getFocal(),
             'report' => Utils::numberFormatByLocale($this->getFocal()/$this->getDiameter()),
             'mount' => $this->getMount(),
-            'ocular' => $this->getOcular()
+            'ocular' => implode(self::DATA_CONCAT_GLUE, $this->getOcular())
         ];
 
         return array_filter($data, function($value) {
