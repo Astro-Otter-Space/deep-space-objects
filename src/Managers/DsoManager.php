@@ -225,7 +225,7 @@ class DsoManager
      */
     public function formatVueData(Dso $dso): array
     {
-        return $this->formatEntityData($dso, self::$listFieldToTranslate);
+        return $this->formatEntityData($dso, self::$listFieldToTranslate, $this->translatorInterface);
     }
 
 

@@ -247,6 +247,13 @@ m97.label: Nebulosa da Coruja
 m101.label: Galáxia Cata-vento
 m102.label: Galáxia do Fuso
 m104.label: Galáxia do Sombreiro
+# Observation : setup page
+instrument: Instrument
+diameter: Diameter (mm)
+focal: Focal (mm)
+report: Report (f/D)
+mount: Equatorial mount
+ocular: Ocular|Oculars
 # Form
 select:
     order:

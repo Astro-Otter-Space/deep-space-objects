@@ -3,11 +3,11 @@
 namespace App\Managers;
 
 use App\Classes\CacheInterface;
-use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Entity\Observation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ObservationRepository;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ObservationManager
@@ -28,6 +28,9 @@ class ObservationManager
     private $locale;
     /** @var  */
     private $dsoManager;
+    /** @var TranslatorInterface */
+    private $translatorInterface;
+
     /**
      * ObservationManager constructor.
      *
@@ -35,14 +38,17 @@ class ObservationManager
      * @param UrlGenerateHelper $urlGeneratorHelper
      * @param CacheInterface $cacheUtil
      * @param $locale
+     * @param DsoManager $dsoManager
+     * @param TranslatorInterface $translatorInterface
      */
-    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager)
+    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
     {
         $this->observationRepository = $observationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
         $this->cacheUtil = $cacheUtil;
         $this->locale = $locale;
         $this->dsoManager = $dsoManager;
+        $this->translatorInterface = $translatorInterface;
     }
 
     /**
@@ -83,6 +89,6 @@ class ObservationManager
      */
     public function formatVueData(Observation $observation)
     {
-        return $this->formatEntityData($observation, []);
+        return $this->formatEntityData($observation, [], $this->translatorInterface);
     }
 }

@@ -59,7 +59,9 @@ class UrlGenerateHelper
                     break;
 
                 case ObservationRepository::INDEX_NAME:
-                    $url = $this->router->generate('observation_show', ['id' => $entity->getId()]);
+                    $name = Utils::camelCaseUrlTransform($entity->getName());
+                    $id = implode(trim($entity::URL_CONCAT_GLUE), [$id, $name]);
+                    $url = $this->router->generate('observation_show', ['id' => $id]);
                     break;
 
                 default:

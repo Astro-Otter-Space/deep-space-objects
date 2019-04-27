@@ -29,6 +29,7 @@
 
         <a id="#information"></a>
         <div class="Dso__data">
+          <h3 class="Dso__title">Setup</h3>
           <Table
             :columns="gridColumns"
             :data="gridData"
@@ -99,7 +100,7 @@
         description: desc,
         urlShare: document.querySelector("link[rel='canonical']").href,
         gridColumns: ['col0', 'col1'],
-        gridData: tabData,
+        gridData: data,
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",

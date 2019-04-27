@@ -24,6 +24,8 @@ class Observation extends AbstractEntity
     private $username;
     /** @var  */
     private $name;
+    /** @var  */
+    private $description;
     /** @var \DateTime */
     private $createdAt;
     /** @var  */
@@ -32,13 +34,17 @@ class Observation extends AbstractEntity
     private $observationDate;
     /** @var  */
     private $location;
-    /** @var  */
+    /** @var ListDso|array  */
     private $dsoList;
-
+    /** @var  */
     private $instrument;
+    /** @var  */
     private $diameter;
+    /** @var  */
     private $focal;
+    /** @var  */
     private $mount;
+    /** @var  */
     private $ocular;
 
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
@@ -160,6 +166,22 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -172,7 +194,7 @@ class Observation extends AbstractEntity
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = \DateTime::createFromFormat("Y-m-dTH:i:sZ" ,$createdAt);
+        $this->createdAt = \DateTime::createFromFormat("Y-m-dTH:i:sZ", $createdAt);
     }
 
     /**
@@ -231,8 +253,9 @@ class Observation extends AbstractEntity
         return $this;
     }
 
+
     /**
-     * @return ListDso
+     * @return ListDso|array
      */
     public function getDsoList()
     {
@@ -360,7 +383,7 @@ class Observation extends AbstractEntity
             'instrument' => $this->getInstrument(),
             'diameter' => $this->getDiameter(),
             'focal' => $this->getFocal(),
-            'rapport' => Utils::numberFormatByLocale($this->getDiameter()/$this->getFocal()),
+            'report' => Utils::numberFormatByLocale($this->getFocal()/$this->getDiameter()),
             'mount' => $this->getMount(),
             'ocular' => $this->getOcular()
         ];

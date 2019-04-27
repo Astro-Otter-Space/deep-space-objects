@@ -42,7 +42,6 @@
         "dso_list": {
           "type": "text"
         },
-
         "instrument": {
           "type": "text"
         },
