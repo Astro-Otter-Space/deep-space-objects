@@ -112,4 +112,25 @@ class ObservationManager
         }, $listObservation));
     }
 
+
+    /**
+     * @return array
+     * @throws \ReflectionException
+     */
+    public function getAllObservation()
+    {
+        /** @var UrlGenerateHelper $urlGenerator */
+        $urlGenerator = $this->urlGeneratorHelper;
+        return array_map(function(Observation $observation) use($urlGenerator) {
+            return [
+                'type' => 'Feature',
+                'properties' => [
+                    'name' => $observation->getName(),
+                    'full_url' => $urlGenerator->generateUrl($observation)
+                ],
+                'geometry' => $observation->getLocation()
+            ];
+        }, iterator_to_array($this->observationRepository->getAllObservation()));
+    }
+
 }

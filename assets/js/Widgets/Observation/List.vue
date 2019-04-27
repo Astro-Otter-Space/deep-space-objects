@@ -7,27 +7,50 @@
 
         <searchautocomplete
           ref="observationsearch"
-          :searchPlaceholder="Test"
+          :searchPlaceholder="searchPlaceholder"
           :customClasses="autoCompleteClasse"
           :url="urlSearch"
         />
 
         <h3 class="Dso__title">Location des observations</h3>
-
+        <div class="Dso__leaflet">
+          <l-map
+            :zoom="zoom"
+            :center="center"
+          >
+            <l-geo-json
+              :geojson="geojson"
+              :options="options"
+            ></l-geo-json>
+            <l-tile-layer
+              :url="url"
+              :attribution="attribution"
+            />
+          </l-map>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+  import Vue from "vue";
   import Searchautocomplete from "./../Homepage/components/Searchautocomplete"
+  import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
+  import axios from 'axios';
+  import popupContent from './GeojsonPopup';
 
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
+  // let geojson = document.querySelector('div[data-observations-list]').dataset.geojson;
 
   export default {
     name: "App",
     components: {
-      Searchautocomplete
+      Searchautocomplete,
+      LMap,
+      LTileLayer,
+      LMarker,
+      LGeoJson,
     },
     data () {
       return {
@@ -37,8 +60,42 @@
           input: 'AppSearch__inputText',
           list: 'AppHeader__list'
         },
+        searchPlaceholder: "Test...",
+        enableTooltip: true,
+        zoom: 5,
+        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        center: L.latLng(48.856614, 2.3522219),
+        geojson: null
+      }
+    },
+    created() {
+      axios.get('/_observations').then((response) => {
+          this.geojson =  response.data;
+        }
+      );
+    },
+    computed: {
+      options() {
+        return {
+          onEachFeature: this.onEachFeatureFunction
+        }
+      },
+      onEachFeatureFunction() {
+        if (!this.enableTooltip) {
+          return () => {};
+        }
+        return (feature, layer) => {
+          let PopupContent = Vue.extend(popupContent);
+          let popup = new PopupContent({
+            propsData: {
+              name: feature.properties.name,
+              url: feature.properties.full_url
+            }
+          });
+          layer.bindPopup(popup.$mount().$el);
+        }
       }
     }
-
   }
 </script>

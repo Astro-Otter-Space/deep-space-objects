@@ -3,10 +3,8 @@ namespace App\Repository;
 
 use App\Entity\Constellation;
 use App\Entity\ListConstellation;
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Query\MatchAll;
 use Elastica\Result;
 use Elastica\Search;
 

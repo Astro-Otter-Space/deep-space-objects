@@ -3,9 +3,13 @@
 
 namespace App\Repository;
 
+use App\Controller\SearchController;
+use App\Entity\ListObservations;
 use App\Entity\Observation;
+use Elastica\Query;
 use Elastica\Result;
 use Elastica\ResultSet;
+use Elastica\Search;
 
 /**
  * Class ObservationRepository
@@ -60,6 +64,36 @@ final class ObservationRepository extends AbstractRepository
             }, $result->getResults());
         }
         return $list;
+    }
+
+    /**
+     * Retrieve all observations
+     *
+     * @return ListObservations
+     * @throws \ReflectionException
+     */
+    public function getAllObservation()
+    {
+        /** @var ListObservations $listObservation */
+        $listObservation = new ListObservations();
+
+        /** @var Query\MatchAll $query */
+        $query = new Query\MatchAll();
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+
+        /** @var ResultSet $result */
+        $result = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $result->count()) {
+            foreach ($result->getDocuments() as $document) {
+                $observation = $this->buildEntityFromDocument($document);
+                $listObservation->addObservation($observation);
+            }
+        }
+
+        return $listObservation;
     }
 
     /**

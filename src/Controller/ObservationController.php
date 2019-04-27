@@ -7,6 +7,7 @@ use App\Entity\Observation;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,17 +28,50 @@ class ObservationController extends AbstractController
      *  "de": "/observations-list"
      * }, name="observation_list")
      *
+     * @param ObservationManager $observationManager
+     *
      * @return Response
+     * @throws \ReflectionException
      */
-    public function list()
+    public function list(ObservationManager $observationManager)
     {
         $params = [];
+//        $geojson = [
+//            'type' => 'FeatureCollection',
+//            'features' => $observationManager->getAllObservation()
+//        ];
+//
+        $params['geojson'] = json_encode([]);
 
         /** @var Response $response */
         $response = $this->render('pages/observations.html.twig', $params);
         $response->setPublic();
 
         return $response;
+    }
+
+
+    /**
+     * @Route({
+     *  "en": "/_observations",
+     *  "fr": "/_observations",
+     *  "es": "/_observations",
+     *  "pt": "/_observations",
+     *  "de": "/_observations"
+     * }, name="observation_list_ajax")
+     * @param ObservationManager $observationManager
+     *
+     * @return JsonResponse
+     * @throws \ReflectionException
+     */
+    public function geosjonAjax(ObservationManager $observationManager)
+    {
+        $geojson = [
+            'type' => 'FeatureCollection',
+            'features' => $observationManager->getAllObservation()
+        ];
+
+        return new JsonResponse($geojson, Response::HTTP_OK);
     }
 
     /**

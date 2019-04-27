@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@fortawesome/free-regular-svg-icons": "^5.8.1",
+        "axios": "^0.18.0",
         "copy-webpack-plugin": "^4.6.0",
         "d3-celestial": "^0.6.10",
         "leaflet": "^1.4.0",

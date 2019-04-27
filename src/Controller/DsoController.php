@@ -281,7 +281,6 @@ class DsoController extends AbstractController
         if ($request->query->has('catalog')) {
             $catalog = $request->query->get('catalog');
             $desc = $translatorInterface->trans('description.' . $catalog);
-//            dump($desc);
             if (!empty($desc) && $desc !== 'description.' . $catalog) {
                 $result['pageDesc'] = $desc;
             }
