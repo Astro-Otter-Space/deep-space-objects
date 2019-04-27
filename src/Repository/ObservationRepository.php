@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 use App\Entity\Observation;
+use Elastica\Result;
 use Elastica\ResultSet;
 
 /**
@@ -14,6 +15,12 @@ use Elastica\ResultSet;
 final class ObservationRepository extends AbstractRepository
 {
     const INDEX_NAME = 'observations';
+
+    private static $listSearchFields = [
+        'id',
+        'username',
+        'location_label'
+    ];
 
     /**
      * @param $id
@@ -33,6 +40,26 @@ final class ObservationRepository extends AbstractRepository
         } else {
             return null;
         }
+    }
+
+
+    /**
+     * Build list of Observation from search term
+     * @param $terms
+     * @return array
+     */
+    public function getObservationsBySearchTerms($terms)
+    {
+        $list = [];
+        /** @var ResultSet $result */
+        $result = $this->requestBySearchTerms($terms, self::$listSearchFields);
+
+        if (0 < $result->getTotalHits()) {
+            $list = array_map(function(Result $doc) {
+                return $this->buildEntityFromDocument($doc->getDocument());
+            }, $result->getResults());
+        }
+        return $list;
     }
 
     /**

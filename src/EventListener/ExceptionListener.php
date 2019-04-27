@@ -34,20 +34,23 @@ class ExceptionListener
     {
         $exception = $event->getException();
 
-        if ($exception instanceof HttpExceptionInterface) {
-            /** @var Response $response */
-            $response = $this->twigEngine->renderResponse('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
-            $response->setStatusCode($exception->getStatusCode());
-            $response->headers->replace($exception->getHeaders());
-        } else {
-            /** @var Response $response */
-            $response = new Response();
-            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
-            $response->setContent($exception->getTrace());
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+        if ("dev" !== $this->env) {
+            if ($exception instanceof HttpExceptionInterface) {
+                /** @var Response $response */
+                $response = $this->twigEngine->renderResponse('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
+                $response->setStatusCode($exception->getStatusCode());
+                $response->headers->replace($exception->getHeaders());
+            } else {
+                /** @var Response $response */
+                $response = new Response();
+                $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
+                $response->setContent($exception->getTrace());
+                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+
+            $event->setResponse($response);
         }
 
-        $event->setResponse($response);
     }
 
 }

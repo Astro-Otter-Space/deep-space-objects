@@ -3,6 +3,7 @@
 namespace App\Managers;
 
 use App\Classes\CacheInterface;
+use App\Classes\Utils;
 use App\Entity\ListDso;
 use App\Entity\Observation;
 use App\Helpers\UrlGenerateHelper;
@@ -81,7 +82,6 @@ class ObservationManager
         return $observation;
     }
 
-
     /**
      * @param Observation $observation
      *
@@ -91,4 +91,25 @@ class ObservationManager
     {
         return $this->formatEntityData($observation, [], $this->translatorInterface);
     }
+
+
+    /***
+     * Format result search observation
+     * @param $terms
+     *
+     * @return mixed
+     */
+    public function buildSearchObservationByTerms($terms)
+    {
+        $listObservation = $this->observationRepository->setLocale($this->locale)->getObservationsBySearchTerms($terms);
+        return call_user_func("array_merge", array_map(function (Observation $observation) {
+            return [
+                'id' => $observation->getId(),
+                'value' => $observation->getName(),
+                'label' => $observation->getUsername(),
+                'url' => $this->urlGeneratorHelper->generateUrl($observation)
+            ];
+        }, $listObservation));
+    }
+
 }

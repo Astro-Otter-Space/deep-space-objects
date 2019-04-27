@@ -10,6 +10,7 @@ use Elastica\Client;
 use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Search;
+use Negotiation\Match;
 
 /**
  * Class AbstractRepository
@@ -99,6 +100,14 @@ abstract class AbstractRepository
         $query->setFields($listSearchFields);
         $query->setQuery($searchTerm);
         $query->setType('phrase_prefix');
+
+//        if (ObservationRepository::INDEX_NAME == $this->getType()) {
+//            /** @var Query\Match $queryMatch */
+//            $queryMatch = new Query\Match();
+//            $queryMatch->setField('is_public', true);
+//
+//            $query->setQuery($queryMatch);
+//        }
 
         /** @var Search $search */
         $search = new Search($this->client);

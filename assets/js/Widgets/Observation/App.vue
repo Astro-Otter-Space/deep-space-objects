@@ -40,6 +40,16 @@
           </Table>
         </div>
 
+        <!--List DSo-->
+        <div class="Dso__list" v-if="0 < itemsDso.length">
+          <h3 class="Dso__title">Items</h3>
+          <cards-grid
+                  :items="itemsDso"
+                  :show-controls="false"
+          >
+          </cards-grid>
+        </div>
+
         <div id="map" style="height: 25rem;">
           <h3 class="Dso__title">Location</h3>
           <l-map
@@ -54,16 +64,6 @@
               :lat-lng="marker"
             ></l-marker>
           </l-map>
-        </div>
-
-        <!--List DSo-->
-        <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3 class="Dso__title">Items</h3>
-          <cards-grid
-            :items="itemsDso"
-            :show-controls="false"
-          >
-          </cards-grid>
         </div>
       </div>
     </section>

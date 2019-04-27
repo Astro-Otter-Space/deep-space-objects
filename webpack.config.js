@@ -25,6 +25,7 @@ Encore
   .addEntry('const_list', './assets/js/list_constellation.js')
   .addEntry('catalog', './assets/js/catalog.js')
   .addEntry('observation', './assets/js/observation.js')
+  .addEntry('observations', './assets/js/list_observations.js')
   .addEntry('notfound', './assets/js/notfound.js')
 
   //D3-celestial

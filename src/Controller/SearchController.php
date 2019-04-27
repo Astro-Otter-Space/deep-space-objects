@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
+use App\Managers\ObservationManager;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,6 +40,33 @@ class SearchController extends AbstractController
 
             $dataConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
             $data = array_merge($dataDso, $dataConstellation);
+        }
+
+        /** @var JsonResponse $response */
+        $response = new JsonResponse($data, Response::HTTP_OK);
+        $response->setPublic()->setSharedMaxAge(0);
+
+        return $response;
+    }
+
+
+    /**
+     * @Route(
+     *     "/_search-observation",
+     *     name="search_observation_ajax",
+     *     options={"exposes"=true}
+     * )
+     * @param Request $request
+     * @param ObservationManager $observationManager
+     *
+     * @return JsonResponse
+     */
+    public function searchObservationAjax(Request $request, ObservationManager $observationManager)
+    {
+        $data = [];
+        if ($request->query->has('q')) {
+            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
+            $data = $observationManager->buildSearchObservationByTerms($searchTerm);
         }
 
         /** @var JsonResponse $response */
