@@ -94,7 +94,9 @@
           let popup = new PopupContent({
             propsData: {
               name: feature.properties.name,
-              url: feature.properties.full_url
+              url: feature.properties.full_url,
+              username: feature.properties.username,
+              date_observation: feature.properties.date
             }
           });
           layer.bindPopup(popup.$mount().$el);

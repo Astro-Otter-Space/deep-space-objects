@@ -3,6 +3,7 @@
     <p>
       <a v-bind:href="url">{{ name }}</a>
     </p>
+    <p>{{ username }} - {{ date_observation }}</p>
   </div>
 </template>
 
@@ -15,6 +16,14 @@
         default: ""
       },
       url: {
+        type: String,
+        default: ""
+      },
+      username: {
+        type: String,
+        default: ""
+      },
+      date_observation: {
         type: String,
         default: ""
       }
