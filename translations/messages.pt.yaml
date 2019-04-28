@@ -53,6 +53,7 @@ dayImage: Imagem do dia
 info: Informações
 desigs: Outras designações
 magnitude: Magnitude aparente
+constellation: Constelação|Constelações
 const_id: Constelação|Constelações
 constId: Constelação|Constelações
 dim: Tamanha
@@ -102,6 +103,9 @@ listMagnitudeAsc: Magnitude miníma
 listMagnitudeDesc: Magnitude maxíma
 type: Tipo de objeto|Tipo de objeto
 filters: filtros
+range.inf: Less than %to%
+range.between: Between %from% to %to%
+range.sup: More than %from%
 filterBy: Filtering by
 nbResults: "%count% result found|]1,Inf[%count% results found"
 # Type DSO
@@ -197,6 +201,7 @@ constellation.psc: Peixes
 constellation.pup: Cão Menor
 constellation.pyx:
 constellation.ret:
+constellation.scl:
 constellation.sco: Escorpião
 constellation.sct: Scutum
 constellation.ser: Serpente
@@ -256,9 +261,9 @@ mount: Equatorial mount
 ocular: Ocular|Oculars
 # Form
 select:
-    order:
-        label: Ordenar por
-        placeholder: Escolha sua opção
+  order:
+    label: Ordenar por
+    placeholder: Escolha sua opção
 # Form contact
 contact.title: "Contact us"
 form.error.sending: "A problem has occurred, please try later"
@@ -287,6 +292,5 @@ constellationListDesc: List of celestial constellations
 dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 listObservationsDesc:
 dsoDesc:
-constellationDesc:
 contactDesc:
 skymapDesc:

@@ -79,6 +79,8 @@ list.ic: Index Catalog
 description.ic:
 list.ldn: Lynds' Catalogue of Dark Nebulae
 description.ldn:
+list.lbn: Lynds' Catalogue of Bright Nebulae
+description.lbn:
 list.sh: Sharpless catalog
 description.sh:
 list.cr: Collinder catalog
@@ -293,4 +295,3 @@ dsoDesc:
 constellationDesc:
 contactDesc:
 skymapDesc:
-

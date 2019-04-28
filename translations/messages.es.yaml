@@ -1,5 +1,5 @@
 # Layout
-dso: Deep-sky objects
+dso: The Space Otter
 dso_tr: Deep-sky objects
 menu.homepage: Homepage
 selectLang: Languages
@@ -93,6 +93,8 @@ list.abl: Abell catalog
 description.abl:
 list.ugc: Uppsala General Catalog
 description.ugc:
+list.cld: Catalogue de Caldwell
+description.cld: Caldwell catalogue
 list.dodz: Dolidze-Dzimselejvil catalog
 description.dodz:
 filters: Filters
@@ -293,4 +295,3 @@ dsoDesc:
 constellationDesc:
 contactDesc:
 skymapDesc:
-

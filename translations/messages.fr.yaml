@@ -261,9 +261,9 @@ mount: Monture équatoriale
 ocular: Oculaire|Oculaires
 # Form
 select:
-    order:
-        label: Trier par
-        placeholder: Sélectionnez votre option
+  order:
+    label: Trier par
+    placeholder: Sélectionnez votre option
 # Form contact
 contact.title: "Contactez-nous"
 form.error.sending: "Problème d'envoi du message, veuillez réassayer plus tard"

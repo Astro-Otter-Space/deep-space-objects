@@ -92,9 +92,9 @@ description.rcw:
 list.abl: Abell catalog
 description.abl:
 list.ugc: Uppsala General Catalog
+description.ugc:
 list.cld: Catalogue de Caldwell
 description.cld: Caldwell catalogue
-description.ugc:
 list.dodz: Dolidze-Dzimselejvil catalog
 description.dodz:
 filters: Filters
@@ -261,9 +261,9 @@ mount: Equatorial mount
 ocular: Ocular|Oculars
 # Form
 select:
-    order:
-        label: Ordering by
-        placeholder: Choose your option
+  order:
+    label: Ordering by
+    placeholder: Choose your option
 # Form contact
 contact.title: "Contact us"
 form.error.sending: "A problem has occurred, please try later"
@@ -292,6 +292,5 @@ constellationListDesc: List of celestial constellations
 dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 listObservationsDesc:
 dsoDesc:
-constellationDesc:
 contactDesc:
 skymapDesc:
