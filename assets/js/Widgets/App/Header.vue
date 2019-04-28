@@ -11,6 +11,7 @@
 
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
+<!--        Open Menu-->
         <span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
         </span>&nbsp;
@@ -24,12 +25,14 @@
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
+
         <!-- Dark/day mod -->
         <li>
-          <span v-on:click="" v-bind:title="titleNightMode">
-            <svgicon name="moon" width="30" height="30" color="#e9e9e9"></svgicon>
-          </span>
+          <a v-on:click="switchTheme(theme)" v-bind:title="titleSwitchMode">
+            <svgicon v-bind:name="theme" width="30" height="30" color="#e9e9e9"></svgicon>
+          </a>
         </li>
+
         <!--Languages-->
         <li class="header__drop">
           <a v-on:click="displayDropMenu()" v-bind:title="titleSwitchLang">
@@ -41,6 +44,7 @@
             </a>
           </ul>
         </li>
+
         <!--Current locale-->
         <li class="header__currentLang">{{currentLocale.toUpperCase()}}</li>
       </nav>
@@ -71,8 +75,8 @@
 
   let titleOpenMenu = "Open menu";
   let titleSwitchLang = "Switch language";
-  let titleNightMode = "Night mode ON";
-  let titleDayMode = "Night mode OFF";
+  let titleNightMode = "Switch to night mode";
+  let titleDayMode = "Switch to day mode";
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
   import { Slide } from 'vue-burger-menu';
@@ -81,6 +85,16 @@
   window.addEventListener("resize", function(event) {
     closeAllMenu();
   });
+
+  let KEY_THEME = 'theme';
+  var themeLocalStorage = {
+    fetch: function() {
+      return localStorage.getItem(KEY_THEME) || 'moon';
+    },
+    save: function(theme) {
+      localStorage.setItem(KEY_THEME, theme);
+    }
+  };
 
   export default {
     name: "Header",
@@ -95,7 +109,7 @@
         title: title,
         listLocales: listLocales,
         currentLocale: currentLocale,
-
+        theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
         homeRoute: 'homepage',
         hide: false,
@@ -108,7 +122,15 @@
         searchUrl: urlSearch,
         titleOpenMenu: titleOpenMenu,
         titleSwitchLang: titleSwitchLang,
-        titleNightMode: titleNightMode
+        titleSwitchMode: titleNightMode
+      }
+    },
+    watch: {
+      theme: {
+        handler: function(newTheme) {
+          console.log("Set new theme : " + newTheme);
+          themeLocalStorage.save(newTheme)
+        }
       }
     },
     methods: {
@@ -144,6 +166,10 @@
       },
       openSlideMenu: function () {
         this.$refs.slideMenu.$children[0].openMenu();
+      },
+      switchTheme: function(theme) {
+        this.theme = ("moon" !== theme) ? "moon" : "moon-empty";
+        this.titleSwitchMode = ("moon" !== theme) ? titleNightMode : titleDayMode;
       }
     }
   }

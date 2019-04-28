@@ -7,7 +7,7 @@
     {% set pageImage = pageImage|default(null) %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
     {% set favicon = favicon|default('') %}
-    {% set facebookId = ''|default(null) %}
+    {% set facebookId = facebookId|default(null) %}
   {% endspaceless %}
   <!DOCTYPE html>
   <html lang="{{ pageLang }}">
