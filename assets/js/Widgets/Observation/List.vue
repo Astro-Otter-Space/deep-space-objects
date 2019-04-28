@@ -61,7 +61,7 @@
         urlSearch: urlSearchObs,
         autoCompleteClasse: {
           wrapper: 'AppHeader__wrapper',
-          input: 'AppSearch__inputText',
+          input: 'AppSearch__inputTextObservation',
           list: 'AppHeader__list'
         },
         searchPlaceholder: "Test...",

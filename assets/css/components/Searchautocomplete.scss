@@ -46,6 +46,11 @@
     }
   }
 
+  &__inputTextObservation {
+    @extend ;
+    border: 1px $bgd-dark;
+  }
+
   &__list {
     color: $color-text-dark;
 
