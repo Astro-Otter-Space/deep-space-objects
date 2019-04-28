@@ -128,7 +128,6 @@
     watch: {
       theme: {
         handler: function(newTheme) {
-          console.log("Set new theme : " + newTheme);
           themeLocalStorage.save(newTheme)
         }
       }
