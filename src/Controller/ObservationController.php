@@ -18,6 +18,22 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ObservationController extends AbstractController
 {
+    /** @var ObservationManager  */
+    private $observationManager;
+    /** @var DsoManager  */
+    private $dsoManager;
+
+    /**
+     * ObservationController constructor.
+     *
+     * @param ObservationManager $observationManager
+     * @param DsoManager $dsoManager
+     */
+    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager)
+    {
+        $this->observationManager = $observationManager;
+        $this->dsoManager = $dsoManager;
+    }
 
     /**
      * @Route({
@@ -28,12 +44,10 @@ class ObservationController extends AbstractController
      *  "de": "/observations-list"
      * }, name="observation_list")
      *
-     * @param ObservationManager $observationManager
-     *
      * @return Response
      * @throws \ReflectionException
      */
-    public function list(ObservationManager $observationManager)
+    public function list()
     {
         $params['geojson'] = json_encode([]);
 
@@ -53,16 +67,15 @@ class ObservationController extends AbstractController
      *  "pt": "/_observations",
      *  "de": "/_observations"
      * }, name="observation_list_ajax")
-     * @param ObservationManager $observationManager
      *
      * @return JsonResponse
      * @throws \ReflectionException
      */
-    public function geosjonAjax(ObservationManager $observationManager)
+    public function geosjonAjax()
     {
         $geojson = [
             'type' => 'FeatureCollection',
-            'features' => $observationManager->getAllObservation()
+            'features' => $this->observationManager->getAllObservation()
         ];
 
         return new JsonResponse($geojson, Response::HTTP_OK);
@@ -72,13 +85,11 @@ class ObservationController extends AbstractController
      * @Route("/observation/{name}", name="observation_show")
      *
      * @param string $name
-     * @param ObservationManager $observationManager
-     * @param DsoManager $dsoManager
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function show($name, ObservationManager $observationManager, DsoManager $dsoManager): Response
+    public function show($name): Response
     {
         $params = [];
 
@@ -86,11 +97,11 @@ class ObservationController extends AbstractController
         $id = reset($id);
 
         /** @var Observation $observation */
-        $observation = $observationManager->buildObservation($id);
+        $observation = $this->observationManager->buildObservation($id);
 
         $params["observation"] = $observation;
-        $params['data'] = $observationManager->formatVueData($observation);
-        $params['list_dso'] = $dsoManager->buildListDso($observation->getDsoList());
+        $params['data'] = $this->observationManager->formatVueData($observation);
+        $params['list_dso'] = $this->dsoManager->buildListDso($observation->getDsoList());
         $params['coordinates'] = [
             'lon' => $observation->getLocation()['coordinates'][0],
             'lat' => $observation->getLocation()['coordinates'][1]

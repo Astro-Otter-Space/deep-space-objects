@@ -29,19 +29,42 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ConstellationController extends AbstractController
 {
+    /** @var ConstellationManager  */
+    private $constellationManager;
+    /** @var DsoManager  */
+    private $dsoManager;
+    /** @var DsoRepository  */
+    private $dsoRepository;
+    /** @var TranslatorInterface  */
+    private $translatorInterface;
+
+    /**
+     * ConstellationController constructor.
+     *
+     * @param $constellationManager
+     * @param $dsoManager
+     * @param $dsoRepository
+     * @param $translatorInterface
+     */
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    {
+        $this->constellationManager = $constellationManager;
+        $this->dsoManager = $dsoManager;
+        $this->dsoRepository = $dsoRepository;
+        $this->translatorInterface = $translatorInterface;
+    }
+
 
     /**
      * @Route("/constellation/{id}", name="constellation_show")
      *
      * @param string $id
-     * @param ConstellationManager $constellationManager
-     * @param DsoRepository $dsoRepository
-     * @param DsoManager $dsoManager
+     *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function show(string $id, ConstellationManager $constellationManager, DsoRepository $dsoRepository, DsoManager $dsoManager, TranslatorInterface $translatorInterface): Response
+    public function show(string $id): Response
     {
         $result = [];
 
@@ -52,25 +75,25 @@ class ConstellationController extends AbstractController
         $serializer = $this->container->get('serializer');
 
         /** @var Constellation $constellation */
-        $constellation = $constellationManager->buildConstellation($id);
+        $constellation = $this->constellationManager->buildConstellation($id);
 
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
-        $listDso = $dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
 
         $constellation->setListDso($listDso);
-        $result['list_dso'] = $dsoManager->buildListDso($constellation->getListDso());
+        $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso());
 
         // List types of DSO for map legend
-        $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) use ($translatorInterface){
-            return [$dso->getType() => $translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
+        $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) {
+            return [$dso->getType() => $this->translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
         }, iterator_to_array($listDso)));
         asort($listTypes);
         $result['list_types'] = $listTypes;
 
         // GeoJson for display dso on map
-        $listDsoFeatures = array_map(function(Dso $dso) use($dsoManager) {
-            return ($dso->getGeometry()) ? $dsoManager->buildgeoJson($dso): null;
+        $listDsoFeatures = array_map(function(Dso $dso) {
+            return ($dso->getGeometry()) ? $this->dsoManager->buildgeoJson($dso): null;
         }, iterator_to_array($constellation->getListDso()->getIterator()));
 
         $geoJsonDso = [
@@ -96,18 +119,16 @@ class ConstellationController extends AbstractController
 
 
     /**
-     *
      * @Route("/constellations", name="constellation_list")
-     * @param ConstellationManager $constellationManager
+     *
      * @return Response
      * @throws \ReflectionException
      */
-    public function list(ConstellationManager $constellationManager): Response
+    public function list(): Response
     {
         $result = [];
 
-        $listConstellation = $constellationManager->buildListConstellation();
-        $result['list_constellation'] = $listConstellation;
+        $result['list_constellation'] = $this->constellationManager->buildListConstellation();
 
         /** @var Response $response */
         $response = $this->render('pages/constellations.html.twig', $result);
