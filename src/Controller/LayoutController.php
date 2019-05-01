@@ -18,15 +18,28 @@ class LayoutController extends AbstractController
 {
     const HTTP_TTL = 31556952;
 
+    /** @var TranslatorInterface  */
+    private $translatorInterface;
+
+    /**
+     * LayoutController constructor.
+     *
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function __construct(TranslatorInterface $translatorInterface)
+    {
+        $this->translatorInterface = $translatorInterface;
+    }
+
     /**
      * Header
      *
      * @param Request $request
      * @param String $listLocales
-     * @param TranslatorInterface $translatorInterface
+     *
      * @return Response
      */
-    public function header(Request $request, String $listLocales, TranslatorInterface $translatorInterface): Response
+    public function header(Request $request, String $listLocales): Response
     {
         /** @var Request $mainRequest */
         $mainRequest = $this->get('request_stack')->getMasterRequest();
@@ -44,16 +57,16 @@ class LayoutController extends AbstractController
         $paramsRoute = array_merge($mainRequest->get('_route_params'), $mainRequest->query->all());
         $result = [
             '_route' => $mainRoute,
-            'listLocales' => array_map(function($locale) use ($router, $translatorInterface, $mainRoute, $paramsRoute) {
+            'listLocales' => array_map(function($locale) use ($router, $mainRoute, $paramsRoute) {
                 $paramsRoute['_locale'] = $locale;
                 return [
                     'locale' => $locale,
-                    'label' => $translatorInterface->trans($locale),
+                    'label' => $this->translatorInterface->trans($locale),
                     'path' => $router->generate(sprintf('%s.%s', $mainRoute, $locale), $paramsRoute)
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-            'leftSideMenu' => $this->leftSideMenu($currentLocale, $translatorInterface),
+            'leftSideMenu' => $this->leftSideMenu($currentLocale),
         ];
 
         /** @var Response $response */
@@ -67,38 +80,37 @@ class LayoutController extends AbstractController
      * Build left side menu
      *
      * @param string $locale
-     * @param TranslatorInterface $translatorInterface
      *
      * @return array
      */
-    private function leftSideMenu($locale = 'en', TranslatorInterface $translatorInterface)
+    private function leftSideMenu($locale = 'en')
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
         return [
             'catalog' => [
-                'label' => $translatorInterface->trans('catalogs'),
+                'label' => $this->translatorInterface->trans('catalogs'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
                 'icon_class' => 'galaxy-cluster'
             ],
             'constellation' => [
-                'label' => $translatorInterface->trans('constId', ['%count%' => 2]),
+                'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
                 'icon_class' => 'constellation'
             ],
             'observations' => [
-                'label' => $translatorInterface->trans('listObservations'),
+                'label' => $this->translatorInterface->trans('listObservations'),
                 'path' => $routerInterface->generate(sprintf('observation_list.%s', $locale)),
                 'icon_class' => 'telescop'
             ],
             'map' => [
-                'label' => $translatorInterface->trans('skymap'),
+                'label' => $this->translatorInterface->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
                 'icon_class' => 'planet'
             ],
             'contact' => [
-                'label' => $translatorInterface->trans('contact.title'),
+                'label' => $this->translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
                 'icon_class' => 'contact'
             ],

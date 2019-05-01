@@ -35,12 +35,6 @@ class ObservationController extends AbstractController
      */
     public function list(ObservationManager $observationManager)
     {
-        $params = [];
-//        $geojson = [
-//            'type' => 'FeatureCollection',
-//            'features' => $observationManager->getAllObservation()
-//        ];
-//
         $params['geojson'] = json_encode([]);
 
         /** @var Response $response */

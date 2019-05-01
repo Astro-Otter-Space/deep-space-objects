@@ -29,6 +29,31 @@ class DsoController extends AbstractController
 {
     const DEFAULT_PAGE = 1;
 
+    /** @var CacheInterface  */
+    private $cacheUtil;
+    /** @var DsoManager  */
+    private $dsoManager;
+    /** @var DsoRepository  */
+    private $dsoRepository;
+    /** @var TranslatorInterface  */
+    private $translatorInterface;
+
+    /**
+     * DsoController constructor.
+     *
+     * @param CacheInterface $cacheUtil
+     * @param DsoManager $dsoManager
+     * @param DsoRepository $dsoRepository
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    {
+        $this->cacheUtil = $cacheUtil;
+        $this->dsoManager = $dsoManager;
+        $this->dsoRepository = $dsoRepository;
+        $this->translatorInterface = $translatorInterface;
+    }
+
     /**
      * @Route({
      *  "en": "/catalog/{id}",
@@ -39,14 +64,12 @@ class DsoController extends AbstractController
      * }, name="dso_show")
      *
      * @param string $id
-     * @param DsoManager $dsoManager
-     * @param CacheInterface $cacheUtil
      *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function show(string $id, DsoManager $dsoManager, CacheInterface $cacheUtil)
+    public function show(string $id)
     {
         $params = [];
 
@@ -54,24 +77,24 @@ class DsoController extends AbstractController
         $id = reset($id);
 
         /** @var Dso $dso */
-        $dso = $dsoManager->buildDso($id);
+        $dso = $this->dsoManager->buildDso($id);
 
         if (!is_null($dso)) {
-            $params['dsoData'] = $dsoManager->formatVueData($dso);
-            $params['constTitle'] = $dsoManager->buildTitleConstellation($dso->getConstId());
-            $params['title'] = $dsoManager->buildTitle($dso);
+            $params['dsoData'] = $this->dsoManager->formatVueData($dso);
+            $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
+            $params['title'] = $this->dsoManager->buildTitle($dso);
 
             // Image cover
             $params['imgCover'] = $dso->getImage();
             $params['imgCoverUser'] = $dso->getAstrobinUser();
 
             // List of Dso from same constellation
-            $params['dso_by_const'] = $dsoManager->getListDsoFromConst($dso, 20);
+            $params['dso_by_const'] = $this->dsoManager->getListDsoFromConst($dso, 20);
 
             // Map
             $params['geojsonDso'] = [
                 "type" => "FeatureCollection",
-                "features" =>  [$dsoManager->buildgeoJson($dso)]
+                "features" =>  [$this->dsoManager->buildgeoJson($dso)]
             ];
             $params['constId'] = $dso->getConstId();
             $params['centerMap'] = $dso->getGeometry()['coordinates'];
@@ -79,10 +102,10 @@ class DsoController extends AbstractController
             // Images
             try {
                 $params['images'] = [];
-                if ($cacheUtil->hasItem(md5($id . '_list_images'))) {
-                    $params['images'] = unserialize($cacheUtil->getItem(md5($id . '_list_images')));
+                if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
+                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')));
                 } else {
-                    $params['images'] = $this->getListImages($dso->getId(), $cacheUtil);
+                    $params['images'] = $this->getListImages($dso->getId());
                 }
             } catch (WsResponseException $e) {}
         } else {
@@ -111,7 +134,7 @@ class DsoController extends AbstractController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    private function getListImages($dsoId, CacheInterface $cacheUtil)
+    private function getListImages($dsoId)
     {
         $tabImages = [];
 
@@ -130,25 +153,24 @@ class DsoController extends AbstractController
             }, iterator_to_array($listImages));
         }
 
-        $cacheUtil->saveItem(md5($dsoId . '_list_images'), serialize($tabImages));
+        $this->cacheUtil->saveItem(md5($dsoId . '_list_images'), serialize($tabImages));
         return $tabImages;
     }
 
     /**
      * @Route("/geodata/dso/{id}", name="dso_geo_data", options={"expose": true})
      * @param string $id
-     * @param DsoManager $dsoManager
      *
      * @return JsonResponse
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function geoJson(string $id, DsoManager $dsoManager)
+    public function geoJson(string $id)
     {
         /** @var Dso $dso */
-        $dso = $dsoManager->buildDso($id);
+        $dso = $this->dsoManager->buildDso($id);
 
-        $geoJsonData = $dsoManager->buildgeoJson($dso);
+        $geoJsonData = $this->dsoManager->buildgeoJson($dso);
 
         /** @var JsonResponse $jsonResponse */
         $jsonResponse = new JsonResponse($geoJsonData, Response::HTTP_OK);
@@ -169,14 +191,11 @@ class DsoController extends AbstractController
      * }, name="dso_catalog")
      *
      * @param Request $request
-     * @param DsoRepository $dsoRepository
-     * @param DsoManager $dsoManager
-     * @param TranslatorInterface $translatorInterface
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function catalog(Request $request, DsoRepository $dsoRepository, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
+    public function catalog(Request $request)
     {
         $page = self::DEFAULT_PAGE;
         $from = DsoRepository::FROM;
@@ -194,7 +213,7 @@ class DsoController extends AbstractController
         }
 
         if (0 < $request->query->count()) {
-            $authorizedFilters = $dsoRepository->getListAggregates(true);
+            $authorizedFilters = $this->dsoRepository->getListAggregates(true);
 
             // Removed unauthorized keys
             $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
@@ -208,17 +227,17 @@ class DsoController extends AbstractController
         }
 
         // Search results
-        list($listDso, $listAggregates, $nbItems) = $dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters);
+        list($listDso, $listAggregates, $nbItems) = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters);
 
         // List facets
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
-            $typeTr = $translatorInterface->trans($type, ['%count%' => count($listFacets)]);
+            $typeTr = $this->translatorInterface->trans($type, ['%count%' => count($listFacets)]);
 
-            $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type, $translatorInterface) {
+            $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type) {
                 return [
                     'code' => key($facet),
-                    'value' => $translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
+                    'value' => $this->translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
                     'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
                 ];
@@ -256,16 +275,16 @@ class DsoController extends AbstractController
         }
 
         // Params
-        $result['list_dso'] = $dsoManager->buildListDso($listDso);
+        $result['list_dso'] = $this->dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = $nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = $nbPages = ceil($nbItems/DsoRepository::SIZE);
 
         $queryAll = $request->query->all();
-        $result['filters'] = call_user_func("array_merge", array_map(function($val, $key) use($translatorInterface, $router, $queryAll) {
+        $result['filters'] = call_user_func("array_merge", array_map(function($val, $key) use($router, $queryAll) {
             return [
-                'label' => $translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))),
+                'label' => $this->translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))),
                 'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))
             ];
         }, $filters, array_keys($filters)));
@@ -277,10 +296,10 @@ class DsoController extends AbstractController
         ];
 
         // Description
-        $result['pageDesc'] = $translatorInterface->trans('filteringList');
+        $result['pageDesc'] = $this->translatorInterface->trans('filteringList');
         if ($request->query->has('catalog')) {
             $catalog = $request->query->get('catalog');
-            $desc = $translatorInterface->trans('description.' . $catalog);
+            $desc = $this->translatorInterface->trans('description.' . $catalog);
             if (!empty($desc) && $desc !== 'description.' . $catalog) {
                 $result['pageDesc'] = $desc;
             }
