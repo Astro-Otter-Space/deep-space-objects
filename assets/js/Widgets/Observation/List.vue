@@ -12,7 +12,7 @@
           :url="urlSearch"
         />
 
-        <h3 class="Dso__title">{{ listMapTitle }}</h3>
+        <h3 class="Dso__title">{{ mapTitle }}</h3>
         <div class="Dso__leaflet">
           <l-map
             :zoom="zoom"
@@ -43,6 +43,7 @@
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
   let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
+  let searchPlaceholder = document.querySelector('div[data-observations-list]').dataset.observationAutocomplete;
   // let geojson = document.querySelector('div[data-observations-list]').dataset.geojson;
 
   export default {
@@ -61,10 +62,10 @@
         urlSearch: urlSearchObs,
         autoCompleteClasse: {
           wrapper: 'AppHeader__wrapper',
-          input: 'AppSearch__inputTextObservation',
+          input: 'AppSearch__inputText AppSearch__inputTextObservation',
           list: 'AppHeader__list'
         },
-        searchPlaceholder: "Test...",
+        searchPlaceholder: searchPlaceholder,
         enableTooltip: true,
         zoom: 5,
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',

@@ -47,8 +47,7 @@
   }
 
   &__inputTextObservation {
-    @extend ;
-    border: 1px $bgd-dark;
+    border: 1px solid $bgd-grey;
   }
 
   &__list {

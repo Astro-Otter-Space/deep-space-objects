@@ -260,6 +260,7 @@ focal: Focale (mm)
 report: Rapport (f/D)
 mount: Monture équatoriale
 ocular: Oculaire|Oculaires
+observation.search.placeholder: Recherchez une observation par lieu, nom, utilisateur...
 # Form
 select:
   order:

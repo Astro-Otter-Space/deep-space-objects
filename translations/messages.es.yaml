@@ -260,6 +260,7 @@ focal: Focal (mm)
 report: Report (f/D)
 mount: Equatorial mount
 ocular: Ocular|Oculars
+observation.search.placeholder: Search by place, user, name...
 # Form
 select:
   order:
