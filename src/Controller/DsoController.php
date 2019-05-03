@@ -69,7 +69,7 @@ class DsoController extends AbstractController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $params = [];
 
@@ -117,7 +117,7 @@ class DsoController extends AbstractController
         $response->setPublic();
         $response->setSharedMaxAge(3600);
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->headers->set('x-dso-id', $dso->getElasticId());
+        $response->headers->set('x-dso-id', [$dso->getElasticId(), md5(sprintf('%s_%s', $id, $request->getLocale()))]);
 
         return $response;
     }
