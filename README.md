@@ -85,17 +85,57 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - NGC : 7251/7840
 - UGC : 268/12921
 - PGC : 29/? 
-- Sharpless : 100/313
-- RCW : 29/182
+- Sharpless : 111/313
+- RCW : 36/182
 - Index Catalog : 205/5386
-- Collinder : 83/471
-- Caldwell : 34/109
+- Collinder : 84/471
+- Caldwell : 35/109
 - Abell: 104/
 - ldn: 18/?
-- lbn: 44/?
+- lbn: 52/?
 - Dolidze-Dzimselejvili: 11/11
 - David Dunlap: 3/?  
 - vdB : 40/158
+
+### Add new DSO Data
+
+```
+    {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
+    {
+      "id": "",
+      "catalog": [""],
+      "order": null,
+      "data": {
+        "desigs": [""],
+        "alt": {
+          "alt": "",
+          "alt_fr": "",
+          "alt_es": "",
+          "alt_de": "",
+          "alt_pt": "",
+          "alt_it": ""
+        },
+        "type": "",
+        "mag": 999,
+        "dim": "",
+        "const_id": "",
+        "cl": "",
+        "dist_al": null,
+        "discover": "",
+        "discover_year": 0,
+        "ra": "",
+        "dec": "",
+        "astrobin_id": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          0
+        ]
+      }
+    }
+ ```   
 
 Authors
 ==
