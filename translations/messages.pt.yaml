@@ -98,6 +98,10 @@ list.cld: Catálogo Caldwell
 description.cld:
 list.dodz: Dolidze-Dzimselejvil catalog
 description.dodz:
+list.lyn: Lynga catalog
+description.lyn: Catalog of Open Cluster
+list.pis: Pismis catalog
+description.pis: New southern star clusters catalog
 listOrderAsc: Ordem crescente
 listOrderDesc: Ordem decrescente
 listMagnitudeAsc: Magnitude miníma

@@ -82,20 +82,28 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 
 ### Status data
 - Messier : 110/110
-- NGC : 7249/7840
-- UGC : 269/12921
-- PGC : 31/? 
+- NGC : 7251/7840
+- UGC : 276/12921
+- PGC : 43/? 
 - Sharpless : 111/313
 - RCW : 36/182
 - Index Catalog : 205/5386
-- Collinder : 86/471
-- Caldwell : 108/109
+- Collinder : 87/471
+- Caldwell : 109/109
 - Abell: 104/
 - ldn: 18/?
 - lbn: 52/?
 - Dolidze-Dzimselejvili: 11/11
 - David Dunlap: 3/?  
 - vdB : 40/158
+- Sto (Stock Open Cluster): 23/24 (no Stock22)
+- Lynga : 13/15 (no Lynga10 lynga15)
+- Mismi : 24/27
+Sources :
+- Wikipedia
+- http://www.dreistein.nl
+- Simbad
+- https://telescopius.com/
 
 ### Add new DSO Data
 
