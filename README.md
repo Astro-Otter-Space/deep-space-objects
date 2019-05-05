@@ -87,7 +87,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - PGC : 43/? 
 - Sharpless : 111/313
 - RCW : 36/182
-- Index Catalog : 205/5386
+- Index Catalog : 205/5386 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
 - Collinder : 87/471
 - Caldwell : 109/109
 - Abell: 104/
