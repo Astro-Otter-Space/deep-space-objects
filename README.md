@@ -82,14 +82,14 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 
 ### Status data
 - Messier : 110/110
-- NGC : 7251/7840
-- UGC : 268/12921
-- PGC : 29/? 
+- NGC : 7249/7840
+- UGC : 269/12921
+- PGC : 31/? 
 - Sharpless : 111/313
 - RCW : 36/182
 - Index Catalog : 205/5386
-- Collinder : 84/471
-- Caldwell : 35/109
+- Collinder : 86/471
+- Caldwell : 108/109
 - Abell: 104/
 - ldn: 18/?
 - lbn: 52/?
