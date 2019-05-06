@@ -98,6 +98,10 @@ list.cld: Catalogue de Caldwell
 description.cld:
 list.dodz: Catalogue Dolidze-Dzimselejvili
 description.dodz: Catalogue des astronomes de Georgie Madona V. Dolidze et G. Dzinselejvili comportant 11 objets. Il fut publié en 1966.
+list.lyn: Catalogue Lynga
+description.lyn: Catalogue d'amas ouvert
+list.pis: Pismis catalog
+description.pis: New southern star clusters catalog
 filters: Filtres
 listOrderAsc: Tri ascendant
 listOrderDesc: Tri descendant

@@ -6,10 +6,12 @@ use App\Entity\AbstractEntity;
 use App\Entity\Observation;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
+use App\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class Observation
@@ -115,11 +117,24 @@ class ObservationController extends AbstractController
     }
 
     /**
+     * @Route("/add-observation", name="add_observation")
      *
      */
     public function add()
     {
+        $params = [];
 
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$this->isGranted('')) {
+            throw new AccessDeniedException();
+        }
+
+        /** @var Response $response */
+        $response = new Response();
+
+        return $this->render("", $params, $response);
     }
 
     /**

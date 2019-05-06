@@ -1,7 +1,13 @@
 security:
+    encoders:
+        App\Security\User:
+            algorithm: argon2i
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            id: App\Security\UserProvider
 
     firewalls:
         dev:
@@ -10,6 +16,11 @@ security:
         main:
             pattern: ^/
             anonymous: true
+            logout:
+                path: app_logout
+            guard:
+                authenticators:
+                    - App\Security\AppESAuthenticator
 
         api:
             pattern:  ^/api/
@@ -26,5 +37,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

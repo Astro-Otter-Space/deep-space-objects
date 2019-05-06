@@ -98,6 +98,10 @@ list.cld: Caldwell-Katalog
 description.cld:
 list.dodz: Dolidze-Dzimselejvil catalog
 description.dodz:
+list.lyn: Lynga catalog
+description.lyn: Catalog of Open Cluster
+list.pis: Pismis catalog
+description.pis: New southern star clusters catalog
 filters: Filters
 listOrderAsc: Sort ascendant
 listOrderDesc: Sort descendant
