@@ -84,7 +84,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - Messier : 110/110
 - NGC : 7251/7840
 - UGC : 276/12921
-- PGC : 43/? 
+- PGC : 43/73197 
 - Sharpless : 111/313
 - RCW : 36/182
 - Index Catalog : 205/5386 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
