@@ -31,7 +31,8 @@ catalog.sh: Sharpless catalog
 catalog.cr: Collinder catalog
 catalog.sto : Stock open clusters
 catalog.rcw: RCW Catalog
-catalog.abl: Abell catalog
+catalog.agc: Abell catalog of galaxies clusters
+catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.ugc: Uppsala General Catalog
 catalog.dodz: Dolidze-Dzimselejvil catalog
 catalog.pgc: Catalogue of Principal Galaxies
@@ -39,6 +40,8 @@ catalog.cld: Caldwell catalogue
 catalog.unassigned: Unassigned
 catalog.ddo: David Dunlap Observatory Catalogue
 catalog.vdb: Catalog van den Bergh
+catalog.pis: Lynga catalog
+catalog.lyn: Pismis catalog
 # Lang:
 fr: French
 en: English (UK)
@@ -90,8 +93,10 @@ list.sto : Stock open clusters
 description.sto:
 list.rcw: RCW catalog
 description.rcw:
-list.abl: Abell catalog
-description.abl:
+list.agc: Abell catalog of galaxies clusters
+description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.
+list.abl: Abell Catalog of Planetary Nebulae
+description.abl: he Abell Catalog of Planetary Nebulae was created in 1966 by George O. Abell and was composed of 86 entries thought to be planetary nebulae.
 list.ugc: Uppsala General Catalog
 description.ugc:
 list.cld: Catalogue de Caldwell

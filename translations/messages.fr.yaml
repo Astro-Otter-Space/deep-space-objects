@@ -31,7 +31,8 @@ catalog.sh: Catalogue de Sharpless
 catalog.cr: Catalogue Collinder
 catalog.sto : Stock open clusters
 catalog.rcw: Catalogue RCW
-catalog.abl: Catalogue Abell
+catalog.agc: Catalogue Abell
+catalog.abl: Catalogue Abell des nébuleuses planétaires
 catalog.ugc: Catalogue général d'Uppsala
 catalog.dodz: Catalogue Dolidze-Dzimselejvili
 catalog.pgc: Catalogue of Principal Galaxies
@@ -39,6 +40,8 @@ catalog.cld: Catalogue de Caldwell
 catalog.unassigned: Non assigné
 catalog.ddo: Catalogue de l'observatoire David Dunlap
 catalog.vdb: Catalogue van den Bergh
+catalog.pis: Catalogue Pismis
+catalog.lyn: Catalogue Lynga
 # Lang:
 fr: Français
 en: Anglais (UK)
@@ -90,7 +93,9 @@ list.sto : Stock open clusters
 description.sto:
 list.rcw: Catalogue RCW
 description.rcw: Catalogue réalisé depuis le Mont Stromlo en Australie par les astronomes Alex Rodgers, Colin Campbell, and John Whiteoak. Il fut publié en 1960 et contient 182 objets.
-list.abl: Catalogue Abell
+list.agc: Catalogue Abell des amas de galaxies
+description.agc: Catalogue rassemblant 4073 riches amas galactiques découverts par l'astronome américain Georges Abell.
+list.abl: Catalogue Abell des nébuleuses planétaires
 description.abl: Catalogue rassemblant 86 nébuleuses planétaires découvertes par l'astronome américain Georges Abell en étudiant les plaques du POSS entre 1955 et 1966.
 list.ugc: Catalogue UGC
 description.ugc: Edité par l'astronome suédois Peter Nilson en 1973, il englobe 12921 objets situés dans le ciel boréal.

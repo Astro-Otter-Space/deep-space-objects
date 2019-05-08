@@ -60,11 +60,12 @@ class Utils
     private static $orderCatalog = [
         'messier',
         'ngc',
-        'ic',
         'sh',
+        'ic',
+        'abl',
         'ugc',
         'pgc',
-        'abl',
+        'agc',
         'cr',
         'cld',
         'ldn',
@@ -73,6 +74,9 @@ class Utils
         'sto',
         'dodz',
         'ddo',
+        'vdb',
+        'lyn',
+        'pis',
         'vdb',
         self::UNASSIGNED
     ];

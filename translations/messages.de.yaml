@@ -31,7 +31,8 @@ catalog.sh: Sharpless catalog
 catalog.cr: Collinder catalog
 catalog.sto : Stock open clusters
 catalog.rcw: RCW Catalog
-catalog.abl: Abell catalog
+catalog.agc: Abell catalog of galaxies clusters
+catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.ugc: Uppsala General Catalog
 catalog.dodz: Dolidze-Dzimselejvil catalog
 catalog.pgc: Catalogue of Principal Galaxies
@@ -39,6 +40,8 @@ catalog.cld: Caldwell-Katalog
 catalog.unassigned: Unassigned
 catalog.ddo: David Dunlap Observatory Catalogue
 catalog.vdb: Catalog van den Bergh
+catalog.pis: Lynga catalog
+catalog.lyn: Pismis catalog
 # Lang:
 fr: French
 en: English (UK)
@@ -90,8 +93,10 @@ list.sto : Stock open clusters
 description.sto:
 list.rcw: RCW catalog
 description.rcw:
-list.abl: Abell catalog
-description.abl:
+list.agc: Abell catalog of galaxies clusters
+description.agc: Der Abell-Katalog ist ein Katalog von 4073 Galaxienhaufen.
+list.abl: Abell Catalog of Planetary Nebulae
+description.abl: Der Abell Catalog of Planetary Nebulae wurde 1966 von George Ogden Abell erstellt und enthielt neu entdeckte 86 Objekte, von denen man annahm, dass es sich um Planetarische Nebel handelte.
 list.ugc: Uppsala General Catalog
 description.ugc:
 list.cld: Caldwell-Katalog

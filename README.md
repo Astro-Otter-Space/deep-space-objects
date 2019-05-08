@@ -85,12 +85,13 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - NGC : 7251/7840
 - UGC : 276/12921
 - PGC : 43/73197 
-- Sharpless : 111/313
+- Sharpless : 126/313
 - RCW : 36/182
-- Index Catalog : 205/5386 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
+- Index Catalog : 206/5386 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
 - Collinder : 87/471
 - Caldwell : 109/109
-- Abell: 104/
+- Abell galaxies : 26/4073
+- Abell planetary nebula: 86/86
 - ldn: 18/?
 - lbn: 52/?
 - Dolidze-Dzimselejvili: 11/11
@@ -98,7 +99,8 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - vdB : 40/158
 - Sto (Stock Open Cluster): 23/24 (no Stock22)
 - Lynga : 13/15 (no Lynga10 lynga15)
-- Mismi : 24/27
+- Pismis : 24/27
+
 Sources :
 - Wikipedia
 - http://www.dreistein.nl
