@@ -625,22 +625,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@fortawesome/fontawesome-common-types@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.17.tgz#d8c36e6f6f3b3415fa1f83eaffe4f41bd313715c"
-  integrity sha512-DEYsEb/iiGVoMPQGjhG2uOylLVuMzTxOxysClkabZ5n80Q3oFDWGnshCLKvOvKoeClsgmKhWVrnnqvsMI1cAbw==
-
-"@fortawesome/free-regular-svg-icons@^5.8.1":
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.8.1.tgz#9477a973fe3f681f871375fa95ff32a87dcb5111"
-  integrity sha512-U+tFjDyQpVdD0UPWoKRBVLhh0J1/q3iaWDrnxNMJKuKRmerc4d0jfiZdM2X7agOTcG7amvcllRBiWCu2FwYlMA==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.17"
-
-"@symfony/webpack-encore@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.26.0.tgz#9ba8feca46a08c76d7b54cc3377d134960d4bb25"
-  integrity sha512-0voE5WvCmcUi/bUHqzMOVR7AdcTTN+m6d8Ty6jnqa0w6/v9RpbrkxiCNfJQ1ulorV/Lp5rOUdiXtr4f3BOwN8A==
+"@symfony/webpack-encore@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.27.0.tgz#efc960967823b5ff93881222f16496f1fa709f24"
+  integrity sha512-ih+H1SQkjFYe2t0wSnksMzfaiWUjlvimDFyXAgHPmeFxCUiypMgGksAz1OxnF83qjEjC08GDkjJayblQ72qIug==
   dependencies:
     "@babel/core" "^7.4.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
@@ -3966,10 +3954,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-leaflet@^1.4.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.5.0.tgz#b8ed4643514f66737c2131252921a889c1ce3db1"
-  integrity sha512-6sVKn1GaeP01ofzPs2f62XgKEx4uYnHsgQK64zBZPN/6pAX53FNakYvtud+Wu3Z7C3vJpINkdQuR//hgCngOiA==
+leaflet@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.5.1.tgz#9afb9d963d66c870066b1342e7a06f92840f46bf"
+  integrity sha512-ekM9KAeG99tYisNBg0IzEywAlp0hYI5XRipsqRXyRTeuU8jcuntilpp+eFf5gaE0xubc9RuSNIVtByEKwqFV0w==
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -4520,7 +4508,7 @@ node-releases@^1.1.17:
   dependencies:
     semver "^5.3.0"
 
-node-sass@^4.11.0:
+node-sass@^4.12.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.12.0.tgz#0914f531932380114a30cc5fa4fa63233a25f017"
   integrity sha512-A1Iv4oN+Iel6EPv77/HddXErL2a+gZ4uBeZUy+a8O35CFYTXhgA8MgLCWBtwpGZdCvTvQ9d+bQxX/QC36GDPpQ==
@@ -6831,10 +6819,10 @@ vue-agile@^0.3.7:
   dependencies:
     vue "2.*.*"
 
-vue-burger-menu@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-2.0.0.tgz#c7b1b2c8c4d9eb2553aef291db0fdc064c639cce"
-  integrity sha512-d4cKgeiWu7NA9IXdZd43hzSmpwWVUc/Lr3K8hT/b/I2F30f62D/zTZ/wRQy2s3f3TAOSPbYY9rsrY6lllJUxcw==
+vue-burger-menu@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-2.0.1.tgz#1060e4b00cdbdc806622607b956afd4ae2f8bf4e"
+  integrity sha512-uFFhneAU+BFCR79Dy+dUBV64Nr9YtVTtIvSdQeR8EEk35SonHJdFQj3HN++A1B0P2mzsQyXuHlV79QA6iiszTw==
   dependencies:
     vue "^2.5.17"
 
@@ -6886,9 +6874,9 @@ vue-pure-lightbox@^2.1.8:
     vue "^2.3.3"
 
 vue-router@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
-  integrity sha512-opKtsxjp9eOcFWdp6xLQPLmRGgfM932Tl56U9chYTnoWqKxQ8M20N7AkdEbM5beUh6wICoFGYugAX9vQjyJLFg==
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.6.tgz#2e4f0f9cbb0b96d0205ab2690cfe588935136ac3"
+  integrity sha512-Ox0ciFLswtSGRTHYhGvx2L44sVbTPNS+uD2kRISuo8B39Y79rOo0Kw0hzupTmiVtftQYCZl87mwldhh2L9Aquw==
 
 vue-social-sharing@^2.3.3:
   version "2.4.3"
@@ -6938,7 +6926,7 @@ vue2-autocomplete-js@^0.2.2:
   dependencies:
     vue "^2.4.2"
 
-vue2-leaflet@^2.1.0:
+vue2-leaflet@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.1.1.tgz#33ec8920bd1e273b312209a84ce355021226ee79"
   integrity sha512-boJIObTHJOtiLqPDtcL8FdQMr/PLDyZ6/InQBU13mcmNtn4/hvzbyqLmVtvWbRFeGOifAMkJBlbj3gLjrhFdmw==
@@ -6953,7 +6941,7 @@ vue@2.*.*:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.20.tgz#79fff9ccaa10cc37e7a7239b4c7adfac94df81ba"
   integrity sha512-kVLZi8RWOk8qwAt+a0bVDy9VV5Zzcnj0fLCMyKLx1dmEBjqmYJYRWHvPwiypiJBtJkdmROy5NP5hyDqTdfBcvQ==
 
-vue@^2.2.4:
+vue@^2.2.4, vue@^2.5.17:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
@@ -6967,11 +6955,6 @@ vue@^2.4.2, vue@^2.5.21:
   version "2.5.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.21.tgz#3d33dcd03bb813912ce894a8303ab553699c4a85"
   integrity sha512-Aejvyyfhn0zjVeLvXd70h4hrE4zZDx1wfZqia6ekkobLmUZ+vNFQer53B4fu0EjWBSiqApxPejzkO1Znt3joxQ==
-
-vue@^2.5.17:
-  version "2.5.22"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.22.tgz#3bf88041af08b8539c37b268b70ca79245e9cc30"
-  integrity sha512-pxY3ZHlXNJMFQbkjEgGVMaMMkSV1ONpz+4qB55kZuJzyJOhn6MSy/YZdzhdnumegNzVTL/Dn3Pp4UrVBYt1j/g==
 
 vue@^2.5.18:
   version "2.5.18"
