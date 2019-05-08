@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import L from 'leaflet';
-import AppObs from './Widgets/Observation/App';
 
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
+// Leaflet
+import { Icon }  from 'leaflet'
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
@@ -12,6 +12,7 @@ L.Icon.Default.mergeOptions({
 import SocialSharing from "vue-social-sharing";
 Vue.use(SocialSharing);
 
+import AppObs from './Widgets/Observation/App';
 new Vue({
   el: '#app',
   render: h => h(AppObs),
