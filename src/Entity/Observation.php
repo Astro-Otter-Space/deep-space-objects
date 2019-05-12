@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Classes\Utils;
 use App\Repository\ObservationRepository;
+use Symfony\Component\Validator\Constraint as Assert;
 
 /**
  * Class Observation
@@ -20,32 +21,85 @@ class Observation extends AbstractEntity
     private $elasticId;
     /** @var  */
     private $id;
-    /** @var  */
+
+    /**
+     * @var string|null
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
     private $username;
-    /** @var  */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
     private $name;
-    /** @var  */
+
+    /**
+     * @var
+     */
     private $description;
-    /** @var \DateTime */
+
+    /**
+     * @var
+     *
+     */
     private $createdAt;
-    /** @var  */
+
+    /**
+     * @var
+     */
     private $isPublic;
-    /** @var \DateTime */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\DateTime(message="", validation_groups={"add_observation"})
+     */
     private $observationDate;
     /** @var  */
+
     private $location;
+
     /** @var ListDso|array  */
     private $dsoList;
-    /** @var  */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
     private $instrument;
-    /** @var  */
+
+    /**
+     * @var integer|null
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\Regex(pattern="/\d/", match=true, validation_groups={"add_observation"})
+     */
     private $diameter;
-    /** @var  */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\Regex(pattern="/\d/", match=true, validation_groups={"add_observation"})
+     */
     private $focal;
-    /** @var  */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
     private $mount;
-    /** @var  */
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
     private $ocular;
+
+    /**
+     * @var
+     * @Assert\Blank(message="contact.constraint.invalid_form")
+     */
+    private $pot2Miel;
 
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
@@ -126,7 +180,7 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getUsername()
     {
@@ -190,7 +244,7 @@ class Observation extends AbstractEntity
     /**
      * @param mixed $createdAt
      *
-     * @return Observation
+     * @return \DateTime
      */
     public function setCreatedAt($createdAt)
     {
@@ -200,7 +254,7 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getisPublic()
+    public function getIsPublic()
     {
         return $this->isPublic;
     }
@@ -290,9 +344,9 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return integer|null
      */
-    public function getDiameter(): int
+    public function getDiameter(): ?int
     {
         return $this->diameter;
     }
@@ -355,6 +409,22 @@ class Observation extends AbstractEntity
     public function setOcular($ocular): void
     {
         $this->ocular = $ocular;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPot2Miel()
+    {
+        return $this->pot2Miel;
+    }
+
+    /**
+     * @param mixed $pot2Miel
+     */
+    public function setPot2Miel($pot2Miel): void
+    {
+        $this->pot2Miel = $pot2Miel;
     }
 
     /**

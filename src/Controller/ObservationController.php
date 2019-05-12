@@ -4,11 +4,15 @@ namespace App\Controller;
 
 use App\Entity\AbstractEntity;
 use App\Entity\Observation;
+use App\Forms\ObservationFormType;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
 use App\Security\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -117,24 +121,58 @@ class ObservationController extends AbstractController
     }
 
     /**
-     * @Route("/add-observation", name="add_observation")
+     * Add observation page
      *
+     * @Route("/add-observation", name="add_observation")
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function add()
+    public function add(Request $request)
     {
         $params = [];
+
+        $isValid = false;
 
         /** @var User $user */
         $user = $this->getUser();
 
-        if (!$this->isGranted('')) {
-            throw new AccessDeniedException();
+//        if (!$this->isGranted('')) {
+//            throw new AccessDeniedException();
+//        }
+
+        /** @var Observation $observation */
+        $observation = new Observation();
+        $options = [
+            'method' => 'POST',
+            'action' => $this->get('router')->generate('add_observation'),
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
+        ];
+
+        $form = $this->createForm(ObservationFormType::class, $observation, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+
+                /** @var Observation $observation */
+                $observation = $form->getData();
+
+            } else {
+                $this->addFlash('form.failed','form.error.message');
+            }
         }
+
+        $params['formAddObservation'] = $form->createView();
+        $result['is_valid'] = $isValid;
 
         /** @var Response $response */
         $response = new Response();
+        $response->setPrivate();
 
-        return $this->render("", $params, $response);
+        return $this->render("pages:observation_add.html.twig", $params, $response);
     }
 
     /**
