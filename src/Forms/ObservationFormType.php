@@ -51,44 +51,36 @@ class ObservationFormType extends AbstractType
     {
         /**  */
         $builder->add('name', TextType::class, [
-
+            'label' => '',
         ]);
 
         $builder->add('description', TextareaType::class, [
-
+            'label' => '',
         ]);
-
-
-        // If not connected
-        $builder->add('username', TextType::class, [
-
-        ]);
-
-//        $builder->
 
         $builder->add('observationDate', DateType::class, [
-
+            'label' => '',
         ]);
 
         $builder->add('dsoList', TextType::class, [
+            'label' => '',
         ]);
 
         $builder->add('instrument', TextType::class, [
-
+            'label' => '',
         ]);
 
         $builder->add('diameter', IntegerType::class, [
-            'data' => 0
+            'label' => '',
         ]);
 
         $builder->add('mount', TextType::class, [
-
+            'label' => '',
         ]);
 
         $builder->add('ocular', TextType::class, [
-
+            'label' => '',
         ]);
-
 
         $builder->add('pot2Miel', TextType::class, [
             'required' => false,

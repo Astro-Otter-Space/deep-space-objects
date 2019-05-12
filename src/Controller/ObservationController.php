@@ -131,12 +131,10 @@ class ObservationController extends AbstractController
     public function add(Request $request)
     {
         $params = [];
-
         $isValid = false;
 
         /** @var User $user */
         $user = $this->getUser();
-
 //        if (!$this->isGranted('')) {
 //            throw new AccessDeniedException();
 //        }
@@ -156,7 +154,6 @@ class ObservationController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
                 /** @var Observation $observation */
                 $observation = $form->getData();
 
@@ -166,13 +163,13 @@ class ObservationController extends AbstractController
         }
 
         $params['formAddObservation'] = $form->createView();
-        $result['is_valid'] = $isValid;
+        $params['is_valid'] = $isValid;
 
         /** @var Response $response */
         $response = new Response();
         $response->setPrivate();
 
-        return $this->render("pages:observation_add.html.twig", $params, $response);
+        return $this->render('pages/observation_add.html.twig', $params, $response);
     }
 
     /**
