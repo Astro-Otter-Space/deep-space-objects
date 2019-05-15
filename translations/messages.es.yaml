@@ -42,6 +42,7 @@ catalog.ddo: David Dunlap Observatory Catalogue
 catalog.vdb: Catalog van den Bergh
 catalog.pis: Lynga catalog
 catalog.lyn: Pismis catalog
+catalog.min: Minkowski catalog
 # Lang:
 fr: French
 en: English (UK)
