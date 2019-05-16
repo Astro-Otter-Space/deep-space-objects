@@ -95,12 +95,12 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - ldn: 18/?
 - lbn: 52/?
 - Dolidze-Dzimselejvili: 11/11
-- David Dunlap: 3/?  
+- David Dunlap: 3/243  
 - vdB : 40/158
 - Sto (Stock Open Cluster): 23/24 (no Stock22)
 - Lynga : 13/15 (no Lynga10 lynga15)
 - Pismis : 24/27
-- Minkowski : http://www.dreistein.nl/dso.aspx?m=2&ca_53=on&qh=Minkowski&o=3&p=2
+- Minkowski : 29/?? http://www.dreistein.nl/dso.aspx?m=2&ca_53=on&qh=Minkowski&o=3&p=2
 
 Sources :
 - Wikipedia
