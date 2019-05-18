@@ -101,6 +101,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - Lynga : 13/15 (no Lynga10 lynga15)
 - Pismis : 24/27
 - Minkowski : 160/?? http://www.dreistein.nl/dso.aspx?m=2&ca_53=on&qh=Minkowski&o=3&p=2
+- Menzel: 3/3
 
 Sources :
 - Wikipedia

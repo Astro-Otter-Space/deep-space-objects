@@ -79,6 +79,7 @@ class Utils
         'pis',
         'vdb',
         'mkw',
+        'mzl',
         self::UNASSIGNED
     ];
 
