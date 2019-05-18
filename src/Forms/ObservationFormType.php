@@ -3,17 +3,13 @@
 
 namespace App\Forms;
 
-use App\Classes\Utils;
-use App\Entity\Dso;
 use App\Entity\Observation;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -51,35 +47,101 @@ class ObservationFormType extends AbstractType
     {
         /**  */
         $builder->add('name', TextType::class, [
-            'label' => '',
+            'label' => 'observation.name.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.name.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
         $builder->add('description', TextareaType::class, [
-            'label' => '',
+            'label' => 'observation.description.label',
+            'attr' => [
+                'placeholder' => 'observation.description.placeholder',
+                'class' => 'Form__textarea',
+                'rows' => 6
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
         $builder->add('observationDate', DateType::class, [
-            'label' => '',
+            'label' => 'observation.observationDate.label',
+            'attr' => [
+                'placeholder' => 'observation.description.placeholder',
+                'class' => 'Form__input',
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
-
-        $builder->add('dsoList', TextType::class, [
-            'label' => '',
-        ]);
+//
+//        $builder->add('dsoList', TextType::class, [
+//            'label' => 'observation.dsoList.label',
+//            'attr' => [
+//                'placeholder' => 'observation.dsoList.placeholder'
+//            ]
+//        ]);
 
         $builder->add('instrument', TextType::class, [
-            'label' => '',
+            'label' => 'observation.instrument.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.instrument.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
         $builder->add('diameter', IntegerType::class, [
-            'label' => '',
+            'label' => 'observation.diameter.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.diameter.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
+        $builder->add('focal', IntegerType::class, [
+            'label' => 'observation.focal.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.focal.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
+        ]);
+
+
         $builder->add('mount', TextType::class, [
-            'label' => '',
+            'label' => 'observation.mount.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.mount.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
         $builder->add('ocular', TextType::class, [
-            'label' => '',
+            'label' => 'observation.ocular.label',
+            'mapped' => false,
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.ocular.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
         ]);
 
         $builder->add('pot2Miel', TextType::class, [
@@ -121,14 +183,33 @@ class ObservationFormType extends AbstractType
 
             if (is_null($user)) {
                 $form->add('username', TextType::class, [
+                    'required' => true,
+                    'label' => 'observation.username.label',
+                    'attr' => [
+                        'class' => 'Form__input',
+                        'placeholder' => 'observation.username.placeholder'
+                    ],
+                    'label_attr' => [
+                        'class' => ContactFormType::CLASS_LABEL
+                    ],
+                ]);
 
+                $form->add('isPublic', ChoiceType::class, [
+                    'choices' => array_flip(['yes', 'no']),
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
                 ]);
             } else {
                 $form->add('isPublic', ChoiceType::class, [
-                    'choices' => ['yes', 'no']
+                    'choices' => array_flip(['yes', 'no']),
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
                 ]);
             }
         });
+
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($user) {
 
@@ -139,6 +220,8 @@ class ObservationFormType extends AbstractType
 
             if (!is_null($user)) {
                 $data->setUsername($user->getUsername());
+            } else {
+                $data->setIsPublic(true);
             }
 
             $data->setCreatedAt($now);

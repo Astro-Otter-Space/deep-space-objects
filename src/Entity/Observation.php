@@ -58,6 +58,7 @@ class Observation extends AbstractEntity
     private $observationDate;
     /** @var  */
 
+    /** @var  */
     private $location;
 
     /** @var ListDso|array  */
@@ -90,7 +91,7 @@ class Observation extends AbstractEntity
     private $mount;
 
     /**
-     * @var
+     * @var array|string
      * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
      */
     private $ocular;
@@ -182,7 +183,7 @@ class Observation extends AbstractEntity
     /**
      * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -192,7 +193,7 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setUsername($username)
+    public function setUsername($username): self
     {
         $this->username = $username;
         return $this;
@@ -201,7 +202,7 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -211,7 +212,7 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = $name;
         return $this;
@@ -220,17 +221,20 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
      * @param mixed $description
+     *
+     * @return Observation
      */
-    public function setDescription($description): void
+    public function setDescription($description): self
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
@@ -254,7 +258,7 @@ class Observation extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getIsPublic()
+    public function getIsPublic(): ?bool
     {
         return $this->isPublic;
     }
@@ -264,16 +268,16 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setIsPublic($isPublic)
+    public function setIsPublic($isPublic): self
     {
         $this->isPublic = $isPublic;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getObservationDate()
+    public function getObservationDate(): ?\DateTimeInterface
     {
         return $this->observationDate;
     }
@@ -283,9 +287,10 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setObservationDate($observationDate)
+    public function setObservationDate($observationDate): self
     {
         $this->observationDate = \DateTime::createFromFormat("Y-m-d", $observationDate);
+        return $this;
     }
 
     /**
@@ -301,7 +306,7 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setLocation($location)
+    public function setLocation($location): self
     {
         $this->location = $location;
         return $this;
@@ -311,7 +316,7 @@ class Observation extends AbstractEntity
     /**
      * @return ListDso|array
      */
-    public function getDsoList()
+    public function getDsoList(): ?ListDso
     {
         return $this->dsoList;
     }
@@ -321,7 +326,7 @@ class Observation extends AbstractEntity
      *
      * @return Observation
      */
-    public function setDsoList(ListDso $dsoList)
+    public function setDsoList(ListDso $dsoList): self
     {
         $this->dsoList = $dsoList;
         return $this;
@@ -337,10 +342,13 @@ class Observation extends AbstractEntity
 
     /**
      * @param mixed $instrument
+     *
+     * @return Observation
      */
-    public function setInstrument($instrument): void
+    public function setInstrument($instrument): self
     {
         $this->instrument = $instrument;
+        return $this;
     }
 
     /**
@@ -353,49 +361,58 @@ class Observation extends AbstractEntity
 
     /**
      * @param mixed $diameter
+     *
+     * @return Observation
      */
-    public function setDiameter($diameter): void
+    public function setDiameter($diameter): self
     {
         $this->diameter = $diameter;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getFocal(): int
+    public function getFocal(): ?int
     {
         return $this->focal;
     }
 
     /**
      * @param mixed $focal
+     *
+     * @return Observation
      */
-    public function setFocal($focal): void
+    public function setFocal($focal): self
     {
         $this->focal = $focal;
+        return $this;
     }
 
 
     /**
      * @return mixed
      */
-    public function getMount()
+    public function getMount(): ?string
     {
         return $this->mount;
     }
 
     /**
      * @param mixed $mount
+     *
+     * @return Observation
      */
-    public function setMount($mount): void
+    public function setMount($mount): self
     {
         $this->mount = $mount;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return array|string|null
      */
-    public function getOcular()
+    public function getOcular(): ?array
     {
         if (!is_array($this->ocular)) {
             $this->ocular = [$this->ocular];
@@ -405,10 +422,13 @@ class Observation extends AbstractEntity
 
     /**
      * @param mixed $ocular
+     *
+     * @return Observation
      */
-    public function setOcular($ocular): void
+    public function setOcular($ocular): self
     {
         $this->ocular = $ocular;
+        return $this;
     }
 
     /**
@@ -430,7 +450,7 @@ class Observation extends AbstractEntity
     /**
      * @return array
      */
-    public function getListFieldsNoMapping()
+    public function getListFieldsNoMapping(): array
     {
         return self::$listFieldsNoMapping;
     }
@@ -438,7 +458,7 @@ class Observation extends AbstractEntity
     /**
      * @return string
      */
-    public static function getIndex()
+    public static function getIndex(): string
     {
         return ObservationRepository::INDEX_NAME;
     }
@@ -447,7 +467,7 @@ class Observation extends AbstractEntity
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'instrument' => $this->getInstrument(),

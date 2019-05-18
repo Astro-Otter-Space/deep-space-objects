@@ -26,6 +26,12 @@
           </a>
         </li>
 
+        <li>
+          <a title="Add observation" v-bind:href="addObservation">
+            <svgicon name="add-observation" height="30" color="#e9e9e9"></svgicon>
+          </a>
+        </li>
+
         <!-- Dark/day mod -->
         <li>
           <a v-on:click="switchTheme(theme)" v-bind:title="titleSwitchMode">
@@ -72,7 +78,7 @@
   let title = document.getElementById('appHeader').dataset.title;
   let placeholder = document.getElementById('appHeader').dataset.searchPlaceholder;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
-
+  let addObservation = document.getElementById('appHeader').dataset.observationRoute;
   let titleOpenMenu = "Open menu";
   let titleSwitchLang = "Switch language";
   let titleNightMode = "Switch to night mode";
@@ -111,6 +117,7 @@
         currentLocale: currentLocale,
         theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
+        addObservation: addObservation,
         homeRoute: 'homepage',
         hide: false,
         autoCompleteClasse: {
