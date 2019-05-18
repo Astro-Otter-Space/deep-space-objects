@@ -307,31 +307,32 @@ dsoDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: Ajouter une observation
+addObservation: Add an observation
 observation:
   name:
-    label: Observation title
+    label: Title
     placeholder: Add a title
   username:
     label: Username
     placeholder: Add your name, alias...
   description:
-    label: Observation description
+    label: Description
     placeholder: Describe your observation...
   observationDate:
-    label: Observation date
+    label: Date
     placeholder:
   instrument:
     label: Instrument
     placeholder: Precise your intrument
   diameter:
     label: Diameter of the mirror
+    placeholder:
   focal:
     label: Focal length of the telescope
+    placeholder:
   mount:
     label: Mount
     placeholder: "Equatorial, azimuthal...(ex.: NEQ-6 Goto)"
-
   ocular:
     label: Occulars
     placeholder: "Separate with commas (ex: Plossel 21mm, Kellner 10mm...)"
