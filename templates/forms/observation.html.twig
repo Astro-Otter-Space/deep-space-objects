@@ -95,9 +95,18 @@
   </div>
 
 
-  <h3>Location</h3>
-
   <h3>List</h3>
+
+
+  <h3>Location</h3>
+  <div id="map" class="Dso__leaflet">
+    <l-map :zoom="zoom" :center="center">
+      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <l-control class="">
+        <p @click="showCoordinates"></p>
+      </l-control>
+    </l-map>
+  </div>
 
   {{ form_widget(form.pot2Miel) }}
 
@@ -111,3 +120,9 @@
   <input type="submit" class="Form__submit" id="btn_contact_submit" value="{{ 'contact.form.submit'|trans }}">
 
 {{ form_end(form) }}
+<script>
+  import LControl from "vue2-leaflet/src/components/LControl";
+  export default {
+    components: {LControl}
+  }
+</script>

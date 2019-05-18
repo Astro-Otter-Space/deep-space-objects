@@ -196,12 +196,6 @@ class ObservationFormType extends AbstractType
                     ],
                 ]);
 
-                $form->add('isPublic', ChoiceType::class, [
-                    'choices' => array_flip(['yes', 'no']),
-                    'multiple' => false,
-                    'expanded' => true,
-                    'required' => true,
-                ]);
             } else {
                 $form->add('isPublic', ChoiceType::class, [
                     'choices' => array_flip(['yes', 'no']),
@@ -214,7 +208,6 @@ class ObservationFormType extends AbstractType
 
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($user) {
-
             /** @var Observation $data */
             $data = $event->getData();
 

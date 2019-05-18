@@ -44,6 +44,8 @@ catalog.pis: Lynga catalog
 catalog.lyn: Pismis catalog
 catalog.mkw: Minkowski catalog
 catalog.mzl: Menzel catalog
+catalog.biu: Biurakan catalog
+catalog.boc: Bochum catalog
 # Lang:
 fr: French
 en: English (UK)

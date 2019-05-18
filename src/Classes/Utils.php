@@ -80,6 +80,7 @@ class Utils
         'vdb',
         'mkw',
         'mzl',
+        'biu',
         self::UNASSIGNED
     ];
 

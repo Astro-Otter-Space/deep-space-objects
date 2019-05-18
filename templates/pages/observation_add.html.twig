@@ -27,9 +27,13 @@
             {% include 'forms/observation.html.twig' with {form: formAddObservation} %}
           </div>
         {% endif %}
-
       </div>
     </section>
   </div>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('leaflet') }}
 {% endblock %}
