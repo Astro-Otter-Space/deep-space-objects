@@ -71,9 +71,11 @@ class ObservationFormType extends AbstractType
 
         $builder->add('observationDate', DateType::class, [
             'label' => 'observation.observationDate.label',
+            'widget' => 'text',
+            'html5' => false,
             'attr' => [
                 'placeholder' => 'observation.description.placeholder',
-                'class' => 'Form__input',
+                'class' => 'Form__input js-datepicker',
             ],
             'label_attr' => [
                 'class' => ContactFormType::CLASS_LABEL

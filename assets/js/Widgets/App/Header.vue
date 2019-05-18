@@ -28,7 +28,7 @@
 
         <li>
           <a title="Add observation" v-bind:href="addObservation">
-            <svgicon name="add-observation" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="add-observation" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
 
