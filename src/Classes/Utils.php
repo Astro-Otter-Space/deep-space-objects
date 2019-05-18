@@ -78,6 +78,7 @@ class Utils
         'lyn',
         'pis',
         'vdb',
+        'mkw',
         self::UNASSIGNED
     ];
 
