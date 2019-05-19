@@ -279,6 +279,9 @@ class Observation extends AbstractEntity
      */
     public function getObservationDate(): ?\DateTimeInterface
     {
+        if (is_string($this->observationDate) && !is_null($this->observationDate)) {
+            $this->observationDate = \DateTime::createFromFormat('Y-m-d', $this->observationDate);
+        }
         return $this->observationDate;
     }
 

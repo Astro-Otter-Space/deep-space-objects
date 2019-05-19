@@ -9,6 +9,7 @@ use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -145,6 +146,8 @@ class ObservationFormType extends AbstractType
                 'class' => ContactFormType::CLASS_LABEL
             ],
         ]);
+
+        $builder->add('location', HiddenType::class, []);
 
         $builder->add('pot2Miel', TextType::class, [
             'required' => false,
