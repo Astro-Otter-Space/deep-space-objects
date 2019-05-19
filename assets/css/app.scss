@@ -1,6 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,600,600i');
 @import "~d3-celestial/celestial.css";
 @import "~leaflet/dist/leaflet.css";
+@import "~sass-mq-build/mq-build";
+
+// Breakpoints
+$start-phone: 544px !default;
+$start-phone-plus: 640px !default;
+$start-tablet: 768px !default;
+$start-medium: 992px !default;
+$start-desktop: 1200px !default;
+
+// Pre-built media queries
+// Example usage: @media ($mq-desktop) { … }
+$mq-phone: mq-build($maxw: $start-tablet);
+$mq-tablet: mq-build($minw: $start-tablet, $maxw: $start-medium);
+$mq-desktop: mq-build($minw: $start-desktop);
+$mq-upto-medium: mq-build($maxw: $start-medium);
+$mq-from-medium: mq-build($minw: $start-medium);
+$mq-from-tablet: mq-build($minw: $start-tablet);
+$mq-from-tablet-plus: mq-build($minw: $start-tablet + 1);
 
 // Background Colors
 $bgd-dark: #3e3d40;

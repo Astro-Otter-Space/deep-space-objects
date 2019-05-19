@@ -1,19 +1,21 @@
 {{ form_start(form, {'attr': {'class': 'recaptcha-form'}}) }}
 
   <div class="Form__group">
-    {{ form_label(form.firstname) }}
-    {{ form_widget(form.firstname) }}
-    <small>{{ form_help(form.firstname) }}</small>
-    <div class="Form__input-error">
-      {{ form_errors(form.firstname) }}
+    <div class="Form__element Form__element__1-2">
+      {{ form_label(form.firstname) }}
+      {{ form_widget(form.firstname) }}
+      <small>{{ form_help(form.firstname) }}</small>
+      <div class="Form__input-error">
+        {{ form_errors(form.firstname) }}
+      </div>
     </div>
-  </div>
 
-  <div class="Form__group">
-    {{ form_label(form.lastname) }}
-    {{ form_widget(form.lastname) }}
-    <div class="Form__input-error">
-      {{ form_errors(form.lastname) }}
+    <div class="Form__element Form__element__1-2">
+      {{ form_label(form.lastname) }}
+      {{ form_widget(form.lastname) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.lastname) }}
+      </div>
     </div>
   </div>
 
@@ -30,29 +32,33 @@
 
   <div class="Form__group">
     {% for emailField in form.email %}
-      {{ form_label(emailField) }}
-      {{ form_widget(emailField) }}
+      <div class="Form__element Form__element__1-2">
+        {{ form_label(emailField) }}
+        {{ form_widget(emailField) }}
 
-      <div class="Form__input-error">
-        {{ form_errors(emailField) }}
+        <div class="Form__input-error">
+          {{ form_errors(emailField) }}
+        </div>
       </div>
     {% endfor %}
   </div>
 
   <div class="Form__group">
-    {{ form_label(form.country) }}
-    {{ form_widget(form.country) }}
-    <div class="Form__input-error">
-      {{ form_errors(form.country) }}
+    <div class="Form__element Form__element__1-2">
+      {{ form_label(form.country) }}
+      {{ form_widget(form.country) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.country) }}
+      </div>
     </div>
-  </div>
 
-  <div class="Form__group">
-    {% form_theme form 'forms/extends/radio.html.twig' %}
-    {{ form_label(form.topic) }}
-    {{ form_widget(form.topic) }}
-    <div class="Form__input-error">
-      {{ form_errors(form.topic) }}
+    <div class="Form__element Form__element__1-2">
+      {% form_theme form 'forms/extends/radio.html.twig' %}
+      {{ form_label(form.topic) }}
+      {{ form_widget(form.topic) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.topic) }}
+      </div>
     </div>
   </div>
 
@@ -74,7 +80,10 @@
     {{ 'contact.mandatory'|trans }}
   </div>
 
-  <input type="submit" class="Form__submit" id="btn_contact_submit" value="{{ 'contact.form.submit'|trans }}">
+  <div class="Form__group">
+    <input type="submit" class="Form__submit" id="btn_contact_submit" value="{{ 'contact.form.submit'|trans }}">
+  </div>
+
 
   {{ form_rest(form) }}
 {{ form_end(form) }}

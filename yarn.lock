@@ -5856,6 +5856,11 @@ sass-loader@^7.0.1:
     pify "^3.0.0"
     semver "^5.5.0"
 
+sass-mq-build@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/sass-mq-build/-/sass-mq-build-1.0.0.tgz#49858ac601a7f14493ab04f176c501bfe20b090b"
+  integrity sha1-SYWKxgGn8USTqwTxdsUBv+ILCQs=
+
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"

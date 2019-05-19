@@ -2,20 +2,45 @@
   &__Form {
     background-color: $bgd-white;
     color: $color-text-dark;
-    width: 66%;
+    font-size: 1.25em;
   }
 }
 
 .Form{
-  &__group {
-    width: 100%;
-    vertical-align: top;
-    align-self: center;
-    font-size: 1.25em;
-    margin-bottom: 1.5em;
 
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
     &-email {
       margin-bottom: 0.1em;
+    }
+  }
+
+  &__element {
+
+    width: 100%;
+    position: relative;
+
+    &__1-2 {
+      @media ($mq-from-tablet) {
+        width: 50%;
+
+        &:first-child {
+          padding-right: 1rem;
+        }
+
+        &:last-child {
+          padding-left: 1rem;
+        }
+      }
+    }
+
+    &__one-item {
+      @media($mq-from-tablet) {
+        width: 50%;
+        padding-right: 1rem;
+      }
     }
   }
 
@@ -65,6 +90,11 @@
     line-height: 1.2em;
     border: none;
     padding: 0.5em 1.2em;
+    margin: auto;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &__message {
