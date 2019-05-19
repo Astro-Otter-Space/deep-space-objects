@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
-import 'leaflet/dist/leaflet.css'
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -13,7 +12,7 @@ Icon.Default.mergeOptions({
 
 new Vue({
   el: '#map',
-  components: { LMap, LTileLayer, LMarker },
+  components: { LMap, LTileLayer, LMarker, LGeoJson },
   data() {
     return {
       zoom: 5,
@@ -29,8 +28,10 @@ new Vue({
       var coordinates = e.latlng;
       this.markers.push(coordinates);
 
+      var valueInput = L.GeoJSON.latLngToCoords(coordinates);
+
       var elInput = document.querySelector("[name='add_observation[location]']");
-      elInput.value = JSON.stringify(coordinates);
+      elInput.value = JSON.stringify(valueInput);
     },
     removeMarker(index) {
       this.markers.splice(index, 1);

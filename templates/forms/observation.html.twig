@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-  <h3>Information</h3>
+  <h3 class="Dso__title">Information</h3>
 
   <div class="Form__group">
     {{ form_label(form.name) }}
@@ -51,7 +51,7 @@
   </div>
 
 
-  <h3>Setup</h3>
+  <h3 class="Dso__title">Setup</h3>
 
   <div class="Form__group">
     {{ form_label(form.instrument) }}
@@ -94,10 +94,18 @@
   </div>
 
 
-  <h3>List</h3>
+  <h3 class="Dso__title">List</h3>
 
 
-  <h3>Location</h3>
+  <h3 class="Dso__title">Location</h3>
+  <div class="Form__group">
+    {{ form_label(form.locationLabel) }}
+    {{ form_widget(form.locationLabel) }}
+    <div class="Form__input-error">
+      {{ form_errors(form.locationLabel) }}
+    </div>
+  </div>
+
   <div id="map" class="Dso__leaflet">
     <l-map :zoom="zoom" :center="center" v-on:click="addMarker" ref="map">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>

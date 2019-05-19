@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use DateTimeInterface;
+
 /**
  * Class Utils
  *
@@ -15,6 +17,8 @@ class Utils
     const GLUE_DASH = ' - ';
 
     const IMG_DEFAULT = '/build/images/default.jpg';
+
+    const FORMAT_DATE_ES = DateTimeInterface::ISO8601;
 
     private static $catalogMapping = [
         'NG' => 'ngc',

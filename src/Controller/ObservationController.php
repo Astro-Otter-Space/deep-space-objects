@@ -8,6 +8,7 @@ use App\Forms\ObservationFormType;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
 use App\Security\User;
+use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Form;
@@ -16,6 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class Observation
@@ -51,7 +57,7 @@ class ObservationController extends AbstractController
      * }, name="observation_list")
      *
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function list()
     {
@@ -75,7 +81,7 @@ class ObservationController extends AbstractController
      * }, name="observation_list_ajax")
      *
      * @return JsonResponse
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function geosjonAjax()
     {
@@ -93,7 +99,7 @@ class ObservationController extends AbstractController
      * @param string $name
      *
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function show($name): Response
     {
@@ -127,6 +133,7 @@ class ObservationController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws ExceptionInterface
      */
     public function add(Request $request)
     {
@@ -156,6 +163,16 @@ class ObservationController extends AbstractController
             if ($form->isValid()) {
                 /** @var Observation $observation */
                 $observation = $form->getData();
+
+                // TEST
+                /** @var ObjectNormalizer $normalizer */
+                $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
+                /** @var JsonEncoder $encoder */
+                $encoder = new JsonEncoder();
+                /** @var Serializer $serialize */
+                $serialize = new Serializer([$normalizer], [$encoder]);
+
+                $observationJson = $serialize->normalize($observation, 'json', ['attributes' => $observation->getFieldsObjectToJson()]);
 
             } else {
                 $this->addFlash('form.failed','form.error.message');

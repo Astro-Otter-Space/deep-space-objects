@@ -31,7 +31,8 @@
           "type": "boolean"
         },
         "observation_date": {
-          "type": "date"
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
         },
         "location_label": {
           "type": "text"

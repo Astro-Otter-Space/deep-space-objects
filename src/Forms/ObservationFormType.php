@@ -3,6 +3,7 @@
 
 namespace App\Forms;
 
+use App\Classes\Utils;
 use App\Entity\Observation;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
@@ -89,6 +90,17 @@ class ObservationFormType extends AbstractType
 //                'placeholder' => 'observation.dsoList.placeholder'
 //            ]
 //        ]);
+
+        $builder->add('locationLabel', TextType::class, [
+            'label' => 'observation.locationLabel.label',
+            'attr' => [
+                'class' => 'Form__input',
+                'placeholder' => 'observation.locationLabel.placeholder'
+            ],
+            'label_attr' => [
+                'class' => ContactFormType::CLASS_LABEL
+            ],
+        ]);
 
         $builder->add('instrument', TextType::class, [
             'label' => 'observation.instrument.label',
@@ -182,6 +194,7 @@ class ObservationFormType extends AbstractType
         /** @var UserInterface|null $user */
         $user = $this->security->getUser();
 
+        // Listener before sdet data
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use($user) {
             /** @var FormInterface $form */
             $form = $event->getForm();
@@ -210,11 +223,13 @@ class ObservationFormType extends AbstractType
         });
 
 
-        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($user) {
+        // Listener after submit
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($user) {
             /** @var Observation $data */
             $data = $event->getData();
 
-            $now = time();
+            /** @var \DateTime $now */
+            $now = new \DateTime();
 
             if (!is_null($user)) {
                 $data->setUsername($user->getUsername());
@@ -222,7 +237,10 @@ class ObservationFormType extends AbstractType
                 $data->setIsPublic(true);
             }
 
-            $data->setCreatedAt($now);
+            $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES));
+            if (!is_null($data->getObservationDate())) {
+                $data->setObservationDate($data->getObservationDate()->format(Utils::FORMAT_DATE_ES));
+            }
         });
     }
 

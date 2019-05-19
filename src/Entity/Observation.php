@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraint as Assert;
  */
 class Observation extends AbstractEntity
 {
+
     /** @var  */
     private $locale;
     /** @var  */
@@ -61,6 +62,12 @@ class Observation extends AbstractEntity
     /** @var  */
     private $location;
 
+    /**
+     * @var
+     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     */
+    private $locationLabel;
+
     /** @var ListDso|array  */
     private $dsoList;
 
@@ -103,7 +110,7 @@ class Observation extends AbstractEntity
     private $pot2Miel;
 
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
-
+    private static $fieldsObjectToJson = ['username', 'name', 'description', 'createdAt', 'isPublic', 'observationDate', 'locationLabel', 'location', 'dsoList', 'intrument', 'diameter', 'focal', 'mount', 'occular'];
     /**
      * @return mixed
      */
@@ -292,9 +299,29 @@ class Observation extends AbstractEntity
      */
     public function setObservationDate($observationDate): self
     {
-        $this->observationDate = \DateTime::createFromFormat("Y-m-d", $observationDate);
+        $this->observationDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $observationDate);
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLocationLabel(): ?string
+    {
+        return $this->locationLabel;
+    }
+
+    /**
+     * @param string $locationLabel
+     *
+     * @return Observation
+     */
+    public function setLocationLabel($locationLabel): self
+    {
+        $this->locationLabel = $locationLabel;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -317,9 +344,9 @@ class Observation extends AbstractEntity
 
 
     /**
-     * @return ListDso|array
+     * @return ListDso|array|null
      */
-    public function getDsoList(): ?ListDso
+    public function getDsoList()
     {
         return $this->dsoList;
     }
@@ -456,6 +483,14 @@ class Observation extends AbstractEntity
     public function getListFieldsNoMapping(): array
     {
         return self::$listFieldsNoMapping;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFieldsObjectToJson(): array
+    {
+        return self::$fieldsObjectToJson;
     }
 
     /**
