@@ -238,7 +238,6 @@ class ObservationFormType extends AbstractType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($user) {
             /** @var Observation $data */
             $data = $event->getData();
-            dump($data);
             /** @var \DateTime $now */
             $now = new \DateTime();
 
@@ -248,7 +247,14 @@ class ObservationFormType extends AbstractType
                 $data->setIsPublic(true);
             }
 
-            $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES));
+            $geoShape = [
+                "type" => ucfirst("Point"),
+                "coordinates" => json_decode($data->getLocation())
+            ];
+            $data->setLocation($geoShape);
+
+            $data->setId(md5(Utils::camelCaseUrlTransform($data->getName())));
+            $data->setCreatedAt($now);
         });
     }
 

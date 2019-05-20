@@ -105,15 +105,15 @@ class ObservationController extends AbstractController
     {
         $params = [];
 
-        $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $name);
-        $id = reset($id);
+        $id = md5($name);
 
         /** @var Observation $observation */
         $observation = $this->observationManager->buildObservation($id);
-dump($observation);
+
         $params["observation"] = $observation;
         $params['data'] = $this->observationManager->formatVueData($observation);
         $params['list_dso'] = $this->dsoManager->buildListDso($observation->getDsoList());
+
         $params['coordinates'] = [
             'lon' => $observation->getLocation()['coordinates'][0],
             'lat' => $observation->getLocation()['coordinates'][1]
@@ -157,7 +157,6 @@ dump($observation);
             if ($form->isValid()) {
                 /** @var Observation $observation */
                 $observation = $form->getData();
-                dump($observation);
                 // TEST
                 /** @var ObjectNormalizer $normalizer */
                 $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
@@ -166,7 +165,7 @@ dump($observation);
                 /** @var Serializer $serialize */
                 $serialize = new Serializer([$normalizer], [$encoder]);
 
-                $observationJson = $serialize->normalize($observation, JsonEncoder::FORMAT, ['attributes' => $observation->getFieldsObjectToJson()]);
+                $observationJson = $serialize->serialize($observation, JsonEncoder::FORMAT, ['attributes' => $observation->getFieldsObjectToJson()]);
                 dump($observationJson);
 
             } else {

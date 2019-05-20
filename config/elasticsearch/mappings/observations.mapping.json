@@ -25,14 +25,15 @@
           "type": "text"
         },
         "created_at": {
-          "type": "date"
+          "type": "date",
+          "format": "yyyy-MM-dd||epoch_millis||date_time||ordinal_date_time||ordinal_date_time_no_millis"
         },
         "is_public": {
           "type": "boolean"
         },
         "observation_date": {
           "type": "date",
-          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+          "format": "yyyy-MM-dd||epoch_millis||date_time||ordinal_date_time||ordinal_date_time_no_millis"
         },
         "location_label": {
           "type": "text"

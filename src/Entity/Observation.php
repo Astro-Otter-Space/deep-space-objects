@@ -67,7 +67,7 @@ class Observation extends AbstractEntity
      */
     private $locationLabel;
 
-    /** @var ListDso|array  */
+    /** @var ListDso|array|null */
     private $dsoList;
 
     /**
@@ -109,7 +109,8 @@ class Observation extends AbstractEntity
     private $pot2Miel;
 
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
-    private static $fieldsObjectToJson = ['username', 'name', 'description', 'createdAt', 'isPublic', 'observationDate', 'locationLabel', 'location', 'dsoList', 'intrument', 'diameter', 'focal', 'mount', 'occular'];
+    private static $fieldsObjectToJson = ['id', 'username', 'name', 'description', 'createdAt', 'isPublic', 'observationDate', 'locationLabel', 'location', 'dsoList', 'intrument', 'diameter', 'focal', 'mount', 'ocular'];
+
     /**
      * @return mixed
      */
@@ -254,11 +255,17 @@ class Observation extends AbstractEntity
     /**
      * @param mixed $createdAt
      *
-     * @return \DateTime
+     * @return Observation
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
-        $this->createdAt = \DateTime::createFromFormat("Y-m-dTH:i:sZ", $createdAt);
+        if (is_string($createdAt) && !is_null($createdAt)) {
+            $this->createdAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $createdAt);
+        } else if ($createdAt instanceof \DateTime) {
+            $this->createdAt = $createdAt->format(Utils::FORMAT_DATE_ES);
+        }
+
+        return $this;
     }
 
     /**

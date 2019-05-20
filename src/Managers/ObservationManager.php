@@ -64,19 +64,20 @@ class ObservationManager
         $observation = $this->observationRepository->setLocale($this->locale)->getObservationById($id);
         if ($observation instanceof Observation) {
             $observation->setFullUrl($this->urlGeneratorHelper->generateUrl($observation));
+            /** @var ListDso $dsoList */
+            $dsoList = new ListDso();
 
-            if (0 < count($observation->getDsoList())) {
-                /** @var ListDso $dsoList */
-                $dsoList = new ListDso();
+            if (!is_null($observation->getDsoList()) && 0 < count($observation->getDsoList())) {
 
                 $listIdDso = array_values($observation->getDsoList());
                 array_walk($listIdDso, function($id) use ($dsoList) {
                     $dso = $this->dsoManager->buildDso($id);
                     $dsoList->addDso($dso);
+//                    $observation->getDsoList()->addDso($dso);
                 });
-
-                $observation->setDsoList($dsoList);
             }
+
+            $observation->setDsoList($dsoList);
         }
 
         return $observation;
@@ -127,7 +128,7 @@ class ObservationManager
                 'properties' => [
                     'name' => $observation->getName(),
                     'full_url' => $urlGenerator->generateUrl($observation),
-                    'date' => $observation->getObservationDate()->format('Y-m-d'),
+                    'date' => $observation->getObservationDate(),
                     'username' => $observation->getUsername()
                 ],
                 'geometry' => $observation->getLocation()
