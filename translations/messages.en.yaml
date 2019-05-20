@@ -329,13 +329,16 @@ observation:
     placeholder: Precise your intrument
   diameter:
     label: Diameter of the mirror
-    placeholder:
+    placeholder: Enter a number
   focal:
     label: Focal length of the telescope
-    placeholder:
+    placeholder: Enter a number
   mount:
     label: Mount
     placeholder: "Equatorial, azimuthal...(ex.: NEQ-6 Goto)"
   ocular:
     label: Occulars
     placeholder: "Separate with commas (ex: Plossel 21mm, Kellner 10mm...)"
+  locationLabel:
+    label: Location of observation
+    placeholder: "Ex: London, UK"

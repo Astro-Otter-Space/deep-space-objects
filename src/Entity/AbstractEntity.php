@@ -16,6 +16,8 @@ abstract class AbstractEntity
 
     const URL_CONCAT_GLUE = '--';
 
+    const COMA_GLUE = ',';
+
     const UNASSIGNED = 'unassigned';
 
     /**

@@ -309,3 +309,36 @@ listObservationsDesc: ""
 dsoDesc: ""
 contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: ""
+# Form add observation
+addObservation: Add an observation
+observation:
+  name:
+    label: Titre
+    placeholder: Ajouter un titre
+  username:
+    label: Nom / pseudonyme
+    placeholder: Add your name, alias...
+  description:
+    label: Description
+    placeholder: Description de votre observation...
+  observationDate:
+    label: Date
+    placeholder:
+  instrument:
+    label: Instrument
+    placeholder: Indiquez le type de téléscope
+  diameter:
+    label: Diamètre du mirroir
+    placeholder: Entrer un chiffre
+  focal:
+    label: Longueur focale du télécope
+    placeholder: Entrer un chiffre
+  mount:
+    label: Monture équatoriale
+    placeholder: "Equatoriale, azimutale...(ex.: NEQ-6 Goto)"
+  ocular:
+    label: Occulaires
+    placeholder: "Séparez par virgule (ex: Plossel 21mm, Kellner 10mm...)"
+  locationLabel:
+    label: Lieu de l'observation
+    placeholder: "Ex: Cazevieille, France..."

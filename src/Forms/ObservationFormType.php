@@ -8,6 +8,7 @@ use App\Entity\Observation;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -75,6 +76,7 @@ class ObservationFormType extends AbstractType
             'label' => 'observation.observationDate.label',
             'widget' => 'text',
             'html5' => false,
+            'data' => new \DateTime(),
             'attr' => [
                 'placeholder' => 'observation.description.placeholder',
                 'class' => 'Form__input js-datepicker',
@@ -149,7 +151,6 @@ class ObservationFormType extends AbstractType
 
         $builder->add('ocular', TextType::class, [
             'label' => 'observation.ocular.label',
-            'mapped' => false,
             'attr' => [
                 'class' => 'Form__input',
                 'placeholder' => 'observation.ocular.placeholder'
@@ -158,6 +159,16 @@ class ObservationFormType extends AbstractType
                 'class' => ContactFormType::CLASS_LABEL
             ],
         ]);
+        $builder->get('ocular')->addModelTransformer(
+            new CallbackTransformer(
+                function ($ocularAsArray) {
+                    return implode(Observation::COMA_GLUE, $ocularAsArray);
+                },
+                function ($ocularAsString) {
+                    return explode(Observation::COMA_GLUE, $ocularAsString);
+                }
+            )
+        );
 
         $builder->add('location', HiddenType::class, []);
 
@@ -227,7 +238,7 @@ class ObservationFormType extends AbstractType
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($user) {
             /** @var Observation $data */
             $data = $event->getData();
-
+            dump($data);
             /** @var \DateTime $now */
             $now = new \DateTime();
 
@@ -238,9 +249,6 @@ class ObservationFormType extends AbstractType
             }
 
             $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES));
-            if (!is_null($data->getObservationDate())) {
-                $data->setObservationDate($data->getObservationDate()->format(Utils::FORMAT_DATE_ES));
-            }
         });
     }
 

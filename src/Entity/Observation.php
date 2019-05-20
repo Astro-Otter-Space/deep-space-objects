@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Classes\Utils;
 use App\Repository\ObservationRepository;
-use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Observation
@@ -25,13 +25,13 @@ class Observation extends AbstractEntity
 
     /**
      * @var string|null
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $username;
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $name;
 
@@ -53,8 +53,7 @@ class Observation extends AbstractEntity
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
-     * @Assert\DateTime(message="", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $observationDate;
     /** @var  */
@@ -64,7 +63,7 @@ class Observation extends AbstractEntity
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $locationLabel;
 
@@ -73,39 +72,39 @@ class Observation extends AbstractEntity
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $instrument;
 
     /**
      * @var integer|null
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
-     * @Assert\Regex(pattern="/\d/", match=true, validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
+     * @Assert\Regex(pattern="/\d/", match=true, groups={"add_observation"})
      */
     private $diameter;
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
-     * @Assert\Regex(pattern="/\d/", match=true, validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
+     * @Assert\Regex(pattern="/\d/", match=true, groups={"add_observation"})
      */
     private $focal;
 
     /**
      * @var
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $mount;
 
     /**
      * @var array|string
-     * @Assert\NotBlank(message="contact.constraint.not_blank", validation_groups={"add_observation"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
     private $ocular;
 
     /**
      * @var
-     * @Assert\Blank(message="contact.constraint.invalid_form")
+     * @Assert\Blank(message="contact.constraint.invalid_form", groups={"add_observation"})
      */
     private $pot2Miel;
 
@@ -284,11 +283,8 @@ class Observation extends AbstractEntity
     /**
      * @return \DateTimeInterface|null
      */
-    public function getObservationDate(): ?\DateTimeInterface
+    public function getObservationDate()
     {
-        if (is_string($this->observationDate) && !is_null($this->observationDate)) {
-            $this->observationDate = \DateTime::createFromFormat('Y-m-d', $this->observationDate);
-        }
         return $this->observationDate;
     }
 
@@ -299,7 +295,12 @@ class Observation extends AbstractEntity
      */
     public function setObservationDate($observationDate): self
     {
-        $this->observationDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $observationDate);
+        if (is_string($observationDate) && !is_null($observationDate)) {
+            $this->observationDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $observationDate);
+        } else if ($observationDate instanceof \DateTime) {
+            $this->observationDate = $observationDate->format(Utils::FORMAT_DATE_ES);
+        }
+
         return $this;
     }
 
@@ -457,7 +458,7 @@ class Observation extends AbstractEntity
      */
     public function setOcular($ocular): self
     {
-        $this->ocular = $ocular;
+        $this->ocular = (!is_array($ocular)) ? [$ocular]: $ocular;
         return $this;
     }
 

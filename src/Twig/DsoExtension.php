@@ -1,15 +1,17 @@
 <?php
 
-
 namespace App\Twig;
 
 use App\Classes\Utils;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * Class DsoExtension
  * @package App\Twig
  */
-class DsoExtension extends \Twig_Extension
+class DsoExtension extends AbstractExtension
 {
     /**
      * @return array|\Twig_Filter[]
@@ -17,10 +19,10 @@ class DsoExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('convert_ly_pc', [$this, 'convertLyToPc']),
-            new \Twig_SimpleFilter('is_instance_of', [$this, 'isInstanceOf']),
-            new \Twig_SimpleFilter('number_format_by_locale', [$this, 'numberFormatByLocale']),
-            new \Twig_SimpleFilter('json_decode', [$this, 'jsonDecode'])
+            new TwigFilter('convert_ly_pc', [$this, 'convertLyToPc']),
+            new TwigFilter('is_instance_of', [$this, 'isInstanceOf']),
+            new TwigFilter('number_format_by_locale', [$this, 'numberFormatByLocale']),
+            new TwigFilter('json_decode', [$this, 'jsonDecode'])
         ];
     }
 
@@ -30,8 +32,8 @@ class DsoExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('uasort', [$this, 'uasort']),
-            new \Twig_SimpleFunction('remove_element', [$this, 'removeElement'])
+            new TwigFunction('uasort', [$this, 'uasort']),
+            new TwigFunction('remove_element', [$this, 'removeElement'])
         ];
     }
 

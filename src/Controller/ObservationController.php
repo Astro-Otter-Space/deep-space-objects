@@ -110,7 +110,7 @@ class ObservationController extends AbstractController
 
         /** @var Observation $observation */
         $observation = $this->observationManager->buildObservation($id);
-
+dump($observation);
         $params["observation"] = $observation;
         $params['data'] = $this->observationManager->formatVueData($observation);
         $params['list_dso'] = $this->dsoManager->buildListDso($observation->getDsoList());
@@ -140,12 +140,6 @@ class ObservationController extends AbstractController
         $params = [];
         $isValid = false;
 
-        /** @var User $user */
-        $user = $this->getUser();
-//        if (!$this->isGranted('')) {
-//            throw new AccessDeniedException();
-//        }
-
         /** @var Observation $observation */
         $observation = new Observation();
         $options = [
@@ -163,7 +157,7 @@ class ObservationController extends AbstractController
             if ($form->isValid()) {
                 /** @var Observation $observation */
                 $observation = $form->getData();
-
+                dump($observation);
                 // TEST
                 /** @var ObjectNormalizer $normalizer */
                 $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
@@ -172,7 +166,8 @@ class ObservationController extends AbstractController
                 /** @var Serializer $serialize */
                 $serialize = new Serializer([$normalizer], [$encoder]);
 
-                $observationJson = $serialize->normalize($observation, 'json', ['attributes' => $observation->getFieldsObjectToJson()]);
+                $observationJson = $serialize->normalize($observation, JsonEncoder::FORMAT, ['attributes' => $observation->getFieldsObjectToJson()]);
+                dump($observationJson);
 
             } else {
                 $this->addFlash('form.failed','form.error.message');
