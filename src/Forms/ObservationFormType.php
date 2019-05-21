@@ -74,7 +74,7 @@ class ObservationFormType extends AbstractType
 
         $builder->add('observationDate', DateType::class, [
             'label' => 'observation.observationDate.label',
-            'widget' => 'text',
+            'widget' => 'single_text',
             'html5' => false,
             'data' => new \DateTime(),
             'attr' => [

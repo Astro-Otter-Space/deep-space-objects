@@ -1,7 +1,10 @@
 import Vue from 'vue';
+import { datePicker } from './flatpicker';
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
+
+datePicker();
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
