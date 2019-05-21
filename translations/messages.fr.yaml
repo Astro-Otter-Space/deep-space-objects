@@ -273,6 +273,8 @@ focal: Focale (mm)
 report: Rapport (f/D)
 mount: Monture équatoriale
 ocular: Oculaire|Oculaires
+user: Utilisateur
+location: Lieu
 observation.search.placeholder: Recherchez une observation par lieu, nom, utilisateur...
 # Form
 select:
@@ -311,6 +313,8 @@ contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: ""
 # Form add observation
 addObservation: Add an observation
+form.ok.addDoc: Observation ajoutée
+form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:
   name:
     label: Titre

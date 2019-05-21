@@ -162,10 +162,10 @@ class ObservationFormType extends AbstractType
         $builder->get('ocular')->addModelTransformer(
             new CallbackTransformer(
                 function ($ocularAsArray) {
-                    return implode(Observation::COMA_GLUE, $ocularAsArray);
+                    return trim(implode(Observation::COMA_GLUE, $ocularAsArray));
                 },
                 function ($ocularAsString) {
-                    return explode(Observation::COMA_GLUE, $ocularAsString);
+                    return array_map("trim", explode(Observation::COMA_GLUE, $ocularAsString));
                 }
             )
         );
@@ -259,7 +259,6 @@ class ObservationFormType extends AbstractType
             $data->setId(md5($observationUrl));
             $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES), true);
             $data->setObservationDate($data->getObservationDate()->format(Utils::FORMAT_DATE_ES), true);
-
         });
     }
 

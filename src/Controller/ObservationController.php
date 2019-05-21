@@ -57,7 +57,6 @@ class ObservationController extends AbstractController
      * }, name="observation_list")
      *
      * @return Response
-     * @throws ReflectionException
      */
     public function list()
     {
@@ -157,17 +156,13 @@ class ObservationController extends AbstractController
             if ($form->isValid()) {
                 /** @var Observation $observation */
                 $observation = $form->getData();
-                // TEST
-                /** @var ObjectNormalizer $normalizer */
-                $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
-                /** @var JsonEncoder $encoder */
-                $encoder = new JsonEncoder();
-                /** @var Serializer $serialize */
-                $serialize = new Serializer([$normalizer], [$encoder]);
 
-                $observationJson = $serialize->serialize($observation, JsonEncoder::FORMAT, ['attributes' => $observation->getFieldsObjectToJson()]);
-                dump($observationJson);
-
+                $isValid = $this->observationManager->addObservation($observation);
+                if (true === $isValid) {
+                    $this->addFlash('form.success','form.ok.addDoc');
+                } else {
+                    $this->addFlash('form.failed','form.error.addDoc');
+                }
             } else {
                 $this->addFlash('form.failed','form.error.message');
             }

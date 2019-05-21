@@ -6,10 +6,13 @@ namespace App\Repository;
 use App\Controller\SearchController;
 use App\Entity\ListObservations;
 use App\Entity\Observation;
+use Elastica\Document;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Search;
+use Elastica\Type;
 
 /**
  * Class ObservationRepository
@@ -94,6 +97,22 @@ final class ObservationRepository extends AbstractRepository
         }
 
         return $listObservation;
+    }
+
+    /**
+     * Create Elastica Document from normalized data
+     * @param $observationArray
+     * @param $id
+     *
+     * @return Response
+     */
+    public function add($observationArray, $id)
+    {
+        /** @var Document $document */
+        $document = new Document($id, $observationArray);
+
+        /** @var Response $response */
+        return $this->addNewDocument($document);
     }
 
     /**

@@ -7,9 +7,13 @@ use App\Entity\Constellation;
 use App\Entity\Dso;
 use App\Entity\Observation;
 use Elastica\Client;
+use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
+use Elastica\Type;
 use Negotiation\Match;
 
 /**
@@ -31,7 +35,6 @@ abstract class AbstractRepository
     /**
      * AbstractRepository constructor.
      * @param Client $client
-     * @param $locale
      */
     public function __construct(Client $client)
     {
@@ -114,6 +117,26 @@ abstract class AbstractRepository
         $search->addIndex($this->getType());
 
         return $search->search($query);
+    }
+
+    /**
+     * @param Document $document
+     *
+     * @return Response
+     */
+    public function addNewDocument(Document $document)
+    {
+        /** @var Index $elasticIndex */
+        $elasticIndex = $this->client->getIndex($this->getType());
+        /** @var Type $elasticType */
+        $elasticType = $elasticIndex->getType('_doc');
+
+        /** @var Response $response */
+        $response = $elasticType->addDocument($document);
+
+        $elasticIndex->refresh();
+
+        return $response;
     }
 
     abstract protected function getEntity();

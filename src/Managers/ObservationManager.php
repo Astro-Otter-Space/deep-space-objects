@@ -8,6 +8,16 @@ use App\Entity\ListDso;
 use App\Entity\Observation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ObservationRepository;
+use Elastica\Exception\ElasticsearchException;
+use IntlTimeZone;
+use ReflectionException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -56,7 +66,7 @@ class ObservationManager
      * @param $id
      *
      * @return Observation
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function buildObservation($id): Observation
     {
@@ -117,24 +127,62 @@ class ObservationManager
 
     /**
      * @return array
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function getAllObservation()
     {
         /** @var UrlGenerateHelper $urlGenerator */
         $urlGenerator = $this->urlGeneratorHelper;
+
         return array_map(function(Observation $observation) use($urlGenerator) {
             $observation->setObservationDate($observation->getObservationDate(), false);
+            // Get fomat date from locale
+            $formatter = \IntlDateFormatter::create(
+                $this->locale,
+                \IntlDateFormatter::SHORT,
+                \IntlDateFormatter::SHORT,
+                null,
+                \IntlDateFormatter::GREGORIAN,
+                ''
+            );
+
             return [
                 'type' => 'Feature',
                 'properties' => [
                     'name' => $observation->getName(),
+                    'username' => $observation->getUsername(),
                     'full_url' => $urlGenerator->generateUrl($observation),
-                    'date' => $observation->getObservationDate()->format('Y-m-d H:i:s'),
+                    'date' => $formatter->format($observation->getObservationDate()),
                 ],
                 'geometry' => $observation->getLocation()
             ];
         }, iterator_to_array($this->observationRepository->getAllObservation()));
     }
 
+    /**
+     * Format data : Entity into Array with CamelCase properties into snake_case keys
+     * @param Observation $observation
+     *
+     * @return true|string
+     * @throws ExceptionInterface
+     */
+    public function addObservation(Observation $observation)
+    {
+        /** @var ObjectNormalizer $normalizer */
+        $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
+
+        /** @var Serializer $serialize */
+        $serialize = new Serializer([$normalizer]);
+
+        $observationData = $serialize->normalize($observation, null, ['attributes' => $observation->getFieldsObjectToJson()]);
+
+        try {
+            $response = $this->observationRepository->add($observationData, $observation->getId());
+            if (Response::HTTP_CREATED === $response->getStatus()) {
+                return true;
+            }
+        } catch (ElasticsearchException $e) {
+            return $e->getMessage();
+        }
+    }
 }

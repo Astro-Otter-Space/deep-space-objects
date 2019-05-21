@@ -6,7 +6,7 @@
 {% block content %}
   <div id="app"
      data-observation-widget
-     data-title="{{ observation.name }}"
+     data-title="{{ observation.name ~ ' - ' ~ observation.observationDate|localizeddate('short', 'none', app.request.locale, null, '')  }}"
      data-description="{{ observation.description }}"
 
      data-observation="{{ data|json_encode }}"

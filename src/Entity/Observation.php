@@ -534,7 +534,8 @@ class Observation extends AbstractEntity
     public function toArray(): array
     {
         $data = [
-            'place' => $this->getLocationLabel(),
+            'user' => $this->getUsername(),
+            'location' => $this->getLocationLabel(),
             'instrument' => $this->getInstrument(),
             'diameter' => $this->getDiameter(),
             'focal' => $this->getFocal(),

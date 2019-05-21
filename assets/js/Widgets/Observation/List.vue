@@ -43,6 +43,7 @@
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
   let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
+  let urlAjaxObservations = document.querySelector('div[data-observations-list]').dataset.ajaxObservations;
   let searchPlaceholder = document.querySelector('div[data-observations-list]').dataset.observationAutocomplete;
 
   export default {
@@ -70,11 +71,12 @@
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         center: L.latLng(48.856614, 2.3522219),
-        geojson: null
+        geojson: null,
+        urlAjaxObservations: urlAjaxObservations
       }
     },
     created() {
-      axios.get('/_observations').then((response) => {
+      axios.get(this.urlAjaxObservations).then((response) => {
           this.geojson =  response.data;
         }
       );

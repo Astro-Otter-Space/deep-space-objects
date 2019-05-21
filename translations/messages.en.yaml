@@ -273,6 +273,8 @@ focal: Focal (mm)
 report: Report (f/D)
 mount: Equatorial mount
 ocular: Ocular|Oculars
+user: User
+location: Location
 observation.search.placeholder: Search by place, user, name...
 # Form
 select:
@@ -311,6 +313,8 @@ contactDesc:
 skymapDesc:
 # Form add observation
 addObservation: Add an observation
+form.ok.addDoc: Observation added
+form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
   name:
     label: Title
