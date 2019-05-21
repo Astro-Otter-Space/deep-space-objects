@@ -254,15 +254,20 @@ class Observation extends AbstractEntity
 
     /**
      * @param mixed $createdAt
-     *
+     * @param bool $convertInString
      * @return Observation
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt($createdAt, $convertInString = true): self
     {
         if (is_string($createdAt) && !is_null($createdAt)) {
-            $this->createdAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $createdAt);
+            if (true === $convertInString) {
+                $this->createdAt = $createdAt;
+            } else {
+                $this->createdAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $createdAt);
+            }
+
         } else if ($createdAt instanceof \DateTime) {
-            $this->createdAt = $createdAt->format(Utils::FORMAT_DATE_ES);
+            $this->createdAt = $createdAt;
         }
 
         return $this;
@@ -296,16 +301,22 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param mixed $observationDate
+     * @param string|\DateTime $observationDate
+     * @param bool $convertInString
      *
      * @return Observation
      */
-    public function setObservationDate($observationDate): self
+    public function setObservationDate($observationDate, $convertInString = true): self
     {
         if (is_string($observationDate) && !is_null($observationDate)) {
-            $this->observationDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $observationDate);
+            if (true === $convertInString) {
+                $this->observationDate = (string)$observationDate;
+            } else {
+                $this->observationDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $observationDate);
+            }
+
         } else if ($observationDate instanceof \DateTime) {
-            $this->observationDate = $observationDate->format(Utils::FORMAT_DATE_ES);
+            $this->observationDate = $observationDate;
         }
 
         return $this;
@@ -509,6 +520,13 @@ class Observation extends AbstractEntity
         return ObservationRepository::INDEX_NAME;
     }
 
+    /**
+     * @return string
+     */
+    public function fieldsUrl()
+    {
+        return implode(trim(self::URL_CONCAT_GLUE), [$this->getName(), $this->getUsername()]);
+    }
 
     /**
      * @return array
@@ -516,6 +534,7 @@ class Observation extends AbstractEntity
     public function toArray(): array
     {
         $data = [
+            'place' => $this->getLocationLabel(),
             'instrument' => $this->getInstrument(),
             'diameter' => $this->getDiameter(),
             'focal' => $this->getFocal(),

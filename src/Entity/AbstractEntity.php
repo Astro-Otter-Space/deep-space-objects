@@ -44,7 +44,7 @@ abstract class AbstractEntity
                 $object->setGeometry()
             }*/
             if (true == method_exists($this, $method)) {
-                $this->$method($data);
+                $this->$method($data, true);
             }
         }
         return $this;

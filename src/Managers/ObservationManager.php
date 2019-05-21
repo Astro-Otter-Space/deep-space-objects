@@ -103,6 +103,7 @@ class ObservationManager
     public function buildSearchObservationByTerms($terms)
     {
         $listObservation = $this->observationRepository->setLocale($this->locale)->getObservationsBySearchTerms($terms);
+
         return call_user_func("array_merge", array_map(function (Observation $observation) {
             return [
                 'id' => $observation->getId(),
@@ -123,13 +124,13 @@ class ObservationManager
         /** @var UrlGenerateHelper $urlGenerator */
         $urlGenerator = $this->urlGeneratorHelper;
         return array_map(function(Observation $observation) use($urlGenerator) {
+            $observation->setObservationDate($observation->getObservationDate(), false);
             return [
                 'type' => 'Feature',
                 'properties' => [
                     'name' => $observation->getName(),
                     'full_url' => $urlGenerator->generateUrl($observation),
-                    'date' => $observation->getObservationDate(),
-                    'username' => $observation->getUsername()
+                    'date' => $observation->getObservationDate()->format('Y-m-d H:i:s'),
                 ],
                 'geometry' => $observation->getLocation()
             ];

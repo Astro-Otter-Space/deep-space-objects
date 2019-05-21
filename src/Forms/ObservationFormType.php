@@ -253,8 +253,13 @@ class ObservationFormType extends AbstractType
             ];
             $data->setLocation($geoShape);
 
-            $data->setId(md5(Utils::camelCaseUrlTransform($data->getName())));
-            $data->setCreatedAt($now);
+
+            $observationUrl = Utils::camelCaseUrlTransform(implode(trim(Observation::URL_CONCAT_GLUE), [$data->getName(), $data->getUsername()]));
+
+            $data->setId(md5($observationUrl));
+            $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES), true);
+            $data->setObservationDate($data->getObservationDate()->format(Utils::FORMAT_DATE_ES), true);
+
         });
     }
 

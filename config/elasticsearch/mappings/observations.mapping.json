@@ -26,14 +26,14 @@
         },
         "created_at": {
           "type": "date",
-          "format": "yyyy-MM-dd||epoch_millis||date_time||ordinal_date_time||ordinal_date_time_no_millis||yyyy-MM-dd'THH:mm:ssP"
+          "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
         },
         "is_public": {
           "type": "boolean"
         },
         "observation_date": {
           "type": "date",
-          "format": "yyyy-MM-dd||epoch_millis||date_time||ordinal_date_time||ordinal_date_time_no_millis"
+          "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
         },
         "location_label": {
           "type": "text"

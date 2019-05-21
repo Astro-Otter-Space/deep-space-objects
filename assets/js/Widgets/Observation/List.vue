@@ -44,7 +44,6 @@
   let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
   let searchPlaceholder = document.querySelector('div[data-observations-list]').dataset.observationAutocomplete;
-  // let geojson = document.querySelector('div[data-observations-list]').dataset.geojson;
 
   export default {
     name: "App",

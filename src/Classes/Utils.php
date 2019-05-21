@@ -18,7 +18,7 @@ class Utils
 
     const IMG_DEFAULT = '/build/images/default.jpg';
 
-    const FORMAT_DATE_ES = DateTimeInterface::W3C;
+    const FORMAT_DATE_ES = DateTimeInterface::RFC3339;
 
     private static $catalogMapping = [
         'NG' => 'ngc',

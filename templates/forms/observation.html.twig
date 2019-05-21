@@ -84,35 +84,35 @@
     </div>
   </div>
 
-
   <div class="Form__group">
-    <div class="Form__element Form__element__1-2">
+    <div class="Form__element Form__element__one-item">
       {{ form_label(form.ocular) }}
       {{ form_widget(form.ocular) }}
       <div class="Form__input-error">
         {{ form_errors(form.ocular) }}
       </div>
     </div>
+  </div>
 
+  <h3 class="Dso__title">List</h3>
+  <div class="Form__group">
+    <div id="tags"></div>
+  </div>
+
+  <h3 class="Dso__title">Location</h3>
+  <div class="Form__group">
+    <div class="Form__element Form__element__1-2">
+      {{ form_label(form.locationLabel) }}
+      {{ form_widget(form.locationLabel) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.locationLabel) }}
+      </div>
+    </div>
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.observationDate) }}
       {{ form_widget(form.observationDate) }}
       <div class="Form__input-error">
         {{ form_errors(form.observationDate) }}
-      </div>
-    </div>
-  </div>
-
-  <h3 class="Dso__title">List</h3>
-
-
-  <h3 class="Dso__title">Location</h3>
-  <div class="Form__group">
-    <div class="Form__element__one-item">
-      {{ form_label(form.locationLabel) }}
-      {{ form_widget(form.locationLabel) }}
-      <div class="Form__input-error">
-        {{ form_errors(form.locationLabel) }}
       </div>
     </div>
   </div>
