@@ -100,8 +100,9 @@
       <tags-input
         element-id="dsoList"
         v-model="listDso"
-        typeahead="true"
+        :typeahead=true
         typeahead-style="badges"
+        v-on:keyup="getListDso"
       ></tags-input>
     </div>
   </div>

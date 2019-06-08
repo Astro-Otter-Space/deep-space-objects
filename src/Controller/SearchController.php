@@ -87,7 +87,7 @@ class  SearchController extends AbstractController
 
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-            $data = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
+            $data['dso'] = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
         }
 
         /** @var JsonResponse $response */

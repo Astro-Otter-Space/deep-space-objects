@@ -62,13 +62,10 @@ new Vue({
   },
   methods: {
     getListDso() {
-      axios.get('/_search_dso_observation')
+      axios.get('/_search_dso_observation', {params: {'q': this.listDso}})
         .then((data) => {
-          this.listDso = data.id;
+          this.listDso = data.dso;
         })
     }
-  },
-  mounted() {
-    this.getListDso();
   }
 });
