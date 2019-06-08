@@ -155,14 +155,21 @@ class DsoManager
 
     /**
      * @param $searchTerms
+     * @param null $typeReturn
+     *
      * @return mixed
      */
-    public function searchDsoByTerms($searchTerms)
+    public function searchDsoByTerms($searchTerms, $typeReturn = null)
     {
         $resultDso = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
 
-        return call_user_func("array_merge", array_map(function(Dso $dso) {
-            return $this->buildSearchListDso($dso);
+        return call_user_func("array_merge", array_map(function(Dso $dso) use ($typeReturn) {
+            if ('id' === $typeReturn) {
+                return $dso->getId();
+            } else {
+                return $this->buildSearchListDso($dso);
+            }
+
         }, $resultDso));
     }
 

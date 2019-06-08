@@ -730,6 +730,13 @@
     "@types/uglify-js" "*"
     source-map "^0.6.0"
 
+"@voerro/vue-tagsinput@^1.11.2":
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/@voerro/vue-tagsinput/-/vue-tagsinput-1.11.2.tgz#61bc701b198c87d0b2e102c1425954068818b6fd"
+  integrity sha512-+vcAELV/egIYTEWqTCUDiLMNs5AcXUX4bwhbJwhFPr8No6WqNNcDPzfhl04tHj6ljOP30NFlSpCDnxPZgN+mmA==
+  dependencies:
+    vue "^2.5.0"
+
 "@vue/component-compiler-utils@^2.0.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@vue/component-compiler-utils/-/component-compiler-utils-2.3.0.tgz#4f580f1b28fc7685859d87ea0e92a1c0271c93da"
@@ -6951,7 +6958,7 @@ vue@2.*.*:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.20.tgz#79fff9ccaa10cc37e7a7239b4c7adfac94df81ba"
   integrity sha512-kVLZi8RWOk8qwAt+a0bVDy9VV5Zzcnj0fLCMyKLx1dmEBjqmYJYRWHvPwiypiJBtJkdmROy5NP5hyDqTdfBcvQ==
 
-vue@^2.2.4, vue@^2.5.17:
+vue@^2.2.4, vue@^2.5.0, vue@^2.5.17:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==

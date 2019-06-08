@@ -1,8 +1,11 @@
 import Vue from 'vue';
+import axios from 'axios';
 import { datePicker } from './flatpicker';
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
+import VoerroTagsInput from '@voerro/vue-tagsinput';
+Vue.component('tags-input', VoerroTagsInput);
 
 datePicker();
 
@@ -13,6 +16,9 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+/**
+ * LEAFLET
+ */
 new Vue({
   el: '#map',
   components: { LMap, LTileLayer, LMarker, LGeoJson },
@@ -39,5 +45,30 @@ new Vue({
     removeMarker(index) {
       this.markers.splice(index, 1);
     }
+  }
+});
+
+/**
+ * TAGS
+ */
+// Todo : get symfony route automatically
+new Vue({
+  el: '#elTags',
+  components: {VoerroTagsInput},
+  data() {
+    return {
+      listDso: []
+    }
+  },
+  methods: {
+    getListDso() {
+      axios.get('/_search_dso_observation')
+        .then((data) => {
+          this.listDso = data.id;
+        })
+    }
+  },
+  mounted() {
+    this.getListDso();
   }
 });

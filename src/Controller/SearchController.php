@@ -18,6 +18,28 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class  SearchController extends AbstractController
 {
+    /** @var DsoManager  */
+    private $dsoManager;
+
+    /** @var ConstellationManager  */
+    private $constellationManager;
+
+    /** @var ObservationManager  */
+    private $observationManager;
+
+    /**
+     * SearchController constructor.
+     *
+     * @param DsoManager $dsoManager
+     * @param ConstellationManager $constellationManager
+     * @param ObservationManager $observationManager
+     */
+    public function __construct(DsoManager $dsoManager, ConstellationManager $constellationManager, ObservationManager $observationManager)
+    {
+        $this->dsoManager = $dsoManager;
+        $this->constellationManager = $constellationManager;
+        $this->observationManager = $observationManager;
+    }
 
     /**
      * @Route(
@@ -27,18 +49,17 @@ class  SearchController extends AbstractController
      * )
      *
      * @param Request $request
-     * @param DsoManager $dsoManager
-     * @param ConstellationManager $constellationManager
+     *
      * @return JsonResponse
      */
-    public function searchAjax(Request $request, DsoManager $dsoManager, ConstellationManager $constellationManager)
+    public function searchAjax(Request $request)
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-            $dataDso = $dsoManager->searchDsoByTerms($searchTerm);
+            $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm);
 
-            $dataConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
+            $dataConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
             $data = array_merge($dataDso, $dataConstellation);
         }
 
@@ -49,6 +70,32 @@ class  SearchController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route(
+     *     "/_search_dso_observation",
+     *     options={"expose"=true},
+     *     name="search_dso_observation"
+     * )
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse $data
+     */
+    public function searchDsoForObservation(Request $request)
+    {
+        $data = [];
+
+        if ($request->query->has('q')) {
+            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
+            $data = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
+        }
+
+        /** @var JsonResponse $response */
+        $response = new JsonResponse($data, Response::HTTP_OK);
+        $response->setPublic()->setSharedMaxAge(0);
+
+        return $response;
+    }
 
     /**
      * @Route(
@@ -57,16 +104,15 @@ class  SearchController extends AbstractController
      *     options={"exposes"=true}
      * )
      * @param Request $request
-     * @param ObservationManager $observationManager
      *
      * @return JsonResponse
      */
-    public function searchObservationAjax(Request $request, ObservationManager $observationManager)
+    public function searchObservationAjax(Request $request)
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-            $data = $observationManager->buildSearchObservationByTerms($searchTerm);
+            $data = $this->observationManager->buildSearchObservationByTerms($searchTerm);
         }
 
         /** @var JsonResponse $response */
