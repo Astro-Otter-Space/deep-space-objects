@@ -128,7 +128,13 @@ class ObservationController extends AbstractController
     /**
      * Add observation page
      *
-     * @Route("/add-observation", name="add_observation")
+     * @Route({
+     *  "en": "/add-observation",
+     *  "fr": "/ajouter-observation",
+     *  "es": "/add-observation",
+     *  "pt": "/add-observation",
+     *  "de": "/add-observation"
+     * }, name="add_observation")
      * @param Request $request
      *
      * @return Response

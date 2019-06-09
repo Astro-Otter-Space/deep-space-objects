@@ -32,16 +32,16 @@ class DsoRepository extends AbstractRepository
     ];
 
     private static $listAggregates = [
-        'type' => [
-            'field' => 'data.type.keyword',
+        'constellation' => [
+            'field' => 'data.const_id.keyword',
             'size' => 100
         ],
         'catalog' => [
             'field' => 'catalog.keyword',
             'size' => 100
         ],
-        'constellation' => [
-            'field' => 'data.const_id.keyword',
+        'type' => [
+            'field' => 'data.type.keyword',
             'size' => 100
         ]
     ];

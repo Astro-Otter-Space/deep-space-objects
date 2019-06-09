@@ -50,6 +50,7 @@ new Vue({
 
 /**
  * TAGS
+ * Waiting for https://github.com/voerro/vue-tagsinput/pull/46
  */
 // Todo : get symfony route automatically
 new Vue({
@@ -67,5 +68,8 @@ new Vue({
           this.listDso = data.dso;
         })
     }
+  },
+  created() {
+    this.getListDso()
   }
 });
