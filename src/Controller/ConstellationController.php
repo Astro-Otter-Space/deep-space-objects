@@ -82,7 +82,7 @@ class ConstellationController extends AbstractController
         $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
 
         $constellation->setListDso($listDso);
-        $result['list_dso'] = (0 < $listDso->getIterator()->count()) ?? $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
+        $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
 
         // List types of DSO for map legend
         if (0 < $listDso->getIterator()->count()) {
@@ -94,6 +94,19 @@ class ConstellationController extends AbstractController
         }
 
         $result['list_types'] = $listTypes ?? [];
+        $result['list_types_filters'] = array_merge(
+            [
+                [
+                    'value' => 1,
+                    'label' => $this->translatorInterface->trans('hem.all')
+                ]
+            ], array_map(function($key, $value) {
+            return [
+                'value' => $key,
+                'label' => $value
+            ];
+        }, array_keys($listTypes), $listTypes));
+
 
         // GeoJson for display dso on map
         $listDsoFeatures = array_map(function(Dso $dso) {

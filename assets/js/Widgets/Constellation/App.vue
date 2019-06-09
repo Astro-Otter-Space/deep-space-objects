@@ -21,7 +21,8 @@
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <cards-grid
             :items="itemsDso"
-            :show-controls="false"
+            :show-controls="true"
+            :list-controls="controls"
           >
           </cards-grid>
         </div>
@@ -64,6 +65,7 @@
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
   let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
   let legendMap = JSON.parse(document.querySelector('div[data-const-widget]').dataset.legendMap);
+  let listFilter = JSON.parse(document.querySelector('div[data-const-widget]').dataset.filter);
 
   export default {
     name: "App",
@@ -81,7 +83,8 @@
         linkDownload: linkDownload,
         titleMap: titleMap,
         legendMap: legendMap, //Object.keys(legendMap).map((key) => legendMap[key]),
-        listColors: color
+        listColors: color,
+        controls: listFilter
       }
     }
   }

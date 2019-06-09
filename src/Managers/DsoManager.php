@@ -148,7 +148,7 @@ class DsoManager
                 $cacheUtils->saveItem($idCover, serialize($imgUrl));
             }
 
-            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl, 'user' => $astrobinUser]);
+            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl, 'user' => $astrobinUser, 'filter' => $dsoChild->getType()]);
         }, iterator_to_array($listDso->getIterator()));
     }
 
