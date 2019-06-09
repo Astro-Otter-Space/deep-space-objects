@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\Constellation;
 use App\Entity\Dso;
 use App\Entity\ListDso;
@@ -29,6 +30,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ConstellationController extends AbstractController
 {
+
+    use DsoTrait;
+
     /** @var ConstellationManager  */
     private $constellationManager;
     /** @var DsoManager  */
@@ -85,27 +89,10 @@ class ConstellationController extends AbstractController
         $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
 
         // List types of DSO for map legend
-        if (0 < $listDso->getIterator()->count()) {
-            $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) {
-                return [$dso->getType() => $this->translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
-            }, iterator_to_array($listDso)));
-
-            asort($listTypes);
-        }
-
-        $result['list_types'] = $listTypes ?? [];
-        $result['list_types_filters'] = array_merge(
-            [
-                [
-                    'value' => 1,
-                    'label' => $this->translatorInterface->trans('hem.all')
-                ]
-            ], array_map(function($key, $value) {
-            return [
-                'value' => $key,
-                'label' => $value
-            ];
-        }, array_keys($listTypes), $listTypes));
+        $result['list_types'] = call_user_func_array("array_merge", array_map(function ($data) {
+            return [$data['value'] => $data['label']];
+        }, $this->buildFilters($listDso)));
+        $result['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
 
         // GeoJson for display dso on map

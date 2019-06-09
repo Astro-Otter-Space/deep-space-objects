@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\AbstractEntity;
 use App\Entity\Dso;
+use App\Entity\ListDso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Astrobin\Exceptions\WsResponseException;
@@ -28,6 +30,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class DsoController extends AbstractController
 {
     const DEFAULT_PAGE = 1;
+
+    use DsoTrait;
 
     /** @var CacheInterface  */
     private $cacheUtil;
@@ -90,7 +94,11 @@ class DsoController extends AbstractController
             $params['imgCoverUser'] = $dso->getAstrobinUser();
 
             // List of Dso from same constellation
-            $params['dso_by_const'] = $this->dsoManager->getListDsoFromConst($dso, 20);
+            /** @var ListDso $listDso */
+            $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
+            $params['dso_by_const'] = $this->dsoManager->buildListDso($listDso);
+
+            $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map
             $params['geojsonDso'] = [

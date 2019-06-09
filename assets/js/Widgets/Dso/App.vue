@@ -66,7 +66,8 @@
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3 class="Dso__title">{{ titleConst }}</h3>
           <cards-grid
-            :show-controls="false"
+            :show-controls="true"
+            :list-controls="filters"
             :items="itemsDso"
           >
           </cards-grid>
@@ -103,6 +104,7 @@
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
   let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
   let dsoList = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dsoConst);
+  let filters = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.filter);
 
   export default {
     name: "App",
@@ -129,7 +131,8 @@
         urlShare: document.querySelector("link[rel='canonical']").href,
         descShare: "",
         astrobinMsg: astrobinMsg,
-        itemsDso: dsoList
+        itemsDso: dsoList,
+        filters: filters
       }
     },
     // TODO : better way

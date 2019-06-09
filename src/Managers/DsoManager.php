@@ -107,15 +107,13 @@ class DsoManager
      *
      * @param Dso $dso
      * @param $limit
-     * @return array
+     * @return ListDso
      * @throws \ReflectionException
      */
     public function getListDsoFromConst(Dso $dso, $limit)
     {
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
-
-        return $this->buildListDso($listDso);
+        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
     }
 
     /**
