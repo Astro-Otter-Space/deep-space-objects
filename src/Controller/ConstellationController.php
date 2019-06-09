@@ -82,14 +82,18 @@ class ConstellationController extends AbstractController
         $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null,20);
 
         $constellation->setListDso($listDso);
-        $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso());
+        $result['list_dso'] = (0 < $listDso->getIterator()->count()) ?? $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
 
         // List types of DSO for map legend
-        $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) {
-            return [$dso->getType() => $this->translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
-        }, iterator_to_array($listDso)));
-        asort($listTypes);
-        $result['list_types'] = $listTypes;
+        if (0 < $listDso->getIterator()->count()) {
+            $listTypes = call_user_func_array("array_merge", array_map(function (Dso $dso) {
+                return [$dso->getType() => $this->translatorInterface->trans(sprintf('type.%s', $dso->getType()))];
+            }, iterator_to_array($listDso)));
+
+            asort($listTypes);
+        }
+
+        $result['list_types'] = $listTypes ?? [];
 
         // GeoJson for display dso on map
         $listDsoFeatures = array_map(function(Dso $dso) {
@@ -106,7 +110,7 @@ class ConstellationController extends AbstractController
 
         // Link to download map
         $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
-        $result['geojsonDso'] = $geoJsonDso;
+        $result['geojsonDso'] = $geoJsonDso ?? null;
         $result['centerMap'] = $constellation->getGeometry()['coordinates'];
 
         /** @var Response $response */
