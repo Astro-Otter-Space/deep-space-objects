@@ -286,7 +286,7 @@ class DsoController extends AbstractController
         // Params
         $result['list_dso'] = $this->dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregations;
-        $result['nb_items'] = $nbItems;
+        $result['nb_items'] = (int)$nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = $nbPages = ceil($nbItems/DsoRepository::SIZE);
 

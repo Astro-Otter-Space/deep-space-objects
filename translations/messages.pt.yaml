@@ -46,6 +46,10 @@ catalog.mkw: Minkowski catalog
 catalog.mzl: Menzel catalog
 catalog.biu: Biurakan catalog
 catalog.boc: Bochum catalog
+magnitude.low: From 0 to 5
+magnitude.average: From 5 to 10
+magnitude.high: From 10 to 15
+magnitude.hard: 15 and more
 # Lang:
 fr: Francês
 en: Inglês (UK)
@@ -121,7 +125,7 @@ range.inf: Less than %to%
 range.between: Between %from% to %to%
 range.sup: More than %from%
 filterBy: Filtering by
-nbResults: "%count% result found|]1,Inf[%count% results found"
+nbResults: "%count% result found|%count% results found"
 # Type DSO
 type.gg: Aglomerado de galáxias
 type.g: Galáxia genérica

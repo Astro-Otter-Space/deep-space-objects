@@ -46,6 +46,10 @@ catalog.mkw: Catalogue Minkowski
 catalog.mzl: Catalogue de Menzel
 catalog.biu: Catalogue Biurakan
 catalog.boc: Catalogue Bochum
+magnitude.low: De 0 à 5
+magnitude.average: De 5 à 10
+magnitude.high: De 10 à 15
+magnitude.hard: Plus de 15
 # Lang:
 fr: Français
 en: Anglais (UK)
@@ -121,7 +125,7 @@ range.inf: Moins de %to%
 range.between: Entre %from% et %to%
 range.sup: Plus de %from%
 filterBy: Filtrer par
-nbResults: "%count% résultat trouvé|]1,Inf[%count% résultats trouvés"
+nbResults: "%count% résultat trouvé|%count% résultats trouvés"
 # Type DSO
 type.gg: Amas de galaxies
 type.g: Galaxie générique

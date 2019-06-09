@@ -7,6 +7,7 @@ use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Managers\DsoManager;
 use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\Range;
 use Elastica\Aggregation\Terms;
 use Elastica\Client;
 use Elastica\Document;
@@ -45,6 +46,18 @@ class DsoRepository extends AbstractRepository
         ]
     ];
 
+    private static $listAggregatesRange = [
+        'magnitude' => [
+            'field' => 'data.mag',
+            'ranges' => [
+                ['to' => 5, 'key' => 'low'],
+                ['from' => 5, 'to' => 10, 'key' => 'average'],
+                ['from' => 10, 'to' => 15, 'key' => 'high'],
+                ['from' => 15, 'key' => 'hard']
+            ]
+        ]
+    ];
+
     const INDEX_NAME = 'deepspaceobjects';
 
 
@@ -57,7 +70,7 @@ class DsoRepository extends AbstractRepository
     public function getListAggregates($onlyKeys = false)
     {
         if ($onlyKeys) {
-            return array_keys(self::$listAggregates);
+            return array_merge(array_keys(self::$listAggregates), array_keys(self::$listAggregatesRange));
         } else {
             return self::$listAggregates;
         }
@@ -175,6 +188,7 @@ class DsoRepository extends AbstractRepository
         /** @var Query $query */
         $query = new Query();
 
+        // BUILD FILTERS
         if (0 < count($filters)) {
             /** @var Query\BoolQuery $query */
             $boolQuery = new Query\BoolQuery();
@@ -183,13 +197,28 @@ class DsoRepository extends AbstractRepository
             foreach ($filters as $type => $val) {
                 /** @var Query\Term $mustQuery */
                 $mustQuery = new Query\Term();
-                $field = self::$listAggregates[$type]['field'];
 
-                // truc à la con, à modifer ds les données sources
-                $val = ("constellation" === $type && $val !== Utils::UNASSIGNED) ? ucfirst($val): $val;
-                $mustQuery->setTerm($field, $val);
+                /** @var Query\Range $rangeQuery */
+                $rangeQuery = new Query\Range();
 
-                $boolQuery->addMust($mustQuery);
+                $field = ('magnitude' === $type) ? self::$listAggregatesRange[$type]['field'] : self::$listAggregates[$type]['field'];
+
+                if ('magnitude' === $type) {
+                    $keyRange = array_search($val , array_column(self::$listAggregatesRange[$type]['ranges'], 'key'));
+                    $range = self::$listAggregatesRange[$type]['ranges'][$keyRange];
+
+                    if (array_key_exists('to', $range)) $paramRange['lte'] =  $range['to'];
+                    if (array_key_exists('from', $range)) $paramRange['gte'] =  $range['from'];
+
+                    $rangeQuery->addField($field, $paramRange);
+
+                    $boolQuery->addMust($rangeQuery);
+                } else {
+                    // truc à la con, à modifer ds les données sources
+                    $val = ("constellation" === $type && $val !== Utils::UNASSIGNED) ? ucfirst($val): $val;
+                    $mustQuery->setTerm($field, $val);
+                    $boolQuery->addMust($mustQuery);
+                }
             }
 
             $query->setQuery($boolQuery);
@@ -215,6 +244,21 @@ class DsoRepository extends AbstractRepository
             $query->addAggregation($aggregation);
         });
 
+        // Aggregates range
+        array_walk(self::$listAggregatesRange, function ($tab, $type) use ($query){
+            /** @var Range $aggregateRange */
+            $aggregationRange = new Range($type);
+            $aggregationRange->setField($tab['field']);
+            foreach ($tab['ranges'] as $range) {
+                $from = $range['from'] ?? null;
+                $to = $range['to'] ?? null;
+                $key = $range['key'] ?? null;
+                $aggregationRange->addRange($from, $to, $key);
+            }
+
+            $query->addAggregation($aggregationRange);
+        });
+
 
         /** @var Search $search */
         $search = new Search($this->client);
@@ -233,6 +277,11 @@ class DsoRepository extends AbstractRepository
                 return [$item['key'] => $item['doc_count']];
             }, $aggregations['buckets']);
         }
+
+        $listSort = $this->getListAggregates(true);
+        uksort($listAggregations, function ($k1, $k2) use ($listSort) {
+            return ((array_search($k1, $listSort) > array_search($k2, $listSort)) ? 1 : -1);
+        });
 
         return [$listDso, $listAggregations, $nbItems];
     }
