@@ -73,7 +73,7 @@ class DsoController extends AbstractController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function show(Request $request, string $id)
+    public function show(Request $request, string $id): Response
     {
         $params = [];
 
@@ -174,7 +174,7 @@ class DsoController extends AbstractController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
-    public function geoJson(string $id)
+    public function geoJson(string $id): JsonResponse
     {
         /** @var Dso $dso */
         $dso = $this->dsoManager->buildDso($id);
@@ -204,7 +204,7 @@ class DsoController extends AbstractController
      * @return Response
      * @throws \ReflectionException
      */
-    public function catalog(Request $request)
+    public function catalog(Request $request): Response
     {
         $page = self::DEFAULT_PAGE;
         $from = DsoRepository::FROM;
