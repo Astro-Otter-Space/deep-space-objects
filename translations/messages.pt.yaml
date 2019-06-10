@@ -46,6 +46,22 @@ catalog.mkw: Minkowski catalog
 catalog.mzl: Menzel catalog
 catalog.biu: Biurakan catalog
 catalog.boc: Bochum catalog
+description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
+description.ngc:
+description.ic:
+description.ldn:
+description.lbn:
+description.sh:
+description.cr:
+description.sto:
+description.rcw:
+description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.
+description.abl: he Abell Catalog of Planetary Nebulae was created in 1966 by George O. Abell and was composed of 86 entries thought to be planetary nebulae.
+description.ugc:
+description.cld:
+description.dodz:
+description.lyn: Catalog of Open Cluster
+description.pis: New southern star clusters catalog
 magnitude.low: From 0 to 5
 magnitude.average: From 5 to 10
 magnitude.high: From 10 to 15
@@ -83,38 +99,6 @@ discoverYear: Year
 galery: Gallery
 # Vue list
 filteringList: Filtrar lista de itens por constelação, tipo e magnitude... e descobrir os mais lindos objetos celestes.
-list.messier: Lista dos objetos de Messier
-description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
-list.ngc: New General Catalog
-description.ngc:
-list.ic: Index Catalog
-description.ic:
-list.ldn: Lynds' Catalogue of Dark Nebulae
-description.ldn:
-list.lbn: Lynds' Catalogue of Bright Nebulae
-description.lbn:
-list.sh: Sharpless catalog
-description.sh:
-list.cr: Collinder catalog
-description.cr:
-list.sto : Stock open clusters
-description.sto:
-list.rcw: RCW catalog
-description.rcw:
-list.agc: Abell catalog of galaxies clusters
-description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.
-list.abl: Abell Catalog of Planetary Nebulae
-description.abl: he Abell Catalog of Planetary Nebulae was created in 1966 by George O. Abell and was composed of 86 entries thought to be planetary nebulae.
-list.ugc: Uppsala General Catalog
-description.ugc:
-list.cld: Catálogo Caldwell
-description.cld:
-list.dodz: Dolidze-Dzimselejvil catalog
-description.dodz:
-list.lyn: Lynga catalog
-description.lyn: Catalog of Open Cluster
-list.pis: Pismis catalog
-description.pis: New southern star clusters catalog
 listOrderAsc: Ordem crescente
 listOrderDesc: Ordem decrescente
 listMagnitudeAsc: Magnitude miníma
@@ -152,19 +136,19 @@ const.unassigned: unassigned
 constellation.and: Andrômeda
 constellation.ant:
 constellation.aps:
-constellation.aql:
+constellation.aql: Aquila
 constellation.aqr: Aquário
-constellation.ara:
-constellation.ari:
+constellation.ara: Altar
+constellation.ari: Carneiro
 constellation.aur: Auriga
-constellation.boo:
+constellation.boo: Boieiro
 constellation.cae:
 constellation.cam:
 constellation.cap: Capricórnio
 constellation.car:
 constellation.cas: Cassiopeia
 constellation.cen:
-constellation.cep:
+constellation.cep: COUCOU-TEST
 constellation.cet: Baleia
 constellation.cha:
 constellation.cir:
@@ -237,39 +221,6 @@ constellation.vel:
 constellation.vir: Virgem
 constellation.vol:
 constellation.vul: Raposa
-# Messier name (from english traduction):
-m1.label: Nebulosa do Caranguejo
-m4.label: Nebulosa do Olho de gato
-m6.label: Aglomerado da Borboleta
-m7.label: Aglomerado de Ptolomeu
-m8.label: Nebulosa Laguna
-m11.label: Aglomerado do Pato Selvagem
-m13.label: Grande Aglomerado Globular de Hércules
-m15.label: Aglomerado globular de Pégaso
-m16.label: Nebulosa da Águia
-m17.label: Nebulosa Ômega
-m18.label: Cisne Negro
-m20.label: Nebulosa Trífida
-m22.label: Nuvem Estelar de Sagitário
-m27.label: Nebulosa do Haltere
-m31.label: Galáxia de Andrômeda
-m33.label: Galáxia do Triângulo
-m42.label: Nebulosa de Órion
-m43.label: Nebulosa De Mairan
-m44.label: Presépio
-m45.label: Plêiades
-m51.label: Galáxia do Rodamoinho
-m57.label: Nebulosa do Anel
-m63.label: Galáxia do Girassol
-m64.label: Galáxia Olho Negro
-m76.label: Pequena Nebulosa do Haltere
-m81.label: Galáxia de Bode
-m82.label: Galáxia do Charuto
-m83.label: Galáxia Cata-vento do Sul
-m97.label: Nebulosa da Coruja
-m101.label: Galáxia Cata-vento
-m102.label: Galáxia do Fuso
-m104.label: Galáxia do Sombreiro
 # Observation : setup page
 instrument: Instrument
 diameter: Diameter (mm)

@@ -36,7 +36,7 @@ catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.ugc: Uppsala General Catalog
 catalog.dodz: Dolidze-Dzimselejvil catalog
 catalog.pgc: Catalogue of Principal Galaxies
-catalog.cld: Caldwell catalogue
+catalog.cld: Caldwell catalog
 catalog.unassigned: Unassigned
 catalog.ddo: David Dunlap Observatory Catalogue
 catalog.vdb: Catalog van den Bergh
@@ -46,6 +46,22 @@ catalog.mkw: Minkowski catalog
 catalog.mzl: Menzel catalog
 catalog.biu: Biurakan catalog
 catalog.boc: Bochum catalog
+description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
+description.ngc: ""
+description.ic: ""
+description.ldn: ""
+description.lbn: ""
+description.sh: ""
+description.cr: ""
+description.sto: ""
+description.rcw: ""
+description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.
+description.abl: he Abell Catalog of Planetary Nebulae was created in 1966 by George O. Abell and was composed of 86 entries thought to be planetary nebulae.
+description.ugc: ""
+description.cld: Caldwell catalogue
+description.dodz: ""
+description.lyn: Catalog of Open Cluster
+description.pis: New southern star clusters catalog
 magnitude.low: From 0 to 5
 magnitude.average: From 5 to 10
 magnitude.high: From 10 to 15
@@ -83,38 +99,6 @@ discoverYear: Year
 galery: Gallery
 # Vue list
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
-list.messier: List of Messier objects
-description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
-list.ngc: New General Catalog
-description.ngc:
-list.ic: Index Catalog
-description.ic:
-list.ldn: Lynds' Catalogue of Dark Nebulae
-description.ldn:
-list.lbn: Lynds' Catalogue of Bright Nebulae
-description.lbn:
-list.sh: Sharpless catalog
-description.sh:
-list.cr: Collinder catalog
-description.cr:
-list.sto : Stock open clusters
-description.sto:
-list.rcw: RCW catalog
-description.rcw:
-list.agc: Abell catalog of galaxies clusters
-description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.
-list.abl: Abell Catalog of Planetary Nebulae
-description.abl: he Abell Catalog of Planetary Nebulae was created in 1966 by George O. Abell and was composed of 86 entries thought to be planetary nebulae.
-list.ugc: Uppsala General Catalog
-description.ugc:
-list.cld: Catalogue de Caldwell
-description.cld: Caldwell catalogue
-list.dodz: Dolidze-Dzimselejvil catalog
-description.dodz:
-list.lyn: Lynga catalog
-description.lyn: Catalog of Open Cluster
-list.pis: Pismis catalog
-description.pis: New southern star clusters catalog
 filters: Filters
 listOrderAsc: Sort ascendant
 listOrderDesc: Sort descendant
@@ -237,39 +221,6 @@ constellation.vel: Vela
 constellation.vir: Virgo
 constellation.vol: Volans
 constellation.vul: Vulpecula
-# Messier name (no translation for english):
-m1.label: Crab Nebula
-m4.label: Cat's eye
-m6.label: Butterfly Cluster
-m7.label: Ptolemy´s Cluster
-m8.label: Nébuleuse de la lagune
-m11.label: Wild Duck Cluster
-m13.label: Great Hercules Cluster
-m15.label: Nuage de Pégase
-m16.label: Eagle Nebula
-m17.label: Omega Nebula
-m18.label: Black swan
-m20.label: Trifid Nebula
-m22.label: Saggitarius cluster
-m27.label: Dumbbell Nebula
-m31.label: Andromeda
-m33.label: Galaxie du Triangle
-m42.label: Orion Nebula
-m43.label: Mairan nebula
-m44.label: Praesepe
-m45.label: Pleiades
-m51.label: Whirlpool
-m57.label: Ring nebula
-m63.label: Sunflower Galaxy
-m64.label: Blackeye Galaxy
-m76.label: Little Dumbbell Nebula
-m81.label: Bode´s Galaxy
-m82.label: Cigar Galaxy
-m83.label: Southern Pinwheel
-m97.label: Owl Nebula
-m101.label: Pinwheel
-m102.label: Spindle
-m104.label: Sombrero
 # Observation : setup page
 instrument: Instrument
 diameter: Diameter (mm)

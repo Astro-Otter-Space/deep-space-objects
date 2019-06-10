@@ -46,6 +46,22 @@ catalog.mkw: Catalogue Minkowski
 catalog.mzl: Catalogue de Menzel
 catalog.biu: Catalogue Biurakan
 catalog.boc: Catalogue Bochum
+description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
+description.ngc: Compilation de 7840 objets découverts par divers observateurs. Pour les astronomes amateurs il s'agit d'une base de données de référence car elle englobe tout les plus beaux objets visibles dans le ciel, y compris ceux du catalogue Messier.
+description.ic: Catalogues IC1 et 2 complémentaires du NGC. Il englobe 5387 objets compilés par Jean-Louis Dreyer entre 1888 et 1907.
+description.ldn: Catalogue de nébuleuses lumineuses publié par l'astronome américain Beverly T. Lynds en 1962. Il s'agit d'un astronome de l'Observatoire Stewart affilié à l'Université d'Arizona.
+description.lbn: ""
+description.sh: Catalogue répertoriant 313 nébuleuses diffuses (régions HII) publié par l'astronome américain Stewart Sharpless en 1953 et finalisé dans une seconde version en 1959.
+description.cr: Catalogue répertoriant 471 amas d'étoiles édité par l'astronome suédois Per Collinder en 1931.
+description.sto:
+description.rcw: Catalogue réalisé depuis le Mont Stromlo en Australie par les astronomes Alex Rodgers, Colin Campbell, and John Whiteoak. Il fut publié en 1960 et contient 182 objets.
+description.agc: Catalogue rassemblant 4073 riches amas galactiques découverts par l'astronome américain Georges Abell.
+description.abl: Catalogue rassemblant 86 nébuleuses planétaires découvertes par l'astronome américain Georges Abell en étudiant les plaques du POSS entre 1955 et 1966.
+description.ugc: Edité par l'astronome suédois Peter Nilson en 1973, il englobe 12921 objets situés dans le ciel boréal.
+description.cld: ""
+description.dodz: Catalogue des astronomes de Georgie Madona V. Dolidze et G. Dzinselejvili comportant 11 objets. Il fut publié en 1966.
+description.lyn: Catalogue d'amas ouvert
+description.pis: New southern star clusters catalog
 magnitude.low: De 0 à 5
 magnitude.average: De 5 à 10
 magnitude.high: De 10 à 15
@@ -83,38 +99,6 @@ discoverYear: Année découverte
 galery: Galerie d'images
 # Vue list
 filteringList: Filtrer la liste par constellations, type de catalogues, type d'objets, magnitude...et découvrez les plus beaux objets du ciel.
-list.messier: Liste des objects de Messier
-description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
-list.ngc: Liste du "New General Catalog"
-description.ngc: Compilation de 7840 objets découverts par divers observateurs. Pour les astronomes amateurs il s'agit d'une base de données de référence car elle englobe tout les plus beaux objets visibles dans le ciel, y compris ceux du catalogue Messier.
-list.ic: Liste du "Index Catalog"
-description.ic: Catalogues IC1 et 2 complémentaires du NGC. Il englobe 5387 objets compilés par Jean-Louis Dreyer entre 1888 et 1907.
-list.ldn: Catlogue de Lynds des Nébuleuses sombres
-description.ldn: Catalogue de nébuleuses lumineuses publié par l'astronome américain Beverly T. Lynds en 1962. Il s'agit d'un astronome de l'Observatoire Stewart affilié à l'Université d'Arizona.
-list.lbn: Catlogue de Lynds des Nébuleuses lumineuses
-description.lbn:
-list.sh: Catalogue Sharpless
-description.sh: Catalogue répertoriant 313 nébuleuses diffuses (régions HII) publié par l'astronome américain Stewart Sharpless en 1953 et finalisé dans une seconde version en 1959.
-list.cr: Catalogue Collinder
-description.cr: Catalogue répertoriant 471 amas d'étoiles édité par l'astronome suédois Per Collinder en 1931.
-list.sto : Stock open clusters
-description.sto:
-list.rcw: Catalogue RCW
-description.rcw: Catalogue réalisé depuis le Mont Stromlo en Australie par les astronomes Alex Rodgers, Colin Campbell, and John Whiteoak. Il fut publié en 1960 et contient 182 objets.
-list.agc: Catalogue Abell des amas de galaxies
-description.agc: Catalogue rassemblant 4073 riches amas galactiques découverts par l'astronome américain Georges Abell.
-list.abl: Catalogue Abell des nébuleuses planétaires
-description.abl: Catalogue rassemblant 86 nébuleuses planétaires découvertes par l'astronome américain Georges Abell en étudiant les plaques du POSS entre 1955 et 1966.
-list.ugc: Catalogue UGC
-description.ugc: Edité par l'astronome suédois Peter Nilson en 1973, il englobe 12921 objets situés dans le ciel boréal.
-list.cld: Catalogue de Caldwell
-description.cld:
-list.dodz: Catalogue Dolidze-Dzimselejvili
-description.dodz: Catalogue des astronomes de Georgie Madona V. Dolidze et G. Dzinselejvili comportant 11 objets. Il fut publié en 1966.
-list.lyn: Catalogue Lynga
-description.lyn: Catalogue d'amas ouvert
-list.pis: Pismis catalog
-description.pis: New southern star clusters catalog
 filters: Filtres
 listOrderAsc: Tri ascendant
 listOrderDesc: Tri descendant
@@ -237,39 +221,6 @@ constellation.vel: Voiles
 constellation.vir: Vièrge
 constellation.vol: Poisson volant
 constellation.vul: Le Petit Renard
-# Messier name (from english traduction):
-m1.label: Nébuleuse du crabe
-m4.label: Oeil du chat
-m6.label: Amas du papillon
-m7.label: Amas de Ptolémée
-m8.label: Nébuleuse de la lagune
-m11.label: Amas du canard sauvage
-m13.label: Grand amas d'Hercule
-m15.label: Nuage de Pégase
-m16.label: Nébuleuse de l'aigle
-m17.label: Nébuleuse Oméga
-m18.label: Le cygne noir
-m20.label: Nébuleuse Trifide
-m22.label: Amas du sagittaire
-m27.label: Nébuleuse de l'haltère
-m31.label: Galaxie d'Andromède
-m33.label: Galaxie du Triangle
-m42.label: Nébuleuse d'Orion
-m43.label: Nébuleuse de Mairan
-m44.label: Amas de la crèche
-m45.label: Amas des Pleiades
-m51.label: Galaxie du Tourbillon
-m57.label: Nébuleuse de l'anneau
-m63.label: Galaxie du tournesol
-m64.label: Galaxie de l'oeil noir
-m76.label: Nébuleuse du petit haltère
-m81.label: Galaxie de Bode
-m82.label: Galaxie du cigare
-m83.label: Moulinet du sud
-m97.label: Nébuleuse du hibou
-m101.label: Galaxie du moulinet
-m102.label: Galaxie du fuseau
-m104.label: Galaxie du sombrero
 # Observation : setup page
 instrument: Instrument
 diameter: Diamètre (mm)
