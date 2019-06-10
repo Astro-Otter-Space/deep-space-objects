@@ -178,13 +178,16 @@ class DsoRepository extends AbstractRepository
      *
      * @param $from
      * @param $filters
+     * @param int|null $to
      * @return array
      * @throws \ReflectionException
      */
-    public function getObjectsCatalogByFilters($from, $filters)
+    public function getObjectsCatalogByFilters($from = 0, $filters, $to = null)
     {
         $this->client->getIndex(self::INDEX_NAME);
+        $size = (is_null($to)) ? parent::SIZE : $to;
         $nbItems = 0;
+
         /** @var Query $query */
         $query = new Query();
 
@@ -225,7 +228,7 @@ class DsoRepository extends AbstractRepository
         }
 
         // From and size
-        $query->setFrom($from)->setSize(parent::SIZE);
+        $query->setFrom($from)->setSize($size);
 
         // Sort
         $query->addSort([

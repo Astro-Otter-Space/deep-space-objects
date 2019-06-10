@@ -20,6 +20,9 @@ class Utils
 
     const FORMAT_DATE_ES = DateTimeInterface::RFC3339;
 
+    const CSV_DELIMITER = ';';
+    const CSV_ENCLOSURE = '"';
+
     private static $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',

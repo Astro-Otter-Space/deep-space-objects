@@ -29,6 +29,7 @@ abstract class AbstractRepository
 
     const FROM = 0;
     const SIZE = 20;
+    const MAX_SIZE = 9999;
     const SORT_ASC = 'asc';
     const SORT_DESC = 'desc';
 

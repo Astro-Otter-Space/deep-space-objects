@@ -4,14 +4,20 @@ namespace App\Controller;
 
 use App\Classes\Utils;
 use App\Entity\Contact;
+use App\Entity\Dso;
 use App\Forms\ContactFormType;
 use App\Helpers\MailHelper;
+use App\Repository\DsoRepository;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class PageController
@@ -19,6 +25,24 @@ use Symfony\Component\Routing\Router;
  */
 class PageController extends AbstractController
 {
+
+    /** @var DsoRepository */
+    private $dsoRepository;
+
+    /** @var TranslatorInterface */
+    private $translatorInterface;
+
+    /**
+     * PageController constructor.
+     *
+     * @param DsoRepository $dsoRepository
+     * @param TranslatorInterface $translatorInterface
+     */
+    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    {
+        $this->dsoRepository = $dsoRepository;
+        $this->translatorInterface = $translatorInterface;
+    }
 
     /**
      * @Route({
@@ -93,4 +117,83 @@ class PageController extends AbstractController
         return $response;
     }
 
+
+    /**
+     * @Route({
+     *     "fr": "/telechargement-donnees",
+     *     "en": "/download-data",
+     *     "de": "/download-data",
+     *     "es": "/download-data",
+     *     "pt": "/download-data",
+     * }, name="download_data")
+     * @param Request $request
+     *
+     * @return StreamedResponse
+     * @throws \Exception
+     */
+    public function download(Request $request)
+    {
+        $nbItems = 0;
+        $data = $filters = $listAggregations = [];
+
+        $header = [
+            'id',
+            'desigs',
+            'type',
+            'constellation',
+            'magnitude',
+            'right_ascension',
+            'declination',
+            'distance'
+        ];
+
+        // Retrieve list filters
+        if (0 < $request->query->count()) {
+            $authorizedFilters = $this->dsoRepository->getListAggregates(true);
+
+            // Removed unauthorized keys
+            $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
+                return in_array($key, $authorizedFilters);
+            }, ARRAY_FILTER_USE_KEY);
+
+            // Sanitize data (todo : try better)
+            array_walk($filters, function (&$value, $key) {
+                $value = filter_var($value, FILTER_SANITIZE_STRING);
+            });
+        }
+
+        list($listDso, $aggregates, $nbItems) = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE);
+        $data = array_map(function(Dso $dso) {
+            return [
+                $dso->getId(),
+                implode(Dso::COMA_GLUE, array_filter($dso->getDesigs())),
+                $this->translatorInterface->trans(sprintf('type.%s', $dso->getType())),
+                $dso->getConstId(),
+                $dso->getMag(),
+                $dso->getRa(),
+                $dso->getDec(),
+                $dso->getDistAl()
+            ];
+        }, iterator_to_array($listDso));
+
+        $data = array_merge([$header], $data);
+
+        /** @var \DateTime $now */
+        $now = new \DateTime();
+        $fileName = sprintf('dso_data_%s.csv', $now->format('Ymd_His'));
+
+        /** @var StreamedResponse $response */
+        $response = new StreamedResponse(function() use ($data) {
+            $handle = fopen('php://output', 'r+');
+            foreach ($data as $r) {
+                fputcsv($handle, $r, Utils::CSV_DELIMITER, Utils::CSV_ENCLOSURE);
+            }
+            fclose($handle);
+        });
+
+        $response->headers->set('content-type', 'application/force-download');
+        $response->headers->set('Content-Disposition', sprintf('attachement; filename="%s"', $fileName));
+
+        return $response;
+    }
 }

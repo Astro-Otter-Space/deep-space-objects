@@ -14,6 +14,9 @@
           </h3>
 
           <ul v-if="listFilters.length" class="Filters__list">
+            <li class="Filters__badge">
+              <a v-bind:href="urlDownloadData" title="Download data"><svgicon name="file-download" width="20" height="20"></svgicon></a>
+            </li>
             <li v-for="filter in listFilters" class="Filters__badge">
               {{filter.label}}
               <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
@@ -60,6 +63,7 @@
   let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
   let showFacets = false;
   let pagination = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.pagination);
+  let urlDownloadData = "/download-data?type=pn";
 
   export default {
     name: "AppCatalog",
@@ -79,7 +83,8 @@
         listFilters: listFilters,
         listFacets: listFacets,
         showFacets: showFacets,
-        pagination: pagination
+        pagination: pagination,
+        urlDownloadData: urlDownloadData
       }
     },
     methods: {
