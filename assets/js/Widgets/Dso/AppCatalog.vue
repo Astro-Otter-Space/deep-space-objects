@@ -63,7 +63,7 @@
   let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
   let showFacets = false;
   let pagination = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.pagination);
-  let urlDownloadData = "/download-data?type=pn";
+  let urlDownloadData = document.querySelector(DATA_SELECTOR).dataset.download;
 
   export default {
     name: "AppCatalog",

@@ -137,14 +137,15 @@ class PageController extends AbstractController
         $data = $filters = $listAggregations = [];
 
         $header = [
-            'id',
-            'desigs',
-            'type',
-            'constellation',
-            'magnitude',
-            'right_ascension',
-            'declination',
-            'distance'
+            'Id',
+            $this->translatorInterface->trans('desigs'),
+            'Name',
+            $this->translatorInterface->trans('type'),
+            'Constellation',
+            $this->translatorInterface->trans('magnitude'),
+            $this->translatorInterface->trans('ra'),
+            $this->translatorInterface->trans('dec'),
+            $this->translatorInterface->trans('distAl')
         ];
 
         // Retrieve list filters
@@ -167,6 +168,7 @@ class PageController extends AbstractController
             return [
                 $dso->getId(),
                 implode(Dso::COMA_GLUE, array_filter($dso->getDesigs())),
+                $dso->getAlt(),
                 $this->translatorInterface->trans(sprintf('type.%s', $dso->getType())),
                 $dso->getConstId(),
                 $dso->getMag(),
@@ -180,7 +182,7 @@ class PageController extends AbstractController
 
         /** @var \DateTime $now */
         $now = new \DateTime();
-        $fileName = sprintf('dso_data_%s.csv', $now->format('Ymd_His'));
+        $fileName = sprintf('dso_data_%s_%s.csv', $request->getLocale(), $now->format('Ymd_His'));
 
         /** @var StreamedResponse $response */
         $response = new StreamedResponse(function() use ($data) {

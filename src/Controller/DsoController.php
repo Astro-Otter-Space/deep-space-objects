@@ -314,6 +314,8 @@ class DsoController extends AbstractController
             }
         }
 
+        $result['download_link'] = $router->generate('download_data', $queryAll);
+
         /** @var Response $response */
         $response = $this->render('pages/catalog.html.twig', $result);
         $response->setPublic();
