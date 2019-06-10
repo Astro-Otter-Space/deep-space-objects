@@ -114,7 +114,7 @@ nbResults: "%count% résultat trouvé|%count% résultats trouvés"
 type.gg: Amas de galaxies
 type.g: Galaxie générique
 type.s: Galaxie en spirale
-type.s0: Galaxie lenticculaire
+type.s0: Galaxie lenticulaire
 type.sd: Galaxie naine
 type.e: Galaxie elliptique
 type.i: Galaxie irrégulière
@@ -131,6 +131,7 @@ type.dn: Nébuleuse sombre
 type.pos: Asterism
 type.sc: Amas stellaires
 type.vn: Nébuleuse variable
+type.ga: Galaxie à anneau
 # Constellations
 constellation.unassigned: Non attribué
 constellation.and: Andromède

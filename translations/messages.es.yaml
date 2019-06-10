@@ -111,15 +111,15 @@ range.sup: More than %from%
 filterBy: Filtering by
 nbResults: "%count% result found|%count% results found"
 # Type DSO
-type.gg: Galaxy cluster
+type.gg: Aglomerado galáctico
 type.g:  Generic galaxy
-type.s:  Spiral galaxy
-type.s0: Lenticular galaxy
-type.sd: Dwarf galaxy
-type.e:  Elliptical galaxy
-type.i:  Irregular galaxy
-type.oc: Open cluster
-type.gc: Globular cluster
+type.s:  Galaxia espiral
+type.s0: Galaxia lenticular
+type.sd: Galaxia enana
+type.e:  Galaxia elíptica
+type.i:  Galaxia irregular
+type.oc: Cúmulo abierto
+type.gc: Cúmulo globular
 type.en: Emission nebula
 type.bn: Generic bright nebula
 type.bpn: Nebulosa bipolar
@@ -131,6 +131,7 @@ type.dn:  Dark nebula grey
 type.pos: Asterism
 type.sc: Star clusters
 type.vn: Nebulosa variable
+type.ga: Galaxie à anneau
 # Constellations
 constellation.unassigned: Unassigned
 constellation.and: Andromeda
