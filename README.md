@@ -85,10 +85,10 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - NGC : 7251/7840
 - UGC : 276/12921
 - PGC : 43/73197 
-- Sharpless : 126/313 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
-- RCW : 36/182
+- Sharpless : 127/313 http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
+- RCW : 38/182
 - Index Catalog : 206/5386 
-- Collinder : 87/471
+- Collinder : 90/471
 - Caldwell : 109/109
 - Abell galaxies : 26/4073
 - Abell planetary nebula: 86/86
@@ -104,6 +104,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 - Menzel: 3/3
 - Biurakan: 9/13
 - Bochum: 13/15
+- Melotte : http://www.dreistein.nl/dso.aspx?m=2&ca_56=on&qh=melotte
 
 Sources :
 - Wikipedia
