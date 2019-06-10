@@ -131,6 +131,7 @@ type.dn: Nebulosa escura
 type.pos: Asterismo
 type.sc: Aglomerado estelar
 type.vn:
+type.ga: Galaxie à anneau
 # Constellations
 const.unassigned: unassigned
 constellation.and: Andrômeda

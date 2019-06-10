@@ -120,15 +120,15 @@ type.e:  Galaxia elíptica
 type.i:  Galaxia irregular
 type.oc: Cúmulo abierto
 type.gc: Cúmulo globular
-type.en: Emission nebula
+type.en: Nebulosa de emisión
 type.bn: Generic bright nebula
 type.bpn: Nebulosa bipolar
-type.sfr: Starforming Nebula (with open cluster)
-type.rn: Reflection nebula
-type.pn: Planetary nebula
-type.snr: Supernova remnant
-type.dn:  Dark nebula grey
-type.pos: Asterism
+type.sfr: Nebulosa difusa
+type.rn: Nebulosa de reflexión
+type.pn: Nebulosa planetaria
+type.snr: Resto de supernova
+type.dn: Nebulosa oscura
+type.pos: Asterismo
 type.sc: Star clusters
 type.vn: Nebulosa variable
 type.ga: Galaxie à anneau

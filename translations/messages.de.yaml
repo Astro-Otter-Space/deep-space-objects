@@ -86,8 +86,8 @@ const_id: Sternbild|Sternbilder
 constId: Sternbild|Sternbilder
 dim: Size
 dimExp: Angular dimensions in arcminutes
-distAl: Distance (year-light)
-distPc: Distance (parsec)
+distAl: Entfernung (lichtjahr)
+distPc: Entfernung (parsec)
 imagesGall: Images gallery
 constImgGall: In the same constellation
 typeImgGall: Objects of type "%type%"
@@ -112,7 +112,7 @@ filterBy: Filtering by
 nbResults: "%count% result found|%count% results found"
 # Type DSO
 type.gg: Galaxienhaufen
-type.g:  Generic galaxy
+type.g:  Galaxie
 type.s:  Spiralgalaxie
 type.s0: Linsenförmige Galaxie
 type.sd: Zwerggalaxie
@@ -120,17 +120,18 @@ type.e:  Elliptische Galaxie
 type.i:  Irreguläre Galaxie
 type.oc: Offener Sternhaufen
 type.gc: Kugelsternhaufen
-type.en: Emission nebula
+type.en: Emissionsnebel
 type.bn: Generic bright nebula
 type.bpn: Bipolar nebula
-type.sfr: Starforming Nebula (with open cluster)
-type.rn: Reflection nebula
-type.pn: Planetary nebula
-type.snr: Supernova remnant
-type.dn: Dark nebula grey
-type.pos: Asterism
+type.sfr: Diffuser Nebel
+type.rn: Reflexionsnebel
+type.pn: Planetarischer Nebel
+type.snr: Supernovaüberrest
+type.dn: Dunkelwolke
+type.pos: Asterismus
 type.sc: Star clusters
 type.vn: Reflexionsnebel
+type.ga: Galaxie à anneau
 # Constellations
 constellation.unassigned: Unassigned
 constellation.and: Andromeda
