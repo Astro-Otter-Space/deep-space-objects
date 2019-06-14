@@ -81,32 +81,32 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 ```
 
 ### Status data
-| Catalog | Count data | Total data |
-| ------- | ---------- | ---------- |
-| Messier | 110 | 110 |
-| NGC | 7840 | 7251 |
-| Sharpless | 127 | 313 |
-| Index catalog | 206 | 5386 |
-| RCW | 38 | 182 |
-| Collinder | 90 | 471 |
-| Caldwell | 109 | 109 |
-| Abell galaxies | 26 | 4073 |
-| Abell planetary nebula | 86 | 86 |
-| UGC | 276 | 12921 |
-| PGC | 43 | 73197 |
-| LDN | 18 | ? |
-| LBN | 52 | ? |
-| Dolidze-Dzimselejvili | 11 | 11 |
-| David Dunlap | 3 | 343 |
-| vdB | 40 | 158 |
-| Sto (Stock Open Cluster) | 23 | 24 |
-| Lynga | 13 | 15 |
+| Catalog | Abbreviation | Count data | Total data |
+| ------- | ---------- | ---------- | ---------- |
+| Messier | messier | 110 | 110 |
+| New General Catalog | ngc | 7840 | 7251 |
+| Sharpless | sh |127 | 313 |
+| Index catalog | ic | 206 | 5386 |
+| RCW | rcw |38 | 182 |
+| Collinder | cr | 90 | 471 |
+| Caldwell | cld | 109 | 109 |
+| Abell galaxies | agc | 26 | 4073 |
+| Abell planetary nebula | abl |86 | 86 |
+| UGC | ugc | 276 | 12921 |
+| PGC | pgc |43 | 73197 |
+| LDN | ldn | 18 | ? |
+| LBN | lbn | 52 | ? |
+| Dolidze-Dzimselejvili | dodz | 11 | 11 |
+| David Dunlap | ddo | 3 | 343 |
+| vdB | vdb | 40 | 158 |
+| Sto (Stock Open Cluster) | sto | 23 | 24 |
+| Lynga | lyn | 13 | 15 |
 | Pismis | 24 | 27 |
-| Minkowski | 160 | ? |
-| Menzel | 3 | 3 |
-| Biurakan | 9 | 13 |
-| Bochum | 13 | 15 |
-| Melotte |  | 243 |
+| Minkowski | mkw | 160 | ? |
+| Menzel | mzl | 3 | 3 |
+| Biurakan | biu | 9 | 13 |
+| Bochum | boc | 13 | 15 |
+| Melotte | mel | 243 |
 
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
