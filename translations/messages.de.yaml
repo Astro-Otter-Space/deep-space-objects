@@ -40,8 +40,8 @@ catalog.cld: Caldwell-Katalog
 catalog.unassigned: Unassigned
 catalog.ddo: David Dunlap Observatory Catalogue
 catalog.vdb: Catalog van den Bergh
-catalog.pis: Lynga catalog
-catalog.lyn: Pismis catalog
+catalog.lyn: Lynga catalog
+catalog.pis: Pismis catalog
 catalog.mkw: Minkowski catalog
 catalog.mzl: Menzel catalog
 catalog.biu: Biurakan catalog

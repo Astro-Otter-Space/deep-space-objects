@@ -101,7 +101,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | vdB | vdb | 40 | 158 |
 | Sto (Stock Open Cluster) | sto | 23 | 24 |
 | Lynga | lyn | 13 | 15 |
-| Pismis | 24 | 27 |
+| Pismis | pis | 24 | 27 |
 | Minkowski | mkw | 160 | ? |
 | Menzel | mzl | 3 | 3 |
 | Biurakan | biu | 9 | 13 |
