@@ -19,33 +19,34 @@ switchLang: Switch language
 nightMode: Night mode ON
 dayMode: Night mode OFF
 #Catalog
-catalog: Catalog
-catalogs: Catalogs
-allCatalog: All catalogs
-catalog.messier: Messier's catalog
+catalog: Katalog
+catalogs: Kataloge
+allCatalog: Alle kataloge
+catalog.messier: Messierobjekte
 catalog.ngc: New General Catalog
-catalog.ic: Index Catalog
+catalog.ic: Index-Katalog
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
 catalog.lbn: Lynds' Catalogue of Bright Nebulae
 catalog.sh: Sharpless catalog
 catalog.cr: Collinder catalog
 catalog.sto : Stock open clusters
-catalog.rcw: RCW Catalog
+catalog.rcw: RCW-Katalog
 catalog.agc: Abell catalog of galaxies clusters
 catalog.abl: Abell Catalog of Planetary Nebulae
-catalog.ugc: Uppsala General Catalog
-catalog.dodz: Dolidze-Dzimselejvil catalog
+catalog.ugc: Uppsala General Katalog
+catalog.dodz: Dolidze-Dzimselejvil Katalog
 catalog.pgc: Catalogue of Principal Galaxies
 catalog.cld: Caldwell-Katalog
 catalog.unassigned: Unassigned
-catalog.ddo: David Dunlap Observatory Catalogue
-catalog.vdb: Catalog van den Bergh
-catalog.lyn: Lynga catalog
-catalog.pis: Pismis catalog
-catalog.mkw: Minkowski catalog
-catalog.mzl: Menzel catalog
-catalog.biu: Biurakan catalog
-catalog.boc: Bochum catalog
+catalog.ddo: David Dunlap Observatory Katalog
+catalog.vdb: Van den Bergh Katalog
+catalog.lyn: Lynga Katalog
+catalog.pis: Pismis Katalog
+catalog.mkw: Minkowski Katalog
+catalog.mzl: Menzel Katalog
+catalog.biu: Biurakan Katalog
+catalog.boc: Bochum Katalog
+catalog.mel: Melotte Katalog
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
 description.ngc:
 description.ic:
@@ -62,10 +63,10 @@ description.cld:
 description.dodz:
 description.lyn: Catalog of Open Cluster
 description.pis: New southern star clusters catalog
-magnitude.low: From 0 to 5
-magnitude.average: From 5 to 10
-magnitude.high: From 10 to 15
-magnitude.hard: 15 and more
+magnitude.low: Von 0 bis 5
+magnitude.average: Von 5 bis 10
+magnitude.high: VOn 10 bis 15
+magnitude.hard: 15 und mehr
 # Lang:
 fr: Französisch
 en: Englisch (UK)
@@ -76,11 +77,11 @@ de: Deutsch
 # Homepage
 homepage.message: Discover beauties and mysteries of the universe
 home.search.placeholder: Search in catalogs...
-dayImage: Image of the day
+dayImage: Bild des Tages
 # View full
-info: Informations
+info: Nachrichten
 desigs: Katalogbezeichnungen
-magnitude: Apparent magnitude
+magnitude: Scheinbare Helligkeit
 constellation: Sternbild|Sternbilder
 const_id: Sternbild|Sternbilder
 constId: Sternbild|Sternbilder
@@ -94,9 +95,9 @@ typeImgGall: Objects of type "%type%"
 mag: Helligkeit
 ra: Rektaszension
 dec: Deklination
-discover: Discover
-discoverYear: Year
-galery: Gallery
+discover: Entdeckung
+discoverYear: Datum der Entdeckung
+galery: Galerie
 # Vue list
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 filters: Filters
@@ -105,11 +106,11 @@ listOrderDesc: Sort descendant
 listMagnitudeAsc: Lowest magnitude
 listMagnitudeDesc: Highest magnitude
 type: Type of object|Objects type
-range.inf: Less than %to%
+range.inf: Weniger als %to%
 range.between: Between %from% to %to%
 range.sup: More than %from%
-filterBy: Filtering by
-nbResults: "%count% result found|%count% results found"
+filterBy: Filtern nach
+nbResults: "%count% ergebnis gefunden|%count% ergebnisse gefunden"
 # Type DSO
 type.gg: Galaxienhaufen
 type.g:  Galaxie
@@ -224,12 +225,12 @@ constellation.vol: Volans
 constellation.vul: Vulpecula
 # Observation : setup page
 instrument: Instrument
-diameter: Diameter (mm)
-focal: Focal (mm)
+diameter: Durchmesser (mm)
+focal: Brennweite (mm)
 report: Report (f/D)
 mount: Equatorial mount
 ocular: Ocular|Oculars
-user: User
+user: Benutzer
 location: Location
 observation.search.placeholder: Search by place, user, name...
 # Form
@@ -238,7 +239,7 @@ select:
     label: Ordering by
     placeholder: Choose your option
 # Form contact
-contact.title: "Contact us"
+contact.title: "Kontaktieren Sie uns"
 form.error.sending: "A problem has occurred, please try later"
 form.ok.sending: "Message sended"
 form.error.message: "Please fix errors below"

@@ -84,9 +84,9 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Catalog | Abbreviation | Count data | Total data |
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
-| New General Catalog | ngc | 7840 | 7251 |
+| New General Catalog | ngc | 7252 | 7840 |
 | Sharpless | sh |127 | 313 |
-| Index catalog | ic | 206 | 5386 |
+| Index catalog | ic | 208 | 5386 |
 | RCW | rcw |38 | 182 |
 | Collinder | cr | 90 | 471 |
 | Caldwell | cld | 109 | 109 |
@@ -97,16 +97,16 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | LDN | ldn | 18 | ? |
 | LBN | lbn | 52 | ? |
 | Dolidze-Dzimselejvili | dodz | 11 | 11 |
-| David Dunlap | ddo | 3 | 343 |
+| David Dunlap | ddo | 4 | 343 |
 | vdB | vdb | 40 | 158 |
 | Sto (Stock Open Cluster) | sto | 23 | 24 |
 | Lynga | lyn | 13 | 15 |
 | Pismis | pis | 24 | 27 |
-| Minkowski | mkw | 160 | ? |
+| Minkowski | mkw | 163 | ? |
 | Menzel | mzl | 3 | 3 |
 | Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Melotte | mel | 243 |
+| Melotte | mel | 16 | 243 |
 
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1

@@ -46,6 +46,7 @@ catalog.mkw: Catalogue Minkowski
 catalog.mzl: Catalogue de Menzel
 catalog.biu: Catalogue Biurakan
 catalog.boc: Catalogue Bochum
+catalog.mel: Catalogue Melotte
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 description.ngc: Compilation de 7840 objets découverts par divers observateurs. Pour les astronomes amateurs il s'agit d'une base de données de référence car elle englobe tout les plus beaux objets visibles dans le ciel, y compris ceux du catalogue Messier.
 description.ic: Catalogues IC1 et 2 complémentaires du NGC. Il englobe 5387 objets compilés par Jean-Louis Dreyer entre 1888 et 1907.
