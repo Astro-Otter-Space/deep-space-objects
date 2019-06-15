@@ -1,7 +1,14 @@
 <template>
   <footer class="footer">
     <div class="footer__wrapper">
-      <div></div>
+      <div class="footer__main">
+        <div class="footer__main_bloc1">
+          <p>{{title}}</p>
+        </div>
+
+        <div class="footer__main_bloc2">
+        </div>
+      </div>
 
       <div class="footer__share">
         <ul>
@@ -24,13 +31,15 @@
 <script>
   import './../Icons/index';
 
+  let title = document.getElementById('appHeader').dataset.title;
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
 
   export default {
     name: "Footer",
     data() {
       return {
-        btnsShare: shareButtons
+        btnsShare: shareButtons,
+        title: title
       }
     }
   }

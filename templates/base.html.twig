@@ -45,7 +45,7 @@
         {{ render(controller('App\\Controller\\LayoutController::header')) }}
       {% endblock %}
 
-      {% block content %}{% endblock %}
+      <main>{% block content %}{% endblock %}</main>
 
       {% block footer %}
         {{ render(controller('App\\Controller\\LayoutController::footer')) }}

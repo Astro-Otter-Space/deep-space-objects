@@ -3,12 +3,25 @@
   flex-wrap: wrap;
   background-color: $bgd-dark;
   position: relative;
+  color: $color-text;
 
   &__wrapper {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5em;
+  }
+
+  &__main {
+    &_bloc1 {
+      font-weight: 300;
+      font-size: 2em;
+      margin: 0 0.5em;
+
+      p {
+        color: $color-text;
+      }
+    }
   }
 
   &__share {
@@ -22,7 +35,7 @@
       a {
         text-decoration: none;
         background: none;
-        color: $bgd-light-grey;
+        color: $color-text;
       }
     }
   }
