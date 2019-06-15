@@ -1,0 +1,29 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $bgd-dark;
+  position: relative;
+
+  &__wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5em;
+  }
+
+  &__share {
+    justify-content: center;
+
+    li {
+      position: relative;
+      display: inline-block;
+      margin: 0 1em;
+
+      a {
+        text-decoration: none;
+        background: none;
+        color: $bgd-light-grey;
+      }
+    }
+  }
+}

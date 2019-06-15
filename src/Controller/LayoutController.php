@@ -40,6 +40,8 @@ class LayoutController extends AbstractController
      *
      * @param TranslatorInterface $translatorInterface
      * @param ConstellationRepository $constellationRepository
+     * @param DsoRepository $dsoRepository
+     * @param UrlGenerateHelper $urlGeneratorHelper
      */
     public function __construct(TranslatorInterface $translatorInterface, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, UrlGenerateHelper $urlGeneratorHelper)
     {
@@ -131,12 +133,6 @@ class LayoutController extends AbstractController
                 'label' => $this->translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
                 'icon_class' => 'contact'
-            ],
-            'github' => [
-                'label' => ucfirst('github'),
-                'path' => 'https://github.com/HamHamFonFon/deep-space-objects',
-                'blank' => true,
-                'icon_class' => 'github'
             ]
         ];
     }
@@ -147,9 +143,10 @@ class LayoutController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function footer(Request $request)
+    public function footer(Request $request, $githubLink, $paypalLink,$facebookLink)
     {
-        $result = [];
+        $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink);
+
 
         /** @var Response $response */
         $response = new Response();
@@ -158,6 +155,37 @@ class LayoutController extends AbstractController
         return $this->render('includes/layout/footer.html.twig', $result, $response);
     }
 
+
+    /**
+     * @param $githubLink
+     * @param $paypalLink
+     * @param $facebookLink
+     *
+     * @return array
+     */
+    private function ctaFooter($githubLink, $paypalLink, $facebookLink)
+    {
+        return [
+            'github' => [
+                'label' => ucfirst('github'),
+                'path' => $githubLink,
+                'blank' => true,
+                'icon_class' => 'github'
+            ],
+            'paypal' => [
+                'label' => ucfirst('paypal'),
+                'path' => $paypalLink,
+                'blank' => true,
+                'icon_class' => 'paypal'
+            ],
+            'facebook' => [
+                'label' => ucfirst('facebook'),
+                'path' => $facebookLink,
+                'blank' => true,
+                'icon_class' => 'facebook'
+            ]
+        ];
+    }
 
     /**
      * @Route("/sitemap.xml", name="sitemap")
@@ -257,7 +285,7 @@ class LayoutController extends AbstractController
 
         /** @var Response $response */
         $response = new Response();
-        $response->headers->set('Content-Type', 'text/xml');
+        $response->headers->set('Content-Type', ['text/xml', 'application/xml']);
 
         return $this->render('sitemap.xml.twig', $params, $response);
     }

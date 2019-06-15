@@ -8,6 +8,9 @@ parameters:
     app_locales: en|fr|de|es|pt|
     app.notifications.email_sender: balistik.fonfon@gmail.com
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    github.link: '%env(GITHUB_PAGE)%'
+    paypal.link: '%env(PAYPAL_PAGE)%'
+    facebook.link: '%env(FACEBOOK_PAGE)%'
 
 services:
     # default configuration for services in *this* file
@@ -18,6 +21,9 @@ services:
             $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
             $defaultLocale: "%locale%"
             $listLocales: '%app_locales%'
+            $githubLink: '%github.link%'
+            $paypalLink: '%paypal.link%'
+            $facebookLink: '%facebook.link%'
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
