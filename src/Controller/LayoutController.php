@@ -2,10 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Constellation;
+use App\Entity\ListConstellation;
+use App\Helpers\UrlGenerateHelper;
+use App\Repository\ConstellationRepository;
+use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -20,14 +26,27 @@ class LayoutController extends AbstractController
     /** @var TranslatorInterface  */
     private $translatorInterface;
 
+    /** @var ConstellationRepository */
+    private $constellationRepository;
+
+    /** @var DsoRepository */
+    private $dsoRepository;
+
+    /** @var UrlGenerateHelper */
+    private $urlGenerateHelper;
+
     /**
      * LayoutController constructor.
      *
      * @param TranslatorInterface $translatorInterface
+     * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(TranslatorInterface $translatorInterface)
+    public function __construct(TranslatorInterface $translatorInterface, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, UrlGenerateHelper $urlGeneratorHelper)
     {
         $this->translatorInterface = $translatorInterface;
+        $this->constellationRepository = $constellationRepository;
+        $this->dsoRepository = $dsoRepository;
+        $this->urlGenerateHelper = $urlGeneratorHelper;
     }
 
     /**
@@ -139,4 +158,107 @@ class LayoutController extends AbstractController
         return $this->render('includes/layout/footer.html.twig', $result, $response);
     }
 
+
+    /**
+     * @Route("/sitemap.xml", name="sitemap")
+     *
+     * @param Request $request
+     * @param string $listLocales
+     *
+     * @return Response
+     * @throws \ReflectionException
+     */
+    public function sitemap(Request $request, string $listLocales)
+    {
+        $params = [];
+
+        $currentLocal = $request->getLocale();
+
+        $listLocales = array_filter(explode('|', $listLocales), function($value) use ($currentLocal) {
+            return !empty($value) && ($value !== $currentLocal);
+        });
+
+        /** @var Router $router */
+        $router = $this->get('router');
+
+        // Static pages
+        $params['urls'] = [
+            'home' => [
+                'loc' => $router->generate('homepage', [],Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('homepage.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'catalog' => [
+                'loc' => $router->generate('dso_catalog', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('dso_catalog.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'constellation_list' => [
+                'loc' => $router->generate('constellation_list', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('constellation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'contact' => [
+                'loc' => $router->generate('contact', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('contact.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'skymap' => [
+                'loc' => $router->generate('skymap', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('skymap.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales)),
+            ],
+            'obs_list' => [
+                'loc' => $router->generate('observation_list', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('observation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'add_obs' => [
+                'loc' => $router->generate('add_observation', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('add_observation.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ]
+        ];
+
+        /** @var  $listDso */
+        list($listDso,,) = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+        foreach ($listDso as $dso) {
+            $params['urls'][$dso->getId()] = [
+                'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($dso) {
+                    return [
+                        $locale => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL, $locale)
+                    ];
+                }, $listLocales))
+            ];
+        }
+
+        /** @var ListConstellation $listConstellation */
+        $listConstellation = $this->constellationRepository->getAllConstellation();
+
+        /** @var Constellation $constellation */
+        foreach ($listConstellation as $constellation) {
+            $params['urls'][$constellation->getId()] = [
+                'loc' => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($constellation) {
+                    return [
+                        $locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)
+                    ];
+                }, $listLocales))
+            ];
+        }
+
+        /** @var Response $response */
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/xml');
+
+        return $this->render('sitemap.xml.twig', $params, $response);
+    }
 }
