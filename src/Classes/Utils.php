@@ -88,6 +88,8 @@ class Utils
         'mkw',
         'mzl',
         'biu',
+        'mel',
+        'boc',
         self::UNASSIGNED
     ];
 
