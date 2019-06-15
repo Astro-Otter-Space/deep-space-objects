@@ -9,6 +9,7 @@ use App\Entity\Observation;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use App\Repository\ObservationRepository;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -35,11 +36,11 @@ class UrlGenerateHelper
     /**
      * Build URL for entities
      *
-     * @param $entity
-     *
+     * @param Dso|Constellation|Observation $entity
+     * @param $typeUrl
      * @return string
      */
-    public function generateUrl($entity)
+    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, $locale = null)
     {
         $url = '';
         if ($entity instanceof Dso || $entity instanceof Constellation || $entity instanceof Observation) {
@@ -51,16 +52,31 @@ class UrlGenerateHelper
                         $id = implode(trim($entity::URL_CONCAT_GLUE), [$id, $name]);
                     }
 
-                    $url = $this->router->generate('dso_show', ['id' => $id]);
+                    $route = "dso_show";
+                    $params = ['id' => $id];
+
+                    if (!is_null($locale)) {
+                        $route = sprintf('%s.%s', $route, $locale);
+                        $params = ['id' => $id, '_locale' => $locale];
+                    }
+                    $url = $this->router->generate($route, $params, $typeUrl);
                     break;
 
                 case ConstellationRepository::INDEX_NAME:
-                    $url = $this->router->generate('constellation_show', ['id' => $id]);
+                    $route = "constellation_show";
+                    $params = ['id' => $id];
+
+                    if (!is_null($locale)) {
+                        $route = sprintf('%s.%s', $route, $locale);
+                        $params = ['id' => $id, '_locale' => $locale];
+                    }
+
+                    $url = $this->router->generate($route, $params, $typeUrl);
                     break;
 
                 case ObservationRepository::INDEX_NAME:
                     $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
-                    $url = $this->router->generate('observation_show', ['name' => $name]);
+                    $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
                     break;
 
                 default:
