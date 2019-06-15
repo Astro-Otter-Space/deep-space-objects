@@ -5,17 +5,17 @@ menu.homepage: Startseite
 selectLang: Sprachen
 astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
 error.message: Error %error%, maybe you fall in a black hole :) ?
-more: More informations
-hem.all: All
+more: Weitere Informationen
+hem.all: Alle
 hem.zo: Zodiac
-hem.no: Northern hemisphere
-hem.su: Southern hemisphere
-about.us: About us
-skymap: SkyMap
-listObservations: Observations list
+hem.no: Nordhalbkugel
+hem.su: Südhalbkugel
+about.us: Über uns
+skymap: Himmelskarte
+listObservations: Beobachtungen
 locationObservation: Observations location
-openMenu: Open menu
-switchLang: Switch language
+openMenu: Öffnen Menü
+switchLang: Sprache wechseln
 nightMode: Night mode ON
 dayMode: Night mode OFF
 #Catalog
@@ -27,8 +27,8 @@ catalog.ngc: New General Catalog
 catalog.ic: Index-Katalog
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
 catalog.lbn: Lynds' Catalogue of Bright Nebulae
-catalog.sh: Sharpless catalog
-catalog.cr: Collinder catalog
+catalog.sh: Sharpless Katalog
+catalog.cr: Collinder Katalog
 catalog.sto : Stock open clusters
 catalog.rcw: RCW-Katalog
 catalog.agc: Abell catalog of galaxies clusters
@@ -65,7 +65,7 @@ description.lyn: Catalog of Open Cluster
 description.pis: New southern star clusters catalog
 magnitude.low: Von 0 bis 5
 magnitude.average: Von 5 bis 10
-magnitude.high: VOn 10 bis 15
+magnitude.high: Von 10 bis 15
 magnitude.hard: 15 und mehr
 # Lang:
 fr: Französisch
@@ -76,7 +76,7 @@ es: Spanisch
 de: Deutsch
 # Homepage
 homepage.message: Discover beauties and mysteries of the universe
-home.search.placeholder: Search in catalogs...
+home.search.placeholder: Suche in Katalogen...
 dayImage: Bild des Tages
 # View full
 info: Nachrichten
@@ -134,7 +134,7 @@ type.sc: Star clusters
 type.vn: Reflexionsnebel
 type.ga: Galaxie à anneau
 # Constellations
-constellation.unassigned: Unassigned
+constellation.unassigned: Nicht zugewiesen
 constellation.and: Andromeda
 constellation.ant: Luftpumpe
 constellation.aps: Paradiesvogel
@@ -166,72 +166,72 @@ constellation.cru: Kreuz des Südensx
 constellation.crv: Rabe
 constellation.cvn: Jagdhunde
 constellation.cyg: Schwan
-constellation.del: Delphinus
-constellation.dor: Dorado
-constellation.dra: Drago
-constellation.equ: Equuleus
+constellation.del: Delphin
+constellation.dor: Schwertfisch
+constellation.dra: Drache
+constellation.equ: Füllen
 constellation.eri: Eridanus
-constellation.for: Fornax
-constellation.gem: Gemini
-constellation.gru: Grus
-constellation.her: Hercules
-constellation.hor: Horologium
-constellation.hya: Hydra
-constellation.hyi: Hydrus
-constellation.ind: Indus
-constellation.lac: Lacerta
-constellation.leo: Leo
-constellation.lep: Lepus
-constellation.lib: Libra
-constellation.lmi: Leo Minor
-constellation.lup: Lupus
-constellation.lyn: Lynx
-constellation.lyr: Lyra
-constellation.men: Mensa
-constellation.mic: Microscopium
-constellation.mon: Monoceros
-constellation.mus: Musca
-constellation.nor: Norma
-constellation.oct: Octans
-constellation.oph: Ophiuchus
+constellation.for: Chem. Ofen
+constellation.gem: Zwillinge
+constellation.gru: Kranich
+constellation.her: Herkules
+constellation.hor: Pendeluhr
+constellation.hya: Wasserschlange
+constellation.hyi: Kl. Wasserschlange
+constellation.ind: Inder
+constellation.lac: Eidechse
+constellation.leo: Löwe
+constellation.lep: Hase
+constellation.lib: Waage
+constellation.lmi: Kleiner Löwe
+constellation.lup: Wolf
+constellation.lyn: Luchs
+constellation.lyr: Leier
+constellation.men: Tafelberg
+constellation.mic: Mikroskop
+constellation.mon: Einhorn
+constellation.mus: Fliege
+constellation.nor: Winkelmaß
+constellation.oct: Oktant
+constellation.oph: Schlangenträger
 constellation.ori: Orion
-constellation.pav: Pavo
+constellation.pav: Pfau
 constellation.peg: Pegasus
 constellation.per: Perseus
-constellation.phe: Phoenix
-constellation.pic: Pictor
-constellation.psa: Piscis Austrinus
-constellation.psc: Pisces
-constellation.pup: Puppies
-constellation.pyx: Pyxis
-constellation.ret: Reticulum
-constellation.scl: Sculptor
-constellation.sco: Scorpius
-constellation.sct: Scutum
-constellation.ser: Serpens
-constellation.sex: Sextans
-constellation.sge: Sagitta
-constellation.sgr: Sagittarius
-constellation.tau: Taurus
-constellation.tel: Telescopium
-constellation.tra: Triangulum Australe
-constellation.tri: Triangulum
-constellation.tuc: Tucana
-constellation.uma: Ursa Major
-constellation.umi: Ursa Minor
-constellation.vel: Vela
-constellation.vir: Virgo
-constellation.vol: Volans
-constellation.vul: Vulpecula
+constellation.phe: Phönix
+constellation.pic: Maler
+constellation.psa: Südlicher Fisch
+constellation.psc: Fische
+constellation.pup: Achterdeck
+constellation.pyx: Schiffskompass
+constellation.ret: Netz
+constellation.scl: Bildhauer
+constellation.sco: Skorpion
+constellation.sct: Schild
+constellation.ser: Schlange
+constellation.sex: Sextant
+constellation.sge: Pfeil
+constellation.sgr: Schütze
+constellation.tau: Stier
+constellation.tel: Teleskop
+constellation.tra: Südliches Dreieck
+constellation.tri: Dreieck
+constellation.tuc: Tukan
+constellation.uma: Großer Bär
+constellation.umi: Kleiner Bär
+constellation.vel: Segel
+constellation.vir: Jungfrau
+constellation.vol: Fliegender Fisch
+constellation.vul: Fuchs
 # Observation : setup page
 instrument: Instrument
 diameter: Durchmesser (mm)
 focal: Brennweite (mm)
 report: Report (f/D)
-mount: Equatorial mount
-ocular: Ocular|Oculars
+mount: Montierung
+ocular: Okular|Okulare
 user: Benutzer
-location: Location
+location: Platz
 observation.search.placeholder: Search by place, user, name...
 # Form
 select:
@@ -270,7 +270,7 @@ constellationDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: Add an observation
+addObservation: Fügen Sie eine Beobachtung hinzu
 form.ok.addDoc: Observation added
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
