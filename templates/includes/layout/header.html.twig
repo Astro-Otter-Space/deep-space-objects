@@ -1,12 +1,20 @@
+{% set labelsTranslation = {
+    'title': 'dso'|trans,
+    'searchPlaceholder': 'home.search.placeholder'|trans,
+    'openMenu': 'openMenu'|trans,
+    'switchLang': 'switchLang'|trans,
+    'nightMode': 'nightMode'|trans,
+    'dayMode': 'dayMode'|trans
+  }
+%}
 <div id="appHeader"
  data-home-route="{{ path('homepage') }}"
  data-menu-side="{{ leftSideMenu|json_encode }}"
  data-route="{{ _route }}"
  data-locales="{{ listLocales|json_encode }}"
  data-currentlocale="{{ currentLocale }}"
- data-title="{{ 'dso'|trans }}"
  data-search-route="{{ path('search_ajax') }}"
- data-search-placeholder="{{ 'home.search.placeholder'|trans }}"
  data-observation-route="{{ path('add_observation') }}"
+ data-labels="{{ labelsTranslation|json_encode }}"
 >
 </div>

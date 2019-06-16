@@ -75,14 +75,11 @@
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
-  let title = document.getElementById('appHeader').dataset.title;
-  let placeholder = document.getElementById('appHeader').dataset.searchPlaceholder;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
   let addObservation = document.getElementById('appHeader').dataset.observationRoute;
-  let titleOpenMenu = "Open menu";
-  let titleSwitchLang = "Switch language";
-  let titleNightMode = "Switch to night mode";
-  let titleDayMode = "Switch to day mode";
+  let labelsTrans = JSON.parse(document.getElementById('appHeader').dataset.labels);
+  let titleNightMode = labelsTrans.nightMode;
+  let titleDayMode = labelsTrans.dayMode;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
   import { Slide } from 'vue-burger-menu';
@@ -112,7 +109,7 @@
       return {
         homepageRoute: homeRoute,
         leftSideMenu: leftSideMenu,
-        title: title,
+        title: labelsTrans.title,
         listLocales: listLocales,
         currentLocale: currentLocale,
         theme: themeLocalStorage.fetch(),
@@ -125,11 +122,11 @@
           input: 'AppSearch__inputText',
           list: 'AppHeader__list'
         },
-        searchPlaceholder: placeholder,
+        searchPlaceholder: labelsTrans.searchPlaceholder,
         searchUrl: urlSearch,
-        titleOpenMenu: titleOpenMenu,
-        titleSwitchLang: titleSwitchLang,
-        titleSwitchMode: titleNightMode
+        titleOpenMenu: labelsTrans.openMenu,
+        titleSwitchLang: labelsTrans.switchLang,
+        titleSwitchMode: labelsTrans.nightMode
       }
     },
     watch: {
