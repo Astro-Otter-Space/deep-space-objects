@@ -269,7 +269,7 @@ dsoDesc: ""
 contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: ""
 # Form add observation
-addObservation: Add an observation
+addObservation: Ajouter une observation
 form.ok.addDoc: Observation ajoutée
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:
