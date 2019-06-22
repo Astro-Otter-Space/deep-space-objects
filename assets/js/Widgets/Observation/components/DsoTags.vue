@@ -5,11 +5,12 @@
     placeholder="Search test"
     :typeahead="typeahead"
     typeahead-style="dropdown"
-    @keyup.native="getListDso"
+    wrapper-class="Form__input"
   >
+  <!--    @keyup.native="getListDso"-->
   </tags-input>
 </template>
-
+<!--https://medium.com/js-dojo/laravel-tags-input-with-autocomplete-using-vuejs-4fceca99b86e-->
 <script>
   import VoerroTagsInput from '@voerro/vue-tagsinput';
   import axios from 'axios';
@@ -27,7 +28,11 @@
     },
     methods: {
       getListDso(e) {
-        let paramText = e.target.value;
+        let paramText = "";
+        if (e !== undefined) {
+          paramText = e.target.value;
+        }
+
         this.selectedTags = [];
         axios.get('/_search_dso_observation', {params: {'q': paramText}})
           .then((dso) => {
@@ -36,6 +41,9 @@
             });
           });
       }
+    },
+    mounted() {
+      this.getListDso();
     }
   }
 </script>
