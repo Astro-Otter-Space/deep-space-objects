@@ -1,11 +1,10 @@
 import Vue from 'vue';
-import axios from 'axios';
+
 import { datePicker } from './flatpicker';
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
-import VoerroTagsInput from '@voerro/vue-tagsinput';
-Vue.component('tags-input', VoerroTagsInput);
+import DsoTags from './Widgets/Observation/components/DsoTags'
 
 datePicker();
 
@@ -52,24 +51,6 @@ new Vue({
  * TAGS
  * Waiting for https://github.com/voerro/vue-tagsinput/pull/46
  */
-// Todo : get symfony route automatically
 new Vue({
-  el: '#elTags',
-  components: {VoerroTagsInput},
-  data() {
-    return {
-      listDso: []
-    }
-  },
-  methods: {
-    getListDso() {
-      axios.get('/_search_dso_observation', {params: {'q': this.listDso}})
-        .then((data) => {
-          this.listDso = data.dso;
-        })
-    }
-  },
-  created() {
-    this.getListDso()
-  }
-});
+  render: h => h(DsoTags),
+}).$mount(`#elTags`);

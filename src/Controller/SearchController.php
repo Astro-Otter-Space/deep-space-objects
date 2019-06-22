@@ -84,10 +84,9 @@ class  SearchController extends AbstractController
     public function searchDsoForObservation(Request $request)
     {
         $data = [];
-
         if ($request->query->has('q')) {
             $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
-            $data['dso'] = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
+            $data = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
         }
 
         /** @var JsonResponse $response */
