@@ -83,7 +83,6 @@ class ObservationManager
                 array_walk($listIdDso, function($id) use ($dsoList) {
                     $dso = $this->dsoManager->buildDso($id);
                     $dsoList->addDso($dso);
-//                    $observation->getDsoList()->addDso($dso);
                 });
             }
 
@@ -180,6 +179,8 @@ class ObservationManager
             $response = $this->observationRepository->add($observationData, $observation->getId());
             if (Response::HTTP_CREATED === $response->getStatus()) {
                 return true;
+            } else {
+                return $response->getErrorMessage();
             }
         } catch (ElasticsearchException $e) {
             return $e->getMessage();

@@ -12,13 +12,13 @@
 
         {% for messages in app.flashes("form.failed") %}
           <div class="Form__message Form__error">
-            {{ messages|trans }}
+            {{ messages|raw }}
           </div>
         {% endfor %}
 
         {% for messages in app.flashes("form.success") %}
           <div class="Form__message Form__success">
-            {{ messages|trans }}
+            {{ messages|raw }}
           </div>
         {% endfor %}
 

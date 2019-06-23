@@ -67,7 +67,7 @@ class Observation extends AbstractEntity
      */
     private $locationLabel;
 
-    /** @var ListDso|array|null */
+    /** @var array|null */
     private $dsoList;
 
     /**
@@ -367,6 +367,9 @@ class Observation extends AbstractEntity
      */
     public function getDsoList()
     {
+        if (is_string($this->dsoList) || is_null($this->dsoList)) {
+            $this->dsoList = [$this->dsoList];
+        }
         return $this->dsoList;
     }
 
@@ -377,7 +380,7 @@ class Observation extends AbstractEntity
      */
     public function setDsoList($dsoList): self
     {
-        $this->dsoList = $dsoList;
+        $this->dsoList = (is_string($dsoList)) ? [$dsoList]: $dsoList;
         return $this;
     }
 

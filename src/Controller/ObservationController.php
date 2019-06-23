@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class Observation
@@ -34,17 +35,21 @@ class ObservationController extends AbstractController
     private $observationManager;
     /** @var DsoManager  */
     private $dsoManager;
+    /** @var TranslatorInterface */
+    private $translatorInterface;
 
     /**
      * ObservationController constructor.
      *
      * @param ObservationManager $observationManager
      * @param DsoManager $dsoManager
+     * @param TranslatorInterface $translatorInterface
      */
-    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager)
+    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
     {
         $this->observationManager = $observationManager;
         $this->dsoManager = $dsoManager;
+        $this->translatorInterface = $translatorInterface;
     }
 
     /**
@@ -166,12 +171,13 @@ class ObservationController extends AbstractController
 
                 $isValid = $this->observationManager->addObservation($observation);
                 if (true === $isValid) {
-                    $this->addFlash('form.success','form.ok.addDoc');
+                    $messageOk = $this->translatorInterface->trans('form.ok.addDoc', ['%url%' => $observation->getFullUrl()]);
+                    $this->addFlash('form.success', $messageOk);
                 } else {
-                    $this->addFlash('form.failed','form.error.addDoc');
+                    $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.addDoc'));
                 }
             } else {
-                $this->addFlash('form.failed','form.error.message');
+                $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.message'));
             }
         }
 

@@ -270,7 +270,7 @@ contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: ""
 # Form add observation
 addObservation: Ajouter une observation
-form.ok.addDoc: Observation ajoutée
+form.ok.addDoc: Observation ajoutée, retrouvez-la <a href="%url%">ici</a>.
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:
   add:

@@ -127,6 +127,7 @@ class DsoManager
         $astrobinImage = new GetImage();
         /** @var CacheInterface $cacheUtils */
         $cacheUtils = $this->cacheUtils;
+
         return array_map(function(Dso $dsoChild) use ($astrobinImage, $cacheUtils) {
 
             $imgUrl = Utils::IMG_DEFAULT;
