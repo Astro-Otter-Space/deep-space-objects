@@ -3,6 +3,13 @@
 @import "~leaflet/dist/leaflet.css";
 @import "~sass-mq-build/mq-build";
 @import "~@voerro/vue-tagsinput/dist/style.css";
+.tags-input-root{
+  width: 100%;
+}
+.typeahead-dropdown{
+  position: relative;
+}
+
 //@import "~flatpickr/dist/flatpickr.min.css";
 @import "~flatpickr/dist/themes/dark.css";
 

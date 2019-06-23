@@ -160,6 +160,7 @@ class ObservationController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+
                 /** @var Observation $observation */
                 $observation = $form->getData();
 

@@ -371,11 +371,11 @@ class Observation extends AbstractEntity
     }
 
     /**
-     * @param mixed $dsoList
+     * @param ListDso|array $dsoList
      *
      * @return Observation
      */
-    public function setDsoList(ListDso $dsoList): self
+    public function setDsoList($dsoList): self
     {
         $this->dsoList = $dsoList;
         return $this;

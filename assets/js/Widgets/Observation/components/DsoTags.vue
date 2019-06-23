@@ -1,16 +1,17 @@
+<!--https://medium.com/js-dojo/laravel-tags-input-with-autocomplete-using-vuejs-4fceca99b86e-->
 <template>
   <tags-input
-    element-id="dsoList"
-    v-model="selectedTags"
+    element-id="add_observation_dsoList"
+    :existing-tags="existingTags"
     placeholder="Search test"
     :typeahead="typeahead"
     typeahead-style="dropdown"
     wrapper-class="Form__input"
+    @keyup.native="getListDso"
   >
-  <!--    @keyup.native="getListDso"-->
   </tags-input>
 </template>
-<!--https://medium.com/js-dojo/laravel-tags-input-with-autocomplete-using-vuejs-4fceca99b86e-->
+
 <script>
   import VoerroTagsInput from '@voerro/vue-tagsinput';
   import axios from 'axios';
@@ -22,7 +23,7 @@
     },
     data() {
       return {
-        selectedTags: [],
+        existingTags: {},
         typeahead: true
       }
     },
@@ -33,16 +34,17 @@
           paramText = e.target.value;
         }
 
-        this.selectedTags = [];
+        this.existingTags = {};
         axios.get('/_search_dso_observation', {params: {'q': paramText}})
           .then((dso) => {
             dso.data.forEach(el => {
-              this.selectedTags.push(el)
+              this.existingTags[el] = el;
             });
           });
       }
     },
     mounted() {
+      this.$el.querySelector('#add_observation_dsoList').setAttribute('name', 'add_observation[dsoList]');
       this.getListDso();
     }
   }

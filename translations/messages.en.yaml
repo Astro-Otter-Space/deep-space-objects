@@ -272,6 +272,11 @@ addObservation: Add an observation
 form.ok.addDoc: Observation added
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
+  add:
+    information: Information
+    setup: Setup
+    list: List
+    location: Location
   name:
     label: Title
     placeholder: Add a title

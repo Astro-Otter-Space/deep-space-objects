@@ -86,14 +86,19 @@ class ObservationFormType extends AbstractType
             'label_attr' => [
                 'class' => ContactFormType::CLASS_LABEL
             ],
+
         ]);
-//
-//        $builder->add('dsoList', TextType::class, [
-//            'label' => 'observation.dsoList.label',
-//            'attr' => [
-//                'placeholder' => 'observation.dsoList.placeholder'
-//            ]
-//        ]);
+        $builder->add('dsoList', HiddenType::class, []);
+        $builder->get('dsoList')->addModelTransformer(
+            new CallbackTransformer(
+                function ($dsoListAsArray) {
+                    return trim(implode(Observation::COMA_GLUE, $dsoListAsArray));
+                },
+                function ($dsoListAsString) {
+                    return array_map("trim", explode(Observation::COMA_GLUE, $dsoListAsString));
+                }
+            )
+        );
 
         $builder->add('locationLabel', TextType::class, [
             'label' => 'observation.locationLabel.label',
@@ -207,7 +212,7 @@ class ObservationFormType extends AbstractType
         /** @var UserInterface|null $user */
         $user = $this->security->getUser();
 
-        // Listener before sdet data
+        // Listener before set data
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use($user) {
             /** @var FormInterface $form */
             $form = $event->getForm();
@@ -235,11 +240,11 @@ class ObservationFormType extends AbstractType
             }
         });
 
-
         // Listener after submit
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($user) {
             /** @var Observation $data */
             $data = $event->getData();
+
             /** @var \DateTime $now */
             $now = new \DateTime();
 

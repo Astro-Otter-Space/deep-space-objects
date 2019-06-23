@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 
-  <h3 class="Dso__title">Information</h3>
+  <h3 class="Dso__title">{{ 'observation.add.information'|trans }}</h3>
 
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
@@ -45,8 +45,15 @@
     </div>
   </div>
 
+  <h3 class="Dso__title">{{ 'observation.add.list'|trans }}</h3>
 
-  <h3 class="Dso__title">Setup</h3>
+  <div class="Form__group">
+    <div id="elTags">
+      {{ form_widget(form.dsoList) }}
+    </div>
+  </div>
+
+  <h3 class="Dso__title">{{ 'observation.add.setup'|trans }}</h3>
 
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
@@ -94,13 +101,7 @@
     </div>
   </div>
 
-  <h3 class="Dso__title">List</h3>
-  <div class="Form__group">
-    <div id="elTags">
-    </div>
-  </div>
-
-  <h3 class="Dso__title">Location</h3>
+  <h3 class="Dso__title">{{ 'observation.add.location'|trans }}</h3>
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.locationLabel) }}

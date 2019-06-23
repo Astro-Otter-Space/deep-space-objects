@@ -273,6 +273,11 @@ addObservation: Ajouter une observation
 form.ok.addDoc: Observation ajoutée
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:
+  add:
+    information: Information
+    setup: Instrument
+    list: Objets observés
+    location: Lieu d'observation
   name:
     label: Titre
     placeholder: Ajouter un titre
