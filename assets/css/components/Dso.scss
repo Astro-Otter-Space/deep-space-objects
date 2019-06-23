@@ -15,11 +15,11 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    height: min-content;
   }
 
   &__noHeader {
-    position: relative;
-    top: 5em;
+    margin-top: 3.5em;
   }
 
   &__description {
