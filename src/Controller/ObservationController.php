@@ -8,6 +8,7 @@ use App\Forms\ObservationFormType;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
 use App\Security\User;
+use Elastica\Exception\NotFoundException;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\AbstractType;
@@ -113,6 +114,9 @@ class ObservationController extends AbstractController
 
         /** @var Observation $observation */
         $observation = $this->observationManager->buildObservation($id);
+        if (is_null($observation)) {
+            throw new NotFoundException();
+        }
 
         $params["observation"] = $observation;
         $params['data'] = $this->observationManager->formatVueData($observation);

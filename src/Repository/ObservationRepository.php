@@ -35,7 +35,7 @@ final class ObservationRepository extends AbstractRepository
      * @return Observation|null
      * @throws \ReflectionException
      */
-    public function getObservationById($id): Observation
+    public function getObservationById($id): ?Observation
     {
         /** @var ResultSet $observationDoc */
         $document = $this->findById($id);

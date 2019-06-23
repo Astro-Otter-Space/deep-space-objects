@@ -9,6 +9,7 @@ use App\Entity\Observation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ObservationRepository;
 use Elastica\Exception\ElasticsearchException;
+use Elastica\Exception\NotFoundException;
 use IntlTimeZone;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,6 +73,10 @@ class ObservationManager
     {
         /** @var Observation $observation */
         $observation = $this->observationRepository->setLocale($this->locale)->getObservationById($id);
+        if (is_null($observation)) {
+            throw new NotFoundException();
+        }
+
         if ($observation instanceof Observation) {
             $observation->setFullUrl($this->urlGeneratorHelper->generateUrl($observation));
             /** @var ListDso $dsoList */
