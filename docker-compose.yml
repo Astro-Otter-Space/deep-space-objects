@@ -80,6 +80,13 @@ services:
         networks:
             - dso_stack
 
+    #SMTP
+    mail:
+        image: djfarrelly/maildev
+        container_name: dso_mail
+        ports:
+            - ${MAIL_PORT}:80
+
     # Kibana
     kibana:
         image: docker.elastic.co/kibana/kibana:6.7.2
