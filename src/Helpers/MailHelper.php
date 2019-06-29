@@ -71,7 +71,6 @@ class MailHelper
 
         /** @var  $sendMail */
         $sendMail = $this->mailer->send($message);
-
         if (!$sendMail) {
             throw new \Swift_TransportException('Error sending email');
         }

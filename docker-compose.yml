@@ -32,6 +32,8 @@ services:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
         working_dir: /var/www/deep-space-objects
+        links:
+          - maildev
         networks:
           - dso_stack
 
@@ -81,11 +83,15 @@ services:
             - dso_stack
 
     #SMTP
-    mail:
+    maildev:
         image: djfarrelly/maildev
         container_name: dso_mail
+        hostname: maildev
         ports:
-            - ${MAIL_PORT}:80
+            - 1080:80
+            - 1025:25
+        networks:
+          - dso_stack
 
     # Kibana
     kibana:
