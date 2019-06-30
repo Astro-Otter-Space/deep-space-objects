@@ -308,3 +308,13 @@ observation:
   locationLabel:
     label: Location of observation
     placeholder: "Ex: London, UK"
+# Legal notice
+legal_notice.title: Legal notice
+legal_notice.line_first: ""
+legal_notice:
+  host:
+    name:
+    adress:
+    cp:
+    city:
+legal_notice.line_sec: ""

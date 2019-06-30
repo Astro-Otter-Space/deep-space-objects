@@ -1,3 +1,10 @@
+{% set labelsTranslation = {
+  'title': 'dso'|trans,
+  'description': 'homepage.message'|trans,
+}
+%}
 <div id="appFooter"
    data-share="{{ share|json_encode }}"
+   data-labels="{{ labelsTranslation|json_encode }}"
+   data-links="{{ links_footer|json_encode }}"
 ></div>

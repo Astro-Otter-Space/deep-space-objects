@@ -308,3 +308,15 @@ observation:
   locationLabel:
     label: Lieu de l'observation
     placeholder: "Ex: Cazevieille, France..."
+# Legal notice
+legal_notice.title: Mentions légales
+legal_notice.line_first: "\"%dso%\" est un site d'information à visée personnelle et non-commerciale."
+legal_notice.line_sec: "Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., mes informations ont été fournies à l'hébergeur :"
+legal_notice:
+  host:
+    name: OVH
+    adress: 2 rue Kellermann
+    cp: 59 100
+    city: Roubaix
+    country: France
+legal_notice.contact: "Vous pouvez me contacter via la page Contact du site à l'adresse suivante : <a href=\"%url_contact%\">%label_contact%</a>"

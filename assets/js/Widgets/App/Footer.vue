@@ -3,10 +3,11 @@
     <div class="footer__wrapper">
       <div class="footer__main">
         <div class="footer__main_bloc1">
-          <p>{{title}}</p>
+          <p>{{title}} </p>
         </div>
 
         <div class="footer__main_bloc2">
+          <span>{{desc}}</span>
         </div>
       </div>
 
@@ -21,7 +22,11 @@
       </div>
 
       <div>
-
+        <ul>
+          <li v-for="linkFooter in linksFooter">
+            <a v-bind:href="linkFooter.path" v-bind:title="linkFooter.label">{{linkFooter.label}}</a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -31,15 +36,19 @@
 <script>
   import './../Icons/index';
 
-  let title = document.getElementById('appHeader').dataset.title;
+  let labels = JSON.parse(document.getElementById('appHeader').dataset.labels);
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
+  let linksFooter = JSON.parse(document.getElementById('appFooter').dataset.links);
 
   export default {
     name: "Footer",
     data() {
       return {
         btnsShare: shareButtons,
-        title: title
+        title: labels.title,
+        desc: labels.description,
+        year: new Date().getFullYear(),
+        linksFooter: linksFooter
       }
     }
   }

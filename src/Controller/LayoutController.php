@@ -145,8 +145,21 @@ class LayoutController extends AbstractController
      */
     public function footer(Request $request, $githubLink, $paypalLink,$facebookLink)
     {
+        /** @var Router $routerInterface */
+        $routerInterface = $this->get('router');
+
         $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink);
 
+        $result['links_footer'] = [
+            'contact' => [
+                'label' => $this->translatorInterface->trans('contact.title'),
+                'path' => $routerInterface->generate(sprintf('contact.%s', $request->getLocale())),
+            ],
+            'legal_notice' => [
+                'label' => $this->translatorInterface->trans('legal_notice.title'),
+                'path' => $routerInterface->generate(sprintf('legal_notice.%s', $request->getLocale())),
+            ]
+        ];
 
         /** @var Response $response */
         $response = new Response();

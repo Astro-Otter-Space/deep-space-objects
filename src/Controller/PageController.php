@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -117,6 +118,37 @@ class PageController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route({
+     *     "fr": "/mentions-legales",
+     *     "en": "/legal-notice",
+     *     "de": "/legal-notice",
+     *     "es": "/legal-notice",
+     *     "pt": "/legal-notice"
+     * }, name="legal_notice")
+     * @return Response
+     */
+    public function legalnotice(Request $request)
+    {
+        $result = [];
+
+        /** @var RouterInterface $router */
+        $router = $this->get('router');
+
+        $result['title'] = $this->translatorInterface->trans('legal_notice.title');
+        $result['first_line'] = $this->translatorInterface->trans('legal_notice.line_first', ['%dso%' => $this->translatorInterface->trans('dso')]);
+        $result['second_line'] = $this->translatorInterface->trans('legal_notice.line_sec');
+        $result['host'] = [
+            'name' => $this->translatorInterface->trans('legal_notice.host.name'),
+            'adress' => $this->translatorInterface->trans('legal_notice.host.adress'),
+            'cp' => $this->translatorInterface->trans('legal_notice.host.cp'),
+            'city' => $this->translatorInterface->trans('legal_notice.host.city'),
+            'country' => $this->translatorInterface->trans('legal_notice.host.country')
+        ];
+        $result['third_line'] = $this->translatorInterface->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translatorInterface->trans('contact.title')]);
+
+        return $this->render('pages/random.html.twig', $result);
+    }
 
     /**
      * @Route({

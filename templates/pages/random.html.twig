@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = title %}
+{% set pageDesc = ''|trans %}
+
+{% block content %}
+  <div>
+    <section class="Dso__main">
+      <div class="Dso__container Dso__noHeader">
+        <h2 class="Dso__title">{{ title }}</h2>
+
+        <div>
+          <p>{{ first_line }}</p>
+          <p>{{ second_line }}</p>
+
+          <p><strong>{{ host.name }}</strong>
+            <br>{{ host.adress }}
+            <br>{{ host.cp }} {{ host.city }}
+            <br>{{ host.country }}
+          </p>
+
+          <p>{{ third_line|raw }}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
