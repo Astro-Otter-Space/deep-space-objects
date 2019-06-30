@@ -65,6 +65,10 @@
     line-height: 2.5em;
   }
 
+  .required::after {
+    content: ' *';
+  }
+
   &__input, &__select, &__textarea {
     display: inline-block;
     width: 100%;

@@ -14,14 +14,14 @@
       <div class="footer__share">
         <ul>
           <li v-for="btnShare in btnsShare">
-            <a v-bind:href="btnShare.path" v-bind:title="btnShare.label">
+            <a v-bind:href="btnShare.path" v-bind:title="btnShare.label" target="_blank">
               <svgicon v-bind:name="btnShare.icon_class" width="30" height="30" ></svgicon>
             </a>
           </li>
         </ul>
       </div>
 
-      <div>
+      <div class="footer__share">
         <ul>
           <li v-for="linkFooter in linksFooter">
             <a v-bind:href="linkFooter.path" v-bind:title="linkFooter.label">{{linkFooter.label}}</a>

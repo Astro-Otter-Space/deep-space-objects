@@ -26,17 +26,27 @@
 
   &__share {
     justify-content: center;
+    display: inline-block;
 
     li {
       position: relative;
       display: inline-block;
       margin: 0 1em;
-
+      font-size: 1.1rem;
       a {
         text-decoration: none;
         background: none;
         color: $color-text;
       }
+    }
+
+    &:first-child{
+      margin-right: 1%;
+      width: 30%;
+    }
+    &:last-child{
+      margin-left: 1%;
+      width: 60%;
     }
   }
 }
