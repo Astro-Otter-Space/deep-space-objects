@@ -81,6 +81,13 @@ textarea {
   overflow: auto;
 }
 
+hr {
+  display: block;
+  clear: both;
+  border-top: 1px solid $bgd-light-grey;
+  border-bottom: 0;
+  margin: 1em 0px;
+}
 //figure {
 //  margin: none;
 //}

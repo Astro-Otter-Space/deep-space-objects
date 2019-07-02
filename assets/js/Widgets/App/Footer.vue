@@ -28,8 +28,18 @@
           </li>
         </ul>
       </div>
-    </div>
+      <hr/>
 
+      <div class="footer__main">
+        <div class="footer__main_bloc1">
+          <p>HamHamFonFon</p>
+        </div>
+
+        <div class="footer__main_bloc2">
+          <span>{{year}}</span>
+        </div>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -46,7 +56,7 @@
       return {
         btnsShare: shareButtons,
         title: labels.title,
-        desc: labels.description,
+        desc: labels.desc,
         year: new Date().getFullYear(),
         linksFooter: linksFooter
       }
