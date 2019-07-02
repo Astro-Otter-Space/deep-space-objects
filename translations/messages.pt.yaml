@@ -320,3 +320,4 @@ legal_notice:
     city: Roubaix
     country: France
 legal_notice.contact: "Vous pouvez me contacter via la page Contact du site à l'adresse suivante : <a href=\"%url_contact%\">%label_contact%</a>"
+allRights: All rights Reserved

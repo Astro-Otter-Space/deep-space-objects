@@ -27,6 +27,7 @@
   &__share {
     justify-content: center;
     display: inline-block;
+    vertical-align: middle;
 
     li {
       position: relative;
@@ -46,7 +47,16 @@
     }
     &:last-child{
       margin-left: 1%;
-      width: 60%;
+      width: 30%;
+      display: right;
+    }
+  }
+
+  &__secondLine {
+    display : inline-flex;
+    width: 100%;
+    span {
+      margin: auto;
     }
   }
 }

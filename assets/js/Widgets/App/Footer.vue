@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__wrapper">
-      <div class="footer__main">
+      <div class="footer__main footer__share">
         <div class="footer__main_bloc1">
           <p>{{title}} </p>
         </div>
@@ -9,6 +9,14 @@
         <div class="footer__main_bloc2">
           <span>{{desc}}</span>
         </div>
+      </div>
+
+      <div class="footer__share">
+        <ul>
+          <li v-for="linkFooter in linksFooter">
+            <a v-bind:href="linkFooter.path" v-bind:title="linkFooter.label">{{linkFooter.label}}</a>
+          </li>
+        </ul>
       </div>
 
       <div class="footer__share">
@@ -21,23 +29,12 @@
         </ul>
       </div>
 
-      <div class="footer__share">
-        <ul>
-          <li v-for="linkFooter in linksFooter">
-            <a v-bind:href="linkFooter.path" v-bind:title="linkFooter.label">{{linkFooter.label}}</a>
-          </li>
-        </ul>
-      </div>
       <hr/>
 
-      <div class="footer__main">
-        <div class="footer__main_bloc1">
-          <p>HamHamFonFon</p>
-        </div>
-
-        <div class="footer__main_bloc2">
-          <span>{{year}}</span>
-        </div>
+      <div class="footer__secondLine">
+        <span>HamHamFonFon</span>
+        <span>{{year}}</span>
+        <span>{{allRights}}</span>
       </div>
     </div>
   </footer>
@@ -46,7 +43,7 @@
 <script>
   import './../Icons/index';
 
-  let labels = JSON.parse(document.getElementById('appHeader').dataset.labels);
+  let labels = JSON.parse(document.getElementById('appFooter').dataset.labels);
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
   let linksFooter = JSON.parse(document.getElementById('appFooter').dataset.links);
 
@@ -58,6 +55,7 @@
         title: labels.title,
         desc: labels.desc,
         year: new Date().getFullYear(),
+        allRights: labels.allRights,
         linksFooter: linksFooter
       }
     }
