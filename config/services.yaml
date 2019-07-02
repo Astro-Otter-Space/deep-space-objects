@@ -37,10 +37,6 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Api\Controller\:
-        resource: '../src/Api/Controller'
-        tags: ['controller.service_arguments']
-
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
@@ -71,5 +67,5 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    #sensio_framework_extra.view.listener:
-    #    alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
+    sensio_framework_extra.view.listener:
+        alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
