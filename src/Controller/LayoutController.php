@@ -151,13 +151,17 @@ class LayoutController extends AbstractController
         $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink);
 
         $result['links_footer'] = [
-            'contact' => [
-                'label' => $this->translatorInterface->trans('contact.title'),
-                'path' => $routerInterface->generate(sprintf('contact.%s', $request->getLocale())),
+            'api' => [
+                'label' => 'API',
+                'path' => $routerInterface->generate(sprintf('help_api_page.%s'), $request->getLocale())
             ],
             'legal_notice' => [
                 'label' => $this->translatorInterface->trans('legal_notice.title'),
                 'path' => $routerInterface->generate(sprintf('legal_notice.%s', $request->getLocale())),
+            ],
+            'contact' => [
+                'label' => $this->translatorInterface->trans('contact.title'),
+                'path' => $routerInterface->generate(sprintf('contact.%s', $request->getLocale())),
             ]
         ];
 

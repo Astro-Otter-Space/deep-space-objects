@@ -150,6 +150,27 @@ class PageController extends AbstractController
         return $this->render('pages/random.html.twig', $result);
     }
 
+
+    /**
+     * @Route({
+     *     "fr": "/aide/api",
+     *     "en": "/help/api",
+     *     "es": "/help/api",
+     *     "de": "/help/api",
+     *     "pt": "/help/api"
+     * }, name="help_api_page")
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function helpApiPage(Request $request)
+    {
+        $response = $this->render('pages/help_api.html.twig');
+        $response->setPublic();
+
+        return $response;
+    }
+
     /**
      * @Route({
      *     "fr": "/telechargement-donnees",
