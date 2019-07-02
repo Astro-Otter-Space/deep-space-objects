@@ -9,13 +9,11 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class DsoController
  *
  * @package App\Api\Controller
- * @Route("/api", name="api_")
  */
 final class CatalogController extends AbstractFOSRestController
 {
@@ -35,21 +33,22 @@ final class CatalogController extends AbstractFOSRestController
     /**
      * @param string $id
      *
-     * @return View
+     * @return Response
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      *
-     * @Rest\Get("/item/{$id}")
+     * @Rest\Get("/item/{$dsoId}", name="api_item_dso")
      */
-    public function getItem(string $id)
+    public function getItem($dsoId)
     {
         /** @var Dso $dso */
-        $dso = $this->dsoManager->buildDso($id);
+        $dso = $this->dsoManager->buildDso($dsoId);
+        dump($dso);
         if (!$dso instanceof Dso) {
             throw new NotFoundHttpException();
         }
 
-        return View::create($id, Response::HTTP_OK);
+        return $this->handleView($this->view($dso));
     }
 
 }

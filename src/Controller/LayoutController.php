@@ -153,7 +153,7 @@ class LayoutController extends AbstractController
         $result['links_footer'] = [
             'api' => [
                 'label' => 'API',
-                'path' => $routerInterface->generate(sprintf('help_api_page.%s'), $request->getLocale())
+                'path' => $routerInterface->generate(sprintf('help_api_page.%s', $request->getLocale()))
             ],
             'legal_notice' => [
                 'label' => $this->translatorInterface->trans('legal_notice.title'),
