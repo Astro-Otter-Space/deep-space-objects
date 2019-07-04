@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\ControllerApi;
 
 use App\Entity\Dso;
 use App\Managers\DsoManager;
@@ -30,13 +30,13 @@ final class DataController extends AbstractFOSRestController
     }
 
     /**
-     * @param string $id
+     * @param string $dsoId
      *
      * @return Response
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      *
-     * @Rest\Get("/object/{$dsoId}", name="api_object_dso")
+     * @Rest\Get("/object/{$dsoId}", requirements={"\w+"}, name="api_object_dso")
      */
     public function getItem($dsoId)
     {
@@ -51,9 +51,10 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\Get("/constellation/{$constid}", name="api_constellation")
+     * @param string $constId
+     * @Rest\Get("/constellation/{$constId}", requirements={"\w+"}, name="api_constellation")
      */
-    public function getConstellation()
+    public function getConstellation($constId)
     {
 
     }
