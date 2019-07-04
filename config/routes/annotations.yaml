@@ -1,8 +1,8 @@
 # Controller for Rest API
-#rest_controller:
-#    resource: ../../src/Api/Controller/
-#    type: annotation
-#    prefix: /api
+rest_controller:
+    resource: ../../src/ControllerApi/
+    type: annotation
+    prefix: /api
 
 # https://symfony.com/doc/current/routing.html#localized-routing-i18n
 controllers:

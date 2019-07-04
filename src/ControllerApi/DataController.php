@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @package App\Api\Controller
  */
-final class ApiCatalogController extends AbstractFOSRestController
+final class DataController extends AbstractFOSRestController
 {
     /** @var DsoManager  */
     private $dsoManager;
@@ -36,7 +36,7 @@ final class ApiCatalogController extends AbstractFOSRestController
      * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      *
-     * @Rest\Get("/item/{$dsoId}", name="api_item_dso")
+     * @Rest\Get("/object/{$dsoId}", name="api_object_dso")
      */
     public function getItem($dsoId)
     {
@@ -47,6 +47,15 @@ final class ApiCatalogController extends AbstractFOSRestController
         }
 
         return $this->handleView($this->view($dso));
+    }
+
+
+    /**
+     * @Rest\Get("/constellation/{$constid}", name="api_constellation")
+     */
+    public function getConstellation()
+    {
+
     }
 
 }
