@@ -6,7 +6,8 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            #- { path: '^/api', priorities: [ json ], fallback_format: json, prefer_extension: false }
+            - { path: '^/api', priorities: [ json ], fallback_format: json, prefer_extension: false }
+            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
     param_fetcher_listener: true
     access_denied_listener:
         json: true
@@ -14,7 +15,7 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
-    exception:
-        exception_controller: 'fos_rest.exception.controller:showAction'
-        codes:
-            Elastica\Exception\NotFoundException: 404
+#    exception:
+#        exception_controller: 'fos_rest.exception.controller:showAction'
+#        codes:
+#            Elastica\Exception\NotFoundException: 404
