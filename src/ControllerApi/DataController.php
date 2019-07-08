@@ -39,7 +39,7 @@ final class DataController extends AbstractFOSRestController
      *
      * @Rest\Get("/object/{$dsoId}", name="api_object_dso")
      */
-    public function getItem($dsoId)
+    public function getDso($dsoId)
     {
         /** @var Dso $dso */
         $dso = $this->dsoManager->buildDso($dsoId);
@@ -60,4 +60,9 @@ final class DataController extends AbstractFOSRestController
         dump('coucou');
     }
 
+    public function getDsoBy()
+    {
+
+    }
+    
 }
