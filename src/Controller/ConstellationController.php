@@ -83,7 +83,7 @@ class ConstellationController extends AbstractController
 
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null,25);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, 300);
 
         $constellation->setListDso($listDso);
         $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
