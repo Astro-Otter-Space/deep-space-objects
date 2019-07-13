@@ -86,7 +86,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7252 | 7840 |
 | Sharpless | sh |127 | 313 |
-| Index catalog | ic | 208 | 5386 |
+| Index catalog | ic | 213 | 5386 |
 | RCW | rcw |38 | 182 |
 | Collinder | cr | 90 | 471 |
 | Caldwell | cld | 109 | 109 |
