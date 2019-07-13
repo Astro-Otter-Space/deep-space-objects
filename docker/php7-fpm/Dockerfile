@@ -1,5 +1,5 @@
 # Source : https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 #USER root
 ARG TIMEZONE
 ARG UID
@@ -45,8 +45,15 @@ RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
 
 # memcached
-RUN pecl install memcached-3.0.4 \
-    && docker-php-ext-enable memcached
+#RUN pecl install memcached-3.0.4 \
+#    && docker-php-ext-enable memcached
+RUN set -ex \
+    && rm -rf /var/lib/apt/lists/* \
+    && MEMCACHED="`mktemp -d`" \
+    && curl -skL https://github.com/php-memcached-dev/php-memcached/archive/master.tar.gz | tar zxf - --strip-components 1 -C $MEMCACHED \
+    && docker-php-ext-configure $MEMCACHED \
+    && docker-php-ext-install $MEMCACHED \
+    && rm -rf $MEMCACHED
 
 RUN { \
 		echo 'opcache.enable= 1'; \
