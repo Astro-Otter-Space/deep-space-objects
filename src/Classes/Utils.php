@@ -90,6 +90,7 @@ class Utils
         'biu',
         'mel',
         'boc',
+        'ber',
         self::UNASSIGNED
     ];
 
