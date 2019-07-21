@@ -7,7 +7,7 @@ var MAP_MODULE = (function(c, constId, color) {
 
   let PROXIMITY_LIMIT = 20;
 
-  let starFile = 'stars.' + constId + '.json'
+  let starFile = 'stars.' + constId + '.json';
   let config = {
     width: 0,
     projection: "aitoff",
