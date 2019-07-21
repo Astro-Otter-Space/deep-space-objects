@@ -110,7 +110,7 @@ RUN echo "memory_limit= 512M" >> /usr/local/etc/php/conf.d/030-custom.ini
 # NPM & Node
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
 RUN apt-get install -y nodejs npm \
-  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 9
 # build tools
 RUN apt-get install -y build-essential
 
@@ -125,9 +125,6 @@ RUN apt-get install -y yarn
 
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Scalingo
-RUN curl -O https://cli-dl.scalingo.io/install && bash install
 
 CMD ["php-fpm", "-F"]
 EXPOSE 9000
