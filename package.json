@@ -2,7 +2,7 @@
     "devDependencies": {
         "@symfony/webpack-encore": "^0.27.0",
         "vue-svgicon": "^3.2.4",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.8.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -16,28 +16,28 @@
     "dependencies": {
         "@types/leaflet": "1.2.11",
         "@voerro/vue-tagsinput": "^1.11.2",
-        "axios": "^0.18.0",
+        "axios": "^0.18.1",
         "copy-webpack-plugin": "^4.6.0",
         "d3-celestial": "0.6.10",
-        "flatpickr": "^4.5.7",
+        "flatpickr": "^4.6.2",
         "leaflet": "^1.5.0",
         "node-sass": "^4.12.0",
         "sass-loader": "^7.0.1",
         "sass-mq-build": "^1.0.0",
         "vue": "^2.6.10",
         "vue-agile": "^0.3.7",
-        "vue-burger-menu": "^2.0.1",
+        "vue-burger-menu": "^2.0.2",
         "vue-flux": "^5.1.9",
-        "vue-i18n": "^8.4.0",
+        "vue-i18n": "^8.12.0",
         "vue-lazy-image-loading": "^1.1.5",
-        "vue-loader": "^15.4.2",
+        "vue-loader": "^15.7.1",
         "vue-plain-pagination": "^0.3.0",
         "vue-pure-lightbox": "^2.1.8",
-        "vue-router": "^3.0.2",
-        "vue-social-sharing": "^2.3.3",
-        "vue-template-compiler": "^2.5.18",
+        "vue-router": "^3.0.7",
+        "vue-social-sharing": "^2.4.5",
+        "vue-template-compiler": "^2.6.10",
         "vue2-autocomplete-js": "^0.2.2",
         "vue2-leaflet": "^2.1.1",
-        "vue2-touch-events": "^1.1.1"
+        "vue2-touch-events": "^1.1.2"
     }
 }

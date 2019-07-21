@@ -1183,7 +1183,7 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
 
-axios@^0.18.0:
+axios@^0.18.1:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
   integrity sha512-0BfJq4NSfQXd+SkFdrvFbG7addhYSBA2mQwISr46pD6E5iqkWg02RAs8vyTT/j0RTnoYmeXauBuSv1qKwR179g==
@@ -2887,7 +2887,7 @@ findup-sync@3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
-flatpickr@^4.5.7:
+flatpickr@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.2.tgz#50e1b4fc84fbf67c5b0919ba3ddc330221f126da"
   integrity sha512-bRfBPyxohUQWgCTg6jPALUO1t/x+sRJ/S/RVti/NzYvHqGRpCAesKSWKLzOuLmpu+vGHfXBld4SXvOCLFgYb+g==
@@ -6951,7 +6951,7 @@ vue-agile@^0.3.7:
   dependencies:
     vue "2.*.*"
 
-vue-burger-menu@^2.0.1:
+vue-burger-menu@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-2.0.2.tgz#49c9568798480faf8d5c681c86768e051b9db1d0"
   integrity sha512-SOJKRyEiSm92Qafnu1AxKKb9vQkFSHN5RtVyOi0heteObxPhz9gyT2tneInkOL8F9WdDwvop6EcDk/EeIl9p1A==
@@ -6970,7 +6970,7 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
   integrity sha512-KmvZVtmM26BQOMK1rwUZsrqxEGeKiYSZGA7SNWE6uExx8UX/cj9hq2MRV/wWC3Cq6AoeDGk57rL9YMFRel/q+g==
 
-vue-i18n@^8.4.0:
+vue-i18n@^8.12.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.12.0.tgz#25b56e9fab7e78a0ff58b8b4fba336ad328cce11"
   integrity sha512-Wh40dvkYZH0CntkhQQEed7nY8P/8xOOHy5Bl9W/WmmmW0oLYIL66XWwOqlcnNbLaL5HGN7XISydYVqXS0Sst9w==
@@ -6980,7 +6980,7 @@ vue-lazy-image-loading@^1.1.5:
   resolved "https://registry.yarnpkg.com/vue-lazy-image-loading/-/vue-lazy-image-loading-1.1.5.tgz#248902dfbbbf9c7235e097b14e6d97c323431983"
   integrity sha512-d6N1BRMHEkEuxlWdvGYpl4IfdzH4C9olBVjFjc7su4VD2DFdhIbsuQQlRwXWHRlD6F+YtBsnCkLEzPQ4WnB2ug==
 
-vue-loader@^15.4.2:
+vue-loader@^15.7.1:
   version "15.7.1"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.7.1.tgz#6ccacd4122aa80f69baaac08ff295a62e3aefcfd"
   integrity sha512-fwIKtA23Pl/rqfYP5TSGK7gkEuLhoTvRYW+TU7ER3q9GpNLt/PjG5NLv3XHRDiTg7OPM1JcckBgds+VnAc+HbA==
@@ -7005,12 +7005,12 @@ vue-pure-lightbox@^2.1.8:
   dependencies:
     vue "^2.3.3"
 
-vue-router@^3.0.2:
+vue-router@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.7.tgz#b36ca107b4acb8ff5bc4ff824584059c23fcb87b"
   integrity sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ==
 
-vue-social-sharing@^2.3.3:
+vue-social-sharing@^2.4.5:
   version "2.4.5"
   resolved "https://registry.yarnpkg.com/vue-social-sharing/-/vue-social-sharing-2.4.5.tgz#37e298b290771e8e7482a911b13544c1aa429dc3"
   integrity sha512-6hZ1fcHdDPLzpvd44yt+3DOCfUiqAAiFQF+odhdpFQ5MU3HJ2eofD0UZqgwPLP08duYuNesx+ntldAZG4GV5Xw==
@@ -7038,7 +7038,7 @@ vue-svgicon@^3.2.4:
     tslib "^1.9.3"
     yargs "^12.0.1"
 
-vue-template-compiler@^2.5.18:
+vue-template-compiler@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.10.tgz#323b4f3495f04faa3503337a82f5d6507799c9cc"
   integrity sha512-jVZkw4/I/HT5ZMvRnhv78okGusqe0+qH2A0Em0Cp8aq78+NK9TII263CDVz2QXZsIT+yyV/gZc/j/vlwa+Epyg==
@@ -7063,7 +7063,7 @@ vue2-leaflet@^2.1.1:
   resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.1.1.tgz#33ec8920bd1e273b312209a84ce355021226ee79"
   integrity sha512-boJIObTHJOtiLqPDtcL8FdQMr/PLDyZ6/InQBU13mcmNtn4/hvzbyqLmVtvWbRFeGOifAMkJBlbj3gLjrhFdmw==
 
-vue2-touch-events@^1.1.1:
+vue2-touch-events@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vue2-touch-events/-/vue2-touch-events-1.1.2.tgz#e900eb22ae067c3915976e1d38454be08cec0a7d"
   integrity sha512-xY5y76R9Rrhjs1ezrJE+GPI5C38JGj1Bz2aB2KAF+COwdVuW9ghaLj77JjOapVUXqqBL36ZObsZ68LD3DZzjmA==
@@ -7177,7 +7177,7 @@ webpack-manifest-plugin@^2.0.2:
     lodash ">=3.5 <5"
     tapable "^1.0.0"
 
-webpack-notifier@^1.6.0:
+webpack-notifier@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.8.0.tgz#994bdde0fcefc5f1a92b6d91353c8152ddd9c583"
   integrity sha512-I6t76NoPe5DZCCm5geELmDV2wlJ89LbU425uN6T2FG8Ywrrt1ZcUMz6g8yWGNg4pttqTPFQJYUPjWAlzUEQ+cQ==
