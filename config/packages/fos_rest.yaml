@@ -6,15 +6,16 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: '^/api', priorities: [ json ], fallback_format: json, prefer_extension: false }
-            - { path: '^/', priorities: [ 'html', '*/*'], fallback_format: ~, prefer_extension: true }
+            - { path: '^/api', priorities: [ json ], fallback_format: json, prefer_extension: true }
     param_fetcher_listener: true
     access_denied_listener:
         json: true
     view:
-        view_response_listener: 'force'
+        view_response_listener: true
         formats:
             json: true
+    zone:
+        - { path: ^/api/* }
 #    exception:
 #        exception_controller: 'fos_rest.exception.controller:showAction'
 #        codes:

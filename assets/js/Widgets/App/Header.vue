@@ -1,8 +1,7 @@
 <template>
   <header class="header">
 
-    <Slide :burgerIcon="false" ref="slideMenu" width="300">
-      <!--TODO : target blank-->
+    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
