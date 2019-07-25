@@ -4,8 +4,11 @@ namespace App\ControllerApi;
 
 use App\Entity\Dso;
 use App\Managers\DsoManager;
+use App\Repository\DsoRepository;
+use Elastica\Document;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\ConfigurableViewHandlerInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,50 +24,49 @@ final class DataController extends AbstractFOSRestController
 {
     const JSON_FORMAT = 'json';
 
-    /** @var DsoManager  */
-    private $dsoManager;
+    const LIMIT = 20;
+
+    /** @var DsoRepository  */
+    private $dsoRepository;
 
     /**
-     * DsoController constructor.
+     * DataController constructor.
      *
-     * @param DsoManager $dsoManager
+     * @param DsoRepository $dsoRepository
      */
-    public function __construct(DsoManager $dsoManager)
+    public function __construct(DsoRepository $dsoRepository)
     {
-        $this->dsoManager = $dsoManager;
+        $this->dsoRepository = $dsoRepository;
     }
 
 
     /**
-     * @Rest\View()
      * @Rest\Get("/object/{id}", name="api_object_dso")
      *
      * @param string $id
      *
      * @return View
-     * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
     public function getDso(string $id): View
     {
-        /** @var Dso $dso */
-        $dso = $this->dsoManager->buildDso($id);
+        /** @var Document $dso */
+        $dso = $this->dsoRepository->getObjectById($id, false);
 
-        if (!$dso instanceof Dso) {
+        if (is_null($dso)) {
             throw new NotFoundHttpException();
         }
 
-//        dump($dso);
-        /** @var Serializer $serializer */
-        $serializer = $this->container->get('serializer');
-
-        $jsonDso = $serializer->serialize($dso, self::JSON_FORMAT);
-
-//        dump($jsonDso);
-        $view = View::create($dso, Response::HTTP_OK);
+        $view = View::create($dso->getData(), Response::HTTP_OK);
         $view->setFormat(self::JSON_FORMAT);
 
         return $view;
+    }
+
+
+    public function getDsoBy(): View
+    {
+
     }
 
 }

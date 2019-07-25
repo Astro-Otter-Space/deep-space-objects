@@ -80,14 +80,19 @@ class DsoRepository extends AbstractRepository
      * Retrieve object by his Id
      *
      * @param $id
-     * @return Dso|null
+     * @param boolean $hydrate
+     * @return Dso|Document|null
      * @throws \ReflectionException
      */
-    public function getObjectById($id)
+    public function getObjectById($id, $hydrate = true)
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-            return $this->buildEntityFromDocument($resultDocument->getDocuments()[0]);
+            if ($hydrate) {
+                return $this->buildEntityFromDocument($resultDocument->getDocuments()[0]);
+            } else {
+                return $resultDocument->getDocuments()[0];
+            }
         } else {
             return null;
         }
@@ -358,7 +363,6 @@ class DsoRepository extends AbstractRepository
         $dso = new $entity;
 
         $dso->setLocale($this->getLocale())->buildObjectR($document);
-        //$dso->setHash(md5($dso->toArray()));
 
         return $dso;
     }
