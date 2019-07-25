@@ -26,6 +26,12 @@ final class DataController extends AbstractFOSRestController
 
     const LIMIT = 20;
 
+    private static $authorizedTypes = [
+        'constellation' => 'const_id',
+        'catalog' => 'catalog',
+        'type' => 'type'
+    ];
+
     /** @var DsoRepository  */
     private $dsoRepository;
 
@@ -64,7 +70,11 @@ final class DataController extends AbstractFOSRestController
     }
 
 
-    public function getDsoBy(): View
+    /**
+     * @Rest\Get("/objects/{type}/{value}")
+     * @return View
+     */
+    public function getDsoBy(string $type, string $value): View
     {
 
     }
