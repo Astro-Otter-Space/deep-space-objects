@@ -2,6 +2,7 @@
 
 namespace App\ControllerApi;
 
+use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\Dso;
 use App\Entity\ListDso;
@@ -121,4 +122,29 @@ final class DataController extends AbstractFOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param ParamFetcher $paramFetcher
+     * @param string $catalog
+     *
+     * @return Response
+     * @throws \ReflectionException
+     * @Rest\Get("/objetcs/by_catalog/{catalog}", name="api_objects_by_catalog")
+     * @Rest\QueryParam(name="offset", requirements="\d+", default="")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="20")
+     */
+    public function getDsoByCatalog(ParamFetcher $paramFetcher, string $catalog): Response
+    {
+//        if (!in_array($catalog, Utils::getCatalogMapping()))
+        $offset = (int)$paramFetcher->get('offset') ?? DsoRepository::FROM;
+        $limit = (int)$paramFetcher->get('limit') ?? self::LIMIT;
+
+        $dsoData = $this->dsoRepository->getObjectsCatalogByFilters($offset, ['catalog' => $catalog], $limit);
+
+        $formatedData = $this->buildJsonApi($dsoData, Response::HTTP_OK);
+
+        $view = $this->view($formatedData, Response::HTTP_OK);
+        $view->setFormat(self::JSON_FORMAT);
+
+        return $this->handleView($view);
+    }
 }

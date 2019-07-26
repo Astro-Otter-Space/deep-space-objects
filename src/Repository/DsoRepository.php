@@ -197,7 +197,7 @@ class DsoRepository extends AbstractRepository
      * @return array
      * @throws \ReflectionException
      */
-    public function getObjectsCatalogByFilters($from = 0, $filters, $to = null)
+    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null)
     {
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
