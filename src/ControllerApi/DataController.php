@@ -2,12 +2,15 @@
 
 namespace App\ControllerApi;
 
+use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\Dso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Elastica\Document;
+use Elastica\Exception\NotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\ControllerTrait;
 use FOS\RestBundle\View\ConfigurableViewHandlerInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +25,9 @@ use Symfony\Component\Serializer\Serializer;
  */
 final class DataController extends AbstractFOSRestController
 {
+
+    use DsoTrait;
+
     const JSON_FORMAT = 'json';
 
     const LIMIT = 20;
@@ -51,22 +57,27 @@ final class DataController extends AbstractFOSRestController
      *
      * @param string $id
      *
-     * @return View
+     * @return Response
      * @throws \ReflectionException
      */
-    public function getDso(string $id): View
+    public function getDso(string $id): Response
     {
         /** @var Document $dso */
         $dso = $this->dsoRepository->getObjectById($id, false);
 
         if (is_null($dso)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundException(sprintf("%s is not an correct item", $id));
+        } else {
+            $codeHttp = Response::HTTP_OK;
+            $data = $dso->getData();
         }
 
-        $view = View::create($dso->getData(), Response::HTTP_OK);
+        $formatedData = $this->buildJsonApi($data, $codeHttp);
+
+        $view = $this->view($formatedData, $codeHttp);
         $view->setFormat(self::JSON_FORMAT);
 
-        return $view;
+        return $this->handleView($view);
     }
 
 

@@ -16,7 +16,8 @@ fos_rest:
             json: true
     zone:
         - { path: ^/api/* }
-#    exception:
-#        exception_controller: 'fos_rest.exception.controller:showAction'
-#        codes:
-#            Elastica\Exception\NotFoundException: 404
+    exception:
+        enabled: true
+        exception_controller: 'fos_rest.exception.controller:showAction'
+        codes:
+            { Elastica\Exception\NotFoundException: 404, \Exception: 500}

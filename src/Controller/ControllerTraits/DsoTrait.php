@@ -70,4 +70,20 @@ trait DsoTrait
         return array_merge($allFilters, $this->buildFilters($listDso));
     }
 
+
+    /**
+     * @param array $data
+     * @param int $codeHttp
+     *
+     * @return array
+     */
+    public function buildJsonApi($data, $codeHttp)
+    {
+        $status = (in_array(substr($codeHttp, 0, 1), [4, 5])) ? 'error' : 'success';
+        return [
+            'status' => $status,
+            'code' => $codeHttp,
+            'data' => $data
+        ];
+    }
 }

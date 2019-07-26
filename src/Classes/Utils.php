@@ -91,6 +91,7 @@ class Utils
         'mel',
         'boc',
         'ber',
+        'mel',
         self::UNASSIGNED
     ];
 
@@ -115,7 +116,7 @@ class Utils
     }
 
     /**
-     * @return array, bien rentré :) ? ALors
+     * @return array
      */
     public static function getOrderCatalog()
     {
