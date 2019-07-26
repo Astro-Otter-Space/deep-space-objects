@@ -80,10 +80,16 @@ trait DsoTrait
     public function buildJsonApi($data, $codeHttp)
     {
         $status = (in_array(substr($codeHttp, 0, 1), [4, 5])) ? 'error' : 'success';
-        return [
+        $dataResponse = [
             'status' => $status,
             'code' => $codeHttp,
             'data' => $data
         ];
+
+        if (is_array($data) && 1 < count($data)) {
+            $dataResponse['count'] = count($data);
+        }
+
+        return $dataResponse;
     }
 }

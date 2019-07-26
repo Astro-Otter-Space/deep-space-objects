@@ -113,7 +113,7 @@ class DsoManager
     public function getListDsoFromConst(Dso $dso, $limit)
     {
         /** @var ListDso $listDso */
-        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), $limit);
+        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), 0, $limit);
     }
 
     /**

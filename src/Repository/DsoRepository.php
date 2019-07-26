@@ -102,14 +102,20 @@ class DsoRepository extends AbstractRepository
      * Retrieve  list of Dso objects in a constellation
      * @param $constId
      * @param null $excludedId
-     * @param $limit
-     * @return ListDso
+     * @param int $offset
+     * @param int $limit
+     * @param bool $hydrate
+     * @return ListDso|array
      * @throws \ReflectionException
      */
-    public function getObjectsByConstId($constId, $excludedId = null, $limit): ListDso
+    public function getObjectsByConstId($constId, $excludedId = null, $offset, $limit, $hydrate = true)
     {
-        if (empty($limit)) {
-            $limit = parent::SIZE;
+        if (empty($offset) || is_null($offset)) {
+            $offset = parent::FROM;
+        }
+
+        if (empty($limit) || is_null($limit)) {
+            $limit = (int)parent::SIZE;
         }
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
@@ -131,7 +137,8 @@ class DsoRepository extends AbstractRepository
             ->addMustNot($mustNotQuery);
 
         $query->setQuery($boolQuery);
-        $query->setFrom(parent::FROM)->setSize($limit);
+
+        $query->setFrom($offset)->setSize($limit);
 
         $query->addSort(
             [
@@ -145,6 +152,9 @@ class DsoRepository extends AbstractRepository
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
         if (0 < $search->count()) {
+            if (false === $hydrate) {
+                return $search->getDocuments();
+            }
             foreach ($search->getDocuments() as $document) {
                 $dsoList->addDso($this->buildEntityFromDocument($document));
             }
@@ -405,7 +415,7 @@ class DsoRepository extends AbstractRepository
                 'catalog' => $typeCatalog
             ]
         ]
-    ];   
+    ];
 **/
 
 }
