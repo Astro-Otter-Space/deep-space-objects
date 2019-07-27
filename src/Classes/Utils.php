@@ -95,6 +95,30 @@ class Utils
         self::UNASSIGNED
     ];
 
+    private static $listTypeDso = [
+        'gg',
+        'g',
+        's',
+        's0',
+        'sd',
+        'e',
+        'i',
+        'oc',
+        'gc',
+        'en',
+        'bn',
+        'bpn',
+        'sfr',
+        'rn',
+        'pn',
+        'snr',
+        'dn',
+        'pos',
+        'sc',
+        'vn',
+        'ga'
+    ];
+
     /**
      * @var array
      */
@@ -110,24 +134,34 @@ class Utils
     /**
      * @return array
      */
-    public static function getCatalogMapping()
+    public static function getCatalogMapping(): array
     {
         return self::$catalogMapping;
     }
 
     /**
+     * List of all catalogs, ordering
      * @return array
      */
-    public static function getOrderCatalog()
+    public static function getOrderCatalog(): array
     {
         return self::$orderCatalog;
+    }
+
+    /**
+     * List type of DSO
+     * @return array
+     */
+    public static function getListTypeDso(): array
+    {
+        return self::$listTypeDso;
     }
 
     /**
      * @param $array
      * @return mixed
      */
-    public static function utf8_converter($array)
+    public static function utf8_converter($array): array
     {
         array_walk_recursive($array, function (&$item, $key) {
             if (!mb_detect_encoding($item, 'utf-8', true)) {
@@ -199,9 +233,9 @@ class Utils
     }
 
     /**
-     *
+     * List of topics for contact form
      */
-    public static function listTopicsContact()
+    public static function listTopicsContact(): array
     {
         return self::$listTopics;
     }

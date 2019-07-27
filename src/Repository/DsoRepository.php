@@ -194,10 +194,11 @@ class DsoRepository extends AbstractRepository
      * @param $from
      * @param $filters
      * @param int|null $to
+     * @param bool $hydrate
      * @return array
      * @throws \ReflectionException
      */
-    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null)
+    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null, $hydrate = true)
     {
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
@@ -282,6 +283,10 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
         $nbItems = $search->getTotalHits();
+
+        if (false === $hydrate) {
+            return [$search->getDocuments(), $nbItems];
+        }
 
         /** @var ListDso $listDso */
         $listDso = new ListDso();

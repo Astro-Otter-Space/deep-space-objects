@@ -70,7 +70,6 @@ trait DsoTrait
         return array_merge($allFilters, $this->buildFilters($listDso));
     }
 
-
     /**
      * @param array $data
      * @param int $codeHttp
