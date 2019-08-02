@@ -9,6 +9,7 @@
         "friendsofsymfony/rest-bundle": "^2.5",
         "hamhamfonfon/astrobin": "dev-master",
         "jms/serializer-bundle": "^3.3",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "ruflin/elastica": "^6.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "^4.2",
