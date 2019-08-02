@@ -6,34 +6,49 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            id: App\Security\UserProvider
+        api_entity_provider:
+            entity:
+                class: App\Entity\ApiUser
+                property: username
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api_login:
+            pattern: ^/api/auth/login
+            stateless: true
+            anonymous: true
+            json_login:
+                provider: api_entity_provider
+                check_path: /api/auth/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api_register:
+            pattern:  ^/api/auth/register
+            stateless: true
+            anonymous: true
         api:
             pattern:  ^/api
-            anonymous: true
-            # activate different ways to authenticate
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+            stateless: true
+            anonymous: false
+            provider: api_entity_provider
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
             pattern: ^/
             anonymous: true
-            logout:
-                path: app_logout
-            guard:
-                authenticators:
-                    - App\Security\AppESAuthenticator
+#            logout:
+#                path: app_logout
+#            guard:
+#                authenticators:
+#                    - App\Security\AppESAuthenticator
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
         # - { path: ^/profile, roles: ROLE_USER }

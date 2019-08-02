@@ -41,6 +41,21 @@ composer install
 yarn install
 ``` 
 
+#### Create JWT tokens
+```
+openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+```
+
+#### Create API users
+```
+curl -X POST -H "Content-Type: application/json" http://<url>/api/register -d '{"username":"user-login","password":"user-pwd", "email":"test@email.com"}'
+```
+
+### Authentication API
+``` 
+curl -X POST -H "Content-Type: application/json" http://<url>>/api/auth/login -d '{"username":"user-login","password":"user-pwd"}'
+```
 Symfony app :
  - http://symfony.local
 
