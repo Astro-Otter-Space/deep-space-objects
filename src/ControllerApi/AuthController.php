@@ -23,7 +23,7 @@ class AuthController extends AbstractController
     /**
      * @Route("/register", name="api_auth_register", methods={"POST"})
      * @param Request $request
-     * @param $userManager
+     * @param UserPasswordEncoderInterface $encoder
      *
      * @return JsonResponse
      */
