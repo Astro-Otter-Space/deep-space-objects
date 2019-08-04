@@ -7,8 +7,7 @@ networks:
 volumes:
     es_data:
         driver: local
-    mysql_data:
-        driver: local
+    mysql_data: {}
 
 services:
     # PHP
@@ -82,14 +81,15 @@ services:
             - 9200:9200
         networks:
             - dso_stack
+
     # MySQL
     mysql:
         image: mysql:5.7
-        command: ["--default-authentication-plugin=mysql_native_password"]
         container_name: dso_mysql
+        hostname: mysql
         restart: always
         volumes:
-            - mysql_data:/var/lib/mysql
+            - mysql-data:/var/lib/mysql:rw
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_DATABASE=${MYSQL_DATABASE}
