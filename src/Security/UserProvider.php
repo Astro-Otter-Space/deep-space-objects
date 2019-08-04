@@ -7,6 +7,12 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * @deprecated
+ * Class UserProvider
+ *
+ * @package App\Security
+ */
 class UserProvider implements UserProviderInterface
 {
     /**

@@ -7,7 +7,8 @@ networks:
 volumes:
     es_data:
         driver: local
-
+    mysql_data:
+        driver: local
 
 services:
     # PHP
@@ -81,7 +82,23 @@ services:
             - 9200:9200
         networks:
             - dso_stack
-
+    # MySQL
+    mysql:
+        image: mysql
+        container_name: dso_mysql
+        hostname: mysql
+        restart: always
+        volumes:
+            - mysql_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+          - 3307:3306
+        networks:
+          - dso_stack
     #SMTP
     maildev:
         image: djfarrelly/maildev

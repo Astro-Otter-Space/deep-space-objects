@@ -4,36 +4,46 @@
 namespace App\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class ApiUser
  * @package App\Entity
+ * @ORM\Entity()
+ * @ORM\Table(name="api_users")
  */
 class ApiUser implements UserInterface
 {
 
     /**
      * @var
+     * @ORM\Id()
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var
+     * @ORM\Column(type="string", unique=true, length=25)
      */
     private $username;
 
     /**
      * @var
+     * @ORM\Column(length=64, type="string")
      */
     private $password;
 
     /**
      * @var
+     * @ORM\Column(type="boolean")
      */
     private $isActive;
 
     /**
      * @var
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
 

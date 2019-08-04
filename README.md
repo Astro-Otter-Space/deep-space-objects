@@ -73,7 +73,7 @@ yarn encore prod
 Elastic Search
 ==
 
-Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create two indexes, each got his own mapping. 
+Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create many indexes, each one got his own mapping. 
 
 ### Create index with mappings and import data
 ```
