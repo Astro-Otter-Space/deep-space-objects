@@ -84,7 +84,7 @@ services:
             - dso_stack
     # MySQL
     mysql:
-        image: mysql
+        image: mysql:5.7
         container_name: dso_mysql
         hostname: mysql
         restart: always
