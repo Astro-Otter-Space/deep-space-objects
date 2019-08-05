@@ -96,6 +96,7 @@ final class DataController extends AbstractFOSRestController
      * @throws \ReflectionException
      *
      * @Rest\Get("/dso/get_objects_by", name="api_dso_get_items")
+     *
      * @Rest\QueryParam(name="constellation", requirements="\w+", default="")
      * @Rest\QueryParam(name="catalog", requirements="\w+", default="")
      * @Rest\QueryParam(name="type", requirements="\w+",default="")
@@ -155,6 +156,9 @@ final class DataController extends AbstractFOSRestController
     /**
      * @Rest\Get("/objects/by_constellation/{constellation}", name="api_objects_by_constellation")
      *
+     * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
+     *
      * @param ParamFetcher $paramFetcher
      * @param string $constellation
      *
@@ -164,7 +168,18 @@ final class DataController extends AbstractFOSRestController
      */
     public function getDsoByConstellation(ParamFetcher $paramFetcher, string $constellation): View
     {
-        return $this->routeRedirectView('api_dso_get_items', ['constellation' => $constellation], Response::HTTP_MOVED_PERMANENTLY);
+        $offset = (int)$paramFetcher->get('offset') ?? null;
+        $limit = (int)$paramFetcher->get('limit') ?? null;
+
+        $params = ['constellation' => $constellation];
+        if (!is_null($offset)) {
+            $params['offset'] = $offset;
+        }
+        if (!is_null($limit)) {
+            $params['limit'] = $limit;
+        }
+
+        return $this->routeRedirectView('api_dso_get_items', $params, Response::HTTP_MOVED_PERMANENTLY);
     }
 
     /**
@@ -173,13 +188,27 @@ final class DataController extends AbstractFOSRestController
      *
      * @return View
      * @Rest\Get("/dso/by_catalog/{catalog}", name="api_objects_by_catalog")
+     * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      */
     public function getDsoByCatalog(ParamFetcher $paramFetcher, string $catalog): View
     {
         if (!in_array($catalog, Utils::getOrderCatalog())) {
             throw new InvalidParameterException("Parameter \"$catalog\" for catalog does not exist");
         }
-        return $this->routeRedirectView('api_dso_get_items', ['catalog' => $catalog], Response::HTTP_MOVED_PERMANENTLY);
+
+        $offset = (int)$paramFetcher->get('offset') ?? null;
+        $limit = (int)$paramFetcher->get('limit') ?? null;
+
+        $params = ['catalog' => $catalog];
+        if (!is_null($offset)) {
+            $params['offset'] = $offset;
+        }
+        if (!is_null($limit)) {
+            $params['limit'] = $limit;
+        }
+
+        return $this->routeRedirectView('api_dso_get_items', $params, Response::HTTP_MOVED_PERMANENTLY);
     }
 
     /**
@@ -189,12 +218,25 @@ final class DataController extends AbstractFOSRestController
      * @return View
      *
      * @Rest\Get("/dso/by_type/{type}", name="api_objects_by_type")
+     * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
+     * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      */
     public function getDsoByType(ParamFetcher $paramFetcher, string $type): View
     {
         if (!in_array($type, Utils::getListTypeDso())) {
             throw new InvalidParameterException("Parameter \"$type\" for type does not exist");
         }
-        return $this->routeRedirectView('api_dso_get_items', ['type' => $type], Response::HTTP_MOVED_PERMANENTLY);
+
+        $offset = (int)$paramFetcher->get('offset') ?? null;
+        $limit = (int)$paramFetcher->get('limit') ?? null;
+
+        $params = ['type' => $type];
+        if (!is_null($offset)) {
+            $params['offset'] = $offset;
+        }
+        if (!is_null($limit)) {
+            $params['limit'] = $limit;
+        }
+        return $this->routeRedirectView('api_dso_get_items', $params, Response::HTTP_MOVED_PERMANENTLY);
     }
 }
