@@ -41,6 +41,12 @@ composer install
 yarn install
 ``` 
 
+### Database
+Run migration :
+``` 
+php bin/console doctrine:migrations:migrate
+```
+
 #### Create JWT tokens
 From [LexikJWTAuthenticationBundle](https://github.com/lexik/LexikJWTAuthenticationBundle)
 ```
