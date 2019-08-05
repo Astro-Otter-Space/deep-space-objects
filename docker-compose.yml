@@ -7,7 +7,7 @@ networks:
 volumes:
     es_data:
         driver: local
-    mysql_data: {}
+    db_data: {}
 
 services:
     # PHP
@@ -83,13 +83,13 @@ services:
             - dso_stack
 
     # MySQL
-    mysql:
-        image: mysql:5.7
-        container_name: dso_mysql
-        hostname: mysql
+    database:
+        image: mariadb:10.3
+        container_name: dso_database
+        hostname: database
         restart: always
         volumes:
-            - mysql_data:/var/lib/mysql:rw
+            - db_data:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -99,6 +99,7 @@ services:
           - 3307:3306
         networks:
           - dso_stack
+
     #SMTP
     maildev:
         image: djfarrelly/maildev
