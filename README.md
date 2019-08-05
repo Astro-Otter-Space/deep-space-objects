@@ -63,7 +63,7 @@ curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/register 
 
 ### Authentication API
 ``` 
-curl -X POST -H "Content-Type: application/json" http://<url>>/api/auth/login -d '{"username":"user-login","password":"user-pwd"}'
+curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/login -d '{"username":"<user-login>","password":"<user-pwd>"}'
 ```
 Symfony app :
  - http://symfony.local
