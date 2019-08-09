@@ -15,6 +15,10 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api_register:
+            pattern:  ^/api/auth/register
+            stateless: true
+            anonymous: true
         api_login:
             pattern: ^/api/auth/login
             stateless: true
@@ -24,10 +28,6 @@ security:
                 check_path: /api/auth/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        api_register:
-            pattern:  ^/api/auth/register
-            stateless: true
-            anonymous: true
         api:
             pattern:  ^/api
             stateless: true
@@ -48,7 +48,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY}
         # - { path: ^/profile, roles: ROLE_USER }
