@@ -243,6 +243,7 @@ contact.title: "Contact us"
 form.error.sending: "A problem has occurred, please try later"
 form.ok.sending: "Message sended"
 form.error.message: "Please fix errors below"
+form.api.success: "Registration OK. You will receive soon in your mailbo a bearer token for API."
 contact.form.firstname: "Firstname (*)"
 contact.placeholder.firstname: "Please enter your firstname"
 contact.form.lastname: "Lastname (*)"
@@ -261,6 +262,7 @@ contact.option.other: "Other"
 contact.form.message: "Message (*)"
 contact.form.submit: "Submit"
 contact.mandatory: "(*) All fields are mandatory"
+register.form.password: "Password (*)"
 # desc
 constellationListDesc: List of celestial constellations
 dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.

@@ -172,6 +172,7 @@ class PageController extends AbstractController
      */
     public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $isValid = false;
         /** @var ApiUser $apiUser */
         $apiUser = new ApiUser();
 
@@ -195,13 +196,18 @@ class PageController extends AbstractController
 
                 $em->persist($apiUser);
                 $em->flush();
-            } else {
 
+                $isValid = true;
+                $this->addFlash('form.failed', 'form.api.success');
+            } else {
+                $isValid = false;
+                $this->addFlash('form.failed', 'form.error.message');
             }
         }
 
         /**  */
-        $result['form'] = $registerApiUserForm->createView();
+        $result['formRegister'] = $registerApiUserForm->createView();
+        $result['is_valid'] = $isValid;
 
         $response = $this->render('pages/help_api.html.twig', $result);
         $response->setPublic();

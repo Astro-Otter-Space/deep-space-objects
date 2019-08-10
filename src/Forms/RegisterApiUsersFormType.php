@@ -33,30 +33,36 @@ class RegisterApiUsersFormType extends AbstractType
     {
 
         $builder->add('email', EmailType::class, [
-            'label' => '',
+            'label' => 'contact.form.email',
             'label_attr' => [
                 'class' => ContactFormType::CLASS_LABEL
             ],
+            'attr' => [
+                'class' => 'Form__input'
+            ]
         ]);
 
         $builder->add('rawPassword', PasswordType::class, [
-            'label' => '',
+            'label' => 'register.form.password',
             'mapped' => false,
             'label_attr' => [
                 'class' => ContactFormType::CLASS_LABEL
             ],
+            'attr' => [
+                'class' => 'Form__input'
+            ],
             'constraints' => [
                 new NotBlank([
                     'groups' => 'api_user',
-                    'message' => ''
+                    'message' => 'contact.constraint.not_blank'
                 ]),
                 new NotCompromisedPassword([
                     'groups' => 'api_user',
-                    'message' => ''
+                    'message' => 'registration.constraint.compromised_pwd'
                 ]),
                 new Length([
                     'min' => 6,
-                    'minMessage' => '',
+                    'minMessage' => 'registration.constraint.length',
                     'max' => 4096,
                 ]),
             ]

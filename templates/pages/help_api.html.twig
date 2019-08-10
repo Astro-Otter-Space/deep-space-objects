@@ -6,12 +6,27 @@
       <div class="Dso__container Dso__noHeader">
         <h2 class="Dso__title">Help API - Work in progress</h2>
 
-        <h3 class="">Register account for API</h3>
-        <p>After register, you will receive in your mailbox a Bearer Token and request API.</p>
+        <h3>EndPoints API</h3>
 
-        <div class="Dso__Form">
-          {% include 'forms/add_api_user.html.twig' with {'form': form} %}
-        </div>
+        <h3 class="">Register account for API</h3>
+
+        {% for messages in app.flashes("form.failed") %}
+          <div class="Form__message Form__error">
+            {{ messages|trans }}
+          </div>
+        {% endfor %}
+
+        {% for messages in app.flashes("form.success") %}
+          <div class="Form__message Form__success">
+            {{ messages|trans }}
+          </div>
+        {% endfor %}
+
+        {% if false == is_valid %}
+          <div class="Dso__Form">
+            {% include 'forms/add_api_user.html.twig' with {'form': formRegister} %}
+          </div>
+        {% endif %}
       </div>
     </section>
   </div>

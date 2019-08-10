@@ -28,14 +28,15 @@ class ApiUser implements UserInterface
     /**
      * @var
      * @ORM\Column(type="string", length=60, unique=true)
-     * @Assert\Email(groups={"api_user"}, message="")
+     * @Assert\Email(groups={"api_user"}, message="contact.constraint.email")
+     * @Assert\Unique(groups={"api_user"}, message="registration.constraint.unique")
      */
     private $email;
 
     /**
      * @var
      * @ORM\Column(length=128, type="string")
-     * @Assert\NotBlank(groups={"api_user"}, message="")
+     * @Assert\NotBlank(groups={"api_user"}, message="contact.constraint.not_blank")
      */
     private $password;
 
@@ -129,9 +130,9 @@ class ApiUser implements UserInterface
     /**
      * @return mixed
      */
-    public function getEmail()
+    public function getEmail(): string
     {
-        return $this->email;
+        return (string) $this->email;
     }
 
     /**
