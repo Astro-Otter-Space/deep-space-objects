@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\EventListener;
-
 
 use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
@@ -10,6 +8,12 @@ use App\Service\Curl;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
+
+/**
+ * Class GenerateTokenListener
+ * Get Bearer token from new user and sending him by email
+ * @package App\EventListener
+ */
 class GenerateTokenListener
 {
     /** @var Curl  */

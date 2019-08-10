@@ -40,6 +40,7 @@ class Curl
     /**
      * @param ApiUser $apiUser
      *
+     * @return ResponseInterface
      * @throws TransportExceptionInterface
      */
     public function getBearerToken(ApiUser $apiUser)
@@ -53,5 +54,7 @@ class Curl
         ]);
 
         dump($httpResponse);
+
+        return $httpResponse;
     }
 }
