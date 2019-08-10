@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package App\Entity
  * @ORM\Entity()
  * @ORM\Table(name="api_users")
- * @ORM\EntityListeners()
+ * @ORM\EntityListeners({"GenerateTokenListener"})
  */
 class ApiUser implements UserInterface
 {

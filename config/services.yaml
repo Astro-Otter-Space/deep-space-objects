@@ -24,6 +24,7 @@ services:
             $githubLink: '%github.link%'
             $paypalLink: '%paypal.link%'
             $facebookLink: '%facebook.link%'
+            $senderMail: '%app.notifications.email_sender%'
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
@@ -68,6 +69,15 @@ services:
         arguments: ['@templating.engine.twig', '%kernel.environment%']
         tags:
           - { name: kernel.event_listener, event: kernel.exception }
+
+    # Entity listeners
+    generate_token:
+        class: App\EventListener\GenerateTokenListener
+        tags:
+            -
+                name: doctrine.orm.entity_listener
+                event: postUpate
+                lazy: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
