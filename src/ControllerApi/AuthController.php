@@ -45,11 +45,17 @@ class AuthController extends AbstractController
         try {
             $em->persist($user);
             $em->flush();
-        } catch (DBALException $e) {
 
+            $response = ['success' => $user->getUsername(), 'code' => Response::HTTP_OK];
+        } catch (DBALException $e) {
+            $response = [
+                'status' => 'error',
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ];
         }
 
-        return new JsonResponse(['success' => $user->getUsername()], Response::HTTP_OK);
+        return new JsonResponse($response);
     }
 
 }

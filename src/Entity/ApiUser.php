@@ -31,7 +31,7 @@ class ApiUser implements UserInterface
 
     /**
      * @var
-     * @ORM\Column(length=64, type="string")
+     * @ORM\Column(length=128, type="string")
      */
     private $password;
 
