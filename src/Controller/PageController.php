@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\Classes\Utils;
+use App\Entity\ApiUser;
 use App\Entity\Contact;
 use App\Entity\Dso;
 use App\Forms\ContactFormType;
+use App\Forms\RegisterApiUsersFormType;
 use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +22,8 @@ use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -159,13 +165,45 @@ class PageController extends AbstractController
      *     "de": "/help/api",
      *     "pt": "/help/api"
      * }, name="help_api_page")
-     * @param Request $request
      *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
-    public function helpApiPage(Request $request)
+    public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $response = $this->render('pages/help_api.html.twig');
+        /** @var ApiUser $apiUser */
+        $apiUser = new ApiUser();
+
+        $optionsForm = [
+            'method' => 'POST',
+            'action' => $this->get('router')->generate('help_api_page', ['_locale' => $request->getLocale()])
+        ];
+
+        /** @var FormInterface $registerApiUserForm */
+        $registerApiUserForm = $this->createForm(RegisterApiUsersFormType::class, $apiUser, $optionsForm);
+
+        $registerApiUserForm->handleRequest($request);
+        if ($registerApiUserForm->isSubmitted()) {
+            if ($registerApiUserForm->isValid()) {
+                /** @var ObjectManager $em */
+                $em = $this->getDoctrine()->getManager();
+
+                $apiUser->setPassword(
+                    $passwordEncoder->encodePassword($apiUser, $registerApiUserForm->get('rawPassword')->getData())
+                );
+
+                $em->persist($apiUser);
+                $em->flush();
+            } else {
+
+            }
+        }
+
+        /**  */
+        $result['form'] = $registerApiUserForm->createView();
+
+        $response = $this->render('pages/help_api.html.twig', $result);
         $response->setPublic();
 
         return $response;

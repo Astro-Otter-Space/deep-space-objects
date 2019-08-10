@@ -5,12 +5,14 @@ namespace App\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class ApiUser
  * @package App\Entity
  * @ORM\Entity()
  * @ORM\Table(name="api_users")
+ * @ORM\EntityListeners()
  */
 class ApiUser implements UserInterface
 {
@@ -25,13 +27,15 @@ class ApiUser implements UserInterface
 
     /**
      * @var
-     * @ORM\Column(type="string", unique=true, length=25)
+     * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\Email(groups={"api_user"}, message="")
      */
-    private $username;
+    private $email;
 
     /**
      * @var
      * @ORM\Column(length=128, type="string")
+     * @Assert\NotBlank(groups={"api_user"}, message="")
      */
     private $password;
 
@@ -42,20 +46,29 @@ class ApiUser implements UserInterface
     private $isActive;
 
     /**
-     * @var
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="json", name="roles")
      */
-    private $email;
+    private $roles = [];
 
     /**
-     * ApiUser constructor.
-     *
-     * @param $username
+     * @var
      */
-    public function __construct($username)
+    private $pot2Miel;
+
+    /**
+     * @return mixed
+     */
+    public function getId(): ?int
     {
-        $this->isActive = true;
-        $this->username = $username;
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
     }
 
     /**
@@ -65,6 +78,26 @@ class ApiUser implements UserInterface
     {
         return ['ROLE_API_USER'];
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRawPassword()
+    {
+        return $this->rawPassword;
+    }
+
+    /**
+     * @param mixed $rawPassword
+     *
+     * @return ApiUser
+     */
+    public function setRawPassword($rawPassword)
+    {
+        $this->rawPassword = $rawPassword;
+        return $this;
+    }
+
 
     /**
      * @return string
@@ -94,14 +127,6 @@ class ApiUser implements UserInterface
     }
 
     /**
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
@@ -111,10 +136,43 @@ class ApiUser implements UserInterface
 
     /**
      * @param mixed $email
+     *
+     * @return ApiUser
      */
-    public function setEmail($email): void
+    public function setEmail($email): self
     {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPot2Miel()
+    {
+        return $this->pot2Miel;
+    }
+
+    /**
+     * @param mixed $pot2Miel
+     *
+     * @return ApiUser
+     */
+    public function setPot2Miel($pot2Miel)
+    {
+        $this->pot2Miel = $pot2Miel;
+        return $this;
+    }
+
+    /**
+     * @param mixed $isActive
+     *
+     * @return ApiUser
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
     }
 
     public function eraseCredentials()
