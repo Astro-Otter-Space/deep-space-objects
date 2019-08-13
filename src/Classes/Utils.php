@@ -40,7 +40,7 @@ class Utils
         'M1' => self::UNASSIGNED, 'M2' => self::UNASSIGNED, 'M3' => self::UNASSIGNED, 'M4' => self::UNASSIGNED, 'M7' => self::UNASSIGNED,
         'Mr' => self::UNASSIGNED,
         'Na' => self::UNASSIGNED,
-        'Cz' => self::UNASSIGNED,
+        'Cz' => 'cz',
         'Ki' => self::UNASSIGNED,
         'Do' => self::UNASSIGNED,
         'Pa' => self::UNASSIGNED, 'Pe' => self::UNASSIGNED,
@@ -92,6 +92,7 @@ class Utils
         'boc',
         'ber',
         'mel',
+        'cz',
         self::UNASSIGNED
     ];
 
