@@ -132,7 +132,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Bochum | boc | 13 | 15 |
 | Melotte | mel | 40 | 243 |
 | Berkeley | ber | 85 | 104 |
-| Czernick | cz | 38 | 45 |
+| Czernick | cz | 40 | 45 |
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
 (no Stock22)
