@@ -3,9 +3,7 @@
 
 namespace App\Command;
 
-
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ConvertCoordinatesCommand extends Command
 {
 
-    const REGEX = '/[0-9]+([,.][0-9]+)?/';
+    const REGEX = '/[-−0-9]+([,.][0-9]+)?/';
 
     protected static $defaultName = 'dso:convert-coordinates';
 
@@ -61,7 +59,7 @@ class ConvertCoordinatesCommand extends Command
             if (!is_null($decOption)) {
                 preg_match_all(self::REGEX, $decOption, $matches, PREG_PATTERN_ORDER);
 
-                $deg = (int)$matches[0][0];
+                $deg = (int)str_replace('−', '-', $matches[0][0]);
                 $mn = (int)$matches[0][1];
                 $sec = (float)$matches[0][2];
 
