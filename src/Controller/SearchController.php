@@ -56,7 +56,7 @@ class  SearchController extends AbstractController
     {
         $data = [];
         if ($request->query->has('q')) {
-            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
+            $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
             $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm);
 
             $dataConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
