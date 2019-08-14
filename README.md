@@ -184,7 +184,10 @@ Sources :
         ]
       }
     }
- ```   
+ ``` 
+Conversion ra -> long : long = (H + m/60 + s/3600)*15
+if > 180 : long-360
+Conversion dec -> lat :   lat = (Deg + m/60 + s/3600)
 
 Authors
 ==
