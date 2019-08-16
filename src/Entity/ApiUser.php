@@ -10,9 +10,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class ApiUser
  * @package App\Entity
+ *
  * @ORM\Entity()
  * @ORM\Table(name="api_users")
- * @ORM\EntityListeners({"GenerateTokenListener"})
+ * @ORM\EntityListeners({"App\EventListener\GenerateTokenListener"})
  */
 class ApiUser implements UserInterface
 {
@@ -57,6 +58,11 @@ class ApiUser implements UserInterface
     private $pot2Miel;
 
     /**
+     * @var
+     */
+    private $rawPassword;
+
+    /**
      * @return mixed
      */
     public function getId(): ?int
@@ -80,6 +86,18 @@ class ApiUser implements UserInterface
         return ['ROLE_API_USER'];
     }
 
+
+    /**
+     * @param mixed $rawPassword
+     *
+     * @return ApiUser
+     */
+    public function setRawPassword($rawPassword): self
+    {
+        $this->rawPassword = $rawPassword;
+        return $this;
+    }
+
     /**
      * @return mixed
      */
@@ -87,18 +105,6 @@ class ApiUser implements UserInterface
     {
         return $this->rawPassword;
     }
-
-    /**
-     * @param mixed $rawPassword
-     *
-     * @return ApiUser
-     */
-    public function setRawPassword($rawPassword)
-    {
-        $this->rawPassword = $rawPassword;
-        return $this;
-    }
-
 
     /**
      * @return string

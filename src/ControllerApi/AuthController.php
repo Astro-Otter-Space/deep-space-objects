@@ -33,13 +33,14 @@ class AuthController extends AbstractController
         /** @var ObjectManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $email = $request->request->get('_email');
-        $password = $request->request->get('_password');
+        $email = $request->request->get('email');
+        $rawPassword = $request->request->get('rawPassword');
 
         /** @var ApiUser $user */
         $user = new ApiUser();
         $user->setEmail($email);
-        $user->setPassword($encoder->encodePassword($user, $password));
+        $user->setIsActive(true);
+        $user->setPassword($encoder->encodePassword($user, $rawPassword));
 
         try {
             $em->persist($user);

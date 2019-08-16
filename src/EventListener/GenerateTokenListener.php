@@ -6,7 +6,12 @@ use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
 use App\Service\Curl;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 
 /**
@@ -43,24 +48,32 @@ class GenerateTokenListener
      * @param ApiUser $apiUser
      * @param LifecycleEventArgs $event
      *
-     * @throws \Swift_TransportException
      * @throws TransportExceptionInterface
+     * @throws \Swift_TransportException
+     * @throws ClientExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
      */
-    public function postUpdateHandler(ApiUser $apiUser, LifecycleEventArgs $event)
+    public function postUpdate(ApiUser $apiUser, LifecycleEventArgs $event)
     {
-        $token = $this->curl->getBearerToken($apiUser);
+        /** @var ResponseInterface $responseToken */
+        $responseToken = $this->curl->getBearerToken($apiUser);
 
-        $from = $this->senderMail;
-        $to = $apiUser->getEmail();
-        $subject = 'API Bearer Token';
+        dump($responseToken->getStatusCode(), $responseToken->getContent(), $responseToken->getInfo()); die();
+        if (Response::HTTP_OK == $responseToken->getStatusCode()) {
+            $from = $this->senderMail;
+            $to = $apiUser->getEmail();
+            $subject = 'API Bearer Token';
 
-        $template = [
-            'html' => 'includes/emails/api_register.html.twig',
-            'text' => 'includes/emails/api_register.txt.twig'
-        ];
+            $template = [
+                'html' => 'includes/emails/api_register.html.twig',
+                'text' => 'includes/emails/api_register.txt.twig'
+            ];
 
-        $data['token'] = $token;
+            $data['token'] = $responseToken->getContent();
 
-        $this->mailHelper->sendMail($from, $to, $subject, $template, $data);
+            $this->mailHelper->sendMail($from, $to, $subject, $template, $data);
+        }
+
     }
 }

@@ -71,12 +71,13 @@ services:
           - { name: kernel.event_listener, event: kernel.exception }
 
     # Entity listeners
-    generate_token:
-        class: App\EventListener\GenerateTokenListener
+    'App\EventListener\GenerateTokenListener':
+        arguments:
+            $senderMail: '%app.notifications.email_sender%'
         tags:
             -
                 name: doctrine.orm.entity_listener
-                event: postUpate
+                entity: App\Entity\ApiUser
                 lazy: true
 
     # add more service definitions when explicit configuration is needed

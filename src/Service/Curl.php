@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\ApiUser;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -45,15 +46,15 @@ class Curl
      */
     public function getBearerToken(ApiUser $apiUser)
     {
-        $urlApiLogin = $this->router->generate('api_auth_login');
+        $urlApiLogin = $this->router->generate('api_auth_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         /** @var ResponseInterface $httpResponse */
         $httpResponse = $this->httpClient->request(self::GET_REQUEST, $urlApiLogin, [
-            "username" => $apiUser->getEmail(),
-            "password" => $apiUser->getRawPassword()
+            "json" => [
+                "email" => $apiUser->getEmail(),
+                "password" => $apiUser->getRawPassword()
+            ]
         ]);
-
-        dump($httpResponse);
 
         return $httpResponse;
     }

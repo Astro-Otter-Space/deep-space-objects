@@ -58,7 +58,7 @@ Do not forget adding passphrase to `.env` file
 
 #### Create API users
 ```
-curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/register -d '{"username":"<user-login>","password":"<user-pwd>", "email":"test@email.com"}'
+curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/register -d '{"email":"<user-login>","rawPassword":"<user-pwd>", "email":"test@email.com"}'
 ```
 
 ### Authentication API
