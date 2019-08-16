@@ -54,7 +54,7 @@ class GenerateTokenListener
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
      */
-    public function postUpdate(ApiUser $apiUser, LifecycleEventArgs $event)
+    public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event)
     {
         /** @var ResponseInterface $responseToken */
         $responseToken = $this->curl->getBearerToken($apiUser);
