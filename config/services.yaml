@@ -6,7 +6,7 @@
 parameters:
     locale: 'en'
     app_locales: en|fr|de|es|pt|
-    app.notifications.email_sender: balistik.fonfon@gmail.com
+    app.notifications.email_sender: admin@otter-in-space.local
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     github.link: '%env(GITHUB_PAGE)%'
     paypal.link: '%env(PAYPAL_PAGE)%'
@@ -71,9 +71,7 @@ services:
           - { name: kernel.event_listener, event: kernel.exception }
 
     # Entity listeners
-    'App\EventListener\GenerateTokenListener':
-        arguments:
-            $senderMail: '%app.notifications.email_sender%'
+    App\EventListener\GenerateTokenListener:
         tags:
             -
                 name: doctrine.orm.entity_listener
