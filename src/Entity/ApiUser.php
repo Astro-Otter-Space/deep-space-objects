@@ -29,15 +29,14 @@ class ApiUser implements UserInterface
     /**
      * @var
      * @ORM\Column(type="string", length=60, unique=true)
-     * @Assert\Email(groups={"api_user"}, message="contact.constraint.email")
-     * @Assert\Unique(groups={"api_user"}, message="registration.constraint.unique")
+     * @Assert\Email(mode="html5", groups={"api_user"}, message="contact.constraint.email")
+     * @Assert\NotBlank(groups={"api_user"}, message="contact.constraint.not_blank")
      */
     private $email;
 
     /**
      * @var
      * @ORM\Column(length=128, type="string")
-     * @Assert\NotBlank(groups={"api_user"}, message="contact.constraint.not_blank")
      */
     private $password;
 
@@ -59,6 +58,9 @@ class ApiUser implements UserInterface
 
     /**
      * @var
+     * @Assert\NotBlank(groups={"api_user"}, message="contact.constraint.not_blank")
+     * @Assert\NotCompromisedPassword(groups={"api_user"}, message="registration.constraint.compromised_pwd")
+     * @Assert\Length(min="6", max="4096", groups={"api_user"}, minMessage="registration.constraint.length")
      */
     private $rawPassword;
 

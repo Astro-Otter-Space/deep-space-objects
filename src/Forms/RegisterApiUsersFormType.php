@@ -31,7 +31,6 @@ class RegisterApiUsersFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder->add('email', EmailType::class, [
             'label' => 'contact.form.email',
             'label_attr' => [
@@ -50,21 +49,6 @@ class RegisterApiUsersFormType extends AbstractType
             ],
             'attr' => [
                 'class' => 'Form__input'
-            ],
-            'constraints' => [
-                new NotBlank([
-                    'groups' => 'api_user',
-                    'message' => 'contact.constraint.not_blank'
-                ]),
-                new NotCompromisedPassword([
-                    'groups' => 'api_user',
-                    'message' => 'registration.constraint.compromised_pwd'
-                ]),
-                new Length([
-                    'min' => 6,
-                    'minMessage' => 'registration.constraint.length',
-                    'max' => 4096,
-                ]),
             ]
         ]);
 
