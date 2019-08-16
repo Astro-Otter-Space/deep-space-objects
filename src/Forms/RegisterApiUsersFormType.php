@@ -43,7 +43,6 @@ class RegisterApiUsersFormType extends AbstractType
 
         $builder->add('rawPassword', PasswordType::class, [
             'label' => 'register.form.password',
-            'mapped' => false,
             'label_attr' => [
                 'class' => ContactFormType::CLASS_LABEL
             ],

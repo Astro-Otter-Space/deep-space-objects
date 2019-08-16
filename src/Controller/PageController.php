@@ -198,7 +198,7 @@ class PageController extends AbstractController
                 $em->flush();
 
                 $isValid = true;
-                $this->addFlash('form.failed', 'form.api.success');
+                $this->addFlash('form.success', 'form.api.success');
             } else {
                 $isValid = false;
                 $this->addFlash('form.failed', 'form.error.message');
