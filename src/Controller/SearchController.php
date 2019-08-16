@@ -85,7 +85,7 @@ class  SearchController extends AbstractController
     {
         $data = [];
         if ($request->query->has('q')) {
-            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
+            $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
             $data = $this->dsoManager->searchDsoByTerms($searchTerm, 'id');
         }
 
@@ -110,7 +110,7 @@ class  SearchController extends AbstractController
     {
         $data = [];
         if ($request->query->has('q')) {
-            $searchTerm = filter_var($request->query->get('q'), FILTER_SANITIZE_STRING);
+            $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
             $data = $this->observationManager->buildSearchObservationByTerms($searchTerm);
         }
 
@@ -137,6 +137,11 @@ class  SearchController extends AbstractController
         $webPath = $this->getParameter('kernel.project_dir') . '/public/';
         $file = $webPath . 'build/data/stars.8.json';
 
+        $starsData = [
+            "type"  => "FeatureCollection",
+            "features" => []
+        ];
+
         if (file_exists($file)) {
 
             $jsonContent = $starsData = json_decode(file_get_contents($file), true)['features'];
@@ -146,10 +151,7 @@ class  SearchController extends AbstractController
                     return strtolower($tab['properties']['con']) === strtolower($id);
                 });
 
-                $starsData = [
-                    "type"  => "FeatureCollection",
-                    "features" => array_values($jsonContent)
-                ];
+                $starsData["features"] = array_values($jsonContent);
             }
         }
 
