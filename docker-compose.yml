@@ -33,7 +33,7 @@ services:
             - TERM=xterm-color
         working_dir: /var/www/deep-space-objects
         links:
-          - smtp
+          - mail
         networks:
           - dso_stack
 
@@ -100,13 +100,11 @@ services:
         networks:
           - dso_stack
 
-    #SMTP
-    smtp:
+    #MAIL - SMTP Server
+    mail:
         image: bytemark/smtp
         container_name: dso_mail
         restart: always
-        environment:
-            RELAY_HOST: smtp.otter-in-space.local
         networks:
           - dso_stack
 

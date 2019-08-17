@@ -6,6 +6,7 @@ use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
 use App\Service\Curl;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -56,8 +57,12 @@ class GenerateTokenListener
      */
     public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event)
     {
-        /** @var ResponseInterface $responseToken */
-        $responseToken = $this->curl->getBearerToken($apiUser);
+        try {
+            /** @var ResponseInterface $responseToken */
+            $responseToken = $this->curl->getBearerToken($apiUser);
+        } catch(ClientException $e) {
+            dump($e->getMessage());
+        }
 
         dump($responseToken->getStatusCode(), $responseToken->getContent(), $responseToken->getInfo()); die();
         if (Response::HTTP_OK == $responseToken->getStatusCode()) {

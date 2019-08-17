@@ -46,16 +46,20 @@ class Curl
      */
     public function getBearerToken(ApiUser $apiUser)
     {
-        $urlApiLogin = $this->router->generate('api_auth_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $urlApiLogin = $this->router->generate('api_auth_login'); //, [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $options = [
+            'json' => [
+                'email' => $apiUser->getEmail(),
+                'password' => $apiUser->getRawPassword()
+            ],
+            'verify_host' => false,
+        ];
+
+        // ONLY DEV
+        $options = array_merge($options, ['base_uri' => 'http://172.17.0.1:80']);
 
         /** @var ResponseInterface $httpResponse */
-        $httpResponse = $this->httpClient->request(self::GET_REQUEST, $urlApiLogin, [
-            "json" => [
-                "email" => $apiUser->getEmail(),
-                "password" => $apiUser->getRawPassword()
-            ]
-        ]);
-
-        return $httpResponse;
+        return $this->httpClient->request(self::POST_REQUEST, $urlApiLogin, $options);
     }
 }

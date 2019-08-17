@@ -27,16 +27,20 @@ class CheckAstrobinImageCommand extends Command
     /** @var MailHelper */
     protected $mailHelper;
 
+    protected $senderMail;
+
     /**
      * CheckAstrobinImageCommand constructor.
      *
      * @param DsoRepository $dsoRepository
      * @param MailHelper $mailHelper
+     * @param string $senderMail
      */
-    public function __construct(DsoRepository $dsoRepository, MailHelper $mailHelper)
+    public function __construct(DsoRepository $dsoRepository, MailHelper $mailHelper, $senderMail)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
+        $this->senderMail = $senderMail;
         parent::__construct();
     }
 
@@ -71,14 +75,15 @@ class CheckAstrobinImageCommand extends Command
                 }
             }
         }
-        $output->writeln(dump($failedAstrobinId));
         $template = [
             'html' => 'includes/emails/check_astrobin_id.html.twig'
         ];
         $content['listAstrobinId'] = $failedAstrobinId;
 
         try {
-            $this->mailHelper->sendMail('noreply@deepskyobjects.com', 'balistik.fonfon@gmail.com', 'Astrobin Id 404', $template, $content);
+            if (0 < count($failedAstrobinId)) {
+                $this->mailHelper->sendMail($this->senderMail, 'balistik.fonfon@gmail.com', 'Astrobin Id 404', $template, $content);
+            }
         } catch (\Swift_TransportException $e) {
             $output->writeln($e->getMessage());
         }

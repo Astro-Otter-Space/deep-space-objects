@@ -6,7 +6,7 @@
 parameters:
     locale: 'en'
     app_locales: en|fr|de|es|pt|
-    app.notifications.email_sender: admin@otter-in-space.local
+    app.notifications.email_sender: '%env(SENDER_MAIL)%'
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     github.link: '%env(GITHUB_PAGE)%'
     paypal.link: '%env(PAYPAL_PAGE)%'

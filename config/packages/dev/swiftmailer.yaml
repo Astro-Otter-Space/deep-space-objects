@@ -2,5 +2,4 @@
 swiftmailer:
     # send all emails to a specific address
     delivery_addresses:
-        - 'balistik.fonfon@gmail.com'
-        - smeaudre@kaliop.com
+        - balistik.fonfon@gmail.com
