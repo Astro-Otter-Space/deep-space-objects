@@ -64,6 +64,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: "CardsGrid",
     data() {
@@ -96,6 +98,10 @@
       showFacets: {
         default: false,
         type: Boolean
+      },
+      urlAjaxData: {
+          default: '',
+          type: string
       }
     },
     methods: {
@@ -117,6 +123,16 @@
           gridItemSetting = 'auto-fill';
         }
         document.querySelector('main').style.setProperty('--grid-items', gridItemSetting);
+      },
+      getDataAjax: function() {
+        // https://vuejsdevelopers.com/2017/08/28/vue-js-ajax-recipes/
+        axios.get(this.urlAjaxData, {params: {start: 20, offset: 20}})
+            .then((response) => {
+                this.items = response.data;
+            })
+            .catch(err => {
+
+            })
       }
     },
     computed: {
