@@ -82,6 +82,7 @@ class LayoutController extends AbstractController
                 return [
                     'locale' => $locale,
                     'label' => $this->translatorInterface->trans($locale),
+                    'flag' => sprintf('flag_%s', $locale),
                     'path' => $router->generate(sprintf('%s.%s', $mainRoute, $locale), $paramsRoute)
                 ];
             }, $listLocales),

@@ -45,7 +45,7 @@
           </a>
           <ul class="header__drop_menu">
             <a v-for="locale in listLocales" v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label">
-              {{ locale.label }}
+              <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon> {{ locale.label }}
             </a>
           </ul>
         </li>

@@ -109,17 +109,17 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7252 | 7840 |
-| Sharpless | sh |128 | 313 |
-| Index catalog | ic | 248 | 5386 |
+| Sharpless | sh |129 | 313 |
+| Index catalog | ic | 257 | 5386 |
 | RCW | rcw |38 | 182 |
-| Collinder | cr | 156 | 471 |
+| Collinder | cr | 159 | 471 |
 | Caldwell | cld | 109 | 109 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
 | UGC | ugc | 276 | 12921 |
-| PGC | pgc |43 | 73197 |
-| LDN | ldn | 26 | ? |
-| LBN | lbn | 70 | ? |
+| PGC | pgc | 50 | 73197 |
+| LDN | ldn | 27 | ? |
+| LBN | lbn | 74 | ? |
 | Dolidze-Dzimselejvili | dodz | 11 | 11 |
 | David Dunlap | ddo | 4 | 343 |
 | vdB | vdb | 40 | 158 |
@@ -130,7 +130,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Menzel | mzl | 3 | 3 |
 | Biurakan | biu | 8 | 13 |
 | Bochum | boc | 13 | 15 |
-| Melotte | mel | 40 | 243 |
+| Melotte | mel | 43 | 243 |
 | Berkeley | ber | 85 | 104 |
 | Czernick | cz | 40 | 45 |
 
