@@ -126,6 +126,7 @@
       },
       getDataAjax: function() {
         // https://vuejsdevelopers.com/2017/08/28/vue-js-ajax-recipes/
+        // In url, do not forget filter on dso type if selected
         axios.get(this.urlAjaxData, {params: {start: 20, offset: 20}})
             .then((response) => {
                 this.items = response.data;
