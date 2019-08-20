@@ -4,7 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
-use App\Service\Curl;
+use App\Service\CurlService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,11 +34,11 @@ class GenerateTokenListener
     /**
      * GenerateTokenListener constructor.
      *
-     * @param Curl $curl
+     * @param CurlService $curl
      * @param MailHelper $mailHelper
      * @param string $senderMail
      */
-    public function __construct(Curl $curl, MailHelper $mailHelper, string $senderMail)
+    public function __construct(CurlService $curl, MailHelper $mailHelper, string $senderMail)
     {
         $this->curl = $curl;
         $this->mailHelper = $mailHelper;

@@ -14,13 +14,16 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  *
  * @package App\Service
  */
-class Curl
+class CurlService
 {
     /** @var HttpClientInterface  */
     private $httpClient;
 
     /** @var RouterInterface */
     private $router;
+
+    /** @var  */
+    private $env;
 
     const GET_REQUEST = 'GET';
 
@@ -32,10 +35,11 @@ class Curl
      * @param HttpClientInterface $httpClient
      * @param RouterInterface $router
      */
-    public function __construct(HttpClientInterface $httpClient, RouterInterface $router)
+    public function __construct(HttpClientInterface $httpClient, RouterInterface $router, $env)
     {
         $this->httpClient = $httpClient;
         $this->router = $router;
+        $this->env = $env;
     }
 
     /**
@@ -57,7 +61,9 @@ class Curl
         ];
 
         // ONLY DEV
-        $options = array_merge($options, ['base_uri' => 'http://172.17.0.1:80']);
+        if ('DEV' === $this->env) {
+            $options = array_merge($options, ['base_uri' => '172.17.0.1:80']);
+        }
 
         /** @var ResponseInterface $httpResponse */
         return $this->httpClient->request(self::POST_REQUEST, $urlApiLogin, $options);
