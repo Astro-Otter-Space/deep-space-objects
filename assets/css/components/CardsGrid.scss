@@ -123,6 +123,17 @@
     line-height: 1.5em;
     margin-bottom: 10px;
   }
+
+}
+
+.appGridBtn {
+  padding: 0.5em 1.2em;
+  background: $bgd-cards;
+  color: rgb(30, 215, 96);
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2em;
+  line-height: 1.2em;
 }
 
 .appGridFilter {

@@ -22,7 +22,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  */
 class GenerateTokenListener
 {
-    /** @var Curl  */
+    /** @var CurlService  */
     private $curl;
 
     /** @var MailHelper */

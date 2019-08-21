@@ -30,12 +30,13 @@ class CurlService
     const POST_REQUEST = 'POST';
 
     /**
-     * Curl constructor.
+     * CurlService constructor.
      *
      * @param HttpClientInterface $httpClient
      * @param RouterInterface $router
+     * @param string $env
      */
-    public function __construct(HttpClientInterface $httpClient, RouterInterface $router, $env)
+    public function __construct(HttpClientInterface $httpClient, RouterInterface $router, $env = '')
     {
         $this->httpClient = $httpClient;
         $this->router = $router;

@@ -37,9 +37,19 @@ docker exec -ti dso_php bash
 
 ```
 cd deep-space-objects
+# Install PHP components
 composer install
+
+# Install Node modules
 yarn install
+
+# Import SVG
+yarn generate-icons
+
+# Dev : build public
+yarn encore dev
 ``` 
+
 
 ### Database
 Run migration :

@@ -23,6 +23,8 @@
             :items="itemsDso"
             :show-controls="true"
             :list-controls="controls"
+            :show-ajax="true"
+            :url-ajax-data="urlAjax"
           >
           </cards-grid>
         </div>
@@ -66,7 +68,7 @@
   let linkDownload = document.querySelector('div[data-const-widget]').dataset.link;
   let legendMap = JSON.parse(document.querySelector('div[data-const-widget]').dataset.legendMap);
   let listFilter = JSON.parse(document.querySelector('div[data-const-widget]').dataset.filter);
-
+  let urlAjax = document.querySelector('div[data-const-widget]').dataset.urlAjax
   export default {
     name: "App",
     components: {
@@ -84,7 +86,8 @@
         titleMap: titleMap,
         legendMap: legendMap, //Object.keys(legendMap).map((key) => legendMap[key]),
         listColors: color,
-        controls: listFilter
+        controls: listFilter,
+        urlAjax: urlAjax
       }
     }
   }

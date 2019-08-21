@@ -59,6 +59,7 @@
           </a>
         </article>
       </transition-group>
+      <button class="appGridBtn" v-show="true === this.showAjax" v-on:click="getDataAjax()">Show more</button>
     </div>
   </div>
 </template>
@@ -75,7 +76,8 @@
         gridGap: 30,
         gridMin: 175,
         gridItems: 20,
-        itemselect: 1
+        itemselect: 1,
+        offset: 10
       }
     },
     props: {
@@ -99,9 +101,13 @@
         default: false,
         type: Boolean
       },
+      showAjax: {
+        default: false,
+        type: Boolean
+      },
       urlAjaxData: {
           default: '',
-          type: string
+          type: String
       }
     },
     methods: {
@@ -127,8 +133,9 @@
       getDataAjax: function() {
         // https://vuejsdevelopers.com/2017/08/28/vue-js-ajax-recipes/
         // In url, do not forget filter on dso type if selected
-        axios.get(this.urlAjaxData, {params: {start: 20, offset: 20}})
+        axios.get(this.urlAjaxData, {params: {offset: this.offset}})
             .then((response) => {
+                // this.offset += 20;
                 this.items = response.data;
             })
             .catch(err => {

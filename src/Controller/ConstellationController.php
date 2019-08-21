@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -83,7 +85,7 @@ class ConstellationController extends AbstractController
 
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, 0, 300);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, DsoRepository::SIZE);
 
         $constellation->setListDso($listDso);
         $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
@@ -112,6 +114,7 @@ class ConstellationController extends AbstractController
         $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
         $result['geojsonDso'] = $geoJsonDso ?? null;
         $result['centerMap'] = $constellation->getGeometry()['coordinates'];
+        $result['ajax_dso_by_const'] = $router->generate('get_dso_by_const_ajax', ['constId' => $constellation->getId()]);
 
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
@@ -121,6 +124,25 @@ class ConstellationController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
+     * @param Request $request
+     * @param $constId
+     *
+     * @return JsonResponse
+     * @throws \ReflectionException
+     */
+    public function dsoByConstellationAjax(Request $request, $constId)
+    {
+        $offset = $request->query->get('offset');
+
+        /** @var ListDso $listDso */
+        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SIZE);
+        $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
+        $result['data'] = $listDsoCards ?? [];
+
+        return new JsonResponse($result);
+    }
 
     /**
      * @Route("/constellations", name="constellation_list")
