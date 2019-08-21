@@ -6,16 +6,13 @@ use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\Constellation;
 use App\Entity\Dso;
 use App\Entity\ListDso;
-use App\Helpers\UrlGenerateHelper;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
-use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
+use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser as oldFileinfoMimeTypeGuesser;
+use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,7 +82,7 @@ class ConstellationController extends AbstractController
 
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, DsoRepository::SIZE);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 5);
 
         $constellation->setListDso($listDso);
         $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
@@ -183,10 +180,9 @@ class ConstellationController extends AbstractController
         /** @var FileinfoMimeTypeGuesser $typeMimeGuesser */
         $typeMimeGuesser = new FileinfoMimeTypeGuesser();
 
-
         /** @var BinaryFileResponse $response */
         $response = new BinaryFileResponse($file);
-        $response->headers->set('Content-Type', $typeMimeGuesser->guess($file));
+        $response->headers->set('Content-Type', $typeMimeGuesser->guessMimeType($file));
 
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,

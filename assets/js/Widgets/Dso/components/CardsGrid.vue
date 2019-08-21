@@ -135,8 +135,11 @@
         // In url, do not forget filter on dso type if selected
         axios.get(this.urlAjaxData, {params: {offset: this.offset}})
             .then((response) => {
-                // this.offset += 20;
-                this.items = response.data;
+                this.offset = this.offset + 5;
+                response.data.forEach(dso => {
+                  console.log(dso);
+                  this.item.push(Object.entries(dso));
+                });
             })
             .catch(err => {
 
