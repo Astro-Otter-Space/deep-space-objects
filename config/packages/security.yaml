@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\ApiUser:
-            algorithm: argon2i
+            algorithm: sodium
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:

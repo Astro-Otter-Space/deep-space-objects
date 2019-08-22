@@ -83,17 +83,18 @@ class ConstellationController extends AbstractController
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
         $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 300);
-        $listDsoLimited = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 5);
+        $listDsoLimited = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, DsoRepository::SMALL_SIZE);
 
         $constellation->setListDso($listDso);
         $result['list_dso'] = $this->dsoManager->buildListDso($listDsoLimited) ?? [];
+
+        // Filter for Grid Cards dso
+        $result['list_types_filters'] = $this->buildFiltersWithAll($listDsoLimited) ?? [];
 
         // List types of DSO for map legend
         $result['list_types'] = call_user_func_array("array_merge", array_map(function ($data) {
             return [$data['value'] => $data['label']];
         }, $this->buildFilters($listDso)));
-        $result['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
-
 
         // GeoJson for display dso on map
         $listDsoFeatures = array_map(function(Dso $dso) {
@@ -135,9 +136,12 @@ class ConstellationController extends AbstractController
         $offset = $request->query->get('offset');
 
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, 5 /*DsoRepository::SIZE*/);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE);
         $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
         $result['dso'] = $listDsoCards ?? [];
+
+        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE);
+        $result['filters'] = $this->buildFiltersWithAll($listDsoAll) ?? [];
 
         return new JsonResponse($result);
     }

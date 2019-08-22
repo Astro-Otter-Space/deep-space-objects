@@ -28,6 +28,7 @@ abstract class AbstractRepository
     protected $client;
 
     const FROM = 0;
+    const SMALL_SIZE = 10;
     const SIZE = 20;
     const MAX_SIZE = 9999;
     const SORT_ASC = 'asc';

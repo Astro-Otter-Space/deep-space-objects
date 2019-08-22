@@ -2,7 +2,7 @@
   <div>
     <div class="appGridFilter" v-if="showControls == true">
       <div class="appGridFilter__filter">
-        <label v-for="control in listControls" class="appGridFilter__btn-radio">
+        <label v-for="control in listFilters" class="appGridFilter__btn-radio">
           <input type="radio"
                  name="appGridFilter__radio-grp"
                  v-model="itemselect"
@@ -41,7 +41,7 @@
       </transition>
 
       <transition-group tag="main" name="card">
-        <article v-for="(item, index) in items" :key="index + 0" class="card" v-show="(itemselect === item.filter) || (itemselect == 1)">
+        <article v-for="(item, index) in listDso" :key="index + 0" class="card" v-show="(itemselect === item.filter) || (itemselect == 1)">
           <a v-bind:href="item.url" v-bind:title="item.value">
             <div class="image">
               <figure>
@@ -71,13 +71,15 @@
     name: "CardsGrid",
     data() {
       return {
+        listDso: [],
+        listFilters: [],
         isActive: false,
         maxPlayCount: 0,
         gridGap: 30,
         gridMin: 175,
         gridItems: 20,
         itemselect: 1,
-        offset: 5
+        offset: 10
       }
     },
     props: {
@@ -110,6 +112,10 @@
           type: String
       }
     },
+    mounted() {
+      this.listDso = this.items;
+      this.listFilters = this.listControls;
+    },
     methods: {
       isLoaded: function() {
         this.isActive = true;
@@ -133,18 +139,15 @@
       getDataAjax: function() {
         // https://vuejsdevelopers.com/2017/08/28/vue-js-ajax-recipes/
         // In url, do not forget filter on dso type if selected
-        axios.get(this.urlAjaxData, {params: {offset: this.offset}})
-          .then(response =>
-            (
-              response.data.dso.forEach(dso => {
-                  this.item.push(dso);
-              }),
-              this.offset = this.offset + 5
-            )
-          )
-          .catch(err => {
-            console.log(err);
-          })
+        axios
+          .get(this.urlAjaxData, {params: {offset: this.offset}})
+          .then(response => {
+            response.data.dso.forEach(dso => {
+              this.listDso.push(dso);
+            });
+            this.listFilters = response.data.filters;
+            this.offset = this.offset + 10;
+          });
       }
     },
     computed: {
