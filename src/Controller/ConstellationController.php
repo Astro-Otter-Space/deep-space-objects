@@ -9,6 +9,7 @@ use App\Entity\ListDso;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use LimitIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser as oldFileinfoMimeTypeGuesser;
@@ -64,7 +65,6 @@ class ConstellationController extends AbstractController
      * @param string $id
      *
      * @return Response
-     * @throws \Astrobin\Exceptions\WsException
      * @throws \ReflectionException
      */
     public function show(string $id): Response
@@ -82,10 +82,11 @@ class ConstellationController extends AbstractController
 
         // Retrieve list of Dso from the constellation
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 5);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 300);
+        $listDsoLimited = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 5);
 
         $constellation->setListDso($listDso);
-        $result['list_dso'] = $this->dsoManager->buildListDso($constellation->getListDso()) ?? [];
+        $result['list_dso'] = $this->dsoManager->buildListDso($listDsoLimited) ?? [];
 
         // List types of DSO for map legend
         $result['list_types'] = call_user_func_array("array_merge", array_map(function ($data) {
@@ -134,9 +135,9 @@ class ConstellationController extends AbstractController
         $offset = $request->query->get('offset');
 
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SIZE);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, 5 /*DsoRepository::SIZE*/);
         $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
-        $result['data'] = $listDsoCards ?? [];
+        $result['dso'] = $listDsoCards ?? [];
 
         return new JsonResponse($result);
     }

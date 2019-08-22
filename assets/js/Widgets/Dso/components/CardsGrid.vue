@@ -77,7 +77,7 @@
         gridMin: 175,
         gridItems: 20,
         itemselect: 1,
-        offset: 10
+        offset: 5
       }
     },
     props: {
@@ -134,16 +134,17 @@
         // https://vuejsdevelopers.com/2017/08/28/vue-js-ajax-recipes/
         // In url, do not forget filter on dso type if selected
         axios.get(this.urlAjaxData, {params: {offset: this.offset}})
-            .then((response) => {
-                this.offset = this.offset + 5;
-                response.data.forEach(dso => {
-                  console.log(dso);
-                  this.item.push(Object.entries(dso));
-                });
-            })
-            .catch(err => {
-
-            })
+          .then(response =>
+            (
+              response.data.dso.forEach(dso => {
+                  this.item.push(dso);
+              }),
+              this.offset = this.offset + 5
+            )
+          )
+          .catch(err => {
+            console.log(err);
+          })
       }
     },
     computed: {
