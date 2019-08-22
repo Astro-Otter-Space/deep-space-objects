@@ -6,8 +6,10 @@ use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
 use App\Service\CurlService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -22,9 +24,9 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
  */
 class GenerateTokenListener
 {
-    /** @var CurlService  */
-    private $curl;
 
+    /** @var JWTTokenManagerInterface */
+    private $jwtManager;
     /** @var MailHelper */
     private $mailHelper;
 
@@ -34,13 +36,13 @@ class GenerateTokenListener
     /**
      * GenerateTokenListener constructor.
      *
-     * @param CurlService $curl
+     * @param JWTTokenManagerInterface $jwtManager
      * @param MailHelper $mailHelper
      * @param string $senderMail
      */
-    public function __construct(CurlService $curl, MailHelper $mailHelper, string $senderMail)
+    public function __construct(JWTTokenManagerInterface $jwtManager, MailHelper $mailHelper, string $senderMail)
     {
-        $this->curl = $curl;
+        $this->jwtManager = $jwtManager;
         $this->mailHelper = $mailHelper;
         $this->senderMail = $senderMail;
     }
@@ -49,36 +51,21 @@ class GenerateTokenListener
      * @param ApiUser $apiUser
      * @param LifecycleEventArgs $event
      *
-     * @throws TransportExceptionInterface
      * @throws \Swift_TransportException
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
      */
     public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event)
     {
-        try {
-            /** @var ResponseInterface $responseToken */
-            $responseToken = $this->curl->getBearerToken($apiUser);
-        } catch(ClientException $e) {
-            dump($e->getMessage());
-        }
+        $from = $this->senderMail;
+        $to = $apiUser->getEmail();
+        $subject = 'API Bearer Token';
 
-        dump($responseToken->getStatusCode(), $responseToken->getContent(), $responseToken->getInfo()); die();
-        if (Response::HTTP_OK == $responseToken->getStatusCode()) {
-            $from = $this->senderMail;
-            $to = $apiUser->getEmail();
-            $subject = 'API Bearer Token';
+        $template = [
+            'html' => 'includes/emails/api_register.html.twig',
+            'text' => 'includes/emails/api_register.txt.twig'
+        ];
 
-            $template = [
-                'html' => 'includes/emails/api_register.html.twig',
-                'text' => 'includes/emails/api_register.txt.twig'
-            ];
+        $data['token'] = $this->jwtManager->create($apiUser);
 
-            $data['token'] = $responseToken->getContent();
-
-            $this->mailHelper->sendMail($from, $to, $subject, $template, $data);
-        }
-
+        $this->mailHelper->sendMail($from, $to, $subject, $template, $data);
     }
 }

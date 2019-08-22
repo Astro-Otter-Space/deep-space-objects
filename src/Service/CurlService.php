@@ -11,7 +11,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
  * Class Curl
- *
+ * @uses NOT USED
  * @package App\Service
  */
 class CurlService
@@ -51,22 +51,21 @@ class CurlService
      */
     public function getBearerToken(ApiUser $apiUser)
     {
-        $urlApiLogin = $this->router->generate('api_auth_login'); //, [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $options = [
-            'json' => [
-                'email' => $apiUser->getEmail(),
-                'password' => $apiUser->getRawPassword()
-            ],
-            'verify_host' => false,
-        ];
-
-        // ONLY DEV
-        if ('DEV' === $this->env) {
-            $options = array_merge($options, ['base_uri' => '172.17.0.1:80']);
-        }
-
-        /** @var ResponseInterface $httpResponse */
-        return $this->httpClient->request(self::POST_REQUEST, $urlApiLogin, $options);
+//        $urlApiLogin = $this->router->generate('api_auth_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
+//
+//        $options = [
+//            'json' => [
+//                'email' => $apiUser->getEmail(),
+//                'password' => $apiUser->getRawPassword()
+//            ],
+//        ];
+//
+//        // ONLY DEV
+//        if ('dev' === $this->env) {
+////            $urlApiLogin = str_replace($urlApiLogin, 'otter-in-space.local', 'http://nginx');
+//        }
+//        /** @var ResponseInterface $httpResponse */
+//        return $this->httpClient->request(self::POST_REQUEST, $urlApiLogin, $options);
+        return true;
     }
 }

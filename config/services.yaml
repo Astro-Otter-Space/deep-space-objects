@@ -64,6 +64,10 @@ services:
         arguments:
             $cachePool: '@app.cache.dso'
 
+    App\Service\CurlService:
+        bind:
+            $env: '%kernel.environment%'
+
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@templating.engine.twig', '%kernel.environment%']
