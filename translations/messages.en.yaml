@@ -134,6 +134,7 @@ type.dn:  Dark nebula grey
 type.pos: Asterism
 type.sc: Star clusters
 type.vn: Variable nebula
+type.ga: Ring galaxy
 # Constellations
 constellation.unassigned: Unassigned
 constellation.and: Andromeda

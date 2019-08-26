@@ -48,13 +48,22 @@
             curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
           </blockquote>
 
+          <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
+          <blockquote>
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}
+          </blockquote>
+          <div id="btnCatalog">
+            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('catalog')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
+            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          </div>
+
 
           <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
           <blockquote>
             curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
           </blockquote>
           <div id="btnConst">
-            <button v-on:click="openSimplert({'message': 'constellationListDesc'|trans, 'type': 'info'})" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
+            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('constellation')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
           </div>
 
@@ -64,21 +73,16 @@
             curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}
           </blockquote>
           <div id="btnType">
-            {% set data = {'message': build_list_filter('type'), 'type': 'info'}|json_encode|raw %}
-            <button v-on:click="openSimplert(" ~ data ~ ")" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
+            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('type')|json_encode }}" id="btn_test">{{ 'api.data.filters'|trans }}</button>
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
           </div>
 
-
-          <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
+          <p><strong>Combine</strong></p>
           <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}
           </blockquote>
-          <div id="btnCatalog">
-            {% set listCatalog = build_list_filter('catalog') %}
-            <button v-on:click="openSimplert({'message': 'Catalogs', 'type': 'info'})" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
-            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
-          </div>
+        </div>
+
 
         <p>See documentation</p>
       </div>

@@ -8,7 +8,8 @@ new Vue({
   el: "#btnConst",
   name: "btn-const",
   methods: {
-    openSimplert (customObjet) {
+    openSimplert: function(event) {
+      let customObjet = JSON.parse(event.target.dataset.filters);
       this.$refs.simplert.openSimplert(customObjet)
     }
   }
@@ -18,7 +19,8 @@ new Vue({
   el: "#btnCatalog",
   name: "btn-catalog",
   methods: {
-    openSimplert (customObjet) {
+    openSimplert: function(event) {
+      let customObjet = JSON.parse(event.target.dataset.filters);
       this.$refs.simplert.openSimplert(customObjet)
     }
   }
@@ -28,7 +30,8 @@ new Vue({
   el: "#btnType",
   name: "btn-type",
   methods: {
-    openSimplert (customObjet) {
+    openSimplert: function(event) {
+      let customObjet = JSON.parse(event.target.dataset.filters);
       this.$refs.simplert.openSimplert(customObjet)
     }
   }

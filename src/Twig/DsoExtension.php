@@ -43,7 +43,7 @@ class DsoExtension extends AbstractExtension
         return [
             new TwigFunction('uasort', [$this, 'uasort']),
             new TwigFunction('remove_element', [$this, 'removeElement']),
-            new TwigFunction('build_list_filter', [$this, 'buildListFilters'])
+            new TwigFunction('build_api_filter', [$this, 'buildApiListFilters'])
         ];
     }
 
@@ -63,9 +63,9 @@ class DsoExtension extends AbstractExtension
      * @param $class
      * @return bool
      */
-    public function isInstanceOf($object, $class)
+    public function isInstanceOf($object, $class): bool
     {
-        return is_a($object, $class, true) ? true: false;
+        return is_a($object, $class, true);
     }
 
     /**
@@ -103,7 +103,7 @@ class DsoExtension extends AbstractExtension
      * @param $value
      * @return mixed
      */
-    public function removeElement($arr, $value)
+    public function removeElement($arr, $value): array
     {
         $index = array_search($value, $arr);
         unset($arr[$index]);
@@ -114,9 +114,9 @@ class DsoExtension extends AbstractExtension
     /**
      * @param $filter
      *
-     * @return string
+     * @return array
      */
-    public function buildListFilters($filter)
+    public function buildApiListFilters($filter): array
     {
         switch($filter) {
             case 'catalog':
@@ -125,23 +125,23 @@ class DsoExtension extends AbstractExtension
             case 'type':
                 $data = Utils::getListTypeDso();
                 break;
-            case 'const':
+            case 'constellation':
                 $data = [];
                 break;
         }
 
-        $html = '<table><theade><tr><td>Filter</td><td>Value</td></tr></theade>';
+        $html = '<table><thead><tr><td>Filter</td><td>Value</td></tr></thead><tbody>';
 
         foreach ($data as $item) {
             $html .= '<tr>';
             $html .= sprintf('<td>%s</td>', $item);
-            $html .= sprintf('<td>%s</td>', $this->translatorInterface->trans($item));
+            $html .= sprintf('<td>%s</td>', $this->translatorInterface->trans(sprintf('%s.%s',$filter, $item)));
             $html .= '</tr>';
         }
 
         $html .= '<tbody>';
         $html .= '</tbody></table>';
 
-        return $html;
+        return ['message' => $html, 'type' => 'info'];
     }
 }
