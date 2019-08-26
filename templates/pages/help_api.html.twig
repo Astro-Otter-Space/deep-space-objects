@@ -60,7 +60,7 @@
 
           <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
           <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}
           </blockquote>
           <div id="btnConst">
             <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('constellation')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
