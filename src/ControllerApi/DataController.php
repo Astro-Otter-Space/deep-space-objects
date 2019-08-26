@@ -175,7 +175,7 @@ final class DataController extends AbstractFOSRestController
         if (!is_null($offset)) {
             $params['offset'] = $offset;
         }
-        if (!is_null($limit)) {
+        if (!is_null($limit) && isset($limit)) {
             $params['limit'] = $limit;
         }
 
@@ -227,8 +227,8 @@ final class DataController extends AbstractFOSRestController
             throw new InvalidParameterException("Parameter \"$type\" for type does not exist");
         }
 
-        $offset = (int)$paramFetcher->get('offset') ?? null;
-        $limit = (int)$paramFetcher->get('limit') ?? null;
+        $offset = (int)$paramFetcher->get('offset');
+        $limit = (int)$paramFetcher->get('limit');
 
         $params = ['type' => $type];
         if (!is_null($offset)) {

@@ -129,6 +129,7 @@ class Utils
         'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
         'language' => 'contact.option.language', // Ajout d une langue
         //'account' => 'Problem with my account',
+        'api' => 'contact.option.api',
         'other' => 'contact.option.other'
     ];
 

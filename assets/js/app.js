@@ -6,6 +6,7 @@ import Vue from 'vue';
 import Header from './Widgets/App/Header'
 import Footer from './Widgets/App/Footer'
 
+
 // Import custom icons
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {

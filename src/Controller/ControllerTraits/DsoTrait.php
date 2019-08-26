@@ -71,7 +71,7 @@ trait DsoTrait
     }
 
     /**
-     * @param array $data
+     * @param array|ListDso $data
      * @param int $codeHttp
      *
      * @return array

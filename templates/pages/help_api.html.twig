@@ -1,14 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% set siteName = 'dso'|trans %}
+{% set pageTitle = "api.title"|trans %}
+{% set pageDesc = "" %}
+
 {% block content %}
   <div>
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
-        <h2 class="Dso__title">Help API - Work in progress</h2>
+        <h2 class="Dso__title">{{ "api.title"|trans }}</h2>
 
-        <h3>EndPoints API</h3>
+        <div class="Dso__description">
+          {{ 'api.intro'|trans({"%sitename%": siteName})|nl2br }}
+        </div>
 
-        <h3 class="">Register account for API</h3>
+        <h3 class="Dso__title">{{ "api.title.form"|trans }}</h3>
 
         {% for messages in app.flashes("form.failed") %}
           <div class="Form__message Form__error">
@@ -27,7 +33,60 @@
             {% include 'forms/add_api_user.html.twig' with {'form': formRegister} %}
           </div>
         {% endif %}
+
+        <h3 class="Dso__title">{{ "api.title.endpoints"|trans }}</h3>
+
+        <div class="Dso__description">
+          <p><strong>Get token :</strong></p>
+          <blockquote>
+            curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'
+          </blockquote>
+
+
+          <p><strong>{{ 'api.objects.id'|trans }} :</strong></p>
+          <blockquote>
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
+          </blockquote>
+
+
+          <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
+          <blockquote>
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
+          </blockquote>
+          <div id="btnConst">
+            <button v-on:click="openSimplert({'message': 'constellationListDesc'|trans, 'type': 'info'})" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
+            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          </div>
+
+
+          <p><strong>{{ 'api.objects.type'|trans }} :</strong></p>
+          <blockquote>
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}
+          </blockquote>
+          <div id="btnType">
+            {% set data = {'message': build_list_filter('type'), 'type': 'info'}|json_encode|raw %}
+            <button v-on:click="openSimplert(" ~ data ~ ")" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
+            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          </div>
+
+
+          <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
+          <blockquote>
+            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}
+          </blockquote>
+          <div id="btnCatalog">
+            {% set listCatalog = build_list_filter('catalog') %}
+            <button v-on:click="openSimplert({'message': 'Catalogs', 'type': 'info'})" class="appGridBtn">{{ 'api.data.filters'|trans }}</button>
+            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          </div>
+
+        <p>See documentation</p>
       </div>
     </section>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('help_api') }}
 {% endblock %}

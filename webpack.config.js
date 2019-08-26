@@ -27,10 +27,12 @@ Encore
   .addEntry('observation', './assets/js/observation.js')
   .addEntry('observations', './assets/js/list_observations.js')
   .addEntry('notfound', './assets/js/notfound.js')
-
+  .addEntry('help_api', './assets/js/help_api.js')
   //D3-celestial
   .addEntry('skymap', './assets/js/skymap.js')
   .addEntry('leaflet', './assets/js/leaflet.js')
+
+  //
 
   // will require an extra script tag for runtime.js
   // but, you probably want this, unless you're building a single-page app

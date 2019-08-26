@@ -7063,6 +7063,18 @@ vue2-leaflet@^2.1.1:
   resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.1.1.tgz#33ec8920bd1e273b312209a84ce355021226ee79"
   integrity sha512-boJIObTHJOtiLqPDtcL8FdQMr/PLDyZ6/InQBU13mcmNtn4/hvzbyqLmVtvWbRFeGOifAMkJBlbj3gLjrhFdmw==
 
+vue2-simplert-core@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue2-simplert-core/-/vue2-simplert-core-1.0.3.tgz#dc1a7ea2a54472b68414e6af65782a62ebdeb21b"
+  integrity sha512-yKDS5jkp/VAyCYS+AxHT4bFJzysfdCKQMQzu7eAOqAJuRMewp2JH+fPcS+NlOifp7sD04fGBmMtgMj1Btegdfw==
+
+vue2-simplert-plugin@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vue2-simplert-plugin/-/vue2-simplert-plugin-0.4.1.tgz#e7ec75b28fb3f84b4dab18d3d279496a91b79003"
+  integrity sha512-wz2G2f7EHatFhwTQoCW9617etVP1eZkMbuBNuUjyuqPnjLlqcS+uZ3+jxWgwLDtXMLsTBtR6oRy77UiM5g3mDg==
+  dependencies:
+    vue2-simplert-core "1.0.3"
+
 vue2-touch-events@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vue2-touch-events/-/vue2-touch-events-1.1.2.tgz#e900eb22ae067c3915976e1d38454be08cec0a7d"

@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Classes\Utils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -13,6 +14,14 @@ use Twig\TwigFunction;
  */
 class DsoExtension extends AbstractExtension
 {
+    /** @var TranslatorInterface */
+    private $translatorInterface;
+
+    public function __construct(TranslatorInterface $translatorInterface)
+    {
+        $this->translatorInterface = $translatorInterface;
+    }
+
     /**
      * @return array|\Twig_Filter[]
      */
@@ -33,7 +42,8 @@ class DsoExtension extends AbstractExtension
     {
         return [
             new TwigFunction('uasort', [$this, 'uasort']),
-            new TwigFunction('remove_element', [$this, 'removeElement'])
+            new TwigFunction('remove_element', [$this, 'removeElement']),
+            new TwigFunction('build_list_filter', [$this, 'buildListFilters'])
         ];
     }
 
@@ -98,5 +108,40 @@ class DsoExtension extends AbstractExtension
         $index = array_search($value, $arr);
         unset($arr[$index]);
         return $arr;
+    }
+
+
+    /**
+     * @param $filter
+     *
+     * @return string
+     */
+    public function buildListFilters($filter)
+    {
+        switch($filter) {
+            case 'catalog':
+                $data = Utils::getOrderCatalog();
+                break;
+            case 'type':
+                $data = Utils::getListTypeDso();
+                break;
+            case 'const':
+                $data = [];
+                break;
+        }
+
+        $html = '<table><theade><tr><td>Filter</td><td>Value</td></tr></theade>';
+
+        foreach ($data as $item) {
+            $html .= '<tr>';
+            $html .= sprintf('<td>%s</td>', $item);
+            $html .= sprintf('<td>%s</td>', $this->translatorInterface->trans($item));
+            $html .= '</tr>';
+        }
+
+        $html .= '<tbody>';
+        $html .= '</tbody></table>';
+
+        return $html;
     }
 }
