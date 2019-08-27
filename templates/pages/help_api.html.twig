@@ -37,7 +37,7 @@
         <h3 class="Dso__title">{{ "api.title.endpoints"|trans }}</h3>
 
         <div class="Dso__description">
-          <p><strong>Get token :</strong></p>
+          <p><strong>{{ 'api.get_token'|trans }} :</strong></p>
           <blockquote>
             curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'
           </blockquote>
@@ -77,7 +77,7 @@
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
           </div>
 
-          <p><strong>Combine</strong></p>
+          <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
           <blockquote>
             curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}
           </blockquote>

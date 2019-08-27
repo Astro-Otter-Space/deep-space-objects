@@ -330,8 +330,10 @@ api.title: "API Documentation"
 api.intro: "\"%sitename%\" expose a read-only Rest-full API and offer to you its data. You can use for your own website or application.\nYou only need a bearer token by register with the form below. The supported response types are only JSON."
 api.title.endpoints: "List of endpoints"
 api.title.form: "Ask for token"
+api.get_token: Retrieve token
 api.objects.id: Get object by Id
 api.objects.const: Get objects filtered by constellation Id
 api.objects.catalog: Get objects filtered by catalog
 api.objects.type: Get objects filtered by type
+api.objects.multi: Get objets with many parameters
 api.data.filters: List filters
