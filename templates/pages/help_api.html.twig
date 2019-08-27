@@ -38,20 +38,20 @@
 
         <div class="Dso__description">
           <p><strong>{{ 'api.get_token'|trans }} :</strong></p>
-          <blockquote>
-            curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'
-          </blockquote>
+          <pre>
+            <code>curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'</code>
+          </pre>
 
 
           <p><strong>{{ 'api.objects.id'|trans }} :</strong></p>
-          <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}
-          </blockquote>
+          <pre>
+            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}</code>
+          </pre>
 
           <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
-          <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}
-          </blockquote>
+          <pre>
+            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}</code>
+          </pre>
           <div id="btnCatalog">
             <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('catalog')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
@@ -59,9 +59,9 @@
 
 
           <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
-          <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}
-          </blockquote>
+          <pre>
+            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}</code>
+          </pre>
           <div id="btnConst">
             <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('constellation')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
@@ -69,18 +69,18 @@
 
 
           <p><strong>{{ 'api.objects.type'|trans }} :</strong></p>
-          <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}
-          </blockquote>
+          <pre>
+            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}</code>
+          </pre>
           <div id="btnType">
             <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('type')|json_encode }}" id="btn_test">{{ 'api.data.filters'|trans }}</button>
             <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
           </div>
 
           <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
-          <blockquote>
-            curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}
-          </blockquote>
+          <pre>
+            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
+          </pre>
         </div>
 
 

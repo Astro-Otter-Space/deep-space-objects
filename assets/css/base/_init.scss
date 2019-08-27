@@ -92,9 +92,14 @@ hr {
 //  margin: none;
 //}
 
-blockquote {
+pre {
+  white-space: pre-wrap;
+  overflow-x:auto;
+  display: block;
+  margin: 1em 0;
+  font-family: monospace;
+}
+code {
   background: $bgd-light-grey;
   color: $color-text-dark;
-  padding: 1em 0.5em;
-  font-family: 'Source Sans Pro', sans-serif;
 }
