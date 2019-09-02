@@ -1,28 +1,28 @@
 # Layout
 dso: The Otter In Space
 dso_tr: Deep-sky objects
-menu.homepage: Homepage
-selectLang: Languages
+menu.homepage: Página principal
+selectLang: Idiomas
 astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
 error.message: Error %error%, maybe you fall in a black hole :) ?
-more: More informations
+more: Más información
 hem.all: All
 hem.zo: Zodiac
-hem.no: Northern hemisphere
-hem.su: Southern hemisphere
-about.us: About us
+hem.no: Hemisferio norte
+hem.su: Hemisferio sur
+about.us: Sobre nosotros
 skymap: SkyMap
 listObservations: Observations list
 locationObservation: Observations location
-openMenu: Open menu
-switchLang: Switch language
+openMenu: Menú abierto
+switchLang: Cambiar de idioma
 nightMode: Night mode ON
 dayMode: Night mode OFF
 #Catalog
 catalog: Catalog
 catalogs: Catalogs
 allCatalog: All catalogs
-catalog.messier: Messier's catalog
+catalog.messier: Catálogo de Messier
 catalog.ngc: New General Catalog
 catalog.ic: Index Catalog
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
@@ -65,10 +65,10 @@ description.cld: Caldwell catalogue
 description.dodz:
 description.lyn: Catalog of Open Cluster
 description.pis: New southern star clusters catalog
-magnitude.low: From 0 to 5
+magnitude.low: De 0 a 5
 magnitude.average: From 5 to 10
-magnitude.high: From 10 to 15
-magnitude.hard: 15 and more
+magnitude.high: De 5 a 10
+magnitude.hard: 15 y más
 # Lang:
 fr: French
 en: English (UK)
@@ -78,28 +78,28 @@ es: Spanish
 de: German
 # Homepage
 homepage.message: Discover beauties and mysteries of the universe
-home.search.placeholder: Search in catalogs...
-dayImage: Image of the day
+home.search.placeholder: Buscar en catálogos...
+dayImage: Imagen del dia
 # View full
-info: Informations
-desigs: Other designations
-magnitude: Apparent magnitude
-constellation: Constellation|Constellations
-const_id: Constellation|Constellations
-constId: Constellation|Constellations
-dim: Size
-dimExp: Angular dimensions in arcminutes
-distAl: Distance (year-light)
-distPc: Distance (parsec)
+info: Informacion
+desigs: Otras designaciones
+magnitude: Magnitud aparente
+constellation: Constelación|Constelaciones
+const_id: Constelación|Constelaciones
+constId: Constelación|Constelaciones
+dim: Tamaño
+dimExp: Dimensiones angulares en minutos de arco
+distAl: Distancia (year-light)
+distPc: Distancia (parsec)
 imagesGall: Images gallery
-constImgGall: In the same constellation
+constImgGall: En la misma constelación
 typeImgGall: Objects of type "%type%"
-mag: Magnitude
-ra: Right ascension
-dec: Declination
-discover: Discover
-discoverYear: Year
-galery: Gallery
+mag: Magnitud
+ra: Ascensión recta
+dec: Declinación
+discover: Descubrimiento
+discoverYear: Año
+galery: Galería
 # Vue list
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 filters: Filters
@@ -136,7 +136,7 @@ type.sc: Star clusters
 type.vn: Nebulosa variable
 type.ga: Galaxie à anneau
 # Constellations
-constellation.unassigned: Unassigned
+constellation.unassigned: No asignado
 constellation.and: Andromeda
 constellation.ant: Máquina Neumática
 constellation.aps: Ave del Paraíso
@@ -323,4 +323,4 @@ legal_notice:
     cp:
     city:
 legal_notice.line_sec: ""
-allRights: All rights Reserved
+allRights: Todos los derechos reservados
