@@ -239,32 +239,32 @@ observation.search.placeholder: Search by place, user, name...
 select:
   order:
     label: Ordering by
-    placeholder: Choose your option
+    placeholder: Elige tu opción
 # Form contact
-contact.title: "Contact us"
-form.error.sending: "A problem has occurred, please try later"
-form.ok.sending: "Message sended"
-form.error.message: "Please fix errors below"
+contact.title: "Contáctenos"
+form.error.sending: "Se ha producido un problema. Inténtalo más tarde."
+form.ok.sending: "Mensaje enviado"
+form.error.message: "Por favor arregle los errores a continuación"
 form.api.success: "Registration OK. You will receive in your mailbox a bearer token for API."
-contact.form.firstname: "Firstname (*)"
-contact.placeholder.firstname: "Please enter your firstname"
-contact.form.lastname: "Lastname (*)"
-contact.placeholder.lastname: "Please enter your lastname"
+contact.form.firstname: "Nombre (*)"
+contact.placeholder.firstname: "Por favor, introduzca su nombre de pila"
+contact.form.lastname: "Apellido (*)"
+contact.placeholder.lastname: "Por favor ingrese su apellido"
 contact.form.email: "Email (*)"
 contact.form.confirm_email: "Email confirmation (*)"
-contact.placeholder.email: "Please enter your email (e.g: email@email.com)"
-contact.form.country: "Country (*)"
-contact.placeholder.country: "Select a country"
-contact.form.topic: "Topic (*)"
-contact.option.contact: "Contact webmaster"
+contact.placeholder.email: "Por favor introduzca su correo electrónico (e.g: email@email.com)"
+contact.form.country: "País (*)"
+contact.placeholder.country: "Seleccione un país"
+contact.form.topic: "Tema (*)"
+contact.option.contact: "Contacta al webmaster"
 contact.option.astrobin: "Propose an astrobin Image"
 contact.option.data: "Propose new data / edit data"
 contact.option.language: "Propose new language / edit a language"
-contact.option.api: "Question about API"
-contact.option.other: "Other"
-contact.form.message: "Message (*)"
-contact.form.submit: "Submit"
-contact.mandatory: "(*) All fields are mandatory"
+contact.option.api: "Pregunta sobre API"
+contact.option.other: "Otro"
+contact.form.message: "Mensaje (*)"
+contact.form.submit: "Presentar"
+contact.mandatory: "(*) Todos los campos son obligatorios"
 # desc
 constellationListDesc: List of celestial constellations
 dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
@@ -274,7 +274,7 @@ constellationDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: Add an observation
+addObservation: Agregar una observación
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
