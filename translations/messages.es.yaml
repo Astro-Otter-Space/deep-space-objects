@@ -257,9 +257,9 @@ contact.form.country: "País (*)"
 contact.placeholder.country: "Seleccione un país"
 contact.form.topic: "Tema (*)"
 contact.option.contact: "Contacta al webmaster"
-contact.option.astrobin: "Propose an astrobin Image"
+contact.option.astrobin: "Astrobin : Sugerir una imagen"
 contact.option.data: "Propose new data / edit data"
-contact.option.language: "Propose new language / edit a language"
+contact.option.language: "Sugerir nuevo idioma / Editar idioma"
 contact.option.api: "Pregunta sobre API"
 contact.option.other: "Otro"
 contact.form.message: "Mensaje (*)"
@@ -275,8 +275,8 @@ contactDesc:
 skymapDesc:
 # Form add observation
 addObservation: Agregar una observación
-form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
-form.error.addDoc: Error adding document. Try again or contact admin.
+form.ok.addDoc: Observación agregada, <a href="%url%">aquí</a>.
+form.error.addDoc: Error al agregar el documento. Inténtalo de nuevo o comunícate con el administrador.
 observation:
   add:
     information: Information
@@ -284,25 +284,25 @@ observation:
     list: List
     location: Location
   name:
-    label: Title
-    placeholder: Add a title
+    label: Título
+    placeholder: Añade un titulo
   username:
-    label: Username
+    label: Nombre de usuario
     placeholder: Add your name, alias...
   description:
-    label: Description
+    label: Descripción
     placeholder: Describe your observation...
   observationDate:
-    label: Date
+    label: Fecha
     placeholder:
   instrument:
-    label: Instrument
+    label: Instrumento
     placeholder: Precise your intrument
   diameter:
-    label: Diameter of the mirror
+    label: Diámetro del espejo
     placeholder: Enter a number
   focal:
-    label: Focal length of the telescope
+    label: Longitud focal del telescopio
     placeholder: Enter a number
   mount:
     label: Mount
@@ -311,10 +311,10 @@ observation:
     label: Occulars
     placeholder: "Separate with commas (ex: Plossel 21mm, Kellner 10mm...)"
   locationLabel:
-    label: Location of observation
-    placeholder: "Ex: London, UK"
+    label: Lugar de observación
+    placeholder: "Ex: Madrid, Spain"
 # Legal notice
-legal_notice.title: Legal notice
+legal_notice.title: Aviso legal
 legal_notice.line_first: ""
 legal_notice:
   host:
