@@ -11,17 +11,17 @@ hem.zo: Zodiac
 hem.no: Hemisferio norte
 hem.su: Hemisferio sur
 about.us: Sobre nosotros
-skymap: SkyMap
-listObservations: Observations list
-locationObservation: Observations location
+skymap: Mapa del cielo
+listObservations: Lista de observaciones
+locationObservation: Lugar de observaciones
 openMenu: Menú abierto
 switchLang: Cambiar de idioma
 nightMode: Night mode ON
 dayMode: Night mode OFF
 #Catalog
-catalog: Catalog
-catalogs: Catalogs
-allCatalog: All catalogs
+catalog: Catalogar
+catalogs: Catálogos
+allCatalog: Todos los catálogos
 catalog.messier: Catálogo de Messier
 catalog.ngc: New General Catalog
 catalog.ic: Index Catalog
@@ -89,7 +89,7 @@ const_id: Constelación|Constelaciones
 constId: Constelación|Constelaciones
 dim: Tamaño
 dimExp: Dimensiones angulares en minutos de arco
-distAl: Distancia (year-light)
+distAl: Distancia (año luz)
 distPc: Distancia (parsec)
 imagesGall: Images gallery
 constImgGall: En la misma constelación
@@ -279,10 +279,10 @@ form.ok.addDoc: Observación agregada, <a href="%url%">aquí</a>.
 form.error.addDoc: Error al agregar el documento. Inténtalo de nuevo o comunícate con el administrador.
 observation:
   add:
-    information: Information
+    information: Información
     setup: Setup
     list: List
-    location: Location
+    location: Ubicación
   name:
     label: Título
     placeholder: Añade un titulo
