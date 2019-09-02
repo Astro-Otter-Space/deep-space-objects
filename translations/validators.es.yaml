@@ -1,10 +1,10 @@
-contact.constraint.not_blank: Field must not be empty
-contact.constraint.email: Email is not correct
-contact.constraint.email_note_same: Email are not both identical
-contact.constraint.country: Pick a country
-contact.constraint.invalid_form: The form is invalid
-contact.constraint.topic: Please, select a topic
-form.constraint.recaptchat: Recaptcha invalid
-registration.constraint.compromised_pwd: Password compromised, please try another one
-registration.constraint.length: Your password should be at least 6 characters
-registration.constraint.unique: The value is already used, please pick another one
+contact.constraint.not_blank: El campo no debe estar vacío.
+contact.constraint.email: El correo electrónico no es correcto.
+contact.constraint.email_note_same: El correo electrónico no es idéntico
+contact.constraint.country: Elige un pais
+contact.constraint.invalid_form: El formulario no es válido.
+contact.constraint.topic: Por favor, seleccione un tema
+form.constraint.recaptchat: Recaptcha inválido
+registration.constraint.compromised_pwd: Contraseña comprometida, intente con otra
+registration.constraint.length: Su contraseña debe tener al menos 6 caracteres.
+registration.constraint.unique: El valor ya está en uso, elija otro.
