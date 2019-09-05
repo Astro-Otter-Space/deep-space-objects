@@ -5,6 +5,7 @@ namespace App\Command;
 
 use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
+use Astrobin\Exceptions\WsException;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
@@ -69,7 +70,12 @@ class CheckAstrobinImageCommand extends Command
                 /** @var GetImage $image */
                 $image = new GetImage();
 
-                $result = $image->debugImageById($astrobinId);
+                try {
+                    $result = $image->debugImageById($astrobinId);
+                } catch (WsException $e) {
+                    $failedAstrobinId[] = $astrobinId . ' - ' . $e->getMessage();
+                }
+
                 if (property_exists($result, 'http_code') && Response::HTTP_NOT_FOUND === $result->http_code) {
                     $failedAstrobinId[] = $result->data;
                 }
@@ -82,6 +88,7 @@ class CheckAstrobinImageCommand extends Command
 
         try {
             if (0 < count($failedAstrobinId)) {
+                dump($failedAstrobinId);
                 $this->mailHelper->sendMail($this->senderMail, 'balistik.fonfon@gmail.com', 'Astrobin Id 404', $template, $content);
             }
         } catch (\Swift_TransportException $e) {

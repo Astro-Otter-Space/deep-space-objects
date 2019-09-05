@@ -116,7 +116,7 @@
               "type": "text"
             },
             "astrobin_id": {
-              "type": "integer"
+              "type": "text"
             }
           }
         },

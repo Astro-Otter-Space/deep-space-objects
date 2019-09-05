@@ -1635,12 +1635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/HamHamFonFon/Astrobin-API-PHP.git",
-                "reference": "f5ac2e4e7808e6f8afef4211d069e15a367de8b6"
+                "reference": "f5ff0384a80cce1dd77c6be3a6140c8fd7ea111c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-API-PHP/zipball/f5ac2e4e7808e6f8afef4211d069e15a367de8b6",
-                "reference": "f5ac2e4e7808e6f8afef4211d069e15a367de8b6",
+                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-API-PHP/zipball/f5ff0384a80cce1dd77c6be3a6140c8fd7ea111c",
+                "reference": "f5ff0384a80cce1dd77c6be3a6140c8fd7ea111c",
                 "shasum": ""
             },
             "require": {
@@ -1684,7 +1684,7 @@
                 "issues": "https://github.com/HamHamFonFon/Astrobin-API-PHP/issues",
                 "source": "https://github.com/HamHamFonFon/Astrobin-API-PHP/tree/master"
             },
-            "time": "2019-02-28T20:13:19+00:00"
+            "time": "2019-09-05T11:48:24+00:00"
         },
         {
             "name": "hoa/compiler",
