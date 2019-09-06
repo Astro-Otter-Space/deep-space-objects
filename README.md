@@ -120,9 +120,9 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7252 | 7840 |
 | Sharpless | sh |129 | 313 |
-| Index catalog | ic | 257 | 5386 |
+| Index catalog | ic | 261 | 5386 |
 | RCW | rcw |38 | 182 |
-| Collinder | cr | 159 | 471 |
+| Collinder | cr | 173 | 471 |
 | Caldwell | cld | 109 | 109 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
@@ -138,9 +138,9 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Pismis | pis | 24 | 27 |
 | Minkowski | mkw | 165 | ? |
 | Menzel | mzl | 3 | 3 |
-| Biurakan | biu | 8 | 13 |
+| Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Melotte | mel | 43 | 243 |
+| Melotte | mel | 48 | 243 |
 | Berkeley | ber | 85 | 104 |
 | Czernick | cz | 40 | 45 |
 
