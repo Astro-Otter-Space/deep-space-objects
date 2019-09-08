@@ -88,6 +88,7 @@ class Utils
         'dodz',
         'haf',
         'har',
+        'hen',
         'hvd',
         'hic',
         'hod',
