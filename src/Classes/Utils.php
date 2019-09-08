@@ -93,6 +93,11 @@ class Utils
         'ber',
         'mel',
         'cz',
+        'rsl',
+        'bsl',
+        'ced',
+        'doc',
+        'haf',
         self::UNASSIGNED
     ];
 
