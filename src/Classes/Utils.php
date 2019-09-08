@@ -86,6 +86,7 @@ class Utils
         'ddo',
         'doc',
         'dodz',
+        'eso',
         'haf',
         'har',
         'hen',
