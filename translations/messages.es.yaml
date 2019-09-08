@@ -51,6 +51,7 @@ catalog.ber: Berkeley catalog
 catalog.cz: Czernick catalog
 catalog.rsl: Roslung
 catalog.arp: Arp
+catalog.am: Arp-Madore
 catalog.b: B
 catalog.bsl: Basel
 catalog.ced: Cederblad

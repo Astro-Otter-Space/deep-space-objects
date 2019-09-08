@@ -76,6 +76,7 @@ class Utils
         'lbn',
         // minor catalogs
         'arp',
+        'am',
         'b',
         'bsl',
         'ber',
