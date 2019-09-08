@@ -49,9 +49,11 @@ catalog.boc: Bochum catalog
 catalog.mel: Melotte catalog
 catalog.ber: Berkeley catalog
 catalog.cz: Czernick catalog
-catalog.rsl: Roslung catalog
-catalog.bsl: Basel catalog
-catalog.ced: Ced catalog
+catalog.rsl: Roslung
+catalog.arp: Arp
+catalog.b: B
+catalog.bsl: Basel
+catalog.ced: Cederblad
 catalog.doc: Do catalog
 catalog.eso: ESO catalog
 catalog.haf: Haffner catalog
@@ -62,10 +64,12 @@ catalog.hic: Hickson catalog
 catalog.hod: Hodge catalog
 catalog.hog: Hogg catalog
 catalog.huc: Humason catalog
+catalog.k: K
 catalog.kin: King catalog
 catalog.lat: Latysev catalog
 catalog.lod: Loden catalog
 catalog.mar: Markarian catalog
+catalog.may: Mayer
 catalog.mrk: MRK catalog
 catalog.ocl: OCL catalog
 catalog.pal: Palomar catalog

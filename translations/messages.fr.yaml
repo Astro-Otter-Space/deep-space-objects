@@ -38,21 +38,23 @@ catalog.dodz: Catalogue Dolidze-Dzimselejvili
 catalog.pgc: Catalogue of Principal Galaxies
 catalog.cld: Catalogue de Caldwell
 catalog.unassigned: Non assigné
-catalog.ddo: Catalogue de l'observatoire David Dunlap
-catalog.vdb: Catalogue van den Bergh
-catalog.pis: Catalogue Pismis
-catalog.lyn: Catalogue Lynga
-catalog.mkw: Catalogue Minkowski
-catalog.mzl: Catalogue de Menzel
-catalog.biu: Catalogue Biurakan
-catalog.boc: Catalogue Bochum
-catalog.mel: Catalogue Melotte
-catalog.ber: Catalogue Berkeley
-catalog.cz: Catalogue de Czernick
-catalog.rsl: Catalogue de Roslung
-catalog.bsl: Catalogue de Basel
-catalog.ced: Catalogue de Ced
-catalog.doc: Catalogue de Do
+catalog.ddo: Observatoire David Dunlap
+catalog.vdb: Van den Bergh
+catalog.pis: Pismis
+catalog.lyn: Lynga
+catalog.mkw: Minkowski
+catalog.mzl: Menzel
+catalog.biu: Biurakan
+catalog.boc: Bochum
+catalog.mel: Melotte
+catalog.ber: Berkeley
+catalog.cz: Czernick
+catalog.rsl: Roslung
+catalog.arp: Arp
+catalog.b: B
+catalog.bsl: Basel
+catalog.ced: Cederblad
+catalog.doc: Do
 catalog.eso: ESO catalog
 catalog.haf: Haffner catalog
 catalog.har: Haro catalog
@@ -62,10 +64,12 @@ catalog.hic: Hickson catalog
 catalog.hod: Hodge catalog
 catalog.hog: Hogg catalog
 catalog.huc: Humason catalog
+catalog.k: K
 catalog.kin: King catalog
 catalog.lat: Latysev catalog
 catalog.lod: Loden catalog
 catalog.mar: Markarian catalog
+catalog.may: Mayer
 catalog.mrk: MRK catalog
 catalog.ocl: OCL catalog
 catalog.pal: Palomar catalog
