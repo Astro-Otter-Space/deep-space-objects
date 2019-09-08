@@ -98,6 +98,10 @@ class Utils
         'ced',
         'doc',
         'haf',
+        'hvd',
+        'hic',
+        'hod',
+        'hog',
         self::UNASSIGNED
     ];
 

@@ -54,6 +54,10 @@ catalog.bsl: Basel catalog
 catalog.ced: Ced catalog
 catalog.doc: Do catalog
 catalog.haf: Haffner catalog
+catalog.hvd: Harvard catalog
+catalog.hic: Hickson catalog
+catalog.hod: Hodge catalog
+catalog.hog: Hogg catalog
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 description.ngc:
 description.ic:
