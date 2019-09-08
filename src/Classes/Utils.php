@@ -75,6 +75,7 @@ class Utils
         'ldn',
         'lbn',
         // minor catalogs
+        'b',
         'bsl',
         'ber',
         'biu',
@@ -117,7 +118,7 @@ class Utils
         'ter',
         'ugc',
         'vdb',
-        'vdb',
+        'vy',
         self::UNASSIGNED
     ];
 
