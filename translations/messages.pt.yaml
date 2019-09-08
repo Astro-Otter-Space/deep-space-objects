@@ -66,6 +66,9 @@ catalog.mar: Markarian catalog
 catalog.mrk: MRK catalog
 catalog.ocl: OCL catalog
 catalog.pal: Palomar catalog
+catalog.pmb: Peimbert catalog
+catalog.per: Perek catalog
+catalog.ru: Ru catalog
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 description.ngc:
 description.ic:

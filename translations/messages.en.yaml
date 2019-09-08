@@ -66,6 +66,9 @@ catalog.mar: Markarian catalog
 catalog.mrk: MRK catalog
 catalog.ocl: OCL catalog
 catalog.pal: Palomar catalog
+catalog.pmb: Peimbert catalog
+catalog.per: Perek catalog
+catalog.ru: Ru catalog
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
 description.ngc: ""
 description.ic: ""
