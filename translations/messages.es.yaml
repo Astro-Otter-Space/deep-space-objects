@@ -54,6 +54,7 @@ catalog.bsl: Basel catalog
 catalog.ced: Ced catalog
 catalog.doc: Do catalog
 catalog.haf: Haffner catalog
+catalog.har: Haro catalog
 catalog.hvd: Harvard catalog
 catalog.hic: Hickson catalog
 catalog.hod: Hodge catalog
@@ -69,6 +70,7 @@ catalog.pal: Palomar catalog
 catalog.pmb: Peimbert catalog
 catalog.per: Perek catalog
 catalog.ru: Ru catalog
+catalog.ter: Ter catalog
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
 description.ngc:
 description.ic:

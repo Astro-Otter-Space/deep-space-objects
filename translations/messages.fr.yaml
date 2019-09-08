@@ -54,6 +54,7 @@ catalog.bsl: Catalogue de Basel
 catalog.ced: Catalogue de Ced
 catalog.doc: Catalogue de Do
 catalog.haf: Haffner catalog
+catalog.har: Haro catalog
 catalog.hvd: Harvard catalog
 catalog.hic: Hickson catalog
 catalog.hod: Hodge catalog
@@ -69,6 +70,7 @@ catalog.pal: Palomar catalog
 catalog.pmb: Peimbert catalog
 catalog.per: Perek catalog
 catalog.ru: Ru catalog
+catalog.ter: Ter catalog
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 description.ngc: Compilation de 7840 objets découverts par divers observateurs. Pour les astronomes amateurs il s'agit d'une base de données de référence car elle englobe tout les plus beaux objets visibles dans le ciel, y compris ceux du catalogue Messier.
 description.ic: Catalogues IC1 et 2 complémentaires du NGC. Il englobe 5387 objets compilés par Jean-Louis Dreyer entre 1888 et 1907.
