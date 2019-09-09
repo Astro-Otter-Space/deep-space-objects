@@ -32,6 +32,10 @@
         "order": {
           "type": "integer"
         },
+        "updated_at": {
+          "type": "date",
+          "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
+        },
         "geometry": {
           "type": "geo_shape"
         },

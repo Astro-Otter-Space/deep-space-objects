@@ -100,7 +100,8 @@ class ConvertSrcToBulkCommand extends Command
                         $mapping = [
                             'randId' => 'md5ForId',
                             'catalog' => 'getCatalog',
-                            'order' => 'getItemOrder'
+                            'order' => 'getItemOrder',
+                            'updatedAt' => 'getDateTUpdate'
                         ];
                         $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping, $id) {
                             $findKey = $match[1];
@@ -180,5 +181,17 @@ class ConvertSrcToBulkCommand extends Command
     public static function getItemOrder()
     {
         return null;
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public static function getDateTUpdate(): string
+    {
+        /** @var \DateTime $dateNow */
+        $dateNow = new \DateTime('now');
+
+        return $dateNow->format(Utils::FORMAT_DATE_ES);
     }
 }
