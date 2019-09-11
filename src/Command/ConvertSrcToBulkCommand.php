@@ -101,7 +101,7 @@ class ConvertSrcToBulkCommand extends Command
                             'randId' => 'md5ForId',
                             'catalog' => 'getCatalog',
                             'order' => 'getItemOrder',
-                            'updatedAt' => 'getDateTUpdate'
+                            'updatedAt' => 'getDateUpdate'
                         ];
                         $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping, $id) {
                             $findKey = $match[1];
@@ -153,7 +153,7 @@ class ConvertSrcToBulkCommand extends Command
     public function buildCreateLine($type, $id): string
     {
         // {"create": {"_index": "<type>", "_type": "_doc", "_id": "<md5 id>"}},
-        return  sprintf('{"create": {"_index": "%s", "_type": "_doc", "_id": "%s"}}',self::$mapping[$type], self::md5ForId($id));
+        return  sprintf('{"create": {"_index": "%s", "_type": "_doc", "_id": "%s"}}', self::$mapping[$type], self::md5ForId($id));
     }
 
     /**
@@ -187,7 +187,7 @@ class ConvertSrcToBulkCommand extends Command
      * @return string
      * @throws \Exception
      */
-    public static function getDateTUpdate(): string
+    public static function getDateUpdate(): string
     {
         /** @var \DateTime $dateNow */
         $dateNow = new \DateTime('now');
