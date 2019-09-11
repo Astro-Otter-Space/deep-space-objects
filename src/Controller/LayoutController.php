@@ -270,6 +270,9 @@ class LayoutController extends AbstractController
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('add_observation.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
+            ],
+            'help_api' => [
+                'loc' => $router->generate('help_api_page', [], Router::ABSOLUTE_URL)
             ]
         ];
 
