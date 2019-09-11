@@ -102,6 +102,7 @@ class Utils
         'kin',
         'lat',
         'lod',
+        'lon',
         'lyn',
         'mar',
         'may',
