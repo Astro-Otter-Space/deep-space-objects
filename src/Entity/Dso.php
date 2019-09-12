@@ -27,6 +27,7 @@ class Dso extends AbstractEntity
     private $discoverYear;
     private $ra;
     private $dec;
+    private $updatedAt;
     private $astrobinId;
     private $astrobinUser;
     private $image;
@@ -328,7 +329,7 @@ class Dso extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getAstrobinUser()
+    public function getAstrobinUser():? string
     {
         return $this->astrobinUser;
     }
@@ -339,12 +340,34 @@ class Dso extends AbstractEntity
      *
      * @return Dso
      */
-    public function setAstrobinUser($astrobinUser)
+    public function setAstrobinUser($astrobinUser): self
     {
         $this->astrobinUser = $astrobinUser;
         return $this;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt():? \DateTime
+    {
+        if (is_string($this->updatedAt)) {
+            $this->updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
+        }
+
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return Dso
+     */
+    public function setUpdatedAt($updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 
     /**
      * @return string

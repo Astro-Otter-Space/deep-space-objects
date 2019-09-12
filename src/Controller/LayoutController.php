@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Constellation;
+use App\Entity\Dso;
 use App\Entity\ListConstellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
@@ -272,12 +273,22 @@ class LayoutController extends AbstractController
                 }, $listLocales))
             ],
             'help_api' => [
-                'loc' => $router->generate('help_api_page', [], Router::ABSOLUTE_URL)
+                'loc' => $router->generate('help_api_page', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('help_api_page.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'legalnotice' => [
+                'loc'=> $router->generate('legal_notice', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('legal_notice.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
             ]
         ];
 
         /** @var  $listDso */
         list($listDso,,) = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+        /** @var Dso $dso */
         foreach ($listDso as $dso) {
             $params['urls'][$dso->getId()] = [
                 'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
@@ -285,7 +296,8 @@ class LayoutController extends AbstractController
                     return [
                         $locale => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL, $locale)
                     ];
-                }, $listLocales))
+                }, $listLocales)),
+                'lastmod' => $dso->getUpdatedAt()->format('Y-m-d')
             ];
         }
 

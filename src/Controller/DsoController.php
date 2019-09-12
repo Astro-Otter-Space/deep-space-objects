@@ -88,7 +88,7 @@ class DsoController extends AbstractController
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $this->dsoManager->buildTitle($dso);
-
+            $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
             // Image cover
             $params['imgCover'] = $dso->getImage();
             $params['imgCoverUser'] = $dso->getAstrobinUser();
