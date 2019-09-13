@@ -119,34 +119,64 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7252 | 7840 |
-| Sharpless | sh |129 | 313 |
-| Index catalog | ic | 261 | 5386 |
-| RCW | rcw |38 | 182 |
-| Collinder | cr | 173 | 471 |
-| Caldwell | cld | 109 | 109 |
+| Index catalog | ic | 268 | 5386 |
+| Sharpless | sh |131 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
-| UGC | ugc | 276 | 12921 |
-| PGC | pgc | 50 | 73197 |
-| LDN | ldn | 27 | ? |
-| LBN | lbn | 74 | ? |
-| Dolidze-Dzimselejvili | dodz | 11 | 11 |
-| David Dunlap | ddo | 4 | 343 |
-| vdB | vdb | 40 | 158 |
-| Sto (Stock Open Cluster) | sto | 23 | 24 |
-| Lynga | lyn | 13 | 15 |
-| Pismis | pis | 24 | 27 |
-| Minkowski | mkw | 165 | ? |
-| Menzel | mzl | 3 | 3 |
+| LDN | ldn | 29 | ? |
+| LBN | lbn | 77 | ? |
+| Arp | arp | 4 | |
+| |am| 1||
+| |b| 158||
+| Basel | bsl | 16 | ? |
+| Berkeley | ber | 98 | 104 |
 | Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Melotte | mel | 48 | 243 |
-| Berkeley | ber | 85 | 104 |
+| Collinder | cr | 184 | 471 |
+| Caldwell | cld | 109 | 109 |
+| Cederblad |ced| 21 ||
 | Czernick | cz | 40 | 45 |
+| David Dunlap | ddo | 4 | 343 |
+| D | do | 40||
+| Dolidze-Dzimselejvili | dodz | 11 | 11 |
+| |eso| 23 ||
+| |fle| 3 ||
+| Haffner | haf | 21 | ? |
+| |har| 53||
+| |hen| 150||
+| |hvd| 9||
+| |hic| 0||
+| |hod| 0||
+| |hog| 20||
+| |huc| 3||
+| |k| 45||
+| |kin| 24||
+| |lat| 1||
+| |lod| 1||
+| |lon| 4||
+| Lynga | lyn | 13 | 15 |
+| |mar| 1||
+| |may| 2||
+| Melotte | mel | 54 | 243 |
+| Minkowski | mkw | 166 | ? |
+| Menzel | mzl | 3 | 3 |
+| |mrk| 4||
+| |ocl| 3||
+| |pal| 13||
+| |pmb| 7||
+| |per| 22||
+| PGC | pgc | 50 | 73197 |
+| Pismis | pis | 25 | 27 |
+| RCW | rcw |38 | 182 |
 | Roslund | rsl | 7 | ? | 
-| Basel | bsl | 14 | ? |
-| Do | doc | 20 | ? |
-| Haffner | haf | ? | ? |
+| |ru| 149||
+| |sha| 3||
+| |sl| 7||
+| Stock Open Cluster | sto | 23 | 24 |
+| |ter| 6||
+| UGC | ugc | 282 | 12921 |
+| vdB | vdb | 39 | 158 |
+| |vy| 5||
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
 (no Stock22)

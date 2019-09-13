@@ -115,7 +115,6 @@ class Utils
         'pal',
         'pmb',
         'per',
-        'pgc',
         'pis',
         'rcw',
         'rsl',
