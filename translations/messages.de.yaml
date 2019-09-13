@@ -22,42 +22,31 @@ dayMode: Night mode OFF
 catalog: Katalog
 catalogs: Kataloge
 allCatalog: Alle kataloge
+catalog.unassigned: Nicht zugewiesen
 catalog.messier: Messierobjekte
 catalog.ngc: New General Catalog
 catalog.ic: Index
+catalog.sh: Sharpless
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
 catalog.lbn: Lynds' Catalogue of Bright Nebulae
-catalog.sh: Sharpless
-catalog.cr: Collinder
-catalog.sto : Stock open clusters
-catalog.rcw: RCW
 catalog.agc: Abell catalog of galaxies clusters
 catalog.abl: Abell Catalog of Planetary Nebulae
-catalog.ugc: Uppsala General Katalog
-catalog.dodz: Dolidze-Dzimselejvil
-catalog.pgc: Catalog of Principal Galaxies
-catalog.cld: Caldwell
-catalog.unassigned: Unassigned
-catalog.ddo: David Dunlap Observatory
-catalog.vdb: Van den Bergh
-catalog.lyn: Lynga
-catalog.pis: Pismis
-catalog.mkw: Minkowski
-catalog.mzl: Menzel
-catalog.biu: Biurakan
-catalog.boc: Bochum
-catalog.mel: Melotte
-catalog.ber: Berkeley
-catalog.cz: Czernick
-catalog.rsl: Roslung
 catalog.arp: Arp
 catalog.am: Arp-Madore
 catalog.b: B
 catalog.bsl: Basel
+catalog.ber: Berkeley
+catalog.biu: Biurakan
+catalog.boc: Bochum
+catalog.cr: Collinder
+catalog.cld: Caldwell
 catalog.ced: Cederblad
+catalog.cz: Czernick
+catalog.ddo: David Dunlap Observatory
 catalog.doc: Do
-catalog.fle: Fleming
+catalog.dodz: Dolidze-Dzimselejvil
 catalog.eso: ESO
+catalog.fle: Fleming
 catalog.haf: Haffner
 catalog.har: Haro
 catalog.hen: Henize
@@ -71,17 +60,28 @@ catalog.kin: King
 catalog.lat: Latysev
 catalog.lod: Loden
 catalog.lon: Longmore
+catalog.lyn: Lynga
 catalog.mar: Markarian
 catalog.may: Mayer
+catalog.mel: Melotte
+catalog.mkw: Minkowski
+catalog.mzl: Menzel
 catalog.mrk: MRK
 catalog.ocl: OCL
-catalog.pal: Palomar
+catalog.pal: Pal - Palomar
 catalog.pmb: Peimbert
-catalog.per: Perek
+catalog.per: Perek catalog
+catalog.pgc: Catalogue of Principal Galaxies
+catalog.pis: Pismis
+catalog.rcw: RCW
+catalog.rsl: Roslung
 catalog.ru: Ruprecht
 catalog.sha: Shapley
 catalog.sl: Sandqvist-Lindroos
+catalog.sto : Stock open clusters
 catalog.ter: Terzan
+catalog.ugc: Uppsala General Catalog
+catalog.vdb: Van den Bergh
 catalog.vy: Vyssotsky
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
 description.ngc:
