@@ -4,7 +4,7 @@
     :placeholder="searchPlaceholder"
     :min="2"
     param="q"
-    anchor="value"
+    anchor="ajaxValue"
     label="label"
     :classes="customClasses"
     :onSelect="redirectToItem"

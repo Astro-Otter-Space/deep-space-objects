@@ -191,6 +191,7 @@ class DsoManager
         return [
             'id' => $dso->getId(),
             'value' => $this->buildTitle($dso),
+            'ajaxValue' => sprintf('%s (%s)', $this->buildTitle($dso), implode(Utils::GLUE_DASH, $otherDesigs)),
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
             'url' => $this->getDsoUrl($dso)
