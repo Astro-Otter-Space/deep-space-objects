@@ -97,9 +97,11 @@ class ConstellationManager
      */
     public function buildSearchListConst(Constellation $constellation)
     {
+        $constellationName = $constellation->getAlt();
         return [
             'id' => $constellation->getId(),
-            'value' => $constellation->getAlt(),
+            'value' => $constellationName,
+            'ajaxValue' => $constellationName,
             'label' => implode(Utils::GLUE_DASH, [$this->translatorInterface->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
             'url' => $this->buildUrl($constellation),
         ];

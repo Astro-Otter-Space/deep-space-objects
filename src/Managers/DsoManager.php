@@ -182,16 +182,18 @@ class DsoManager
     public function buildSearchListDso(Dso $dso): array
     {
         $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstId())) : null;
+        $title = $this->buildTitle($dso);
 
         $otherDesigs = $dso->getDesigs();
         $removeDesigs = (is_array($otherDesigs))
             ? array_shift($otherDesigs)
             : null;
 
+        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
         return [
             'id' => $dso->getId(),
-            'value' => $this->buildTitle($dso),
-            'ajaxValue' => sprintf('%s (%s)', $this->buildTitle($dso), implode(Utils::GLUE_DASH, $otherDesigs)),
+            'value' => $title,
+            'ajaxValue' => $ajaxValue,
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
             'url' => $this->getDsoUrl($dso)
