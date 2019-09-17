@@ -8,6 +8,7 @@ use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\DsoRepository;
+use Astrobin\Exceptions\WsException;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
@@ -64,7 +65,7 @@ class DsoManager
      * @param $id
      *
      * @return Dso
-     * @throws \Astrobin\Exceptions\WsException
+     * @throws WsException
      * @throws \ReflectionException
      */
     public function buildDso($id): Dso
@@ -182,9 +183,15 @@ class DsoManager
     {
         $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstId())) : null;
 
+        $otherDesigs = $dso->getDesigs();
+        $removeDesigs = (is_array($otherDesigs))
+            ? array_shift($otherDesigs)
+            : null;
+
         return [
             'id' => $dso->getId(),
             'value' => $this->buildTitle($dso),
+            'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
             'url' => $this->getDsoUrl($dso)
         ];
@@ -196,8 +203,10 @@ class DsoManager
      * @param $astrobinId
      * @param $id
      * @param string $param
-     * @return string|null
-     * @throws \Astrobin\Exceptions\WsException
+     *
+     * @return array
+     *
+     * @throws WsException
      * @throws \ReflectionException
      */
     public function getAstrobinImage($astrobinId, $id, $param = 'url_hd'): array
@@ -243,13 +252,19 @@ class DsoManager
      */
     public function buildTitle(Dso $dso): string
     {
-        // Fist we retrieve desigs
+        // Fist we retrieve desigs and other desigs
         $desig = (is_array($dso->getDesigs())) ? current($dso->getDesigs()) : $dso->getDesigs();
+//        $otherDesigs = (is_array($dso->getDesigs())) ? array_shift($dso->getDesigs()): '';
+
         // If Alt is set, we merge desig and alt
-        $title = (empty($dso->getAlt())) ? $desig : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), $desig]);
+        $title = (empty($dso->getAlt()))
+            ? $desig
+            : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), $desig]);
 
         // If title still empty, we put Id
-        $title = (empty($title))? $dso->getId() : $title;
+        $title = (empty($title))
+            ? $dso->getId()
+            : $title;
 
         return $title;
     }

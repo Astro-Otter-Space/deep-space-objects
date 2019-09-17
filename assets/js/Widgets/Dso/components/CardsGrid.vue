@@ -54,6 +54,7 @@
                 <span v-bind:style="{width: m_percentage(33) + '%'}"></span>
               </span>
               <h3 class="title" :data-id="item.value">{{ item.value }}</h3>
+              <p class="artist" v-if="item.subValue">{{ item.subValue }}</p>
               <p class="artist">{{ item.label }}</p>
             </div>
           </a>
