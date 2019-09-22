@@ -126,6 +126,7 @@ class Utils
         'ter',
         'ugc',
         'vdb',
+        'vv',
         'vy',
         self::UNASSIGNED
     ];
