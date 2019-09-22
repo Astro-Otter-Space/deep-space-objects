@@ -91,6 +91,7 @@ class Utils
         'dodz',
         'eso',
         'fle',
+        'gum',
         'haf',
         'har',
         'hen',
