@@ -50,6 +50,7 @@ catalog.fle: Fleming
 catalog.gum: Gum
 catalog.haf: Haffner
 catalog.har: Haro
+catalog.hb: Hubble
 catalog.hen: Henize
 catalog.hvd: Harvard
 catalog.hic: Hickson
@@ -83,6 +84,7 @@ catalog.sto : Stock open clusters
 catalog.ter: Terzan
 catalog.ugc: Uppsala General Catalog
 catalog.vdb: Van den Bergh
+catalog.vv: Vorontsov-Vel’yaminov
 catalog.vy: Vyssotsky
 description.messier: Les objets de Messier sont une liste d'objets astronomiques catalogués par l'astronome français Charles Messier dans son Catalogue des Nébuleuses et des Amas d'Étoiles, publiée en 1771.
 description.ngc:

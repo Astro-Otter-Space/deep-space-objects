@@ -99,6 +99,7 @@ class Utils
         'hic',
         'hod',
         'hog',
+        'hub',
         'huc',
         'k',
         'kin',

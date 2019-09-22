@@ -50,6 +50,7 @@ catalog.fle: Fleming
 catalog.gum: Gum
 catalog.haf: Haffner
 catalog.har: Haro
+catalog.hb: Hubble
 catalog.hen: Henize
 catalog.hvd: Harvard
 catalog.hic: Hickson
@@ -83,6 +84,7 @@ catalog.sto : Stock open clusters
 catalog.ter: Terzan
 catalog.ugc: Uppsala General Catalog
 catalog.vdb: Van den Bergh
+catalog.vv: Vorontsov-Vel’yaminov
 catalog.vy: Vyssotsky
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
 description.ngc: ""
