@@ -78,6 +78,7 @@ class Utils
         'arp',
         'am',
         'b',
+        'bar',
         'bsl',
         'ber',
         'biu',
