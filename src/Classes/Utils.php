@@ -123,6 +123,7 @@ class Utils
         'rcw',
         'rsl',
         'ru',
+        'sast',
         'sha',
         'sl',
         'sto',
