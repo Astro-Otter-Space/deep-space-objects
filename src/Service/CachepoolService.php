@@ -29,7 +29,6 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool|mixed
-     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function getItem($key): string
     {
@@ -44,7 +43,6 @@ class CachepoolService implements CacheInterface
      * @param $value
      *
      * @return bool
-     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function saveItem($key, $value): bool
     {
