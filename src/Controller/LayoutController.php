@@ -141,11 +141,16 @@ class LayoutController extends AbstractController
 
     /**
      * Footer
-     * @deprecated
+     *
      * @param Request $request
+     * @param $githubLink
+     * @param $paypalLink
+     * @param $facebookLink
+     *
      * @return Response
+     * @deprecated
      */
-    public function footer(Request $request, $githubLink, $paypalLink,$facebookLink)
+    public function footer(Request $request, $githubLink, $paypalLink, $facebookLink)
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
@@ -287,7 +292,8 @@ class LayoutController extends AbstractController
         ];
 
         /** @var  $listDso */
-        list($listDso,,) = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+        [$listDso,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+
         /** @var Dso $dso */
         foreach ($listDso as $dso) {
             $params['urls'][$dso->getId()] = [
