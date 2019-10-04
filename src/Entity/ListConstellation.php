@@ -28,4 +28,6 @@ class ListConstellation implements \IteratorAggregate
     {
         $this->listConstellation[] = $constellation;
     }
+
+    // TODO add Yield insteed ArrayIterator : https://www.pmg.com/blog/generators-iterator-aggregate-php/?cn-reloaded=1
 }
