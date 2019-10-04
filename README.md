@@ -119,24 +119,24 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7252 | 7840 |
-| Index catalog | ic | 293 | 5386 |
-| Sharpless | sh |131 | 313 |
+| Index catalog | ic | 319 | 5386 |
+| Sharpless | sh |132 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
-| LDN | ldn | 29 | ? |
-| LBN | lbn | 77 | ? |
-| Arp | arp | 18 | |
+| LDN | ldn | 33 | ? |
+| LBN | lbn | 83 | ? |
+| Arp | arp | 29 | |
 | |am| 1||
 | |b| 158||
 | Basel | bsl | 16 | ? |
 | Berkeley | ber | 98 | 104 |
 | Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Collinder | cr | 219 | 471 |
+| Collinder | cr | 262 | 471 |
 | Caldwell | cld | 109 | 109 |
 | Cederblad |ced| 21 ||
 | Czernick | cz | 40 | 45 |
-| David Dunlap | ddo | 4 | 343 |
+| David Dunlap | ddo | 10 | 343 |
 | D | do | 40||
 | Dolidze-Dzimselejvili | dodz | 11 | 11 |
 | |eso| 23 ||
@@ -158,12 +158,12 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Lynga | lyn | 13 | 15 |
 | |mar| 1||
 | |may| 2||
-| Melotte | mel | 54 | 243 |
+| Melotte | mel | 81 | 243 |
 | Minkowski | mkw | 166 | ? |
 | Menzel | mzl | 3 | 3 |
 | |mrk| 4||
 | |ocl| 3||
-| |pal| 13||
+| |pal| 14||
 | |pmb| 7||
 | |per| 22||
 | PGC | pgc | 50 | 73197 |
@@ -176,7 +176,8 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Stock Open Cluster | sto | 23 | 24 |
 | Terzan |ter| 19||
 | UGC | ugc | 282 | 12921 |
-| vdB | vdb | 39 | 158 |
+| vdB | vdb | 44 | 158 |
+| | vv | 13 | |
 | |vy| 5||
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
