@@ -10,6 +10,7 @@ use Traversable;
  */
 class ListConstellation implements \IteratorAggregate
 {
+    /** @var array|Traversable */
     protected $listConstellation = [];
 
     /**
