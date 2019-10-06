@@ -79,7 +79,7 @@ class ObservationController extends AbstractController
      * @return JsonResponse
      * @throws ReflectionException
      */
-    public function geosjonAjax()
+    public function geosjonAjax(): JsonResponse
     {
         $geojson = [
             'type' => 'FeatureCollection',

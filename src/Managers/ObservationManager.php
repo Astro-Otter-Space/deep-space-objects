@@ -121,7 +121,7 @@ class ObservationManager
         return call_user_func("array_merge", array_map(function (Observation $observation) {
             return [
                 'id' => $observation->getId(),
-                'value' => $observation->getName(),
+                'ajaxValue' => $observation->getName(),
                 'label' => $observation->getUsername(),
                 'url' => $this->urlGeneratorHelper->generateUrl($observation)
             ];

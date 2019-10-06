@@ -81,7 +81,7 @@ class  SearchController extends AbstractController
      *
      * @return JsonResponse $data
      */
-    public function searchDsoForObservation(Request $request)
+    public function searchDsoForObservation(Request $request): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
@@ -106,7 +106,7 @@ class  SearchController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function searchObservationAjax(Request $request)
+    public function searchObservationAjax(Request $request): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
