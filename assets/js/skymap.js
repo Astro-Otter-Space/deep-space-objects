@@ -106,7 +106,7 @@ var MAP_MODULE = (function(c, constId, color) {
     },
     // BACKGROUND
     background: {
-      fill: "#171717",   // Area fill
+      fill: "#0B182B",   // Area fill
       opacity: 1,
       stroke: "#2B2A34", // Outline
       width: 1.5
