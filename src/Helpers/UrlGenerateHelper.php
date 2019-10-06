@@ -64,7 +64,9 @@ class UrlGenerateHelper
 
                 case ConstellationRepository::INDEX_NAME:
                     $route = "constellation_show";
-                    $params = ['id' => $id];
+
+                    $name = Utils::camelCaseUrlTransform($entity->getAlt());
+                    $params = ['id' => implode(trim($entity::URL_CONCAT_GLUE), [$id, $name])];
 
                     if (!is_null($locale)) {
                         $route = sprintf('%s.%s', $route, $locale);

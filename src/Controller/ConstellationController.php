@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
+use App\Entity\AbstractEntity;
 use App\Entity\Constellation;
 use App\Entity\Dso;
 use App\Entity\ListDso;
@@ -76,6 +77,9 @@ class ConstellationController extends AbstractController
 
         /** @var Serializer $serializer */
         $serializer = $this->container->get('serializer');
+
+        $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $id);
+        $id = reset($id);
 
         /** @var Constellation $constellation */
         $constellation = $this->constellationManager->buildConstellation($id);
