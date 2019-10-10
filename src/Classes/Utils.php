@@ -125,6 +125,7 @@ class Utils
         'ru',
         'sast',
         'sha',
+        'shk',
         'sl',
         'sto',
         'ter',
