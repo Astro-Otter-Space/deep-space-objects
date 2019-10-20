@@ -118,9 +118,9 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Catalog | Abbreviation | Count data | Total data |
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
-| New General Catalog | ngc | 7252 | 7840 |
-| Index catalog | ic | 319 | 5386 |
-| Sharpless | sh |132 | 313 |
+| New General Catalog | ngc | 7261 | 7840 |
+| Index catalog | ic | 369 | 5386 |
+| Sharpless | sh |133 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
 | LDN | ldn | 33 | ? |
@@ -136,15 +136,15 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Caldwell | cld | 109 | 109 |
 | Cederblad |ced| 21 ||
 | Czernick | cz | 40 | 45 |
-| David Dunlap | ddo | 10 | 343 |
+| David Dunlap | ddo | 13 | 343 |
 | D | do | 40||
 | Dolidze-Dzimselejvili | dodz | 11 | 11 |
-| |eso| 23 ||
+| ESO |eso| 30 ||
 | |fle| 3 ||
 | gum | Gum ||
 | Haffner | haf | 21 | ? |
 | |har| 53||
-| |hen| 150||
+| Henize |hen| 195||
 | |hvd| 9||
 | |hic| 9||
 | |hod| 0||
@@ -156,14 +156,13 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | |lod| 1||
 | |lon| 4||
 | Lynga | lyn | 13 | 15 |
-| |mar| 1||
 | |may| 2||
-| Melotte | mel | 81 | 243 |
-| Minkowski | mkw | 166 | ? |
+| Melotte | mel | 115 | 243 |
+| Minkowski | mkw | 176 | ? |
 | Menzel | mzl | 3 | 3 |
-| |mrk| 4||
+| Markarian|mrk| 59 ||
 | |ocl| 3||
-| |pal| 14||
+| Paloma |pal| 14||
 | |pmb| 7||
 | |per| 22||
 | PGC | pgc | 50 | 73197 |
@@ -174,10 +173,10 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | |sha| 3||
 | |sl| 7||
 | Stock Open Cluster | sto | 23 | 24 |
-| Terzan |ter| 19||
-| UGC | ugc | 282 | 12921 |
-| vdB | vdb | 44 | 158 |
-| | vv | 13 | |
+| Terzan |ter| 23 ||
+| UGC | ugc | 278 | 12921 |
+| vdB | vdb | 50 | 158 |
+| | vv | 31 | |
 | |vy| 5||
 
  http://www.dreistein.nl/dso.aspx?m=2&ca_71=on&qh=sh&o=-3&p=1
