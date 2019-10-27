@@ -119,20 +119,20 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7261 | 7840 |
-| Index catalog | ic | 369 | 5386 |
-| Sharpless | sh |133 | 313 |
+| Index catalog | ic | 378 | 5386 |
+| Sharpless | sh |134 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
-| LDN | ldn | 33 | ? |
-| LBN | lbn | 83 | ? |
-| Arp | arp | 29 | |
+| LDN | ldn | 46 | ? |
+| LBN | lbn | 96 | ? |
+| Arp | arp | 64 | |
 | |am| 1||
 | |b| 158||
 | Basel | bsl | 16 | ? |
 | Berkeley | ber | 98 | 104 |
 | Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Collinder | cr | 262 | 471 |
+| Collinder | cr | 312 | 471 |
 | Caldwell | cld | 109 | 109 |
 | Cederblad |ced| 21 ||
 | Czernick | cz | 40 | 45 |
@@ -144,9 +144,9 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | gum | Gum ||
 | Haffner | haf | 21 | ? |
 | |har| 53||
-| Henize |hen| 195||
-| |hvd| 9||
-| |hic| 9||
+| Henize |hen| 203||
+| Harvard |hvd| 9||
+| Hickson |hic| 31 ||
 | |hod| 0||
 | |hog| 20||
 | |huc| 3||
@@ -157,7 +157,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | |lon| 4||
 | Lynga | lyn | 13 | 15 |
 | |may| 2||
-| Melotte | mel | 115 | 243 |
+| Melotte | mel | 118 | 243 |
 | Minkowski | mkw | 176 | ? |
 | Menzel | mzl | 3 | 3 |
 | Markarian|mrk| 59 ||
