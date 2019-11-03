@@ -142,6 +142,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ESO |eso| 30 ||
 | |fle| 3 ||
 | gum | Gum ||
+| Hoffleit | hf ||
 | Haffner | haf | 21 | ? |
 | |har| 53||
 | Henize |hen| 203||

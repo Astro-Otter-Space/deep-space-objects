@@ -94,6 +94,7 @@ class Utils
         'fle',
         'gum',
         'hb',
+        'hf',
         'haf',
         'har',
         'hen',
