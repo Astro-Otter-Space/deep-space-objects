@@ -31,6 +31,7 @@ catalog.agc: Catalogue Abell
 catalog.abl: Catalogue Abell des nébuleuses planétaires
 catalog.ldn: Catalogue de Lynd des nébuleuses sombres
 catalog.lbn: Catalogue de Lynd des nébuleuses brillantes
+catalog.3c: Troisième catalogue de Cambridge de sources radio
 catalog.arp: Arp
 catalog.am: Arp-Madore
 catalog.b: B
@@ -174,6 +175,7 @@ type.pos: Asterism
 type.sc: Amas stellaires
 type.vn: Nébuleuse variable
 type.ga: Galaxie à anneau
+type.q: Quasar
 # Constellations
 constellation.unassigned: Non attribué
 constellation.and: Andromède

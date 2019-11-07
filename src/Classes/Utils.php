@@ -75,6 +75,7 @@ class Utils
         'ldn',
         'lbn',
         // minor catalogs
+        '3c',
         'arp',
         'am',
         'b',
@@ -158,7 +159,8 @@ class Utils
         'pos',
         'sc',
         'vn',
-        'ga'
+        'ga',
+        'q'
     ];
 
     /**

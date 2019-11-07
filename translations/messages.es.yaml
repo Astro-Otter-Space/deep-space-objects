@@ -31,6 +31,7 @@ catalog.agc: Abell catalog of galaxies clusters
 catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.ldn: Lynds of Dark Nebulae
 catalog.lbn: Lynds of Bright Nebulae
+catalog.3c: Third Cambridge Catalogue of Radio Sources
 catalog.arp: Arp
 catalog.am: Arp-Madore
 catalog.b: B
@@ -174,6 +175,7 @@ type.pos: Asterismo
 type.sc: Star clusters
 type.vn: Nebulosa variable
 type.ga: Galaxie à anneau
+type.q: Cuásar
 # Constellations
 constellation.unassigned: No asignado
 constellation.and: Andromeda

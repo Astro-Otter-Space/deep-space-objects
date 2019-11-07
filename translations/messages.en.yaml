@@ -31,6 +31,7 @@ catalog.agc: Abell catalog of galaxies clusters
 catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.ldn: Lynds of Dark Nebulae
 catalog.lbn: Lynds of Bright Nebulae
+catalog.3c: Third Cambridge Catalogue of Radio Sources
 catalog.arp: Arp
 catalog.am: Arp-Madore
 catalog.b: B
@@ -175,6 +176,7 @@ type.pos: Asterism
 type.sc: Star clusters
 type.vn: Variable nebula
 type.ga: Ring galaxy
+type.q: Quasar
 # Constellations
 constellation.unassigned: Unassigned
 constellation.and: Andromeda

@@ -29,6 +29,7 @@ catalog.ic: Index
 catalog.sh: Sharpless
 catalog.ldn: Lynds' Catalogue of Dark Nebulae
 catalog.lbn: Lynds' Catalogue of Bright Nebulae
+catalog.3c: Third Cambridge Catalogue of Radio Sources
 catalog.agc: Abell catalog of galaxies clusters
 catalog.abl: Abell Catalog of Planetary Nebulae
 catalog.arp: Arp
@@ -174,6 +175,7 @@ type.pos: Asterismus
 type.sc: Star clusters
 type.vn: Reflexionsnebel
 type.ga: Galaxie à anneau
+type.q: Quasar
 # Constellations
 constellation.unassigned: Nicht zugewiesen
 constellation.and: Andromeda
