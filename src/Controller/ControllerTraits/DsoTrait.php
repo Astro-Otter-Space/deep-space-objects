@@ -37,7 +37,7 @@ trait DsoTrait
      *
      * @return array
      */
-    protected function buildFilters(ListDso $listDso)
+    protected function buildFilters(ListDso $listDso): array
     {
         if (0 < $listDso->getIterator()->count()) {
             $listDso = ($listDso instanceof ListDso) ? iterator_to_array($listDso) : $listDso;
@@ -58,7 +58,7 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildFiltersWithAll($listDso)
+    public function buildFiltersWithAll($listDso): array
     {
         $allFilters = [
             [
@@ -76,7 +76,7 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildJsonApi($data, $codeHttp)
+    public function buildJsonApi($data, $codeHttp): array
     {
         $status = (in_array(substr($codeHttp, 0, 1), [4, 5])) ? 'error' : 'success';
         $dataResponse = [
