@@ -2,27 +2,35 @@
 
 namespace App\EventListener;
 
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class ExceptionListener
  * @package App\EventListener
  */
-class ExceptionListener
+final class ExceptionListener
 {
+    /** @var Environment  */
     private $twigEngine;
 
+    /** @var string  */
     private $env;
+
+
     /**
      * ExceptionListener constructor.
-     * @param EngineInterface $twigEngine
+     *
+     * @param Environment $twigEngine
      * @param string $env
      */
-    public function __construct(EngineInterface $twigEngine, $env)
+    public function __construct(Environment $twigEngine, $env)
     {
         $this->twigEngine = $twigEngine;
         $this->env = $env;
@@ -30,6 +38,10 @@ class ExceptionListener
 
     /**
      * @param ExceptionEvent $event
+     *
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function onKernelException(ExceptionEvent $event)
     {
@@ -37,8 +49,10 @@ class ExceptionListener
 
         if ("dev" !== $this->env) {
             if ($exception instanceof HttpExceptionInterface || $exception instanceof NotFoundHttpException) {
+                $template = $this->twigEngine->render('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
+
                 /** @var Response $response */
-                $response = $this->twigEngine->renderResponse('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
+                $response = new Response($template);
                 $response->setStatusCode($exception->getStatusCode());
                 $response->headers->replace($exception->getHeaders());
             } else {
@@ -50,7 +64,6 @@ class ExceptionListener
 
             $event->setResponse($response);
         }
-
     }
 
 }

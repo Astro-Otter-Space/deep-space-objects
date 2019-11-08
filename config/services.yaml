@@ -70,7 +70,7 @@ services:
 
     # Exception listener
     App\EventListener\ExceptionListener:
-        arguments: ['@templating.engine.twig', '%kernel.environment%']
+        arguments: ['@twig', '%kernel.environment%']
         tags:
           - { name: kernel.event_listener, event: kernel.exception }
 
