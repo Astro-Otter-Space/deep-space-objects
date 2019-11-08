@@ -18,7 +18,7 @@ class GenericPageController extends AbstractController
      *   "pt": "/skymap"
      * }, name="skymap")
      */
-    public function skymap()
+    public function skymap(): Response
     {
         $params = [];
 
