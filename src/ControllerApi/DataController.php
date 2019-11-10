@@ -4,7 +4,9 @@ namespace App\ControllerApi;
 
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
+use App\DataTransformer\DsoDataTransformer;
 use App\Entity\Dso;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ListDso;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
@@ -47,6 +49,8 @@ final class DataController extends AbstractFOSRestController
     private $dsoRepository;
     /** @var ConstellationRepository */
     private $constellationRepository;
+    /** @var DsoDataTransformer */
+    private $dsoDataTransformer;
 
     /**
      * DataController constructor.
@@ -54,10 +58,11 @@ final class DataController extends AbstractFOSRestController
      * @param DsoRepository $dsoRepository
      * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository)
+    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer)
     {
         $this->dsoRepository = $dsoRepository;
         $this->constellationRepository = $constellationRepository;
+        $this->dsoDataTransformer = $dsoDataTransformer;
     }
 
 
@@ -72,13 +77,14 @@ final class DataController extends AbstractFOSRestController
     public function getDso(string $id): Response
     {
         /** @var Document $dso */
-        $dso = $this->dsoRepository->getObjectById($id, false);
+        $dso = $this->dsoRepository->getObjectById($id, true);
 
         if (is_null($dso)) {
             throw new NotFoundException(sprintf("%s is not an correct item", $id));
         } else {
             $codeHttp = Response::HTTP_OK;
-            $data = $dso->getData();
+            /** @var DsoDTO|null $data */
+            $data = $this->dsoDataTransformer->transform($dso);
         }
 
         $formatedData = $this->buildJsonApi($data, $codeHttp);
@@ -137,13 +143,13 @@ final class DataController extends AbstractFOSRestController
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         });
 
-        /**  */
-        list($listDsoData, ) = $this->dsoRepository->getObjectsCatalogByFilters($offset, $filters, $limit, false);
+        /** @var ListDso $listDso */
+        list($listDso, ) = $this->dsoRepository->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
         /** @var ListDso $listDso */
-        $listDso = array_map(function(Document $document) {
-            return $document->getData();
-        }, $listDsoData);
+        $listDso = array_map(function(Dso $document) {
+            return $this->dsoDataTransformer->transform($document);
+        }, iterator_to_array($listDso->getIterator()));
 
         $formatedData = $this->buildJsonApi($listDso, Response::HTTP_OK);
 
@@ -152,6 +158,7 @@ final class DataController extends AbstractFOSRestController
 
         return $this->handleView($view);
     }
+
 
     /**
      * @Rest\Get("/objects/by_constellation/{constellation}", name="api_objects_by_constellation")
@@ -182,6 +189,7 @@ final class DataController extends AbstractFOSRestController
         return $this->routeRedirectView('api_dso_get_items', $params, Response::HTTP_MOVED_PERMANENTLY);
     }
 
+
     /**
      * @param ParamFetcher $paramFetcher
      * @param string $catalog
@@ -210,6 +218,7 @@ final class DataController extends AbstractFOSRestController
 
         return $this->routeRedirectView('api_dso_get_items', $params, Response::HTTP_MOVED_PERMANENTLY);
     }
+
 
     /**
      * @param ParamFetcher $paramFetcher
