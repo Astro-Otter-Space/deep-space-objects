@@ -133,7 +133,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Berkeley | ber | 98 | 104 |
 | Biurakan | biu | 9 | 13 |
 | Bochum | boc | 13 | 15 |
-| Collinder | cr | 312 | 471 |
+| Collinder | cr | 335 | 471 |
 | Caldwell | cld | 109 | 109 |
 | Cederblad |ced| 21 ||
 | Czernick | cz | 40 | 45 |

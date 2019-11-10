@@ -94,12 +94,12 @@ catalog.vdb: Van den Bergh
 catalog.vv: Vorontsov-Vel’yaminov
 catalog.vy: Vyssotsky
 description.messier: The Messier objects are a set of 110 astronomical objects catalogued by the French astronomer Charles Messier in his "Catalogue des Nébuleuses et des Amas d'Étoiles" ("Catalogue of Nebulae and Star Clusters").
-description.ngc: ""
-description.ic: ""
+description.ngc: The New General Catalogue of Nebulae and Clusters of Stars (abbreviated as NGC) is a catalogue of deep-sky objects compiled by John Louis Emil Dreyer in 1888. The NGC contains 7,840 objects, known as the NGC objects.
+description.ic: The first major update to the NGC is the Index Catalogue of Nebulae and Clusters of Stars (abbreviated as IC), published in two parts by Dreyer in 1895 and 1908. It serves as a supplement to the NGC, and contains an additional 5,386 objects, collectively known as the IC objects
 description.ldn: ""
 description.lbn: ""
-description.sh: ""
-description.cr: ""
+description.sh: The Sharpless catalog is a list of 313 H II regions (emission nebulae). The first edition was published in 1953 with 142 objects (Sh1), and the second and final version was published by US astronomer Stewart Sharpless in 1959 with 312 objects
+description.cr: The Collinder catalog is a catalog of 471 open clusters by Swedish astronomer Per Collinder. It was published in 1931.
 description.sto: ""
 description.rcw: ""
 description.agc: The Abell catalog of rich clusters of galaxies is an all-sky catalog of 4,073 rich galaxy clusters.

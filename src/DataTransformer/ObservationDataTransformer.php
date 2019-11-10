@@ -3,7 +3,6 @@
 
 namespace App\DataTransformer;
 
-
 use App\Classes\Utils;
 use App\Entity\Observation;
 

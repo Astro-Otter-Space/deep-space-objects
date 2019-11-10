@@ -6,7 +6,7 @@
 {% block content %}
   <div id="appCatalog" data-catalog-widget
      data-title="{{ 'allCatalog'|trans }}"
-     data-desc="{{ 'filteringList'|trans }}"
+     data-desc="{{ pageDesc|default('filteringList'|trans) }}"
      data-list-dso="{{ list_dso|json_encode }}"
      data-list-facets="{{ list_facets|json_encode }}"
      data-selected-filters="{{ filters|json_encode }}"
