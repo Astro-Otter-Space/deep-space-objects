@@ -34,6 +34,7 @@ catalog.lbn: Lynds of Bright Nebulae
 catalog.3c: Third Cambridge Catalogue of Radio Sources
 catalog.arp: Arp
 catalog.am: Arp-Madore
+catalog.ant: Antalova
 catalog.b: B
 catalog.bar: Barkhatova
 catalog.bsl: Basel
@@ -53,6 +54,7 @@ catalog.gum: Gum
 catalog.haf: Haffner
 catalog.har: Haro
 catalog.hb: Hubble
+catalog.hf: Hoffleit
 catalog.hen: Henize
 catalog.hvd: Harvard
 catalog.hic: Hickson
@@ -83,8 +85,9 @@ catalog.ru: Ruprecht
 catalog.sast: Sanduleak-Stephenson
 catalog.sha: Shapley
 catalog.sl: Sandqvist-Lindroos
-catalog.sto : Stock open clusters
+catalog.sto: Stock open clusters
 catalog.ter: Terzan
+catalog.ton: Tonantzintla
 catalog.ugc: Uppsala General Catalog
 catalog.vdb: Van den Bergh
 catalog.vv: Vorontsov-Vel’yaminov

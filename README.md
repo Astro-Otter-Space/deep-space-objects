@@ -119,15 +119,16 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7261 | 7840 |
-| Index catalog | ic | 378 | 5386 |
+| Index catalog | ic | 410 | 5386 |
 | Sharpless | sh |134 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
 | LDN | ldn | 46 | ? |
 | LBN | lbn | 96 | ? |
 | Arp | arp | 64 | |
-| |am| 1||
-| |b| 158||
+| Arp-Madore |am| 1||
+| Antalova | ant | 4 ||
+| B |b| 158||
 | Basel | bsl | 16 | ? |
 | Berkeley | ber | 98 | 104 |
 | Biurakan | biu | 9 | 13 |
@@ -140,7 +141,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | D | do | 40||
 | Dolidze-Dzimselejvili | dodz | 11 | 11 |
 | ESO |eso| 30 ||
-| |fle| 3 ||
+| Fleming |fle| 3 ||
 | gum | Gum ||
 | Hoffleit | hf ||
 | Haffner | haf | 21 | ? |
