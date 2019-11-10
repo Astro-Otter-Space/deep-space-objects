@@ -298,8 +298,8 @@ class Utils
         $lon = null;
         preg_match_all(ConvertCoordinatesCommand::REGEX, $ra, $matches, PREG_PATTERN_ORDER);
         if (!is_null($ra)) {
-            $h = (int)$matches[0][0];
-            $mn = (int)$matches[0][1];
+            $h = (float)$matches[0][0];
+            $mn = (float)$matches[0][1];
             $sec = (float)$matches[0][2];
 
             $lon = ($h + ($mn/60) + ($sec/3600))*15;
@@ -320,13 +320,18 @@ class Utils
 
         preg_match_all(ConvertCoordinatesCommand::REGEX, $dec, $matches, PREG_PATTERN_ORDER);
         if (!is_null($dec)) {
-            $deg = (int)str_replace('−', '-', $matches[0][0]);
-            $mn = (int)$matches[0][1];
+
+            $deg = (float)$matches[0][0];
+            $isNegative = ($deg < 0)? true : false;
+
+            $deg = (float)str_replace('-', '', $matches[0][0]);
+            $mn = (float)$matches[0][1];
             $sec = (float)$matches[0][2];
 
             $lat = $deg + $mn/60 + $sec/3600;
-        }
 
+            $lat = ($isNegative)? '-' . $lat: $lat;
+        }
 
         return $lat;
     }
