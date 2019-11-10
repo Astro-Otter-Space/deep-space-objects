@@ -4,6 +4,7 @@ namespace App\Managers;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\DataTransformer\ObservationDataTransformer;
 use App\Entity\ListDso;
 use App\Entity\Observation;
 use App\Helpers\UrlGenerateHelper;
@@ -42,6 +43,8 @@ class ObservationManager
     private $dsoManager;
     /** @var TranslatorInterface */
     private $translatorInterface;
+    /** @var ObservationDataTransformer */
+    private $obsDataTransformer;
 
     /**
      * ObservationManager constructor.
@@ -52,8 +55,9 @@ class ObservationManager
      * @param $locale
      * @param DsoManager $dsoManager
      * @param TranslatorInterface $translatorInterface
+     * @param $obsDataTransformer
      */
-    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
+    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translatorInterface, ObservationDataTransformer $obsDataTransformer)
     {
         $this->observationRepository = $observationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
@@ -61,6 +65,7 @@ class ObservationManager
         $this->locale = $locale;
         $this->dsoManager = $dsoManager;
         $this->translatorInterface = $translatorInterface;
+        $this->obsDataTransformer = $obsDataTransformer;
     }
 
     /**
@@ -104,7 +109,8 @@ class ObservationManager
      */
     public function formatVueData(Observation $observation)
     {
-        return $this->formatEntityData($observation, [], $this->translatorInterface);
+        $observationArray = $this->obsDataTransformer->toArray($observation);
+        return $this->formatEntityData($observationArray, [], $this->translatorInterface);
     }
 
 

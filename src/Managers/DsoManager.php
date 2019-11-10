@@ -4,6 +4,7 @@ namespace App\Managers;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\DataTransformer\DsoDataTransformer;
 use App\Entity\Dso;
 use App\Entity\ListDso;
 use App\Helpers\UrlGenerateHelper;
@@ -38,6 +39,8 @@ class DsoManager
     private $cacheUtils;
     /** @var  */
     private $locale;
+    /** @var DsoDataTransformer */
+    private $dsoDataTransformer;
 
     /**
      * DsoManager constructor.
@@ -46,9 +49,10 @@ class DsoManager
      * @param UrlGenerateHelper $urlGenerateHelper
      * @param TranslatorInterface $translatorInterface
      * @param CacheInterface $cacheUtils
-     * @param string $locale
+     * @param $locale
+     * @param DsoDataTransformer $dsoDataTransformer
      */
-    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale)
+    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
@@ -56,6 +60,7 @@ class DsoManager
         $this->translatorInterface = $translatorInterface;
         $this->cacheUtils = $cacheUtils;
         $this->locale = $locale;
+        $this->dsoDataTransformer = $dsoDataTransformer;
     }
 
 
@@ -243,7 +248,8 @@ class DsoManager
      */
     public function formatVueData(Dso $dso): array
     {
-        return $this->formatEntityData($dso, self::$listFieldToTranslate, $this->translatorInterface);
+        $dsoArray = $this->dsoDataTransformer->toArray($dso);
+        return $this->formatEntityData($dsoArray, self::$listFieldToTranslate, $this->translatorInterface);
     }
 
 
@@ -255,9 +261,19 @@ class DsoManager
      */
     public function buildTitle(Dso $dso): string
     {
+        return self::buildTitleStatic($dso);
+    }
+
+    /**
+     * Return a formated title
+     * @param Dso $dso
+     *
+     * @return mixed|string
+     */
+    public static function buildTitleStatic(Dso $dso)
+    {
         // Fist we retrieve desigs and other desigs
         $desig = (is_array($dso->getDesigs())) ? current($dso->getDesigs()) : $dso->getDesigs();
-//        $otherDesigs = (is_array($dso->getDesigs())) ? array_shift($dso->getDesigs()): '';
 
         // If Alt is set, we merge desig and alt
         $title = (empty($dso->getAlt()))

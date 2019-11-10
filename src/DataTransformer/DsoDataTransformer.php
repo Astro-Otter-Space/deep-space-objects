@@ -14,24 +14,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Transform an Entity Dso into DTO - Only API Use
  * @package App\DataTransformer
  */
-class DsoDataTransformer
+final class DsoDataTransformer extends AbstractDataTransformer
 {
     /** @var TranslatorInterface */
     private $translator;
-
-    /** @var DsoManager */
-    private $dsoManager;
 
     /**
      * DsoDataTransformer constructor.
      *
      * @param TranslatorInterface $translator
-     * @param DsoManager $dsoManager
      */
-    public function __construct(TranslatorInterface $translator, DsoManager $dsoManager)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
-        $this->dsoManager = $dsoManager;
     }
 
     /**
@@ -46,7 +41,7 @@ class DsoDataTransformer
             $dsoDto = new DsoDTO();
 
             $dsoDto->setId($dso->getId());
-            $dsoDto->setTitle($this->dsoManager->buildTitle($dso));
+            $dsoDto->setTitle(DsoManager::buildTitleStatic($dso));
             $dsoDto->setConstellation($this->translator->trans(sprintf('constellation.%s', strtolower($dso->getConstId()))));
             $dsoDto->setDesigs($dso->getDesigs());
             $dsoDto->setType($this->translator->trans(sprintf('type.%s', $dso->getType())));
@@ -65,6 +60,37 @@ class DsoDataTransformer
         }
 
         return null;
+    }
+
+    /**
+     * Convert Dso into Array
+     * @param Dso|null $entity
+     *
+     * @return array|null
+     */
+    public function toArray($entity):? array
+    {
+        $catalog = array_map(function($itemCatalog) {
+            return implode(Dso::DATA_GLUE, ['catalog', $itemCatalog]);
+        }, $entity->getCatalog());
+
+        $data = [
+            'catalog' => $catalog, //implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
+            'desigs' => implode(Dso::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
+            'type' => implode(Dso::DATA_GLUE, ['type', $entity->getType()]),
+            'constId' => implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+            'mag' => $entity->getMag(),
+            'distAl' => Utils::numberFormatByLocale($entity->getDistAl()),
+            'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $entity->getDistAl()),
+            'discover' => $entity->getDiscover(),
+            'discoverYear' => $entity->getDiscoverYear(),
+            'ra' => $entity->getRa(),
+            'dec' => $entity->getDec()
+        ];
+
+        return array_filter($data, function($value) {
+            return (false === empty($value));
+        });
     }
 
 }

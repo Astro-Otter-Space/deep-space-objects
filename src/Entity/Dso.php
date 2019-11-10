@@ -411,6 +411,7 @@ class Dso extends AbstractEntity
 
     /**
      * Serialize data
+     * @deprecated
      * @return array
      */
     public function toArray()

@@ -532,6 +532,7 @@ class Observation extends AbstractEntity
     }
 
     /**
+     * @deprecated
      * @return array
      */
     public function toArray(): array

@@ -57,6 +57,7 @@ final class DataController extends AbstractFOSRestController
      *
      * @param DsoRepository $dsoRepository
      * @param ConstellationRepository $constellationRepository
+     * @param DsoDataTransformer $dsoDataTransformer
      */
     public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer)
     {
