@@ -209,8 +209,6 @@ class DsoManager
      *
      * @return array
      *
-     * @throws WsException
-     * @throws \ReflectionException
      */
     public function getAstrobinImage($astrobinId, $id, $param = 'url_hd'): array
     {
@@ -221,6 +219,8 @@ class DsoManager
                 return [$imageAstrobin->$param, $imageAstrobin->user];
             }
         } catch(WsResponseException $e) {
+            return [basename(Utils::IMG_DEFAULT), ''];
+        } catch (\Exception $e) {
             return [basename(Utils::IMG_DEFAULT), ''];
         }
         return [basename(Utils::IMG_DEFAULT), ''];
