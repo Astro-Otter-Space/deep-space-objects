@@ -119,7 +119,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7261 | 7840 |
-| Index catalog | ic | 410 | 5386 |
+| Index catalog | ic | 418 | 5386 |
 | Sharpless | sh |134 | 313 |
 | Abell galaxies | agc | 26 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |

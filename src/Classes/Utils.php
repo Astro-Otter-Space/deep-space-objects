@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Command\ConvertCoordinatesCommand;
 use DateTimeInterface;
 
 /**
@@ -285,5 +286,48 @@ class Utils
     public static function listTopicsContact(): array
     {
         return self::$listTopics;
+    }
+
+    /**
+     * @param $ra
+     *
+     * @return float|null
+     */
+    public static function raToLon($ra):? float
+    {
+        $lon = null;
+        preg_match_all(ConvertCoordinatesCommand::REGEX, $ra, $matches, PREG_PATTERN_ORDER);
+        if (!is_null($ra)) {
+            $h = (int)$matches[0][0];
+            $mn = (int)$matches[0][1];
+            $sec = (float)$matches[0][2];
+
+            $lon = ($h + ($mn/60) + ($sec/3600))*15;
+            $lon = ($lon > 180) ? $lon-360 : $lon;
+        }
+
+        return $lon;
+    }
+
+    /**
+     * @param $dec
+     *
+     * @return float|null
+     */
+    public static function decToLat($dec):? float
+    {
+        $lat = null;
+
+        preg_match_all(ConvertCoordinatesCommand::REGEX, $dec, $matches, PREG_PATTERN_ORDER);
+        if (!is_null($dec)) {
+            $deg = (int)str_replace('−', '-', $matches[0][0]);
+            $mn = (int)$matches[0][1];
+            $sec = (float)$matches[0][2];
+
+            $lat = $deg + $mn/60 + $sec/3600;
+        }
+
+
+        return $lat;
     }
 }
