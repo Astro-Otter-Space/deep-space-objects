@@ -28,7 +28,7 @@ class AuthController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
     {
         /** @var ObjectManager $em */
         $em = $this->getDoctrine()->getManager();

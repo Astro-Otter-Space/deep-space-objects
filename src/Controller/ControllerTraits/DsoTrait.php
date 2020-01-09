@@ -25,7 +25,7 @@ trait DsoTrait
      *
      * @return DsoTrait
      */
-    public function setTranslatorInterface(TranslatorInterface $translatorInterface)
+    public function setTranslatorInterface(TranslatorInterface $translatorInterface): self
     {
         $this->translatorInterface = $translatorInterface;
         return $this;
