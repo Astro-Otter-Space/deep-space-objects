@@ -4,17 +4,8 @@ namespace App\EventListener;
 
 use App\Entity\ApiUser;
 use App\Helpers\MailHelper;
-use App\Service\CurlService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\HttpClient\Exception\ClientException;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 
 /**
@@ -53,7 +44,7 @@ class GenerateTokenListener
      *
      * @throws \Swift_TransportException
      */
-    public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event)
+    public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event): void
     {
         $from = $this->senderMail;
         $to = $apiUser->getEmail();
