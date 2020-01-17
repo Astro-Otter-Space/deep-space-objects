@@ -23,6 +23,7 @@
         "symfony/intl": "^4.2",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/process": "4.4.*",
         "symfony/requirements-checker": "^1.1",
         "symfony/security-bundle": "^4.2",
         "symfony/serializer": "^4.2",

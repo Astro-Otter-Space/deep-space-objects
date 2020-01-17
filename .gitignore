@@ -16,7 +16,7 @@ yarn-error.log
 /logs/
 /.idea/
 /.env
-config/elasticsearch/bulk/*.json
+#config/elasticsearch/bulk/*.json
 
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
