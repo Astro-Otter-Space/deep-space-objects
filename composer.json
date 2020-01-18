@@ -7,7 +7,7 @@
         "ext-iconv": "*",
         "excelwebzone/recaptcha-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.5",
-        "hamhamfonfon/astrobin": "dev-master",
+        "hamhamfonfon/astrobin-ws": "^1.0",
         "jms/serializer-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.6",
         "ruflin/elastica": "^6.0",
@@ -37,10 +37,6 @@
         "symfony/yaml": "^4.2",
         "twig/extensions": "^1.5"
     },
-    "repositories": [{
-        "type" : "vcs",
-        "url" : "https://github.com/HamHamFonFon/Astrobin-API-PHP.git"
-    }],
     "config": {
         "preferred-install": {
             "*": "dist"
