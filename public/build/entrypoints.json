@@ -1,0 +1,82 @@
+{
+  "entrypoints": {
+    "observation": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observation.js"
+      ]
+    },
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "dso": {
+      "js": [
+        "/build/runtime.js",
+        "/build/dso.js"
+      ]
+    },
+    "const": {
+      "js": [
+        "/build/runtime.js",
+        "/build/const.js"
+      ]
+    },
+    "const_list": {
+      "js": [
+        "/build/runtime.js",
+        "/build/const_list.js"
+      ]
+    },
+    "catalog": {
+      "js": [
+        "/build/runtime.js",
+        "/build/catalog.js"
+      ]
+    },
+    "home": {
+      "js": [
+        "/build/runtime.js",
+        "/build/home.js"
+      ]
+    },
+    "observations": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observations.js"
+      ]
+    },
+    "notfound": {
+      "js": [
+        "/build/runtime.js",
+        "/build/notfound.js"
+      ]
+    },
+    "help_api": {
+      "js": [
+        "/build/runtime.js",
+        "/build/help_api.js"
+      ]
+    },
+    "skymap": {
+      "js": [
+        "/build/runtime.js",
+        "/build/skymap.js"
+      ]
+    },
+    "leaflet": {
+      "js": [
+        "/build/runtime.js",
+        "/build/leaflet.js"
+      ],
+      "css": [
+        "/build/leaflet.css"
+      ]
+    }
+  }
+}
