@@ -45,7 +45,8 @@ final class ExceptionListener
      */
     public function onKernelException(ExceptionEvent $event)
     {
-        $exception = $event->getException();
+        /** @var \Throwable $exception */
+        $exception = $event->getThrowable();
 
         if ("dev" !== $this->env) {
             if ($exception instanceof HttpExceptionInterface || $exception instanceof NotFoundHttpException) {
