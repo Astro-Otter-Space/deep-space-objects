@@ -23,7 +23,7 @@ final class Version20190810170943 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP INDEX IF EXISTS UNIQ_3016F139F85E0677 ON api_users');
-        $this->addSql('ALTER TABLE api_users ADD roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', DROP username');
+        $this->addSql('ALTER TABLE api_users ADD roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', DROP IF EXISTS username');
     }
 
     public function down(Schema $schema) : void
