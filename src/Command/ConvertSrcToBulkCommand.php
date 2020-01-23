@@ -4,6 +4,8 @@ namespace App\Command;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\Entity\UpdateData;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,6 +22,10 @@ class ConvertSrcToBulkCommand extends Command
     private $kernel;
     /** @var CacheInterface */
     private $cacheUtil;
+
+    /** @var EntityManagerInterface */
+    private $em;
+
     protected static $defaultName = "dso:convert-bulk";
 
     protected static $listType = ['dso20', 'constellations'];
@@ -38,10 +44,11 @@ class ConvertSrcToBulkCommand extends Command
      * @param KernelInterface $kernel
      * @param CacheInterface $cacheUtil
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
+        $this->em = $em;
         parent::__construct();
     }
 
@@ -64,6 +71,12 @@ class ConvertSrcToBulkCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var UpdateData $updateData */
+        $updateData = $this->em->getRepository(UpdateData::class)->findOneBy(['id' => 'DESC']);
+
+        /** @var \DateTimeInterface $lastUpdate */
+        $lastUpdate = $updateData->getDate();
+
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listType)) {
 
             $type = $input->getArgument('type');
@@ -121,6 +134,17 @@ class ConvertSrcToBulkCommand extends Command
                         fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                     }
+
+                    // TODO : retrieve list of dso where date update are between lastUpdateDate and Now
+
+                    /** @var UpdateData $newLastUpdate */
+                    $newLastUpdate = new UpdateData();
+                    $newLastUpdate->setDate(new \DateTime('now'));
+                    $newLastUpdate->setListDso([]);
+
+                    $this->em->persist($newLastUpdate);
+                    $this->em->flush();
+
                     fclose($handle);
                 } else {
                     $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));

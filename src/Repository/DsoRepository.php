@@ -305,6 +305,52 @@ class DsoRepository extends AbstractRepository
         return [$listDso, $listAggregations, $nbItems];
     }
 
+    /**
+     * Retrieve last updated Dso
+     * @param \DateTimeInterface $lastUpdate
+     *
+     * @return ListDso
+     * @throws \Exception
+     */
+    public function getObjectsUpdatedAfter(\DateTimeInterface $lastUpdate): ListDso
+    {
+        /** @var ListDso $dsoList */
+        $dsoList = new ListDso();
+
+        $this->client->getIndex(self::INDEX_NAME);
+
+        $now = new \DateTime('now');
+
+        /** @var Query $query */
+        $query = new Query();
+
+        /** @var Query\BoolQuery $boolQuery */
+        $boolQuery = new Query\BoolQuery();
+
+        /** @var Range $range */
+        $rangeQuery = new Query\Range();
+        $rangeQuery->addField('', [
+            'gte' => $lastUpdate->format(Utils::FORMAT_DATE_ES),
+            'lt' => $now->format(Utils::FORMAT_DATE_ES)
+        ]);
+
+        $boolQuery->addMust($rangeQuery);
+        $query->setQuery($boolQuery);
+
+        $query->setFrom(0)->setSize(self::MAX_SIZE);
+
+        /** @var Search $search */
+        $search = new Search($this->client);
+        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $search->count()) {
+            foreach ($search->getDocuments() as $document) {
+                $dsoList->addDso($this->buildEntityFromDocument($document));
+            }
+        }
+
+        return $dsoList;
+    }
 
     /**
      * Get list of AstrobinId
