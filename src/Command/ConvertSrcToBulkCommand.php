@@ -4,7 +4,10 @@ namespace App\Command;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\Entity\Dso;
+use App\Entity\ListDso;
 use App\Entity\UpdateData;
+use App\Repository\DsoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,11 +23,15 @@ class ConvertSrcToBulkCommand extends Command
 {
     /** @var KernelInterface */
     private $kernel;
+
     /** @var CacheInterface */
     private $cacheUtil;
 
     /** @var EntityManagerInterface */
     private $em;
+
+    /** @var DsoRepository */
+    private $dsoRepository;
 
     protected static $defaultName = "dso:convert-bulk";
 
@@ -43,12 +50,15 @@ class ConvertSrcToBulkCommand extends Command
      *
      * @param KernelInterface $kernel
      * @param CacheInterface $cacheUtil
+     * @param EntityManagerInterface $em
+     * @param DsoRepository $dsoRepository
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
         $this->em = $em;
+        $this->dsoRepository = $dsoRepository;
         parent::__construct();
     }
 
@@ -67,15 +77,17 @@ class ConvertSrcToBulkCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     *
      * @return int|null|void
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var UpdateData $updateData */
         $updateData = $this->em->getRepository(UpdateData::class)->findOneBy(['id' => 'DESC']);
 
-        /** @var \DateTimeInterface $lastUpdate */
-        $lastUpdate = $updateData->getDate();
+        /** @var \DateTimeInterface $lastUpdateDate */
+        $lastUpdateDate = $updateData->getDate() ?? new \DateTime('now');
 
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listType)) {
 
@@ -125,22 +137,36 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
-                        // After import, we delete cache
-                        $idMd5 = self::md5ForId($id);
-                        if ($this->cacheUtil->hasItem($idMd5)) {
-                            $this->cacheUtil->deleteItem($idMd5);
-                        }
-
                         fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                     }
 
+                    $listDsoId = [];
                     // TODO : retrieve list of dso where date update are between lastUpdateDate and Now
+
+                    /** @var ListDso $listDso */
+                    $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastUpdateDate);
+                    if (0 < $listDso->getIterator()->count()) {
+                        while($listDso->getIterator()->valid()) {
+
+                            /** @var Dso $dso */
+                            $dso = $listDso->getIterator()->current();
+
+                            array_push($listDsoId, $dso->getId());
+
+                            // TODO : add locale
+                            $idMd5 = self::md5ForId($dso->getId());
+                            if ($this->cacheUtil->hasItem($idMd5)) {
+                                $this->cacheUtil->deleteItem($idMd5);
+                            }
+                        }
+                    }
+
 
                     /** @var UpdateData $newLastUpdate */
                     $newLastUpdate = new UpdateData();
                     $newLastUpdate->setDate(new \DateTime('now'));
-                    $newLastUpdate->setListDso([]);
+                    $newLastUpdate->setListDso($listDsoId);
 
                     $this->em->persist($newLastUpdate);
                     $this->em->flush();

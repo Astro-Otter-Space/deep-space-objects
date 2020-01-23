@@ -363,10 +363,6 @@ class DsoRepository extends AbstractRepository
                 $dsoList->addDso($dso);
                 $listDsoIterator->next();
             }
-
-            array_walk(iterator_to_array($listDsoGenerator()), function (Dso $dso) use($dsoList) {
-                $dsoList->addDso($dso);
-            });
         }
 
         return $dsoList;
