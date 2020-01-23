@@ -344,9 +344,29 @@ class DsoRepository extends AbstractRepository
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
         if (0 < $search->count()) {
-            foreach ($search->getDocuments() as $document) {
-                $dsoList->addDso($this->buildEntityFromDocument($document));
+            /**
+             * @param $listDocuments
+             *
+             * @return \Generator
+             */
+            $listDsoGenerator = function($listDocuments) {
+                foreach ($listDocuments as $document) {
+                    yield $this->buildEntityFromDocument($document);
+                }
+            };
+
+            $listDsoIterator = $listDsoGenerator($search->getDocuments());
+            while($listDsoIterator->valid()) {
+                /** @var Dso $dso */
+                $dso = $listDsoIterator->current();
+
+                $dsoList->addDso($dso);
+                $listDsoIterator->next();
             }
+
+            array_walk(iterator_to_array($listDsoGenerator()), function (Dso $dso) use($dsoList) {
+                $dsoList->addDso($dso);
+            });
         }
 
         return $dsoList;
