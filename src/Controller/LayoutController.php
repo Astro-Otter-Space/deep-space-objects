@@ -212,7 +212,7 @@ class LayoutController extends AbstractController
     }
 
     /**
-     * @Route("/sitemap.xml", name="sitemap")
+     * @Route("/sitemap.xml", name="sitemap", format="xml")
      *
      * @param Request $request
      * @param string $listLocales
@@ -322,10 +322,12 @@ class LayoutController extends AbstractController
             ];
         }
 
-        /** @var Response $response */
-        $response = new Response();
-        $response->headers->set('Content-Type', ['text/xml', 'application/xml']);
+        $xml = $this->renderView('sitemap.xml.twig', $params);
 
-        return $this->render('sitemap.xml.twig', $params, $response);
+        /** @var Response $response */
+        $response = new Response($xml, Response::HTTP_OK);
+        $response->headers->set('Content-Type', 'text/xml');
+
+        return $response;
     }
 }
