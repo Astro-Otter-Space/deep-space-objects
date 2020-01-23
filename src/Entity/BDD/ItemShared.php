@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Entity\BDD;
 
 use Doctrine\ORM\Mapping as ORM;

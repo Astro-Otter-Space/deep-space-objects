@@ -8,3 +8,4 @@ form.constraint.recaptchat: Recaptcha invalide
 registration.constraint.compromised_pwd: Password compromised, please try another one
 registration.constraint.length: Votre mot de passe doit faire au moins 6 caractères
 registration.constraint.unique: Cette entrée est déjà utilisée, veuillez en sélectionner une autre
+update_data.constraint.datetime: Format datetime requis

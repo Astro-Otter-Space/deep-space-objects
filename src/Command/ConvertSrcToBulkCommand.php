@@ -4,6 +4,11 @@ namespace App\Command;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
+use App\Entity\BDD\UpdateData;
+use App\Entity\ES\Dso;
+use App\Entity\ES\ListDso;
+use App\Repository\DsoRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,11 +23,23 @@ class ConvertSrcToBulkCommand extends Command
 {
     /** @var KernelInterface */
     private $kernel;
+
     /** @var CacheInterface */
     private $cacheUtil;
+
+    /** @var EntityManagerInterface */
+    private $em;
+
+    /** @var DsoRepository */
+    private $dsoRepository;
+
+    /** @var array  */
+    protected $listLocales;
+
     protected static $defaultName = "dso:convert-bulk";
 
-    protected static $listType = ['dso20', 'constellations'];
+    protected static $listTypeImport = ['full', 'delta'];
+    protected static $listIndexType = ['dso20', 'constellations'];
 
     protected static $mapping = [
         'dso20' => 'deepspaceobjects',
@@ -37,11 +54,17 @@ class ConvertSrcToBulkCommand extends Command
      *
      * @param KernelInterface $kernel
      * @param CacheInterface $cacheUtil
+     * @param EntityManagerInterface $em
+     * @param DsoRepository $dsoRepository
+     * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
+        $this->em = $em;
+        $this->dsoRepository = $dsoRepository;
+        $this->listLocales = explode('|', $listLocales);
         parent::__construct();
     }
 
@@ -52,7 +75,8 @@ class ConvertSrcToBulkCommand extends Command
     {
         $this
             ->setDescription('Convert source file into bulk for Elastic Search')
-            ->addArgument('type', InputArgument::REQUIRED, 'List of values : ' . implode(', ', self::$listType));
+            ->addOption('import',null,  InputArgument::REQUIRED, 'List of import : ' . implode(', ', self::$listTypeImport))
+            ->addArgument('type', null,InputArgument::REQUIRED, 'List of values : ' . implode(', ', self::$listIndexType));
         ;
     }
 
@@ -60,11 +84,19 @@ class ConvertSrcToBulkCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     *
      * @return int|null|void
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listType)) {
+        /** @var UpdateData $updateData */
+        $updateData = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
+
+        /** @var \DateTimeInterface $lastUpdateDate */
+        $lastUpdateDate = $updateData->getDate() ?? new \DateTime('now');
+
+        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
 
             $type = $input->getArgument('type');
 
@@ -86,22 +118,34 @@ class ConvertSrcToBulkCommand extends Command
 
             if (is_readable($inputFile)) {
                 $data = $this->openFile($inputFile);
-
+                $bulkData = [];
                 if (JSON_ERROR_NONE === json_last_error()) {
                     $handle = fopen($outputFilename, 'w');
 
+                    /**
+                     * STEP 1 : build bulk
+                     */
                     foreach ($data as $inputData) {
                         if (!array_key_exists('id', $inputData)) {
                             continue;
                         }
 
                         $id = $inputData['id'];
+
+                        if (array_key_exists('created_at', $inputData)){
+                            //$bulkLine = $this->buildCreateLine($type, $id);
+                            $mode = 'create';
+
+                        } elseif (array_key_exists('updated_at', $inputData)) {
+                            $mode = 'update';
+                            //$bulkLine = $this->buildUpdateLine($type, $id);
+                        }
+
                         $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
                         $mapping = [
                             'randId' => 'md5ForId',
                             'catalog' => 'getCatalog',
-                            'order' => 'getItemOrder',
-                            'updatedAt' => 'getDateUpdate'
+                            'order' => 'getItemOrder'
                         ];
                         $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping, $id) {
                             $findKey = $match[1];
@@ -113,15 +157,78 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
-                        // After import, we delete cache
-                        $idMd5 = self::md5ForId($id);
-                        if ($this->cacheUtil->hasItem($idMd5)) {
-                            $this->cacheUtil->deleteItem($idMd5);
-                        }
+                        if ('create' === $mode) {
 
-                        fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
-                        fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+                            //fwrite($handle, $bulkLine . PHP_EOL);
+                            //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+
+                            array_push($bulkData, [
+                                'idDoc' => self::md5ForId($id),
+                                'mode' => 'create',
+                                'data' => json_decode(utf8_decode($lineReplace), true)
+                            ]);
+                        } elseif ('update' === $mode) {
+                            // fow now, only delta
+                            $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
+                            if (0 === $lastUpdateDate->diff($lastUpdateData)->invert) {
+                                //fwrite($handle, $bulkLine . PHP_EOL);
+                                //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+
+                                array_push($bulkData, [
+                                    'idDoc' => self::md5ForId($id),
+                                    'mode' => 'update',
+                                    'data' => json_decode(utf8_decode($lineReplace), true)
+                                ]);
+                            }
+                        }
                     }
+
+                    /**
+                     * STEP 2 : import data
+                     */
+
+                    //$bulk = $this->dsoRepository->bulkImport($bulkData);
+
+                    /**
+                     * Step 3 : get list of updated data
+                     */
+                    /** @var ListDso $listDso */
+                    $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastUpdateDate);
+
+                    if (0 < $listDso->getIterator()->count()) {
+                        /**
+                         * STEP 4 : update DB
+                         */
+                        $listDsoAsArray = array_map(function(Dso $dso) {
+                            return $dso->getId();
+                        }, iterator_to_array($listDso));
+
+                        /** @var UpdateData $newLastUpdate */
+                        $newLastUpdate = new UpdateData();
+                        $newLastUpdate->setDate(new \DateTime('now'));
+                        $newLastUpdate->setListDso($listDsoAsArray);
+
+                        $this->em->persist($newLastUpdate);
+                        $this->em->flush();
+
+                        /**
+                         * STEP 5 empty cache
+                         */
+                        foreach(iterator_to_array($listDso) as $dsoCurrent) {
+
+                            $listMd5Dso = array_map(function($locale) use ($dsoCurrent) {
+                                return md5(sprintf('%s_%s', $dsoCurrent->getId(), $locale));
+                            }, $this->listLocales);
+
+                            array_walk($listMd5Dso, function($idMd5) use ($dsoCurrent) {
+                                if ($this->cacheUtil->hasItem($idMd5)) {
+                                    $this->cacheUtil->deleteItem($idMd5);
+                                }
+                                $this->cacheUtil->saveItem($idMd5, serialize($dsoCurrent));
+                            });
+                        }
+                    }
+
                     fclose($handle);
                 } else {
                     $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));
@@ -152,8 +259,18 @@ class ConvertSrcToBulkCommand extends Command
      */
     public function buildCreateLine($type, $id): string
     {
-        // {"create": {"_index": "<type>", "_type": "_doc", "_id": "<md5 id>"}},
         return  sprintf('{"create": {"_index": "%s", "_type": "_doc", "_id": "%s"}}', self::$mapping[$type], self::md5ForId($id));
+    }
+
+    /**
+     * @param $type
+     * @param $id
+     *
+     * @return string
+     */
+    public function buildUpdateLine($type, $id): string
+    {
+        return sprintf('{"update": {"_id": "%s", "_index": "%s"}}', self::md5ForId($id), self::$mapping[$type]);
     }
 
     /**
@@ -183,15 +300,4 @@ class ConvertSrcToBulkCommand extends Command
         return null;
     }
 
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public static function getDateUpdate(): string
-    {
-        /** @var \DateTime $dateNow */
-        $dateNow = new \DateTime('now');
-
-        return $dateNow->format(Utils::FORMAT_DATE_ES);
-    }
 }
