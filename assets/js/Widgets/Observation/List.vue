@@ -68,8 +68,8 @@
         searchPlaceholder: searchPlaceholder,
         enableTooltip: true,
         zoom: 5,
-        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
         center: L.latLng(48.856614, 2.3522219),
         geojson: null,
         urlAjaxObservations: urlAjaxObservations

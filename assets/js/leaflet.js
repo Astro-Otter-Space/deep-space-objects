@@ -24,8 +24,8 @@ new Vue({
   data() {
     return {
       zoom: 5,
-      url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      url:'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      attribution:'&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
       center: latLng(48.5734053, 7.7521113),
       markers:[]
     }
