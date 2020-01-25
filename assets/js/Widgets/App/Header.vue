@@ -1,42 +1,62 @@
 <template>
   <header class="header">
 
-    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
+    <!--Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
       </a>
-    </Slide>
+    </Slide -->
 
     <div class="header__wrap">
       <h1 class="h1 h1__title" >
-<!--        Open Menu-->
-        <span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
+        <!-- Open Menu-->
+        <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
-        </span>&nbsp;
+        </span -->&nbsp;
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
 
       <nav id="headerMenu" class="header__menu">
         <!--Search-->
         <li v-if="currentRoute !== homeRoute">
-          <a v-on:click="displaySearch(hide);" v-bind:title="searchPlaceholder">
+          <a v-on:click="displaySearch(hide)" v-bind:title="searchPlaceholder">
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
 
-        <li>
-          <a title="Add observation" v-bind:href="addObservation">
-            <svgicon name="add-observation" width="30" height="30" color="#e9e9e9"></svgicon>
+        <!-- data -->
+        <li class="header__drop">
+          <a v-on:click="displayDropMenu()" v-bind:title="titleData">
+            <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
+          <ul class="header__drop_menu">
+            <a v-for="menu in menuData" v-bind:href="menu.path" v-bind:title="menu.label">
+              <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
+              {{ menu.label }}
+            </a>
+          </ul>
+        </li>
+
+        <!-- Observations -->
+        <li class="header__drop">
+          <a v-on:click="displayDropMenu()" v-bind:title="titleObservation">
+            <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
+          </a>
+          <ul class="header__drop_menu">
+            <a v-for="menu in menuObservations" v-bind:href="menu.path" v-bind:title="menu.label">
+              <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
+              {{ menu.label }}
+            </a>
+          </ul>
         </li>
 
         <!-- Dark/day mod -->
-        <li>
+        <!-- li>
           <a v-on:click="switchTheme(theme)" v-bind:title="titleSwitchMode">
             <svgicon v-bind:name="theme" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
-        </li>
+        </li -->
 
         <!--Languages-->
         <li class="header__drop">
@@ -45,7 +65,8 @@
           </a>
           <ul class="header__drop_menu">
             <a v-for="locale in listLocales" v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label">
-              <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon> {{ locale.label }}
+              <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
+              {{ locale.label }}
             </a>
           </ul>
         </li>
@@ -70,18 +91,20 @@
 
 <script>
   let homeRoute = document.getElementById('appHeader').dataset.homeRoute;
-  let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuSide);
+  // let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuSide);
+  let menuData = JSON.parse(document.getElementById('appHeader').dataset.menuData);
+  let menuObservations = JSON.parse(document.getElementById('appHeader').dataset.menuObservation);
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
-  let addObservation = document.getElementById('appHeader').dataset.observationRoute;
+  // let addObservation = document.getElementById('appHeader').dataset.observationRoute;
   let labelsTrans = JSON.parse(document.getElementById('appHeader').dataset.labels);
-  let titleNightMode = labelsTrans.nightMode;
-  let titleDayMode = labelsTrans.dayMode;
+  // let titleNightMode = labelsTrans.nightMode;
+  // let titleDayMode = labelsTrans.dayMode;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
-  import { Slide } from 'vue-burger-menu';
+  // import { Slide } from 'vue-burger-menu';
   import './../Icons/index';
 
   window.addEventListener("resize", function(event) {
@@ -101,19 +124,21 @@
   export default {
     name: "Header",
     components: {
-      searchautocomplete,
-      Slide
+      searchautocomplete
+      // Slide
     },
     data() {
       return {
         homepageRoute: homeRoute,
-        leftSideMenu: leftSideMenu,
+        // leftSideMenu: leftSideMenu,
+        menuData: menuData,
+        menuObservations: menuObservations,
         title: labelsTrans.title,
         listLocales: listLocales,
         currentLocale: currentLocale,
         theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
-        addObservation: addObservation,
+        // addObservation: addObservation,
         homeRoute: 'homepage',
         hide: false,
         autoCompleteClasse: {
@@ -125,7 +150,9 @@
         searchUrl: urlSearch,
         titleOpenMenu: labelsTrans.openMenu,
         titleSwitchLang: labelsTrans.switchLang,
-        titleSwitchMode: labelsTrans.nightMode
+        // titleSwitchMode: labelsTrans.nightMode,
+        titleData: labelsTrans.titleData,
+        titleObservation: labelsTrans.titleObservation
       }
     },
     watch: {
@@ -137,8 +164,20 @@
     },
     methods: {
       displayDropMenu: function() {
-        var drop_menu = event.currentTarget.parentElement.parentElement.getElementsByClassName("header__drop_menu")[0];
+        console.log("Click on " + event.target.localName);
+        if("a"== event.target.localName) {
+          var item = event.target.parentElement;
+
+        } else if ("svg" == event.target.localName) {
+          var item = event.target.parentElement.parentElement;
+
+        } else if("path" == event.target.localName) {
+          var item = event.target.parentElement.parentElement.parentElement;
+        }
+
+        // because of click on svg, we need to access to grandParent and not parent
         var drop_menus = document.getElementsByClassName("header__drop_menu");
+        var drop_menu = item.getElementsByClassName("header__drop_menu")[0];
 
         Array.from(drop_menus).forEach(function(e){
           if(e !== drop_menu){
@@ -153,9 +192,8 @@
 
         (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
 
-
         if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
-          event.target.parentElement.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
+          item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
         }
       },
       displaySearch: function(hide) {
@@ -166,13 +204,13 @@
           });
         }
       },
-      openSlideMenu: function () {
+      /*openSlideMenu: function () {
         this.$refs.slideMenu.$children[0].openMenu();
-      },
-      switchTheme: function(theme) {
+      },*/
+      /*switchTheme: function(theme) {
         this.theme = ("moon" !== theme) ? "moon" : "moon-empty";
         this.titleSwitchMode = ("moon" !== theme) ? titleNightMode : titleDayMode;
-      }
+      }*/
     }
   }
 

@@ -12,7 +12,8 @@ hem.no: Northern hemisphere
 hem.su: Southern hemisphere
 about.us: About us
 skymap: SkyMap
-listObservations: Observations list
+titleObservation: Observations
+listObservations: List
 locationObservation: Observations location
 openMenu: Open menu
 switchLang: Switch language

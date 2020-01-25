@@ -12,7 +12,8 @@ hem.no: Nordhalbkugel
 hem.su: Südhalbkugel
 about.us: Über uns
 skymap: Himmelskarte
-listObservations: Beobachtungen
+titleObservation: Observations
+listObservations: List
 locationObservation: Observations location
 openMenu: Öffnen Menü
 switchLang: Sprache wechseln

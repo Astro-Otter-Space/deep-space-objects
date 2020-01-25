@@ -12,7 +12,8 @@ hem.no: Hemisferio norte
 hem.su: Hemisferio sur
 about.us: Sobre nosotros
 skymap: Mapa del cielo
-listObservations: Lista de observaciones
+titleObservation: Observaciones
+listObservations: Lista
 locationObservation: Lugar de observaciones
 openMenu: Menú abierto
 switchLang: Cambiar de idioma

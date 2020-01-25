@@ -4,17 +4,20 @@
     'openMenu': 'openMenu'|trans,
     'switchLang': 'switchLang'|trans,
     'nightMode': 'nightMode'|trans,
-    'dayMode': 'dayMode'|trans
+    'dayMode': 'dayMode'|trans,
+    'titleData': 'dso_tr'|trans,
+    'titleObservation': 'titleObservation'|trans
   }
 %}
 <div id="appHeader"
  data-home-route="{{ path('homepage') }}"
- data-menu-side="{{ leftSideMenu|json_encode }}"
+{# data-menu-side="{{ leftSideMenu|json_encode }}"#}
+ data-menu-data="{{ menuData|json_encode }}"
+ data-menu-observation="{{ menuObservations|json_encode }}"
  data-route="{{ _route }}"
  data-locales="{{ listLocales|json_encode }}"
  data-currentlocale="{{ currentLocale }}"
  data-search-route="{{ path('search_ajax') }}"
- data-observation-route="{{ path('add_observation') }}"
  data-labels="{{ labelsTranslation|json_encode }}"
 >
 </div>

@@ -12,7 +12,8 @@ hem.no: Hemisfério Norte
 hem.su: Hemisfério sul
 about.us:
 skymap: SkyMap
-listObservations: Observations list
+titleObservation: Observations
+listObservations: List
 locationObservation: Observations location
 openMenu: Open menu
 switchLang: Switch language

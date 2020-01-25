@@ -88,7 +88,9 @@ class LayoutController extends AbstractController
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-            'leftSideMenu' => $this->leftSideMenu($currentLocale),
+//            'leftSideMenu' => $this->buildMenu($currentLocale),
+            'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
+            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations'])
         ];
 
         /** @var Response $response */
@@ -102,34 +104,39 @@ class LayoutController extends AbstractController
      * Build left side menu
      *
      * @param string $locale
-     *
+     * @param array $listKeysMenu
      * @return array
      */
-    private function leftSideMenu($locale = 'en')
+    private function buildMenu(string $locale = 'en', array $listKeysMenu): array
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
-        return [
+        $menu = [
             'catalog' => [
                 'label' => $this->translatorInterface->trans('catalogs'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
-                'icon_class' => 'galaxy-cluster'
+                'icon_class' => 'shape'
             ],
             'constellation' => [
                 'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
                 'icon_class' => 'constellation'
             ],
+            'map' => [
+                'label' => $this->translatorInterface->trans('skymap'),
+                'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
+                'icon_class' => 'planet'
+            ],
             'observations' => [
                 'label' => $this->translatorInterface->trans('listObservations'),
                 'path' => $routerInterface->generate(sprintf('observation_list.%s', $locale)),
                 'icon_class' => 'telescop'
             ],
-            'map' => [
-                'label' => $this->translatorInterface->trans('skymap'),
-                'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
-                'icon_class' => 'planet'
+            'addObservations' => [
+                'label' => $this->translatorInterface->trans('addObservation'),
+                'path' => $routerInterface->generate(sprintf('add_observation.%s', $locale)),
+                'icon_class' => 'add-observation'
             ],
             'contact' => [
                 'label' => $this->translatorInterface->trans('contact.title'),
@@ -137,6 +144,11 @@ class LayoutController extends AbstractController
                 'icon_class' => 'contact'
             ]
         ];
+
+        return array_filter($menu, function ($key) use ($listKeysMenu) {
+            return in_array($key, $listKeysMenu);
+        }, ARRAY_FILTER_USE_KEY);
+
     }
 
     /**

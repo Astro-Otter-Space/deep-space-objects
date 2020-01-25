@@ -1,5 +1,5 @@
 # Layout
-dso: Astro-Otter
+dso: Astro Otter
 dso_tr: Objets du ciel profond
 menu.homepage: Accueil
 selectLang: Langues
@@ -12,7 +12,8 @@ hem.no: Hémisphère nord
 hem.su: Hémisphère sud
 about.us: À propos
 skymap: Carte du ciel
-listObservations: Liste des observations
+titleObservation: Observations
+listObservations: Liste
 locationObservation: Localisation des observations
 openMenu: Ouverture menu
 switchLang: Changer de langue
