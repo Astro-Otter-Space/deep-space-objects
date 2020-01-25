@@ -5,9 +5,6 @@ monolog:
             path:  '%kernel.logs_dir%/%kernel.environment%.log'
             action_level: error
             max_files: 10
-            excluded_404s:
-                # regex: exclude all 404 errors from the logs
-                - ^/
         console:
             type: console
             process_psr_3_messages: false
