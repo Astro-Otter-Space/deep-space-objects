@@ -205,7 +205,7 @@ class LayoutController extends AbstractController
      *
      * @return array
      */
-    private function ctaFooter($githubLink, $paypalLink, $facebookLink)
+    private function ctaFooter(string $githubLink, string $paypalLink, string $facebookLink): array
     {
         return [
             'github' => [
@@ -233,12 +233,12 @@ class LayoutController extends AbstractController
      * @Route("/sitemap.xml", name="sitemap", format="xml")
      *
      * @param Request $request
-     * @param string $listLocales
+     * @param array $listLocales
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function sitemap(Request $request, string $listLocales)
+    public function sitemap(Request $request, array $listLocales): Response
     {
         $params = [];
 
