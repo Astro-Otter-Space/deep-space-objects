@@ -91,7 +91,7 @@ class PageController extends AbstractController
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
 
-                $contactData->label_country = Intl::getRegionBundle()->getCountryNames()[$contactData->getCountry()];
+                $contactData->setLabelCountry(Intl::getRegionBundle()->getCountryNames()[$contactData->getCountry()]);
 
                 $template = [
                     'html' => 'includes/emails/contact.html.twig',

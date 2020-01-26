@@ -57,67 +57,85 @@ class Contact
     private $message;
 
     /**
+     * @var
+     */
+    private $labelCountry;
+
+
+    /**
      * @return mixed
      */
-    public function getFirstname()
+    public function getFirstname():? string
     {
         return $this->firstname;
     }
 
     /**
      * @param mixed $firstname
+     *
+     * @return Contact
      */
-    public function setFirstname($firstname): void
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getLastname()
+    public function getLastname():? string
     {
         return $this->lastname;
     }
 
     /**
      * @param mixed $lastname
+     *
+     * @return Contact
      */
-    public function setLastname($lastname): void
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail()
+    public function getEmail():? string
     {
         return $this->email;
     }
 
     /**
      * @param mixed $email
+     *
+     * @return Contact
      */
-    public function setEmail($email): void
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getCountry()
+    public function getCountry():? string
     {
         return $this->country;
     }
 
     /**
      * @param mixed $country
+     *
+     * @return Contact
      */
-    public function setCountry($country): void
+    public function setCountry(?string $country): self
     {
         $this->country = $country;
+        return $this;
     }
 
     /**
@@ -130,26 +148,32 @@ class Contact
 
     /**
      * @param mixed $topic
+     *
+     * @return Contact
      */
-    public function setTopic($topic): void
+    public function setTopic($topic): self
     {
         $this->topic = $topic;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMessage()
+    public function getMessage():? string
     {
         return $this->message;
     }
 
     /**
      * @param mixed $message
+     *
+     * @return Contact
      */
-    public function setMessage($message): void
+    public function setMessage($message): self
     {
         $this->message = $message;
+        return $this;
     }
 
     /**
@@ -168,11 +192,29 @@ class Contact
         $this->pot2Miel = $pot2Miel;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLabelCountry():? string
+    {
+        return $this->labelCountry;
+    }
+
+    /**
+     * @param mixed $labelCountry
+     *
+     * @return Contact
+     */
+    public function setLabelCountry($labelCountry): self
+    {
+        $this->labelCountry = $labelCountry;
+        return $this;
+    }
 
     /**
      * @return array
      */
-    public static function getValidTopics()
+    public static function getValidTopics(): array
     {
         return array_keys(Utils::listTopicsContact());
     }
