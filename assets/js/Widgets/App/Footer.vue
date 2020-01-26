@@ -28,14 +28,6 @@
           </li>
         </ul>
       </div>
-
-      <hr/>
-
-      <div class="footer__secondLine">
-        <span>HamHamFonFon</span>
-        <span>{{year}}</span>
-        <span>{{allRights}}</span>
-      </div>
     </div>
   </footer>
 </template>
