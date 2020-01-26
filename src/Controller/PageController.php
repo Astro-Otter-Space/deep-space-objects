@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
@@ -91,7 +92,7 @@ class PageController extends AbstractController
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
 
-                $contactData->setLabelCountry(Intl::getRegionBundle()->getCountryNames()[$contactData->getCountry()]);
+                $contactData->setLabelCountry(Countries::getName($contactData->getCountry(), $request->getLocale()));
 
                 $template = [
                     'html' => 'includes/emails/contact.html.twig',

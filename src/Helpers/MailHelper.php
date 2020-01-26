@@ -34,7 +34,7 @@ class MailHelper
      * @param Environment $templateEngine
      * @param string $defaultLocale
      */
-    public function __construct(\Swift_Mailer $mailer, Environment $templateEngine, $defaultLocale)
+    public function __construct(\Swift_Mailer $mailer, Environment $templateEngine, string $defaultLocale)
     {
         $this->mailer = $mailer;
         $this->templateEngine = $templateEngine;
@@ -54,7 +54,7 @@ class MailHelper
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function sendMail($from, $to, $subject, $template, $content): int
+    public function sendMail(string $from, string $to, string $subject, array $template, array $content): int
     {
         /** @var \Swift_Message $message */
         $message = (new \Swift_Message($subject))
