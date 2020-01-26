@@ -133,9 +133,12 @@ class PageController extends AbstractController
      *     "es": "/legal-notice",
      *     "pt": "/legal-notice"
      * }, name="legal_notice")
+     *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function legalnotice(Request $request)
+    public function legalnotice(Request $request): Response
     {
         $result = [];
 
@@ -171,7 +174,7 @@ class PageController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
-    public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $isValid = false;
         /** @var ApiUser $apiUser */
@@ -229,10 +232,10 @@ class PageController extends AbstractController
      * @return StreamedResponse
      * @throws \Exception
      */
-    public function download(Request $request)
+    public function download(Request $request): StreamedResponse
     {
         $nbItems = 0;
-        $data = $filters = $listAggregations = [];
+        $data = $filters = [];
 
         $header = [
             'Id',
@@ -261,7 +264,7 @@ class PageController extends AbstractController
             });
         }
 
-        list($listDso, $aggregates, $nbItems) = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE);
+        [$listDso,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE);
         $data = array_map(function(Dso $dso) {
             return [
                 $dso->getId(),
