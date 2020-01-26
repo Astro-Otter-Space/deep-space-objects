@@ -162,8 +162,12 @@ class LayoutController extends AbstractController
      * @return Response
      * @deprecated
      */
-    public function footer(Request $request, $githubLink, $paypalLink, $facebookLink)
+    public function footer(Request $request, $githubLink, $paypalLink, $facebookLink): Response
     {
+        /** @var Request $mainRequest */
+        $mainRequest = $this->get('request_stack')->getMasterRequest();
+        $mainRoute = $mainRequest->get('_route');
+
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
@@ -183,6 +187,8 @@ class LayoutController extends AbstractController
                 'path' => $routerInterface->generate(sprintf('contact.%s', $request->getLocale())),
             ]
         ];
+
+        $result['main_route'] = $mainRoute;
 
         /** @var Response $response */
         $response = new Response();

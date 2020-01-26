@@ -1,10 +1,10 @@
 <template>
-  <footer class="footer">
+  <footer v-bind:class="[ !this.isHome  ? 'footer': 'footer__isHome', 'footer']">
     <div class="footer__wrapper">
 
       <div class="footer__share footer__main">
-        <p class="footer__main_bloc1">{{title}} </p>
-        <p class="footer__main_bloc2">{{desc}}</p>
+        <p v-if="!this.isHome" class="footer__main_bloc1">{{title}} </p>
+        <p v-if="!this.isHome" class="footer__main_bloc2">{{desc}}</p>
       </div>
 
       <div class="footer__share">
@@ -34,11 +34,14 @@
   let labels = JSON.parse(document.getElementById('appFooter').dataset.labels);
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
   let linksFooter = JSON.parse(document.getElementById('appFooter').dataset.links);
+  let routeSf = document.getElementById('appFooter').dataset.currentRoute;
 
   export default {
     name: "Footer",
     data() {
       return {
+        currentRoute: routeSf,
+        isHome: true,
         btnsShare: shareButtons,
         title: labels.title,
         desc: labels.desc,
@@ -46,6 +49,18 @@
         allRights: labels.allRights,
         linksFooter: linksFooter
       }
+    },
+    methods: {
+      isHomepage: function() {
+        if(this.currentRoute === "homepage") {
+          this.isHome = true;
+        } else {
+          this.isHome = false
+        }
+      }
+    },
+    beforeMount() {
+      this.isHomepage()
     }
   }
 </script>

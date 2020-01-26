@@ -1,15 +1,21 @@
 .footer {
   display: flex;
   flex-wrap: wrap;
-  background-color: $bgd-dark;
-  position: relative;
+  bottom: 0;
   color: $color-text;
+  width: 100%;
+  background-color: $bgd-dark;
+
+  &__isHome {
+    position: fixed;
+    background-color: transparent;
+  }
 
   &__wrapper {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    margin: 0 auto;
+    margin: 0.5em auto;
     padding: 0 1em;
     width: 100%;
   }
