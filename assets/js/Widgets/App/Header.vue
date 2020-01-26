@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']">
 
     <!--Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
@@ -17,9 +17,9 @@
         <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
       </h1>
 
-      <nav id="headerMenu" class="header__menu">
+      <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <!--Search-->
-        <li v-if="currentRoute !== homeRoute">
+        <li v-if="!this.isHome">
           <a v-on:click="displaySearch(hide)" v-bind:title="searchPlaceholder">
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
@@ -164,7 +164,6 @@
     },
     methods: {
       displayDropMenu: function() {
-        console.log("Click on " + event.target.localName);
         if("a"== event.target.localName) {
           var item = event.target.parentElement;
 
@@ -204,6 +203,13 @@
           });
         }
       },
+      isHomepage: function() {
+        if(this.currentRoute == this.homeRoute) {
+          this.isHome = true;
+        } else {
+          this.isHome = false
+        }
+      }
       /*openSlideMenu: function () {
         this.$refs.slideMenu.$children[0].openMenu();
       },*/
@@ -211,6 +217,9 @@
         this.theme = ("moon" !== theme) ? "moon" : "moon-empty";
         this.titleSwitchMode = ("moon" !== theme) ? titleNightMode : titleDayMode;
       }*/
+    },
+    beforeMount() {
+      this.isHomepage()
     }
   }
 

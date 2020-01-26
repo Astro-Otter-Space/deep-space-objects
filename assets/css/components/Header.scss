@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   z-index: 20;
-  background-color: $bgd-dark;
+
   position: fixed;
   width: 100%;
   top: 0;
@@ -11,6 +11,9 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
   transition: 0.33s;
 
+  &__notHome {
+    background-color: $bgd-dark;
+  }
   &__barSlideMenu {
     &:hover {
       cursor: pointer;
@@ -33,12 +36,14 @@
   &__menu {
     display: flex;
     flex-direction: row;
+    &__notHome {
+      background: $bgd-dark;
+    }
 
     li {
       position: relative;
       user-select: none;
       margin-left: 20px;
-      background-color: $bgd-dark;
 
       &:hover {
         color: $color-text-dark;
@@ -50,7 +55,7 @@
         font-size: 1.15em;
         border: none;
         transition: 0.15s;
-        background: $bgd-dark;
+        //background-color: $bgd-dark;
       }
     }
   }
