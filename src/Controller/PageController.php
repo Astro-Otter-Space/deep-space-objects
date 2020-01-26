@@ -12,6 +12,7 @@ use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -40,16 +41,21 @@ class PageController extends AbstractController
     /** @var TranslatorInterface */
     private $translatorInterface;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     /**
      * PageController constructor.
      *
      * @param DsoRepository $dsoRepository
      * @param TranslatorInterface $translatorInterface
+     * @param LoggerInterface $logger
      */
-    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translatorInterface, LoggerInterface $logger)
     {
         $this->dsoRepository = $dsoRepository;
         $this->translatorInterface = $translatorInterface;
+        $this->logger = $logger;
     }
 
     /**
@@ -87,7 +93,6 @@ class PageController extends AbstractController
 
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted()) {
-
             if ($contactForm->isValid()) {
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
@@ -102,7 +107,13 @@ class PageController extends AbstractController
                 $subject = $this->translatorInterface->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
                 $content['contact'] = $contactData;
 
-                $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
+                try {
+                    $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
+                } catch(\Swift_SwiftException $e) {
+                    $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
+                    $sendMail = false;
+                }
+
                 if (1 === $sendMail) {
                     $this->addFlash('form.success','form.ok.sending');
                     $isValid = true;
