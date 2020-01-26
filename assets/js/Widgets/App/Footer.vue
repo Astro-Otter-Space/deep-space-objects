@@ -1,14 +1,10 @@
 <template>
   <footer class="footer">
     <div class="footer__wrapper">
-      <div class="footer__main footer__share">
-        <div class="footer__main_bloc1">
-          <p>{{title}} </p>
-        </div>
 
-        <div class="footer__main_bloc2">
-          <span>{{desc}}</span>
-        </div>
+      <div class="footer__share footer__main">
+        <p class="footer__main_bloc1">{{title}} </p>
+        <p class="footer__main_bloc2">{{desc}}</p>
       </div>
 
       <div class="footer__share">

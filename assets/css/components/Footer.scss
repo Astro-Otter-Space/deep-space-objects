@@ -6,28 +6,34 @@
   color: $color-text;
 
   &__wrapper {
-    width: 100%;
-    max-width: 1200px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     margin: 0 auto;
-    padding: 0 5em;
+    padding: 0 1em;
+    width: 100%;
   }
 
   &__main {
+    color: $color-text;
     &_bloc1 {
       font-weight: 300;
       font-size: 2em;
       margin: 0 0.5em;
+    }
+    &_bloc2 {
 
-      p {
-        color: $color-text;
-      }
     }
   }
 
   &__share {
-    justify-content: center;
-    display: inline-block;
     vertical-align: middle;
+    width: 100%;
+    text-align: center;
+    ul {
+      margin: 0;
+      padding: 0;
+    }
 
     li {
       position: relative;
@@ -42,21 +48,13 @@
     }
 
     &:first-child{
+      text-align: left;
       margin-right: 1%;
-      width: 30%;
     }
+
     &:last-child{
       margin-left: 1%;
-      width: 30%;
-      display: right;
-    }
-  }
-
-  &__secondLine {
-    display : inline-flex;
-    width: 100%;
-    span {
-      margin: auto;
+      text-align: right;
     }
   }
 }
