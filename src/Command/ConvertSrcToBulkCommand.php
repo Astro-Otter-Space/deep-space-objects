@@ -33,9 +33,13 @@ class ConvertSrcToBulkCommand extends Command
     /** @var DsoRepository */
     private $dsoRepository;
 
+    /** @var array  */
+    protected $listLocales;
+
     protected static $defaultName = "dso:convert-bulk";
 
-    protected static $listType = ['dso20', 'constellations'];
+    protected static $listTypeImport = ['full', 'delta'];
+    protected static $listIndexType = ['dso20', 'constellations'];
 
     protected static $mapping = [
         'dso20' => 'deepspaceobjects',
@@ -52,13 +56,15 @@ class ConvertSrcToBulkCommand extends Command
      * @param CacheInterface $cacheUtil
      * @param EntityManagerInterface $em
      * @param DsoRepository $dsoRepository
+     * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
         $this->em = $em;
         $this->dsoRepository = $dsoRepository;
+        $this->listLocales = explode('|', $listLocales);
         parent::__construct();
     }
 
@@ -69,7 +75,8 @@ class ConvertSrcToBulkCommand extends Command
     {
         $this
             ->setDescription('Convert source file into bulk for Elastic Search')
-            ->addArgument('type', InputArgument::REQUIRED, 'List of values : ' . implode(', ', self::$listType));
+            ->addOption('import', InputArgument::REQUIRED, 'List of import : ' . implode(', ', self::$listTypeImport))
+            ->addArgument('type', InputArgument::REQUIRED, 'List of values : ' . implode(', ', self::$listIndexType));
         ;
     }
 
@@ -89,7 +96,7 @@ class ConvertSrcToBulkCommand extends Command
         /** @var \DateTimeInterface $lastUpdateDate */
         $lastUpdateDate = $updateData->getDate() ?? new \DateTime('now');
 
-        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listType)) {
+        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
 
             $type = $input->getArgument('type');
 
@@ -115,6 +122,9 @@ class ConvertSrcToBulkCommand extends Command
                 if (JSON_ERROR_NONE === json_last_error()) {
                     $handle = fopen($outputFilename, 'w');
 
+                    /**
+                     * STEP 1 : build bulk
+                     */
                     foreach ($data as $inputData) {
                         if (!array_key_exists('id', $inputData)) {
                             continue;
@@ -137,10 +147,25 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
+                        // If full :
                         fwrite($handle, $this->buildCreateLine($type, $id) . PHP_EOL);
                         fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+
+                        // If delta
                     }
 
+
+                    /**
+                     * STEP 2 : delete index and rebuild mapping ?
+                     */
+
+                    /**
+                     * STEP 3 : import data
+                     */
+
+                    /**
+                     * Step 4 : get list of updated data
+                     */
                     $listDsoId = [];
                     // TODO : retrieve list of dso where date update are between lastUpdateDate and Now
 
@@ -155,13 +180,18 @@ class ConvertSrcToBulkCommand extends Command
                             array_push($listDsoId, $dso->getId());
 
                             // TODO : add locale
-                            $idMd5 = self::md5ForId($dso->getId());
-                            if ($this->cacheUtil->hasItem($idMd5)) {
-                                $this->cacheUtil->deleteItem($idMd5);
+                            $listIdMd5 = array_map(function($locale) use ($dso){
+                                return sprintf('%s_%s', self::md5ForId($dso->getId()), $locale);
+                            }, $this->listLocales);
+
+                            foreach ($listIdMd5 as $idMd5) {
+                                if ($this->cacheUtil->hasItem($idMd5)) {
+                                    $this->cacheUtil->deleteItem($idMd5);
+                                }
                             }
+
                         }
                     }
-
 
                     /** @var UpdateData $newLastUpdate */
                     $newLastUpdate = new UpdateData();
@@ -203,6 +233,17 @@ class ConvertSrcToBulkCommand extends Command
     {
         // {"create": {"_index": "<type>", "_type": "_doc", "_id": "<md5 id>"}},
         return  sprintf('{"create": {"_index": "%s", "_type": "_doc", "_id": "%s"}}', self::$mapping[$type], self::md5ForId($id));
+    }
+
+    /**
+     * @param $type
+     * @param $id
+     *
+     * @return string
+     */
+    public function buildUpdateLine($type, $id): string
+    {
+        return sprintf('{"update": {"_id": "%s", "_index": "%s"}}', self::md5ForId($id), self::$mapping[$type]);
     }
 
     /**
