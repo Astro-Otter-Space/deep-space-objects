@@ -233,12 +233,12 @@ class LayoutController extends AbstractController
      * @Route("/sitemap.xml", name="sitemap", format="xml")
      *
      * @param Request $request
-     * @param array $listLocales
+     * @param string $listLocales
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function sitemap(Request $request, array $listLocales): Response
+    public function sitemap(Request $request, string $listLocales): Response
     {
         $params = [];
 
