@@ -81,7 +81,7 @@
       }
     }
     &:before {
-      content: '#'counter(rank);
+      //content: '#'counter(rank);
       display: block;
       width: 25px;
       height: 20px;
