@@ -10,13 +10,13 @@
   display: grid;
   grid-template-columns: repeat(var(--grid-items), minmax(var(--grid-min), 1fr));
   grid-gap: var(--grid-gap);
-  #counter-reset: rank;
+  //counter-reset: rank;
   margin: 1%;
 
   article {
-    #counter-increment: rank;
+    //counter-increment: rank;
     position: relative;
-    background: $bgd-cards; //$bgd-cards;
+    background: $bgd-cards;
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     border-radius: 4px;
     overflow: hidden;
