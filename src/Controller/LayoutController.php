@@ -162,7 +162,7 @@ class LayoutController extends AbstractController
      * @return Response
      * @deprecated
      */
-    public function footer(Request $request, $githubLink, $paypalLink, $facebookLink): Response
+    public function footer(Request $request, ?string $githubLink, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): Response
     {
         /** @var Request $mainRequest */
         $mainRequest = $this->get('request_stack')->getMasterRequest();
@@ -171,7 +171,7 @@ class LayoutController extends AbstractController
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
-        $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink);
+        $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink, $twitterLink);
 
         $result['links_footer'] = [
             'api' => [
@@ -206,7 +206,7 @@ class LayoutController extends AbstractController
      *
      * @return array
      */
-    private function ctaFooter(string $githubLink, string $paypalLink, string $facebookLink, string $twitterLink): array
+    private function ctaFooter(?string $githubLink, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): array
     {
         return [
             'github' => [
