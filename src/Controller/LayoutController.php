@@ -199,13 +199,14 @@ class LayoutController extends AbstractController
 
 
     /**
-     * @param $githubLink
-     * @param $paypalLink
-     * @param $facebookLink
+     * @param string $githubLink
+     * @param string $paypalLink
+     * @param string $facebookLink
+     * @param string $twitterLink
      *
      * @return array
      */
-    private function ctaFooter(string $githubLink, string $paypalLink, string $facebookLink): array
+    private function ctaFooter(string $githubLink, string $paypalLink, string $facebookLink, string $twitterLink): array
     {
         return [
             'github' => [
@@ -225,6 +226,12 @@ class LayoutController extends AbstractController
                 'path' => $facebookLink,
                 'blank' => true,
                 'icon_class' => 'facebook'
+            ],
+            'twitter' => [
+                'label' => ucfirst('twitter'),
+                'path' => $twitterLink,
+                'blank' => true,
+                'icon_class' => 'twitter'
             ]
         ];
     }

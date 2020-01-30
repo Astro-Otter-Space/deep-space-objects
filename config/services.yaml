@@ -11,7 +11,7 @@ parameters:
     github.link: '%env(GITHUB_PAGE)%'
     paypal.link: '%env(PAYPAL_PAGE)%'
     facebook.link: '%env(FACEBOOK_PAGE)%'
-
+    twitter.link: '%env(TWITTER_PAGE)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -24,6 +24,7 @@ services:
             $githubLink: '%github.link%'
             $paypalLink: '%paypal.link%'
             $facebookLink: '%facebook.link%'
+            $twitterLink: '%twitter.link%'
             $senderMail: '%app.notifications.email_sender%'
 
     App\EventSubscriber\LocaleSubscriber:
