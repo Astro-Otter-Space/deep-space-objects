@@ -208,32 +208,45 @@ class LayoutController extends AbstractController
      */
     private function ctaFooter(?string $githubLink, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): array
     {
-        return [
-            'github' => [
+        $tab = [];
+
+        if ($githubLink) {
+            $tab['github'] = [
                 'label' => ucfirst('github'),
                 'path' => $githubLink,
                 'blank' => true,
                 'icon_class' => 'github'
-            ],
-            'paypal' => [
+            ];
+        }
+
+        if ($paypalLink) {
+            $tab['paypal'] = [
                 'label' => ucfirst('paypal'),
                 'path' => $paypalLink,
                 'blank' => true,
                 'icon_class' => 'paypal'
-            ],
-            'facebook' => [
+            ];
+        }
+
+        if ($facebookLink) {
+            $tab['facebook'] = [
                 'label' => ucfirst('facebook'),
                 'path' => $facebookLink,
                 'blank' => true,
                 'icon_class' => 'facebook'
-            ],
-            'twitter' => [
+            ];
+        }
+
+        if ($twitterLink) {
+            $tab['twitter'] = [
                 'label' => ucfirst('twitter'),
                 'path' => $twitterLink,
                 'blank' => true,
                 'icon_class' => 'twitter'
-            ]
-        ];
+            ];
+        }
+
+        return $tab;
     }
 
     /**
