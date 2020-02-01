@@ -14,7 +14,9 @@
         <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
         </span -->&nbsp;
-        <a v-bind:href="homepageRoute" v-bind:title="title">{{title}}</a>
+        <a v-bind:href="homepageRoute" v-bind:title="title" itemscope itemtype="http://schema.org/Dataset">
+          <span itemprop="name">{{title}}</span>
+        </a>
       </h1>
 
       <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">

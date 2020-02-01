@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" itemscope>
     <div class="AppSlider">
       <slider
         :images="[
@@ -10,7 +10,7 @@
         ]"
       />
       <div class="AppSlider__Research">
-        <h2 class="AppSlider__subTitle">{{ subTitle }}</h2>
+        <h2 class="AppSlider__subTitle" itemprop="title">{{ subTitle }}</h2>
         <searchautocomplete
           ref="homesearch"
           :searchPlaceholder="searchPlaceholder"
