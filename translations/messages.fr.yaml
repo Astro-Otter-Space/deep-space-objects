@@ -289,7 +289,7 @@ select:
 # Form contact
 contact.title: "Contactez-nous"
 form.error.sending: "Problème d'envoi du message, veuillez réassayer plus tard"
-form.ok.sending: "Votre message a bien été envoyé"
+form.ok.sending: "Votre message a bien été envoyé. Nous vous répondrons le plus vite possible"
 form.error.message: "Veuillez corriger les erreurs"
 form.api.success: "Enregistrement de vos identifiants éffectué. Vous allez recevoir dans votre boîte mail le bearer-token pour l'API."
 contact.form.firstname: "Prénom (*)"

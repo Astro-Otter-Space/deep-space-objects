@@ -290,7 +290,7 @@ select:
 # Form contact
 contact.title: "Contact us"
 form.error.sending: "A problem has occurred, please try later"
-form.ok.sending: "Message sended"
+form.ok.sending: "Message have been sended. We will answer you as soon as possible."
 form.error.message: "Please fix errors below"
 form.api.success: "Registration OK. You will receive in your mailbox a bearer token for API."
 contact.form.firstname: "Firstname (*)"
