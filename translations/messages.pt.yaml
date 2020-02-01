@@ -122,7 +122,7 @@ es: Espanhol
 de: Alemão
 # Homepage
 homepage.message: Descobre belezas e mistérios do universo
-homepage.desc: "%sitename% is a celestial atlas containing more than 9000 deep sky objects, grouped by different catalog or type of object. You can search, find and discover the beauty and mysteries of our universe on our site."
+homepage.desc: "%sitename% is a celestial atlas containing more than 9000 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel."
 home.search.placeholder: Procurar no catálogo
 dayImage: Imagem do dia
 # View full
