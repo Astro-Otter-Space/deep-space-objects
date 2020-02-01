@@ -28,6 +28,7 @@ class GenericPageController extends AbstractController
 
         /** @var Response $response */
         $response = $this->render('pages/skymap.html.twig', $params);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
     }

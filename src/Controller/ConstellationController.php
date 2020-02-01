@@ -122,7 +122,7 @@ class ConstellationController extends AbstractController
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
         $response->headers->set('X-Constellation-Id', $constellation->getElasticId());
-        $response->setPublic();
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
     }
@@ -164,7 +164,7 @@ class ConstellationController extends AbstractController
 
         /** @var Response $response */
         $response = $this->render('pages/constellations.html.twig', $result);
-        $response->setPublic();
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
     }
