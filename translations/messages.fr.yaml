@@ -122,6 +122,7 @@ es: Espagnol
 de: Allemand
 # Homepage
 homepage.message: Découvrez les beautés et les mystères de l'univers
+homepage.desc: "%sitename% est un atlas céleste contenant plus de 9000 objets du ciel profond, regroupés par différents catalogue ou type d'objet. Vous pourrez chercher, trouver et découvrir la beauté et les mystères de notre univers sur notre site."
 home.search.placeholder: Rechercher dans les catalogues...
 dayImage: L'image du jour
 # View full
