@@ -31,9 +31,6 @@ class MailService
     /** @var string */
     private $pwdMail;
 
-    /** @var string */
-    private $fromMail;
-
     /**
      * MailService constructor.
      *
@@ -83,26 +80,6 @@ class MailService
         $this->pwdMail = $pwdMail;
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    private function getFromMail(): string
-    {
-        return $this->fromMail;
-    }
-
-    /**
-     * @param mixed $fromMail
-     *
-     * @return MailService
-     */
-    public function setFromMail($fromMail): self
-    {
-        $this->fromMail = $fromMail;
-        return $this;
-    }
-
 
     /**
      * @param string $to
