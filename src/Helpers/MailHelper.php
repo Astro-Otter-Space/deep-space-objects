@@ -11,7 +11,7 @@ use Twig\Error\SyntaxError;
 /**
  * Class MailHelper
  * @deprecated
- * 
+ *
  * @package App\Helpers
  */
 class MailHelper

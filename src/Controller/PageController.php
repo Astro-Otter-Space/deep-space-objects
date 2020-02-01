@@ -110,12 +110,13 @@ class PageController extends AbstractController
 
                 try {
                     $mailService->sendMail($contactData->getEmail(), $subject, $templates, $content);
+                    $sendMail = true;
                 } catch(ExceptionInterface $e) {
                     $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
                     $sendMail = false;
                 }
 
-                if (1 === $sendMail) {
+                if (true === $sendMail) {
                     $this->addFlash('form.success','form.ok.sending');
                     $isValid = true;
                 } else {
