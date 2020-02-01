@@ -26,7 +26,7 @@ $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
 if ('prod' === $_SERVER['APP_ENV']) {
     /** @var CacheKernel $kernel */
     $kernel = new CacheKernel($kernel);
-    Request::enableHttpMethodParameterOverride(); // <-- add this line
+    //Request::enableHttpMethodParameterOverride(); // <-- add this line
 }
 
 $request = Request::createFromGlobals();
