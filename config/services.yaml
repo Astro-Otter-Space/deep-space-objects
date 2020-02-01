@@ -6,12 +6,12 @@
 parameters:
     locale: 'en'
     app_locales: en|fr|de|es|pt|
-    app.notifications.email_sender: '%env(SENDER_MAIL)%'
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     github.link: '%env(GITHUB_PAGE)%'
     paypal.link: '%env(PAYPAL_PAGE)%'
     facebook.link: '%env(FACEBOOK_PAGE)%'
     twitter.link: '%env(TWITTER_PAGE)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -25,7 +25,7 @@ services:
             $paypalLink: '%paypal.link%'
             $facebookLink: '%facebook.link%'
             $twitterLink: '%twitter.link%'
-            $senderMail: '%app.notifications.email_sender%'
+            $senderMail: '%env(SENDER_MAIL)%'
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
@@ -72,8 +72,6 @@ services:
     App\Service\MailService:
         autowire: true
         autoconfigure: true
-        bind:
-            $senderMail: $senderMail
         calls:
             -   method: setUserMail
                 arguments:
