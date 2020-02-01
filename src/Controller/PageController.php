@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Mailer\Exception\ExceptionInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
@@ -111,7 +112,7 @@ class PageController extends AbstractController
                 try {
                     $mailService->sendMail($contactData->getEmail(), $subject, $templates, $content);
                     $sendMail = true;
-                } catch(ExceptionInterface $e) {
+                } catch(TransportExceptionInterface $e) {
                     $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
                     $sendMail = false;
                 }
