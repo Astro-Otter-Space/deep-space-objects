@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
@@ -18,9 +19,6 @@ use Twig\Error\SyntaxError;
  */
 class MailService
 {
-    /** @var MailerInterface  */
-    private $mailer;
-
     /** @var Environment */
     private $templateEngine;
 
@@ -39,13 +37,11 @@ class MailService
     /**
      * MailService constructor.
      *
-     * @param MailerInterface $mailer
      * @param Environment $templateEngine
      * @param string $senderMail
      */
-    public function __construct(MailerInterface $mailer, Environment $templateEngine, string $senderMail)
+    public function __construct(Environment $templateEngine, string $senderMail)
     {
-        $this->mailer = $mailer;
         $this->templateEngine = $templateEngine;
         $this->senderMail = $senderMail;
     }
@@ -116,7 +112,7 @@ class MailService
      *
      * @throws TransportExceptionInterface
      */
-    public function sendMail(string $to, string $subject, array $template, array $content)
+    public function sendMail(string $to, string $subject, array $template, array $content): void
     {
         /** @var GmailSmtpTransport $transport */
         $transport = new GmailSmtpTransport($this->getUserMail(), $this->getPwdMail());
