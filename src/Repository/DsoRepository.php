@@ -3,19 +3,14 @@
 namespace App\Repository;
 
 use App\Classes\Utils;
-use App\Entity\Dso;
-use App\Entity\ListDso;
-use App\Managers\DsoManager;
-use Elastica\Aggregation\Avg;
+use App\Entity\ES\Dso;
+use App\Entity\ES\ListDso;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\Terms;
-use Elastica\Client;
 use Elastica\Document;
-use Elastica\Processor\Sort;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Search;
-use Elastica\Suggest;
 
 /**
  * Class DsoRepository
@@ -169,7 +164,7 @@ class DsoRepository extends AbstractRepository
      * @param $searchTerm
      * @return array
      */
-    public function getObjectsBySearchTerms($searchTerm)
+    public function getObjectsBySearchTerms($searchTerm): array
     {
         $list = [];
         if ('en' !== $this->getLocale()) {
@@ -198,7 +193,7 @@ class DsoRepository extends AbstractRepository
      * @return array
      * @throws \ReflectionException
      */
-    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null, $hydrate = true)
+    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null, $hydrate = true): array
     {
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
@@ -312,6 +307,7 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Get list of AstrobinId
+     * @param array $listExcludedAstrobinId
      * @return array
      *
      * Query :
@@ -327,7 +323,7 @@ class DsoRepository extends AbstractRepository
      *   }
      * }
      */
-    public function getAstrobinId()
+    public function getAstrobinId(array $listExcludedAstrobinId): array
     {
         $listAstrobinId = [];
 
@@ -340,6 +336,13 @@ class DsoRepository extends AbstractRepository
         /** @var Query\Exists $mustQuery */
         $mustQuery = new Query\Exists("data.astrobin_id");
         $boolQuery->addMust($mustQuery);
+
+        if (0 < count($listExcludedAstrobinId)) {
+            foreach ($listExcludedAstrobinId as $astrobinId) {
+                $astrobinMatchQuery = new Query\Match("data.astrobin_id", $astrobinId);
+                $boolQuery->addMustNot($astrobinMatchQuery);
+            }
+        }
 
         $query->setQuery($boolQuery);
         $query->setFrom(0)->setSize(500);
@@ -362,16 +365,18 @@ class DsoRepository extends AbstractRepository
      */
     protected function getEntity()
     {
-        return 'App\Entity\Dso';
+        return 'App\Entity\ES\Dso';
     }
 
     /**
      * Build a Dso entity from document ElasticSearch
+     *
      * @param Document $document
+     *
      * @return Dso
      * @throws \ReflectionException
      */
-    private function buildEntityFromDocument(Document $document)
+    private function buildEntityFromDocument(Document $document): Dso
     {
         $entity = $this->getEntity();
         /** @var Dso $dso */

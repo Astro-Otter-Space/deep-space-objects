@@ -3,17 +3,15 @@
 namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
-use App\Entity\AbstractEntity;
-use App\Entity\Constellation;
-use App\Entity\Dso;
-use App\Entity\ListDso;
+use App\Entity\ES\AbstractEntity;
+use App\Entity\ES\Constellation;
+use App\Entity\ES\Dso;
+use App\Entity\ES\ListDso;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
-use LimitIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser as oldFileinfoMimeTypeGuesser;
 use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

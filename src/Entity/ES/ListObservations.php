@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Entity;
+namespace App\Entity\ES;
 
 use Traversable;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\BDD;
 
 use App\Classes\Utils;
 use Symfony\Component\Validator\Constraints as Assert;

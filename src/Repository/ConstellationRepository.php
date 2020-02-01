@@ -1,8 +1,8 @@
 <?php
 namespace App\Repository;
 
-use App\Entity\Constellation;
-use App\Entity\ListConstellation;
+use App\Entity\ES\Constellation;
+use App\Entity\ES\ListConstellation;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
@@ -35,7 +35,7 @@ final class ConstellationRepository extends AbstractRepository
      * @return Constellation
      * @throws \ReflectionException
      */
-    public function getObjectById($id)
+    public function getObjectById($id):? Constellation
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
@@ -49,9 +49,10 @@ final class ConstellationRepository extends AbstractRepository
 
     /**
      * Build a list of all constellation (88)
+     * @return ListConstellation
      * @throws \ReflectionException
      */
-    public function getAllConstellation()
+    public function getAllConstellation(): ListConstellation
     {
         /** @var ListConstellation $listConstellation */
         $listConstellation = new ListConstellation();
@@ -82,7 +83,7 @@ final class ConstellationRepository extends AbstractRepository
      * @param $searchTerm
      * @return array
      */
-    public function getConstellationsBySearchTerms($searchTerm)
+    public function getConstellationsBySearchTerms($searchTerm): array
     {
         $list = [];
 
@@ -107,7 +108,7 @@ final class ConstellationRepository extends AbstractRepository
      * @return Constellation
      * @throws \ReflectionException
      */
-    private function buildEntityFromDocument(Document $document)
+    private function buildEntityFromDocument(Document $document): Constellation
     {
         /** @var Constellation $constellation */
         $entity = $this->getEntity();
@@ -127,13 +128,14 @@ final class ConstellationRepository extends AbstractRepository
      */
     public function getEntity(): string
     {
-        return 'App\Entity\Constellation';
+        return 'App\Entity\ES\Constellation';
     }
 
     /**
      * @return string
      */
-    public function getType(): string {
+    public function getType(): string
+    {
         return self::INDEX_NAME;
     }
 }

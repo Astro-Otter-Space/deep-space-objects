@@ -3,7 +3,7 @@
 namespace App\Managers;
 
 use App\Classes\Utils;
-use App\Entity\Constellation;
+use App\Entity\ES\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use Symfony\Contracts\Translation\TranslatorInterface;

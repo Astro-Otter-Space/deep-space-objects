@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

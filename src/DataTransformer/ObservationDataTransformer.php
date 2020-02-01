@@ -4,7 +4,7 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
-use App\Entity\Observation;
+use App\Entity\ES\Observation;
 
 /**
  * Class ObservationDataTransformer

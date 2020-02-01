@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\Classes\Utils;
+use App\Entity\BDD\Contact;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
@@ -175,6 +176,7 @@ class ContactFormType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'validation_groups' => null,
+            'data_class' => Contact::class
         ]);
     }
 

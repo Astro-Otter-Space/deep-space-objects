@@ -2,7 +2,7 @@
 
 namespace App\Forms;
 
-use App\Entity\ApiUser;
+use App\Entity\BDD\ApiUser;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
@@ -13,9 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 /**
  * Class RegisterApiUsersFormType

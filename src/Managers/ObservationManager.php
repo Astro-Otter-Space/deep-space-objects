@@ -3,19 +3,15 @@
 namespace App\Managers;
 
 use App\Classes\CacheInterface;
-use App\Classes\Utils;
 use App\DataTransformer\ObservationDataTransformer;
-use App\Entity\ListDso;
-use App\Entity\Observation;
+use App\Entity\ES\ListDso;
+use App\Entity\ES\Observation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ObservationRepository;
 use Elastica\Exception\ElasticsearchException;
 use Elastica\Exception\NotFoundException;
-use IntlTimeZone;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Intl\Intl;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

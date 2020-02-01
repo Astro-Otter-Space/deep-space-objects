@@ -3,31 +3,25 @@
 namespace App\Controller;
 
 use App\Classes\Utils;
-use App\Entity\ApiUser;
-use App\Entity\Contact;
-use App\Entity\Dso;
+use App\Entity\BDD\ApiUser;
+use App\Entity\BDD\Contact;
+use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
-use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Countries;
-use Symfony\Component\Intl\Intl;
-use Symfony\Component\Mailer\Exception\ExceptionInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

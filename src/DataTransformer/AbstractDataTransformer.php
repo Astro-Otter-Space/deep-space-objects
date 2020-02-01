@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\DataTransformer;
 
-use App\Entity\Dso;
-use App\Entity\Observation;
+use App\Entity\ES\Dso;
+use App\Entity\ES\Observation;
 
 /**
  * Class AbstractDataTransformer

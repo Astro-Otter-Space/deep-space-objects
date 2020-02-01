@@ -1,6 +1,6 @@
 security:
     encoders:
-        App\Entity\ApiUser:
+        App\Entity\BDD\ApiUser:
             algorithm: sodium
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -8,7 +8,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         api_entity_provider:
             entity:
-                class: App\Entity\ApiUser
+                class: App\Entity\BDD\ApiUser
                 property: email
 
     firewalls:

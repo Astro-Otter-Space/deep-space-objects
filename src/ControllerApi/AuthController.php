@@ -3,7 +3,7 @@
 
 namespace App\ControllerApi;
 
-use App\Entity\ApiUser;
+use App\Entity\BDD\ApiUser;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -5,25 +5,19 @@ namespace App\ControllerApi;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
-use App\Entity\Dso;
+use App\Entity\ES\Dso;
+use App\Entity\ES\ListDso;
 use App\Entity\DTO\DsoDTO;
-use App\Entity\ListDso;
-use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\ControllerTrait;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\Request\ParamFetcher;
-use FOS\RestBundle\View\ConfigurableViewHandlerInterface;
 use FOS\RestBundle\View\View;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class DsoController

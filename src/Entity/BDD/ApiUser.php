@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Entity\BDD;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;

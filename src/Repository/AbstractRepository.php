@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
-use App\Entity\AbstractEntity;
-use App\Entity\Constellation;
-use App\Entity\Dso;
-use App\Entity\Observation;
+use App\Entity\ES\AbstractEntity;
+use App\Entity\ES\Constellation;
+use App\Entity\ES\Dso;
+use App\Entity\ES\Observation;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
@@ -14,7 +14,6 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Type;
-use Negotiation\Match;
 
 /**
  * Class AbstractRepository

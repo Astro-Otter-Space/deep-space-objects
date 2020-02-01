@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\ES;
 
 use App\Classes\Utils;
 use App\Repository\ObservationRepository;

@@ -3,16 +3,14 @@
 namespace App\Helpers;
 
 use App\Classes\Utils;
-use App\Entity\Constellation;
-use App\Entity\Dso;
-use App\Entity\Observation;
+use App\Entity\ES\Constellation;
+use App\Entity\ES\Dso;
+use App\Entity\ES\Observation;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use App\Repository\ObservationRepository;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * Class UrlGenerateHelper

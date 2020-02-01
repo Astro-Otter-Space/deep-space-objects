@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Observation;
+use App\Entity\ES\Observation;
 use App\Forms\ObservationFormType;
 use App\Managers\DsoManager;
 use App\Managers\ObservationManager;

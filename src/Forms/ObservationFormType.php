@@ -4,7 +4,7 @@
 namespace App\Forms;
 
 use App\Classes\Utils;
-use App\Entity\Observation;
+use App\Entity\ES\Observation;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;

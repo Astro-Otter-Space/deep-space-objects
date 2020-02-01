@@ -3,8 +3,8 @@
 
 namespace App\Controller\ControllerTraits;
 
-use App\Entity\Dso;
-use App\Entity\ListDso;
+use App\Entity\ES\Dso;
+use App\Entity\ES\ListDso;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**

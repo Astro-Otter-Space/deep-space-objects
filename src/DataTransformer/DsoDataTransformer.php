@@ -4,13 +4,14 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
-use App\Entity\Dso;
+use App\Entity\ES\Dso;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class DsoDataTransformer
+ *
  * Transform an Entity Dso into DTO - Only API Use
  * @package App\DataTransformer
  */
