@@ -3,7 +3,7 @@ swiftmailer:
     transport: gmail
     username: '%env(GMAIL_MAIL)%'
     password: '%env(GMAIL_APP_PWD)%'
-    host: smtp.gmail.com
+    host: localhost
     port: 465
     encryption: ssl
     auth_mode: login

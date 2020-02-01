@@ -69,6 +69,19 @@ services:
         bind:
             $env: '%kernel.environment%'
 
+    App\Service\MailService:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $senderMail: $senderMail
+        calls:
+            -   method: setUserMail
+                arguments:
+                    - '%env(GMAIL_LOGIN)%'
+            -   method: setPwdMail
+                arguments:
+                    - '%env(GMAIL_APP_PWD)%'
+
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@twig', '%kernel.environment%']

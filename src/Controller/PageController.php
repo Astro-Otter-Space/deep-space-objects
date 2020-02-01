@@ -10,6 +10,7 @@ use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
+use App\Service\MailService;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Log\LoggerInterface;
@@ -21,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Mailer\Exception\ExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
@@ -68,12 +70,11 @@ class PageController extends AbstractController
      * }, name="contact")
      *
      * @param Request $request
-     * @param MailHelper $mailHelper
+     * @param MailService $mailService
      *
      * @return Response
-     * @throws \Exception
      */
-    public function contact(Request $request, MailHelper $mailHelper): Response
+    public function contact(Request $request, MailService $mailService): Response
     {
         /** @var Router $router */
         $router = $this->get('router');
@@ -99,7 +100,7 @@ class PageController extends AbstractController
 
                 $contactData->setLabelCountry(Countries::getName($contactData->getCountry(), $request->getLocale()));
 
-                $template = [
+                $templates = [
                     'html' => 'includes/emails/contact.html.twig',
                     'text' => 'includes/emails/contact.txt.twig'
                 ];
@@ -108,8 +109,8 @@ class PageController extends AbstractController
                 $content['contact'] = $contactData;
 
                 try {
-                    $sendMail = $mailHelper->sendMail($contactData->getEmail(), $this->getParameter('app.notifications.email_sender'), $subject, $template, $content);
-                } catch(\Swift_SwiftException $e) {
+                    $mailService->sendMail($contactData->getEmail(), $subject, $templates, $content);
+                } catch(ExceptionInterface $e) {
                     $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
                     $sendMail = false;
                 }
@@ -315,4 +316,25 @@ class PageController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route({
+     *   "en": "/skymap",
+     *   "fr": "/carte-du-ciel",
+     *   "es": "/skymap",
+     *   "de": "/skymap",
+     *   "pt": "/skymap"
+     * }, name="skymap")
+     */
+    public function skymap(): Response
+    {
+        $params = [];
+
+        /** @var Response $response */
+        $response = $this->render('pages/skymap.html.twig', $params);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
+
+        return $response;
+    }
+
 }

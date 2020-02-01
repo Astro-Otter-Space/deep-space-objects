@@ -3,10 +3,12 @@
 namespace App\Service;
 
 use App\Classes\CacheInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 
 /**
  * Class CachepoolService
+ *
  * @package App\Service
  * @source http://www.inanzzz.com/index.php/post/ruhe/symfony-memcached-and-redis-adapter-as-cache-pool
  */
@@ -20,7 +22,7 @@ class CachepoolService implements CacheInterface
      *
      * @param MemcachedAdapter $cachePool
      */
-    public function __construct($cachePool)
+    public function __construct(MemcachedAdapter $cachePool)
     {
         $this->cachePool = $cachePool;
     }
@@ -29,6 +31,7 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool|mixed
+     * @throws InvalidArgumentException
      */
     public function getItem($key): string
     {
@@ -43,6 +46,7 @@ class CachepoolService implements CacheInterface
      * @param $value
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function saveItem($key, $value): bool
     {
@@ -56,6 +60,7 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function hasItem($key): bool
     {
@@ -66,6 +71,7 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function deleteItem($key): bool
     {
