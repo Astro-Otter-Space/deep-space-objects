@@ -73,7 +73,7 @@ class PageController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function contact(Request $request, MailHelper $mailHelper)
+    public function contact(Request $request, MailHelper $mailHelper): Response
     {
         /** @var Router $router */
         $router = $this->get('router');
@@ -130,7 +130,7 @@ class PageController extends AbstractController
 
         /** @var Response $response */
         $response = $this->render('pages/contact.html.twig', $result);
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->setPublic();
 
         return $response;
@@ -168,7 +168,11 @@ class PageController extends AbstractController
         ];
         $result['third_line'] = $this->translatorInterface->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translatorInterface->trans('contact.title')]);
 
-        return $this->render('pages/random.html.twig', $result);
+        /** @var Response $response */
+        $response = $this->render('pages/random.html.twig', $result);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+
+        return $response;
     }
 
 
@@ -226,6 +230,7 @@ class PageController extends AbstractController
 
         $response = $this->render('pages/help_api.html.twig', $result);
         $response->setPublic();
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
 
         return $response;
     }

@@ -19,21 +19,22 @@ class HomeController extends AbstractController
      * @Route("/", name="homepage")
      * @return Response
      */
-    public function homepage()
+    public function homepage(): Response
     {
         /** @var Response $response */
         $response = $this->render('pages/home.html.twig', []);
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->setPublic();
 
         return $response;
     }
 
     /**
+     * @param string $env
      * @Route("/phpinfo", name="phpinfo")
      */
-    public function phpinfo()
+    public function phpinfo($env)
     {
-        echo phpinfo();
+        echo ('prod' === $env) ? phpinfo() : new Response();
     }
 }
