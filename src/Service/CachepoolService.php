@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Classes\CacheInterface;
+use Symfony\Contracts\Cache\CacheInterface as SfCacheInterface;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 
@@ -20,9 +21,9 @@ class CachepoolService implements CacheInterface
     /**
      * CachepoolService constructor.
      *
-     * @param MemcachedAdapter $cachePool
+     * @param SfCacheInterface $cachePool
      */
-    public function __construct(MemcachedAdapter $cachePool)
+    public function __construct(SfCacheInterface $cachePool)
     {
         $this->cachePool = $cachePool;
     }
