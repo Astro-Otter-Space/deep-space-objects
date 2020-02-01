@@ -5,6 +5,7 @@ namespace App\Command;
 
 use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
+use App\Service\MailService;
 use Astrobin\Exceptions\WsException;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Services\GetImage;
@@ -12,6 +13,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 /**
  * Class CheckAstrobinImageCommand
@@ -25,7 +27,7 @@ class CheckAstrobinImageCommand extends Command
     /** @var DsoRepository */
     protected $dsoRepository;
 
-    /** @var MailHelper */
+    /** @var MailService */
     protected $mailHelper;
 
     protected $senderMail;
@@ -34,10 +36,10 @@ class CheckAstrobinImageCommand extends Command
      * CheckAstrobinImageCommand constructor.
      *
      * @param DsoRepository $dsoRepository
-     * @param MailHelper $mailHelper
+     * @param MailService $mailHelper
      * @param string $senderMail
      */
-    public function __construct(DsoRepository $dsoRepository, MailHelper $mailHelper, $senderMail)
+    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, $senderMail)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
@@ -60,6 +62,7 @@ class CheckAstrobinImageCommand extends Command
      *
      * @return int|void|null
      * @throws WsResponseException
+     * @throws TransportExceptionInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -88,8 +91,7 @@ class CheckAstrobinImageCommand extends Command
 
         try {
             if (0 < count($failedAstrobinId)) {
-                dump($failedAstrobinId);
-                $this->mailHelper->sendMail($this->senderMail, 'balistik.fonfon@gmail.com', 'Astrobin Id 404', $template, $content);
+                $this->mailHelper->sendMail($this->senderMail, 'Astrobin Id 404', $template, $content);
             }
         } catch (\Swift_TransportException $e) {
             $output->writeln($e->getMessage());
