@@ -66,8 +66,7 @@ class CheckAstrobinImageCommand extends Command
      * @param OutputInterface $output
      *
      * @return int|void|null
-     * @throws WsResponseException
-     * @throws TransportExceptionInterface
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -100,9 +99,9 @@ class CheckAstrobinImageCommand extends Command
         $subject = sprintf('%s - Astrobin Id 404', $now->format('Y-m-d'));
 
         try {
-            //if (0 < count($failedAstrobinId)) {
+            if (0 < count($failedAstrobinId)) {
                 $this->mailHelper->sendMail($this->senderMail, $this->receiverMail, $subject, $template, $content);
-            //}
+            }
         } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
         }

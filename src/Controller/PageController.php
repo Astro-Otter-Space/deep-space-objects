@@ -69,7 +69,7 @@ class PageController extends AbstractController
      *
      * @return Response
      */
-    public function contact(Request $request, MailService $mailService): Response
+    public function contact(Request $request, MailService $mailService, string $receiverMail): Response
     {
         /** @var Router $router */
         $router = $this->get('router');
@@ -104,7 +104,7 @@ class PageController extends AbstractController
                 $content['contact'] = $contactData;
 
                 try {
-                    $mailService->sendMail($contactData->getEmail(), $subject, $templates, $content);
+                    $mailService->sendMail($contactData->getEmail(), $receiverMail, $subject, $templates, $content);
                     $sendMail = true;
                 } catch(TransportExceptionInterface $e) {
                     $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
