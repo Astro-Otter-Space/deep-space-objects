@@ -3,10 +3,10 @@
     <div class="AppSlider">
       <slider
         :images="[
-          '/build/images/background/bg-1.jpg',
-          '/build/images/background/bg-6.jpg',
-          '/build/images/background/bg-3.jpg',
-          '/build/images/background/bg-4.jpg'
+          '/build/images/background/bg-1.webp',
+          '/build/images/background/bg-6.webp',
+          '/build/images/background/bg-3.webp',
+          '/build/images/background/bg-4.webp'
         ]"
       />
       <div class="AppSlider__Research">
