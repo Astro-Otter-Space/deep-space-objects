@@ -34,7 +34,7 @@ var MAP_MODULE = (function(c, constId, color) {
     // DEEP SKY OBJECTS
     dsos: {
       show: true,
-      data: "nodata.json",
+      data: "messier.json",
       //size: 10
       names: true,
       limit: 1000,

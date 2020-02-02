@@ -78,7 +78,7 @@
         <div class="Dso__map">
           <h3 class="Dso__title">{{ titleMap }}</h3>
           <div class="map" id="map"></div>
-          <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank">Map by ofrohn/d3-celestial</a></legend>
+          <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank" rel="noopener">Map by ofrohn/d3-celestial</a></legend>
         </div>
       </div>
 
@@ -138,11 +138,6 @@
     // TODO : better way
     // https://nehalist.io/directly-injecting-data-to-vue-apps-with-symfony-twig/
     // https://stackoverflow.com/questions/42269260/how-to-get-the-values-of-data-attributes-in-vuejs
-    /*mounted: function() {
-      console.log(this);
-      this.title = this.$el.getAttribute('data-title');
-      console.log('Title : ' + this.title);
-    },*/
     methods: {
       getHeaderClass() {
         if (this.imageCover !== 'default.jpg') {
