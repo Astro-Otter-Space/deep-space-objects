@@ -1,4 +1,4 @@
-Sitemap: https//astro-otter.space/sitemap.xml
+Sitemap: https://astro-otter.space/sitemap.xml
 
 User-agent: Applebot
 Allow: /
