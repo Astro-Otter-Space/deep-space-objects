@@ -55,6 +55,7 @@ class DsoRepository extends AbstractRepository
 
     const INDEX_NAME = 'deepspaceobjects';
 
+    const ASTROBIN_FIELD = 'data.astrobin_id';
 
     /**
      * Get aggregates proprieties
@@ -307,7 +308,8 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Get list of AstrobinId
-     * @param array $listExcludedAstrobinId
+     *
+     * @param array|null $listExcludedAstrobinId
      * @return array
      *
      * Query :
@@ -323,7 +325,7 @@ class DsoRepository extends AbstractRepository
      *   }
      * }
      */
-    public function getAstrobinId(array $listExcludedAstrobinId): array
+    public function getAstrobinId(?array $listExcludedAstrobinId): array
     {
         $listAstrobinId = [];
 
@@ -334,18 +336,24 @@ class DsoRepository extends AbstractRepository
         $boolQuery = new Query\BoolQuery();
 
         /** @var Query\Exists $mustQuery */
-        $mustQuery = new Query\Exists("data.astrobin_id");
+        $mustQuery = new Query\Exists(self::ASTROBIN_FIELD);
         $boolQuery->addMust($mustQuery);
 
-        if (0 < count($listExcludedAstrobinId)) {
+        if (!is_null($listAstrobinId) && (is_array($listExcludedAstrobinId) && 0 < count($listExcludedAstrobinId))) {
+            /** @var Query\Match $astrobinMatchQuery */
+
             foreach ($listExcludedAstrobinId as $astrobinId) {
-                $astrobinMatchQuery = new Query\Match("data.astrobin_id", $astrobinId);
+                $astrobinMatchQuery = new Query\Match();
+                $astrobinMatchQuery->setField(self::ASTROBIN_FIELD, $astrobinId);
+
                 $boolQuery->addMustNot($astrobinMatchQuery);
             }
         }
 
         $query->setQuery($boolQuery);
         $query->setFrom(0)->setSize(500);
+
+        dump($query->getQuery()->toArray());
 
         /** @var Search $search */
         $search = new Search($this->client);

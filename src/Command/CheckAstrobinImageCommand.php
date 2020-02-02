@@ -67,7 +67,7 @@ class CheckAstrobinImageCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $failedAstrobinId = [];
-        $listAstrobinId = $this->dsoRepository->getAstrobinId();
+        $listAstrobinId = $this->dsoRepository->getAstrobinId([]);
         if (0 < count($listAstrobinId)) {
             foreach ($listAstrobinId as $astrobinId) {
                 /** @var GetImage $image */
@@ -93,11 +93,10 @@ class CheckAstrobinImageCommand extends Command
             if (0 < count($failedAstrobinId)) {
                 $this->mailHelper->sendMail($this->senderMail, 'Astrobin Id 404', $template, $content);
             }
-        } catch (\Swift_TransportException $e) {
+        } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
         }
 
     }
-
 
 }
