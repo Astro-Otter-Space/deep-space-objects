@@ -79,9 +79,13 @@ class DsoManager
         $idMd5Cover = md5(sprintf('%s_cover', $id));
 
         if ($this->cacheUtils->hasItem($idMd5)) {
-            $dsoSerialized = $this->cacheUtils->getItem($idMd5);
-            /** @var Dso $dso */
-            $dso = unserialize($dsoSerialized);
+            $dsoFromCache = $this->getDsoFromCache($idMd5);
+            if (is_null($dsoFromCache)) {
+                $this->cacheUtils->deleteItem($idMd5);
+                $dso = $this->buildDso($id);
+            } else {
+                $dso = $dsoFromCache;
+            }
         } else {
             /** @var Dso $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
@@ -107,6 +111,20 @@ class DsoManager
         return $dso;
     }
 
+    /**
+     * @param $idMd5
+     *
+     * @return Dso|null
+     */
+    private function getDsoFromCache($idMd5):? Dso
+    {
+        $dsoSerialized = $this->cacheUtils->getItem($idMd5);
+
+        /** @var Dso $unserializedDso */
+        $unserializedDso = unserialize($dsoSerialized);
+
+        return ($unserializedDso instanceof Dso) ? $unserializedDso : null;
+    }
 
     /**
      * Get Dso from a constellation identifier and build list
