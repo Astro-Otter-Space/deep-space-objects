@@ -67,6 +67,8 @@ class PageController extends AbstractController
      * @param Request $request
      * @param MailService $mailService
      *
+     * @param string $receiverMail
+     *
      * @return Response
      */
     public function contact(Request $request, MailService $mailService, string $receiverMail): Response
@@ -100,7 +102,7 @@ class PageController extends AbstractController
                     'text' => 'includes/emails/contact.txt.twig'
                 ];
 
-                $subject = $this->translatorInterface->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
+                $subject = '[Contact] - ' . $this->translatorInterface->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
                 $content['contact'] = $contactData;
 
                 try {

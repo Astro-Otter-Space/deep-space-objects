@@ -3,11 +3,11 @@
 namespace App\EventListener;
 
 use App\Entity\BDD\ApiUser;
-use App\Helpers\MailHelper;
 use App\Service\MailService;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 /**
@@ -20,10 +20,10 @@ class GenerateTokenListener
 
     /** @var JWTTokenManagerInterface */
     private $jwtManager;
-    /** @var MailHelper */
-    private $mailHelper;
     /** @var MailService  */
     private $mailService;
+    /** @var TranslatorInterface */
+    private $translator;
     /** @var string */
     private $senderMail;
 
@@ -32,14 +32,14 @@ class GenerateTokenListener
      *
      * @param JWTTokenManagerInterface $jwtManager
      * @param MailService $mailService
-     * @param MailHelper $mailHelper
+     * @param TranslatorInterface $translator
      * @param string $senderMail
      */
-    public function __construct(JWTTokenManagerInterface $jwtManager, MailService $mailService, MailHelper $mailHelper, string $senderMail)
+    public function __construct(JWTTokenManagerInterface $jwtManager, MailService $mailService, TranslatorInterface $translator, string $senderMail)
     {
         $this->jwtManager = $jwtManager;
         $this->mailService = $mailService;
-        $this->mailHelper = $mailHelper;
+        $this->translator = $translator;
         $this->senderMail = $senderMail;
     }
 
@@ -52,7 +52,7 @@ class GenerateTokenListener
     public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event): void
     {
         $to = $apiUser->getEmail();
-        $subject = 'API Bearer Token';
+        $subject = sprintf('[API %s] Here\'s your bearer Token', $this->translator->trans('dso'));
 
         $template = [
             'html' => 'includes/emails/api_register.html.twig',
@@ -61,7 +61,6 @@ class GenerateTokenListener
 
         $data['token'] = $this->jwtManager->create($apiUser);
 
-        //$this->mailHelper->sendMail($from, $to, $subject, $template, $data);
-        $this->mailService->sendMail($to, $subject, $template, $data);
+        $this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
     }
 }
