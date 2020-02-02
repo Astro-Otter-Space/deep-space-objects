@@ -18,7 +18,7 @@
       <div class="footer__share">
         <ul>
           <li v-for="btnShare in btnsShare">
-            <a v-bind:href="btnShare.path" v-bind:title="btnShare.label" target="_blank">
+            <a v-bind:href="btnShare.path" v-bind:title="btnShare.label" target="_blank" rel="noopener">
               <svgicon v-bind:name="btnShare.icon_class" width="30" height="30" ></svgicon>
             </a>
           </li>

@@ -3,13 +3,16 @@
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
 
-        <h2 class="Dso__title">{{ pageTitle }}</h2>
+        <h2 class="Dso__title">
+          <label for="observationsearch">{{ pageTitle }}</label>
+        </h2>
 
         <searchautocomplete
           ref="observationsearch"
           :searchPlaceholder="searchPlaceholder"
           :customClasses="autoCompleteClasse"
           :url="urlSearch"
+          id="observationsearch"
         />
 
         <h3 class="Dso__title">{{ mapTitle }}</h3>
