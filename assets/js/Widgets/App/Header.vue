@@ -33,10 +33,12 @@
             <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
-            <a v-for="menu in menuData" v-bind:href="menu.path" v-bind:title="menu.label">
-              <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-              {{ menu.label }}
-            </a>
+            <li v-for="menu in menuData">
+              <a v-bind:href="menu.path" v-bind:title="menu.label">
+                <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
+                {{ menu.label }}
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -46,10 +48,12 @@
             <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
-            <a v-for="menu in menuObservations" v-bind:href="menu.path" v-bind:title="menu.label">
-              <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-              {{ menu.label }}
-            </a>
+            <li v-for="menu in menuObservations" >
+              <a v-bind:href="menu.path" v-bind:title="menu.label">
+                <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
+                {{ menu.label }}
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -66,10 +70,12 @@
             <svgicon name="globe" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
-            <a v-for="locale in listLocales" v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label" rel="alternate">
-              <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
-              {{ locale.label }}
-            </a>
+            <li v-for="locale in listLocales">
+              <a v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label" rel="alternate">
+                <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
+                {{ locale.label }}
+              </a>
+            </li>
           </ul>
         </li>
 
