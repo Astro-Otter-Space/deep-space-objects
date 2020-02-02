@@ -85,6 +85,7 @@
           :searchPlaceholder="searchPlaceholder"
           :customClasses="autoCompleteClasse"
           :url="searchUrl"
+          id="search"
         ></searchautocomplete>
       </transition>
     </div>

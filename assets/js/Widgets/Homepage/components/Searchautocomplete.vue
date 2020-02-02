@@ -9,6 +9,7 @@
     :classes="customClasses"
     :onSelect="redirectToItem"
     :onInput="showDeleteEntry"
+    :id="id"
   >
   </autocomplete>
 </template>
@@ -31,6 +32,10 @@
       },
       url: {
         default: '/_search',
+        type: String
+      },
+      id : {
+        default: '',
         type: String
       }
     },
