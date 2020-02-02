@@ -17,7 +17,8 @@ class Utils
 
     const GLUE_DASH = ' - ';
 
-    const IMG_DEFAULT = '/build/images/default.jpg';
+    const IMG_DEFAULT = '/build/images/default.png';
+    const IMG_LARGE_DEFAULT = '/build/images/default_large.jpg';
 
     const FORMAT_DATE_ES = DateTimeInterface::RFC3339;
 

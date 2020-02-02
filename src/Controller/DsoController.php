@@ -136,7 +136,6 @@ class DsoController extends AbstractController
      * Retrieve list of images for carousel
 
      * @param $dsoId
-     * @param CacheInterface $cacheUtil
      *
      * @return array
      * @throws WsResponseException

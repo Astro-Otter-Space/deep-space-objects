@@ -122,7 +122,7 @@
         this.isActive = true;
       },
       m_percentage: function(value) {
-        return parseInt((value * 100) / this.$data.maxPlayCount);
+        return parseInt((value * 100) / this.$data.maxPlayCount);d
       },
       changeGridGap: function() {
         document.querySelector('main').style.setProperty('--grid-gap', this.gridGap + 'px');

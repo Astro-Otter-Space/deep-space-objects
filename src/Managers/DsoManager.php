@@ -171,7 +171,7 @@ class DsoManager
                 $cacheUtils->saveItem($idCover, serialize($imgUrl));
             }
 
-            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl, 'user' => $astrobinUser, 'filter' => $dsoChild->getType()]);
+            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl ?? Utils::IMG_DEFAULT, 'user' => $astrobinUser, 'filter' => $dsoChild->getType()]);
         }, iterator_to_array($listDso->getIterator()));
     }
 
@@ -237,16 +237,16 @@ class DsoManager
     {
         try {
             /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_DEFAULT);
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
                 return [$imageAstrobin->$param, $imageAstrobin->user];
             }
         } catch(WsResponseException $e) {
-            return [basename(Utils::IMG_DEFAULT), ''];
+            return [basename(Utils::IMG_LARGE_DEFAULT), ''];
         } catch (\Exception $e) {
-            return [basename(Utils::IMG_DEFAULT), ''];
+            return [basename(Utils::IMG_LARGE_DEFAULT), ''];
         }
-        return [basename(Utils::IMG_DEFAULT), ''];
+        return [basename(Utils::IMG_LARGE_DEFAULT), ''];
     }
 
     /**
