@@ -26,6 +26,7 @@ services:
             $facebookLink: '%facebook.link%'
             $twitterLink: '%twitter.link%'
             $senderMail: '%env(SENDER_MAIL)%'
+            $receiverMail: '%env(GMAIL_MAIL)%'
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']

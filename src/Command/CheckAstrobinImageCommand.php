@@ -32,18 +32,23 @@ class CheckAstrobinImageCommand extends Command
 
     protected $senderMail;
 
+    /** @var string */
+    protected $receiverMail;
+
     /**
      * CheckAstrobinImageCommand constructor.
      *
      * @param DsoRepository $dsoRepository
      * @param MailService $mailHelper
      * @param string $senderMail
+     * @param string $receiverMail
      */
-    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, $senderMail)
+    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail,string $receiverMail)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
         $this->senderMail = $senderMail;
+        $this->receiverMail = $receiverMail;
         parent::__construct();
     }
 
@@ -84,15 +89,20 @@ class CheckAstrobinImageCommand extends Command
                 }
             }
         }
+
         $template = [
             'html' => 'includes/emails/check_astrobin_id.html.twig'
         ];
         $content['listAstrobinId'] = $failedAstrobinId;
 
+        /** @var \DateTimeInterface $now */
+        $now = new \DateTime();
+        $subject = sprintf('%s - Astrobin Id 404', $now->format('Y-m-d'));
+
         try {
-            if (0 < count($failedAstrobinId)) {
-                $this->mailHelper->sendMail($this->senderMail, 'Astrobin Id 404', $template, $content);
-            }
+            //if (0 < count($failedAstrobinId)) {
+                $this->mailHelper->sendMail($this->senderMail, $this->receiverMail, $subject, $template, $content);
+            //}
         } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
         }

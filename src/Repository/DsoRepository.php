@@ -353,7 +353,7 @@ class DsoRepository extends AbstractRepository
         $query->setQuery($boolQuery);
         $query->setFrom(0)->setSize(500);
 
-        dump($query->getQuery()->toArray());
+        //dump($query->getQuery()->toArray());
 
         /** @var Search $search */
         $search = new Search($this->client);

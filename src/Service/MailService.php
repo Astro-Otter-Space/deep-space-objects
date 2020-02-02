@@ -82,6 +82,9 @@ class MailService
     }
 
     /**
+     * Create transport SMTP and send email
+     *
+     * @param string $from
      * @param string $to
      * @param string $subject
      * @param array $template
@@ -89,7 +92,7 @@ class MailService
      *
      * @throws TransportExceptionInterface
      */
-    public function sendMail(string $to, string $subject, array $template, array $content): void
+    public function sendMail(string $from, string $to, string $subject, array $template, array $content): void
     {
         /** @var GmailSmtpTransport $transport */
         $transport = new GmailSmtpTransport($this->getUserMail(), $this->getPwdMail());
@@ -98,12 +101,17 @@ class MailService
         $mailer = new Mailer($transport);
 
         /** @var Email $email */
-        $email = $this->buildEmail($to, $subject, $template, $content);
+        $email = $this->buildEmail($from, $to, $subject, $template, $content);
 
-        $mailer->send($email);
+        if (!is_null($email)) {
+            $mailer->send($email);
+        }
     }
 
     /**
+     * Build an instance of Email
+     *
+     * @param string $from
      * @param string $to
      * @param string $subject
      * @param array $template
@@ -111,16 +119,24 @@ class MailService
      *
      * @return Email|null
      */
-    private function buildEmail(string $to, string $subject, array $template, array $content):? Email
+    private function buildEmail(string $from, string $to, string $subject, array $template, array $content):? Email
     {
         /** @var Email $email */
         try {
-            return (new Email())
-                ->from($this->senderMail)
+            $email =  (new Email())
+                ->from($from)
                 ->to($to)
-                ->subject($subject)
-                ->html($this->templateEngine->render($template['html'], $content))
-                ->text($this->templateEngine->render($template['text'], $content));
+                ->subject($subject);
+
+            if (array_key_exists('html', $template)) {
+                $email->html($this->templateEngine->render($template['html'], $content));
+            }
+
+            if (array_key_exists('text', $template)) {
+                $email->text($this->templateEngine->render($template['text'], $content));
+            }
+
+            return $email;
         } catch (LoaderError $e) {
             return null;
         } catch (RuntimeError $e) {
