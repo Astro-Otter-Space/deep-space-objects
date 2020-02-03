@@ -201,7 +201,7 @@
         (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
 
         if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
-          item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
+          //item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
         }
       },
       displaySearch: function(hide) {

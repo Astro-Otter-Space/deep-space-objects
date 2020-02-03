@@ -1,5 +1,4 @@
 .header {
-  //position: relative;
   display: flex;
   flex-wrap: wrap;
   z-index: 20;
@@ -43,7 +42,9 @@
     li {
       position: relative;
       user-select: none;
-      margin-left: 20px;
+      margin-left: 1em;
+
+      @media ($mq-phone) { margin-left: 0.5em; }
 
       &:hover {
         color: $color-text-dark;
@@ -63,9 +64,9 @@
   &__drop_menu {
     position: absolute;
     display: block;
-    top: 149%;
+    top: 2.5em;
     transform: scaleY(0);
-    width: 12em;
+    width: max-content; //<-- test, width: 12em;
     transform-origin: top;
     background-color: $bgd-dark;
     transition: 0.25s;
@@ -73,7 +74,8 @@
     padding-right: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     margin: 0;
-    left: -8em;
+    //left: -8em;
+    right: 0;
 
     li {
       margin: 0;
