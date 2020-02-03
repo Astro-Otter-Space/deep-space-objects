@@ -32,6 +32,10 @@
   &__data {
     width: 100%;
     margin: 1em 0em;
+    @media($mq-phone) {
+      margin: 1em 0.1em;
+      width: auto;
+    }
   }
 
   &__table {
@@ -49,6 +53,9 @@
     min-width: 0;
     font-size: 1.1rem;
     border-bottom: 1px solid $bgd-white;
+    @media($mq-phone) {
+      font-size: 0.9rem;
+    }
   }
 
   // Slider VueFlux
