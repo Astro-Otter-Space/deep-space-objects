@@ -55,9 +55,22 @@
   }
 
   &__Research {
+    width: fit-content;
     position: fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, 0);
+
+    @media($mq-phone) {
+      h2 {
+        text-align: center;
+        font-size: 1em;
+      }
+    }
+
+    @media ($mq-tablet) {
+      top: 15%;
+    }
+
   }
 }
