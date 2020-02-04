@@ -27,18 +27,18 @@ new Vue({
       url:'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:'&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
       center: latLng(48.5734053, 7.7521113),
-      markers:[]
+      markers: []
     }
   },
   methods: {
     addMarker(e) {
       this.removeMarker(0);
-      var coordinates = e.latlng;
+      let coordinates = e.latlng;
       this.markers.push(coordinates);
 
-      var valueInput = L.GeoJSON.latLngToCoords(coordinates);
+      let valueInput = L.GeoJSON.latLngToCoords(coordinates);
 
-      var elInput = document.querySelector("[name='add_observation[location]']");
+      let elInput = document.querySelector("[name='add_observation[location]']");
       elInput.value = JSON.stringify(valueInput);
     },
     removeMarker(index) {

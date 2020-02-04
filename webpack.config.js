@@ -1,5 +1,6 @@
 let Encore = require('@symfony/webpack-encore');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
+//let TerserPlugin = require('terser-webpack-plugin');
 
 Encore
   // directory where compiled assets will be stored
