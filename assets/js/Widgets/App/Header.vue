@@ -29,7 +29,7 @@
 
         <!-- data -->
         <li class="header__drop">
-          <a v-on:click="displayDropMenu()" v-bind:title="titleData">
+          <a v-on:click="displayDropMenu" v-bind:title="titleData">
             <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
@@ -44,7 +44,7 @@
 
         <!-- Observations -->
         <li class="header__drop">
-          <a v-on:click="displayDropMenu()" v-bind:title="titleObservation">
+          <a v-on:click="displayDropMenu" v-bind:title="titleObservation">
             <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
@@ -66,7 +66,7 @@
 
         <!--Languages-->
         <li class="header__drop">
-          <a v-on:click="displayDropMenu()" v-bind:title="titleSwitchLang">
+          <a v-on:click="displayDropMenu" v-bind:title="titleSwitchLang">
             <svgicon name="globe" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
@@ -169,37 +169,41 @@
       }
     },
     methods: {
-      displayDropMenu: function() {
-        if("a"== event.target.localName) {
-          var item = event.target.parentElement;
+      displayDropMenu: function(event) {
+        if (event) {
+          let item = null;
+          if("a" === event.target.localName) {
+            item = event.target.parentElement;
 
-        } else if ("svg" == event.target.localName) {
-          var item = event.target.parentElement.parentElement;
+          } else if ("svg" === event.target.localName) {
+            item = event.target.parentElement.parentElement;
 
-        } else if("path" == event.target.localName) {
-          var item = event.target.parentElement.parentElement.parentElement;
-        }
-
-        // because of click on svg, we need to access to grandParent and not parent
-        var drop_menus = document.getElementsByClassName("header__drop_menu");
-        var drop_menu = item.getElementsByClassName("header__drop_menu")[0];
-
-        Array.from(drop_menus).forEach(function(e){
-          if(e !== drop_menu){
-            e.classList.remove("header__display");
+          } else if("path" === event.target.localName) {
+            item = event.target.parentElement.parentElement.parentElement;
           }
-        });
 
-        var lis = document.getElementById("headerMenu").getElementsByTagName("li");
-        Array.from(lis).forEach(function(e){
-          e.style.marginTop = 0;
-        });
+          // because of click on svg, we need to access to grandParent and not parent
+          var drop_menus = document.getElementsByClassName("header__drop_menu");
+          var drop_menu = item.getElementsByClassName("header__drop_menu")[0];
 
-        (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
+          Array.from(drop_menus).forEach(function(e) {
+            if(e !== drop_menu){
+              e.classList.remove("header__display");
+            }
+          });
 
-        if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
-          //item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
+          var lis = document.getElementById("headerMenu").getElementsByTagName("li");
+          Array.from(lis).forEach((e) => {
+            e.style.marginTop = 0;
+          });
+
+          (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
+
+          if(window.innerWidth < 660 && drop_menu.classList.contains("header__display")) {
+            //item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
+          }
         }
+
       },
       displaySearch: function(hide) {
         this.hide = !hide;
@@ -210,7 +214,7 @@
         }
       },
       isHomepage: function() {
-        if(this.currentRoute == this.homeRoute) {
+        if(this.currentRoute === this.homeRoute) {
           this.isHome = true;
         } else {
           this.isHome = false
