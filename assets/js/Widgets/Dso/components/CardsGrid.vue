@@ -132,7 +132,7 @@
       },
       changeGridItems: function() {
         var gridItemSetting = this.gridItems;
-        if (this.gridItems == 0) {
+        if (this.gridItems === 0) {
           gridItemSetting = 'auto-fill';
         }
         document.querySelector('main').style.setProperty('--grid-items', gridItemSetting);

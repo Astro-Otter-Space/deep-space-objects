@@ -1,14 +1,14 @@
 <template>
   <div id="app" itemscope>
     <div class="AppSlider">
-      <slider
-        :images="[
-          '/build/images/background/bg-1.webp',
-          '/build/images/background/bg-6.webp',
-          '/build/images/background/bg-3.webp',
-          '/build/images/background/bg-4.webp'
-        ]"
-      />
+<!--      <slider-->
+<!--        :images="[-->
+<!--          '/build/images/background/bg-1.webp',-->
+<!--          '/build/images/background/bg-6.webp',-->
+<!--          '/build/images/background/bg-3.webp',-->
+<!--          '/build/images/background/bg-4.webp'-->
+<!--        ]"-->
+<!--      />-->
       <div class="AppSlider__Research">
         <h2 class="AppSlider__subTitle" itemprop="title">
           <label for="homesearch">{{ subTitle }}</label>
@@ -21,12 +21,21 @@
           id="homesearch"
         />
       </div>
+
+      <div class="AppSlider__slides">
+        <div
+          v-for="(image, index) in this.images"
+          v-bind:key="image"
+          :style="{ backgroundImage: `url(${image})` }"
+          class="AppSlider__dImage"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Slider from './components/Slider'
+  //import Slider from './components/Slider'
   import Searchautocomplete from "./components/Searchautocomplete"
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
@@ -36,7 +45,7 @@
   export default {
     name: "App",
     components: {
-      Slider,
+      //Slider,
       Searchautocomplete
     },
     data() {
@@ -48,7 +57,13 @@
           input: 'AppSearch__inputText',
           list: 'AppSearch__list'
         },
-        urlSearchHome: urlSearchHome
+        urlSearchHome: urlSearchHome,
+        images: [
+          '/build/images/background/bg-1.webp',
+          '/build/images/background/bg-6.webp',
+          '/build/images/background/bg-3.webp',
+          '/build/images/background/bg-4.webp'
+        ]
       }
     }
   }
