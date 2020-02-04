@@ -3,14 +3,15 @@
     v-touch:swipe.right="next"
     v-touch:swipe.left="prev"
     :duration="1000"
-    :style="{ paddingBottom: `${aspectRatio}%` }"
     tag="div"
     enter-active-class="AppSlider__enterActive"
     enter-class="AppSlider__enter"
     leave-active-class="AppSlider__leaveActive"
     leave-to-class="AppSlider__leaveTo"
     class="AppSlider__slides"
+    :style="{ paddingBottom: `${aspectRatio}%` }"
   >
+<!--    -->
     <div
       v-for="(image, index) in images"
       v-bind:key="image"
@@ -26,7 +27,7 @@
     name: "Slider",
     props: {
       height: {
-        default: 1920,
+        default: 1080,
         type: Number
       },
       images: {
@@ -38,7 +39,7 @@
         type: Number
       },
       width: {
-        default: 3072,
+        default: 1920,
         type: Number
       },
       subTitle: {
@@ -55,6 +56,8 @@
     },
     computed: {
       aspectRatio() {
+        this.width = screen.availWidth;
+        this.height = (screen.availHeight)-60;
         return (this.height / this.width) * 100;
       }
     },

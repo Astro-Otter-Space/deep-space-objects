@@ -9,11 +9,11 @@
     </Slide -->
 
     <div class="header__wrap">
-      <h1 class="h1 h1__title" >
+      <h1 class="h1 h1__title">
         <!-- Open Menu-->
         <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
-        </span -->&nbsp;
+        </span -->
         <a v-bind:href="homepageRoute" v-bind:title="title" itemscope itemtype="http://schema.org/Dataset">
           <span itemprop="name">{{title}}</span>
         </a>
@@ -107,7 +107,6 @@
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
-  // let addObservation = document.getElementById('appHeader').dataset.observationRoute;
   let labelsTrans = JSON.parse(document.getElementById('appHeader').dataset.labels);
   // let titleNightMode = labelsTrans.nightMode;
   // let titleDayMode = labelsTrans.dayMode;
@@ -139,7 +138,6 @@
     data() {
       return {
         homepageRoute: homeRoute,
-        // leftSideMenu: leftSideMenu,
         menuData: menuData,
         menuObservations: menuObservations,
         title: labelsTrans.title,
@@ -147,7 +145,6 @@
         currentLocale: currentLocale,
         theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
-        // addObservation: addObservation,
         homeRoute: 'homepage',
         hide: false,
         autoCompleteClasse: {

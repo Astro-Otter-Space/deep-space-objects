@@ -18,6 +18,10 @@
     margin: 0.5em auto;
     padding: 0 1em;
     width: 100%;
+    @media ($mq-phone) {
+      margin: 0.5em auto;
+      padding: 0 0.5em;
+    }
   }
 
   &__main {
@@ -36,6 +40,9 @@
     vertical-align: middle;
     width: 100%;
     text-align: center;
+    @media ($mq-phone) {
+      width: none;
+    }
     ul {
       margin: 0;
       padding: 0;
@@ -46,6 +53,11 @@
       display: inline-block;
       margin: 0 0.5em;
       font-size: 1.1rem;
+      @media ($mq-phone) {
+        margin: 0 0.2em;
+        font-size: 0.8rem;
+      }
+
       a {
         text-decoration: none;
         background: none;
@@ -56,11 +68,18 @@
     &:first-child{
       text-align: left;
       margin-right: 1%;
+      @media ($mq-phone) {
+        display: none;
+        margin-right: 0.5em;
+      }
     }
 
     &:last-child{
       margin-left: 1%;
       text-align: right;
+      @media ($mq-phone) {
+        margin-right: 0.5em;
+      }
     }
   }
 }

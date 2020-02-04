@@ -14,28 +14,16 @@
     overflow: hidden;
   }
 
-  //&__image {
-  //  position: absolute;
-  //  width: 100%;
-  //  //height: auto;
-  //  background-repeat: no-repeat;
-  //  //background-size: contain;
-  //  @media (min-width: 42em) {
-  //    animation: kenburns 8s;
-  //    animation-fill-mode: forwards;
-  //  }
-  //}
-
   &__dImage {
     position: absolute;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    @media (min-width: 42em) {
+    //@media (min-width: 42em) {
       animation: kenburns 8s;
       animation-fill-mode: forwards;
-    }
+    //}
   }
 
   &__enterActive,
@@ -71,6 +59,5 @@
     @media ($mq-tablet) {
       top: 15%;
     }
-
   }
 }
