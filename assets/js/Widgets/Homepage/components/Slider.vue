@@ -1,3 +1,8 @@
+<!--
+/**
+ * DEPRECATED
+**/
+-->
 <template>
   <transition-group
     v-touch:swipe.right="next"
