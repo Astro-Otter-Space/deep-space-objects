@@ -68,6 +68,7 @@
         <li class="header__drop">
           <a v-on:click="displayDropMenu" v-bind:title="titleSwitchLang">
             <svgicon name="globe" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon v-bind:name="currentFlag" width="15" height="15" original class="floatFlag"></svgicon>
           </a>
           <ul class="header__drop_menu">
             <li v-for="locale in listLocales">
@@ -78,9 +79,6 @@
             </li>
           </ul>
         </li>
-
-        <!--Current locale-->
-        <li class="header__currentLang">{{currentLocale.toUpperCase()}}</li>
       </nav>
     </div>
 
@@ -143,6 +141,7 @@
         title: labelsTrans.title,
         listLocales: listLocales,
         currentLocale: currentLocale,
+        currentFlag: 'flag_en',
         theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
         homeRoute: 'homepage',
@@ -229,7 +228,8 @@
       }*/
     },
     beforeMount() {
-      this.isHomepage()
+      this.currentFlag = 'flag_' + this.currentLocale;
+      this.isHomepage();
     }
   }
 
