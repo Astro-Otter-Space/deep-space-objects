@@ -10,6 +10,10 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 /**
  * Class FacebookWs
  * @package App\Service\SocialNetworks\WebServices
+ *
+ * Doc :
+ * POST : https://developers.facebook.com/docs/graph-api/reference/v6.0/post
+ * Feed : https://developers.facebook.com/docs/graph-api/reference/v6.0/page/feed#publish
  */
 class FacebookWs implements socialNetworkInterface
 {
