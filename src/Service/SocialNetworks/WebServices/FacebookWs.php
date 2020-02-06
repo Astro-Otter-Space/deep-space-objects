@@ -147,7 +147,7 @@ class FacebookWs implements socialNetworkInterface
 
         if (array_key_exists('data', $body) && 1 === count($body['data'])) {
             /** @var FacebookPost $facebookPost */
-            $facebookPost = $objectNormalizer->denormalize(reset($body['data']), FacebookPost::class));
+            $facebookPost = $objectNormalizer->denormalize(reset($body['data']), FacebookPost::class);
 
             return $facebookPost;
         }
