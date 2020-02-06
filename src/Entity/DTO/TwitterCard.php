@@ -4,7 +4,7 @@
 namespace App\Entity\DTO;
 
 
-class Twitter
+class TwitterCard
 {
 
 }

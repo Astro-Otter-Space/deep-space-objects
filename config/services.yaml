@@ -81,6 +81,23 @@ services:
                 arguments:
                     - '%env(GMAIL_APP_PWD)%'
 
+    # Web services
+    App\Service\SocialNetworks\WebServices\FacebookWs:
+        autowire: true
+        autoconfigure: true
+        calls:
+            -   method: setAppId
+                arguments:
+                    - '%env(FACEBOOK_APP_ID))%'
+            -   method: setAppSecret
+                arguments:
+                    - '%env(FACEBOOK_SECRET_ID))%'
+            -   method: setAccessToken
+                arguments:
+                    - '%env()%'
+            -   method: setPageId
+                arguments:
+                    - '%env(FACEBOOK_PAGE))%'
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@twig', '%kernel.environment%']
