@@ -97,7 +97,8 @@ services:
                     - '%env(FACEBOOK_TOKEN)%'
             -   method: setPageId
                 arguments:
-                    - '%env(FACEBOOK_PAGE)%'
+                    - '%env(FACEBOOK_PAGE_ID)%'
+
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@twig', '%kernel.environment%']

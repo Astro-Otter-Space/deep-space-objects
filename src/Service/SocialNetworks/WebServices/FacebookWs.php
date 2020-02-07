@@ -5,6 +5,11 @@ namespace App\Service\SocialNetworks\WebServices;
 use App\Entity\DTO\FacebookPost;
 use App\Entity\ES\AbstractEntity;
 use App\Service\SocialNetworks\Singleton\Facebook;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\FacebookResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
@@ -17,7 +22,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
  */
 class FacebookWs implements socialNetworkInterface
 {
-    /** @var Facebook */
+    /** @var Facebook|\Facebook\Facebook */
     private $facebookWs;
 
     /** @var string */
@@ -108,6 +113,8 @@ class FacebookWs implements socialNetworkInterface
 
     /**
      * FacebookWs constructor.
+     *
+     * @throws FacebookSDKException
      */
     public function __construct()
     {
@@ -117,6 +124,8 @@ class FacebookWs implements socialNetworkInterface
 
     /**
      * Build Instance Facebook
+     *
+     * @throws FacebookSDKException
      */
     public function buildFactory(): void
     {
@@ -124,19 +133,52 @@ class FacebookWs implements socialNetworkInterface
     }
 
     /**
+     * Get last facebook post
      * @return FacebookPost
      */
-    public function getPost(): FacebookPost
+    public function getPost():? FacebookPost
     {
-        // TODO send request
+        try {
+            /** @var FacebookResponse $fbResponse */
+            $fbResponse = $this->facebookWs->get($this->endpoint(), $this->getAccessToken());
+
+            if (Response::HTTP_OK === $fbResponse->getHttpStatusCode()) {
+                /** @var FacebookPost $facebookPost */
+                $facebookPost = $this->buildResponse($fbResponse->getBody());
+
+                return $facebookPost;
+            }
+        } catch (FacebookResponseException $e) {
+            dump($e->getMessage());
+
+        } catch (FacebookSDKException $e) {
+            dump($e->getMessage());
+        }
+
+        return null;
     }
 
 
     /**
      * @param AbstractEntity $object
+     *
+     * @return FacebookResponse
+     * @throws FacebookSDKException
      */
-    public function sendPost(AbstractEntity $object)
+    public function sendPost(?AbstractEntity $object)
     {
+        /** @var \DateTimeInterface $publishDate */
+        $publishDate = new \DateTime();
+
+        try {
+            $fbResponse = $this->facebookWs->post($this->endpoint(), [
+                'message' => 'Test publication ' . $publishDate->format('Y-m-d H:i:s'),
+            ]);
+
+            return $fbResponse;
+        } catch (FacebookResponseException $e) {
+            dump($e->getMessage());
+        }
 
     }
 
@@ -156,4 +198,14 @@ class FacebookWs implements socialNetworkInterface
             return $facebookPost;
         }
     }
+
+
+    /**
+     * @return string
+     */
+    private function endpoint()
+    {
+        return sprintf('/%s/feed', $this->getPageId());
+    }
+
 }

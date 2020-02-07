@@ -71,6 +71,9 @@
     "excelwebzone/recaptcha-bundle": {
         "version": "v1.5.13"
     },
+    "facebook/graph-sdk": {
+        "version": "5.7.0"
+    },
     "friendsofsymfony/rest-bundle": {
         "version": "2.2",
         "recipe": {
