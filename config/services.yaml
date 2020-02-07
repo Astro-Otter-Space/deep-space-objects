@@ -88,16 +88,16 @@ services:
         calls:
             -   method: setAppId
                 arguments:
-                    - '%env(FACEBOOK_APP_ID))%'
+                    - '%env(FACEBOOK_APP_ID)%'
             -   method: setAppSecret
                 arguments:
-                    - '%env(FACEBOOK_SECRET_ID))%'
+                    - '%env(FACEBOOK_SECRET_ID)%'
             -   method: setAccessToken
                 arguments:
-                    - '%env()%'
+                    - '%env(FACEBOOK_TOKEN)%'
             -   method: setPageId
                 arguments:
-                    - '%env(FACEBOOK_PAGE))%'
+                    - '%env(FACEBOOK_PAGE)%'
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@twig', '%kernel.environment%']
