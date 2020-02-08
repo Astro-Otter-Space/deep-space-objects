@@ -85,19 +85,12 @@ services:
     App\Service\SocialNetworks\WebServices\FacebookWs:
         autowire: true
         autoconfigure: true
-        calls:
-            -   method: setAppId
-                arguments:
-                    - '%env(FACEBOOK_APP_ID)%'
-            -   method: setAppSecret
-                arguments:
-                    - '%env(FACEBOOK_SECRET_ID)%'
-            -   method: setAccessToken
-                arguments:
-                    - '%env(FACEBOOK_TOKEN)%'
-            -   method: setPageId
-                arguments:
-                    - '%env(FACEBOOK_PAGE_ID)%'
+        bind:
+            $appId: '%env(FACEBOOK_APP_ID)%'
+            $appSecret: '%env(FACEBOOK_SECRET_ID)%'
+            $accessToken: '%env(FACEBOOK_TOKEN)%'
+            $pageId: '%env(FACEBOOK_PAGE_ID)%'
+
 
     # Exception listener
     App\EventListener\ExceptionListener:

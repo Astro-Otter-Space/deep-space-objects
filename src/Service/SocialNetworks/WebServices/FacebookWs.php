@@ -5,9 +5,12 @@ namespace App\Service\SocialNetworks\WebServices;
 use App\Entity\DTO\FacebookPost;
 use App\Entity\ES\AbstractEntity;
 use App\Service\SocialNetworks\Singleton\Facebook;
+use Facebook\Authentication\AccessToken;
+use Facebook\Authentication\OAuth2Client;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\FacebookResponse;
+use Facebook\Helpers\FacebookRedirectLoginHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -27,10 +30,16 @@ class FacebookWs implements socialNetworkInterface
 
     /** @var string */
     private $appId;
+
     /** @var string */
     private $appSecret;
+
     /** @var string */
     private $accessToken;
+
+    /** @var  */
+    private $appAccessToken;
+
     /** @var string */
     private $pageId;
 
@@ -110,14 +119,39 @@ class FacebookWs implements socialNetworkInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAppAccessToken()
+    {
+        return $this->appAccessToken;
+    }
+
+    /**
+     * @param mixed $appAccessToken
+     *
+     * @return FacebookWs
+     */
+    public function setAppAccessToken($appAccessToken)
+    {
+        $this->appAccessToken = $appAccessToken;
+        return $this;
+    }
+
 
     /**
      * FacebookWs constructor.
      *
+     * @param string $appId
+     * @param string $appSecret
+     * @param string $accessToken
+     * @param string $pageId
+     *
      * @throws FacebookSDKException
      */
-    public function __construct()
+    public function __construct(string $appId, string $appSecret, string $accessToken, string $pageId)
     {
+        $this->setAppId($appId)->setAppSecret($appSecret)/*->setAccessToken($accessToken)*/->setPageId($pageId);
         $this->buildFactory();
     }
 
@@ -133,14 +167,64 @@ class FacebookWs implements socialNetworkInterface
     }
 
     /**
+     */
+    private function getPageAccessToken()
+    {
+        /**
+         * STEP 1 : authentication
+         */
+        /** @var FacebookRedirectLoginHelper $helper */
+        $helper = $this->facebookWs->getRedirectLoginHelper();
+        dump($helper);
+        try {
+            /** @var AccessToken $accessToken */
+            $accessToken = $helper->getAccessToken();
+        } catch (FacebookResponseException $e) {
+            dump($e->getMessage());
+            exit;
+
+        } catch (FacebookSDKException $e) {
+            dump($e->getMessage());
+            exit;
+        }
+
+        if ($accessToken) {
+            /**
+             * Step 2 : get access token from oAuth
+             */
+
+            /** @var OAuth2Client $client */
+            $oAuth2Client = $this->facebookWs->getOAuth2Client();
+            try {
+                /** @var AccessToken $accessToken */
+                $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+                dump($accessToken);
+//                $response = $this->facebookWs->get('/me/accounts', $accessToken);
+
+//                dump($response);
+//                die();
+//                $this->setAppAccessToken($value);
+            } catch (FacebookSDKException $e) {
+                dump($e->getMessage());
+                exit;
+            }
+        } else {
+            dump($helper->getError(), $helper->getErrorDescription(), $helper->getErrorReason());
+        }
+    }
+
+    /**
      * Get last facebook post
      * @return FacebookPost
      */
     public function getPost():? FacebookPost
     {
         try {
+            $this->getPageAccessToken();
+
+            die();
             /** @var FacebookResponse $fbResponse */
-            $fbResponse = $this->facebookWs->get($this->endpoint(), $this->getAccessToken());
+            $fbResponse = $this->facebookWs->get($this->endpoint(), $this->getAppAccessToken());
 
             if (Response::HTTP_OK === $fbResponse->getHttpStatusCode()) {
                 /** @var FacebookPost $facebookPost */
@@ -169,11 +253,17 @@ class FacebookWs implements socialNetworkInterface
     {
         /** @var \DateTimeInterface $publishDate */
         $publishDate = new \DateTime();
-
+        $this->getPageAccessToken();
+        die();
         try {
             $fbResponse = $this->facebookWs->post($this->endpoint(), [
                 'message' => 'Test publication ' . $publishDate->format('Y-m-d H:i:s'),
-            ]);
+                "link" => "https://astro-otter.space/catalog/m42--orion-nebula",
+                "picture" => "https://cdn.astrobin.com/thumbs/vDiHXOHAK_fs_1824x0_kWXURFLk.jpg",
+                "name" => "Title",
+                "caption" => "www.example.com",
+                "description" => "Description example"
+            ], $this->getAppAccessToken());
 
             return $fbResponse;
         } catch (FacebookResponseException $e) {

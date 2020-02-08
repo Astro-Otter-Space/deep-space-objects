@@ -28,6 +28,7 @@ class DsoPostSocialNetworkCommand extends Command
     public function __construct(FacebookWs $facebookWs)
     {
         $this->facebookWs = $facebookWs;
+        parent::__construct();
     }
 
     /**
@@ -49,7 +50,7 @@ class DsoPostSocialNetworkCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
+        dump("DEBUG : try to send post");
         $postFb = $this->facebookWs->sendPost(null);
         dump($postFb);
         return 0;

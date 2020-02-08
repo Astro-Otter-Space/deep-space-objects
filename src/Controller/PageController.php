@@ -10,7 +10,9 @@ use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
+use App\Service\SocialNetworks\WebServices\FacebookWs;
 use Doctrine\Common\Persistence\ObjectManager;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -335,4 +337,17 @@ class PageController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/facebook", name="facebook")
+     * @param FacebookWs $facebookWs
+     *
+     * @return Response
+     */
+    public function test(FacebookWs $facebookWs): Response
+    {
+        $post = $facebookWs->getPost();
+
+        $response = new Response();
+        return $response;
+    }
 }

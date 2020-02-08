@@ -31,7 +31,7 @@ final class Facebook extends abstractSocialNetworks
             self::$_instance = new \Facebook\Facebook([
                 'app_id' => $appId,
                 'app_secret' => $appSecret,
-                'graph_api_version'
+                'default_graph_version' => self::API_VERSION
             ]);
         }
 
