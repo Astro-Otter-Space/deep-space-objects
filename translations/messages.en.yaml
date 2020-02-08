@@ -316,7 +316,7 @@ register.form.password: "Password (*)"
 # desc
 constellationListDesc: List of celestial constellations
 dsoListDesc: Celestial catalogs of deep sky objects. Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
-listObservationsDesc:
+listObservationsDesc: Retrieve list of astronomicals observations and upcoming metting or observations.
 dsoDesc:
 contactDesc:
 skymapDesc:

@@ -314,10 +314,10 @@ contact.mandatory: "(*) Tous les champs sont obligatoire"
 # desc
 constellationListDesc: Liste des constellations du ciel
 dsoListDesc: Catalogue celeste des objets du ciel profonds. Filtrer la liste par constellations, type de catalogues, type d'objets, magnitude...et découvrez les plus beaux objets du ciel.
-listObservationsDesc: ""
+listObservationsDesc: Retrouvez la liste des observations astronomique enregistrées et les futures observations et rencontres prévues
 dsoDesc: ""
 contactDesc: Contactez l'administrateur pour n'importe quelle question
-skymapDesc: ""
+skymapDesc: "Carte du ciel"
 # Form add observation
 addObservation: Ajouter une observation
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
