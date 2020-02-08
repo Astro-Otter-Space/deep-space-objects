@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\DTO;
+namespace App\Entity\SocialNetworks;
 
 /**
  * Class FacebookPost
