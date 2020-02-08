@@ -88,7 +88,6 @@ services:
         bind:
             $appId: '%env(FACEBOOK_APP_ID)%'
             $appSecret: '%env(FACEBOOK_SECRET_ID)%'
-            $accessToken: '%env(FACEBOOK_TOKEN)%'
             $pageId: '%env(FACEBOOK_PAGE_ID)%'
 
 

@@ -144,14 +144,13 @@ class FacebookWs implements socialNetworkInterface
      *
      * @param string $appId
      * @param string $appSecret
-     * @param string $accessToken
      * @param string $pageId
      *
      * @throws FacebookSDKException
      */
-    public function __construct(string $appId, string $appSecret, string $accessToken, string $pageId)
+    public function __construct(string $appId, string $appSecret, string $pageId)
     {
-        $this->setAppId($appId)->setAppSecret($appSecret)/*->setAccessToken($accessToken)*/->setPageId($pageId);
+        $this->setAppId($appId)->setAppSecret($appSecret)->setPageId($pageId);
         $this->buildFactory();
     }
 
