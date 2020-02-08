@@ -320,6 +320,8 @@ contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: ""
 # Form add observation
 addObservation: Ajouter une observation
+addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
+scheduleObs: Préparer une sortie
 form.ok.addDoc: Observation ajoutée, retrouvez-la <a href="%url%">ici</a>.
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:

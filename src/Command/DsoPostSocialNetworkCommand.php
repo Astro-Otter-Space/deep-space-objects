@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Entity\BDD\ItemShared;
 use App\Repository\DsoRepository;
 use App\Service\SocialNetworks\WebServices\FacebookWs;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Facebook\Exceptions\FacebookSDKException;
 use Symfony\Component\Console\Command\Command;
@@ -16,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class DsoPostSocialNetworkCommand
  *
  * @package App\Command
+ *
+ * https://stackoverflow.com/questions/32328734/facebook-sdk-v5-post-as-page-on-wall?answertab=active#tab-top
  */
 class DsoPostSocialNetworkCommand extends Command
 {
@@ -69,9 +70,11 @@ class DsoPostSocialNetworkCommand extends Command
         // 1 Get all inserted
         $listItems = $this->em->getRepository(ItemShared::class)->findAll();
         dump($listItems);
+
+        $listExcludesItems = [];
         die();
         // 2 Get random item, filtered by above
-        $dsoId = array_rand($this->dsoRepository->getAstrobinId());
+        $dsoId = array_rand($this->dsoRepository->getAstrobinId($listExcludesItems));
 
         $dso = $this->dsoRepository->getObjectById($dsoId, true);
 

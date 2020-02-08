@@ -89,7 +89,7 @@ class LayoutController extends AbstractController
             'currentLocale' => $currentLocale,
 //            'leftSideMenu' => $this->buildMenu($currentLocale),
             'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
-            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations'])
+            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs'])
         ];
 
         /** @var Response $response */
@@ -136,6 +136,11 @@ class LayoutController extends AbstractController
                 'label' => $this->translatorInterface->trans('addObservation'),
                 'path' => $routerInterface->generate(sprintf('add_observation.%s', $locale)),
                 'icon_class' => 'add-observation'
+            ],
+            'scheduleObs' => [
+                'label' => $this->translatorInterface->trans('scheduleObs'),
+                'path' => $routerInterface->generate(sprintf('schedule_obs.%s', $locale)),
+                'icon_class' => 'calendar'
             ],
             'contact' => [
                 'label' => $this->translatorInterface->trans('contact.title'),

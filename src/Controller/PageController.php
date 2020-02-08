@@ -12,6 +12,7 @@ use App\Repository\DsoRepository;
 use App\Service\MailService;
 use App\Service\SocialNetworks\WebServices\FacebookWs;
 use Doctrine\Common\Persistence\ObjectManager;
+use Facebook\Exceptions\FacebookSDKException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -342,10 +343,11 @@ class PageController extends AbstractController
      * @param FacebookWs $facebookWs
      *
      * @return Response
+     * @throws FacebookSDKException
      */
     public function test(FacebookWs $facebookWs): Response
     {
-        $post = $facebookWs->getPost();
+        $post = $facebookWs->getPost(null);
 
         $response = new Response();
         return $response;

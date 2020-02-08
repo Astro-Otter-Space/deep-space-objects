@@ -194,4 +194,27 @@ class ObservationController extends AbstractController
 
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Request
+     *
+     * @Route({
+     *  "en": "/schedule-an-observation",
+     *  "fr": "/preparer-une-observation",
+     *  "es": "/schedule-an-observation",
+     *  "pt": "/schedule-an-observation",
+     *  "de": "/schedule-an-observation"
+     * }, name="schedule_obs")
+     */
+    public function scheduleObservation(Request $request): Response
+    {
+        $params = [];
+
+        /** @var Response $response */
+        $response = new Response();
+        $response->setPrivate();
+
+        return $this->render('pages/schedule_observation.html.twig', $params, $response);
+    }
 }
