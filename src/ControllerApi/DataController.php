@@ -156,7 +156,7 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\Get("/objects/by_constellation/{constellation}", name="api_objects_by_constellation")
+     * @Rest\Get("/dso/by_constellation/{constellation}", name="api_objects_by_constellation")
      *
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")

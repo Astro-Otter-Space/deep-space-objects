@@ -104,11 +104,13 @@ hr {
 pre {
   white-space: pre-wrap;
   overflow-x:auto;
-  display: block;
+  display: flex;
   margin: 1em 0;
   font-family: monospace;
 }
 code {
   background: $bgd-light-grey;
   color: $color-text-dark;
+  padding: 1em 0.5em;
+  width: 100%;
 }
