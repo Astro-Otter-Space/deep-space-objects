@@ -1,6 +1,6 @@
 $items: 4;
 $animation-time: 10s;
-$transition-time: .3s;
+$transition-time: 1s;
 $scale: 20%;
 
 $total-time: ($animation-time * $items);
@@ -46,8 +46,6 @@ $scale-base-1: (1 + $scale / 100%);
       }
     }
   }
-
-
 
   /*&__enterActive,
   &__leaveActive {
