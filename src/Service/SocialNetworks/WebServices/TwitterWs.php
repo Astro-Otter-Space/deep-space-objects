@@ -124,7 +124,6 @@ class TwitterWs implements socialNetworkInterface
      */
     public function buildFactory(): void
     {
-        dump(__CLASS__, $this->getConsumerKey(), $this->getConsumerSecretKey(), $this->getAccessToken(), $this->getAccessTokenSecret());
         $this->twitterWs = Twitter::getInstance($this->getConsumerKey(), $this->getConsumerSecretKey(), $this->getAccessToken(), $this->getAccessTokenSecret());
     }
 
