@@ -60,7 +60,7 @@ class DsoManager
         $this->urlGenerateHelper = $urlGenerateHelper;
         $this->translatorInterface = $translatorInterface;
         $this->cacheUtils = $cacheUtils;
-        $this->locale = $locale;
+        $this->locale = $locale ?? 'en';
         $this->dsoDataTransformer = $dsoDataTransformer;
     }
 
