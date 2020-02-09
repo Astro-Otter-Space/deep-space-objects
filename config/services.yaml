@@ -93,10 +93,10 @@ services:
         autowire: true
         autoconfigure: true
         bind:
-            $consumerKey: '%env(TWITTER_CONSUMER_KEY))%'
-            $consumerSecretKey: '%env(TWITTER_CONSUMER_SECRET))%'
-            $accessToken: '%env(TWITTER_OAUTH_ACCESS_TOKEN))%'
-            $accessTokenSecret: '%env(TWITTER_OAUTH_ACCESS_TOKEN_SECRET))%'
+            $consumerKey: '%env(TWITTER_CONSUMER_KEY)%'
+            $consumerSecretKey: '%env(TWITTER_CONSUMER_SECRET)%'
+            $accessToken: '%env(TWITTER_OAUTH_ACCESS_TOKEN)%'
+            $accessTokenSecret: '%env(TWITTER_OAUTH_ACCESS_TOKEN_SECRET)%'
 
     # Exception listener
     App\EventListener\ExceptionListener:

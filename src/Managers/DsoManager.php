@@ -251,11 +251,13 @@ class DsoManager
 
     /**
      * @param Dso $dso
+     * @param string $typeUrl
+     *
      * @return string
      */
-    public function getDsoUrl(Dso $dso)
+    public function getDsoUrl(Dso $dso, $typeUrl)
     {
-        return $this->urlGenerateHelper->generateUrl($dso);
+        return $this->urlGenerateHelper->generateUrl($dso, $typeUrl);
     }
 
     /**

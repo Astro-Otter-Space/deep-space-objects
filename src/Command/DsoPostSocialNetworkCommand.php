@@ -3,8 +3,12 @@
 namespace App\Command;
 
 use App\Entity\BDD\ItemShared;
+use App\Entity\ES\Dso;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\SocialNetworks\WebServices\FacebookWs;
+use App\Service\SocialNetworks\WebServices\TwitterWs;
+use Astrobin\Exceptions\WsException;
 use Doctrine\ORM\EntityManagerInterface;
 use Facebook\Exceptions\FacebookSDKException;
 use Symfony\Component\Console\Command\Command;
@@ -25,8 +29,14 @@ class DsoPostSocialNetworkCommand extends Command
     /** @var FacebookWs */
     private $facebookWs;
 
+    /** @var TwitterWs */
+    private $twitterWs;
+
     /** @var EntityManagerInterface */
     private $em;
+
+    /** @var DsoManager */
+    private $dsoManager;
 
     /** @var DsoRepository */
     private $dsoRepository;
@@ -35,13 +45,17 @@ class DsoPostSocialNetworkCommand extends Command
      * DsoPostSocialNetworkCommand constructor.
      *
      * @param FacebookWs $facebookWs
+     * @param TwitterWs $twitterWs
      * @param EntityManagerInterface $em
+     * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      */
-    public function __construct(FacebookWs $facebookWs, EntityManagerInterface $em, DsoRepository $dsoRepository)
+    public function __construct(FacebookWs $facebookWs, TwitterWs $twitterWs, EntityManagerInterface $em, DsoManager $dsoManager, DsoRepository $dsoRepository)
     {
         $this->facebookWs = $facebookWs;
+        $this->twitterWs = $twitterWs;
         $this->em = $em;
+        $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         parent::__construct();
     }
@@ -61,27 +75,67 @@ class DsoPostSocialNetworkCommand extends Command
      * @param OutputInterface $output
      *
      * @return int
-     * @throws FacebookSDKException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \ReflectionException
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // 1 Get all inserted
-        $listItems = $this->em->getRepository(ItemShared::class)->findAll();
-        dump($listItems);
+        /** @var Dso $dso */
+        $dso = $this->getDsoToPost();
 
-        $listExcludesItems = [];
         die();
+        // Send to social networks
+        $this->sendToFacebook($dso);
+        $this->sendToTwitter($dso);
+
+        // Record into BDD
+        $this->addSharedItem($dso);
+
+        return 0;
+    }
+
+    /**
+     *
+     */
+    private function getDsoToPost(): Dso
+    {
+        // 1 Get all inserted
+        $listSharedItems = $this->em->getRepository(ItemShared::class)->findAll();
+        dump($listSharedItems);
+
         // 2 Get random item, filtered by above
-        $dsoId = array_rand($this->dsoRepository->getAstrobinId($listExcludesItems));
+        $listResult = $this->dsoRepository->getAstrobinId($listSharedItems);
 
-        $dso = $this->dsoRepository->getObjectById($dsoId, true);
+        $dsoRandom = array_rand($listResult);
 
-        // 3 Post into social networks
-        $postFb = $this->facebookWs->sendPost(null);
-        dump($postFb);
+        $dsoId = key($dsoRandom);
+        try {
+            return $this->dsoManager->buildDso($dsoId);
+        } catch (WsException $e) {
+        } catch (\ReflectionException $e) {
+        }
+    }
 
+
+    /**
+     * @param $dso
+     */
+    private function sendToFacebook($dso)
+    {
+            return;
+    }
+
+    private function sendToTwitter(Dso $dso)
+    {
+        $this->twitterWs->postLink()
+    }
+
+    /**
+     * @param Dso $dso
+     *
+     * @throws \Exception
+     */
+    private function addSharedItem(Dso $dso): void
+    {
         // 4 Save into BDD
         /** @var \DateTimeInterface $dateCreate */
         $dateCreate = new \DateTime();
@@ -94,7 +148,5 @@ class DsoPostSocialNetworkCommand extends Command
 
         $this->em->persist($newSharedItem);
         $this->em->flush();
-
-        return 0;
     }
 }
