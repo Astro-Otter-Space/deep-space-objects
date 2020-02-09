@@ -79,10 +79,11 @@ $scale-base-1: (1 + $scale / 100%);
         font-size: 1em;
       }
       width: 90%;
+      top: 33%;
     }
 
     @media ($mq-tablet) {
-      top: 15%;
+      top: 40%;
     }
   }
 
