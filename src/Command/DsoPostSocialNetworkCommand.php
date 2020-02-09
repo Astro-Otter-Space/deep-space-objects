@@ -51,12 +51,12 @@ class DsoPostSocialNetworkCommand extends Command
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      */
-    public function __construct(FacebookWs $facebookWs, TwitterWs $twitterWs, EntityManagerInterface $em, DsoManager $dsoManager, DsoRepository $dsoRepository)
+    public function __construct(FacebookWs $facebookWs, TwitterWs $twitterWs, EntityManagerInterface $em, /*DsoManager $dsoManager,*/ DsoRepository $dsoRepository)
     {
         $this->facebookWs = $facebookWs;
         $this->twitterWs = $twitterWs;
         $this->em = $em;
-        $this->dsoManager = $dsoManager;
+        //$this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         parent::__construct();
     }
