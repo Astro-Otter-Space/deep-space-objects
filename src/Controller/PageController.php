@@ -8,9 +8,12 @@ use App\Entity\BDD\Contact;
 use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use App\Service\SocialNetworks\WebServices\FacebookWs;
+use App\Service\SocialNetworks\WebServices\TwitterWs;
+use Astrobin\Exceptions\WsException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Facebook\Exceptions\FacebookSDKException;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -23,6 +26,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -339,16 +343,45 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/facebook", name="facebook")
+     * @Route("/facebook", name="facebook_test")
      * @param FacebookWs $facebookWs
      *
      * @return Response
      * @throws FacebookSDKException
      */
-    public function test(FacebookWs $facebookWs): Response
+    public function testFacebook(FacebookWs $facebookWs): Response
     {
         $post = $facebookWs->getPost(null);
 
+        $response = new Response();
+        return $response;
+    }
+
+
+    /**
+     * @param TwitterWs $twitterWs
+     * @param DsoManager $dsoManager
+     *
+     * @param RouterInterface $router
+     *
+     * @return Response
+     * @throws WsException
+     * @throws \ReflectionException
+     * @Route("/twitter", name="twiiter_test")
+     */
+    public function testTwitter(TwitterWs $twitterWs, DsoManager $dsoManager, RouterInterface $router): Response
+    {
+        $id = 'm42';
+
+        $dso = $dsoManager->buildDso($id);
+
+        $title = $dsoManager->buildTitle($dso);
+        $url = $dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
+        $image = null; //$dso->getImage();
+
+        $tweet = $twitterWs->postLink($title, $url, $image);
+
+        /** @var Response $response */
         $response = new Response();
         return $response;
     }

@@ -15,9 +15,13 @@ class TwitterWs implements socialNetworkInterface
     /** @var Twitter|TwitterOAuth */
     private $twitterWs;
 
+    /** @var string */
     private $consumerKey;
+    /** @var string */
     private $consumerSecretKey;
+    /** @var string */
     private $accessToken;
+    /** @var string */
     private $accessTokenSecret;
 
     /**
@@ -33,7 +37,7 @@ class TwitterWs implements socialNetworkInterface
      *
      * @return TwitterWs
      */
-    public function setConsumerKey($consumerKey)
+    public function setConsumerKey($consumerKey): self
     {
         $this->consumerKey = $consumerKey;
         return $this;
@@ -52,7 +56,7 @@ class TwitterWs implements socialNetworkInterface
      *
      * @return TwitterWs
      */
-    public function setConsumerSecretKey($consumerSecretKey)
+    public function setConsumerSecretKey($consumerSecretKey): self
     {
         $this->consumerSecretKey = $consumerSecretKey;
         return $this;
@@ -71,7 +75,7 @@ class TwitterWs implements socialNetworkInterface
      *
      * @return TwitterWs
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken($accessToken): self
     {
         $this->accessToken = $accessToken;
         return $this;
@@ -90,7 +94,7 @@ class TwitterWs implements socialNetworkInterface
      *
      * @return TwitterWs
      */
-    public function setAccessTokenSecret($accessTokenSecret)
+    public function setAccessTokenSecret($accessTokenSecret): self
     {
         $this->accessTokenSecret = $accessTokenSecret;
         return $this;
@@ -120,6 +124,7 @@ class TwitterWs implements socialNetworkInterface
      */
     public function buildFactory(): void
     {
+        dump(__CLASS__, $this->getConsumerKey(), $this->getConsumerSecretKey(), $this->getAccessToken(), $this->getAccessTokenSecret());
         $this->twitterWs = Twitter::getInstance($this->getConsumerKey(), $this->getConsumerSecretKey(), $this->getAccessToken(), $this->getAccessTokenSecret());
     }
 
@@ -157,11 +162,11 @@ class TwitterWs implements socialNetworkInterface
     }
 
     /**
-     * @param object $body
+     * @param object|array|null $body
      *
      * @return array
      */
-    public function buildResponse(object $body)
+    public function buildResponse($body)
     {
         return $body;
     }

@@ -149,6 +149,7 @@ class FacebookWs implements socialNetworkInterface
      */
     public function __construct(string $appId, string $appSecret, string $pageId)
     {
+        dump(__METHOD__, $appId);
         $this->setAppId($appId)->setAppSecret($appSecret)->setPageId($pageId);
         $this->buildFactory();
     }

@@ -14,6 +14,7 @@ use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Services\GetImage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -97,7 +98,7 @@ class DsoManager
                 $dso->setAstrobinUser($astrobinImageUser);
 
                 // Add URl
-                $dso->setFullUrl($this->getDsoUrl($dso));
+                $dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
                 $this->cacheUtils->saveItem($idMd5, serialize($dso));
                 if ($dso->getImage() !== basename(Utils::IMG_DEFAULT)) {
@@ -219,7 +220,7 @@ class DsoManager
             'ajaxValue' => $ajaxValue,
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
-            'url' => $this->getDsoUrl($dso)
+            'url' => $this->getDsoUrl($dso, Router::RELATIVE_PATH)
         ];
     }
 

@@ -89,6 +89,7 @@ services:
             $appId: '%env(FACEBOOK_APP_ID)%'
             $appSecret: '%env(FACEBOOK_SECRET_ID)%'
             $pageId: '%env(FACEBOOK_PAGE_ID)%'
+
     App\Service\SocialNetworks\WebServices\TwitterWs:
         autowire: true
         autoconfigure: true

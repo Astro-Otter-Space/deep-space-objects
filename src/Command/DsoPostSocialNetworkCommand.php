@@ -14,6 +14,7 @@ use Facebook\Exceptions\FacebookSDKException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Routing\Router;
 
 /**
  * Class DsoPostSocialNetworkCommand
@@ -84,8 +85,9 @@ class DsoPostSocialNetworkCommand extends Command
 
         die();
         // Send to social networks
-        $this->sendToFacebook($dso);
         $this->sendToTwitter($dso);
+        $this->sendToFacebook($dso);
+
 
         // Record into BDD
         $this->addSharedItem($dso);
@@ -124,9 +126,14 @@ class DsoPostSocialNetworkCommand extends Command
             return;
     }
 
+    /**
+     * @param Dso $dso
+     */
     private function sendToTwitter(Dso $dso)
     {
-        $this->twitterWs->postLink()
+        $title = $this->dsoManager->buildTitle($dso);
+        $link = $this->dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
+        $tweet = $this->twitterWs->postLink($title, $link, null);
     }
 
     /**
