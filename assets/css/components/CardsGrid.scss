@@ -153,6 +153,7 @@
     margin: auto;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 1em;
+    display: grid;
     @media ($mq-phone) {
       display: grid;
       grid-gap: 0.5em;
