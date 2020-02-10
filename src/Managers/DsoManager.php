@@ -220,7 +220,7 @@ class DsoManager
             'ajaxValue' => $ajaxValue,
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
-            'url' => $this->getDsoUrl($dso, Router::RELATIVE_PATH)
+            'url' => $this->getDsoUrl($dso, Router::ABSOLUTE_PATH)
         ];
     }
 

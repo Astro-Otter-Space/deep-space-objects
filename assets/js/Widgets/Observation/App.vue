@@ -52,18 +52,20 @@
 
         <div id="map" style="height: 25rem;">
           <h3 class="Dso__title">Location</h3>
-          <l-map
-            :zoom="zoom"
-            :center="marker"
-          >
-            <l-tile-layer
-              :url="url"
-              :attribution="attribution"
-            />
-            <l-marker
-              :lat-lng="marker"
-            ></l-marker>
-          </l-map>
+          <div class="Dso__leaflet">
+            <l-map
+              :zoom="zoom"
+              :center="marker"
+            >
+              <l-tile-layer
+                :url="url"
+                :attribution="attribution"
+              />
+              <l-marker
+                :lat-lng="marker"
+              ></l-marker>
+            </l-map>
+          </div>
         </div>
       </div>
     </section>
