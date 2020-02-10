@@ -69,6 +69,10 @@
   }
 
   &__map {
+    @media ($mq-phone) {
+      margin: 0.5em;
+    }
+
     li {
       display: inline;
       padding: 0 0.5em;
