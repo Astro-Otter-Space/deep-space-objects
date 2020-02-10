@@ -1,6 +1,12 @@
 .Dso {
   &__leaflet {
-
     height: 800px;
+    width: auto;
+    display: flex;
+    @media ($mq-phone) {
+      margin: 0 0.5em;
+    }
   }
+
+
 }
