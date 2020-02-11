@@ -17,12 +17,13 @@
 
         <h3 class="Dso__title">{{ mapTitle }}</h3>
         <div class="Dso__leaflet">
+<!--  TODO  https://travishorn.com/interactive-maps-with-vue-leaflet-5430527353c8-->
           <l-map
             :zoom="zoom"
             :center="center"
           >
             <l-geo-json
-              :geojson="geojson"
+              :geojson="geojsonObs"
               :options="options"
             ></l-geo-json>
             <l-tile-layer
@@ -74,13 +75,13 @@
         url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
         center: L.latLng(48.856614, 2.3522219),
-        geojson: null,
+        geojsonObs: null,
         urlAjaxObservations: urlAjaxObservations
       }
     },
     created() {
       axios.get(this.urlAjaxObservations).then((response) => {
-          this.geojson =  response.data;
+          this.geojsonObs =  response.data;
         }
       );
     },
