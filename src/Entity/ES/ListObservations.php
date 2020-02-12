@@ -12,6 +12,7 @@ use Traversable;
 class ListObservations implements \IteratorAggregate
 {
     protected $listObservations = [];
+    protected $listEvents = [];
 
     /**
      * @return \ArrayIterator|Traversable
@@ -29,4 +30,11 @@ class ListObservations implements \IteratorAggregate
         $this->listObservations[] = $observation;
     }
 
+    /**
+     * @param Event $event
+     */
+    public function addEvent(Event $event)
+    {
+        $this->listEvents[] = $event;
+    }
 }
