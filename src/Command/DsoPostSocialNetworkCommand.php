@@ -85,7 +85,7 @@ class DsoPostSocialNetworkCommand extends Command
 
         die();
         // Send to social networks
-        $this->sendToTwitter($dso);
+        //$this->sendToTwitter($dso);
         $this->sendToFacebook($dso);
 
 
@@ -119,11 +119,12 @@ class DsoPostSocialNetworkCommand extends Command
 
 
     /**
+     * In stand-by
      * @param $dso
      */
     private function sendToFacebook($dso)
     {
-            return;
+        return;
     }
 
     /**
@@ -133,7 +134,22 @@ class DsoPostSocialNetworkCommand extends Command
     {
         $title = $this->dsoManager->buildTitle($dso);
         $link = $this->dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
-        $tweet = $this->twitterWs->postLink($title, $link, null);
+        $fileTmpPath = null;
+        /**
+         * We cant send to twitter a distant image, so we doanload into local file and delete after sendind tweet
+         */
+        if ($dso->getAstrobinId()) {
+
+            [$astrobinUrl,] = $this->dsoManager->getAstrobinImage($dso->getAstrobinId(), null);
+
+            $fileTmpPath = tmpfile();
+            $path = stream_get_meta_data($fileTmpPath)['uri'];
+
+            file_put_contents($path, file_get_contents($astrobinUrl));
+        }
+
+        $tweet = $this->twitterWs->postLink($title, $link, $fileTmpPath);
+        unlink($fileTmpPath);
     }
 
     /**

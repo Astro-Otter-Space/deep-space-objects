@@ -3,8 +3,7 @@
     <div v-if="imageCover !== 'default_large.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
-        :alt-image="title + ' - ' + imageCoverUser"
-        :owner-img="imageCoverUser"
+        :alt-image="imageCoverAlt"
       />
     </div>
     <section class="Dso__main">
@@ -95,7 +94,7 @@
   import './../Icons/twitter';
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
-  let coverImageUser = document.querySelector('div[data-dso-widget]').dataset.imgcoveruser;
+  let coverImageAlt = document.querySelector('div[data-dso-widget]').dataset.imgcoveralt;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
@@ -117,7 +116,7 @@
     data () {
       return {
         imageCover: coverImage,
-        imageCoverUser: coverImageUser,
+        imageCoverAlt: coverImageAlt,
         imagesDso: images,
         title: title,
         titleGallery: titleGallery,

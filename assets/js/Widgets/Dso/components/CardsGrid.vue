@@ -45,8 +45,8 @@
           <a v-bind:href="item.url" v-bind:title="item.value">
             <div class="image">
               <figure>
-                <img :src="item.image" :alt="item.value" v-on:load="isLoaded()" v-bind:class="{ active: isActive }">
-                <figcaption v-if="item.user !== undefined && 0 < item.user.length">Astrobin Image by {{item.user}}</figcaption>
+                <img :src="item.image.url_regular" :alt="item.image.user" v-on:load="isLoaded()" v-bind:class="{ active: isActive }">
+                <figcaption v-if="item.image.user">{{item.image.title}}</figcaption>
               </figure>
             </div>
             <div class="description">

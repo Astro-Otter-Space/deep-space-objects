@@ -67,6 +67,7 @@ class DsoController extends AbstractController
      *  "de": "/katalog/{id}"
      * }, name="dso_show")
      *
+     * @param Request $request
      * @param string $id
      *
      * @return Response
@@ -89,15 +90,16 @@ class DsoController extends AbstractController
             $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $this->dsoManager->buildTitle($dso);
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
+
             // Image cover
-            $params['imgCover'] = $dso->getImage();
-            $params['imgCoverUser'] = $dso->getAstrobinUser();
+            $params['imgCover'] = $dso->getImage()->url_hd;
+            $params['imgCoverAlt'] = sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user);
 
             // List of Dso from same constellation
             /** @var ListDso $listDso */
             $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
-            $params['dso_by_const'] = $this->dsoManager->buildListDso($listDso);
 
+            $params['dso_by_const'] = $this->dsoManager->buildListDso($listDso);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map

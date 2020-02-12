@@ -6,6 +6,7 @@ use App\Classes\Utils;
 use App\Entity\ES\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
+use Astrobin\Response\Image;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -61,14 +62,18 @@ class ConstellationManager
     public function buildListConstellation()
     {
         $listConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
-
         return array_map(function(Constellation $constellation) {
+            $image = new Image();
+            $image->url_regular = $constellation->getImage();
+            $image->user = null;
+            $image->title = null;
+
             return [
                 'id' => $constellation->getId(),
                 'value' => $constellation->getAlt(),
                 'label' => $constellation->getGen(),
                 'url' => $this->buildUrl($constellation),
-                'image' => $constellation->getImage(),
+                'image' => $image,
                 'filter' => $constellation->getLoc()
             ];
         }, iterator_to_array($listConstellation->getIterator()));

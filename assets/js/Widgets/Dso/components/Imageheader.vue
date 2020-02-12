@@ -9,8 +9,8 @@
     >
       <div slot="content" slot-scope="{ visible }">
         <figure>
-          <img :src="coverImage" v-bind:class="headerImgCover" :alt="altImage" />
-          <figcaption>An astrobin image from {{ownerImg}}</figcaption>
+          <img :src="coverImage" v-bind:class="headerImgCover" v-bind:alt="altImage" />
+          <figcaption>{{ altImage }}</figcaption>
         </figure>
       </div>
     </lazy-background>
@@ -35,10 +35,6 @@
         type: String
       },
       altImage: {
-        default: '',
-        type: String
-      },
-      ownerImg: {
         default: '',
         type: String
       }

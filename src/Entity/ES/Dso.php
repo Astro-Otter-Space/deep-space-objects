@@ -5,6 +5,7 @@ namespace App\Entity\ES;
 
 use App\Classes\Utils;
 use App\Repository\DsoRepository;
+use Astrobin\Response\Image;
 
 /**
  * Class Dso
@@ -29,13 +30,13 @@ class Dso extends AbstractEntity
     private $dec;
     private $updatedAt;
     private $astrobinId;
-    private $astrobinUser;
+    /** @var Image */
     private $image;
     private $fullUrl;
     private $geometry;
     private $hash;
 
-    private static $listFieldsNoMapping = ['locale', 'image', 'astrobinUser' ,'fullUrl', 'elasticId', 'order', 'data', 'hash'];
+    private static $listFieldsNoMapping = ['locale', 'image', 'fullUrl', 'elasticId', 'order', 'data', 'hash'];
 
     /**
      * @return mixed
@@ -313,36 +314,19 @@ class Dso extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getImage():? Image
     {
         return $this->image;
     }
 
     /**
-     * @param mixed $image
-     */
-    public function setImage($image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAstrobinUser():? string
-    {
-        return $this->astrobinUser;
-    }
-
-
-    /**
-     * @param $astrobinUser
+     * @param Image $image
      *
      * @return Dso
      */
-    public function setAstrobinUser($astrobinUser): self
+    public function setImage(Image $image): self
     {
-        $this->astrobinUser = $astrobinUser;
+        $this->image = $image;
         return $this;
     }
 

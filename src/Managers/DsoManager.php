@@ -26,7 +26,7 @@ class DsoManager
 
     use ManagerTrait;
 
-    private static $listFieldToTranslate = ['catalog', 'type', 'constId'];
+    private static $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
 
     /** @var DsoRepository  */
     private $dsoRepository;
@@ -93,15 +93,15 @@ class DsoManager
             if (!is_null($dso)) {
 
                 // Add astrobin image
-                list($astrobinImageUrl, $astrobinImageUser) = $this->getAstrobinImage($dso->getAstrobinId(), $dso->getId());
-                $dso->setImage($astrobinImageUrl);
-                $dso->setAstrobinUser($astrobinImageUser);
+                /** @var Image $astrobinImage */
+                $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
+                $dso->setImage($astrobinImage);
 
                 // Add URl
                 $dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
                 $this->cacheUtils->saveItem($idMd5, serialize($dso));
-                if ($dso->getImage() !== basename(Utils::IMG_DEFAULT)) {
+                if ($dso->getImage()->url_hd !== basename(Utils::IMG_DEFAULT)) {
                     $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
                 }
             } else {
@@ -148,31 +148,24 @@ class DsoManager
      */
     public function buildListDso(ListDso $listDso): array
     {
-        /** @var GetImage $astrobinImage */
-        $astrobinImage = new GetImage();
         /** @var CacheInterface $cacheUtils */
         $cacheUtils = $this->cacheUtils;
 
-        return array_map(function(Dso $dsoChild) use ($astrobinImage, $cacheUtils) {
+        return array_map(function(Dso $dsoChild) use ($cacheUtils) {
 
-            $imgUrl = Utils::IMG_DEFAULT;
-            $astrobinUser = '';
             $idCover = md5(sprintf('%s_cover', $dsoChild->getId()));
 
             if ($cacheUtils->hasItem($idCover)) {
-                $imgUrl = unserialize($cacheUtils->getItem($idCover));
-
+                $imgCached = unserialize($cacheUtils->getItem($idCover));
+                $dsoChild->setImage($imgCached);
             } else {
                 /** @var Image $imageAstrobin */
-                $imageAstrobin = (!is_null($dsoChild->getAstrobinId())) ? $astrobinImage->getImageById($dsoChild->getAstrobinId()) : Utils::IMG_DEFAULT;
-                if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                    $imgUrl = $imageAstrobin->url_regular;
-                    $astrobinUser = $imageAstrobin->user;
-                }
-                $cacheUtils->saveItem($idCover, serialize($imgUrl));
+                $imageAstrobin = $this->getAstrobinImage($dsoChild->getAstrobinId());
+                $dsoChild->setImage($imageAstrobin);
+                $cacheUtils->saveItem($idCover, serialize($dsoChild->getImage()));
             }
 
-            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $imgUrl ?? Utils::IMG_DEFAULT, 'user' => $astrobinUser, 'filter' => $dsoChild->getType()]);
+            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $dsoChild->getImage(), 'filter' => $dsoChild->getType()]);
         }, iterator_to_array($listDso->getIterator()));
     }
 
@@ -228,26 +221,31 @@ class DsoManager
      * Get image (and his owner) from Astrobin
      *
      * @param $astrobinId
-     * @param $id
-     * @param string $param
      *
-     * @return array
-     *
+     * @return Image
      */
-    public function getAstrobinImage($astrobinId, $id, $param = 'url_hd'): array
+    public function getAstrobinImage($astrobinId): Image
     {
+        /** @var Image $defautImage */
+        $defautImage = new Image();
+        $defautImage->url_hd = Utils::IMG_LARGE_DEFAULT;
+        $defautImage->url_regular = Utils::IMG_LARGE_DEFAULT;
+        $defautImage->user = 'none';
+
         try {
             /** @var Image $imageAstrobin */
             $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
             if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
-                return [$imageAstrobin->$param, $imageAstrobin->user];
+                return $imageAstrobin;
+            } else {
+                return $defautImage;
             }
         } catch(WsResponseException $e) {
-            return [basename(Utils::IMG_LARGE_DEFAULT), ''];
+            return $defautImage;
         } catch (\Exception $e) {
-            return [basename(Utils::IMG_LARGE_DEFAULT), ''];
+            return $defautImage;
         }
-        return [basename(Utils::IMG_LARGE_DEFAULT), ''];
+        return $defautImage;
     }
 
     /**
