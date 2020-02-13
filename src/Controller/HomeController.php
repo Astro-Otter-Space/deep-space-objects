@@ -35,6 +35,6 @@ class HomeController extends AbstractController
      */
     public function phpinfo($env)
     {
-        echo ('prod' === $env) ? phpinfo() : new Response();
+        echo ('prod' !== $env) ? phpinfo() : new Response();
     }
 }

@@ -197,7 +197,7 @@ class ObservationController extends AbstractController
     /**
      * @param Request $request
      *
-     * @return Request
+     * @return Response
      *
      * @Route({
      *  "en": "/schedule-an-observation",

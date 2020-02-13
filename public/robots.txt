@@ -40,4 +40,9 @@ User-agent: Yeti
 Allow: /
 
 User-agent: *
-Disallow: /
+Disallow: /download/map/*
+Disallow: /_get_dso_by_constellation/*
+Disallow: /geodata/dso/*
+Disallow: /phpinfo
+Disallow: /_observations
+Disallow: /_search
