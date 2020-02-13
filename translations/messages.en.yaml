@@ -4,6 +4,7 @@ dso_tr: Deep-sky objects
 menu.homepage: Homepage
 selectLang: Languages
 astrobin.message: This product uses the AstroBin API but is not endorsed or certified by AstroBin.
+astrobin.credit: &copy; Astrobin credit
 error.message: Error %error%, maybe you fall in a black hole :) ?
 more: More informations
 hem.all: All

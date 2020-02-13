@@ -4,6 +4,7 @@ dso_tr: Objetos do céu profundo
 menu.homepage: Página incial
 selectLang: Línguas
 astrobin.message: Esse produto utilisa o API AstroBin mas não é apoiado ou certificado por AstroBin
+astrobin.credit: &copy; Astrobin credit
 error.message: Erro %error%, talvez você caiu num buraco negro
 more: Mais informações
 hem.all: All

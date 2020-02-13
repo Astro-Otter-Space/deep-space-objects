@@ -87,7 +87,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'discoverYear' => $entity->getDiscoverYear(),
             'ra' => $entity->getRa(),
             'dec' => $entity->getDec(),
-            'astrobin' => implode(Dso::DATA_CONCAT_GLUE, [$entity->getImage()->user, $entity->getImage()->title ])
+            'astrobin.credit' => sprintf('"%s" %s %s', $entity->getImage()->title, Dso::DATA_CONCAT_GLUE, $entity->getImage()->user )
         ];
 
         return array_filter($data, function($value) {
