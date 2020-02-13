@@ -4,7 +4,7 @@
     {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
     {% set pageDesc = pageDesc|default('dso'|trans) %}
     {% set pageUrl = app.request.uri %}
-    {% set pageImage = pageImage|default(null) %}
+    {% set pageImage = pageImage|default('/build/images/logo_tmp.png') %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
     {% set favicon = favicon|default('') %}
     {% set facebookId = facebookId|default(null) %}
