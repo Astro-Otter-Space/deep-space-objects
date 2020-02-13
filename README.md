@@ -4,19 +4,19 @@ Atlas for deep space objects (Symfony 4 / Elastic Search / Vue.js)
 Installation
 ==
 ### Clone project
-`git clone git@github.com:HamHamFonFon/deep-space-objects.git` 
- 
+`git clone git@github.com:HamHamFonFon/deep-space-objects.git`
+
 ### Generate SSL certificate for HTTPS
 ```
 openssl req -new -newkey rsa:2048 -nodes -out deepskyobjects_local.csr -keyout deepskyobjects_local.key -subj "/C=FR/ST=/L=Montpellier/O=/OU=Montpellier/CN=deepskyobjects.local"
-``` 
+```
 Copy path of deepskyobjects_local.csr and deepskyobjects_local.key in .env file.
 
 ### Init .env files
 ```
  cp .env.dist .env
-``` 
- 
+```
+
 ### Launch docker stack
  ```
  docker-compose build
@@ -48,12 +48,12 @@ yarn generate-icons
 
 # Dev : build public
 yarn encore dev
-``` 
+```
 
 
 ### Database
 Run migration :
-``` 
+```
 php bin/console doctrine:migrations:migrate
 ```
 
@@ -72,7 +72,7 @@ curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/register 
 ```
 
 ### Authentication API
-``` 
+```
 curl -X POST -H "Content-Type: application/json" http://<url>/api/auth/login -d '{"username":"<user-login>","password":"<user-pwd>"}'
 ```
 Symfony app :
@@ -89,7 +89,7 @@ yarn encore prod
 Elastic Search
 ==
 
-Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create many indexes, each one got his own mapping. 
+Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create many indexes, each one got his own mapping.
 
 ### Create index with mappings and import data
 ```
@@ -170,7 +170,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | PGC | pgc | 50 | 73197 |
 | Pismis | pis | 25 | 27 |
 | RCW | rcw |39 | 182 |
-| Roslund | rsl | 7 | ? | 
+| Roslund | rsl | 7 | ? |
 | |ru| 150||
 | |sha| 3||
 | |sl| 7||
@@ -199,8 +199,9 @@ Sources :
     {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
     {
       "id": "",
-      "catalog": [""],
+      "catalog": null,
       "order": null,
+      "updated_at": "2020-01-01T00:00:00+01:00",
       "data": {
         "desigs": [""],
         "alt": {
@@ -231,10 +232,14 @@ Sources :
         ]
       }
     }
- ``` 
-Conversion ra -> long : long = (H + m/60 + s/3600)*15
+ ```
+Conversion ra -> long :
+`long = (H + m/60 + s/3600)*15`
+
 if > 180 : long-360
-Conversion dec -> lat :   lat = (Deg + m/60 + s/3600)
+
+Conversion dec -> lat :
+`lat = (Deg + m/60 + s/3600)`
 
 Authors
 ==
