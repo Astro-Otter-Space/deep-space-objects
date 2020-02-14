@@ -2,7 +2,7 @@
 
 {% set pageTitle = title %}
 {% set pageImage = imgCover %}
-{% set pageDesc = desc|trans %}
+{% set pageDesc = description|truncate(200) %}
 {#https://coxpi.draftium.site/#}
 
 {% block content %}
@@ -12,6 +12,7 @@
     data-imgcoveralt="{{ imgCoverAlt|default('') }}"
     data-dso="{{ dsoData|json_encode }}"
     data-title="{{ title }}"
+    data-description="{{ description }}"
     data-title-map="{{ 'skymap'|trans }}"
     data-title-gallery="{{ 'galery'|trans }}"
     data-images="{{ images|json_encode|default({}) }}"

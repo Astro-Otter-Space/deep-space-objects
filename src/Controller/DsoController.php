@@ -10,6 +10,7 @@ use App\Entity\ES\ListDso;
 use App\Entity\ES\AbstractEntity;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use Astrobin\Exceptions\WsException;
 use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Response\ListImages;
@@ -71,7 +72,7 @@ class DsoController extends AbstractController
      * @param string $id
      *
      * @return Response
-     * @throws \Astrobin\Exceptions\WsException
+     * @throws WsException
      * @throws \ReflectionException
      */
     public function show(Request $request, string $id): Response
@@ -89,6 +90,7 @@ class DsoController extends AbstractController
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $this->dsoManager->buildTitle($dso);
+            $params['description'] = $dso->getDescription() ?? '';
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
 
             // Image cover
@@ -141,7 +143,7 @@ class DsoController extends AbstractController
      *
      * @return array
      * @throws WsResponseException
-     * @throws \Astrobin\Exceptions\WsException
+     * @throws WsException
      * @throws \ReflectionException
      */
     private function getListImages($dsoId)
@@ -172,7 +174,7 @@ class DsoController extends AbstractController
      * @param string $id
      *
      * @return JsonResponse
-     * @throws \Astrobin\Exceptions\WsException
+     * @throws WsException
      * @throws \ReflectionException
      */
     public function geoJson(string $id): JsonResponse

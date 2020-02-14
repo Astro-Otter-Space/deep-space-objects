@@ -95,10 +95,15 @@ abstract class AbstractEntity
             $property->setValue($this, $dataDocument[$property->getName()]);
         }
 
+        // TODO verifier quand même ce truc...
         if (array_key_exists('alt', $dataDocument)) {
-            // TODO verifier quand même ce truc...
             $this->setAlt($dataDocument['alt']);
         }
+
+        if (array_key_exists('description', $dataDocument)) {
+            $this->setDescription($dataDocument['description']);
+        }
+
         return $this;
     }
 

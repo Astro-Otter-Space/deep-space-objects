@@ -33,8 +33,8 @@
 
         <!--Description-->
         <a id="#description"></a>
-        <div class="Dso__description" v-if="0 < descShare.length">
-          <p>Lorem ipsum dolor sit amet, interdum aenean semper egestas imperdiet quisque. Diam lacus, nulla nibh quisque neque at. Velit nec maecenas quam phasellus ac et, malesuada vitae lectus. Adipiscing suspendisse, molestie sed viverra malesuada pellentesque convallis. Risus pharetra.</p>
+        <div class="Dso__description" v-if="0 < description.length">
+          {{description}}
         </div>
 
         <!--Table data-->
@@ -97,6 +97,7 @@
   let coverImageAlt = document.querySelector('div[data-dso-widget]').dataset.imgcoveralt;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
+  let description = document.querySelector('div[data-dso-widget]').dataset.description;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
   let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
   let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
@@ -128,7 +129,7 @@
         classTr: "Dso__tr",
         classTd: "Dso__td",
         urlShare: document.querySelector("link[rel='canonical']").href,
-        descShare: "",
+        description: description,
         astrobinMsg: astrobinMsg,
         itemsDso: dsoList,
         filters: filters

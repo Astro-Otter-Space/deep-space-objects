@@ -22,6 +22,7 @@ class Dso extends AbstractEntity
     private $mag;
     private $constId;
     private $alt;
+    private $description;
     private $dim;
     private $distAl;
     private $discover;
@@ -197,6 +198,31 @@ class Dso extends AbstractEntity
         } else {
             $this->alt = $alt[sprintf('alt_%s', $this->locale)];
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     *
+     * @return Dso
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        if (!$this->locale || 'en' === $this->locale) {
+            $this->description = $description['description'];
+        } else {
+            $this->description = $description[sprintf('description_%s', $this->locale)];
+        }
+        return $this;
     }
 
     /**
