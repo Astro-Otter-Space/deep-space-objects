@@ -42,6 +42,10 @@
       {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
       {% endblock %}
+
+      {% block schema_data %}
+        {% include 'includes/schema/logo.html.twig' %}
+      {% endblock %}
     </head>
 
     <body>
