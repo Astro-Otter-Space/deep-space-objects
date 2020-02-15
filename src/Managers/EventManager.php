@@ -3,6 +3,7 @@
 namespace App\Managers;
 
 use App\Entity\ES\Event;
+use App\Entity\ES\ListObservations;
 use App\Repository\EventRepository;
 use Elastica\Exception\ElasticsearchException;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,10 +40,16 @@ class EventManager
 
     /**
      * @return array
-     * @throws \ReflectionException
      */
     public function getAllEvents(): array
     {
+        /** @return \Generator
+         * @var  $listEvents
+         */
+        $listEvents = function() {
+            yield from $this->eventRepository->setLocale($this->locale)->getAllFuturEvents();
+        };
+
         return array_map(function(Event $event) {
             /** @var \IntlDateFormatter $formatter */
             $formatter = \IntlDateFormatter::create(
@@ -63,7 +70,7 @@ class EventManager
                 ],
                 'geometry' => $event->getLocation()
             ];
-        }, iterator_to_array($this->eventRepository->setLocale($this->locale)->getAllFuturEvents()));
+        }, iterator_to_array($listEvents()));
     }
 
     /**

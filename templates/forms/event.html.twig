@@ -16,6 +16,7 @@
       {{ form_widget(form.eventDate) }}
       <div class="Form__input-error">
         {{ form_errors(form.eventDate) }}
+      </div>
     </div>
   </div>
 
@@ -27,7 +28,7 @@
     </div>
   </div>
 
-<h3 class="Dso__title">{{ 'place'|trans }}</h3>
+  <h3 class="Dso__title">{{ 'place'|trans }}</h3>
 
   <div class="Form__group">
     {{ form_label(form.locationLabel) }}
@@ -45,7 +46,7 @@
     {{ form_widget(form.location) }}
   </div>
 
-<h3 class="Dso__title">{{ 'organiser'|trans }}</h3>
+  <h3 class="Dso__title">{{ 'organiser'|trans }}</h3>
   <div class="Form__group">
 
     <div class="Form__element Form__element__1-2">
@@ -64,6 +65,7 @@
       </div>
     </div>
   </div>
+
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.organiserTel) }}

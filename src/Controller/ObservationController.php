@@ -107,7 +107,6 @@ class ObservationController extends AbstractController
      * }, name="events_list_ajax")
      * @return JsonResponse
      *
-     * @throws ReflectionException
      */
     public function geojsonEventsAjax(): JsonResponse
     {

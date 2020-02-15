@@ -5,6 +5,7 @@ namespace App\Repository;
 
 use App\Classes\Utils;
 use App\Entity\ES\Event;
+use App\Entity\ES\ListEvents;
 use App\Entity\ES\ListObservations;
 use Elastica\Document;
 use Elastica\Query;
@@ -53,13 +54,13 @@ class EventRepository extends AbstractRepository
      * Get all futur events
      * @throws \ReflectionException
      */
-    public function getAllFuturEvents(): ListObservations
+    public function getAllFuturEvents(): \Generator
     {
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
 
-        /** @var ListObservations $listObservation */
-        $listObservation = new ListObservations();
+        /** @var ListEvents $listObservation */
+        $listEvents = new ListEvents();
 
         /** @var Query $query */
         $query = new Query();
@@ -67,7 +68,7 @@ class EventRepository extends AbstractRepository
         /** @var Query\Range $mustQuery */
         $rangeQuery = new Query\Range();
         $rangeQuery->addField('event_date', [
-            'gte' => $now->format(Utils::FORMAT_DATE_ES)
+            'gte' => 'now' // $now->format(Utils::FORMAT_DATE_ES)
         ]);
 
         /** @var Query\BoolQuery $boolQuery */
@@ -76,21 +77,21 @@ class EventRepository extends AbstractRepository
 
         $query->setQuery($boolQuery)->setFrom(0)->setSize(500);
 
-        dump($query->toArray());
         /** @var Search $search */
         $search = new Search($this->client);
 
         /** @var ResultSet $result */
         $result = $search->addIndex(self::INDEX_NAME)->search($query);
-
         if (0 < $result->count()) {
             foreach ($result->getDocuments() as $document) {
-                $event = $this->buildEntityFromDocument($document);
-                $listObservation->addEvent($event);
+                /** @var Event $event */
+               //$event = $this->buildEntityFromDocument($document);
+                //$listEvents->addEvent($event);
+                yield $this->buildEntityFromDocument($document);
             }
         }
 
-        return $listObservation;
+        //return $listEvents;
     }
 
 
