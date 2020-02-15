@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    name: "GeojsonPopup",
+    name: "ObservationPopup",
     props: {
       name: {
         type: String,

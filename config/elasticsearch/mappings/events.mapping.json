@@ -39,7 +39,7 @@
           "type": "integer"
         },
         "public": {
-          "type": "integer"
+          "type": "text"
         },
         "number_entrant": {
           "type": "integer"

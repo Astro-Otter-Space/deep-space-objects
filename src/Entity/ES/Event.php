@@ -54,11 +54,25 @@ class Event extends AbstractEntity
      * @Assert\NotBlank(message="", groups={"add_event"})
      */
     private $locationLabel;
+
+    /**
+     * @var
+     */
     private $location;
+
+    /**
+     * @var
+     */
     private $tarif;
 
+    /**
+     * @var
+     */
     private $public;
 
+    /**
+     * @var
+     */
     private $numberEntrant;
 
     /**
@@ -66,10 +80,20 @@ class Event extends AbstractEntity
      * @Assert\NotBlank(message="", groups={"add_event"})
      */
     private $organiserName;
+
+    /**
+     * @var
+     */
     private $organiserTel;
 
+    /**
+     * @var
+     */
     private $organiserMail;
 
+    /**
+     * @var
+     */
     private $shared;
 
     /**
@@ -334,7 +358,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getNumberEntrant():? integer
+    public function getNumberEntrant():? int
     {
         return $this->numberEntrant;
     }
@@ -344,7 +368,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setNumberEntrant($numberEntrant)
+    public function setNumberEntrant($numberEntrant): self
     {
         $this->numberEntrant = $numberEntrant;
         return $this;
@@ -363,7 +387,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setOrganiserName($organiserName)
+    public function setOrganiserName($organiserName): self
     {
         $this->organiserName = $organiserName;
         return $this;
@@ -382,7 +406,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setOrganiserTel($organiserTel)
+    public function setOrganiserTel($organiserTel): self
     {
         $this->organiserTel = $organiserTel;
         return $this;
@@ -401,7 +425,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setOrganiserMail($organiserMail)
+    public function setOrganiserMail($organiserMail): self
     {
         $this->organiserMail = $organiserMail;
         return $this;
@@ -420,7 +444,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setShared($shared)
+    public function setShared($shared): self
     {
         $this->shared = $shared;
         return $this;
@@ -439,7 +463,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setPot2Miel($pot2Miel)
+    public function setPot2Miel($pot2Miel): self
     {
         $this->pot2Miel = $pot2Miel;
         return $this;
