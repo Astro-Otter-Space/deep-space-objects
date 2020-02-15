@@ -46,3 +46,4 @@ Disallow: /geodata/dso/*
 Disallow: /phpinfo
 Disallow: /_observations
 Disallow: /_search
+Disallow: /_events

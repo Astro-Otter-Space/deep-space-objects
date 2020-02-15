@@ -3,6 +3,7 @@
 
 namespace App\Repository;
 
+use App\Classes\Utils;
 use App\Entity\ES\Event;
 use App\Entity\ES\ListObservations;
 use Elastica\Document;
@@ -66,7 +67,7 @@ class EventRepository extends AbstractRepository
         /** @var Query\Range $mustQuery */
         $rangeQuery = new Query\Range();
         $rangeQuery->addField('event_date', [
-            'gte' => $now->format('Y-m-d')
+            'gte' => $now->format(Utils::FORMAT_DATE_ES)
         ]);
 
         /** @var Query\BoolQuery $boolQuery */

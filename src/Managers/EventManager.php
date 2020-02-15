@@ -38,6 +38,35 @@ class EventManager
 
 
     /**
+     * @return array
+     * @throws \ReflectionException
+     */
+    public function getAllEvents(): array
+    {
+        return array_map(function(Event $event) {
+            /** @var \IntlDateFormatter $formatter */
+            $formatter = \IntlDateFormatter::create(
+                $this->locale,
+                \IntlDateFormatter::SHORT,
+                \IntlDateFormatter::SHORT,
+                null,
+                \IntlDateFormatter::GREGORIAN,
+                ''
+            );
+
+            return [
+                'type' => 'Feature',
+                'properties' => [
+                    'name' => $event->getName(),
+//                    'full_url' => ->generateUrl($observation),
+                    'date' => $formatter->format($event->getEventDate()),
+                ],
+                'geometry' => $event->getLocation()
+            ];
+        }, iterator_to_array($this->eventRepository->getAllFuturEvents()));
+    }
+
+    /**
      * Normalize Entity into JSON
      *
      * @param Event $event
