@@ -10,6 +10,7 @@ use App\Managers\DsoManager;
 use App\Managers\EventManager;
 use App\Managers\ObservationManager;
 use Elastica\Exception\NotFoundException;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -86,11 +87,34 @@ class ObservationController extends AbstractController
      * @return JsonResponse
      * @throws ReflectionException
      */
-    public function geosjonAjax(): JsonResponse
+    public function geojonObservationsAjax(): JsonResponse
     {
         $geojson = [
             'type' => 'FeatureCollection',
             'features' => $this->observationManager->getAllObservation()
+        ];
+
+        return new JsonResponse($geojson, Response::HTTP_OK);
+    }
+
+
+    /**
+     * @Route({
+     *  "en": "/_events",
+     *  "fr": "/_events",
+     *  "es": "/_events",
+     *  "pt": "/_events",
+     *  "de": "/_events"
+     * }, name="events_list_ajax")
+     * @return JsonResponse
+     *
+     * @throws ReflectionException
+     */
+    public function geojsonEventsAjax(): JsonResponse
+    {
+        $geojson = [
+            'type' => 'FeatureCollection',
+            'features' => $this->eventManager->getAllEvents()
         ];
 
         return new JsonResponse($geojson, Response::HTTP_OK);

@@ -9,6 +9,7 @@ use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -49,7 +50,7 @@ class ObservingEventFormType extends AbstractType
             ]
         ]);
 
-        $builder->add('eventDate', DateType::class, [
+        $builder->add('eventDate', DateTimeType::class, [
             'label' => 'event.eventDate.label',
             'widget' => 'single_text',
             'html5' => false,
