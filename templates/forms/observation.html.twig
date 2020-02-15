@@ -120,7 +120,7 @@
   </div>
 
   <div id="map" class="Dso__leaflet">
-    <l-map :zoom="zoom" :center="center" v-on:click="addMarker" ref="map">
+    <l-map :zoom="zoom" :center="center" v-on:click="addMarker" ref="map" :form="form">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
       <l-marker v-for="marker,index in markers" :lat-lng="marker" v-on:click="removeMarker(index)"></l-marker>
     </l-map>

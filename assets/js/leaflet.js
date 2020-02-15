@@ -4,7 +4,6 @@ import { datePicker } from './flatpicker';
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
 import { Icon } from 'leaflet'
-import DsoTags from './Widgets/Observation/components/DsoTags'
 
 datePicker();
 
@@ -27,7 +26,8 @@ new Vue({
       url:'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:'&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
       center: latLng(48.5734053, 7.7521113),
-      markers: []
+      markers: [],
+      form: document.querySelector('form').name
     }
   },
   methods: {
@@ -38,7 +38,8 @@ new Vue({
 
       let valueInput = L.GeoJSON.latLngToCoords(coordinates);
 
-      let elInput = document.querySelector("[name='add_observation[location]']");
+      let formSelector = "[name='"+ this.form + "[location]'";
+      let elInput = document.querySelector(formSelector);
       elInput.value = JSON.stringify(valueInput);
     },
     removeMarker(index) {
@@ -46,11 +47,3 @@ new Vue({
     }
   }
 });
-
-/**
- * TAGS
- * Waiting for https://github.com/voerro/vue-tagsinput/pull/46
- */
-new Vue({
-  render: h => h(DsoTags),
-}).$mount(`#elTags`);

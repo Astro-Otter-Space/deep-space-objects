@@ -15,6 +15,8 @@ class Event extends AbstractEntity
 {
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
+    private static $fieldsObjectToJson = ['id', 'name', 'description', 'eventDate', 'createdAt', 'locationLabel', 'location', 'tarif', 'public', 'numberEntrant', 'organiserName', 'organiserTel', 'organiserMail'];
+
     /** @var string */
     private $id;
     /** @var string */
@@ -223,9 +225,9 @@ class Event extends AbstractEntity
     }
 
     /**
-     * @return \DateTimeInterface|string|null
+     * @return mixed
      */
-    public function getEventDate():? \DateTimeInterface
+    public function getEventDate()
     {
         return $this->eventDate;
     }
@@ -237,7 +239,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setEventDate($eventDate, $convertInString = true)
+    public function setEventDate($eventDate, $convertInString = true): self
     {
         if (is_string($eventDate) && !is_null($eventDate)) {
             if (true === $convertInString) {
@@ -256,7 +258,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getLocationLabel()
+    public function getLocationLabel():? string
     {
         return $this->locationLabel;
     }
@@ -266,7 +268,7 @@ class Event extends AbstractEntity
      *
      * @return Event
      */
-    public function setLocationLabel($locationLabel)
+    public function setLocationLabel($locationLabel): self
     {
         $this->locationLabel = $locationLabel;
         return $this;
@@ -294,7 +296,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getTarif()
+    public function getTarif():? float
     {
         return $this->tarif;
     }
@@ -313,7 +315,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getPublic()
+    public function getPublic():? string
     {
         return $this->public;
     }
@@ -332,7 +334,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getNumberEntrant()
+    public function getNumberEntrant():? integer
     {
         return $this->numberEntrant;
     }
@@ -351,7 +353,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getOrganiserName()
+    public function getOrganiserName():? string
     {
         return $this->organiserName;
     }
@@ -370,7 +372,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getOrganiserTel()
+    public function getOrganiserTel():? string
     {
         return $this->organiserTel;
     }
@@ -389,7 +391,7 @@ class Event extends AbstractEntity
     /**
      * @return mixed
      */
-    public function getOrganiserMail()
+    public function getOrganiserMail():? string
     {
         return $this->organiserMail;
     }
@@ -450,6 +452,14 @@ class Event extends AbstractEntity
     public function getListFieldsNoMapping(): array
     {
         return self::$listFieldsNoMapping;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFieldsObjectToJson(): array
+    {
+        return self::$fieldsObjectToJson;
     }
 
     /**
