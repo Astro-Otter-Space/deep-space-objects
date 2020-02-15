@@ -3,7 +3,7 @@
   <social-sharing
     :url="urlShare"
     :title="titleShare"
-    :description="descShare"
+    :description="description"
     inline-template
   >
     <div>
@@ -30,7 +30,7 @@
         default: "",
         type: String
       },
-      descShare: {
+      description: {
         default: "",
         type: String
       }

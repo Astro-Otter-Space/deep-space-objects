@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="imageCover !== 'default_large.jpg'" class="Dso_header">
+    <div v-if="imageCover !== '/build/images/default_large.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
         :alt-image="imageCoverAlt"
@@ -16,7 +16,7 @@
         <social-sharing
           :url="urlShare"
           :title="title"
-          :description="descShare"
+          :description="description"
           hashtags=""
           twitter-user=""
           inline-template
@@ -140,7 +140,7 @@
     // https://stackoverflow.com/questions/42269260/how-to-get-the-values-of-data-attributes-in-vuejs
     methods: {
       getHeaderClass() {
-        if (this.imageCover !== 'default_large.jpg') {
+        if (this.imageCover !== '/build/images/default_large.jpg') {
           return 'Dso__container';
         } else {
           return 'Dso__container Dso__noHeader';

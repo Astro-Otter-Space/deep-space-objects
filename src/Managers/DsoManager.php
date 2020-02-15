@@ -230,7 +230,7 @@ class DsoManager
         $defautImage = new Image();
         $defautImage->url_hd = Utils::IMG_LARGE_DEFAULT;
         $defautImage->url_regular = Utils::IMG_LARGE_DEFAULT;
-        $defautImage->user = 'none';
+        $defautImage->user = null;
 
         try {
             /** @var Image $imageAstrobin */
