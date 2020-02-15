@@ -74,6 +74,9 @@ class EventRepository extends AbstractRepository
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addMust($rangeQuery);
 
+        $query->setQuery($boolQuery)->setFrom(0)->setSize(500);
+
+        dump($query->toArray());
         /** @var Search $search */
         $search = new Search($this->client);
 
@@ -119,7 +122,7 @@ class EventRepository extends AbstractRepository
         /** @var Event $event */
         $event = new $entity;
 
-        return $event->setLocale()->buildObjectR($document);
+        return $event->setLocale($this->locale)->buildObjectR($document);
     }
 
     /**

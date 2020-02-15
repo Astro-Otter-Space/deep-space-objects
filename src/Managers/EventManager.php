@@ -63,7 +63,7 @@ class EventManager
                 ],
                 'geometry' => $event->getLocation()
             ];
-        }, iterator_to_array($this->eventRepository->getAllFuturEvents()));
+        }, iterator_to_array($this->eventRepository->setLocale($this->locale)->getAllFuturEvents()));
     }
 
     /**

@@ -10,7 +10,6 @@ use App\Managers\DsoManager;
 use App\Managers\EventManager;
 use App\Managers\ObservationManager;
 use Elastica\Exception\NotFoundException;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
