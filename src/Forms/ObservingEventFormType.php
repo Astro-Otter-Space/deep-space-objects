@@ -5,11 +5,14 @@ namespace App\Forms;
 
 use App\Classes\Utils;
 use App\Entity\ES\Event;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,6 +32,8 @@ class ObservingEventFormType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
+     *
+     * @throws \Exception
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,8 +51,11 @@ class ObservingEventFormType extends AbstractType
 
         $builder->add('eventDate', DateType::class, [
             'label' => 'event.eventDate.label',
+            'widget' => 'single_text',
+            'html5' => false,
+            'data' => new \DateTime(),
             'attr' => [
-                'class' => 'Form__input',
+                'class' => 'Form__input js-datepicker',
                 'placeholder' => 'event.eventDate.placeholder'
             ],
             'label_attr' => [
@@ -58,7 +66,8 @@ class ObservingEventFormType extends AbstractType
         $builder->add('description', TextareaType::class, [
             'label' => 'event.description.label',
             'attr' => [
-                'class' => 'Form__input',
+                'class' => 'Form__textarea',
+                'rows' => 6,
                 'placeholder' => 'event.description.placeholder'
             ],
             'label_attr' => [
@@ -95,6 +104,10 @@ class ObservingEventFormType extends AbstractType
 
         $builder->add('public', ChoiceType::class, [
             'label' => 'event.public.label',
+
+            'choices' => array_flip(Utils::listEventPublic()),
+            'expanded' => false,
+            'multiple' => false,
             'attr' => [
                 'class' => 'Form__input',
                 'placeholder' => 'event.public.placeholder'
@@ -104,7 +117,7 @@ class ObservingEventFormType extends AbstractType
             ]
         ]);
 
-        $builder->add('numberEntrant', NumberType::class, [
+        $builder->add('numberEntrant', IntegerType::class, [
             'label' => 'event.numberEntrant.label',
             'attr' => [
                 'class' => 'Form__input',
@@ -154,6 +167,28 @@ class ObservingEventFormType extends AbstractType
             'attr' => [
                 'aria-hidden' => "true",
                 'style' => 'display: none;'
+            ]
+        ]);
+
+        $builder->add('recaptcha', EWZRecaptchaType::class, [
+            'mapped' => false,
+            'error_bubbling' => false,
+            'attr' => [
+                'options' => [
+                    'theme' => 'light',
+                    'type'  => 'image',
+                    'size' => 'invisible',              // set size to invisible
+                    'defer' => true,
+                    'async' => true,
+                    //'callback' => 'onReCaptchaSuccess', // callback will be set by default if not defined (along with JS function that validate the form on success)
+                    'bind' => 'btn_contact_submit',
+                ]
+            ],
+            'invalid_message' => 'contact.constraint',
+            'constraints' => [
+                new IsTrue([
+                    'message' => 'form.constraint.recaptcha'
+                ])
             ]
         ]);
 

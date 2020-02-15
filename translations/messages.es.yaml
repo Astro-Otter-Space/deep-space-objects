@@ -324,6 +324,7 @@ skymapDesc:
 addObservation: Agregar una observación
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
 scheduleObs: Schedule an observation
+scheduleObsDesc: Schedule an astronomical observing event and discover the wonders of the universe.
 form.ok.addDoc: Observación agregada, <a href="%url%">aquí</a>.
 form.error.addDoc: Error al agregar el documento. Inténtalo de nuevo o comunícate con el administrador.
 observation:
@@ -362,6 +363,8 @@ observation:
   locationLabel:
     label: Lugar de observación
     placeholder: "Ex: Madrid, Spain"
+
+
 # Legal notice
 legal_notice.title: Aviso legal
 legal_notice.line_first: ""

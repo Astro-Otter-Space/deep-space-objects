@@ -213,6 +213,8 @@ class ObservationController extends AbstractController
      *  "pt": "/schedule-observing-event",
      *  "de": "/schedule-observing-event"
      * }, name="schedule_obs")
+     *
+     * @throws ExceptionInterface
      */
     public function scheduleObservation(Request $request): Response
     {
@@ -235,9 +237,19 @@ class ObservationController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-
+                /** @var Event $event */
+                $event = $form->getData();
+                dump($event);
+                die();
+                $isValid = $this->eventManager->addEvent($event);
+                if (true === $isValid) {
+                    $messageOk = $this->translatorInterface->trans('form.ok.addDoc', ['%url%' => $event->getFullUrl()]);
+                    $this->addFlash('form.success', $messageOk);
+                } else {
+                    $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.addDoc'));
+                }
             } else {
-
+                $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.message'));
             }
         }
 

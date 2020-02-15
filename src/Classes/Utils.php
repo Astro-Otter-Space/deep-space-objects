@@ -181,6 +181,15 @@ class Utils
     ];
 
     /**
+     * @var array
+     */
+    private static $listPublics = [
+        'all' => 'event.option.all',
+        'deb' => 'event.option.deb',
+        'conf' => 'event.option.conf'
+    ];
+
+    /**
      * @return array
      */
     public static function getCatalogMapping(): array
@@ -287,6 +296,14 @@ class Utils
     public static function listTopicsContact(): array
     {
         return self::$listTopics;
+    }
+
+    /**
+     * @return array
+     */
+    public static function listEventPublic(): array
+    {
+        return self::$listPublics;
     }
 
     /**

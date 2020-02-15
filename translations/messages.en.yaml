@@ -325,6 +325,7 @@ skymapDesc:
 addObservation: Add an observation
 addObservationDesc: Save your observations and add objects you've seen.
 scheduleObs: Schedule observing event
+scheduleObsDesc: Schedule an astronomical observing event and discover the wonders of the universe.
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
@@ -363,6 +364,42 @@ observation:
   locationLabel:
     label: Location of observation
     placeholder: "Ex: London, UK"
+# Event
+event:
+    name:
+        label: "Name"
+        placeholder: "Enter a name"
+    eventDate:
+        label: "Date event"
+        placeholder: "Pick a date"
+    description:
+        label: "Description"
+        placeholder: "Describe event"
+    locationLabel:
+        label: "Location"
+        placeholder: "Where is it take place"
+    tarif:
+        label: "Price"
+        placeholder: "Free or paying"
+    public:
+        label: "Public"
+        placeholder: "Public type"
+    numberEntrant:
+        label: "Number of participants"
+        placeholder: ""
+    organiserName:
+        label: "Organizer name"
+        placeholder: ""
+    organiserMail:
+        label: "Organizer mail"
+        placeholder: ""
+    organiserTel:
+        label: "Organizer tel"
+        placeholder: ""
+    option:
+        all: All public
+        deb: Beginner
+        conf: Confirmed
 # Legal notice
 legal_notice.title: Legal notice
 legal_notice.line_first: "\"%dso%\" est un site d'information à visée personnelle et non-commerciale."
