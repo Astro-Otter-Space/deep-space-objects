@@ -3,8 +3,9 @@
 
 namespace App\Entity\ES;
 
+use App\Classes\Utils;
 use App\Repository\ObservationRepository;
-use Elastica\Document;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Event
@@ -14,23 +15,65 @@ class Event extends AbstractEntity
 {
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
+    /** @var string */
     private $id;
+    /** @var string */
     private $locale;
+    /** @var string */
     private $fullUrl;
+    /** @var string */
     private $elasticId;
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="", groups={"add_event"})
+     */
     private $name;
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="", groups={"add_event"})
+     */
     private $description;
+
+    /** @var
+     * @Assert\DateTime(message="", groups={"add_event"})
+     */
     private $createdAt;
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="", groups={"add_event"})
+     */
     private $eventDate;
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="", groups={"add_event"})
+     */
     private $locationLabel;
     private $location;
     private $tarif;
+
     private $public;
+
     private $numberEntrant;
+
+    /**
+     * @var
+     * @Assert\NotBlank(message="", groups={"add_event"})
+     */
     private $organiserName;
     private $organiserTel;
+
     private $organiserMail;
+
     private $shared;
+
+    /**
+     * @var
+     * @Assert\Blank(message="contact.constraint.invalid_form", groups={"add_event"})
+     */
     private $pot2Miel;
 
 
@@ -159,18 +202,30 @@ class Event extends AbstractEntity
     /**
      * @param mixed $createdAt
      *
+     * @param bool $convertInString
+     *
      * @return Event
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt, $convertInString)
     {
-        $this->createdAt = $createdAt;
+        if (is_string($createdAt) && !is_null($createdAt)) {
+            if (true === $convertInString) {
+                $this->createdAt = $createdAt;
+            } else {
+                $this->createdAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $createdAt);
+            }
+
+        } else if ($createdAt instanceof \DateTime) {
+            $this->createdAt = $createdAt;
+        }
+
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|string|null
      */
-    public function getEventDate()
+    public function getEventDate():? \DateTimeInterface
     {
         return $this->eventDate;
     }
@@ -178,11 +233,23 @@ class Event extends AbstractEntity
     /**
      * @param mixed $eventDate
      *
+     * @param bool $convertInString
+     *
      * @return Event
      */
-    public function setEventDate($eventDate)
+    public function setEventDate($eventDate, $convertInString = true)
     {
-        $this->eventDate = $eventDate;
+        if (is_string($eventDate) && !is_null($eventDate)) {
+            if (true === $convertInString) {
+                $this->eventDate = (string)$eventDate;
+            } else {
+                $this->eventDate = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $eventDate);
+            }
+
+        } else if ($eventDate instanceof \DateTime) {
+            $this->eventDate = $eventDate;
+        }
+
         return $this;
     }
 

@@ -242,11 +242,11 @@ class ObservationFormType extends AbstractType
 
         // Listener after submit
         $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($user) {
-            /** @var Observation $data */
-            $data = $event->getData();
-
             /** @var \DateTime $now */
             $now = new \DateTime();
+
+            /** @var Observation $data */
+            $data = $event->getData();
 
             if (!is_null($user)) {
                 $data->setUsername($user->getUsername());

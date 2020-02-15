@@ -1,0 +1,52 @@
+{{ form_start(form) }}
+
+  {{ form_label(form.name) }}
+  {{ form_widget(form.name) }}
+  {{ form_errors(form.name) }}
+
+  {{ form_label(form.eventDate) }}
+  {{ form_widget(form.eventDate) }}
+  {{ form_errors(form.eventDate) }}
+
+  {{ form_label(form.description) }}
+  {{ form_widget(form.description) }}
+  {{ form_errors(form.description) }}
+
+  {{ form_label(form.locationLabel) }}
+  {{ form_widget(form.locationLabel) }}
+  {{ form_errors(form.locationLabel) }}
+
+  {{ form_label(form.location) }}
+  {{ form_widget(form.location) }}
+  {{ form_errors(form.location) }}
+
+  {{ form_label(form.organiserName) }}
+  {{ form_widget(form.organiserName) }}
+  {{ form_errors(form.organiserName) }}
+
+  {{ form_label(form.organiserMail) }}
+  {{ form_widget(form.organiserMail) }}
+  {{ form_errors(form.organiserMail) }}
+
+  {{ form_label(form.organiserTel) }}
+  {{ form_widget(form.organiserTel) }}
+  {{ form_errors(form.organiserTel) }}
+
+  {{ form_label(form.public) }}
+  {{ form_widget(form.public) }}
+  {{ form_errors(form.public) }}
+
+  {{ form_label(form.tarif) }}
+  {{ form_widget(form.tarif) }}
+  {{ form_errors(form.tarif) }}
+
+  {{ form_label(form.numberEntrant) }}
+  {{ form_widget(form.numberEntrant) }}
+  {{ form_errors(form.numberEntrant) }}
+
+  {{ form_widget(form.pot2Miel) }}
+
+  <button type="submit" class="">
+    {{ 'contact.form.submit'|trans }}
+  </button>
+{{ form_end(form) }}

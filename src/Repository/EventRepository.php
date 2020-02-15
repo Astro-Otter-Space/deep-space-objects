@@ -7,6 +7,7 @@ use App\Entity\ES\Event;
 use App\Entity\ES\ListObservations;
 use Elastica\Document;
 use Elastica\Query;
+use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 
@@ -88,9 +89,20 @@ class EventRepository extends AbstractRepository
         return $listObservation;
     }
 
-    public function addEvent()
-    {
 
+    /**
+     * Add normalized data into elasticsearch document
+     * @param $id
+     * @param $eventData
+     *
+     * @return Response
+     */
+    public function addEvent($id, $eventData)
+    {
+        /** @var Document $document */
+        $document = new Document($id, $eventData, '', self::INDEX_NAME);
+
+        return $this->addNewDocument($document);
     }
 
     /**

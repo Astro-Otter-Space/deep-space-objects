@@ -8,7 +8,24 @@
   <section class="Dso__main">
     <div class="Dso__container Dso__noHeader">
       <h2 class="Dso__title">{{ 'scheduleObs'|trans }}</h2>
-      <p>Work in progress...</p>
+
+      {% for messages in app.flashes("form.failed") %}
+        <div class="Form__message Form__error">
+          {{ messages|raw }}
+        </div>
+      {% endfor %}
+
+      {% for messages in app.flashes("form.success") %}
+        <div class="Form__message Form__success">
+          {{ messages|raw }}
+        </div>
+      {% endfor %}
+
+      {% if false == is_valid %}
+        <div class="Dso__Form">
+          {% include 'forms/event.html.twig' with {form: formAddEvent} %}
+        </div>
+      {% endif %}
     </div>
   </section>
 </div>
