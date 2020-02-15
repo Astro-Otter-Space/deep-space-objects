@@ -323,6 +323,7 @@ skymapDesc: "Carte du ciel"
 addObservation: Ajouter une observation
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
 scheduleObs: Préparer une soirée
+scheduleObsDesc: Organisez une soirée d'observation astronomique et faites découvrir les merveilles du ciel
 form.ok.addDoc: Observation ajoutée, retrouvez-la <a href="%url%">ici</a>.
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:
@@ -361,6 +362,42 @@ observation:
   locationLabel:
     label: Lieu de l'observation
     placeholder: "Ex: Cazevieille, France..."
+# Event
+event:
+    name:
+        title: ""
+        placeholder: ""
+    eventDate:
+        title: ""
+        placeholder: ""
+    description:
+        title: ""
+        placeholder: ""
+    locationLabel:
+        title: ""
+        placeholder: ""
+    tarif:
+        title: ""
+        placeholder: ""
+    public:
+        title: ""
+        placeholder: ""
+    numberEntrant:
+        title: ""
+        placeholder: ""
+    organiserName:
+        title: ""
+        placeholder: ""
+    organiserMail:
+        title: ""
+        placeholder: ""
+    organiserTel:
+        title: ""
+        placeholder: ""
+    option:
+        all: Tout public
+        deb: Débutant
+        conf: Confirmés
 # Legal notice
 legal_notice.title: Mentions légales
 legal_notice.line_first: "\"%dso%\" est un site d'information à visée personnelle et non-commerciale."

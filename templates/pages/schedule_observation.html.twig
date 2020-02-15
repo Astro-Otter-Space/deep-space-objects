@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = 'scheduleObs'|trans %}
+{% set pageDesc = 'scheduleObsDesc'|trans %}
+
 
 {% block content %}
 
@@ -8,6 +10,10 @@
   <section class="Dso__main">
     <div class="Dso__container Dso__noHeader">
       <h2 class="Dso__title">{{ 'scheduleObs'|trans }}</h2>
+
+      <div>
+        <p>{{ 'scheduleObsDesc'|trans }}</p>
+      </div>
 
       {% for messages in app.flashes("form.failed") %}
         <div class="Form__message Form__error">
@@ -30,4 +36,9 @@
   </section>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('leaflet') }}
 {% endblock %}

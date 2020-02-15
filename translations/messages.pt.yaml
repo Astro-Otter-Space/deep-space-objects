@@ -323,6 +323,7 @@ skymapDesc:
 addObservation: Add an observation
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
 scheduleObs: Schedule an observation
+scheduleObsDesc: Organisez une soirée d'observation astronomique et faites découvrir les merveilles du ciel
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
