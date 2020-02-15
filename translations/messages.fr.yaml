@@ -14,7 +14,7 @@ hem.su: Hémisphère sud
 about.us: À propos
 skymap: Carte du ciel
 titleObservation: Observations
-listObservations: Liste des observations
+listObservations: Soirées & observations
 locationObservation: Localisation des observations
 openMenu: Ouverture menu
 switchLang: Changer de langue
@@ -322,7 +322,7 @@ skymapDesc: "Carte du ciel"
 # Form add observation
 addObservation: Ajouter une observation
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
-scheduleObs: Préparer une sortie
+scheduleObs: Préparer une soirée
 form.ok.addDoc: Observation ajoutée, retrouvez-la <a href="%url%">ici</a>.
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:

@@ -14,7 +14,7 @@ hem.su: Southern hemisphere
 about.us: About us
 skymap: SkyMap
 titleObservation: Observations
-listObservations: Observations list
+listObservations: Observing events
 locationObservation: Observations location
 openMenu: Open menu
 switchLang: Switch language
@@ -324,7 +324,7 @@ skymapDesc:
 # Form add observation
 addObservation: Add an observation
 addObservationDesc: Save your observations and add objects you've seen.
-scheduleObs: Schedule an observation
+scheduleObs: Schedule observing event
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:

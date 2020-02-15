@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\ES\Event;
 use App\Entity\ES\Observation;
 use App\Forms\ObservationFormType;
+use App\Forms\ObservingEventFormType;
 use App\Managers\DsoManager;
+use App\Managers\EventManager;
 use App\Managers\ObservationManager;
 use Elastica\Exception\NotFoundException;
 use ReflectionException;
@@ -29,6 +32,8 @@ class ObservationController extends AbstractController
     private $dsoManager;
     /** @var TranslatorInterface */
     private $translatorInterface;
+    /** @var EventManager  */
+    private $eventManager;
 
     /**
      * ObservationController constructor.
@@ -36,12 +41,14 @@ class ObservationController extends AbstractController
      * @param ObservationManager $observationManager
      * @param DsoManager $dsoManager
      * @param TranslatorInterface $translatorInterface
+     * @param EventManager $eventManager
      */
-    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager, TranslatorInterface $translatorInterface)
+    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager, TranslatorInterface $translatorInterface, EventManager $eventManager)
     {
         $this->observationManager = $observationManager;
         $this->dsoManager = $dsoManager;
         $this->translatorInterface = $translatorInterface;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -200,16 +207,42 @@ class ObservationController extends AbstractController
      * @return Response
      *
      * @Route({
-     *  "en": "/schedule-an-observation",
-     *  "fr": "/preparer-une-observation",
-     *  "es": "/schedule-an-observation",
-     *  "pt": "/schedule-an-observation",
-     *  "de": "/schedule-an-observation"
+     *  "en": "/schedule-observing-event",
+     *  "fr": "/organiser-une-soiree-observation",
+     *  "es": "/schedule-observing-event",
+     *  "pt": "/schedule-observing-event",
+     *  "de": "/schedule-observing-event"
      * }, name="schedule_obs")
      */
     public function scheduleObservation(Request $request): Response
     {
         $params = [];
+        $isValid = false;
+
+        $options = [
+            'method' => 'POST',
+            'action' => $this->generateUrl('schedule_obs'),
+            'attr' => [
+                'novalidate' => 'novalidate'
+            ]
+        ];
+
+        /** @var Event $event */
+        $event = new Event();
+
+        $form = $this->createForm(ObservingEventFormType::class, $event, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+
+            } else {
+
+            }
+        }
+
+        $params['formAddEvent'] = $form->createView();
+        $params['is_valid'] = $isValid;
 
         /** @var Response $response */
         $response = new Response();
