@@ -35,7 +35,6 @@
           </div>
         </div>
         <div class="Dso__leaflet">
-<!--  TODO  https://travishorn.com/interactive-maps-with-vue-leaflet-5430527353c8-->
           <l-map
             :zoom="zoom"
             :center="center"
@@ -44,12 +43,18 @@
               :geojson="geojsonObs"
               :options="options"
               :options-style="styleObservation"
-            ></l-geo-json>
+              name="l_observations"
+            >
+              <l-marker
+                :icon="iconObs"
+              ></l-marker>
+            </l-geo-json>
 
             <l-geo-json v-if="(itemselect === 'event') || (itemselect === 'all')"
               :geojson="geojsonEvents"
               :options="options"
               :options-style="styleEvents"
+              name="l_events"
             ></l-geo-json>
 
             <l-tile-layer
@@ -66,7 +71,7 @@
 <script>
   import Vue from "vue";
   import Searchautocomplete from "./../Homepage/components/Searchautocomplete"
-  import { LMap, LTileLayer, LMarker, LGeoJson } from 'vue2-leaflet';
+  import { LMap, LTileLayer, LMarker, LIcon, LGeoJson } from 'vue2-leaflet';
   import axios from 'axios';
   import obsPopupContent from './ObservationPopup';
 
@@ -85,6 +90,7 @@
       LTileLayer,
       LMarker,
       LGeoJson,
+      LIcon
     },
     data () {
       return {
@@ -122,6 +128,11 @@
             label: 'Observations',
           }
         ],
+        iconObs: L.icon({
+          iconUrl: 'build/images/markers/telescope.png',
+          iconSize: [32, 37],
+          iconAnchor: [16, 37]
+        }),
         itemselect: 'all',
       }
     },
@@ -159,24 +170,11 @@
           layer.bindPopup(popup.$mount().$el);*/
         }
       },
-      styleObservation() {
-        /*return {
-          pointToLayer(feature, latlng) {
-            return L.Marker(latlng, {
-              icon: new L.icon({
-                iconUrl: 'assets/images/markers/telescope.png',
-                iconSize: [40, 40],
-                iconAnchor: [20, 20]
-              })
-            })
-          }
-        }*/
-        return () => {
-          return {
-            color: '#ff0000',
-            weight: 5,
-            opacity: 0.5
-          }
+      styleObservation(feature) {
+        return {
+          color: '#ff0000',
+          weight: 5,
+          opacity: 0.5
         }
       },
       styleEvents() {
