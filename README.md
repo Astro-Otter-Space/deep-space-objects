@@ -96,10 +96,12 @@ Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/
 curl -X DELETE "elasticsearch:9200/deepspaceobjects"
 curl -X DELETE "elasticsearch:9200/constellations"
 curl -X DELETE "elasticsearch:9200/observations"
+curl -X DELETE "elasticsearch:9200/events"
 
 curl -X PUT elasticsearch:9200/deepspaceobjects?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/deepspaceobjects.mapping.json
 curl -X PUT elasticsearch:9200/constellations?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/constellations.mapping.json
 curl -X PUT elasticsearch:9200/observations?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/observations.mapping.json
+curl -X PUT elasticsearch:9200/events?pretty=true -H 'Content-Type: application/json' -d @config/elasticsearch/mappings/events.mapping.json
 ```
 NB : not delete indexes if deployed in prod yet
 

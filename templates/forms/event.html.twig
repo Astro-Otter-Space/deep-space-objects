@@ -6,20 +6,25 @@
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.name) }}
       {{ form_widget(form.name) }}
-      {{ form_errors(form.name) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.name) }}
+      </div>
     </div>
 
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.eventDate) }}
       {{ form_widget(form.eventDate) }}
-      {{ form_errors(form.eventDate) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.eventDate) }}
     </div>
   </div>
 
   <div class="Form__group">
     {{ form_label(form.description) }}
     {{ form_widget(form.description) }}
-    {{ form_errors(form.description) }}
+    <div class="Form__input-error">
+      {{ form_errors(form.description) }}
+    </div>
   </div>
 
 <h3 class="Dso__title">{{ 'place'|trans }}</h3>
@@ -27,7 +32,9 @@
   <div class="Form__group">
     {{ form_label(form.locationLabel) }}
     {{ form_widget(form.locationLabel) }}
-    {{ form_errors(form.locationLabel) }}
+    <div class="Form__input-error">
+      {{ form_errors(form.locationLabel) }}
+    </div>
   </div>
 
   <div id="map" class="Dso__leaflet">
@@ -44,40 +51,52 @@
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.organiserName) }}
       {{ form_widget(form.organiserName) }}
-      {{ form_errors(form.organiserName) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.organiserName) }}
+      </div>
     </div>
 
     <div class="Form__element Form__element__1-2">
       {{ form_label(form.organiserMail) }}
       {{ form_widget(form.organiserMail) }}
-      {{ form_errors(form.organiserMail) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.organiserMail) }}
+      </div>
     </div>
   </div>
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
-    {{ form_label(form.organiserTel) }}
-    {{ form_widget(form.organiserTel) }}
-    {{ form_errors(form.organiserTel) }}
+      {{ form_label(form.organiserTel) }}
+      {{ form_widget(form.organiserTel) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.organiserTel) }}
+      </div>
     </div>
 
     <div class="Form__element Form__element__1-2">
-    {{ form_label(form.public) }}
-    {{ form_widget(form.public) }}
-    {{ form_errors(form.public) }}
+      {{ form_label(form.public) }}
+      {{ form_widget(form.public) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.public) }}
+      </div>
     </div>
   </div>
 
   <div class="Form__group">
     <div class="Form__element Form__element__1-2">
-    {{ form_label(form.tarif) }}
-    {{ form_widget(form.tarif) }}
-    {{ form_errors(form.tarif) }}
+      {{ form_label(form.tarif) }}
+      {{ form_widget(form.tarif) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.tarif) }}
+      </div>
     </div>
 
     <div class="Form__element Form__element__1-2">
-    {{ form_label(form.numberEntrant) }}
-    {{ form_widget(form.numberEntrant) }}
-    {{ form_errors(form.numberEntrant) }}
+      {{ form_label(form.numberEntrant) }}
+      {{ form_widget(form.numberEntrant) }}
+      <div class="Form__input-error">
+        {{ form_errors(form.numberEntrant) }}
+      </div>
     </div>
   </div>
 </div>
