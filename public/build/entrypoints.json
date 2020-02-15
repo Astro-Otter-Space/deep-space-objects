@@ -73,9 +73,15 @@
       "js": [
         "/build/runtime.js",
         "/build/leaflet.js"
+      ]
+    },
+    "tags": {
+      "js": [
+        "/build/runtime.js",
+        "/build/tags.js"
       ],
       "css": [
-        "/build/leaflet.css"
+        "/build/tags.css"
       ]
     }
   }

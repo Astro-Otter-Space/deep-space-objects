@@ -239,8 +239,7 @@ class ObservationController extends AbstractController
             if ($form->isValid()) {
                 /** @var Event $event */
                 $event = $form->getData();
-                dump($event);
-                die();
+
                 $isValid = $this->eventManager->addEvent($event);
                 if (true === $isValid) {
                     $messageOk = $this->translatorInterface->trans('form.ok.addDoc', ['%url%' => $event->getFullUrl()]);

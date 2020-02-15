@@ -32,7 +32,7 @@ Encore
   //D3-celestial
   .addEntry('skymap', './assets/js/skymap.js')
   .addEntry('leaflet', './assets/js/leaflet.js')
-
+  .addEntry('tags', './assets/js/tags.js')
   //
 
   // will require an extra script tag for runtime.js

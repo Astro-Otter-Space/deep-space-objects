@@ -199,11 +199,11 @@ class ObservingEventFormType extends AbstractType
             /** @var \DateTimeInterface $now */
             $now = new \DateTime();
 
-            $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES), true);
-            $data->setEventDate($data->getEventDate()->format(Utils::FORMAT_DATE_ES), true);
-
             // URL
             $eventUrl = Utils::camelCaseUrlTransform(implode(trim(Event::URL_CONCAT_GLUE), [$data->getName(), $data->getEventDate()->format('Y-m-d')]));
+
+            $data->setCreatedAt($now->format(Utils::FORMAT_DATE_ES), true);
+            $data->setEventDate($data->getEventDate()->format(Utils::FORMAT_DATE_ES), true);
 
             // Add location
             $geoShape = [
@@ -212,11 +212,8 @@ class ObservingEventFormType extends AbstractType
             ];
             $data->setLocation($geoShape);
 
-            // Add URL
-            $data->setFullUrl($eventUrl);
             // Add id
             $data->setId(md5($eventUrl));
-
         });
     }
 
