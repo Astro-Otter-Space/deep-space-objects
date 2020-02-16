@@ -313,6 +313,12 @@ class LayoutController extends AbstractController
                     return [$locale => $router->generate(sprintf('observation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
+            'add_event' => [
+                'loc' => $router->generate('schedule_obs', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('schedule_obs.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
             'add_obs' => [
                 'loc' => $router->generate('add_observation', [], Router::ABSOLUTE_URL),
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
@@ -334,10 +340,22 @@ class LayoutController extends AbstractController
         ];
 
         /** @var  $listDso */
-        [$listDso,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+        [$listDsoMessier,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
+        [$listDsoNgc,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'ngc'], 8000);
 
         /** @var Dso $dso */
-        foreach ($listDso as $dso) {
+        foreach ($listDsoMessier as $dso) {
+            $params['urls'][$dso->getId()] = [
+                'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($dso) {
+                    return [
+                        $locale => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL, $locale)
+                    ];
+                }, $listLocales)),
+                'lastmod' => $dso->getUpdatedAt()->format('Y-m-d')
+            ];
+        }
+        foreach ($listDsoNgc as $dso) {
             $params['urls'][$dso->getId()] = [
                 'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($dso) {
