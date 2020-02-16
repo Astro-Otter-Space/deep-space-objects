@@ -313,12 +313,12 @@ class LayoutController extends AbstractController
                     return [$locale => $router->generate(sprintf('observation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
-            'add_event' => [
+            /*'add_event' => [
                 'loc' => $router->generate('schedule_obs', [], Router::ABSOLUTE_URL),
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('schedule_obs.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
-            ],
+            ],*/
             'add_obs' => [
                 'loc' => $router->generate('add_observation', [], Router::ABSOLUTE_URL),
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
