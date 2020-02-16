@@ -20,6 +20,7 @@ openMenu: Ouverture menu
 switchLang: Changer de langue
 nightMode: Mode nuit ON
 dayMode: Mode nuit OFF
+dateFormatLong: d/m/Y H:i
 #Catalog
 catalog: Catalogue
 catalogs: Catalogues
@@ -384,13 +385,13 @@ event:
         placeholder: "Type de public"
     numberEntrant:
         label: "Nombre de participants maximum souhaités"
-        placeholder: ""
+        placeholder: "20"
     organiserName:
         label: "Nom de l'organisateur (*)"
-        placeholder: ""
+        placeholder: "Votre nom ou celui de votre club/association"
     organiserMail:
         label: "Adresse email de l'organisateur"
-        placeholder: ""
+        placeholder: "(ex.: mail@exemple.com)"
     organiserTel:
         label: "Téléphone de l'organisateur"
         placeholder: ""

@@ -20,6 +20,7 @@ openMenu: Open menu
 switchLang: Switch language
 nightMode: Night mode ON
 dayMode: Night mode OFF
+dateFormatLong: Y-m-d H:i
 #Catalog
 catalog: Catalog
 catalogs: Catalogs
@@ -386,13 +387,13 @@ event:
         placeholder: "Public type"
     numberEntrant:
         label: "Number of participants"
-        placeholder: ""
+        placeholder: "20"
     organiserName:
         label: "Organizer name (*)"
-        placeholder: ""
+        placeholder: "Your name or your club name"
     organiserMail:
         label: "Organizer mail"
-        placeholder: ""
+        placeholder: "(eg: mail@example.com)"
     organiserTel:
         label: "Organizer tel"
         placeholder: ""

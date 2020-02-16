@@ -10,6 +10,7 @@ use App\Entity\ES\ListObservations;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Response;
+use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Search;
 
@@ -20,6 +21,8 @@ use Elastica\Search;
 class EventRepository extends AbstractRepository
 {
     const INDEX_NAME = 'events';
+
+    private static $listSearchFields = ['name', 'description', 'locationLabel', 'organiserName'];
 
     /**
      * @param $id
@@ -43,11 +46,26 @@ class EventRepository extends AbstractRepository
 
 
     /**
+     * @param $terms
      *
+     * @return \Generator
+     * @throws \ReflectionException
      */
-    public function getEventBySearchTerms()
+    public function getEventBySearchTerms($terms)
     {
+        $list = [];
+        /** @var ResultSet $result */
+        $result = $this->requestBySearchTerms($terms, self::$listSearchFields);
 
+        if (0 < $result->getTotalHits()) {
+            /*$list = array_map(function(Result $doc) {
+                return $this->buildEntityFromDocument($doc->getDocument());
+            }, $result->getResults());*/
+
+            foreach ($result->getResults() as $doc) {
+                yield $this->buildEntityFromDocument($doc->getDocument());
+            }
+        }
     }
 
     /**

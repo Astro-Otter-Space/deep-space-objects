@@ -91,6 +91,12 @@
     line-height: 20px;
   }
 
+  /*&__input[type="email"]:before {
+    background-image: url('/build/images/layout/mail.svg');
+    background-size: 16px;
+    background-position: 2px;
+    background-repeat: no-repeat;
+  }*/
 
   &__submit {
     color: $color-text;

@@ -8,6 +8,7 @@ use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
+use App\Repository\EventRepository;
 use App\Repository\ObservationRepository;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
@@ -75,6 +76,7 @@ class UrlGenerateHelper
                     break;
 
                 case ObservationRepository::INDEX_NAME:
+                case EventRepository::INDEX_NAME:
                     $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
                     $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
                     break;

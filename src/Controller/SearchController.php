@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
+use App\Managers\EventManager;
 use App\Managers\ObservationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,18 +27,23 @@ class  SearchController extends AbstractController
     /** @var ObservationManager  */
     private $observationManager;
 
+    /** @var EventManager */
+    private $eventManager;
+
     /**
      * SearchController constructor.
      *
      * @param DsoManager $dsoManager
      * @param ConstellationManager $constellationManager
      * @param ObservationManager $observationManager
+     * @param EventManager $eventManager
      */
-    public function __construct(DsoManager $dsoManager, ConstellationManager $constellationManager, ObservationManager $observationManager)
+    public function __construct(DsoManager $dsoManager, ConstellationManager $constellationManager, ObservationManager $observationManager, EventManager $eventManager)
     {
         $this->dsoManager = $dsoManager;
         $this->constellationManager = $constellationManager;
         $this->observationManager = $observationManager;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -110,7 +116,10 @@ class  SearchController extends AbstractController
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
-            $data = $this->observationManager->buildSearchObservationByTerms($searchTerm);
+            $data = array_merge(
+                $this->observationManager->buildSearchObservationByTerms($searchTerm),
+                $this->eventManager->buildSearchEventByTerms($searchTerm)
+            );
         }
 
         /** @var JsonResponse $response */
