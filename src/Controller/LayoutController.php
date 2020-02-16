@@ -387,7 +387,9 @@ class LayoutController extends AbstractController
         /** @var Response $response */
         $response = new Response($xml, Response::HTTP_OK);
         $response->headers->set('Content-Type', 'text/xml');
-
+        $response->setPublic();
+        $response->setSharedMaxAge(0);
+        
         return $response;
     }
 }
