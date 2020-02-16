@@ -7,6 +7,7 @@ use App\Helpers\UrlGenerateHelper;
 use App\Repository\EventRepository;
 use Elastica\Exception\ElasticsearchException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -48,6 +49,22 @@ class EventManager
         $this->translator= $translator;
     }
 
+    /**
+     * @param $id
+     *
+     * @return Event|null
+     * @throws \ReflectionException
+     */
+    public function buildEvent($id)
+    {
+        /** @var Event|null $event */
+        $event = $this->eventRepository->setLocale($this->locale)->getEventById($id);
+        if (!is_null($event)) {
+            $event->setFullUrl($this->urlGeneratorHelper->generateUrl($event, Router::ABSOLUTE_PATH, $this->locale));
+        }
+
+        return $event;
+    }
 
     /**
      * @param $terms
@@ -73,7 +90,7 @@ class EventManager
                 'id' => $event->getId(),
                 'ajaxValue' => $event->getName(),
                 'label' => $event->getEventDate()->format($formatDate),
-                'url' => $this->urlGeneratorHelper->generateUrl($event),
+                'url' => $this->urlGeneratorHelper->generateUrl($event, Router::ABSOLUTE_PATH, $this->locale),
                 'type' => EventRepository::INDEX_NAME
             ];
         }, iterator_to_array($listResults())));

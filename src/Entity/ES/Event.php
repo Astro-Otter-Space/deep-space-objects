@@ -4,6 +4,7 @@
 namespace App\Entity\ES;
 
 use App\Classes\Utils;
+use App\Repository\EventRepository;
 use App\Repository\ObservationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -500,6 +501,6 @@ class Event extends AbstractEntity
      */
     public static function getIndex(): string
     {
-        return ObservationRepository::INDEX_NAME;
+        return EventRepository::INDEX_NAME;
     }
 }
