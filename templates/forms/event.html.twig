@@ -101,12 +101,15 @@
       </div>
     </div>
   </div>
-</div>
 
   {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
   {{ form_widget(form.recaptcha) }}
 
   {{ form_widget(form.pot2Miel) }}
+
+  <div class="Form__group">
+    {{ 'contact.mandatory'|trans }}
+  </div>
 
   <div class="Form__group">
     <button type="submit" class="Form__submit" id="btn_event_submit">
