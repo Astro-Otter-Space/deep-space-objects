@@ -367,16 +367,16 @@ observation:
 # Event
 event:
     name:
-        label: "Name"
+        label: "Name (*)"
         placeholder: "Enter a name"
     eventDate:
-        label: "Date event"
+        label: "Date event (*)"
         placeholder: "Pick a date"
     description:
-        label: "Description"
+        label: "Description (*)"
         placeholder: "Describe event"
     locationLabel:
-        label: "Location"
+        label: "Location (*)"
         placeholder: "Where is it take place"
     tarif:
         label: "Price"
@@ -388,7 +388,7 @@ event:
         label: "Number of participants"
         placeholder: ""
     organiserName:
-        label: "Organizer name"
+        label: "Organizer name (*)"
         placeholder: ""
     organiserMail:
         label: "Organizer mail"

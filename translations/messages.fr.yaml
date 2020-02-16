@@ -365,38 +365,38 @@ observation:
 # Event
 event:
     name:
-        title: ""
-        placeholder: ""
+        label: "Nom (*)"
+        placeholder: "Nommez l'observation"
     eventDate:
-        title: ""
-        placeholder: ""
+        label: "Date et heure de l'événement (*)"
+        placeholder: "Choissiez une date et un horaire"
     description:
-        title: ""
-        placeholder: ""
+        label: "Description (*)"
+        placeholder: "Description de l'évenement"
     locationLabel:
-        title: ""
-        placeholder: ""
+        label: "Lieux (*)"
+        placeholder: "Endroit de l'observation"
     tarif:
-        title: ""
-        placeholder: ""
+        label: "Prix"
+        placeholder: "Gratuit ou payant"
     public:
-        title: ""
-        placeholder: ""
+        label: "Public"
+        placeholder: "Type de public"
     numberEntrant:
-        title: ""
+        label: "Nombre de participants maximum souhaités"
         placeholder: ""
     organiserName:
-        title: ""
+        label: "Nom de l'organisateur (*)"
         placeholder: ""
     organiserMail:
-        title: ""
+        label: "Adresse email de l'organisateur"
         placeholder: ""
     organiserTel:
-        title: ""
+        label: "Téléphone de l'organisateur"
         placeholder: ""
     option:
         all: Tout public
-        deb: Débutant
+        deb: Débutants
         conf: Confirmés
 # Legal notice
 legal_notice.title: Mentions légales
