@@ -89,6 +89,7 @@
       }
     }
   }
+
 }
 
 // Header
@@ -100,7 +101,6 @@
   }
 
   &__inputText {
-
   }
 
   &__list {
@@ -127,6 +127,32 @@
         background-color: $bgd-white;
       }
       a:hover {
+        color: $color-text-dark;
+      }
+    }
+  }
+
+  &__list_obs {
+    color: $color-text-dark;
+
+    ul {
+      list-style: none;
+      padding: 10px 0;
+      display: inline-block;
+      min-width: 15%;
+      margin: 0px
+    }
+
+    ul:before {
+      content: none !important;
+    }
+
+    li {
+      line-height: 2.2em;
+      padding-left: 1em;
+
+      a {
+        text-decoration: none;
         color: $color-text-dark;
       }
     }

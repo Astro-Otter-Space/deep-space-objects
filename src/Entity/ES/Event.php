@@ -28,30 +28,30 @@ class Event extends AbstractEntity
 
     /**
      * @var
-     * @Assert\NotBlank(message="", groups={"add_event"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $name;
 
     /**
      * @var
-     * @Assert\NotBlank(message="", groups={"add_event"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $description;
 
     /** @var
-     * @Assert\DateTime(message="", groups={"add_event"})
+     * @Assert\DateTime(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $createdAt;
 
     /**
      * @var
-     * @Assert\NotBlank(message="", groups={"add_event"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $eventDate;
 
     /**
      * @var
-     * @Assert\NotBlank(message="", groups={"add_event"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $locationLabel;
 
@@ -77,7 +77,7 @@ class Event extends AbstractEntity
 
     /**
      * @var
-     * @Assert\NotBlank(message="", groups={"add_event"})
+     * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_event"})
      */
     private $organiserName;
 
@@ -88,6 +88,7 @@ class Event extends AbstractEntity
 
     /**
      * @var
+     * @Assert\Email(message="contact.constraint.email", groups={"add_event"})
      */
     private $organiserMail;
 
@@ -484,6 +485,14 @@ class Event extends AbstractEntity
     public function getFieldsObjectToJson(): array
     {
         return self::$fieldsObjectToJson;
+    }
+
+    /**
+     * @return string
+     */
+    public function fieldsUrl()
+    {
+        return implode(trim(self::URL_CONCAT_GLUE), [$this->getName(), $this->getEventDate()->format('Y-m-d')]);
     }
 
     /**

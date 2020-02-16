@@ -3,7 +3,7 @@
 namespace App\Managers;
 
 use App\Entity\ES\Event;
-use App\Entity\ES\ListObservations;
+use App\Helpers\UrlGenerateHelper;
 use App\Repository\EventRepository;
 use Elastica\Exception\ElasticsearchException;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class EventManager
@@ -25,18 +26,58 @@ class EventManager
     /** @var string */
     private $locale;
 
+    /** @var UrlGenerateHelper */
+    private $urlGeneratorHelper;
+
+    /** @var TranslatorInterface  */
+    private $translator;
+
     /**
      * EventManager constructor.
      *
      * @param EventRepository $eventRepository
      * @param $locale
+     * @param UrlGenerateHelper $urlGeneratorHelper
+     * @param TranslatorInterface $translator
      */
-    public function __construct(EventRepository $eventRepository, $locale)
+    public function __construct(EventRepository $eventRepository, $locale, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator)
     {
         $this->eventRepository = $eventRepository;
         $this->locale = $locale;
+        $this->urlGeneratorHelper = $urlGeneratorHelper;
+        $this->translator= $translator;
     }
 
+
+    /**
+     * @param $terms
+     *
+     * @return array
+     */
+    public function buildSearchEventByTerms($terms): array
+    {
+        /**
+         * @return \Generator
+         */
+        $listResults = function() use ($terms) {
+            yield from $this->eventRepository->setLocale($this->locale)->getEventBySearchTerms($terms);
+        };
+
+        return call_user_func("array_merge", array_map(function (Event $event) {
+            $formatDate = $this->translator->trans('dateFormatLong');
+
+            /** @var \DateTimeInterface $eventDate */
+            $event->setEventDate($event->getEventDate(), false);
+
+            return [
+                'id' => $event->getId(),
+                'ajaxValue' => $event->getName(),
+                'label' => $event->getEventDate()->format($formatDate),
+                'url' => $this->urlGeneratorHelper->generateUrl($event),
+                'type' => EventRepository::INDEX_NAME
+            ];
+        }, iterator_to_array($listResults())));
+    }
 
     /**
      * @return array

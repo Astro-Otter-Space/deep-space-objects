@@ -100,7 +100,7 @@
         autoCompleteClasse: {
           wrapper: 'AppHeader__wrapper',
           input: 'AppSearch__inputText AppSearch__inputTextObservation',
-          list: 'AppHeader__list'
+          list: 'AppHeader__list_obs'
         },
         searchPlaceholder: searchPlaceholder,
         enableTooltip: true,

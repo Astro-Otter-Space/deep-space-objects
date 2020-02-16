@@ -125,7 +125,8 @@ class ObservationManager
                 'id' => $observation->getId(),
                 'ajaxValue' => $observation->getName(),
                 'label' => $observation->getUsername(),
-                'url' => $this->urlGeneratorHelper->generateUrl($observation)
+                'url' => $this->urlGeneratorHelper->generateUrl($observation),
+                'type' => ObservationRepository::INDEX_NAME
             ];
         }, $listObservation));
     }
