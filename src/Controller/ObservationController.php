@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -281,6 +282,40 @@ class ObservationController extends AbstractController
         $response = new Response();
         $response->setPrivate();
 
-        return $this->render('pages/schedule_observation.html.twig', $params, $response);
+        return $this->render('pages/event_add.html.twig', $params, $response);
+    }
+
+    /**
+     * @param Request $request
+     * @param $name
+     * @Route({
+     *  "en": "/event/{name}",
+     *  "fr": "/evenement/{name}",
+     *  "es": "/event/{name}",
+     *  "pt": "/event/{name}",
+     *  "de": "/event/{name}"
+     * }, name="event_show")
+     *
+     * @return Response
+     * @throws ReflectionException
+     */
+    public function showEvent(Request $request, string $name): Response
+    {
+        $params = [];
+        $id = md5($name);
+
+        $event = $this->eventManager->buildEvent($id);
+        if (is_null($event)) {
+            throw new NotFoundHttpException();
+        }
+
+        $params["event"] = $event;
+
+
+        /** @var Response $response */
+        $response = new Response();
+
+        /** @var Response $response */
+        return $this->render('pages/event.html.twig', $params, $response);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Classes\Utils;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
+use App\Entity\ES\Event;
 use App\Entity\ES\Observation;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
@@ -35,14 +36,20 @@ class UrlGenerateHelper
     /**
      * Build URL for entities
      *
-     * @param Dso|Constellation|Observation $entity
-     * @param $typeUrl
+     * @param Dso|Constellation|Observation|Event $entity
+     * @param int $typeUrl
+     * @param string $locale
+     *
      * @return string
      */
-    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, $locale = null)
+    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, string $locale = null)
     {
         $url = '';
-        if ($entity instanceof Dso || $entity instanceof Constellation || $entity instanceof Observation) {
+        if ($entity instanceof Dso
+            || $entity instanceof Constellation
+            || $entity instanceof Observation
+            || $entity instanceof Event
+        ) {
             $id = strtolower($entity->getId());
             switch ($entity::getIndex()) {
                 case DsoRepository::INDEX_NAME:
@@ -76,9 +83,13 @@ class UrlGenerateHelper
                     break;
 
                 case ObservationRepository::INDEX_NAME:
-                case EventRepository::INDEX_NAME:
                     $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
                     $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
+                    break;
+
+                case EventRepository::INDEX_NAME:
+                    $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
+                    $url = $this->router->generate('event_show', ['name' => $name], $typeUrl);
                     break;
 
                 default:
