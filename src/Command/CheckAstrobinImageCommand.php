@@ -71,9 +71,9 @@ class CheckAstrobinImageCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $failedAstrobinId = [];
-        $listAstrobinId = $this->dsoRepository->getAstrobinId([]);
-        if (0 < count($listAstrobinId)) {
-            foreach ($listAstrobinId as $astrobinId) {
+        $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
+        if (0 < count($listDsoAstrobin)) {
+            foreach ($listDsoAstrobin as $dsoId => $astrobinId) {
                 /** @var GetImage $image */
                 $image = new GetImage();
 
@@ -83,8 +83,8 @@ class CheckAstrobinImageCommand extends Command
                     $failedAstrobinId[] = $astrobinId . ' - ' . $e->getMessage();
                 }
 
-                if (property_exists($result, 'http_code') && Response::HTTP_NOT_FOUND === $result->http_code) {
-                    $failedAstrobinId[] = $result->data;
+                if (property_exists($result, 'http_code')) {
+                    $failedAstrobinId[$result->http_code] = [$dsoId => $result->data];
                 }
             }
         }

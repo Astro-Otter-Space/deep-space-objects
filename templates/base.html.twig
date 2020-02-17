@@ -8,6 +8,7 @@
 
     {% set pageUrl = app.request.uri %}
     {% set pageImage = pageImage|default('/build/images/logo_tmp.png') %}
+    {% set pageImageDesc = pageImageDesc|default('') %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
 
     {% set favicon = favicon|default('') %}
@@ -32,12 +33,16 @@
         <meta property="og:title"         content="{{ pageTitle }}" />
         <meta property="og:description"   content="{{ pageDesc }}" />
         <meta property="og:image"         content="{{ pageImage }}" />
+        <meta property="og:image:alt"     content="{{ pageImageDesc }}" />
         <meta property="og:locale"        content="{{ pageLang }}" />
         <meta property="og:site_name"     content="{{ 'dso'|trans }}" />
 
-      {# Twitter cards #}
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="{{ twitter_name }}" />
+        {# Twitter cards #}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="{{ twitter_name }}" />
+        <meta name="twitter:title" content="{{ pageTitle }}" />
+        <meta name="twitter:description" content="{{ pageDesc }}" />
+        <meta name="twitter:image" content="{{ pageImage }}" />
 
       {% endblock %}
       {#Favicon#}
