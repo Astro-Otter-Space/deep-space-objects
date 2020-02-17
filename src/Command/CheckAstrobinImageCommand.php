@@ -84,7 +84,7 @@ class CheckAstrobinImageCommand extends Command
                 }
 
                 if (property_exists($result, 'http_code')) {
-                    $failedAstrobinId[$result->http_code][$dsoId] = $result->data;
+                    $failedAstrobinId[$result->http_code] = [$dsoId => $result->data];
                 }
             }
         }
@@ -94,6 +94,7 @@ class CheckAstrobinImageCommand extends Command
         ];
         $content['listAstrobinId'] = $failedAstrobinId;
 
+        dump($failedAstrobinId); die();
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
         $subject = sprintf('%s - Astrobin Id 404', $now->format('Y-m-d'));
