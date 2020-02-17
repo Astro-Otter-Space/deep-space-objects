@@ -35,9 +35,12 @@
         <meta property="og:locale"        content="{{ pageLang }}" />
         <meta property="og:site_name"     content="{{ 'dso'|trans }}" />
 
-      {# Twitter cards #}
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="{{ twitter_name }}" />
+        {# Twitter cards #}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="{{ twitter_name }}" />
+        <meta name="twitter:title" content="{{ pageTitle }}" />
+        <meta name="twitter:description" content="{{ pageDesc }}" />
+        <meta name="twitter:image" content="{{ pageImage }}" />
 
       {% endblock %}
       {#Favicon#}
