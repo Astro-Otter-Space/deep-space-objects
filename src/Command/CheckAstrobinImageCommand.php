@@ -94,7 +94,6 @@ class CheckAstrobinImageCommand extends Command
         ];
         $content['listAstrobinId'] = $failedAstrobinId;
 
-        dump($failedAstrobinId); die();
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
         $subject = sprintf('%s - Astrobin Id 404', $now->format('Y-m-d'));
