@@ -1,4 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% set pageTitle = event.name %}
+{% set pageDesc = event.description %}
+
 {% block content %}
+  <div>
+    <section class="Dso__main">
+      {{ dump(event) }}
+    </section>
+  </div>
+
 {% endblock %}

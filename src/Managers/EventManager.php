@@ -60,6 +60,7 @@ class EventManager
         /** @var Event|null $event */
         $event = $this->eventRepository->setLocale($this->locale)->getEventById($id);
         if (!is_null($event)) {
+            $event->setEventDate($event->getEventDate(), false); // transform string date to datetime
             $event->setFullUrl($this->urlGeneratorHelper->generateUrl($event, Router::ABSOLUTE_PATH, $this->locale));
         }
 
