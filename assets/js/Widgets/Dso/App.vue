@@ -32,7 +32,7 @@
         </social-sharing>
 
 
-        <div class="Form__info" v-if="bugAstrobin" role="alert">
+        <div class="Form__message Form__info" v-if="bugAstrobin" role="alert">
           Due to a bug on the Astrobin site, images cannot be displayed. We apologize.
         </div>
 
