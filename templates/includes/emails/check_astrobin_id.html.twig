@@ -1,5 +1,12 @@
 {% if listAstrobinId is defined and 0 < listAstrobinId|length %}
-  <p>
-    List astrobinId 404 : {{ listAstrobinId|join(' - ') }}
-  </p>
+  <ul>
+    {% for codeHttp, astrobin in listAstrobinId %}
+      <li><strong>Code HTTP {{ codeHttp }}</strong></li>
+      <ul>
+        {% for dsoId, astrobinId in astrobin %}
+          <li>{{ dsoId }} : {{ astrobinId }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </ul>
 {% endif %}

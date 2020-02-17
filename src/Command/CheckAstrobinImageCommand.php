@@ -83,8 +83,8 @@ class CheckAstrobinImageCommand extends Command
                     $failedAstrobinId[] = $astrobinId . ' - ' . $e->getMessage();
                 }
 
-                if (property_exists($result, 'http_code') && Response::HTTP_NOT_FOUND === $result->http_code) {
-                    $failedAstrobinId[] = $result->data;
+                if (property_exists($result, 'http_code')) {
+                    $failedAstrobinId[$result->http_code][$dsoId] = $result->data;
                 }
             }
         }
