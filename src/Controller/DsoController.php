@@ -130,7 +130,12 @@ class DsoController extends AbstractController
         $response->setPublic();
         $response->setSharedMaxAge(3600);
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->headers->set('x-dso-id', implode(' ', [$dso->getElasticId(), md5(sprintf('%s_%s', $id, $request->getLocale()))]));
+
+        $listDsoIdHeaders = [
+            md5(sprintf('%s_%s', $id, $request->getLocale())),
+            md5(sprintf('%s_cover', $id))
+        ];
+        $response->headers->set('x-dso-id', implode(' ', $listDsoIdHeaders));
 
         return $response;
     }
