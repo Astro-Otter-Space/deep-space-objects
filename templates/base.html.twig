@@ -8,6 +8,7 @@
 
     {% set pageUrl = app.request.uri %}
     {% set pageImage = pageImage|default('/build/images/logo_tmp.png') %}
+    {% set pageImageDesc = pageImageDesc|default('') %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
 
     {% set favicon = favicon|default('') %}
@@ -32,6 +33,7 @@
         <meta property="og:title"         content="{{ pageTitle }}" />
         <meta property="og:description"   content="{{ pageDesc }}" />
         <meta property="og:image"         content="{{ pageImage }}" />
+        <meta property="og:image:alt"     content="{{ pageImageDesc }}" />
         <meta property="og:locale"        content="{{ pageLang }}" />
         <meta property="og:site_name"     content="{{ 'dso'|trans }}" />
 

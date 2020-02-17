@@ -95,7 +95,7 @@ class DsoController extends AbstractController
 
             // Image cover
             $params['imgCover'] = $dso->getImage()->url_hd;
-            $params['imgCoverAlt'] = sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user);
+            $params['imgCoverAlt'] = ($dso->getImage()->title) ? sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user) : null;
 
             // List of Dso from same constellation
             /** @var ListDso $listDso */
