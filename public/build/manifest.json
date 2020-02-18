@@ -1,6 +1,7 @@
 {
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
+  "build/astrobin.js": "/build/astrobin.js",
   "build/catalog.js": "/build/catalog.js",
   "build/const.js": "/build/const.js",
   "build/const_list.js": "/build/const_list.js",

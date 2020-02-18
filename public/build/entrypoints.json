@@ -77,6 +77,12 @@
       "css": [
         "/build/leaflet.css"
       ]
+    },
+    "astrobin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/astrobin.js"
+      ]
     }
   }
 }

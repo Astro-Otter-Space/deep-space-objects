@@ -140,7 +140,7 @@ class DsoPostSocialNetworkCommand extends Command
          */
         if ($dso->getAstrobinId()) {
 
-            [$astrobinUrl,] = $this->dsoManager->getAstrobinImage($dso->getAstrobinId(), null);
+            [$astrobinUrl,] = $this->dsoManager->getAstrobinImage($dso->getAstrobinId());
 
             $fileTmpPath = tmpfile();
             $path = stream_get_meta_data($fileTmpPath)['uri'];

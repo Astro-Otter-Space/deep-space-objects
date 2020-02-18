@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+  {{ parent() }}
+  <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block content %}
+  <div id="appDso" data-dso="{{ dso|json_encode }}"></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('astrobin') }}
+{% endblock %}
