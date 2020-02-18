@@ -94,7 +94,7 @@ class DsoController extends AbstractController
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
 
             // Image cover
-            $params['imgCover'] = $dso->getImage()->url_hd;
+            $params['imgCover'] = $dso->getImage()->url_regular;
             $params['imgCoverAlt'] = ($dso->getImage()->title) ? sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user) : null;
 
             // List of Dso from same constellation
