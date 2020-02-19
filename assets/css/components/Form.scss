@@ -142,5 +142,9 @@
     background-color: $bgd-success;
     border: 1px solid $border-success;
   }
-
+  &__info {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: 1px solid #ffeeba;
+  }
 }

@@ -94,7 +94,7 @@ class DsoController extends AbstractController
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
 
             // Image cover
-            $params['imgCover'] = $dso->getImage()->url_hd;
+            $params['imgCover'] = $dso->getImage()->url_regular;
             $params['imgCoverAlt'] = ($dso->getImage()->title) ? sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user) : null;
 
             // List of Dso from same constellation
@@ -130,7 +130,12 @@ class DsoController extends AbstractController
         $response->setPublic();
         $response->setSharedMaxAge(3600);
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response->headers->set('x-dso-id', implode(' ', [$dso->getElasticId(), md5(sprintf('%s_%s', $id, $request->getLocale()))]));
+
+        $listDsoIdHeaders = [
+            md5(sprintf('%s_%s', $id, $request->getLocale())),
+            md5(sprintf('%s_cover', $id))
+        ];
+        $response->headers->set('x-dso-id', implode(' ', $listDsoIdHeaders));
 
         return $response;
     }
@@ -325,5 +330,31 @@ class DsoController extends AbstractController
         $response->setSharedMaxAge(0);
 
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @param int $offset
+     *
+     * @return Response
+     * @throws WsException
+     * @throws \ReflectionException
+     * @Route("/debug-astrobin/{offset}", name="debug_astrobin")
+     */
+    public function debugAstrobinImage(Request $request, $offset = 0): Response
+    {
+        $items = $this->dsoRepository->getAstrobinId(null);
+        ksort($items);
+        $items = array_slice($items, $offset, 50);
+        $listDso = new ListDso();
+        foreach (array_keys($items) as $dsoId) {
+            $dso = $this->dsoManager->buildDso($dsoId);
+            $listDso->addDso($dso);
+        }
+
+        $params['dso'] = $this->dsoManager->buildListDso($listDso);
+
+        return $this->render('pages/debug_astrobin.html.twig', $params);
     }
 }

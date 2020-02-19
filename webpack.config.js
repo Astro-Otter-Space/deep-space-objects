@@ -33,7 +33,8 @@ Encore
   .addEntry('skymap', './assets/js/skymap.js')
   .addEntry('leaflet', './assets/js/leaflet.js')
   .addEntry('tags', './assets/js/tags.js')
-  //
+  // debug
+  .addEntry('astrobin', './assets/js/astrobin.js')
 
   // will require an extra script tag for runtime.js
   // but, you probably want this, unless you're building a single-page app
