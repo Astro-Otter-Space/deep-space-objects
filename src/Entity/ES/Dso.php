@@ -420,36 +420,6 @@ class Dso extends AbstractEntity
     }
 
     /**
-     * Serialize data
-     * @deprecated
-     * @return array
-     */
-    public function toArray()
-    {
-        $catalog = array_map(function($itemCatalog) {
-            return implode(self::DATA_GLUE, ['catalog', $itemCatalog]);
-        }, $this->getCatalog());
-
-        $data = [
-            'catalog' => $catalog, //implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
-            'desigs' => implode(self::DATA_CONCAT_GLUE, array_filter($this->getDesigs())),
-            'type' => implode(self::DATA_GLUE, ['type', $this->getType()]),
-            'constId' => implode(self::DATA_GLUE, ['constellation', strtolower($this->getConstId())]),
-            'mag' => $this->getMag(),
-            'distAl' => Utils::numberFormatByLocale($this->getDistAl()),
-            'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $this->getDistAl()),
-            'discover' => $this->getDiscover(),
-            'discoverYear' => $this->getDiscoverYear(),
-            'ra' => $this->getRa(),
-            'dec' => $this->getDec()
-        ];
-
-        return array_filter($data, function($value) {
-            return (false === empty($value));
-        });
-    }
-
-    /**
      * @return array
      */
     public function getListFieldsNoMapping()

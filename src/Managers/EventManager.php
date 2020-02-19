@@ -3,6 +3,7 @@
 namespace App\Managers;
 
 use App\Classes\Iterator\EventsFuturIterator;
+use App\DataTransformer\EventDataTransformer;
 use App\Entity\ES\Event;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\EventRepository;
@@ -22,6 +23,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class EventManager
 {
+    use ManagerTrait;
+
     /** @var EventRepository  */
     private $eventRepository;
 
@@ -34,6 +37,9 @@ class EventManager
     /** @var TranslatorInterface  */
     private $translator;
 
+    /** @var EventDataTransformer */
+    private $eventDataTransformer;
+
     /**
      * EventManager constructor.
      *
@@ -41,13 +47,15 @@ class EventManager
      * @param $locale
      * @param UrlGenerateHelper $urlGeneratorHelper
      * @param TranslatorInterface $translator
+     * @param EventDataTransformer $eventDataTransformer
      */
-    public function __construct(EventRepository $eventRepository, $locale, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator)
+    public function __construct(EventRepository $eventRepository, $locale, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator, EventDataTransformer $eventDataTransformer)
     {
         $this->eventRepository = $eventRepository;
         $this->locale = $locale;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
         $this->translator= $translator;
+        $this->eventDataTransformer = $eventDataTransformer;
     }
 
     /**
@@ -69,6 +77,18 @@ class EventManager
     }
 
     /**
+     * @param Event $event
+     *
+     * @return array
+     */
+    public function formatVueData(Event $event)
+    {
+        $eventArray = $this->eventDataTransformer->toArray($event);
+        return $this->formatEntityData($eventArray, [], $this->translator);
+    }
+
+    /**
+     * List of events, filtered by FilterIterator
      * @param $terms
      *
      * @return array

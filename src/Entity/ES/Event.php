@@ -5,7 +5,6 @@ namespace App\Entity\ES;
 
 use App\Classes\Utils;
 use App\Repository\EventRepository;
-use App\Repository\ObservationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

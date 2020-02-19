@@ -1,0 +1,94 @@
+{
+  "entrypoints": {
+    "observations": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observations.js"
+      ]
+    },
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "dso": {
+      "js": [
+        "/build/runtime.js",
+        "/build/dso.js"
+      ]
+    },
+    "const": {
+      "js": [
+        "/build/runtime.js",
+        "/build/const.js"
+      ]
+    },
+    "const_list": {
+      "js": [
+        "/build/runtime.js",
+        "/build/const_list.js"
+      ]
+    },
+    "catalog": {
+      "js": [
+        "/build/runtime.js",
+        "/build/catalog.js"
+      ]
+    },
+    "observation": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observation.js"
+      ]
+    },
+    "home": {
+      "js": [
+        "/build/runtime.js",
+        "/build/home.js"
+      ]
+    },
+    "notfound": {
+      "js": [
+        "/build/runtime.js",
+        "/build/notfound.js"
+      ]
+    },
+    "help_api": {
+      "js": [
+        "/build/runtime.js",
+        "/build/help_api.js"
+      ]
+    },
+    "skymap": {
+      "js": [
+        "/build/runtime.js",
+        "/build/skymap.js"
+      ]
+    },
+    "leaflet": {
+      "js": [
+        "/build/runtime.js",
+        "/build/leaflet.js"
+      ]
+    },
+    "tags": {
+      "js": [
+        "/build/runtime.js",
+        "/build/tags.js"
+      ],
+      "css": [
+        "/build/tags.css"
+      ]
+    },
+    "astrobin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/astrobin.js"
+      ]
+    }
+  }
+}

@@ -18,7 +18,7 @@ final class ObservationDataTransformer extends AbstractDataTransformer
      *
      * @return mixed|void
      */
-    public function toArray($entity)
+    public function toArray($entity): array
     {
         $data = [
             'user' => $entity->getUsername(),

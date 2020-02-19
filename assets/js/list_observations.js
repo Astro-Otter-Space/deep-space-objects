@@ -2,6 +2,9 @@ import Vue from 'vue';
 
 Vue.config.productionTip = false;
 
+import VueLazyImageLoading from "vue-lazy-image-loading";
+Vue.use(VueLazyImageLoading);
+
 // Leaflet
 import { Icon }  from 'leaflet'
 delete Icon.Default.prototype._getIconUrl;

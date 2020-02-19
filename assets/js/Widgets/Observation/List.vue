@@ -1,8 +1,13 @@
 <template>
   <div>
+    <div class="Dso_header">
+      <image-header
+        :cover-image="imageCover"
+        :alt-image="imageCoverAlt"
+      />
+    </div>
     <section class="Dso__main">
-      <div class="Dso__container Dso__noHeader">
-
+      <div class="Dso__container">
         <h2 class="Dso__title">
           <label for="observationsearch">{{ pageTitle }}</label>
         </h2>
@@ -69,7 +74,7 @@
 </template>
 
 <script>
-  import Vue from "vue";
+  import ImageHeader from './../Dso/components/Imageheader';
   import Searchautocomplete from "./../Homepage/components/Searchautocomplete"
   import { LMap, LTileLayer, LMarker, LIcon, LGeoJson } from 'vue2-leaflet';
   import axios from 'axios';
@@ -85,6 +90,7 @@
   export default {
     name: "App",
     components: {
+      ImageHeader,
       Searchautocomplete,
       LMap,
       LTileLayer,
@@ -114,6 +120,8 @@
         geojsonEvents: null,
         urlAjaxObservations: urlAjaxObservations,
         urlAjaxEvents: urlAjaxEvents,
+        imageCover: 'build/images/layout/observation_silouhette.jpg',
+        imageCoverAlt: pageTitle,
         listFilters: [
           {
             value: 'all',
@@ -125,7 +133,7 @@
           },
           {
             value: 'obs',
-            label: 'Observations',
+            label: 'DSO Planner',
           }
         ],
         iconObs: L.icon({

@@ -135,12 +135,12 @@ class LayoutController extends AbstractController
             'scheduleObs' => [
                 'label' => $this->translatorInterface->trans('scheduleObs'),
                 'path' => $routerInterface->generate(sprintf('schedule_obs.%s', $locale)),
-                'icon_class' => 'calendar'
+                'icon_class' => 'add-observation'
             ],
             'addObservations' => [
                 'label' => $this->translatorInterface->trans('addObservation'),
                 'path' => $routerInterface->generate(sprintf('add_observation.%s', $locale)),
-                'icon_class' => 'add-observation'
+                'icon_class' => 'calendar'
             ],
 
             'contact' => [

@@ -531,25 +531,4 @@ class Observation extends AbstractEntity
         return implode(trim(self::URL_CONCAT_GLUE), [$this->getName(), $this->getUsername()]);
     }
 
-    /**
-     * @deprecated
-     * @return array
-     */
-    public function toArray(): array
-    {
-        $data = [
-            'user' => $this->getUsername(),
-            'location' => $this->getLocationLabel(),
-            'instrument' => $this->getInstrument(),
-            'diameter' => $this->getDiameter(),
-            'focal' => $this->getFocal(),
-            'report' => Utils::numberFormatByLocale($this->getFocal()/$this->getDiameter()),
-            'mount' => $this->getMount(),
-            'ocular' => implode(self::DATA_CONCAT_GLUE, $this->getOcular())
-        ];
-
-        return array_filter($data, function($value) {
-            return (false === empty($value));
-        });
-    }
 }

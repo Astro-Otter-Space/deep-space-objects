@@ -320,7 +320,7 @@ dsoDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: Add an observation
+addObservation: DSO observation
 addObservationDesc: Sauvegardez vos observations en ajoutant les objets que vous avez observé.
 scheduleObs: Schedule an observation
 scheduleObsDesc: Organisez une soirée d'observation astronomique et faites découvrir les merveilles du ciel

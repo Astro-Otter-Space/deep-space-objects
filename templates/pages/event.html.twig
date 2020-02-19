@@ -4,10 +4,17 @@
 {% set pageDesc = event.description %}
 
 {% block content %}
-  <div>
-    <section class="Dso__main">
-      {{ dump(event) }}
-    </section>
-  </div>
+  <div id="app"
+    data-observation-widget
+    data-name="{{ pageTitle }}"
+    data-description="{{ pageDesc }}"
+    data-listData="{{ data|json_encode }}"
+    data-coordinates="{{ coordinates|json_encode }}"
+  ></div>
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('observation') }}
 {% endblock %}

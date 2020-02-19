@@ -323,8 +323,8 @@ dsoDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: Add an observation
-addObservationDesc: Save your observations and add objects you've seen.
+addObservation: DSO Planner
+addObservationDesc: Save or plan your observations and add objects you've seen.
 scheduleObs: Schedule observing event
 scheduleObsDesc: Schedule an astronomical observing event and discover the wonders of the universe.
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.

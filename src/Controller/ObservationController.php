@@ -216,13 +216,6 @@ class ObservationController extends AbstractController
         return $this->render('pages/observation_add.html.twig', $params, $response);
     }
 
-    /**
-     *
-     */
-    public function delete()
-    {
-
-    }
 
     /**
      * @param Request $request
@@ -304,13 +297,18 @@ class ObservationController extends AbstractController
         $params = [];
         $id = md5($name);
 
+        /** @var Event $event */
         $event = $this->eventManager->buildEvent($id);
         if (is_null($event)) {
             throw new NotFoundHttpException();
         }
 
         $params["event"] = $event;
-
+        $params['data'] = $this->eventManager->formatVueData($event);
+        $params['coordinates'] = [
+            'lon' => $event->getLocation()['coordinates'][0],
+            'lat' => $event->getLocation()['coordinates'][1]
+        ];
 
         /** @var Response $response */
         $response = new Response();
