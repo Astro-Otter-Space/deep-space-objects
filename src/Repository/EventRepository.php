@@ -58,9 +58,6 @@ class EventRepository extends AbstractRepository
         $result = $this->requestBySearchTerms($terms, self::$listSearchFields);
 
         if (0 < $result->getTotalHits()) {
-            /*$list = array_map(function(Result $doc) {
-                return $this->buildEntityFromDocument($doc->getDocument());
-            }, $result->getResults());*/
 
             foreach ($result->getResults() as $doc) {
                 yield $this->buildEntityFromDocument($doc->getDocument());
@@ -86,7 +83,7 @@ class EventRepository extends AbstractRepository
         /** @var Query\Range $mustQuery */
         $rangeQuery = new Query\Range();
         $rangeQuery->addField('event_date', [
-            'gte' => 'now' // $now->format(Utils::FORMAT_DATE_ES)
+            'gte' => 'now'
         ]);
 
         /** @var Query\BoolQuery $boolQuery */

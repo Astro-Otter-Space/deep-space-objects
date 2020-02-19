@@ -2,6 +2,7 @@
 
 namespace App\Managers;
 
+use App\Classes\Iterator\EventsFuturIterator;
 use App\Entity\ES\Event;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\EventRepository;
@@ -71,6 +72,7 @@ class EventManager
      * @param $terms
      *
      * @return array
+     * @throws \Exception
      */
     public function buildSearchEventByTerms($terms): array
     {
@@ -80,6 +82,9 @@ class EventManager
         $listResults = function() use ($terms) {
             yield from $this->eventRepository->setLocale($this->locale)->getEventBySearchTerms($terms);
         };
+
+        /** @var EventsFuturIterator $listEventsFiltered */
+        $listEventsFiltered = new EventsFuturIterator($listResults());
 
         return call_user_func("array_merge", array_map(function (Event $event) {
             $formatDate = $this->translator->trans('dateFormatLong');
@@ -94,7 +99,7 @@ class EventManager
                 'url' => $this->urlGeneratorHelper->generateUrl($event, Router::ABSOLUTE_PATH, $this->locale),
                 'type' => EventRepository::INDEX_NAME
             ];
-        }, iterator_to_array($listResults())));
+        }, iterator_to_array($listEventsFiltered)));
     }
 
     /**
