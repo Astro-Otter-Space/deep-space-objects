@@ -407,13 +407,17 @@ class LayoutController extends AbstractController
     public function getStarsFromConst(Request $request, KernelInterface $kernel, string $file): JsonResponse
     {
         preg_match('/stars.([A-Za-z]{3}|([0-9]{1,2})).json/', $file, $matches);
-        $json = [];
+        $geojson = [
+            'type' => 'FeatureCollection',
+            'features' => []
+        ];
+
         if ($matches) {
             $match = $matches[1];
             if (in_array($match, [6,8,14])) {
                 $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/' . sprintf('stars.%d.json', $match));
 
-                $json = json_decode($fileJson);
+                $geojson = json_decode($fileJson);
             } else {
                 /** @var \Generator $readFile */
                 /*$readFile = function($file) {
@@ -432,7 +436,7 @@ class LayoutController extends AbstractController
                     return $match === $starData['properties']['con'];
                 });
 
-                $json = [
+                $geojson = [
                     'type' => 'FeatureCollection',
                     'features' => array_values($filteredStars)
                 ];
@@ -441,12 +445,12 @@ class LayoutController extends AbstractController
             $filePath = $kernel->getProjectDir() . sprintf('/public/build/data/%s', $file);
             if (file_exists($filePath)) {
                 $fileJson = file_get_contents($filePath);
-                $json = json_decode($fileJson);
+                $geojson = json_decode($fileJson);
             }
         }
 
         /** @var JsonResponse $jsonResponse */
-        $jsonResponse = new JsonResponse($json, Response::HTTP_OK);
+        $jsonResponse = new JsonResponse($geojson, Response::HTTP_OK);
         $jsonResponse->setSharedMaxAge(LayoutController::HTTP_TTL);
         $jsonResponse->setPublic();
 

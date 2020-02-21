@@ -137,7 +137,6 @@ var MAP_MODULE = (function(c, constId, color) {
    * @param jsonDso
    */
   function buildMap(zoom, jsonDso) {
-    console.log(jsonDso);
     if (jsonDso !== undefined && "" !== jsonDso) {
       var pointStyle = {
           stroke: "rgba(255, 0, 204, 1)",
