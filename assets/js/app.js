@@ -23,7 +23,7 @@ new Vue({
 }).$mount(`#appFooter`);
 
 // Google analytics
-import Analytics from 'analytics';
+/*import Analytics from 'analytics';
 import googleAnalytics from '@analytics/google-analytics';
 
 const analytics = Analytics({
@@ -36,6 +36,6 @@ const analytics = Analytics({
   ]
 });
 
-analytics.page();
+analytics.page();*/
 
 
