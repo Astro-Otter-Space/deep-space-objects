@@ -102,7 +102,6 @@ class DsoController extends AbstractController
             $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
 
             $params['dso_by_const'] = $this->dsoManager->buildListDso($listDso);
-            dump($params['dso_by_const']);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map
