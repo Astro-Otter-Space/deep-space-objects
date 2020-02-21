@@ -27,7 +27,7 @@ import Analytics from 'analytics';
 import googleAnalytics from '@analytics/google-analytics';
 
 const analytics = Analytics({
-  app: 'Astro Otter',
+  app: 'astro.otter.space',
   version: 100,
   plugins: [
     googleAnalytics({
