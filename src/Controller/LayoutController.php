@@ -9,8 +9,10 @@ use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -393,4 +395,67 @@ class LayoutController extends AbstractController
 
         return $response;
     }
+
+
+    /**
+     * @Route("/load/data/{file}", name="data_celestial")
+     * @param Request $request
+     * @param KernelInterface $kernel
+     * @param string $file
+     *
+     * @return JsonResponse
+     */
+    public function getStarsFromConst(Request $request, KernelInterface $kernel, string $file): JsonResponse
+    {
+        preg_match('/stars.([A-Za-z]{3}|([0-9]{1,2})).json/', $file, $matches);
+        $geojson = [
+            'type' => 'FeatureCollection',
+            'features' => []
+        ];
+
+        if ($matches) {
+            $match = $matches[1];
+            if (in_array($match, [6,8,14])) {
+                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/' . sprintf('stars.%d.json', $match));
+
+                $geojson = json_decode($fileJson);
+            } else {
+                /** @var \Generator $readFile */
+                /*$readFile = function($file) {
+                    $h = fopen($file, 'r+');
+                    while(!feof($h)) {
+                        yield fgets($h);
+                    }
+                    fclose($h);
+                };
+
+                $fileJson = $readFile($kernel->getProjectDir() . '/public/build/data/stars.14.json');*/
+
+                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/stars.8.json');
+                $dataJson = json_decode($fileJson, true);
+                $filteredStars = array_filter($dataJson['features'], function ($starData) use ($match) {
+                    return $match === $starData['properties']['con'];
+                });
+
+                $geojson = [
+                    'type' => 'FeatureCollection',
+                    'features' => array_values($filteredStars)
+                ];
+            }
+        } else {
+            $filePath = $kernel->getProjectDir() . sprintf('/public/build/data/%s', $file);
+            if (file_exists($filePath)) {
+                $fileJson = file_get_contents($filePath);
+                $geojson = json_decode($fileJson);
+            }
+        }
+
+        /** @var JsonResponse $jsonResponse */
+        $jsonResponse = new JsonResponse($geojson, Response::HTTP_OK);
+        $jsonResponse->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $jsonResponse->setPublic();
+
+        return $jsonResponse;
+    }
+
 }

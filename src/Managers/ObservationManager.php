@@ -160,6 +160,7 @@ class ObservationManager
                     'username' => $observation->getUsername(),
                     'full_url' => $urlGenerator->generateUrl($observation),
                     'date' => $formatter->format($observation->getObservationDate()),
+                    'layer' => 'l_dsoplanner'
                 ],
                 'geometry' => $observation->getLocation()
             ];

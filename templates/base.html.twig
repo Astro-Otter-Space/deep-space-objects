@@ -13,6 +13,8 @@
 
     {% set favicon = favicon|default('') %}
     {% set facebookId = facebookId|default(null) %}
+
+    {% set analyticsId = analyticsId|default('') %}
   {% endspaceless %}
   <!DOCTYPE html>
   <html lang="{{ pageLang }}">
@@ -54,6 +56,10 @@
 
       {% block schema_data %}
         {% include 'includes/schema/logo.html.twig' %}
+      {% endblock %}
+
+      {% block analytics %}
+        {% include 'includes/layout/analytics.html.twig' %}
       {% endblock %}
     </head>
 

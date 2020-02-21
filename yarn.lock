@@ -2,6 +2,25 @@
 # yarn lockfile v1
 
 
+"@analytics/cookie-utils@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@analytics/cookie-utils/-/cookie-utils-0.2.2.tgz#eecee19b04603b73e22ba8b6d9727df287d9ec44"
+  integrity sha512-lrRYRkakCvjXt4VmloLIsfgTOMWMcRDxjsx04LMaT6G1PUbJ9SOQP+LPfxJEMCS9WyOCcRwTccVpIRmx7PEASg==
+
+"@analytics/google-analytics@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@analytics/google-analytics/-/google-analytics-0.2.2.tgz#60930a827e8d428604872390c002c4f9f088a275"
+  integrity sha512-WaLMKLHPIIONww4sGrpSRmLvECfemitgXDvKpL4k/cys8lPq2C1vk5Kn/nGxJRmtmbMEFTVRacBspRY9+O4iYA==
+  dependencies:
+    universal-analytics "^0.4.20"
+
+"@analytics/storage-utils@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@analytics/storage-utils/-/storage-utils-0.2.2.tgz#aaa29f42762241e4ea81f0a68418ab5dc248cad1"
+  integrity sha512-R7lLDcIzXKM4JXmqXtUCq21WZ9/jzZxnP4r1XqZAsKv6l0rWgLNK9W63uR/LlPsOaWrl4GjEtvlM8CefDrsG7g==
+  dependencies:
+    "@analytics/cookie-utils" "^0.2.2"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
@@ -979,6 +998,21 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
+
+analytics-utils@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/analytics-utils/-/analytics-utils-0.1.2.tgz#0aa4a38be030985365d4c21a0610887569d7cef7"
+  integrity sha512-xRH9l6dcpdD7FugcyNwcT6uLQ9JSYrK99xmVdpvyxQNTy1JfKtaZV4UIzCPxYwzHWpV/UwDs5gM1WH2JOOVAhg==
+  dependencies:
+    "@analytics/storage-utils" "^0.2.2"
+
+analytics@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/analytics/-/analytics-0.3.0.tgz#f119499506476c2f245b1658913b2d4b8cfbf7f9"
+  integrity sha512-z7zmmfLFnQZIdRFA6mFk8w+M3/kxrEAFHYYnJI4pO6S2n4JVuzMv6XyItACuIX12bGo2aJyvBZDFLEHjHYMvqw==
+  dependencies:
+    analytics-utils "^0.1.2"
+    redux "^3.6.0"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -2226,7 +2260,7 @@ debug@=3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.2.5, debug@^3.2.6:
+debug@^3.0.0, debug@^3.2.5, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -4082,6 +4116,11 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
+lodash-es@^4.2.1:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -4097,7 +4136,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.5, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.5, lodash@^4.2.1, lodash@~4.17.10:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -4107,7 +4146,7 @@ loglevel@^1.6.3:
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.3.tgz#77f2eb64be55a404c9fd04ad16d57c1d6d6b1280"
   integrity sha512-LoEDv5pgpvWgPF4kNYuIp0qqSJVWak/dML0RY74xlzMZiT9w77teNAwKYKWBTYjlokMirg+o3jBwp+vlLrcfAA==
 
-loose-envify@^1.0.0:
+loose-envify@^1.0.0, loose-envify@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -5681,6 +5720,16 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
+redux@^3.6.0:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
+  integrity sha512-pNqnf9q1hI5HHZRBkj3bAngGZW/JMCmexDlOxw4XagXY2o1327nHH54LoTjiPJ0gizoqPDRqWyX/00g0hD6w+A==
+  dependencies:
+    lodash "^4.2.1"
+    lodash-es "^4.2.1"
+    loose-envify "^1.1.0"
+    symbol-observable "^1.0.3"
+
 regenerate-unicode-properties@^8.0.2:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/regenerate-unicode-properties/-/regenerate-unicode-properties-8.1.0.tgz#ef51e0f0ea4ad424b77bf7cb41f3e015c70a3f0e"
@@ -6546,6 +6595,11 @@ svgo@^1.0.0, svgo@^1.0.5:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+symbol-observable@^1.0.3:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
+
 tapable@^1.0.0, tapable@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
@@ -6804,6 +6858,15 @@ unique-slug@^2.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
+universal-analytics@^0.4.20:
+  version "0.4.20"
+  resolved "https://registry.yarnpkg.com/universal-analytics/-/universal-analytics-0.4.20.tgz#d6b64e5312bf74f7c368e3024a922135dbf24b03"
+  integrity sha512-gE91dtMvNkjO+kWsPstHRtSwHXz0l2axqptGYp5ceg4MsuurloM0PU3pdOfpb5zBXUvyjT4PwhWK2m39uczZuw==
+  dependencies:
+    debug "^3.0.0"
+    request "^2.88.0"
+    uuid "^3.0.0"
+
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -6901,6 +6964,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+uuid@^3.0.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"

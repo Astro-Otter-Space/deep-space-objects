@@ -14,8 +14,10 @@
         "generate-icons": "vsvg -s ./assets/svg -t ./assets/js/Widgets/Icons"
     },
     "dependencies": {
+        "@analytics/google-analytics": "^0.2.2",
         "@types/leaflet": "1.2.11",
         "@voerro/vue-tagsinput": "^1.11.2",
+        "analytics": "^0.3.0",
         "axios": "^0.18.1",
         "copy-webpack-plugin": "^4.6.0",
         "d3-celestial": "0.6.10",

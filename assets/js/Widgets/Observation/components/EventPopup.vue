@@ -1,15 +1,17 @@
 <template>
   <div>
     <p>
-      <a v-bind:href="url">{{ name }}</a>
+      <b><a v-bind:href="url">{{ name }} - {{ organiser }}</a></b>
     </p>
-    <p>{{ username }} - {{ date_observation }}</p>
+    <p>
+      {{location}} - {{date_observation}}
+    </p>
   </div>
 </template>
 
 <script>
   export default {
-    name: "ObservationPopup",
+    name: "EventPopup",
     props: {
       name: {
         type: String,
@@ -19,7 +21,11 @@
         type: String,
         default: ""
       },
-      username: {
+      organiser: {
+        type: String,
+        default: ""
+      },
+      location: {
         type: String,
         default: ""
       },

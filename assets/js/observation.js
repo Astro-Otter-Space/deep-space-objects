@@ -12,7 +12,7 @@ Icon.Default.mergeOptions({
 import SocialSharing from "vue-social-sharing";
 Vue.use(SocialSharing);
 
-import AppObs from './Widgets/Observation/App';
+import AppObs from './Widgets/Observation/DsoPlanner';
 new Vue({
   el: '#app',
   render: h => h(AppObs),

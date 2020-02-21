@@ -6,7 +6,6 @@ import Vue from 'vue';
 import Header from './Widgets/App/Header'
 import Footer from './Widgets/App/Footer'
 
-
 // Import custom icons
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
@@ -22,3 +21,21 @@ new Vue({
 new Vue({
     render: h => h(Footer)
 }).$mount(`#appFooter`);
+
+// Google analytics
+/*import Analytics from 'analytics';
+import googleAnalytics from '@analytics/google-analytics';
+
+const analytics = Analytics({
+  app: 'astro.otter.space',
+  version: 100,
+  plugins: [
+    googleAnalytics({
+      trackingId: '',
+    })
+  ]
+});
+
+analytics.page();*/
+
+

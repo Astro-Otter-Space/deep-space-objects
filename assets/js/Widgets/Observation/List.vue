@@ -44,24 +44,19 @@
             :zoom="zoom"
             :center="center"
           >
-            <l-geo-json v-if="(itemselect === 'obs') || (itemselect === 'all')"
-              :geojson="geojsonObs"
-              :options="options"
-              :options-style="styleObservation"
-              name="l_observations"
-            >
-              <l-marker
-                :icon="iconObs"
-              ></l-marker>
-            </l-geo-json>
-
             <l-geo-json v-if="(itemselect === 'event') || (itemselect === 'all')"
               :geojson="geojsonEvents"
-              :options="options"
-              :options-style="styleEvents"
+              :options="optionsEvents"
               name="l_events"
-            ></l-geo-json>
+            >
+            </l-geo-json>
 
+            <l-geo-json v-if="(itemselect === 'obs') || (itemselect === 'all')"
+              :geojson="geojsonObs"
+              name="l_dsoplanner"
+              onclick="alert(this.feature.properties.name)"
+            >
+            </l-geo-json>
             <l-tile-layer
               :url="url"
               :attribution="attribution"
@@ -74,11 +69,12 @@
 </template>
 
 <script>
+  import Vue from "vue";
   import ImageHeader from './../Dso/components/Imageheader';
   import Searchautocomplete from "./../Homepage/components/Searchautocomplete"
   import { LMap, LTileLayer, LMarker, LIcon, LGeoJson } from 'vue2-leaflet';
   import axios from 'axios';
-  import obsPopupContent from './ObservationPopup';
+  import eventPopupContent from './components/EventPopup';
 
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
   let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
@@ -120,7 +116,7 @@
         geojsonEvents: null,
         urlAjaxObservations: urlAjaxObservations,
         urlAjaxEvents: urlAjaxEvents,
-        imageCover: 'build/images/layout/observation_silouhette.jpg',
+        imageCover: '/build/images/layout/observation_silouhette.jpg',
         imageCoverAlt: pageTitle,
         listFilters: [
           {
@@ -136,10 +132,11 @@
             label: 'DSO Planner',
           }
         ],
-        iconObs: L.icon({
-          iconUrl: 'build/images/markers/telescope.png',
-          iconSize: [32, 37],
-          iconAnchor: [16, 37]
+        iconEvent: L.icon({
+          iconUrl: '/build/images/markers/telescop.svg',
+          iconSize: [32, 32],
+          iconAnchor: [5, 5],
+          popupAnchor: [0, -5],
         }),
         itemselect: 'all',
       }
@@ -156,43 +153,36 @@
       );
     },
     computed: {
-      options() {
+      optionsEvents() {
         return {
-          onEachFeature: this.onEachFeatureFunction
+          pointToLayer: this.pointToLayer,
+          onEachFeature: this.onEachFeatureEventFunction
         }
       },
-      onEachFeatureFunction() {
+      pointToLayer() {
+        return (feature, latlng) => {
+          return L.marker(latlng, {icon: this.iconEvent});
+        }
+      },
+      onEachFeatureEventFunction() {
         if (!this.enableTooltip) {
           return () => {};
         }
         return (feature, layer) => {
-          /*let ObsPopupContent = Vue.extend(obsPopupContent);
-          let popup = new ObsPopupContent({
+          let EventPopupContent = Vue.extend(eventPopupContent);
+          let popup = new EventPopupContent({
             propsData: {
-              name: feature.properties.name,
               url: feature.properties.full_url,
-              username: feature.properties.username,
-              date_observation: feature.properties.date
+              name: feature.properties.name,
+              date_observation: feature.properties.date,
+              location: feature.properties.location,
+              organiser: feature.properties.organiserName
             }
           });
-          layer.bindPopup(popup.$mount().$el);*/
+          layer.bindPopup(popup.$mount().$el);
         }
       },
-      styleObservation(feature) {
-        return {
-          color: '#ff0000',
-          weight: 5,
-          opacity: 0.5
-        }
-      },
-      styleEvents() {
-        return () => {
-          return {
-            color: '#265575',
-            weight: 5,
-            opacity: 0.5
-          }
-        }
+      onEachFeatureDsoPlannerFunction() {
       },
     }
   }

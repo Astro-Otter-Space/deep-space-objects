@@ -179,11 +179,11 @@ class FacebookWs implements socialNetworkInterface
             /** @var AccessToken $accessToken */
             $accessToken = $helper->getAccessToken();
         } catch (FacebookResponseException $e) {
-            dump($e->getMessage());
+            //dump($e->getMessage());
             exit;
 
         } catch (FacebookSDKException $e) {
-            dump($e->getMessage());
+            //dump($e->getMessage());
             exit;
         }
 

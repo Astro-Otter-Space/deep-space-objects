@@ -149,8 +149,11 @@ class EventManager
                 'type' => 'Feature',
                 'properties' => [
                     'name' => $event->getName(),
-//                    'full_url' => ->generateUrl($observation),
+                    'full_url' => $this->urlGeneratorHelper->generateUrl($event),
                     'date' => $formatter->format($event->getEventDate()),
+                    'location' => $event->getLocationLabel(),
+                    'organiserName' => $event->getOrganiserName(),
+                    'layer' => 'l_events'
                 ],
                 'geometry' => $event->getLocation()
             ];

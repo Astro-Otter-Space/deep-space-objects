@@ -492,6 +492,7 @@ class Event extends AbstractEntity
      */
     public function fieldsUrl()
     {
+        $this->setEventDate($this->getEventDate(), false);
         return implode(trim(self::URL_CONCAT_GLUE), [$this->getName(), $this->getEventDate()->format('Y-m-d')]);
     }
 

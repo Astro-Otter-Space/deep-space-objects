@@ -19,9 +19,10 @@ var MAP_MODULE = (function(c, constId, color) {
     location: false,
     controls: false,
     container: "map",
-    datapath: "/build/data/",
+    datapath: "/load/data/",
     // STARS
     stars: {
+      show: true,
       colors: true,
       names: true,
       proper: true,
@@ -34,13 +35,10 @@ var MAP_MODULE = (function(c, constId, color) {
     // DEEP SKY OBJECTS
     dsos: {
       show: true,
-      data: "messier.json",
-      //size: 10
+      data: 'no_dso.json',
       names: true,
       limit: 1000,
       namelimit: 1000,
-      // size: null,
-      // exponent: 1.4,
       symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
         // Galaxies
         gg: { shape: "circle", fill: color.gc }, // Galaxy cluster
@@ -89,10 +87,10 @@ var MAP_MODULE = (function(c, constId, color) {
       data: 'mw.json',
       style: { fill: "#ffffff", opacity: 0.15 }
     },
-    planets: {
+    /**planets: {
       show: false,
       data: ""
-    },
+    },*/
     // LINES
     lines: {
       graticule: {
@@ -135,11 +133,10 @@ var MAP_MODULE = (function(c, constId, color) {
 
   /**
    *
-   * @param jsonConstellation
+   * @param zoom
    * @param jsonDso
    */
   function buildMap(zoom, jsonDso) {
-
     if (jsonDso !== undefined && "" !== jsonDso) {
       var pointStyle = {
           stroke: "rgba(255, 0, 204, 1)",

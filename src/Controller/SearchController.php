@@ -102,6 +102,8 @@ class  SearchController extends AbstractController
     }
 
     /**
+     * Search events and dso planner by autocomplete
+     *
      * @Route(
      *     "/_search-observation",
      *     name="search_observation_ajax",
@@ -110,6 +112,7 @@ class  SearchController extends AbstractController
      * @param Request $request
      *
      * @return JsonResponse
+     * @throws \Exception
      */
     public function searchObservationAjax(Request $request): JsonResponse
     {
