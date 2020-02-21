@@ -445,7 +445,12 @@ class LayoutController extends AbstractController
             }
         }
 
-        return new JsonResponse($json, Response::HTTP_OK);
+        /** @var JsonResponse $jsonResponse */
+        $jsonResponse = new JsonResponse($json, Response::HTTP_OK);
+        $jsonResponse->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $jsonResponse->setPublic();
+
+        return $jsonResponse;
     }
 
 }
