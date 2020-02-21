@@ -31,7 +31,7 @@ const analytics = Analytics({
   version: 100,
   plugins: [
     googleAnalytics({
-      trackingId: 'UA-158825900-1',
+      trackingId: '',
     })
   ]
 });
