@@ -63,10 +63,11 @@ class ConstellationManager
     {
         $listConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
         return array_map(function(Constellation $constellation) {
+            /** @var Image $image */
             $image = new Image();
             $image->url_regular = $constellation->getImage();
-            $image->user = null;
-            $image->title = null;
+            $image->user = $constellation->getAlt();
+            $image->title = $constellation->getAlt();
 
             return [
                 'id' => $constellation->getId(),
