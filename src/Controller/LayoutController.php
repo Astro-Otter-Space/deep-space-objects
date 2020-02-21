@@ -9,8 +9,10 @@ use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -389,7 +391,51 @@ class LayoutController extends AbstractController
         $response->headers->set('Content-Type', 'text/xml');
         $response->setPublic();
         $response->setSharedMaxAge(0);
-        
+
         return $response;
     }
+
+
+    /**
+     * @Route("/load/data/{file}", name="data_celestial")
+     * @param Request $request
+     * @param KernelInterface $kernel
+     * @param string $file
+     *
+     * @return JsonResponse
+     */
+    public function getStarsFromConst(Request $request, KernelInterface $kernel, string $file): JsonResponse
+    {
+        preg_match('/stars.([A-Za-z]{3}|([0-9]{1,2})).json/', $file, $matches);
+        $json = [];
+        if ($matches) {
+            $match = $matches[1];
+            if (in_array($match, [6,8,14])) {
+                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/' . sprintf('stars.%d.json', $match));
+
+                $json = json_decode($fileJson);
+            } else {
+                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/stars.14.json');
+
+                $dataJson = json_decode($fileJson, true);
+                $filteredStars = array_filter($dataJson['features'], function ($starData) use ($match) {
+                    return $match === $starData['properties']['con'];
+                });
+
+                $json = [
+                    'type' => 'FeatureCollection',
+                    'features' => array_values($filteredStars)
+                ];
+            }
+        } else {
+            $filePath = $kernel->getProjectDir() . sprintf('/public/build/data/%s', $file);
+            if (file_exists($filePath)) {
+                $fileJson = file_get_contents($filePath);
+                $json = json_decode($fileJson);
+            }
+        }
+
+        return new JsonResponse($json, Response::HTTP_OK);
+    }
+
 }

@@ -128,7 +128,7 @@ class DsoController extends AbstractController
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
         $response->setPublic();
-        $response->setSharedMaxAge(3600);
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         $listDsoIdHeaders = [
