@@ -415,8 +415,18 @@ class LayoutController extends AbstractController
 
                 $json = json_decode($fileJson);
             } else {
-                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/stars.14.json');
+                /** @var \Generator $readFile */
+                /*$readFile = function($file) {
+                    $h = fopen($file, 'r+');
+                    while(!feof($h)) {
+                        yield fgets($h);
+                    }
+                    fclose($h);
+                };
 
+                $fileJson = $readFile($kernel->getProjectDir() . '/public/build/data/stars.14.json');*/
+
+                $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/stars.8.json');
                 $dataJson = json_decode($fileJson, true);
                 $filteredStars = array_filter($dataJson['features'], function ($starData) use ($match) {
                     return $match === $starData['properties']['con'];
