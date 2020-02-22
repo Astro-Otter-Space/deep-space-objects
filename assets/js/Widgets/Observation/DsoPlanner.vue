@@ -44,8 +44,8 @@
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3 class="Dso__title" v-if="labels.listTitle">{{labels.listTitle}}</h3>
           <cards-grid
-                  :items="itemsDso"
-                  :show-controls="false"
+            :items="itemsDso"
+            :show-controls="false"
           >
           </cards-grid>
         </div>
@@ -73,12 +73,10 @@
 </template>
 
 <script>
-
   import CardsGrid from './../Dso/components/CardsGrid';
   import Table from './../App/SimpleTable';
   import './../Icons/facebook';
   import './../Icons/twitter';
-
   import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
   let title = document.querySelector('div[data-observation-widget]').dataset.title;

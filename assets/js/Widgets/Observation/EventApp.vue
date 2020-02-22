@@ -66,14 +66,13 @@
   import './../Icons/facebook';
   import './../Icons/twitter';
   import Table from './../App/SimpleTable';
+  import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
   let title = document.querySelector('div[data-event-widget]').dataset.title;
   let desc = document.querySelector('div[data-event-widget]').dataset.description;
   let labels = JSON.parse(document.querySelector('div[data-event-widget]').dataset.labels);
-  let coordinates = JSON.parse(document.querySelector('div[data-event-widget]').dataset.coordinates);
   let data = JSON.parse(document.querySelector('div[data-event-widget]').dataset.data);
-
-  import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+  let coordinates = JSON.parse(document.querySelector('div[data-event-widget]').dataset.coordinates);
 
   export default {
     name: "App",
@@ -94,7 +93,7 @@
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",
-        zoom: 15,
+        zoom: 10,
         url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
         marker: L.latLng(coordinates.lat, coordinates.lon)
