@@ -366,6 +366,7 @@ observation:
     label: Location of observation
     placeholder: "Ex: London, UK"
 # Event
+organiser: Organisateur(s)
 event:
     name:
         label: "Name (*)"

@@ -364,6 +364,7 @@ observation:
     label: Lieu de l'observation
     placeholder: "Ex: Cazevieille, France..."
 # Event
+organiser: Organisateur(s)
 event:
     name:
         label: "Nom (*)"
