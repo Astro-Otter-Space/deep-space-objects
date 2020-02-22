@@ -53,8 +53,8 @@
 
             <l-geo-json v-if="(itemselect === 'obs') || (itemselect === 'all')"
               :geojson="geojsonObs"
+              :options="optionsDsoPlanner"
               name="l_dsoplanner"
-              onclick="alert(this.feature.properties.name)"
             >
             </l-geo-json>
             <l-tile-layer
@@ -135,7 +135,7 @@
         iconEvent: L.icon({
           iconUrl: '/build/images/markers/telescop.svg',
           iconSize: [32, 32],
-          iconAnchor: [5, 5],
+          iconAnchor: [16, 16],
           popupAnchor: [0, -5],
         }),
         itemselect: 'all',
@@ -157,6 +157,13 @@
         return {
           pointToLayer: this.pointToLayer,
           onEachFeature: this.onEachFeatureEventFunction
+        }
+      },
+      optionsDsoPlanner() {
+        return {
+          onEachFeature: (feature, layer) => {
+            layer.bindTooltip(feature.properties.name);
+          }
         }
       },
       pointToLayer() {
