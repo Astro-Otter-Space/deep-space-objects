@@ -99,7 +99,16 @@ class ObservationController extends AbstractController
             'features' => $this->observationManager->getAllObservation()
         ];
 
-        return new JsonResponse($geojson, Response::HTTP_OK);
+
+        /** @var JsonResponse $response */
+        $response = new JsonResponse($geojson, Response::HTTP_OK);
+        $response->setPublic()->setSharedMaxAge(0);
+
+        $response->headers->addCacheControlDirective('no-cache', true);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->addCacheControlDirective('no-store', true);
+
+        return $response;
     }
 
 
@@ -121,7 +130,15 @@ class ObservationController extends AbstractController
             'features' => $this->eventManager->getAllEvents()
         ];
 
-        return new JsonResponse($geojson, Response::HTTP_OK);
+        /** @var JsonResponse $response */
+        $response = new JsonResponse($geojson, Response::HTTP_OK);
+        $response->setPublic()->setSharedMaxAge(0);
+
+        $response->headers->addCacheControlDirective('no-cache', true);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->addCacheControlDirective('no-store', true);
+
+        return $response;
     }
 
     /**
@@ -320,7 +337,7 @@ class ObservationController extends AbstractController
         $response = new Response();
         $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->setPublic();
-        
+
         /** @var Response $response */
         return $this->render('pages/event.html.twig', $params, $response);
     }

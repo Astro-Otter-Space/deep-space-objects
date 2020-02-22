@@ -72,6 +72,10 @@ class  SearchController extends AbstractController
         $response = new JsonResponse($data, Response::HTTP_OK);
         $response->setPublic()->setSharedMaxAge(0);
 
+        $response->headers->addCacheControlDirective('no-cache', true);
+        $response->headers->addCacheControlDirective('must-revalidate', true);
+        $response->headers->addCacheControlDirective('no-store', true);
+
         return $response;
     }
 
