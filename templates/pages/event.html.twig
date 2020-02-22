@@ -4,17 +4,24 @@
 {% set pageDesc = event.description %}
 
 {% block content %}
+  {% set labels =  {
+        "tabTitle": "info"|trans,
+        "mapTitle": "location"|trans
+      }
+  %}
+
   <div id="app"
-    data-observation-widget
-    data-name="{{ pageTitle }}"
+    data-event-widget
+    data-title="{{ event.name }}"
     data-description="{{ pageDesc }}"
-    data-listData="{{ data|json_encode }}"
+    data-data="{{ data|json_encode }}"
     data-coordinates="{{ coordinates|json_encode }}"
+    data-labels="{{ labels|json_encode }}"
   ></div>
 
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  {{ encore_entry_script_tags('observation') }}
+  {{ encore_entry_script_tags('event') }}
 {% endblock %}

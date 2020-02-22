@@ -84,7 +84,7 @@ class EventManager
     public function formatVueData(Event $event)
     {
         $eventArray = $this->eventDataTransformer->toArray($event);
-        return $this->formatEntityData($eventArray, [], $this->translator);
+        return $this->formatEntityData($eventArray, ['event.public.label'], $this->translator);
     }
 
     /**

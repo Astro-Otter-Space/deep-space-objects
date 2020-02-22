@@ -375,7 +375,7 @@ event:
         label: "Description (*)"
         placeholder: "Description de l'évenement"
     locationLabel:
-        label: "Lieux (*)"
+        label: "Lieu (*)"
         placeholder: "Endroit de l'observation"
     tarif:
         label: "Prix"

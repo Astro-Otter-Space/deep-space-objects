@@ -5,14 +5,21 @@
 {#{% set pageImage = observation. %}#}
 
 {% block content %}
+  {% set labels =  {
+    "tabTitle": "observation.add.setup"|trans,
+    "listTitle": "DSO",
+    "mapTitle": "location"|trans
+  }
+  %}
+
   <div id="app"
      data-observation-widget
      data-title="{{ observation.name ~ ' - ' ~ observation.observationDate|localizeddate('short', 'none', app.request.locale, null, '')  }}"
      data-description="{{ observation.description }}"
-
-     data-observation="{{ data|json_encode }}"
+     data-data="{{ data|json_encode }}"
      data-coordinates="{{ coordinates|json_encode }}"
      data-list-dso="{{ list_dso|json_encode }}"
+     data-labels="{{ labels|json_encode }}"
   ></div>
 {% endblock %}
 

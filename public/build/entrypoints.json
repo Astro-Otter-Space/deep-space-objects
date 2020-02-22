@@ -1,9 +1,9 @@
 {
   "entrypoints": {
-    "observations": {
+    "event": {
       "js": [
         "/build/runtime.js",
-        "/build/observations.js"
+        "/build/event.js"
       ]
     },
     "app": {
@@ -49,6 +49,12 @@
       "js": [
         "/build/runtime.js",
         "/build/home.js"
+      ]
+    },
+    "observations": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observations.js"
       ]
     },
     "notfound": {

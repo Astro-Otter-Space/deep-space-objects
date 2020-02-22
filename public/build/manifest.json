@@ -6,6 +6,7 @@
   "build/const.js": "/build/const.js",
   "build/const_list.js": "/build/const_list.js",
   "build/dso.js": "/build/dso.js",
+  "build/event.js": "/build/event.js",
   "build/help_api.js": "/build/help_api.js",
   "build/home.js": "/build/home.js",
   "build/leaflet.js": "/build/leaflet.js",

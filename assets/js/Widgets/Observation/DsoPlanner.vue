@@ -29,7 +29,7 @@
 
         <a id="#information"></a>
         <div class="Dso__data">
-          <h3 class="Dso__title">Setup</h3>
+          <h3 class="Dso__title" v-if="labels.tabTitle">{{labels.tabTitle}}</h3>
           <Table
             :columns="gridColumns"
             :data="gridData"
@@ -42,7 +42,7 @@
 
         <!--List DSo-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3 class="Dso__title">Items</h3>
+          <h3 class="Dso__title" v-if="labels.listTitle">{{labels.listTitle}}</h3>
           <cards-grid
                   :items="itemsDso"
                   :show-controls="false"
@@ -51,7 +51,7 @@
         </div>
 
         <div id="map" style="height: 25rem;">
-          <h3 class="Dso__title">Location</h3>
+          <h3 class="Dso__title" v-if="labels.mapTitle">{{labels.mapTitle}}</h3>
           <div class="Dso__leaflet">
             <l-map
               :zoom="zoom"
@@ -83,7 +83,8 @@
 
   let title = document.querySelector('div[data-observation-widget]').dataset.title;
   let desc = document.querySelector('div[data-observation-widget]').dataset.description;
-  let data = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.observation);
+  let labels = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.labels);
+  let data = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.data);
   let dsoList = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.listDso);
   let coordinates = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.coordinates);
 
@@ -101,6 +102,7 @@
         pageTitle: title,
         description: desc,
         urlShare: document.querySelector("link[rel='canonical']").href,
+        labels: labels,
         gridColumns: ['col0', 'col1'],
         gridData: data,
         classTable: "Dso__table",
