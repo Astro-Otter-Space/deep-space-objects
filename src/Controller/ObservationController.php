@@ -156,6 +156,7 @@ class ObservationController extends AbstractController
         /** @var Response $response */
         $response = $this->render('pages/observation.html.twig', $params);
         $response->setPublic();
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
 
         return $response;
     }
@@ -317,7 +318,9 @@ class ObservationController extends AbstractController
 
         /** @var Response $response */
         $response = new Response();
-
+        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setPublic();
+        
         /** @var Response $response */
         return $this->render('pages/event.html.twig', $params, $response);
     }
