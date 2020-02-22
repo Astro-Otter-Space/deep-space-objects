@@ -5,14 +5,31 @@
 {% set pageImage = '' %}
 
 {% block content %}
+  {% set tabFilters = [
+      {
+        value: 'all',
+        label: 'hem.all'|trans
+      },
+      {
+        value: 'event',
+        label: "listObservations"|trans
+      },
+      {
+        value: 'obs',
+        label: 'addObservation'|trans,
+      }
+    ]
+  %}
   <div id="app"
      data-observations-list
      data-title="{{ 'listObservations'|trans }}"
+     data-description="{{ 'listObservationsDesc'|trans }}"
      data-map-title="{{ 'locationObservation'|trans }}"
      data-search-route="{{ path('search_observation_ajax') }}"
      data-ajax-observations="{{ path('observation_list_ajax') }}"
      data-ajax-events="{{ path('events_list_ajax') }}"
      data-observation-autocomplete="{{ 'observation.search.placeholder'|trans }}"
+     data-filters="{{ tabFilters|json_encode }}"
   >
   </div>
 {% endblock %}

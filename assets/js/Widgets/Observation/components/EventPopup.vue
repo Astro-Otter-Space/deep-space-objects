@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>
+      <svgicon name="telescop" width="15" height="15"></svgicon>
       <b><a v-bind:href="url">{{ name }} - {{ organiser }}</a></b>
     </p>
     <p>
@@ -10,6 +11,8 @@
 </template>
 
 <script>
+   import './../../Icons/telescop'
+
   export default {
     name: "EventPopup",
     props: {

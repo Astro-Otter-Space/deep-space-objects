@@ -1,15 +1,18 @@
 <template>
   <div>
     <p>
-      <b><a v-bind:href="url">{{ name }} - {{ date_observation }}</a></b>
+      <svgicon name="dsoplanner" width="15" height="15"></svgicon>
+      <b><a v-bind:href="url">{{ name }}</a></b>
     </p>
     <p>
-      {{place}}
+      {{username}} - {{ date_observation }}
     </p>
   </div>
 </template>
 
 <script>
+  import './../../Icons/dsoplanner'
+
   export default {
     name: "ObservationPopup",
     props: {
@@ -25,7 +28,7 @@
         type: String,
         default: ""
       },
-      place: {
+      location: {
         type: String,
         default: ""
       },

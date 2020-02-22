@@ -12,6 +12,24 @@
           <label for="observationsearch">{{ pageTitle }}</label>
         </h2>
 
+        <social-sharing
+          :url="urlShare"
+          :title="pageTitle"
+          :description="description"
+          hashtags=""
+          twitter-user=""
+          inline-template
+        >
+          <div>
+            <network network="facebook">
+              <svgicon name="facebook" width="15" height="15"></svgicon>
+            </network>
+            <network network="twitter">
+              <svgicon name="twitter" width="15" height="15"></svgicon>
+            </network>
+          </div>
+        </social-sharing>
+
         <searchautocomplete
           ref="observationsearch"
           :searchPlaceholder="searchPlaceholder"
@@ -75,13 +93,18 @@
   import { LMap, LTileLayer, LMarker, LIcon, LGeoJson } from 'vue2-leaflet';
   import axios from 'axios';
   import eventPopupContent from './components/EventPopup';
+  import dsoPlannerPopupContent from './components/DsoPlannerPopup';
+  import './../Icons/facebook';
+  import './../Icons/twitter';
 
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
+  let description = document.querySelector('div[data-observations-list]').dataset.description;
   let mapTitle = document.querySelector('div[data-observations-list]').dataset.mapTitle;
   let urlSearchObs = document.querySelector('div[data-observations-list]').dataset.searchRoute;
   let urlAjaxObservations = document.querySelector('div[data-observations-list]').dataset.ajaxObservations;
   let urlAjaxEvents = document.querySelector('div[data-observations-list]').dataset.ajaxEvents;
   let searchPlaceholder = document.querySelector('div[data-observations-list]').dataset.observationAutocomplete;
+  let listFilter = JSON.parse(document.querySelector('div[data-observations-list]').dataset.filters);
 
   export default {
     name: "App",
@@ -97,6 +120,8 @@
     data () {
       return {
         pageTitle: pageTitle,
+        description: description,
+        urlShare: document.querySelector("link[rel='canonical']").href,
         mapTitle: mapTitle,
         urlSearch: urlSearchObs,
         autoCompleteClasse: {
@@ -118,24 +143,17 @@
         urlAjaxEvents: urlAjaxEvents,
         imageCover: '/build/images/layout/observation_silouhette.jpg',
         imageCoverAlt: pageTitle,
-        listFilters: [
-          {
-            value: 'all',
-            label: 'All'
-          },
-          {
-            value: 'event',
-            label: "Events"
-          },
-          {
-            value: 'obs',
-            label: 'DSO Planner',
-          }
-        ],
+        listFilters: listFilter,
         iconEvent: L.icon({
           iconUrl: '/build/images/markers/telescop.svg',
           iconSize: [32, 32],
           iconAnchor: [16, 16],
+          popupAnchor: [0, -5],
+        }),
+        iconDsoPlanner: L.icon({
+          iconUrl: '/build/images/markers/dsoplanner.svg',
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
           popupAnchor: [0, -5],
         }),
         itemselect: 'all',
@@ -161,8 +179,21 @@
       },
       optionsDsoPlanner() {
         return {
+          pointToLayer: (feature, latLng) => {
+            return L.marker(latLng, {icon: this.iconDsoPlanner})
+          },
           onEachFeature: (feature, layer) => {
-            layer.bindTooltip(feature.properties.name);
+            let DsoPlannerPopupContent = Vue.extend(dsoPlannerPopupContent);
+            let popup = new DsoPlannerPopupContent({
+              propsData: {
+                name: feature.properties.name,
+                username: feature.properties.username,
+                url: feature.properties.full_url,
+                place: '',
+                date_observation: feature.properties.date
+              }
+            });
+            layer.bindPopup(popup.$mount().$el);
           }
         }
       },
