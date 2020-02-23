@@ -214,6 +214,10 @@ Sources :
           "alt_pt": "",
           "alt_it": ""
         },
+        "description": {
+            "description": "",
+            "description_fr": ""
+        },
         "type": "",
         "mag": 999,
         "dim": "",
