@@ -138,7 +138,7 @@
         astrobinMsg: astrobinMsg,
         itemsDso: dsoList,
         filters: filters,
-        bugAstrobin: true
+        bugAstrobin: false
       }
     },
     // TODO : better way
