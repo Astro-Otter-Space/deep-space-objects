@@ -12,7 +12,10 @@
   grid-gap: var(--grid-gap);
   //counter-reset: rank;
   margin: 1%;
-
+  @media ($mq-phone) {
+    margin: 0em 1em;
+  }
+  
   article {
     //counter-increment: rank;
     position: relative;
