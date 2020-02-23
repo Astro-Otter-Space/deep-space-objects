@@ -57,11 +57,16 @@ class ConstellationManager
 
     /**
      * Get all constellation and build formated data for template
-     * @throws \ReflectionException
      */
-    public function buildListConstellation()
+    public function buildListConstellation(): array
     {
-        $listConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
+        /** @return \Generator
+         * @var \Generator $listConstellation
+         */
+        $listConstellation = function() {
+            yield from $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
+        };
+
         return array_map(function(Constellation $constellation) {
             /** @var Image $image */
             $image = new Image();
@@ -77,7 +82,7 @@ class ConstellationManager
                 'image' => $image,
                 'filter' => $constellation->getLoc()
             ];
-        }, iterator_to_array($listConstellation->getIterator()));
+        }, iterator_to_array($listConstellation()));
     }
 
 

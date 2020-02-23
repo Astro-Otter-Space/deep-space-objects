@@ -71,12 +71,6 @@ class EventRepository extends AbstractRepository
      */
     public function getAllFuturEvents(): \Generator
     {
-        /** @var \DateTimeInterface $now */
-        $now = new \DateTime();
-
-        /** @var ListEvents $listObservation */
-        $listEvents = new ListEvents();
-
         /** @var Query $query */
         $query = new Query();
 
@@ -99,14 +93,9 @@ class EventRepository extends AbstractRepository
         $result = $search->addIndex(self::INDEX_NAME)->search($query);
         if (0 < $result->count()) {
             foreach ($result->getDocuments() as $document) {
-                /** @var Event $event */
-               //$event = $this->buildEntityFromDocument($document);
-                //$listEvents->addEvent($event);
                 yield $this->buildEntityFromDocument($document);
             }
         }
-
-        //return $listEvents;
     }
 
 

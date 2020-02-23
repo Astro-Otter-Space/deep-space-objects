@@ -370,7 +370,7 @@ class LayoutController extends AbstractController
             ];
         }
 
-        /** @var ListConstellation $listConstellation */
+        /** @var \Generator $listConstellation */
         $listConstellation = $this->constellationRepository->getAllConstellation();
 
         /** @var Constellation $constellation */

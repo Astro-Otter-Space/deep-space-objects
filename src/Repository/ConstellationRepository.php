@@ -49,13 +49,12 @@ final class ConstellationRepository extends AbstractRepository
 
     /**
      * Build a list of all constellation (88)
-     * @return ListConstellation
      * @throws \ReflectionException
      */
-    public function getAllConstellation(): ListConstellation
+    public function getAllConstellation(): \Generator
     {
         /** @var ListConstellation $listConstellation */
-        $listConstellation = new ListConstellation();
+        //$listConstellation = new ListConstellation();
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query $query */
@@ -69,12 +68,12 @@ final class ConstellationRepository extends AbstractRepository
 
         if (0 < $result->count()) {
             foreach ($result->getDocuments() as $document) {
-                $constellation = $this->buildEntityFromDocument($document);
-                $listConstellation->addConstellation($constellation);
+                yield $this->buildEntityFromDocument($document);
+                //$listConstellation->addConstellation($constellation);
             }
         }
 
-        return $listConstellation;
+        //return $listConstellation;
     }
 
     /**
