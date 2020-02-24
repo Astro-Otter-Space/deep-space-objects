@@ -18,10 +18,10 @@
         type: Array
       }
     },
-
     methods: {
       imgStyle: (dso) => {
         var bgImage = dso.image.url_regular;
+        // bug : return only first proprity
         return {
           "background-size": "cover",
           "background-position" : "50% 50%",
