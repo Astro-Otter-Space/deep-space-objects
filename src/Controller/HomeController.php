@@ -17,6 +17,8 @@ class HomeController extends AbstractController
     /** @var DsoManager  */
     private $dsoManager;
 
+    const DSO_VIGNETTES = 3;
+
     /**
      * HomeController constructor.
      *
@@ -44,18 +46,19 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @var Request $request
      * @return Response
+     * @throws \Exception
+     * @var Request $request
      */
-    public function vignetteDso(Request $request): Response
+    public function vignettesDso(Request $request): Response
     {
-        $params = [];
-
-        $params['vignettes'] = [];
+        $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES) ?? [];
 
         /** @var Response $response */
         $response = new Response();
         $response->setPublic();
+
+        // TTL of 24 hours
         $response->setSharedMaxAge(86400);
 
         return $this->render('includes/components/vignettes.html.twig', $params, $response);
