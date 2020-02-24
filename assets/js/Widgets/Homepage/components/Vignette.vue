@@ -19,7 +19,7 @@
     },
     computed: {
       imgStyle: () => {
-        var bgImage = this.dso.image.url_regular;
+        var bgImage = this.$refs.image.url_regular;
         return {
           "background-size": "cover",
           "background-position" : "50% 50%",
