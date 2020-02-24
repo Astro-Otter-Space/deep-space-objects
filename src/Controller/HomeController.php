@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Managers\DsoManager;
-use Elastica\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,9 +33,11 @@ class HomeController extends AbstractController
      * Homepage
      *
      * @Route("/", name="homepage")
+     * @param Request $request
+     *
      * @return Response
      */
-    public function homepage(): Response
+    public function homepage(Request $request): Response
     {
         /** @var Response $response */
         $response = $this->render('pages/home.html.twig', []);
@@ -54,6 +56,7 @@ class HomeController extends AbstractController
     {
         $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES) ?? [];
 
+        dump($params['vignettes']);
         /** @var Response $response */
         $response = new Response();
         $response->setPublic();

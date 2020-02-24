@@ -379,15 +379,18 @@ class DsoRepository extends AbstractRepository
     {
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
-
-        /** @var int $seed */
         $seed = $now->getTimestamp();
 
-
+        /** @var Query\Exists $existQuery */
+        $existQuery = new Query\Exists(self::ASTROBIN_FIELD);
 
         /** @var Query\FunctionScore $score */
         $score = new Query\FunctionScore();
-        $score->addRandomScoreFunction($seed);
+        $score
+            ->setQuery($existQuery)
+            ->setBoost(5)
+            ->setRandomScore($seed)
+            ->setBoostMode(Query\FunctionScore::BOOST_MODE_MULTIPLY);
 
         /** @var Query $query */
         $query = new Query();
