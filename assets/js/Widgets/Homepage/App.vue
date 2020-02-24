@@ -30,6 +30,10 @@
           class="AppSlider__dImage"
         ></div>
       </div>
+
+      <vignette
+        :vignettes="listVignettes"
+      ></vignette>
     </div>
   </div>
 </template>
@@ -37,16 +41,19 @@
 <script>
   //import Slider from './components/Slider'
   import Searchautocomplete from "./components/Searchautocomplete"
+  import Vignette from "./components/Vignette";
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
   let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
   let urlSearchHome = document.getElementById('appHome').dataset.searchRoute;
+  let listVignettes = JSON.parse(document.querySelector('div#appVignette').dataset.vignettes);
 
   export default {
     name: "App",
     components: {
       //Slider,
-      Searchautocomplete
+      Searchautocomplete,
+      Vignette
     },
     data() {
       return {
@@ -63,7 +70,8 @@
           '/build/images/background/bg-6.webp',
           '/build/images/background/bg-3.webp',
           '/build/images/background/bg-4.webp'
-        ]
+        ],
+        listVignettes: listVignettes
       }
     }
   }
