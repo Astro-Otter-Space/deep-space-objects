@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="headerBackground">
+  <div v-bind:class="headerBackground" v-bind:title="altImage">
     <lazy-background
       :src="coverImage"
       :blur="30"
