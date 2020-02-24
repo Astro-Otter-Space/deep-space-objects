@@ -1,7 +1,7 @@
 <template>
   <section class="Vignette_container">
-    <a v-for="dso in vignettes" class="vignette"
-       v-bind:title="dso.image.title"
+    <a v-for="dso in vignettes" :href="dso.url" class="vignette"
+     v-bind:title="dso.image.title"
       v-bind:style="imgStyle"
     >
     </a>
