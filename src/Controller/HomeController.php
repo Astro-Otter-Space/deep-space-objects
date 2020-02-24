@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Managers\DsoManager;
+use Elastica\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class HomeController extends AbstractController
 {
+    /** @var DsoManager  */
+    private $dsoManager;
+
+    /**
+     * HomeController constructor.
+     *
+     * @param DsoManager $dsoManager
+     */
+    public function __construct(DsoManager $dsoManager)
+    {
+        $this->dsoManager = $dsoManager;
+    }
 
     /**
      * Homepage
@@ -27,6 +41,24 @@ class HomeController extends AbstractController
         $response->setPublic();
 
         return $response;
+    }
+
+    /**
+     * @var Request $request
+     * @return Response
+     */
+    public function vignetteDso(Request $request): Response
+    {
+        $params = [];
+
+        $params['vignettes'] = [];
+
+        /** @var Response $response */
+        $response = new Response();
+        $response->setPublic();
+        $response->setSharedMaxAge(86400);
+
+        return $this->render('includes/components/vignettes.html.twig', $params, $response);
     }
 
     /**
