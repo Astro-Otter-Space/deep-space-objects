@@ -1,14 +1,6 @@
 <template>
   <div id="app" itemscope>
     <div class="AppSlider">
-<!--      <slider-->
-<!--        :images="[-->
-<!--          '/build/images/background/bg-1.webp',-->
-<!--          '/build/images/background/bg-6.webp',-->
-<!--          '/build/images/background/bg-3.webp',-->
-<!--          '/build/images/background/bg-4.webp'-->
-<!--        ]"-->
-<!--      />-->
       <div class="AppSlider__Research">
         <h2 class="AppSlider__subTitle" itemprop="title">
           <label for="homesearch">{{ subTitle }}</label>
@@ -31,9 +23,11 @@
         ></div>
       </div>
 
-      <vignette
-        :vignettes="listVignettes"
-      ></vignette>
+      <div class="AppSlider__vignettes">
+        <vignette
+          :vignettes="listVignettes"
+        ></vignette>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +45,6 @@
   export default {
     name: "App",
     components: {
-      //Slider,
       Searchautocomplete,
       Vignette
     },

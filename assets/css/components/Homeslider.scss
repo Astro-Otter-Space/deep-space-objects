@@ -95,6 +95,15 @@ $scale-base-1: (1 + $scale / 100%);
     font-size: 2rem;
     margin-bottom: 0.5em;
   }
+
+  &__vignettes {
+    z-index: 99;
+    position: absolute;
+    width: 66%;
+    top: 30%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
 }
 
 @for $i from 1 through $items {

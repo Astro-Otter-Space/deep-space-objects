@@ -56,7 +56,6 @@ class HomeController extends AbstractController
     {
         $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES) ?? [];
 
-        dump($params['vignettes']);
         /** @var Response $response */
         $response = new Response();
         $response->setPublic();
