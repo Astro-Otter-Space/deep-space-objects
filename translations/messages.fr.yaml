@@ -321,10 +321,12 @@ dsoDesc: ""
 contactDesc: Contactez l'administrateur pour n'importe quelle question
 skymapDesc: "Carte du ciel"
 # Form add observation
-addObservation: DSO planner
-addObservationDesc: Sauvegardez ou planifiez vos observations en ajoutant les objets que vous avez observé.
+addObservation: Compte-rendu
+addObservationTitle: Compte-rendu d'observation
+addObservationDesc: Sauvegardez ou planifiez vos observations en faisant une compte-rendu des objets observés.
 scheduleObs: Proposer une soirée
-scheduleObsDesc: Organisez une soirée d'observation astronomique et faites découvrir les merveilles du ciel
+scheduleObsTitle: Proposer une soirée d'observation
+scheduleObsDesc: Organisez une soirée d'observation astronomique, partagez et faites découvrir les merveilles du ciel.
 form.ok.addDoc: Observation ajoutée, retrouvez-la <a href="%url%">ici</a>.
 form.error.addDoc: Erreur d'ajout de documents, rééssayez ou contactez l'administrateur.
 observation:

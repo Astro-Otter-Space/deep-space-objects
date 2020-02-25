@@ -323,10 +323,12 @@ dsoDesc:
 contactDesc:
 skymapDesc:
 # Form add observation
-addObservation: DSO Planner
+addObservation: Observation report
+addObservationTitle: Observation report
 addObservationDesc: Save or plan your observations and add objects you've seen.
 scheduleObs: Schedule observing event
-scheduleObsDesc: Schedule an astronomical observing event and discover the wonders of the universe.
+scheduleObsTitle: Schedule observing event
+scheduleObsDesc: Schedule an astronomical observing event, share and discover the wonders of the universe.
 form.ok.addDoc: Observation added, retrieve it <a href="%url%">here</a>.
 form.error.addDoc: Error adding document. Try again or contact admin.
 observation:
