@@ -38,6 +38,10 @@
           ></pagination>
         </div>
       </div>
+
+      <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
+        <svgicon name="up" width="40" height="40"></svgicon>
+      </back-to-top>
     </section>
   </div>
 </template>
@@ -52,6 +56,8 @@
   import './../Icons/cross';
   import './../Icons/up';
   import './../Icons/down';
+  import './../Icons/up';
+  import BackToTop from 'vue-backtotop';
 
   let title = document.querySelector(DATA_SELECTOR).dataset.title;
   let desc = document.querySelector(DATA_SELECTOR).dataset.desc;
@@ -70,7 +76,8 @@
     components: {
       ImageHeader,
       CardsGrid,
-      Pagination
+      Pagination,
+      BackToTop
     },
     data() {
       return {

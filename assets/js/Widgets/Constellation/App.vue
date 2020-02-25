@@ -46,9 +46,11 @@
 <!--            <img v-bind:src="map" v-bind:title="title">-->
           </a>
         </div>
-
       </div>
 
+      <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
+        <svgicon name="up" width="40" height="40"></svgicon>
+      </back-to-top>
     </section>
   </div>
 </template>
@@ -58,6 +60,8 @@
   import ImageHeader from './../Dso/components/Imageheader';
   import CardsGrid from './../Dso/components/CardsGrid';
   import { color } from './../../legendSkyMap';
+  import './../Icons/up';
+  import BackToTop from 'vue-backtotop';
 
   let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
@@ -73,7 +77,8 @@
     name: "App",
     components: {
       ImageHeader,
-      CardsGrid
+      CardsGrid,
+      BackToTop
     },
     data () {
       return {
