@@ -19,24 +19,36 @@
       "js": [
         "/build/runtime.js",
         "/build/dso.js"
+      ],
+      "css": [
+        "/build/dso.css"
       ]
     },
     "const": {
       "js": [
         "/build/runtime.js",
         "/build/const.js"
+      ],
+      "css": [
+        "/build/const.css"
       ]
     },
     "const_list": {
       "js": [
         "/build/runtime.js",
         "/build/const_list.js"
+      ],
+      "css": [
+        "/build/const_list.css"
       ]
     },
     "catalog": {
       "js": [
         "/build/runtime.js",
         "/build/catalog.js"
+      ],
+      "css": [
+        "/build/catalog.css"
       ]
     },
     "observation": {
