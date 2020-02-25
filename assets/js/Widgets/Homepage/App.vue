@@ -1,19 +1,6 @@
 <template>
   <div id="app" itemscope>
     <div class="AppSlider">
-      <div class="AppSlider__Research">
-        <h2 class="AppSlider__subTitle" itemprop="title">
-          <label for="homesearch">{{ subTitle }}</label>
-        </h2>
-        <searchautocomplete
-          ref="homesearch"
-          :searchPlaceholder="searchPlaceholder"
-          :customClasses="classesSearchAutocomplete"
-          :url="urlSearchHome"
-          id="homesearch"
-        />
-      </div>
-
       <div class="AppSlider__slides">
         <div
           v-for="(image, index) in this.images"
@@ -23,7 +10,20 @@
         ></div>
       </div>
 
-      <div class="AppSlider__vignettes">
+      <div class="AppSlider__Vignettes" id="appVignette">
+        <div class="AppSlider__Research">
+          <h2 class="AppSlider__subTitle" itemprop="title">
+            <label for="homesearch">{{ subTitle }}</label>
+          </h2>
+          <searchautocomplete
+            ref="homesearch"
+            :searchPlaceholder="searchPlaceholder"
+            :customClasses="classesSearchAutocomplete"
+            :url="urlSearchHome"
+            id="homesearch"
+          />
+        </div>
+
         <vignette
           :vignettes="listVignettes"
         ></vignette>

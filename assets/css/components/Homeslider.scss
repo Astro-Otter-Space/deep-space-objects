@@ -12,7 +12,7 @@ $scale-base-1: (1 + $scale / 100%);
     //position: relative;
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 25%;
     overflow: hidden;
     z-index: 0;
   }
@@ -85,6 +85,15 @@ $scale-base-1: (1 + $scale / 100%);
     }
   }
 
+  &__Vignettes {
+    top: 25%;
+    position: absolute;
+    width: 100vw;
+    height: 75%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
   &__title,
   &__subTitle {
     z-index: 99;
@@ -94,15 +103,6 @@ $scale-base-1: (1 + $scale / 100%);
     font-weight: 500;
     font-size: 2rem;
     margin-bottom: 0.5em;
-  }
-
-  &__vignettes {
-    z-index: 99;
-    position: absolute;
-    width: 66%;
-    top: 30%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
   }
 }
 

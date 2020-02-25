@@ -86,6 +86,10 @@
         </div>
       </div>
 
+      <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
+        <svgicon name="up" width="40" height="40"></svgicon>
+      </back-to-top>
+
     </section>
   </div>
 </template>
@@ -97,6 +101,8 @@
   import CardsGrid from './components/CardsGrid'
   import './../Icons/facebook';
   import './../Icons/twitter';
+  import './../Icons/up';
+  import BackToTop from 'vue-backtotop';
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let coverImageAlt = document.querySelector('div[data-dso-widget]').dataset.imgcoveralt;
@@ -117,7 +123,8 @@
       ImageHeader,
       ImagesDsoSlider,
       Table,
-      CardsGrid
+      CardsGrid,
+      BackToTop
     },
     data () {
       return {

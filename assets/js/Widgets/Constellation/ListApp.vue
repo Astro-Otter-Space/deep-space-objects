@@ -21,6 +21,10 @@
           </cards-grid>
         </div>
       </div>
+
+      <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
+        <svgicon name="up" width="40" height="40"></svgicon>
+      </back-to-top>
     </section>
   </div>
 </template>
@@ -28,6 +32,8 @@
 <script>
   import ImageHeader from './../Dso/components/Imageheader';
   import CardsGrid from './../Dso/components/CardsGrid';
+  import './../Icons/up';
+  import BackToTop from 'vue-backtotop';
 
   let title = document.querySelector('div[data-constellations]').dataset.titleConst;
   let listConstellations = JSON.parse(document.querySelector('div[data-constellations]').dataset.listConst);
@@ -38,7 +44,8 @@
     name: "ListApp",
     components: {
       ImageHeader,
-      CardsGrid
+      CardsGrid,
+      BackToTop
     },
     data() {
       return {

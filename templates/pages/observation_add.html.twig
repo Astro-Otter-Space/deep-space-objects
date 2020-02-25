@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle = 'addObservation'|trans %}
+{% set pageTitle = 'addObservationTitle'|trans %}
 {% set pageDesc = 'addObservationDesc'|trans %}
 
 {% block content %}
@@ -8,7 +8,7 @@
   <div>
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
-        <h2 class="Dso__title">{{ 'addObservation'|trans }}</h2>
+        <h2 class="Dso__title">{{ 'addObservationTitle'|trans }}</h2>
 
         {% for messages in app.flashes("form.failed") %}
           <div class="Form__message Form__error">
