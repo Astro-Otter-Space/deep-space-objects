@@ -1,0 +1,36 @@
+.Vignettes {
+  &__container {
+    display: flex;
+    width: 100%;
+    margin: 2em auto;
+    justify-content: space-between;
+    //background-color: rgba(255,255,255,.25);
+    //box-shadow: 0 1em 2em -1em rgba(0,0,0,.5);
+    padding: 1em 2em;
+    z-index: 50;
+    @media ($mq-phone) {
+      padding: 1em;
+    }
+  }
+
+  &__vignette {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+
+    /**&:hover {
+      border: 5px solid rgba($bgd-cards, 0.3);
+    }**/
+
+    @media ($mq-phone) {
+      border: 2px solid rgba(255,255,255,0.3);
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

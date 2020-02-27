@@ -1,18 +1,19 @@
 <template>
   <div id="app" itemscope>
     <div class="AppSlider">
-<!--      <slider-->
-<!--        :images="[-->
-<!--          '/build/images/background/bg-1.webp',-->
-<!--          '/build/images/background/bg-6.webp',-->
-<!--          '/build/images/background/bg-3.webp',-->
-<!--          '/build/images/background/bg-4.webp'-->
-<!--        ]"-->
-<!--      />-->
+      <div class="AppSlider__slides">
+        <div
+          v-for="(image, index) in this.images"
+          v-bind:key="image"
+          :style="{ backgroundImage: `url(${image})` }"
+          class="AppSlider__dImage"
+        ></div>
+      </div>
+
       <div class="AppSlider__Research">
-        <h2 class="AppSlider__subTitle" itemprop="title">
+        <h1 class="AppSlider__subTitle" itemprop="title">
           <label for="homesearch">{{ subTitle }}</label>
-        </h2>
+        </h1>
         <searchautocomplete
           ref="homesearch"
           :searchPlaceholder="searchPlaceholder"
@@ -22,13 +23,10 @@
         />
       </div>
 
-      <div class="AppSlider__slides">
-        <div
-          v-for="(image, index) in this.images"
-          v-bind:key="image"
-          :style="{ backgroundImage: `url(${image})` }"
-          class="AppSlider__dImage"
-        ></div>
+      <div class="AppSlider__Vignettes" id="appVignette">
+        <vignette
+          :vignettes="listVignettes"
+        ></vignette>
       </div>
     </div>
   </div>
@@ -37,16 +35,18 @@
 <script>
   //import Slider from './components/Slider'
   import Searchautocomplete from "./components/Searchautocomplete"
+  import Vignette from "./components/Vignette";
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
   let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
   let urlSearchHome = document.getElementById('appHome').dataset.searchRoute;
+  let listVignettes = JSON.parse(document.querySelector('div#appVignette').dataset.vignettes);
 
   export default {
     name: "App",
     components: {
-      //Slider,
-      Searchautocomplete
+      Searchautocomplete,
+      Vignette
     },
     data() {
       return {
@@ -63,7 +63,8 @@
           '/build/images/background/bg-6.webp',
           '/build/images/background/bg-3.webp',
           '/build/images/background/bg-4.webp'
-        ]
+        ],
+        listVignettes: listVignettes
       }
     }
   }

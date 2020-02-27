@@ -10,7 +10,7 @@ $scale-base-1: (1 + $scale / 100%);
 
   &__slides {
     //position: relative;
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -66,8 +66,8 @@ $scale-base-1: (1 + $scale / 100%);
   &__Research {
     z-index: 99;
     width: fit-content;
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 33%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
 
@@ -83,6 +83,15 @@ $scale-base-1: (1 + $scale / 100%);
     @media ($mq-tablet) {
       top: 40%;
     }
+  }
+
+  &__Vignettes {
+    top: 66%;
+    position: fixed;
+    width: 100vw;
+    height: 75%;
+    overflow: hidden;
+    z-index: 0;
   }
 
   &__title,

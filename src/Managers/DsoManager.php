@@ -272,6 +272,30 @@ class DsoManager
         return $this->formatEntityData($dsoArray, self::$listFieldToTranslate, $this->translatorInterface);
     }
 
+    /**
+     * https://discuss.elastic.co/t/elasticsearch-get-random-document-atleast-5-from-each-category/120015
+     * @param $limit
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function randomDsoWithImages($limit): array
+    {
+        /**
+         * @return \Generator
+         */
+        $getRandomDso = function () use($limit) {
+            yield from $this->dsoRepository->setLocale($this->locale)->getRandomDso($limit);
+        };
+
+        /** @var ListDso $listDso */
+        $listDso = new ListDso();
+        foreach ($getRandomDso() as $dso) {
+            $listDso->addDso($dso);
+        }
+
+        return $this->buildListDso($listDso);
+    }
 
     /**
      * Return a formated title

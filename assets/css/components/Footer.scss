@@ -41,7 +41,7 @@
     width: 100%;
     text-align: center;
     @media ($mq-phone) {
-      width: none;
+      text-align: left;
     }
     ul {
       margin: 0;

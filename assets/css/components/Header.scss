@@ -67,6 +67,7 @@
     top: 2.5em;
     transform: scaleY(0);
     width: max-content; //<-- test, width: 12em;
+    min-width: 12em;
     transform-origin: top;
     background-color: $bgd-dark;
     transition: 0.25s;
@@ -74,7 +75,6 @@
     padding-right: 0;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     margin: 0;
-    //left: -8em;
     right: 0;
 
     li {
@@ -124,6 +124,8 @@
   &__title {
     color: $color-text;
     font-weight: 500;
+    margin: 0;
+    font-size: 2em;
   }
 
   a {

@@ -368,6 +368,46 @@ class DsoRepository extends AbstractRepository
         return $listAstrobinId;
     }
 
+
+    /**
+     * @param int $limit
+     *
+     * @return \Generator
+     * @throws \Exception
+     */
+    public function getRandomDso(int $limit = 1): \Generator
+    {
+        /** @var \DateTimeInterface $now */
+        $now = new \DateTime();
+        $seed = $now->getTimestamp();
+
+        /** @var Query\Exists $existQuery */
+        $existQuery = new Query\Exists(self::ASTROBIN_FIELD);
+
+        /** @var Query\FunctionScore $score */
+        $score = new Query\FunctionScore();
+        $score
+            ->setQuery($existQuery)
+            ->setBoost(5)
+            ->setRandomScore($seed)
+            ->setBoostMode(Query\FunctionScore::BOOST_MODE_MULTIPLY);
+
+        /** @var Query $query */
+        $query = new Query();
+        $query->setFrom(0)->setSize($limit);
+        $query->setQuery($score);
+
+        $search = new Search($this->client);
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $results->count()) {
+            /** @var Document $document */
+            foreach ($results->getDocuments() as $document) {
+                yield $this->buildEntityFromDocument($document);
+            }
+        }
+    }
+
     /**
      * @return string
      */

@@ -3,7 +3,7 @@
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
 
-        <h2 class="Dso__title">{{ title }}</h2>
+        <h1 class="Dso__title">{{ title }}</h1>
         <div>{{ desc }}</div>
 
         <!--List-->

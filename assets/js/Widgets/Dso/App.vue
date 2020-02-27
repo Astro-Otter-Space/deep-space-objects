@@ -9,9 +9,9 @@
     <section class="Dso__main">
       <div v-bind:class="getHeaderClass()">
         <!--Title-->
-        <h2 class="Dso__title">
+        <h1 class="Dso__title">
           {{ title }}
-        </h2>
+        </h1>
 
         <social-sharing
           :url="urlShare"

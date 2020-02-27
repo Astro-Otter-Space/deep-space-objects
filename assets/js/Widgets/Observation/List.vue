@@ -8,9 +8,9 @@
     </div>
     <section class="Dso__main">
       <div class="Dso__container">
-        <h2 class="Dso__title">
+        <h1 class="Dso__title">
           <label for="observationsearch">{{ pageTitle }}</label>
-        </h2>
+        </h1>
 
         <social-sharing
           :url="urlShare"
