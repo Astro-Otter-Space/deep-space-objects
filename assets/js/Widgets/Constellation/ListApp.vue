@@ -7,9 +7,9 @@
     </div>
     <section class="Dso__main">
       <div class="Dso__container">
-        <h2 class="Dso__title">
+        <h1 class="Dso__title">
           {{ title }}
-        </h2>
+        </h1>
 
         <!--List DSo-->
         <div class="Dso__slider" v-if="0 < listConstellations.length">

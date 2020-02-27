@@ -9,7 +9,7 @@
     </Slide -->
 
     <div class="header__wrap">
-      <h1 class="h1 h1__title">
+      <span class="h1 h1__title">
         <!-- Open Menu-->
         <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
@@ -17,7 +17,7 @@
         <a v-bind:href="homepageRoute" v-bind:title="title" itemscope itemtype="http://schema.org/Dataset">
           <span itemprop="name">{{title}}</span>
         </a>
-      </h1>
+      </span>
 
       <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <!--Search-->

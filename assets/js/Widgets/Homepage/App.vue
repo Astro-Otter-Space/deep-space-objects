@@ -10,20 +10,20 @@
         ></div>
       </div>
 
-      <div class="AppSlider__Vignettes" id="appVignette">
-        <div class="AppSlider__Research">
-          <h2 class="AppSlider__subTitle" itemprop="title">
-            <label for="homesearch">{{ subTitle }}</label>
-          </h2>
-          <searchautocomplete
-            ref="homesearch"
-            :searchPlaceholder="searchPlaceholder"
-            :customClasses="classesSearchAutocomplete"
-            :url="urlSearchHome"
-            id="homesearch"
-          />
-        </div>
+      <div class="AppSlider__Research">
+        <h1 class="AppSlider__subTitle" itemprop="title">
+          <label for="homesearch">{{ subTitle }}</label>
+        </h1>
+        <searchautocomplete
+          ref="homesearch"
+          :searchPlaceholder="searchPlaceholder"
+          :customClasses="classesSearchAutocomplete"
+          :url="urlSearchHome"
+          id="homesearch"
+        />
+      </div>
 
+      <div class="AppSlider__Vignettes" id="appVignette">
         <vignette
           :vignettes="listVignettes"
         ></vignette>
