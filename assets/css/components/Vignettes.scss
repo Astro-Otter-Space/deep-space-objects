@@ -18,10 +18,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 5px solid rgba(255,255,255,0.3);
+    border: 5px solid rgba(255, 255, 255, 0.3);
     width: 200px;
     height: 200px;
     border-radius: 50%;
+
+    /**&:hover {
+      border: 5px solid rgba($bgd-cards, 0.3);
+    }**/
 
     @media ($mq-phone) {
       border: 2px solid rgba(255,255,255,0.3);
