@@ -2,13 +2,13 @@
 
 {% set siteName = 'dso'|trans %}
 {% set pageTitle = "api.title"|trans %}
-{% set pageDesc = "" %}
+{% set pageDesc = 'api.intro'|trans({"%sitename%": siteName})|truncate(200) %}
 
 {% block content %}
   <div>
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
-        <h2 class="Dso__title">{{ "api.title"|trans }}</h2>
+        <h1 class="Dso__title">{{ "api.title"|trans }}</h1>
 
         <div class="Dso__description">
           {{ 'api.intro'|trans({"%sitename%": siteName})|nl2br }}
