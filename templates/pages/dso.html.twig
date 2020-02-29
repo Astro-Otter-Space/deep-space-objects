@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle =  'dso.title.seo'|trans({'%title%': title,'%constId%': constTitle|lower,'%type%': type|trans|lower }) %}
+{% set pageTitle =  'dso.title.seo'|trans({'%title%': title, '%type%': type|trans|lower }) %}
 {% set pageImage = imgCover %}
-{% set pageDesc = description|truncate(200) %}
+
+{% set descDefaut = 'dso.desc.seo'|trans({'%title%': title,'%constId%': constTitle|lower,'%type%': type|trans|lower, '%mag%': magnitude }) %}
+{% set pageDesc = description|truncate(200)|default(descDefaut) %}
 {% set pageImageDesc = imgCoverAlt %}
 
 {#https://coxpi.draftium.site/#}

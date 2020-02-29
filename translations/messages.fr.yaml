@@ -128,7 +128,8 @@ homepage.desc: "%sitename% est un atlas céleste contenant plus de 9500 objets d
 home.search.placeholder: Rechercher dans les catalogues...
 dayImage: L'image du jour
 # View full
-dso.title.seo: "%title%, %type%, %constId%"
+dso.title.seo: "%title%, %type%"
+dso.desc.seo: "\"%title%\" est un est objet de type %type% (magnitude apparente de %mag%), observable dans la %constId%"
 info: Informations
 desigs: Autres désignations
 magnitude: Magnitude

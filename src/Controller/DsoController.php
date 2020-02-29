@@ -93,6 +93,7 @@ class DsoController extends AbstractController
             $params['title'] = $this->dsoManager->buildTitle($dso);
             $params['description'] = $dso->getDescription() ?? '';
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
+            $params['magnitude'] = Utils::numberFormatByLocale($dso->getMag());
 
             // Image cover
             $params['imgCover'] = $dso->getImage()->url_regular;
