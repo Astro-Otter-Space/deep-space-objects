@@ -129,6 +129,7 @@ homepage.desc: "%sitename% is a celestial atlas containing more than 9500 deep s
 home.search.placeholder: Search in catalogs...
 dayImage: Image of the day
 # View full
+dso.title.seo: "%title%, %type%, %constId%"
 info: Informations
 desigs: Other designations
 magnitude: Magnitude

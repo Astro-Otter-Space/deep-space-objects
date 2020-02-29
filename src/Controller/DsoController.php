@@ -87,6 +87,7 @@ class DsoController extends AbstractController
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
+            $params['type'] = sprintf('type.%s', $dso->getType());
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
             $params['title'] = $this->dsoManager->buildTitle($dso);

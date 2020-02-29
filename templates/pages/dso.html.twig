@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle = title %}
+{% set pageTitle =  'dso.title.seo'|trans({'%title%': title,'%constId%': constTitle|lower,'%type%': type|trans|lower }) %}
 {% set pageImage = imgCover %}
 {% set pageDesc = description|truncate(200) %}
 {% set pageImageDesc = imgCoverAlt %}
