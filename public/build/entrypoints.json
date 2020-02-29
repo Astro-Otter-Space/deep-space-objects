@@ -67,6 +67,9 @@
       "js": [
         "/build/runtime.js",
         "/build/observations.js"
+      ],
+      "css": [
+        "/build/observations.css"
       ]
     },
     "notfound": {

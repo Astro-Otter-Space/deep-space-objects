@@ -250,7 +250,6 @@ class DsoController extends AbstractController
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
             $typeTr = $this->translatorInterface->trans($type, ['%count%' => count($listFacets)]);
-
             $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type) {
                 return [
                     'code' => key($facet),

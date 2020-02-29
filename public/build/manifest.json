@@ -16,6 +16,7 @@
   "build/leaflet.js": "/build/leaflet.js",
   "build/notfound.js": "/build/notfound.js",
   "build/observation.js": "/build/observation.js",
+  "build/observations.css": "/build/observations.css",
   "build/observations.js": "/build/observations.js",
   "build/runtime.js": "/build/runtime.js",
   "build/skymap.js": "/build/skymap.js",

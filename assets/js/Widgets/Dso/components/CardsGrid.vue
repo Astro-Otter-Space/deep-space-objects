@@ -22,21 +22,27 @@
     <div id="appGrid">
       <transition tag="facets" name="list-facets">
         <div class="appGridFacet__list" v-if="showFacets && 0 < Object.keys(listFacets).length">
-          <ul v-for="facets in listFacets">
+          <div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
 
-            <h3 class="Dso__title">
-              {{facets.name}}
-              <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
-                <svgicon name="cross" width="20" height="20"></svgicon>
-              </a>
-            </h3>
+              <h3 class="Dso__title">
+                {{facets.name}}
+                <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
+                  <svgicon name="cross" width="20" height="20"></svgicon>
+                </a>
 
-            <ul v-for="facet in facets.list" v-if="0 < facets.list.length">
-              <li class="appGridFacet__item">
-                <a v-bind:href="facet.full_url" v-bind:title="facet.value">{{facet.value}} <span class="appGridFacet__badge">{{facet.number}}</span></a>
-              </li>
-            </ul>
-          </ul>
+                <!-- svgicon name="down" width="20" height="20" class="" v-if="!showBlockFacets" v-on:click="toggleBlockFacets()"></svgicon>
+                <svgicon name="up" width="20" height="20" class=""  v-if="showBlockFacets" v-on:click="toggleBlockFacets()"></svgicon -->
+              </h3>
+
+              <ul>
+                <li v-for="facet in facets.list" v-if="0 < facets.list.length" class="appGridFacet__item">
+                  <a v-bind:href="facet.full_url" v-bind:title="facet.value">
+                    {{facet.value}}
+                    <span class="appGridFacet__badge">{{facet.number}}</span>
+                  </a>
+                </li>
+              </ul>
+          </div>
         </div>
       </transition>
 
@@ -80,7 +86,8 @@
         gridMin: 175,
         gridItems: 20,
         itemselect: 1,
-        offset: 10
+        offset: 10,
+        showBlockFacets: false
       }
     },
     props: {
@@ -149,6 +156,9 @@
             this.listFilters = response.data.filters;
             this.offset = this.offset + 10;
           });
+      },
+      toggleBlockFacets: function() {
+        this.showBlockFacets = !this.showBlockFacets;
       }
     },
     computed: {

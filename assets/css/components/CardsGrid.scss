@@ -230,11 +230,28 @@
 
 .appGridFacet {
   &__list {
-    display: flex;
+    display: inline-grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(4, 1fr);
+
+    @media ($mq-phone) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 0.7em;
+    }
   }
+
+  &__blockFacets {
+    width: max-content;
+  }
+
 
   &__item {
     font-size: 1em;
+    @media ($mq-phone){
+      font-size: 0.8em;
+    }
+
     li {
       width: 100%;
     }

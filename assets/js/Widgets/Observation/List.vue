@@ -82,6 +82,10 @@
           </l-map>
         </div>
       </div>
+
+      <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
+        <svgicon name="up" width="40" height="40"></svgicon>
+      </back-to-top>
     </section>
   </div>
 </template>
@@ -94,8 +98,10 @@
   import axios from 'axios';
   import eventPopupContent from './components/EventPopup';
   import dsoPlannerPopupContent from './components/DsoPlannerPopup';
+  import backToTop from 'vue-backtotop';
   import './../Icons/facebook';
   import './../Icons/twitter';
+  import './../Icons/up'
 
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
   let description = document.querySelector('div[data-observations-list]').dataset.description;
@@ -115,7 +121,8 @@
       LTileLayer,
       LMarker,
       LGeoJson,
-      LIcon
+      LIcon,
+      backToTop
     },
     data () {
       return {

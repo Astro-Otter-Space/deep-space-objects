@@ -22,7 +22,7 @@ nightMode: Mode nuit ON
 dayMode: Mode nuit OFF
 dateFormatLong: d/m/Y H:i
 #Catalog
-catalog: Catalogue
+catalog: Catalogue|Catalogues
 catalogs: Catalogues
 allCatalog: Tous les catalogues
 catalog.unassigned: Non assigné
@@ -130,7 +130,7 @@ dayImage: L'image du jour
 # View full
 info: Informations
 desigs: Autres désignations
-magnitude: Magnitude apparente
+magnitude: Magnitude
 constellation: Constellation|Constellations
 const_id: Constellation|Constellations
 constId: Constellation|Constellations

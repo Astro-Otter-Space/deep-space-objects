@@ -8,15 +8,16 @@
 
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3>{{ nbItems }}
+          <h3>
+            {{ nbItems }}
+            <a v-bind:href="urlDownloadData" title="Download data">
+              <svgicon name="file-download" width="30" height="30" color="#2B2A34"></svgicon>
+            </a>
             <svgicon name="down" width="20" height="20" v-if="!showFacets" v-on:click="toggleFacets()"></svgicon>
             <svgicon name="up" width="20" height="20" v-if="showFacets" v-on:click="toggleFacets()"></svgicon>
           </h3>
 
           <ul v-if="listFilters.length" class="Filters__list">
-            <li class="Filters__badge">
-              <a v-bind:href="urlDownloadData" title="Download data"><svgicon name="file-download" width="20" height="20"></svgicon></a>
-            </li>
             <li v-for="filter in listFilters" class="Filters__badge">
               {{filter.label}}
               <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
