@@ -72,11 +72,11 @@ class UrlGenerateHelper
                     $route = "constellation_show";
 
                     $name = Utils::camelCaseUrlTransform($entity->getAlt());
-                    $params = ['id' => implode(trim($entity::URL_CONCAT_GLUE), [$id, $name])];
+                    $params = ['id' => $id, 'name' => $name];
 
                     if (!is_null($locale)) {
                         $route = sprintf('%s.%s', $route, $locale);
-                        $params = ['id' => $id, '_locale' => $locale];
+                        $params = ['id' => $id, 'name' => $name, '_locale' => $locale];
                     }
 
                     $url = $this->router->generate($route, $params, $typeUrl);

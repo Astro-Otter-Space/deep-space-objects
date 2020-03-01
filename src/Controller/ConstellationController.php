@@ -59,14 +59,15 @@ class ConstellationController extends AbstractController
 
 
     /**
-     * @Route("/constellation/{id}", name="constellation_show")
+     * @Route("/constellation/{id}/{name}", name="constellation_show")
      *
      * @param string $id
+     * @param string $name
      *
      * @return Response
      * @throws \ReflectionException
      */
-    public function show(string $id): Response
+    public function show(string $id, string $name): Response
     {
         $result = [];
 
@@ -75,9 +76,6 @@ class ConstellationController extends AbstractController
 
         /** @var Serializer $serializer */
         $serializer = $this->container->get('serializer');
-
-        $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $id);
-        $id = reset($id);
 
         /** @var Constellation $constellation */
         $constellation = $this->constellationManager->buildConstellation($id);
