@@ -213,7 +213,7 @@ class Dso extends AbstractEntity
      *
      * @return Dso
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
 

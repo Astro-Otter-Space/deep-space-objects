@@ -112,14 +112,18 @@ class Constellation extends AbstractEntity
 
     /**
      * @param mixed $alt
+     *
+     * @return Constellation
      */
-    public function setAlt($alt): void
+    public function setAlt($alt): self
     {
         if (!$this->locale || 'en' === $this->locale) {
             $this->alt = $alt['alt'];
         } else {
             $this->alt = $alt[sprintf('alt_%s', $this->locale)];
         }
+
+        return $this;
     }
 
     /**
@@ -132,14 +136,19 @@ class Constellation extends AbstractEntity
 
     /**
      * @param $description
+     *
+     * @return Constellation
      */
-    public function setDescription($description): void
+    public function setDescription($description): self
     {
+        $this->description = $description;
+
         if (!$this->locale || 'en' === $this->locale) {
-            $this->description = $description['alt'];
+            $this->description = $description['description'];
         } else {
-            $this->description = $description[sprintf('alt_%s', $this->locale)];
+            $this->description = $description[sprintf('description_%s', $this->locale)];
         }
+        return $this;
     }
 
     /**

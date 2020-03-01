@@ -12,13 +12,13 @@
         "alt_pt": "Andrômeda",
         "alt_it": "Andromeda"
       },
-      "desc": {
-        "desc":"",
-        "desc_fr":"Dans la mythologie grecque, Andromède fille du roi Céphée et de la reine Cassiopée, a été enchainé à un rocher pour être offerte un à monstre marin afin d'apaiser Poséidon, dieu des océans. Constellation visible uniquement dans l'hémisphère nord, est trouvable en repérant un grand carré vers le nord : le grand carré de Pégase. Elle contient la magnifique galaxie d'Andromède, visible à l'oeil nu.",
-        "desc_es":"",
-        "desc_de":"",
-        "desc_pt":"",
-        "desc_it":""
+      "description": {
+        "description":"",
+        "description_fr":"Dans la mythologie grecque, Andromède fille du roi Céphée et de la reine Cassiopée, a été enchainé à un rocher pour être offerte un à monstre marin afin d'apaiser Poséidon, dieu des océans. Constellation visible uniquement dans l'hémisphère nord, est trouvable en repérant un grand carré vers le nord : le grand carré de Pégase. Elle contient la magnifique galaxie d'Andromède, visible à l'oeil nu.",
+        "description_es":"",
+        "description_de":"",
+        "description_pt":"",
+        "description_it":""
       },
       "rank": "1",
       "order": "2",
@@ -144,13 +144,13 @@
         "alt_pt": "",
         "alt_it": "Macchina Pneumatica"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "52",
@@ -196,13 +196,13 @@
         "alt_pt": "",
         "alt_it": "Uccello del Paradiso"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "53",
@@ -252,13 +252,13 @@
         "alt_pt": "Aquila",
         "alt_it": "Aquila"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "1",
@@ -332,13 +332,13 @@
         "alt_pt": "Aquário",
         "alt_it": "Aquario"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "86",
@@ -456,13 +456,13 @@
         "alt_pt": "Altar",
         "alt_it": "Altare"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "3",
@@ -524,13 +524,13 @@
         "alt_pt": "Carneiro",
         "alt_it": "Ariete"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "6",
@@ -580,13 +580,13 @@
         "alt_pt": "Auriga",
         "alt_it": "Auriga"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "19",
@@ -664,13 +664,13 @@
         "alt_pt": "Boieiro",
         "alt_it": "Boote"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "8",
@@ -766,13 +766,13 @@
         "alt_pt": "Cinzel",
         "alt_it": "Bulino"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "9",
@@ -822,13 +822,13 @@
         "alt_pt": "Camelopardalis",
         "alt_it": "Giraffa"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "10",
@@ -900,13 +900,13 @@
         "alt_pt": "Capricórnio",
         "alt_it": "Capricorno"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "12",
@@ -984,13 +984,13 @@
         "alt_pt": "",
         "alt_it": "Carena"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "13",
@@ -1106,13 +1106,13 @@
         "alt_pt": "Cassiopeia",
         "alt_it": "Cassiopea"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "14",
@@ -1166,13 +1166,13 @@
         "alt_pt": "Centaurus",
         "alt_it": "Centauro"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "15",
@@ -1288,13 +1288,13 @@
         "alt_pt": "Cepheus",
         "alt_it": "Cefeo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "16",
@@ -1382,13 +1382,13 @@
         "alt_pt": "Baleia",
         "alt_it": "Balena"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "5",
@@ -1486,13 +1486,13 @@
         "alt_pt": "",
         "alt_it": "Camaleonte"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "10",
@@ -1550,13 +1550,13 @@
         "alt_pt": "Compasso",
         "alt_it": "Compasso"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "21",
@@ -1602,13 +1602,13 @@
         "alt_pt": "Cão Maior",
         "alt_it": "Cane Maggiore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "37",
@@ -1702,13 +1702,13 @@
         "alt_pt": "",
         "alt_it": "Cane Minore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "64",
@@ -1750,13 +1750,13 @@
         "alt_pt": "Câncer",
         "alt_it": "Cancro"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "11",
@@ -1816,13 +1816,13 @@
         "alt_pt": "",
         "alt_it": "Colomba"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "20",
@@ -1849,13 +1849,13 @@
         "alt_pt": "Coma Berenice",
         "alt_it": "Chioma di Berenice"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "17",
@@ -1901,13 +1901,13 @@
         "alt_pt": "",
         "alt_it": "Corona Australe"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "24",
@@ -1973,13 +1973,13 @@
         "alt_pt": "",
         "alt_it": "Corona Boreale"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "25",
@@ -2041,13 +2041,13 @@
         "alt_pt": "",
         "alt_it": "Cratere"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "23",
@@ -2127,13 +2127,13 @@
         "alt_pt": "Cruzeiro do Sul",
         "alt_it": "Croce del Sud"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "26",
@@ -2185,13 +2185,13 @@
         "alt_pt": "",
         "alt_it": "Corvo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "22",
@@ -2249,13 +2249,13 @@
         "alt_pt": "Canes Venatici",
         "alt_it": "Cani da Caccia"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "18",
@@ -2297,13 +2297,13 @@
         "alt_pt": "Cygnus",
         "alt_it": "Cigno"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "27",
@@ -2379,13 +2379,13 @@
         "alt_pt": "",
         "alt_it": "Delfino"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "28",
@@ -2443,13 +2443,13 @@
         "alt_pt": "",
         "alt_it": "Dorado"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "29",
@@ -2515,13 +2515,13 @@
         "alt_pt": "Draco",
         "alt_it": "Dragone"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "30",
@@ -2631,13 +2631,13 @@
         "alt_pt": "",
         "alt_it": "Cavallino"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "63",
@@ -2683,13 +2683,13 @@
         "alt_pt": "",
         "alt_it": "Eridano"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "32",
@@ -2831,13 +2831,13 @@
         "alt_pt": "",
         "alt_it": "Fornace"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "34",
@@ -2883,13 +2883,13 @@
         "alt_pt": "Gêmeos",
         "alt_it": "Gemelli"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "35",
@@ -2977,13 +2977,13 @@
         "alt_pt": "",
         "alt_it": "Gru"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "39",
@@ -3059,13 +3059,13 @@
         "alt_pt": "Hércules",
         "alt_it": "Ercole"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "40",
@@ -3195,13 +3195,13 @@
         "alt_pt": "",
         "alt_it": "Orologio"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "41",
@@ -3259,13 +3259,13 @@
         "alt_pt": "Hydra",
         "alt_it": "Idra"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "42",
@@ -3375,13 +3375,13 @@
         "alt_pt": "",
         "alt_it": "Idra Maschio"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "43",
@@ -3439,13 +3439,13 @@
         "alt_pt": "",
         "alt_it": "Indiano"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "44",
@@ -3503,13 +3503,13 @@
         "alt_pt": "",
         "alt_it": "Lucertola"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "45",
@@ -3593,13 +3593,13 @@
         "alt_pt": "Leo",
         "alt_it": "Leone"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "48",
@@ -3679,13 +3679,13 @@
         "alt_pt": "Lebre",
         "alt_it": "Lepre"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "47",
@@ -3769,13 +3769,13 @@
         "alt_pt": "Balança",
         "alt_it": "Bilancia"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "4",
@@ -3843,13 +3843,13 @@
         "alt_pt": "",
         "alt_it": "Leone Minore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "65",
@@ -3907,13 +3907,13 @@
         "alt_pt": "",
         "alt_it": "Lupo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "49",
@@ -4005,13 +4005,13 @@
         "alt_pt": "",
         "alt_it": "Lince"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "50",
@@ -4073,13 +4073,13 @@
         "alt_pt": "Lyra",
         "alt_it": "Lira"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "51",
@@ -4145,13 +4145,13 @@
         "alt_pt": "",
         "alt_it": "Mensa"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "80",
@@ -4201,13 +4201,13 @@
         "alt_pt": "",
         "alt_it": "Microscopio"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "53",
@@ -4265,13 +4265,13 @@
         "alt_pt": "Unicórnio",
         "alt_it": "Unicorno"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "46",
@@ -4347,13 +4347,13 @@
         "alt_pt": "",
         "alt_it": "Mosca"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "50",
@@ -4415,13 +4415,13 @@
         "alt_pt": "",
         "alt_it": "Regolo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "73",
@@ -4475,13 +4475,13 @@
         "alt_pt": "",
         "alt_it": "Ottante"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "55",
@@ -4531,13 +4531,13 @@
         "alt_pt": "Serpentário",
         "alt_it": "Ofiuco"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "57",
@@ -4655,13 +4655,13 @@
         "alt_pt": "Órion",
         "alt_it": "Orione"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "58",
@@ -4813,13 +4813,13 @@
         "alt_pt": "",
         "alt_it": "Pavone"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "59",
@@ -4897,13 +4897,13 @@
         "alt_pt": "",
         "alt_it": "Pegaso"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "60",
@@ -5003,13 +5003,13 @@
         "alt_pt": "Perseu",
         "alt_it": "Perseo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "62",
@@ -5151,13 +5151,13 @@
         "alt_pt": "",
         "alt_it": "Fenice"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "68",
@@ -5223,13 +5223,13 @@
         "alt_pt": "",
         "alt_it": "Pittore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "61",
@@ -5275,13 +5275,13 @@
         "alt_pt": "",
         "alt_it": "Pesce Australe"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "69",
@@ -5355,13 +5355,13 @@
         "alt_pt": "Peixes",
         "alt_it": "Pesci"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "71",
@@ -5497,13 +5497,13 @@
         "alt_pt": "Cão Menor",
         "alt_it": "Poppa"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "72",
@@ -5591,13 +5591,13 @@
         "alt_pt": "Bússola",
         "alt_it": "Bussola"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "7",
@@ -5647,13 +5647,13 @@
         "alt_pt": "",
         "alt_it": "Reticolo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "74",
@@ -5707,13 +5707,13 @@
         "alt_pt": "Escorpião",
         "alt_it": "Scorpione"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "76",
@@ -5809,13 +5809,13 @@
         "alt_pt": "",
         "alt_it": "Scultore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "77",
@@ -5865,13 +5865,13 @@
         "alt_pt": "Scutum",
         "alt_it": "Scudo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "31",
@@ -5925,13 +5925,13 @@
         "alt_pt": "Serpente",
         "alt_it": "Serpente"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "78",
@@ -6001,13 +6001,13 @@
         "alt_pt": "",
         "alt_it": "Sestante"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "79",
@@ -6057,13 +6057,13 @@
         "alt_pt": "Flecha",
         "alt_it": "Freccia"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "33",
@@ -6119,13 +6119,13 @@
         "alt_pt": "Sagitário",
         "alt_it": "Sagittario"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "75",
@@ -6297,13 +6297,13 @@
         "alt_pt": "Touro",
         "alt_it": "Toro"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "81",
@@ -6397,13 +6397,13 @@
         "alt_pt": "",
         "alt_it": "Telescopio"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "82",
@@ -6449,13 +6449,13 @@
         "alt_pt": "",
         "alt_it": "Triangolo Australe"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "85",
@@ -6505,13 +6505,13 @@
         "alt_pt": "Triângulo",
         "alt_it": "Triangolo"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "84",
@@ -6561,13 +6561,13 @@
         "alt_pt": "",
         "alt_it": "Tucano"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "83",
@@ -6629,13 +6629,13 @@
         "alt_pt": "Ursa Maior",
         "alt_it": "Orsa Maggiore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "38",
@@ -6793,13 +6793,13 @@
         "alt_pt": "",
         "alt_it": "Orsa Minore"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "67",
@@ -6865,13 +6865,13 @@
         "alt_pt": "",
         "alt_it": "Vele"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "2",
       "order": "88",
@@ -6937,13 +6937,13 @@
         "alt_pt": "Virgem",
         "alt_it": "Vergine"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "1",
       "order": "87",
@@ -7041,13 +7041,13 @@
         "alt_pt": "",
         "alt_it": "Pesce Volante"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "70",
@@ -7109,13 +7109,13 @@
         "alt_pt": "Raposa",
         "alt_it": "Volpetta"
       },
-      "desc": {
-        "desc": "",
-        "desc_fr": "",
-        "desc_es": "",
-        "desc_de": "",
-        "desc_pt": "",
-        "desc_it": ""
+      "description": {
+        "description": "",
+        "description_fr": "",
+        "description_es": "",
+        "description_de": "",
+        "description_pt": "",
+        "description_it": ""
       },
       "rank": "3",
       "order": "66",
