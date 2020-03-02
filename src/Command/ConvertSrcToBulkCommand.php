@@ -180,9 +180,9 @@ class ConvertSrcToBulkCommand extends Command
                                     'mode' => 'update',
                                     'data' => json_decode(utf8_decode($lineReplace), true)
                                 ]);
+                                $output->writeln(sprintf('[%s] item %s', $mode, $id));
                             }
                         }
-                        $output->writeln(sprintf('[%s] item %s', $mode, $id));
                     }
 
                     /**
