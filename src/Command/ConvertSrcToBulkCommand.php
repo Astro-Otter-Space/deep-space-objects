@@ -186,8 +186,7 @@ class ConvertSrcToBulkCommand extends Command
                     /**
                      * STEP 2 : import data
                      */
-
-                    //$bulk = $this->dsoRepository->bulkImport($bulkData);
+                    $bulk = $this->dsoRepository->bulkImport($bulkData);
 
                     /**
                      * Step 3 : get list of updated data
