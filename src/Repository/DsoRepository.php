@@ -329,7 +329,7 @@ class DsoRepository extends AbstractRepository
 
         /** @var Range $range */
         $rangeQuery = new Query\Range();
-        $rangeQuery->addField('', [
+        $rangeQuery->addField('updated_at', [
             'gte' => $lastUpdate->format(Utils::FORMAT_DATE_ES),
             'lt' => $now->format(Utils::FORMAT_DATE_ES)
         ]);

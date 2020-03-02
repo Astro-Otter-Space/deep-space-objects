@@ -6,6 +6,7 @@ use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
+use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
@@ -117,7 +118,7 @@ abstract class AbstractRepository
      *
      * @return Response
      */
-    public function addNewDocument(Document $document)
+    public function addNewDocument(Document $document): Response
     {
         /** @var Index $elasticIndex */
         $elasticIndex = $this->client->getIndex($this->getType());
@@ -130,6 +131,37 @@ abstract class AbstractRepository
         $elasticIndex->refresh();
 
         return $response;
+    }
+
+
+    /**
+     * @param $listItems
+     *
+     * @return bool
+     */
+    public function bulkImport($listItems): bool
+    {
+        /** @var Bulk $bulk */
+        $bulk = new Bulk($this->client);
+        $bulk->setIndex($this->getType())->setType('_doc');
+
+        foreach ($listItems as $doc) {
+            /** @var Document $doc */
+            $docEs = new Document($doc['idDoc'], $doc['data']);
+
+            if ('update' === $doc['mode']) {
+                $action = new Bulk\Action\UpdateDocument($docEs);
+
+            } else if ('create' === $doc['mode']) {
+                $action = new Bulk\Action\CreateDocument($docEs);
+            }
+            $bulk->addAction($action);
+        }
+
+        /** @var Bulk\ResponseSet $responseBulk */
+        $responseBulk = $bulk->send();
+
+        return $responseBulk->isOk();
     }
 
     abstract protected function getEntity();
