@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,600,600i');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Source+Sans+Pro:300&display=swap');
 @import "~d3-celestial/celestial.css";
 @import "~leaflet/dist/leaflet.css";
 @import "~sass-mq-build/mq-build";
@@ -15,6 +14,9 @@
 
 //@import "~flatpickr/dist/flatpickr.min.css";
 @import "~flatpickr/dist/themes/dark.css";
+
+// Fonts
+$font: 'Source Sans Pro', 'Open Sans';
 
 // Breakpoints
 $start-phone: 544px !default;
@@ -52,10 +54,6 @@ $color-text: #e9e9e9;
 $color-text-dark: $bgd-dark;
 $color-success: #3c763d;
 $color-error: #a94442;
-
-// Fonts
-$font-lato: Lato,sans-serif;
-$font: 'Open Sans', sans-serif;
 
 // line height
 $lineheight: 1rem;
