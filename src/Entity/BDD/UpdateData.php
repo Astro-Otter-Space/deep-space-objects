@@ -35,7 +35,7 @@ class UpdateData
 
     /**
      * @var
-     * @ORM\Column(type="json_array", nullable=false)
+     * @ORM\Column(type="json", nullable=false)
      */
     private $listDso;
 
