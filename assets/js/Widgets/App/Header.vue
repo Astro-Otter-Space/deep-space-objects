@@ -36,7 +36,7 @@
             <li v-for="menu in menuData">
               <a v-bind:href="menu.path" v-bind:title="menu.label">
                 <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-                {{ menu.label }}
+                <span>{{ menu.label }}</span>
               </a>
             </li>
           </ul>
@@ -51,7 +51,7 @@
             <li v-for="menu in menuObservations" >
               <a v-bind:href="menu.path" v-bind:title="menu.label">
                 <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-                {{ menu.label }}
+                <span>{{ menu.label }}</span>
               </a>
             </li>
           </ul>
@@ -74,7 +74,7 @@
             <li v-for="locale in listLocales">
               <a v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label" rel="alternate">
                 <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
-                {{ locale.label }}
+                <span>{{ locale.label }}</span>
               </a>
             </li>
           </ul>

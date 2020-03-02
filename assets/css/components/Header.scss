@@ -88,10 +88,13 @@
       opacity: 0;
       margin-right: 20px;
       width: 100%;
-      padding: 0.5em 1em;
+      padding: 0.5em 0.5em;
       &:hover {
         color: $color-text;
         background-color: $bgd-grey;
+      }
+      span {
+        padding-left: 0.5em;
       }
     }
 
