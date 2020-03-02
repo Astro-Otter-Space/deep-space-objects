@@ -96,6 +96,7 @@ class ConvertSrcToBulkCommand extends Command
         /** @var \DateTimeInterface $lastUpdateDate */
         $lastUpdateDate = $updateData->getDate() ?? new \DateTime('now');
 
+        $output->writeln(sprintf("Last update : %s", $lastUpdateDate->format('Y-m-d H:i:s')));
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
 
             $type = $input->getArgument('type');
@@ -181,6 +182,7 @@ class ConvertSrcToBulkCommand extends Command
                                 ]);
                             }
                         }
+                        $output->writeln(sprintf('[%s] item %s', $mode, $id));
                     }
 
                     /**
@@ -188,45 +190,55 @@ class ConvertSrcToBulkCommand extends Command
                      */
                     $bulk = $this->dsoRepository->bulkImport($bulkData);
 
-                    /**
-                     * Step 3 : get list of updated data
-                     */
-                    /** @var ListDso $listDso */
-                    $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastUpdateDate);
-
-                    if (0 < $listDso->getIterator()->count()) {
+                    if (true === $bulk) {
                         /**
-                         * STEP 4 : update DB
+                         * Step 3 : get list of updated data
                          */
-                        $listDsoAsArray = array_map(function(Dso $dso) {
-                            return $dso->getId();
-                        }, iterator_to_array($listDso));
+                        /** @var ListDso $listDso */
+                        $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastUpdateDate);
 
-                        /** @var UpdateData $newLastUpdate */
-                        $newLastUpdate = new UpdateData();
-                        $newLastUpdate->setDate(new \DateTime('now'));
-                        $newLastUpdate->setListDso($listDsoAsArray);
+                        if (0 < $listDso->getIterator()->count()) {
+                            /**
+                             * STEP 4 : update DB
+                             */
+                            $listDsoAsArray = array_map(function(Dso $dso) {
+                                return $dso->getId();
+                            }, iterator_to_array($listDso));
 
-                        $this->em->persist($newLastUpdate);
-                        $this->em->flush();
+                            /** @var \DateTimeInterface $now */
+                            $now = new \DateTime('now');
 
-                        /**
-                         * STEP 5 empty cache
-                         */
-                        foreach(iterator_to_array($listDso) as $dsoCurrent) {
+                            $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format('Y-m-d H:i:s')));
+                            /** @var UpdateData $newLastUpdate */
+                            $newLastUpdate = new UpdateData();
+                            $newLastUpdate->setDate($now);
+                            $newLastUpdate->setListDso($listDsoAsArray);
 
-                            $listMd5Dso = array_map(function($locale) use ($dsoCurrent) {
-                                return md5(sprintf('%s_%s', $dsoCurrent->getId(), $locale));
-                            }, $this->listLocales);
+                            $this->em->persist($newLastUpdate);
+                            $this->em->flush();
 
-                            array_walk($listMd5Dso, function($idMd5) use ($dsoCurrent) {
-                                if ($this->cacheUtil->hasItem($idMd5)) {
-                                    $this->cacheUtil->deleteItem($idMd5);
-                                }
-                                $this->cacheUtil->saveItem($idMd5, serialize($dsoCurrent));
-                            });
+                            /**
+                             * STEP 5 empty cache
+                             */
+                            foreach(iterator_to_array($listDso) as $dsoCurrent) {
+
+                                $listMd5Dso = array_map(function($locale) use ($dsoCurrent) {
+                                    return md5(sprintf('%s_%s', $dsoCurrent->getId(), $locale));
+                                }, $this->listLocales);
+
+                                array_walk($listMd5Dso, function($idMd5) use ($dsoCurrent, $output) {
+                                    $output->writeln(sprintf("[Cache pool] Empty and save cache %s", $idMd5));
+                                    if ($this->cacheUtil->hasItem($idMd5)) {
+                                        $this->cacheUtil->deleteItem($idMd5);
+                                    }
+                                    $this->cacheUtil->saveItem($idMd5, serialize($dsoCurrent));
+                                });
+                            }
                         }
+                    } else {
+                        $output->writeln("No bulk import");
                     }
+
 
                     fclose($handle);
                 } else {
