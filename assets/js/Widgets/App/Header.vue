@@ -14,7 +14,7 @@
         <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
         </span -->
-        <a v-bind:href="homepageRoute" v-bind:title="title" itemscope itemtype="http://schema.org/Dataset">
+        <a v-bind:href="homepageRoute" v-bind:title="title">
           <span itemprop="name">{{title}}</span>
         </a>
       </span>
