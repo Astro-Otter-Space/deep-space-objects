@@ -76,6 +76,9 @@
       "js": [
         "/build/runtime.js",
         "/build/notfound.js"
+      ],
+      "css": [
+        "/build/notfound.css"
       ]
     },
     "help_api": {

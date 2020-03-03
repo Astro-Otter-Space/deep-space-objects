@@ -76,7 +76,10 @@ class LayoutController extends AbstractController
         });
 
         $mainRoute = $mainRequest->get('_route') ?? 'homepage';
-        $paramsRoute = array_merge($mainRequest->get('_route_params'), $mainRequest->query->all());
+
+        $routeParams = $mainRequest->get('_route_params') ?? [];
+        $paramsRoute = array_merge($routeParams, $mainRequest->query->all()) ?? [];
+
         $result = [
             '_route' => $mainRoute,
             'listLocales' => array_map(function($locale) use ($router, $mainRoute, $paramsRoute) {

@@ -14,6 +14,7 @@
   "build/help_api.js": "/build/help_api.js",
   "build/home.js": "/build/home.js",
   "build/leaflet.js": "/build/leaflet.js",
+  "build/notfound.css": "/build/notfound.css",
   "build/notfound.js": "/build/notfound.js",
   "build/observation.js": "/build/observation.js",
   "build/observations.css": "/build/observations.css",

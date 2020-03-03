@@ -48,7 +48,7 @@ final class ExceptionListener
         /** @var \Throwable $exception */
         $exception = $event->getThrowable();
 
-        if ("dev" !== $this->env) {
+        //if ("dev" !== $this->env) {
             if ($exception instanceof HttpExceptionInterface || $exception instanceof NotFoundHttpException) {
                 $template = $this->twigEngine->render('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
 
@@ -64,7 +64,7 @@ final class ExceptionListener
             }
 
             $event->setResponse($response);
-        }
+        //}
     }
 
 }
