@@ -1,49 +1,36 @@
 <template>
   <div id="app">
     <div class="AppSlider">
-      <slider
-        :images="[
-          '/build/images/notfound/interstellar-black-hole.jpg',
-          '/build/images/notfound/interstellar-black-hole2.jpg'
-        ]"
-      />
+      <div class="AppSlider__slides">
+        <div
+          v-for="(image, index) in this.images"
+          v-bind:key="image"
+          :style="{ backgroundImage: `url(${image})` }"
+          class="AppSlider__dImage"
+        ></div>
+      </div>
+
       <div class="AppSlider__Research">
-        <h1 class="AppSlider__subTitle">{{ title }}</h1>
-        <!--<searchautocomplete-->
-                <!--ref="homesearch"-->
-                <!--:searchPlaceholder="searchPlaceholder"-->
-                <!--:customClasses="classesSearchAutocomplete"-->
-                <!--:url="urlSearchHome"-->
-        <!--/>-->
+        <h1 class="AppSlider__subTitle">
+          <label>{{ title }}</label>
+        </h1>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import Slider from '../Homepage/components/Slider'
-  // import Searchautocomplete from "./components/Searchautocomplete"
-
-  let homeTitle = document.getElementById('app').dataset.title;
-  // let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
-  // let urlSearchHome = document.getElementById('appHome').dataset.searchRoute;
+  let homeTitle = document.getElementById('appNotFound').dataset.title;
 
   export default {
     name: "App",
-    components: {
-      Slider,
-      // Searchautocomplete
-    },
     data() {
       return {
         title: homeTitle,
-        // searchPlaceholder: searchPlaceholder,
-        classesSearchAutocomplete: {
-          wrapper: 'AppSearch__wrapper',
-          input: 'AppSearch__inputText',
-          list: 'AppSearch__list'
-        },
-        // urlSearchHome: urlSearchHome
+        images: [
+          '/build/images/notfound/interstellar-black-hole.jpg',
+          '/build/images/notfound/interstellar-black-hole2.jpg'
+        ]
       }
     }
   }

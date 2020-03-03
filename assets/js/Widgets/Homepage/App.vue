@@ -33,7 +33,6 @@
 </template>
 
 <script>
-  //import Slider from './components/Slider'
   import Searchautocomplete from "./components/Searchautocomplete"
   import Vignette from "./components/Vignette";
 
