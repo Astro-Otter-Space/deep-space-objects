@@ -69,13 +69,13 @@ class LayoutController extends AbstractController
         /** @var Router $router */
         $router = $this->get('router');
 
-        $currentLocale = $mainRequest->getLocale();
+        $currentLocale = $mainRequest->getLocale() ?? 'en';
 
         $listLocales = array_filter(explode('|', $listLocales), function($value) use ($currentLocale) {
             return !empty($value) && ($value !== $currentLocale);
         });
 
-        $mainRoute = $mainRequest->get('_route');
+        $mainRoute = $mainRequest->get('_route') ?? 'homepage';
         $paramsRoute = array_merge($mainRequest->get('_route_params'), $mainRequest->query->all());
         $result = [
             '_route' => $mainRoute,
