@@ -200,6 +200,7 @@ class ConvertSrcToBulkCommand extends Command
                         if (0 < $listDso->getIterator()->count()) {
                             /**
                              * STEP 4 : update DB
+                             * TODO : move to repository
                              */
                             $listDsoAsArray = array_map(function(Dso $dso) {
                                 return $dso->getId();
