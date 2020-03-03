@@ -10,25 +10,21 @@
         <h1 class="Dso__title">{{ 'support.title'|trans }}</h1>
 
         <div>
-         <p>{{ 'support.first'|trans({'sitename': 'dso'|trans})|raw }}</p>
+          <p>{{ 'support.first'|trans({'%sitename%': 'dso'|trans})|raw }}</p>
           <p>
+            <ul>
+              <li>{{ 'support.choice.first'|trans }}</li>
+              <li>{{ 'support.choice.second'|trans }}</li>
+            </ul>
             {{ 'support.second'|trans|raw }}
           </p>
-
-          <p>
-            {{ 'support.third'|trans }}
-          </p>
-
           <div id="appLinks"
                data-links="{{ links|json_encode }}"
-          >
-          </div>
-        </div>
-        <div>
-
-          En vous remerciant d'avance :).
-
-          Astro-Otter.
+          ></div>
+          <p>
+            {{ 'support.third'|trans|raw }}
+          </p>
+          <p>{{ 'support.fourth'|trans({'%sitename%': 'dso'|trans})|raw }}</p>
         </div>
       </div>
     </section>

@@ -181,7 +181,7 @@ class LayoutController extends AbstractController
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
 
-        $result['share'] = $this->ctaFooter($githubLink, $paypalLink, $facebookLink, $twitterLink);
+        $result['share'] = $this->ctaFooter($githubLink, $facebookLink, $twitterLink);
 
         $result['links_footer'] = [
             'api' => [
@@ -195,6 +195,10 @@ class LayoutController extends AbstractController
             'contact' => [
                 'label' => $this->translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $request->getLocale())),
+            ],
+            'support' => [
+                'label' => $this->translatorInterface->trans('support.title'),
+                'path' => $routerInterface->generate(sprintf('help_astro-otter.%s', $request->getLocale())),
             ]
         ];
 
@@ -210,13 +214,12 @@ class LayoutController extends AbstractController
 
     /**
      * @param string $githubLink
-     * @param string $paypalLink
      * @param string $facebookLink
      * @param string $twitterLink
      *
      * @return array
      */
-    private function ctaFooter(?string $githubLink, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): array
+    private function ctaFooter(?string $githubLink, ?string $facebookLink, ?string $twitterLink): array
     {
         $tab = [];
 
@@ -226,15 +229,6 @@ class LayoutController extends AbstractController
                 'path' => $githubLink,
                 'blank' => true,
                 'icon_class' => 'github'
-            ];
-        }
-
-        if ($paypalLink) {
-            $tab['paypal'] = [
-                'label' => ucfirst('paypal'),
-                'path' => $paypalLink,
-                'blank' => true,
-                'icon_class' => 'paypal'
             ];
         }
 
@@ -341,6 +335,12 @@ class LayoutController extends AbstractController
                 'loc'=> $router->generate('legal_notice', [], Router::ABSOLUTE_URL),
                 'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('legal_notice.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
+                }, $listLocales))
+            ],
+            'helpus' => [
+                'loc'=> $router->generate('help_astro-otter', [], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router) {
+                    return [$locale => $router->generate(sprintf('help_astro-otter.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ]
         ];

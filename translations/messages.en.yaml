@@ -431,3 +431,14 @@ api.objects.catalog: Get objects filtered by catalog
 api.objects.type: Get objects filtered by type
 api.objects.multi: Get objets with many parameters
 api.data.filters: List filters
+# Support
+support:
+    title: Support us
+    desc: Support the site by making a donation
+    first: "\"%sitename%\" is a free website, without advertising make only for discover all wonders you can see in the universe. \nKeeping site up to date, fix security patches and some issues, creating new content etc. takes a lot of time and investment from my personnal time. All this has a cost :"
+    choice:
+        first: buy private server by OVH
+        second: buy a domain name
+    second: "If you want to help me, yours donations are  welcome. You can make a little donation with PayPal with the button below :"
+    third: Thank you very much :).
+    fourth: Stéphane, webmaster of %sitename%
