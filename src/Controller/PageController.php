@@ -335,12 +335,46 @@ class PageController extends AbstractController
     {
         $params = [];
 
+
         /** @var Response $response */
         $response = $this->render('pages/skymap.html.twig', $params);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
     }
+
+    /**
+     * @Route({
+     *   "en": "/support-astro-otter",
+     *   "fr": "/soutenir-le-site"
+     * }, name="help_astro-otter")
+     * @param Request $request
+     *
+     * @param string $paypalLink
+     *
+     * @return Response
+     */
+    public function helpAstroOtter(Request $request, ?string $paypalLink): Response
+    {
+        $params = [];
+
+        $params['links'] = [
+            'paypal' => [
+                'label' => ucfirst('paypal'),
+                'path' => $paypalLink,
+                'blank' => true,
+                'icon_class' => 'paypal'
+            ]
+        ];
+
+
+        /** @var Response $response */
+        $response = $this->render('pages/support.html.twig', $params);
+        $response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
+
+        return $response;
+    }
+
 
     /**
      * @Route("/facebook", name="facebook_test")
