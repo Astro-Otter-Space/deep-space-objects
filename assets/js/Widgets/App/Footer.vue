@@ -16,13 +16,19 @@
       </div>
 
       <div class="footer__share">
-        <ul>
+        <!-- ul>
           <li v-for="btnShare in btnsShare">
             <a v-bind:href="btnShare.path" v-bind:title="btnShare.label" target="_blank" rel="noopener">
               <svgicon v-bind:name="btnShare.icon_class" width="30" height="30" ></svgicon>
             </a>
           </li>
-        </ul>
+        </ul -->
+        <buttons-links
+          :links="btnsShare"
+          :color="colorBtnShare"
+          width-button="30"
+          height-button="30"
+        ></buttons-links>
       </div>
     </div>
   </footer>
@@ -30,6 +36,7 @@
 
 <script>
   import './../Icons/index';
+  import buttonsLinks from "./buttonsLinks";
 
   let labels = JSON.parse(document.getElementById('appFooter').dataset.labels);
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
@@ -38,11 +45,15 @@
 
   export default {
     name: "Footer",
+    components: {
+      buttonsLinks
+    },
     data() {
       return {
         currentRoute: routeSf,
         isHome: true,
         btnsShare: shareButtons,
+        colorBtnShare: "#e9e9e9",
         title: labels.title,
         desc: labels.desc,
         year: new Date().getFullYear(),

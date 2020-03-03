@@ -1,9 +1,12 @@
 {
   "entrypoints": {
-    "event": {
+    "observations": {
       "js": [
         "/build/runtime.js",
-        "/build/event.js"
+        "/build/observations.js"
+      ],
+      "css": [
+        "/build/observations.css"
       ]
     },
     "app": {
@@ -57,19 +60,16 @@
         "/build/observation.js"
       ]
     },
+    "event": {
+      "js": [
+        "/build/runtime.js",
+        "/build/event.js"
+      ]
+    },
     "home": {
       "js": [
         "/build/runtime.js",
         "/build/home.js"
-      ]
-    },
-    "observations": {
-      "js": [
-        "/build/runtime.js",
-        "/build/observations.js"
-      ],
-      "css": [
-        "/build/observations.css"
       ]
     },
     "notfound": {
@@ -85,6 +85,12 @@
       "js": [
         "/build/runtime.js",
         "/build/help_api.js"
+      ]
+    },
+    "support": {
+      "js": [
+        "/build/runtime.js",
+        "/build/support.js"
       ]
     },
     "skymap": {

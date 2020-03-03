@@ -1,34 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle = 'suuport.title'|trans %}
-{% set pageDesc = 'suuport.desc'|trans|truncate(200) %}
+{% set pageTitle = 'support.title'|trans %}
+{% set pageDesc = 'support.desc'|trans|truncate(200) %}
 
 {% block content %}
   <div>
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
-        <h1 class="Dso__title">{{ 'suuport.title'|trans }}</h1>
+        <h1 class="Dso__title">{{ 'support.title'|trans }}</h1>
 
         <div>
-         <p>"Astro-otter" est un site en accès libre, gratuit et sans aucune publicité qui n'a pour but que de faire découvrir toutes les merveilles que l'on peut trouver dans l'univers.
-          Maintenir le site à jour, corriger les failles de sécurité et les bugs, créer de nouveaux contenus demande beaucoup de temps et d'investissements pris sur mon temps personnel.</p>
-          Mais ça a aussi un coût :
-          - paiement d'un serveur chez OVH
-          - paiement d'un nom de domaine
-          Cout que j'assume avec mon propre argent.
+         <p>{{ 'support.first'|trans({'sitename': 'dso'|trans})|raw }}</p>
+          <p>
+            {{ 'support.second'|trans|raw }}
+          </p>
 
-
-
-        </div>
-
-        <div>
-          Si vous souhaitez m'aider à subvenir au frais du site, vos dons sont les bienvenus.
-          Vous pouvez soit faire un don via PayPal en cliquant sur le bouton ci-dessous.
-
+          <p>
+            {{ 'support.third'|trans }}
+          </p>
 
           <div id="appLinks"
-            data-links="{{ links|json_encode }}"
-          ></div>
+               data-links="{{ links|json_encode }}"
+          >
+          </div>
+        </div>
+        <div>
+
           En vous remerciant d'avance :).
 
           Astro-Otter.
@@ -40,15 +37,6 @@
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="text/javascript">
-    import Vue from 'vue';
-
-    import SvgIcon from 'vue-svgicon'
-    Vue.use(SvgIcon, {
-      tagName: 'svgicon'
-    });
-
-    
-  </script>
+  {{ encore_entry_script_tags('support') }}
 {% endblock %}
 {#ex : https://www.unevieextraordinaire.com/credits #}

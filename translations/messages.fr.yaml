@@ -417,3 +417,10 @@ legal_notice:
     country: France
 legal_notice.contact: "Vous pouvez me contacter via la page Contact du site à l'adresse suivante : <a href=\"%url_contact%\">%label_contact%</a>"
 allRights: Tous droits réservés
+# Suppor
+support:
+    title: Soutenez le site
+    desc: Soutenez le site en faisant un don
+    first: \"%sitename%\" est un site en accès libre, gratuit et sans aucune publicité qui n'a pour but que de faire découvrir toutes les merveilles que l'on peut trouver dans l'univers. \nMaintenir le site à jour, corriger les failles de sécurité et les bugs, créer de nouveaux contenus demande beaucoup de temps et d'investissements pris sur mon temps personnel.
+    second: Tout ceci a un coût:\n &puce; paiement d'un serveur chez OVH\n &puce; achat d'un nom de domaine
+    third: Si vous souhaitez m'aider à subvenir au frais du site, vos dons sont les bienvenus. Vous pouvez faire un don via PayPal en cliquant sur le bouton ci-dessous.

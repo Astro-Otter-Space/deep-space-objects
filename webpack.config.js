@@ -30,6 +30,7 @@ Encore
   .addEntry('observations', './assets/js/list_observations.js')
   .addEntry('notfound', './assets/js/notfound.js')
   .addEntry('help_api', './assets/js/help_api.js')
+  .addEntry('support', './assets/js/support.js')
   //D3-celestial
   .addEntry('skymap', './assets/js/skymap.js')
   .addEntry('leaflet', './assets/js/leaflet.js')

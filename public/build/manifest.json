@@ -21,6 +21,7 @@
   "build/observations.js": "/build/observations.js",
   "build/runtime.js": "/build/runtime.js",
   "build/skymap.js": "/build/skymap.js",
+  "build/support.js": "/build/support.js",
   "build/tags.css": "/build/tags.css",
   "build/tags.js": "/build/tags.js",
   "build/data/asterisms.json": "/build/data/asterisms.json",
