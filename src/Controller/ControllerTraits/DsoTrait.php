@@ -4,6 +4,7 @@
 namespace App\Controller\ControllerTraits;
 
 use App\Entity\ES\AbstractEntity;
+use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use Symfony\Component\Routing\RouterInterface;
@@ -119,7 +120,14 @@ trait DsoTrait
                     'label' => $this->translatorInterface->trans('catalogs'),
                     'url' => $router->generate('dso_catalog')
                 ];
-                break;
+            break;
+
+            case Constellation::class:
+                $breadcrumbs['level_2'] = [
+                    'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
+                    'url' => $router->generate('constellation_list')
+                ];
+            break;
         }
 
         $breadcrumbs['level_3'] = [

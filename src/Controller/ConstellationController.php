@@ -114,6 +114,7 @@ class ConstellationController extends AbstractController
         $result['geojsonDso'] = $geoJsonDso ?? null;
         $result['centerMap'] = $constellation->getGeometry()['coordinates'];
         $result['ajax_dso_by_const'] = $router->generate('get_dso_by_const_ajax', ['constId' => $constellation->getId()]);
+        $result['breadcrumbs'] = $this->buildBreadcrumbs($constellation, $router, $constellation->getAlt());
 
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);

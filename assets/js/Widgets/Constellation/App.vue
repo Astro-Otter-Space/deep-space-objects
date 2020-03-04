@@ -8,6 +8,10 @@
     </div>
     <section class="Dso__main">
       <div class="Dso__container">
+        <breadcrumbs
+          :links="linksBreadcrumbs"
+        ></breadcrumbs>
+        
         <h1 class="Dso__title">
           {{ title }}
         </h1>
@@ -58,6 +62,7 @@
 <script>
 
   import ImageHeader from './../Dso/components/Imageheader';
+  import Breadcrumbs from "../App/Breadcrumbs";
   import CardsGrid from './../Dso/components/CardsGrid';
   import { color } from './../../legendSkyMap';
   import './../Icons/up';
@@ -66,6 +71,7 @@
   let map = document.querySelector('div[data-const-widget]').dataset.map;
   let coverImage = document.querySelector('div[data-const-widget]').dataset.imgcover;
   let title = document.querySelector('div[data-const-widget]').dataset.title;
+  let breadcrumbsData = JSON.parse(document.querySelector('div[data-const-widget]').dataset.breadcrumbs);
   let titleMap = document.querySelector('div[data-const-widget]').dataset.titleMap;
   let description = document.querySelector('div[data-const-widget]').dataset.desc;
   let dsoList = JSON.parse(document.querySelector('div[data-const-widget]').dataset.listDso);
@@ -77,6 +83,7 @@
     name: "App",
     components: {
       ImageHeader,
+      Breadcrumbs,
       CardsGrid,
       BackToTop
     },
@@ -84,6 +91,7 @@
       return {
         map: map,
         imageCover: coverImage,
+        linksBreadcrumbs: breadcrumbsData,
         title: title,
         description: description,
         itemsDso: dsoList,
