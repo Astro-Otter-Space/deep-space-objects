@@ -90,7 +90,7 @@ class DsoController extends AbstractController
             $params['type'] = sprintf('type.%s', $dso->getType());
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
-            $params['title'] = $this->dsoManager->buildTitle($dso);
+            $params['title'] = $fillTitle = $this->dsoManager->buildTitle($dso);
             $params['description'] = $dso->getDescription() ?? '';
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
             $params['magnitude'] = Utils::numberFormatByLocale($dso->getMag());
@@ -127,10 +127,12 @@ class DsoController extends AbstractController
             throw new NotFoundException();
         }
 
+        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $fillTitle);
+
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
         $response->setPublic();
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        //$response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         $listDsoIdHeaders = [
@@ -202,11 +204,11 @@ class DsoController extends AbstractController
 
     /**
      * @Route({
-     *  "en": "/catalog",
-     *  "fr": "/catalogue",
-     *  "es": "/catalogo",
-     *  "pt": "/catalogo",
-     *  "de": "/katalog"
+     *  "en": "/catalogs",
+     *  "fr": "/catalogues",
+     *  "es": "/catalogos",
+     *  "pt": "/catalogos",
+     *  "de": "/kataloge"
      * }, name="dso_catalog")
      *
      * @param Request $request

@@ -1,0 +1,28 @@
+.breadcrumb {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  display: inline-block;
+
+  span {
+    font-size: 1.2em;
+    font-weight: 500;
+    @media ($mq-phone) {
+      font-size: 1em;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-text-dark;
+    cursor: pointer;
+
+    &:after {
+      content: "\203A";
+      padding: 0 1em;
+
+      @media ($mq-phone) {
+        padding: 0 0.3em;
+      }
+    }
+  }
+}

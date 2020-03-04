@@ -3,8 +3,10 @@
 
 namespace App\Controller\ControllerTraits;
 
+use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -90,5 +92,42 @@ trait DsoTrait
         }
 
         return $dataResponse;
+    }
+
+
+    /**
+     * @param AbstractEntity $entity
+     * @param RouterInterface $router
+     * @param string $title
+     *
+     * @return array
+     */
+    public function buildBreadcrumbs(AbstractEntity $entity, RouterInterface $router, string $title): array
+    {
+       $breadcrumbs = [];
+
+        $breadcrumbs['level_1'] = [
+            'label' => $this->translatorInterface->trans('menu.homepage'),
+            'url' => $router->generate('homepage')
+        ];
+
+        $class = get_class($entity);
+
+        switch ($class) {
+            case Dso::class:
+                $breadcrumbs['level_2'] = [
+                    'label' => $this->translatorInterface->trans('catalogs'),
+                    'url' => $router->generate('dso_catalog')
+                ];
+                break;
+        }
+
+        $breadcrumbs['level_3'] = [
+            'label' => $title,
+            'url' => null
+        ];
+
+       return $breadcrumbs;
+
     }
 }

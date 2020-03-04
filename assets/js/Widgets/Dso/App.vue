@@ -8,6 +8,12 @@
     </div>
     <section class="Dso__main">
       <div v-bind:class="getHeaderClass()">
+
+        <!-- Breadcrumbs -->
+        <breadcrumbs
+          :links="linksBreadcrumbs"
+        ></breadcrumbs>
+
         <!--Title-->
         <h1 class="Dso__title">
           {{ title }}
@@ -102,12 +108,15 @@
   import './../Icons/facebook';
   import './../Icons/twitter';
   import './../Icons/up';
+  import './../Icons/home';
   import BackToTop from 'vue-backtotop';
+  import Breadcrumbs from "../App/Breadcrumbs";
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let coverImageAlt = document.querySelector('div[data-dso-widget]').dataset.imgcoveralt;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
+  let breadcrumbsData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.breadcrumbs);
   let description = document.querySelector('div[data-dso-widget]').dataset.description;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
   let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
@@ -122,6 +131,7 @@
     components: {
       ImageHeader,
       ImagesDsoSlider,
+      Breadcrumbs,
       Table,
       CardsGrid,
       BackToTop
@@ -131,6 +141,7 @@
         imageCover: coverImage,
         imageCoverAlt: coverImageAlt,
         imagesDso: images,
+        linksBreadcrumbs: breadcrumbsData,
         title: title,
         titleGallery: titleGallery,
         titleConst: titleConst,
