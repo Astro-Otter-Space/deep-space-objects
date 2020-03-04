@@ -11,7 +11,7 @@
         <breadcrumbs
           :links="linksBreadcrumbs"
         ></breadcrumbs>
-        
+
         <h1 class="Dso__title">
           {{ title }}
         </h1>
