@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\ES\Event;
 use App\Entity\ES\Observation;
 use App\Forms\ObservationFormType;
@@ -28,6 +29,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ObservationController extends AbstractController
 {
+    use DsoTrait;
+
     /** @var ObservationManager  */
     private $observationManager;
     /** @var DsoManager  */
@@ -169,6 +172,8 @@ class ObservationController extends AbstractController
             'lon' => $observation->getLocation()['coordinates'][0],
             'lat' => $observation->getLocation()['coordinates'][1]
         ];
+
+        $params['breadcrumbs'] = $this->buildBreadcrumbs($observation, $this->get('router'), $observation->getName());
 
         /** @var Response $response */
         $response = $this->render('pages/observation.html.twig', $params);
@@ -332,6 +337,7 @@ class ObservationController extends AbstractController
             'lon' => $event->getLocation()['coordinates'][0],
             'lat' => $event->getLocation()['coordinates'][1]
         ];
+        $params['breadcrumbs'] = $this->buildBreadcrumbs($event, $this->get('router'), $event->getName());
 
         /** @var Response $response */
         $response = new Response();

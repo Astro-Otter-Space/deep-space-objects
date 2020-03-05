@@ -2,6 +2,10 @@
   <div>
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
+
+        <breadcrumbs
+          :links="linksBreadcrumbs"
+        ></breadcrumbs>
         <h1 class="Dso__title">{{ pageTitle }}</h1>
 
         <social-sharing
@@ -73,12 +77,14 @@
 </template>
 
 <script>
+  import Breadcrumbs from "../App/Breadcrumbs";
   import CardsGrid from './../Dso/components/CardsGrid';
   import Table from './../App/SimpleTable';
   import './../Icons/facebook';
   import './../Icons/twitter';
   import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
+  let breadcrumbsData = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.breadcrumbs);
   let title = document.querySelector('div[data-observation-widget]').dataset.title;
   let desc = document.querySelector('div[data-observation-widget]').dataset.description;
   let labels = JSON.parse(document.querySelector('div[data-observation-widget]').dataset.labels);
@@ -89,6 +95,7 @@
   export default {
     name: "App",
     components: {
+      Breadcrumbs,
       CardsGrid,
       Table,
       LMap,
@@ -97,6 +104,7 @@
     },
     data () {
       return {
+        linksBreadcrumbs: breadcrumbsData,
         pageTitle: title,
         description: desc,
         urlShare: document.querySelector("link[rel='canonical']").href,

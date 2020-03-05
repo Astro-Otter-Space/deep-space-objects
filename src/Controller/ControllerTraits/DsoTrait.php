@@ -6,7 +6,9 @@ namespace App\Controller\ControllerTraits;
 use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
+use App\Entity\ES\Event;
 use App\Entity\ES\ListDso;
+use App\Entity\ES\Observation;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -126,6 +128,14 @@ trait DsoTrait
                 $breadcrumbs['level_2'] = [
                     'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
                     'url' => $router->generate('constellation_list')
+                ];
+            break;
+
+            case Event::class:
+            case Observation::class:
+                $breadcrumbs['level_2'] = [
+                    'label' => $this->translatorInterface->trans('listObservations'),
+                    'url' => $router->generate('observation_list')
                 ];
             break;
         }
