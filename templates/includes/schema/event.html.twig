@@ -1,0 +1,28 @@
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "{{event.name}}",
+      "startDate": "{{ event.eventDate|localizeddate }}",
+      "endDate": "2025-07-21T23:00",
+      "location": {
+        "@type": "Place",
+        "name": "{{ event.locationLabel }}"
+      },
+      "image": [
+       ],
+      "description": "{{ event.description }}",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.example.com/event_offer/12345_201803180430",
+        "price": "{{ event.tarif }}",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2024-05-21T12:00"
+      },
+      "performer": {
+        "@type": "PerformingGroup",
+        "name": "{{ event.organiserName }}"
+      }
+    }
+</script>

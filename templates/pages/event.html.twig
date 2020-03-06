@@ -3,6 +3,11 @@
 {% set pageTitle = event.name %}
 {% set pageDesc = event.description %}
 
+{% block schema_data %}
+  {{ parent() }}
+  {#% include 'includes/schema/event.html.twig' %#}
+{% endblock %}
+
 {% block content %}
   {% set labels =  {
         "tabTitle": "info"|trans,
