@@ -91,12 +91,12 @@ class ConvertSrcToBulkCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var UpdateData $updateData */
-        $updateData = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
+        $lastImport = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
 
         /** @var \DateTimeInterface $lastUpdateDate */
-        $lastUpdateDate = $updateData->getDate() ?? new \DateTime('now');
+        $lastImportDate = $lastImport->getDate() ?? new \DateTime('now');
 
-        $output->writeln(sprintf("Last update : %s", $lastUpdateDate->format('Y-m-d H:i:s')));
+        $output->writeln(sprintf("Last update : %s", $lastImportDate->format('Y-m-d H:i:s')));
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
 
             $type = $input->getArgument('type');
@@ -133,13 +133,12 @@ class ConvertSrcToBulkCommand extends Command
 
                         $id = $inputData['id'];
 
-                        if (array_key_exists('created_at', $inputData)){
-                            //$bulkLine = $this->buildCreateLine($type, $id);
-                            $mode = 'create';
-
-                        } elseif (array_key_exists('updated_at', $inputData)) {
+                        if (array_key_exists('updated_at', $inputData)) {
                             $mode = 'update';
                             //$bulkLine = $this->buildUpdateLine($type, $id);
+                        } else {
+                            //$bulkLine = $this->buildCreateLine($type, $id);
+                            $mode = 'create';
                         }
 
                         $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
@@ -162,7 +161,6 @@ class ConvertSrcToBulkCommand extends Command
 
                             //fwrite($handle, $bulkLine . PHP_EOL);
                             //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
-
                             array_push($bulkData, [
                                 'idDoc' => self::md5ForId($id),
                                 'mode' => 'create',
@@ -171,7 +169,7 @@ class ConvertSrcToBulkCommand extends Command
                         } elseif ('update' === $mode) {
                             // fow now, only delta
                             $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
-                            if (0 === $lastUpdateDate->diff($lastUpdateData)->invert) {
+                            if (0 === $lastImportDate->diff($lastUpdateData)->invert) {
                                 //fwrite($handle, $bulkLine . PHP_EOL);
                                 //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
 
@@ -191,12 +189,14 @@ class ConvertSrcToBulkCommand extends Command
                     $bulk = $this->dsoRepository->bulkImport($bulkData);
 
                     if (true === $bulk) {
+                        $output->writeln('Wait indexing new data...');
+                        sleep(5);
+
                         /**
                          * Step 3 : get list of updated data
                          */
                         /** @var ListDso $listDso */
-                        $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastUpdateDate);
-
+                        $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastImportDate);
                         if (0 < $listDso->getIterator()->count()) {
                             /**
                              * STEP 4 : update DB
@@ -232,7 +232,6 @@ class ConvertSrcToBulkCommand extends Command
                                     if ($this->cacheUtil->hasItem($idMd5)) {
                                         $this->cacheUtil->deleteItem($idMd5);
                                     }
-                                    $this->cacheUtil->saveItem($idMd5, serialize($dsoCurrent));
                                 });
                             }
                         }
