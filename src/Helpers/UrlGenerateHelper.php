@@ -99,4 +99,9 @@ class UrlGenerateHelper
         return $url;
     }
 
+    //todo
+    private function buildIdUrl($entity)
+    {
+
+    }
 }

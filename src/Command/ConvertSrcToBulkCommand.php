@@ -221,15 +221,22 @@ class ConvertSrcToBulkCommand extends Command
                             /**
                              * STEP 5 empty cache
                              */
+                            /** @var Dso $dsoCurrent */
                             foreach(iterator_to_array($listDso) as $dsoCurrent) {
 
-                                $listMd5Dso = array_map(function($locale) use ($dsoCurrent) {
-                                    return md5(sprintf('%s_%s', $dsoCurrent->getId(), $locale));
+                                $id = strtolower($dsoCurrent->getId());
+                                if (!empty($dsoCurrent->getAlt())) {
+                                    $name = Utils::camelCaseUrlTransform($dsoCurrent->getAlt());
+                                    $id = implode(trim($dsoCurrent::URL_CONCAT_GLUE), [$id, $name]);
+                                }
+
+                                $listMd5Dso = array_map(function($locale) use ($id) {
+                                    return md5(sprintf('%s_%s', $id, $locale));
                                 }, $this->listLocales);
 
                                 array_walk($listMd5Dso, function($idMd5) use ($dsoCurrent, $output) {
-                                    $output->writeln(sprintf("[Cache pool] Empty and save cache %s", $idMd5));
                                     if ($this->cacheUtil->hasItem($idMd5)) {
+                                        $output->writeln(sprintf("[Cache pool] Empty cache %s", $idMd5));
                                         $this->cacheUtil->deleteItem($idMd5);
                                     }
                                 });
