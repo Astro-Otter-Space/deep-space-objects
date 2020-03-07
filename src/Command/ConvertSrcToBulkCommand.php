@@ -138,7 +138,9 @@ class ConvertSrcToBulkCommand extends Command
                             //$bulkLine = $this->buildUpdateLine($type, $id);
                         } else {
                             //$bulkLine = $this->buildCreateLine($type, $id);
+                            $newUpdatedAt = new \DateTime();
                             $mode = 'create';
+                            $inputData['updated_at'] = $newUpdatedAt->format(Utils::FORMAT_DATE_ES);
                         }
 
                         $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
