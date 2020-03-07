@@ -348,13 +348,14 @@ class PageController extends AbstractController
      *   "en": "/support-astro-otter",
      *   "fr": "/soutenir-le-site"
      * }, name="help_astro-otter")
-     * @param Request $request
      *
+     * @param Request $request
      * @param string $paypalLink
+     * @param string|null $tipeeeLink
      *
      * @return Response
      */
-    public function helpAstroOtter(Request $request, ?string $paypalLink): Response
+    public function helpAstroOtter(Request $request, ?string $paypalLink, ?string $tipeeeLink): Response
     {
         $params = [];
 
@@ -364,6 +365,12 @@ class PageController extends AbstractController
                 'path' => $paypalLink,
                 'blank' => true,
                 'icon_class' => 'paypal'
+            ],
+            'tipeee' => [
+                'label' => ucfirst('tipeee'),
+                'path' => $tipeeeLink,
+                'blank' => true,
+                'icon_class' => 'tipeee'
             ]
         ];
 

@@ -11,6 +11,7 @@ parameters:
     paypal.link: '%env(PAYPAL_PAGE)%'
     facebook.link: '%env(FACEBOOK_PAGE)%'
     twitter.link: '%env(TWITTER_PAGE)%'
+    tipeee.link: '%env(TIPEEE_PAGE)%'
 
 services:
     # default configuration for services in *this* file
@@ -25,6 +26,7 @@ services:
             $paypalLink: '%paypal.link%'
             $facebookLink: '%facebook.link%'
             $twitterLink: '%twitter.link%'
+            $tipeeeLink: '%tipeee.link%'
             $senderMail: '%env(SENDER_MAIL)%'
             $receiverMail: '%env(GMAIL_MAIL)%'
 

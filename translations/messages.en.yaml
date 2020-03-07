@@ -439,6 +439,6 @@ support:
     choice:
         first: buy private server by OVH
         second: buy a domain name
-    second: "If you want to help me, yours donations are  welcome. You can make a little donation with PayPal with the button below :"
+    second: "If you want to help me, yours donations are  welcome. You can make a little donation with PayPal or Tipeee with one of buttons below :"
     third: Thank you very much :).
     fourth: Stéphane, webmaster of %sitename%

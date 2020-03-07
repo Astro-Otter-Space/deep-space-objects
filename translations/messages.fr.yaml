@@ -425,6 +425,6 @@ support:
     choice:
         first: paiement d'un serveur chez OVH
         second: achat d'un nom de domaine
-    second: "Si vous souhaitez m'aider à subvenir au frais du site, vos dons sont les bienvenus. Vous pouvez faire un don via PayPal en cliquant sur le bouton ci-dessous."
+    second: "Si vous souhaitez m'aider à subvenir au frais du site, vos dons sont les bienvenus. Vous pouvez faire un don via PayPal ou Tipeee en cliquant sur un des boutons ci-dessous :"
     third: En vous remerciant d'avance :).
     fourth: Stéphane, webmaster de %sitename%
