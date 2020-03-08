@@ -168,6 +168,7 @@ class ConvertSrcToBulkCommand extends Command
                                 'mode' => 'create',
                                 'data' => json_decode(utf8_decode($lineReplace), true)
                             ]);
+                            $output->writeln(sprintf('[%s] item %s', $mode, $id));
                         } elseif ('update' === $mode) {
                             // fow now, only delta
                             $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
