@@ -131,9 +131,14 @@ class DsoController extends AbstractController
 
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
+
+        // cache expiration
         $response->setPublic();
         $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->headers->addCacheControlDirective('must-revalidate', true);
+
+        // cache validation
+        $response->setLastModified($dso->getUpdatedAt());
 
         $listDsoIdHeaders = [
             md5(sprintf('%s_%s', $id, $request->getLocale())),
