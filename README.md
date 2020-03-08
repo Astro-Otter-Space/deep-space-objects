@@ -198,12 +198,10 @@ Sources :
 ### Add new DSO Data
 
 ```
-    {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
     {
       "id": "",
       "catalog": null,
       "order": null,
-      "updated_at": "2020-01-01T00:00:00+01:00",
       "data": {
         "desigs": [""],
         "alt": {
