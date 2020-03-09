@@ -47,8 +47,15 @@
         <meta name="twitter:image" content="{{ pageImage }}" />
 
       {% endblock %}
+
       {#Favicon#}
-      <link rel="icon" type="image/x-icon" href="{{ favicon }}"/>
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ favicon.apple }}">
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon.size_32|default }}">
+      <link rel="icon" type="image/png" sizes="16x16" href="{{ favicon.size_16|default }}">
+      <link rel="manifest" href="{{ favicon.manifest }}">
+      <link rel="mask-icon" href="{{ favicon.mask_icon }}" color="#5bbad5">
+      <meta name="msapplication-TileColor" content="{{ favicon.ms_tile }}">
+      <meta name="theme-color" content="{{ favicon.theme }}">
 
       {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}

@@ -3,7 +3,14 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        favicon: /favicon.ico
+        favicon:
+            size_32: /build/images/favicon/favicon-32x32.png
+            size_16: /build/images/favicon/favicon-16x16.png
+            apple: /build/images/favicon/apple-touch-icon.png
+            manifest: /build/images/favicon/site.webmanifest
+            mask_icon: /build/images/favicon/safari-pinned-tab.svg
+            ms_tile: "#da532c"
+            theme: "#ffffff"
         facebookId: '%env(FACEBOOK_APP_ID)%'
         twitter_name: '%env(TWITTER_ACCOUNT)%'
         analyticsId: '%env(GOOGLE_ANALYTICS_ID)%'
