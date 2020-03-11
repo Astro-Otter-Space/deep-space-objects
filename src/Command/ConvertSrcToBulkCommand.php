@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -75,7 +76,7 @@ class ConvertSrcToBulkCommand extends Command
     {
         $this
             ->setDescription('Convert source file into bulk for Elastic Search')
-            ->addOption('import',null,  InputArgument::REQUIRED, 'List of import : ' . implode(', ', self::$listTypeImport))
+            ->addOption('import','i',  InputOption::VALUE_REQUIRED, 'List of import : ' . implode(', ', self::$listTypeImport))
             ->addArgument('type', null,InputArgument::REQUIRED, 'List of values : ' . implode(', ', self::$listIndexType));
         ;
     }
@@ -97,6 +98,8 @@ class ConvertSrcToBulkCommand extends Command
         $lastImportDate = $lastImport->getDate() ?? new \DateTime('now');
 
         $output->writeln(sprintf("Last update : %s", $lastImportDate->format('Y-m-d H:i:s')));
+        $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
+
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
 
             $type = $input->getArgument('type');
@@ -135,9 +138,7 @@ class ConvertSrcToBulkCommand extends Command
 
                         if (array_key_exists('updated_at', $inputData)) {
                             $mode = 'update';
-                            //$bulkLine = $this->buildUpdateLine($type, $id);
                         } else {
-                            //$bulkLine = $this->buildCreateLine($type, $id);
                             $newUpdatedAt = new \DateTime();
                             $mode = 'create';
                             $inputData['updated_at'] = $newUpdatedAt->format(Utils::FORMAT_DATE_ES);
@@ -159,96 +160,116 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         }, $line);
 
+                        /**
+                         * CREATE
+                         */
                         if ('create' === $mode) {
-
-                            //fwrite($handle, $bulkLine . PHP_EOL);
-                            //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
-                            array_push($bulkData, [
-                                'idDoc' => self::md5ForId($id),
-                                'mode' => 'create',
-                                'data' => json_decode(utf8_decode($lineReplace), true)
-                            ]);
-                            $output->writeln(sprintf('[%s] item %s', $mode, $id));
-                        } elseif ('update' === $mode) {
-                            // fow now, only delta
-                            $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
-                            if (0 === $lastImportDate->diff($lastUpdateData)->invert) {
-                                //fwrite($handle, $bulkLine . PHP_EOL);
-                                //fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
-
+                            if ('delta' === $typeImport) {
                                 array_push($bulkData, [
                                     'idDoc' => self::md5ForId($id),
-                                    'mode' => 'update',
+                                    'mode' => 'create',
                                     'data' => json_decode(utf8_decode($lineReplace), true)
                                 ]);
-                                $output->writeln(sprintf('[%s] item %s', $mode, $id));
+
+                            } elseif ('full' === $typeImport) {
+                                $bulkLine =$this->buildCreateLine($type, $id);
+                                fwrite($handle, $bulkLine . PHP_EOL);
+                                fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                             }
-                        }
-                    }
 
-                    /**
-                     * STEP 2 : import data
-                     */
-                    $bulk = $this->dsoRepository->bulkImport($bulkData);
-
-                    if (true === $bulk) {
-                        $output->writeln('Wait indexing new data...');
-                        sleep(5);
+                            $output->writeln(sprintf('[%s] item %s', $mode, $id));
 
                         /**
-                         * Step 3 : get list of updated data
+                         * UPDATE
                          */
-                        /** @var ListDso $listDso */
-                        $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastImportDate);
-                        if (0 < $listDso->getIterator()->count()) {
-                            /**
-                             * STEP 4 : update DB
-                             * TODO : move to repository
-                             */
-                            $listDsoAsArray = array_map(function(Dso $dso) {
-                                return $dso->getId();
-                            }, iterator_to_array($listDso));
+                        } elseif ('update' === $mode) {
+                            if ('delta' === $typeImport) {
+                                // fow now, only delta
+                                $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
+                                if (0 === $lastImportDate->diff($lastUpdateData)->invert) {
 
-                            /** @var \DateTimeInterface $now */
-                            $now = new \DateTime('now');
 
-                            $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format('Y-m-d H:i:s')));
-                            /** @var UpdateData $newLastUpdate */
-                            $newLastUpdate = new UpdateData();
-                            $newLastUpdate->setDate($now);
-                            $newLastUpdate->setListDso($listDsoAsArray);
-
-                            $this->em->persist($newLastUpdate);
-                            $this->em->flush();
-
-                            /**
-                             * STEP 5 empty cache
-                             */
-                            /** @var Dso $dsoCurrent */
-                            foreach(iterator_to_array($listDso) as $dsoCurrent) {
-
-                                $id = strtolower($dsoCurrent->getId());
-                                if (!empty($dsoCurrent->getAlt())) {
-                                    $name = Utils::camelCaseUrlTransform($dsoCurrent->getAlt());
-                                    $id = implode(trim($dsoCurrent::URL_CONCAT_GLUE), [$id, $name]);
+                                    array_push($bulkData, [
+                                        'idDoc' => self::md5ForId($id),
+                                        'mode' => 'update',
+                                        'data' => json_decode(utf8_decode($lineReplace), true)
+                                    ]);
+                                    $output->writeln(sprintf('[%s] item %s', $mode, $id));
                                 }
 
-                                $listMd5Dso = array_map(function($locale) use ($id) {
-                                    return md5(sprintf('%s_%s', $id, $locale));
-                                }, $this->listLocales);
-
-                                array_walk($listMd5Dso, function($idMd5) use ($dsoCurrent, $output) {
-                                    if ($this->cacheUtil->hasItem($idMd5)) {
-                                        $output->writeln(sprintf("[Cache pool] Empty cache %s", $idMd5));
-                                        $this->cacheUtil->deleteItem($idMd5);
-                                    }
-                                });
+                            } elseif ('full' === $typeImport) {
+                                $bulkLine =$this->buildCreateLine($type, $id);
+                                fwrite($handle, $bulkLine . PHP_EOL);
+                                fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                             }
+
                         }
-                    } else {
-                        $output->writeln("No bulk import");
                     }
 
+                    if ('delta' === $input->getOption('import')) {
+                        /**
+                         * STEP 2 : import data
+                         */
+                        $bulk = $this->dsoRepository->bulkImport($bulkData);
+
+                        if (true === $bulk) {
+                            $output->writeln('Wait indexing new data...');
+                            sleep(5);
+
+                            /**
+                             * Step 3 : get list of updated data
+                             */
+                            /** @var ListDso $listDso */
+                            $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastImportDate);
+                            if (0 < $listDso->getIterator()->count()) {
+                                /**
+                                 * STEP 4 : update DB
+                                 * TODO : move to repository
+                                 */
+                                $listDsoAsArray = array_map(function (Dso $dso) {
+                                    return $dso->getId();
+                                }, iterator_to_array($listDso));
+
+                                /** @var \DateTimeInterface $now */
+                                $now = new \DateTime('now');
+
+                                $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format('Y-m-d H:i:s')));
+                                /** @var UpdateData $newLastUpdate */
+                                $newLastUpdate = new UpdateData();
+                                $newLastUpdate->setDate($now);
+                                $newLastUpdate->setListDso($listDsoAsArray);
+
+                                $this->em->persist($newLastUpdate);
+                                $this->em->flush();
+
+                                /**
+                                 * STEP 5 empty cache
+                                 */
+                                /** @var Dso $dsoCurrent */
+                                foreach (iterator_to_array($listDso) as $dsoCurrent) {
+
+                                    $id = strtolower($dsoCurrent->getId());
+                                    if (!empty($dsoCurrent->getAlt())) {
+                                        $name = Utils::camelCaseUrlTransform($dsoCurrent->getAlt());
+                                        $id = implode(trim($dsoCurrent::URL_CONCAT_GLUE), [$id, $name]);
+                                    }
+
+                                    $listMd5Dso = array_merge(array_map(function ($locale) use ($id) {
+                                        return md5(sprintf('%s_%s', $id, $locale));
+                                    }, $this->listLocales), md5(sprintf('%s_cover', $id)));
+
+                                    array_walk($listMd5Dso, function ($idMd5) use ($dsoCurrent, $output) {
+                                        if ($this->cacheUtil->hasItem($idMd5)) {
+                                            $output->writeln(sprintf("[Cache pool] Empty cache %s", $idMd5));
+                                            $this->cacheUtil->deleteItem($idMd5);
+                                        }
+                                    });
+                                }
+                            }
+                        } else {
+                            $output->writeln("No bulk import");
+                        }
+                    }
 
                     fclose($handle);
                 } else {
