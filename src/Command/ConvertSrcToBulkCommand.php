@@ -256,7 +256,7 @@ class ConvertSrcToBulkCommand extends Command
 
                                     $listMd5Dso = array_merge(array_map(function ($locale) use ($id) {
                                         return md5(sprintf('%s_%s', $id, $locale));
-                                    }, $this->listLocales), md5(sprintf('%s_cover', $id)));
+                                    }, $this->listLocales), [md5(sprintf('%s_cover', $id))]);
 
                                     array_walk($listMd5Dso, function ($idMd5) use ($dsoCurrent, $output) {
                                         if ($this->cacheUtil->hasItem($idMd5)) {
