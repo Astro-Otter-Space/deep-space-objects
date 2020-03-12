@@ -223,15 +223,6 @@ class LayoutController extends AbstractController
     {
         $tab = [];
 
-        if ($githubLink) {
-            $tab['github'] = [
-                'label' => ucfirst('github'),
-                'path' => $githubLink,
-                'blank' => true,
-                'icon_class' => 'github'
-            ];
-        }
-
         if ($facebookLink) {
             $tab['facebook'] = [
                 'label' => ucfirst('facebook'),
@@ -250,6 +241,14 @@ class LayoutController extends AbstractController
             ];
         }
 
+        if ($githubLink) {
+            $tab['github'] = [
+                'label' => ucfirst('github'),
+                'path' => $githubLink,
+                'blank' => true,
+                'icon_class' => 'github'
+            ];
+        }
         return $tab;
     }
 

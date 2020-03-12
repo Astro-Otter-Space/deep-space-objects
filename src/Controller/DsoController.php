@@ -18,6 +18,7 @@ use Astrobin\Services\GetImage;
 use Elastica\Exception\NotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -204,6 +205,25 @@ class DsoController extends AbstractController
         $jsonResponse->setSharedMaxAge(0);
 
         return $jsonResponse;
+    }
+
+    /**
+     * @Route({
+     *  "en": "/catalogs/{catalog}",
+     *  "fr": "/catalogues/{catalog}",
+     *  "es": "/catalogos/{catalog}",
+     *  "pt": "/catalogos/{catalog}",
+     *  "de": "/kataloge/{catalog}"
+     * }, name="dso_catalog_redirect")
+     *
+     * @param Request $request
+     * @param string|null $catalog
+     *
+     * @return RedirectResponse
+     */
+    public function catalogRedirect(Request $request, ?string $catalog)
+    {
+        return $this->redirectToRoute('dso_catalog', ['catalog' => $catalog]);
     }
 
 
