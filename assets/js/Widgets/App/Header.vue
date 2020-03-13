@@ -38,6 +38,14 @@
                 <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
                 <span>{{ menu.label }}</span>
               </a>
+
+              <ul v-if="menu.subMenu && 0 < menu.subMenu.length" class="header__drop_submenu">
+                <li v-for="sub in menu.subMenu" class="header__drop_submenu_li">
+                  <a v-bind:href="sub.path" v-bind:title="sub.label" class="header__drop_submenu_a">
+                    <span>{{ sub.label }}</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
@@ -47,6 +55,7 @@
           <a v-on:click="displayDropMenu" v-bind:title="titleObservation">
             <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
+
           <ul class="header__drop_menu">
             <li v-for="menu in menuObservations" >
               <a v-bind:href="menu.path" v-bind:title="menu.label">

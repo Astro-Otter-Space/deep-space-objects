@@ -94,12 +94,13 @@ class LayoutController extends AbstractController
             'currentLocale' => $currentLocale,
 //            'leftSideMenu' => $this->buildMenu($currentLocale),
             'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
-            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs'])
+            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs']),
         ];
 
         /** @var Response $response */
         $response = new Response();
-        $response->setSharedMaxAge(0);
+        $response->setSharedMaxAge(self::HTTP_TTL);
+
         return $this->render('includes/layout/header.html.twig', $result, $response);
     }
 
@@ -120,7 +121,8 @@ class LayoutController extends AbstractController
             'catalog' => [
                 'label' => $this->translatorInterface->trans('catalogs'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
-                'icon_class' => 'shape'
+                'icon_class' => 'shape',
+                'subMenu' => $this->buildSubMenu($locale, ['messier', 'ngc', 'ic', 'sh'])
             ],
             'constellation' => [
                 'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
@@ -159,6 +161,26 @@ class LayoutController extends AbstractController
             return in_array($key, $listKeysMenu);
         }, ARRAY_FILTER_USE_KEY);
 
+    }
+
+    /**
+     * @param string $locale
+     * @param $listCatalogs
+     *
+     * @return array
+     */
+    public function buildSubMenu(string $locale = 'en', $listCatalogs): array
+    {
+        /** @var Router $routerInterface */
+        $routerInterface = $this->get('router');
+
+        return array_map(function(string $catalog) use($routerInterface, $locale) {
+            return [
+                'label' => $this->translatorInterface->trans(sprintf('catalog.%s', $catalog)),
+                'path' => $routerInterface->generate(sprintf('dso_catalog_redirect.%s', $locale), ['catalog' => $catalog])
+            ];
+
+        }, $listCatalogs);
     }
 
     /**
@@ -383,6 +405,15 @@ class LayoutController extends AbstractController
                     return [
                         $locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)
                     ];
+                }, $listLocales))
+            ];
+        }
+
+        foreach (['messier', 'ngc', 'ic', 'sh'] as $catalog) {
+            $params['urls']['catalog_'.$catalog] = [
+                'loc' => $router->generate('dso_catalog_redirect', ['catalog' => $catalog], Router::ABSOLUTE_URL),
+                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($router, $catalog) {
+                    return [$locale => $router->generate(sprintf('dso_catalog_redirect.%s', $locale), ['catalog' => $catalog, '_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ];
         }

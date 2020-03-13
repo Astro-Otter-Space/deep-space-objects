@@ -97,7 +97,27 @@
         padding-left: 0.5em;
       }
     }
+  }
 
+  &__drop_submenu {
+    &_li {
+      margin: 0;
+      padding: 0;
+      line-height: 1.5em;
+    }
+
+    &_a {
+      display: block;
+      transition: 0.45s;
+      opacity: 0;
+      width: 100%;
+      font-size: 1em;
+      padding: 0.5em 0.5em;
+      &:hover {
+        color: $color-text;
+        background-color: $bgd-grey;
+      }
+    }
   }
 
   &__display {
