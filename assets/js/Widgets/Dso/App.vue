@@ -71,6 +71,14 @@
           <div v-html="astrobinMsg"></div>
         </div>
 
+        <!--Sky Map-->
+        <a id="#map"></a>
+        <div class="Dso__map">
+          <h3 class="Dso__title">{{ titleMap }}</h3>
+          <div class="map" id="map"></div>
+          <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank" rel="noopener">Map by ofrohn/d3-celestial</a></legend>
+        </div>
+
         <!--Constellation-->
         <a id="#constellation"></a>
         <div class="Dso__list" v-if="0 < itemsDso.length">
@@ -83,13 +91,6 @@
           </cards-grid>
         </div>
 
-        <!--Sky Map-->
-        <a id="#map"></a>
-        <div class="Dso__map">
-          <h3 class="Dso__title">{{ titleMap }}</h3>
-          <div class="map" id="map"></div>
-          <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank" rel="noopener">Map by ofrohn/d3-celestial</a></legend>
-        </div>
       </div>
 
       <back-to-top visibleoffset="10" bottom="25px" right="25px" text="">
