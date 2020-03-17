@@ -15,7 +15,7 @@
   <div id="app"
      data-observation-widget
      data-title="{{ observation.name ~ ' - ' ~ observation.observationDate|localizeddate('short', 'none', app.request.locale, null, '')  }}"
-     data-description="{{ observation.description }}"
+     data-description="{{ observation.description|nl2br }}"
      data-data="{{ data|json_encode }}"
      data-coordinates="{{ coordinates|json_encode }}"
      data-list-dso="{{ list_dso|json_encode }}"
