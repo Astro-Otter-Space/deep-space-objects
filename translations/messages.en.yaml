@@ -292,7 +292,7 @@ select:
     label: Ordering by
     placeholder: Choose your option
 # Form contact
-contact.title: "Contact us"
+contact.title: "Contact"
 form.error.sending: "A problem has occurred, please try later"
 form.ok.sending: "Message have been sended. We will answer you as soon as possible."
 form.error.message: "Please fix errors below"
@@ -433,7 +433,7 @@ api.objects.multi: Get objets with many parameters
 api.data.filters: List filters
 # Support
 support:
-    title: Support us
+    title: Support
     desc: Support the site by making a donation
     first: "\"%sitename%\" is a free website, without advertising make only for discover all wonders you can see in the universe. \nKeeping site up to date, fix security patches and some issues, creating new content etc. takes a lot of time and investment from my personnal time. All this has a cost :"
     choice:

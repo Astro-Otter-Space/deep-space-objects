@@ -77,9 +77,6 @@
     &:last-child{
       margin-left: 1%;
       text-align: right;
-      @media ($mq-phone) {
-        margin-right: 0.5em;
-      }
     }
   }
 }
