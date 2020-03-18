@@ -17,6 +17,10 @@
     margin-left: auto;
     margin-right: auto;
     height: min-content;
+
+    @media ($mq-phone) {
+      margin: 0 0.3em;
+    }
   }
 
   &__noHeader {
