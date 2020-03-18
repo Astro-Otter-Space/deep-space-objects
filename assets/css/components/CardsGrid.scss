@@ -149,7 +149,7 @@
   margin: 2em;
   display: grid;
   @media ($mq-phone) {
-    margin: 1em;
+    margin: 0.5em;
   }
 
   &__filter {

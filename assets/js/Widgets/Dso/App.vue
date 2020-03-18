@@ -73,7 +73,7 @@
 
         <!--Sky Map-->
         <a id="#map"></a>
-        <div class="Dso__map">
+        <div class="Dso__list">
           <h3 class="Dso__title">{{ titleMap }}</h3>
           <div class="map" id="map"></div>
           <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank" rel="noopener">Map by ofrohn/d3-celestial</a></legend>
