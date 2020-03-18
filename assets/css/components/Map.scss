@@ -3,6 +3,7 @@
     height: 800px;
     width: auto;
     display: flex;
+    z-index: 0;
     @media ($mq-phone) {
       margin: 0 0.5em;
     }
