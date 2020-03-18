@@ -4,10 +4,14 @@
     width: auto;
     display: flex;
     z-index: 0;
+    overflow: hidden;
     @media ($mq-phone) {
-      margin: 0 0.5em;
+      height: 350px;
     }
   }
+}
 
-
+.leaflet-container {
+  z-index: 1;
+  overflow: hidden;
 }
