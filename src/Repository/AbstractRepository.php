@@ -161,6 +161,9 @@ abstract class AbstractRepository
         /** @var Bulk\ResponseSet $responseBulk */
         $responseBulk = $bulk->send();
 
+        // Refresh index
+        $this->client->getIndex($this->getType())->refresh();
+
         return $responseBulk->isOk();
     }
 
