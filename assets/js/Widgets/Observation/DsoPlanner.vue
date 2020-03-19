@@ -28,7 +28,7 @@
 
         <a id="#description"></a>
         <div class="Dso__description" v-if="0 < description.length">
-          <p>{{ description }}</p>
+          <p v-html="description"></p>
         </div>
 
         <a id="#information"></a>
