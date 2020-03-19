@@ -12,5 +12,7 @@ twig:
             ms_tile: "#da532c"
             theme: "#ffffff"
         facebookId: '%env(FACEBOOK_APP_ID)%'
+        facebookPage: '%env(FACEBOOK_PAGE))%'
         twitter_name: '%env(TWITTER_ACCOUNT)%'
+        twitterPage: '%env(TWITTER_PAGE))%'
         analyticsId: '%env(GOOGLE_ANALYTICS_ID)%'
