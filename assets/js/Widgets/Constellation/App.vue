@@ -45,7 +45,7 @@
               </li>
             </ul>
           </div>
-          <a v-bind:href="linkDownload" target="_blank" alt="Download map">
+          <a v-bind:href="linkDownload" target="_blank" alt="Download map" rel="nofollow">
             Download map
 <!--            <img v-bind:src="map" v-bind:title="title">-->
           </a>
