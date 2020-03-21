@@ -1,3 +1,6 @@
+/**
+ * Only use in add form twig (add event, add dso planner)
+ */
 import Vue from 'vue';
 
 import { datePicker } from './flatpicker';
@@ -25,7 +28,7 @@ new Vue({
       zoom: 5,
       url:'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:'&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-      center: latLng(48.5734053, 7.7521113),
+      center: latLng(0, 0),
       markers: [],
       form: document.querySelector('form').name
     }
@@ -44,6 +47,18 @@ new Vue({
     },
     removeMarker(index) {
       this.markers.splice(index, 1);
+    }
+  },
+  mounted: function() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = latLng(position.coords.latitude, position.coords.longitude);
+      },
+        (err) => {
+          this.center = latLng(48.5734053, 7.7521113);
+      });
+    } else {
+      this.center = latLng(48.5734053, 7.7521113);
     }
   }
 });

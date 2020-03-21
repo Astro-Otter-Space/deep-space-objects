@@ -102,6 +102,7 @@
   import './../Icons/facebook';
   import './../Icons/twitter';
   import './../Icons/up'
+  import {latLng} from "leaflet";
 
   let pageTitle = document.querySelector('div[data-observations-list]').dataset.title;
   let description = document.querySelector('div[data-observations-list]').dataset.description;
@@ -143,7 +144,7 @@
         zoom: 5,
         url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
         attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-        center: L.latLng(48.856614, 2.3522219),
+        center: L.latLng(0, 0),
         geojsonObs: null,
         geojsonEvents: null,
         urlAjaxObservations: urlAjaxObservations,
@@ -176,6 +177,18 @@
           this.geojsonEvents =  response.data;
         }
       );
+    },
+    mounted: function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.center = latLng(position.coords.latitude, position.coords.longitude);
+          },
+          (err) => {
+            this.center = latLng(48.5734053, 7.7521113);
+          });
+      } else {
+        this.center = latLng(48.5734053, 7.7521113);
+      }
     },
     computed: {
       optionsEvents() {
