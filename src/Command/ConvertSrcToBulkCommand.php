@@ -260,7 +260,7 @@ class ConvertSrcToBulkCommand extends Command
 
                                     array_walk($listMd5Dso, function ($idMd5) use ($dsoCurrent, $output) {
                                         if ($this->cacheUtil->hasItem($idMd5)) {
-                                            $output->writeln(sprintf("[Cache pool] Empty cache %s", $idMd5));
+                                            $output->writeln(sprintf("[Cache pool %s] Empty cache %s", $dsoCurrent->getId(), $idMd5));
                                             $this->cacheUtil->deleteItem($idMd5);
                                         }
                                     });
