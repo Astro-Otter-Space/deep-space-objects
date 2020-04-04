@@ -7,7 +7,7 @@
 {% block content %}
   <div id="appHome"
      data-home-title="{{ 'homepage.message'|trans }}"
-     data-search-route="{{ path('search_ajax') }}"
+     data-search-route="{{ path('search_ajax', {'_locale': currentLocale}) }}"
      data-search-placeholder="{{ 'home.search.placeholder'|trans }}"
   ></div>
   {{ render_esi(controller('App\\Controller\\HomeController::vignettesDso')) }}

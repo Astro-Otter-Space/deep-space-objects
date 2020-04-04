@@ -10,14 +10,13 @@
   }
 %}
 <div id="appHeader"
- data-home-route="{{ path('homepage') }}"
-{# data-menu-side="{{ leftSideMenu|json_encode }}"#}
+ data-home-route="{{ path('homepage', {'_locale': currentLocale}) }}"
  data-menu-data="{{ menuData|json_encode }}"
  data-menu-observation="{{ menuObservations|json_encode }}"
  data-route="{{ _route }}"
  data-locales="{{ listLocales|json_encode }}"
  data-currentlocale="{{ currentLocale }}"
- data-search-route="{{ path('search_ajax') }}"
+ data-search-route="{{ routeSearch }}"
  data-labels="{{ labelsTranslation|json_encode }}"
 >
 </div>

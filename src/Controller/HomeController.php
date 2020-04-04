@@ -39,8 +39,9 @@ class HomeController extends AbstractController
      */
     public function homepage(Request $request): Response
     {
+
         /** @var Response $response */
-        $response = $this->render('pages/home.html.twig', []);
+        $response = $this->render('pages/home.html.twig', ['currentLocale' => $request->getLocale()]);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL);
         $response->setPublic();
 

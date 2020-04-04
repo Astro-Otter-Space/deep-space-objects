@@ -68,7 +68,6 @@ class LayoutController extends AbstractController
 
         /** @var Router $router */
         $router = $this->get('router');
-
         $currentLocale = $mainRequest->getLocale() ?? 'en';
 
         $listLocales = array_filter(explode('|', $listLocales), function($value) use ($currentLocale) {
@@ -95,6 +94,7 @@ class LayoutController extends AbstractController
 //            'leftSideMenu' => $this->buildMenu($currentLocale),
             'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
             'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs']),
+            'routeSearch' => $router->generate(sprintf('search_ajax.%s', $currentLocale), ['_locale' => $currentLocale])
         ];
 
         /** @var Response $response */
