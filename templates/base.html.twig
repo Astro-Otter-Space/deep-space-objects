@@ -8,7 +8,8 @@
 
     {% set pageUrl = app.request.uri %}
     {% set pageImage = pageImage|default('/build/images/logos/astro_otter_500-500.png') %}
-    {% set pageOgImage = pageImage|default('/build/images/logos/astro_otter_200-200.png') %}
+    {% set pageImage200 = '/build/images/logos/astro_otter_200-200.png' %}
+    {% set pageOgImage = pageImage|default(pageImage200) %}
     {% set pageImageDesc = pageImageDesc|default('') %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
 
