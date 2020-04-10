@@ -7,7 +7,8 @@
     {% set pageDesc = pageDesc|default(pageDescDefault) %}
 
     {% set pageUrl = app.request.uri %}
-    {% set pageImage = pageImage|default('/build/images/astro_otter@500x500.jpg') %}
+    {% set pageImage = pageImage|default('/build/images/logos/astro_otter_500-500.png') %}
+    {% set pageOgImage = pageImage|default('/build/images/logos/astro_otter_200-200.png') %}
     {% set pageImageDesc = pageImageDesc|default('') %}
     {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
 
@@ -34,7 +35,7 @@
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="{{ pageTitle }}" />
         <meta property="og:description"   content="{{ pageDesc }}" />
-        <meta property="og:image"         content="{{ pageImage }}" />
+        <meta property="og:image"         content="{{ pageOgImage }}" />
         <meta property="og:image:alt"     content="{{ pageImageDesc }}" />
         <meta property="og:locale"        content="{{ pageLang }}" />
         <meta property="og:site_name"     content="{{ 'dso'|trans }}" />
@@ -44,7 +45,7 @@
         <meta name="twitter:site" content="{{ twitter_name }}" />
         <meta name="twitter:title" content="{{ pageTitle }}" />
         <meta name="twitter:description" content="{{ pageDesc }}" />
-        <meta name="twitter:image" content="{{ pageImage }}" />
+        <meta name="twitter:image" content="{{ pageOgImage }}" />
 
       {% endblock %}
 
