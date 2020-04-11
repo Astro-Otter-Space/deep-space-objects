@@ -136,7 +136,7 @@ class ConvertSrcToBulkCommand extends Command
 
                         $id = $inputData['id'];
 
-                        if (array_key_exists('updated_at', $inputData)) {
+                        if (array_key_exists('updated_at', $inputData) && !is_null($inputData['updated_at'])) {
                             $mode = 'update';
                         } else {
                             $newUpdatedAt = new \DateTime();

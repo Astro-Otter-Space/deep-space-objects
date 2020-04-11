@@ -201,6 +201,7 @@ Sources :
     {
       "id": "",
       "catalog": null,
+      "updated_at": null,
       "order": null,
       "data": {
         "desigs": [""],
