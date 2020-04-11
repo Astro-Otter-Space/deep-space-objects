@@ -426,4 +426,49 @@ class PageController extends AbstractController
         $response = new Response();
         return $response;
     }
+
+
+    /**
+     * @Route("/notindexed", name="not_indexed")
+     * @param DsoRepository $dsoRepository
+     *
+     * @return Response
+     * @throws \ReflectionException
+     */
+    public function tosearch(DsoRepository $dsoRepository): Response
+    {
+        $data = [];
+        $limit = 313;
+        $i = 1;
+
+        $fullArray = array_map(function($i) {
+            return sprintf('Sh2-%d', $i);
+        }, range(1, $limit, $i));
+
+
+        $results = $dsoRepository->getObjectsCatalogByFilters(0,['catalog' => 'sh'], 1000);
+        /** @var Dso $dso */
+        foreach ($results[0] as $dso) {
+            if (0 === strpos(strtolower($dso->getId()), 'sh')) {
+                array_push($data, $dso->getId());
+            } else {
+                $item = preg_grep('/^Sh2-\d*/', $dso->getDesigs());
+                if (false !== reset($item)) {
+                    array_push($data, reset($item));
+                }
+            }
+        }
+
+        usort($data, function($a, $b) {
+            [, $nA] = explode('-', $a);
+            [, $nB] = explode('-', $b);
+
+            return $nA > $nB;
+        });
+
+
+        $notIndexedItems = array_diff($fullArray, $data);
+
+        return new Response(print_r(array_values($notIndexedItems)));
+    }
 }
