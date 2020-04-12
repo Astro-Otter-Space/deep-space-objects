@@ -121,13 +121,14 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | ------- | ---------- | ---------- | ---------- |
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7261 | 7840 |
-| Index catalog | ic | 424 | 5386 |
-| Sharpless | sh |134 | 313 |
-| Abell galaxies | agc | 26 | 4073 |
+| Index catalog | ic | 431 | 5386 |
+| Sharpless | sh |149 | 313 |
+| Abell galaxies | agc | 27 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
-| LDN | ldn | 46 | ? |
-| LBN | lbn | 96 | ? |
-| Arp | arp | 64 | |
+| LDN | ldn | 50 | ? |
+| LBN | lbn | 110 | ? |
+| 3C | 3c | 10 | ? |
+| Arp | arp | 86 | |
 | Arp-Madore |am| 1||
 | Antalova | ant | 4 ||
 | B |b| 158||
@@ -171,7 +172,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | |per| 22||
 | PGC | pgc | 50 | 73197 |
 | Pismis | pis | 25 | 27 |
-| RCW | rcw |39 | 182 |
+| RCW | rcw |44 | 182 |
 | Roslund | rsl | 7 | ? |
 | |ru| 150||
 | |sha| 3||
