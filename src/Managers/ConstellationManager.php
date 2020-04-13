@@ -7,6 +7,7 @@ use App\Entity\ES\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use Astrobin\Response\Image;
+use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -114,16 +115,18 @@ class ConstellationManager
             'value' => $constellationName,
             'ajaxValue' => $constellationName,
             'label' => implode(Utils::GLUE_DASH, [$this->translatorInterface->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
-            'url' => $this->buildUrl($constellation),
+            'url' => $this->buildUrl($constellation, Router::ABSOLUTE_PATH),
         ];
     }
 
     /**
-     * @param $constellation
+     * @param Constellation $constellation
+     * @param string $typeUrl
+     *
      * @return string
      */
-    private function buildUrl($constellation)
+    private function buildUrl(Constellation $constellation, string $typeUrl)
     {
-        return $this->urlGeneratorHelper->generateUrl($constellation);
+        return $this->urlGeneratorHelper->generateUrl($constellation, $typeUrl, $this->locale);
     }
 }

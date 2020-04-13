@@ -255,9 +255,9 @@ class DsoManager
      *
      * @return string
      */
-    public function getDsoUrl(Dso $dso, $typeUrl)
+    public function getDsoUrl(Dso $dso, string $typeUrl)
     {
-        return $this->urlGenerateHelper->generateUrl($dso, $typeUrl);
+        return $this->urlGenerateHelper->generateUrl($dso, $typeUrl, $this->locale);
     }
 
     /**

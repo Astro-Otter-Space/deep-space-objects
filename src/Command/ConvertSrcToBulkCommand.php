@@ -234,6 +234,7 @@ class ConvertSrcToBulkCommand extends Command
 
                                 /** @var \DateTimeInterface $now */
                                 $now = new \DateTime('now');
+                                $now->setTimezone(new \DateTimeZone('Europe/Paris'));
 
                                 $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format('Y-m-d H:i:s')));
                                 /** @var UpdateData $newLastUpdate */

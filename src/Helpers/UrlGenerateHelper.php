@@ -73,6 +73,11 @@ class UrlGenerateHelper
 
                     $name = Utils::camelCaseUrlTransform($entity->getAlt());
                     $params = ['id' => $id, 'name' => $name];
+                    if (!is_null($locale)) {
+                        //$route = sprintf('%s.%s', $route, $locale);
+                        $params = ['id' => $id, 'name' => $name, '_locale' => $locale];
+                    }
+
 
                     if (!is_null($locale)) {
                         $route = sprintf('%s.%s', $route, $locale);
