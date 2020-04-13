@@ -99,7 +99,7 @@ class ConvertSrcToBulkCommand extends Command
         $lastImportDate->setTimezone(new \DateTimeZone('Europe/Paris'));
 
 
-        $output->writeln(sprintf("Last update : %s", $lastImportDate->format('Y-m-d H:i:s')));
+        $output->writeln(sprintf("Last update : %s", $lastImportDate->format(Utils::FORMAT_DATE_ES)));
         $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
 
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
@@ -236,7 +236,7 @@ class ConvertSrcToBulkCommand extends Command
                                 $now = new \DateTime('now');
                                 $now->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-                                $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format('Y-m-d H:i:s')));
+                                $output->writeln(sprintf("Save in table Update_data, lastUpdate Bulk : %s", $now->format(Utils::FORMAT_DATE_ES)));
                                 /** @var UpdateData $newLastUpdate */
                                 $newLastUpdate = new UpdateData();
                                 $newLastUpdate->setDate($now);
