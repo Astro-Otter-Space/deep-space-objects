@@ -321,7 +321,7 @@ class DsoRepository extends AbstractRepository
 
         $now = new \DateTime('now');
         $now->setTimezone(new \DateTimeZone('Europe/paris'));
-        
+
         /** @var Query $query */
         $query = new Query();
 
