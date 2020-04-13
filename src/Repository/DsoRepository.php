@@ -320,7 +320,8 @@ class DsoRepository extends AbstractRepository
         $this->client->getIndex(self::INDEX_NAME);
 
         $now = new \DateTime('now');
-
+        $now->setTimezone(new \DateTimeZone('Europe/paris'));
+        
         /** @var Query $query */
         $query = new Query();
 

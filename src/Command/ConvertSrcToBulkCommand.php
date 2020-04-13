@@ -96,6 +96,8 @@ class ConvertSrcToBulkCommand extends Command
 
         /** @var \DateTimeInterface $lastUpdateDate */
         $lastImportDate = $lastImport->getDate() ?? new \DateTime('now');
+        $lastImportDate->setTimezone(new \DateTimeZone('Europe/Paris'));
+
 
         $output->writeln(sprintf("Last update : %s", $lastImportDate->format('Y-m-d H:i:s')));
         $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
