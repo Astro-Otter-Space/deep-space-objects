@@ -8,6 +8,7 @@ use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use Astrobin\Response\Image;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -79,7 +80,7 @@ class ConstellationManager
                 'id' => $constellation->getId(),
                 'value' => $constellation->getAlt(),
                 'label' => $constellation->getGen(),
-                'url' => $this->buildUrl($constellation),
+                'url' => $this->buildUrl($constellation, RouterInterface::RELATIVE_PATH),
                 'image' => $image,
                 'filter' => $constellation->getLoc()
             ];
