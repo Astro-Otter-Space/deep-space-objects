@@ -61,6 +61,7 @@ catalog.hf: Hoffleit
 catalog.hen: Henize
 catalog.hvd: Harvard
 catalog.hic: Hickson
+catalog.hcg: Hickson compact group
 catalog.hod: Hodge
 catalog.hog: Hogg
 catalog.hol: Holmberg
@@ -111,6 +112,7 @@ description.cld: ""
 description.dodz: Catalogue des astronomes de Georgie Madona V. Dolidze et G. Dzinselejvili comportant 11 objets. Il fut publié en 1966.
 description.lyn: Catalogue d'amas ouvert
 description.pis: New southern star clusters catalog
+description.arp: L'Atlas Of Pelcukiar Galaxies (ARP) est un catalogue produit par Halton Arp recensant 338 galaxies particulières
 magnitude.low: De 0 à 5
 magnitude.average: De 5 à 10
 magnitude.high: De 10 à 15

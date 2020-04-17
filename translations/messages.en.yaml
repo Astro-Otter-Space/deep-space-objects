@@ -61,6 +61,7 @@ catalog.hf: Hoffleit
 catalog.hen: Henize
 catalog.hvd: Harvard
 catalog.hic: Hickson
+catalog.hcg: Hickson compact group
 catalog.hod: Hodge
 catalog.hog: Hogg
 catalog.hol: Holmberg
@@ -112,6 +113,7 @@ description.cld: Caldwell catalogue
 description.dodz: ""
 description.lyn: Catalog of Open Cluster
 description.pis: New southern star clusters catalog
+description.arp: Atlas Of Pelcukiar Galaxies (ARP) is a catalog made by par Halton Arp with 338 of different kinds of peculiar structures found among galaxies.
 magnitude.low: From 0 to 5
 magnitude.average: From 5 to 10
 magnitude.high: From 10 to 15

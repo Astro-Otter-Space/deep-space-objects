@@ -128,7 +128,7 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | LDN | ldn | 50 | ? |
 | LBN | lbn | 110 | ? |
 | 3C | 3c | 10 | ? |
-| Arp | arp | 86 | |
+| Arp | arp | 86 | 338 |
 | Arp-Madore |am| 1||
 | Antalova | ant | 4 ||
 | B |b| 158||

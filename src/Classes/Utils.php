@@ -104,6 +104,7 @@ class Utils
         'hen',
         'hvd',
         'hic',
+        'hcg',
         'hod',
         'hog',
         'hol',
