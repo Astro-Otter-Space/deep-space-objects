@@ -1,12 +1,9 @@
 {
   "entrypoints": {
-    "observations": {
+    "event": {
       "js": [
         "/build/runtime.js",
-        "/build/observations.js"
-      ],
-      "css": [
-        "/build/observations.css"
+        "/build/event.js"
       ]
     },
     "app": {
@@ -25,6 +22,15 @@
       ],
       "css": [
         "/build/dso.css"
+      ]
+    },
+    "last_update": {
+      "js": [
+        "/build/runtime.js",
+        "/build/last_update.js"
+      ],
+      "css": [
+        "/build/last_update.css"
       ]
     },
     "const": {
@@ -60,16 +66,19 @@
         "/build/observation.js"
       ]
     },
-    "event": {
-      "js": [
-        "/build/runtime.js",
-        "/build/event.js"
-      ]
-    },
     "home": {
       "js": [
         "/build/runtime.js",
         "/build/home.js"
+      ]
+    },
+    "observations": {
+      "js": [
+        "/build/runtime.js",
+        "/build/observations.js"
+      ],
+      "css": [
+        "/build/observations.css"
       ]
     },
     "notfound": {

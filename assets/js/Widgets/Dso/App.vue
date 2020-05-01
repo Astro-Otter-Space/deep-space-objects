@@ -37,11 +37,6 @@
           </div>
         </social-sharing>
 
-
-        <div class="Form__message Form__info" v-if="bugAstrobin" role="alert">
-          Due to a bug on the Astrobin site, images cannot be displayed. We apologize.
-        </div>
-
         <!--Description-->
         <a id="#description"></a>
         <div class="Dso__description" v-if="0 < description.length">

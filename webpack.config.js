@@ -22,6 +22,7 @@ Encore
   .addEntry('app', './assets/js/app.js')
   .addEntry('home', './assets/js/home.js')
   .addEntry('dso', './assets/js/dso.js')
+  .addEntry('last_update', './assets/js/last_updated.js')
   .addEntry('const', './assets/js/constellation.js')
   .addEntry('const_list', './assets/js/list_constellation.js')
   .addEntry('catalog', './assets/js/catalog.js')
