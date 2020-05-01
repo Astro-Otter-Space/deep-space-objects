@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% set pageTitle = title %}
+{% set pageDesc = '' %}
+
+{% block content %}
+  <div id="app"
+       data-last-update
+       data-title="{{ title }}"
+       data-list-dso="{{ list_dso|json_encode }}"
+       data-breadcrumbs="{{ breadcrumbs|json_encode }}"
+  ></div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('last_update') }}
+{% endblock %}

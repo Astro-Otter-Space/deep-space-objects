@@ -99,13 +99,13 @@ trait DsoTrait
 
 
     /**
-     * @param AbstractEntity $entity
+     * @param AbstractEntity|null $entity
      * @param RouterInterface $router
      * @param string $title
      *
      * @return array
      */
-    public function buildBreadcrumbs(AbstractEntity $entity, RouterInterface $router, string $title): array
+    public function buildBreadcrumbs(?AbstractEntity $entity, RouterInterface $router, string $title): array
     {
        $breadcrumbs = [];
 
@@ -114,31 +114,34 @@ trait DsoTrait
             'url' => $router->generate('homepage')
         ];
 
-        $class = get_class($entity);
+        if (!is_null($entity)) {
+            $class = get_class($entity);
 
-        switch ($class) {
-            case Dso::class:
-                $breadcrumbs['level_2'] = [
-                    'label' => $this->translatorInterface->trans('catalogs'),
-                    'url' => $router->generate('dso_catalog')
-                ];
-            break;
+            switch ($class) {
+                case Dso::class:
+                    $breadcrumbs['level_2'] = [
+                        'label' => $this->translatorInterface->trans('catalogs'),
+                        'url' => $router->generate('dso_catalog')
+                    ];
+                    break;
 
-            case Constellation::class:
-                $breadcrumbs['level_2'] = [
-                    'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
-                    'url' => $router->generate('constellation_list')
-                ];
-            break;
+                case Constellation::class:
+                    $breadcrumbs['level_2'] = [
+                        'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
+                        'url' => $router->generate('constellation_list')
+                    ];
+                    break;
 
-            case Event::class:
-            case Observation::class:
-                $breadcrumbs['level_2'] = [
-                    'label' => $this->translatorInterface->trans('listObservations'),
-                    'url' => $router->generate('observation_list')
-                ];
-            break;
+                case Event::class:
+                case Observation::class:
+                    $breadcrumbs['level_2'] = [
+                        'label' => $this->translatorInterface->trans('listObservations'),
+                        'url' => $router->generate('observation_list')
+                    ];
+                    break;
+            }
         }
+
 
         $breadcrumbs['level_3'] = [
             'label' => $title,
@@ -146,6 +149,5 @@ trait DsoTrait
         ];
 
        return $breadcrumbs;
-
     }
 }

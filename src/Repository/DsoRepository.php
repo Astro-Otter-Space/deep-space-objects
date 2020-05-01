@@ -160,6 +160,37 @@ class DsoRepository extends AbstractRepository
     }
 
     /**
+     * Get last updated items
+     *
+     * @return ListDso
+     * @throws \ReflectionException
+     */
+    public function getLastUpdated(): ListDso
+    {
+        /** @var ListDso $dsoList */
+        $dsoList = new ListDso();
+
+        /** @var Query $query */
+        $query = new Query();
+
+        $query->setFrom(0)->setSize(self::SIZE);
+        $query->addSort([
+            'updated_at' => ['order' => parent::SORT_DESC]
+        ]);
+
+        $search = new Search($this->client);
+        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+
+        if (0 < $search->count()) {
+            foreach ($search->getDocuments() as $document) {
+                $dsoList->addDso($this->buildEntityFromDocument($document));
+            }
+        }
+
+        return $dsoList;
+    }
+
+    /**
      * Search autocomplete
      *
      * @param $searchTerm

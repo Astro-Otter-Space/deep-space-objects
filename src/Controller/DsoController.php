@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -150,6 +151,41 @@ class DsoController extends AbstractController
         return $response;
     }
 
+
+    /**
+     * Get last updated items
+     *
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \ReflectionException
+     *
+     * @Route({
+     *   "en": "/last-update",
+     *   "fr": "/mises-a-jour"
+     * }, name="last_update_dso")
+     */
+    public function getLastUpdatedDso(Request $request): Response
+    {
+        /** @var  $listDso */
+        $listDso = $this->dsoManager->buildListDso($this->dsoRepository->getLastUpdated());
+
+        /** @var RouterInterface $router */
+        $router = $this->get('router');
+
+        $title = $this->translatorInterface->trans('last_update_item');
+        $params = [
+            'title' => $title,
+            'breadcrumbs' => $this->buildBreadcrumbs(null, $router, $title),
+            'list_dso' => $listDso
+        ];
+
+        /** @var Response $response */
+        $response = $this->render('pages/last_dso_updated.html.twig', $params);
+        $response->setSharedMaxAge(86400);
+
+        return $response;
+    }
 
     /**
      * Retrieve list of images for carousel
