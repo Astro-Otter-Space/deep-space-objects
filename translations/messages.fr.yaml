@@ -152,7 +152,8 @@ discover: Découvreur
 discoverYear: Année découverte
 galery: Galerie d'images
 # Vue list
-last_update_item: Mise à jour
+last_update_title: Mise à jour
+last_update_item: Mise à jour le %date%
 filteringList: Filtrer la liste par constellations, type de catalogues, type d'objets, magnitude...et découvrez les plus beaux objets du ciel.
 filters: Filtres
 listOrderAsc: Tri ascendant

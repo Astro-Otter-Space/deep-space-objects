@@ -153,7 +153,8 @@ discover: Discovery
 discoverYear: Year
 galery: Gallery
 # Vue list
-last_update_item: Last update
+last_update_title: Last update
+last_update_item: Last update on %date%
 filteringList: Filter list items by constellation, type and magnitude...and discover most beautiful celestial objects.
 filters: Filters
 listOrderAsc: Sort ascendant

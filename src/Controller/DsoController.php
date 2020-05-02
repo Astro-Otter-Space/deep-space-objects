@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
+use App\Entity\BDD\UpdateData;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\AbstractEntity;
@@ -15,6 +16,7 @@ use Astrobin\Exceptions\WsResponseException;
 use Astrobin\Response\Image;
 use Astrobin\Response\ListImages;
 use Astrobin\Services\GetImage;
+use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Exception\NotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -157,15 +159,16 @@ class DsoController extends AbstractController
      *
      * @param Request $request
      *
+     * @param EntityManagerInterface $doctrineManager
+     *
      * @return Response
      * @throws \ReflectionException
-     *
      * @Route({
      *   "en": "/last-update",
      *   "fr": "/mises-a-jour"
      * }, name="last_update_dso")
      */
-    public function getLastUpdatedDso(Request $request): Response
+    public function getLastUpdatedDso(Request $request, EntityManagerInterface $doctrineManager): Response
     {
         /** @var  $listDso */
         $listDso = $this->dsoManager->buildListDso($this->dsoRepository->getLastUpdated());
@@ -173,16 +176,23 @@ class DsoController extends AbstractController
         /** @var RouterInterface $router */
         $router = $this->get('router');
 
-        $title = $this->translatorInterface->trans('last_update_item');
+        /** @var UpdateData $lastUpdateData */
+        $lastUpdateData = $doctrineManager->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
+
+        $lastUpdateDate = $lastUpdateData->getDate()->format($this->translatorInterface->trans('dateFormatLong'));
+
+        $title = $this->translatorInterface->trans('last_update_item', ['%date%' => $lastUpdateDate]);
+        $titleBr = $this->translatorInterface->trans('last_update_title');
         $params = [
             'title' => $title,
-            'breadcrumbs' => $this->buildBreadcrumbs(null, $router, $title),
+            'breadcrumbs' => $this->buildBreadcrumbs(null, $router, $titleBr),
             'list_dso' => $listDso
         ];
 
         /** @var Response $response */
         $response = $this->render('pages/last_dso_updated.html.twig', $params);
-        $response->setSharedMaxAge(86400);
+        $response->setSharedMaxAge(0)
+            ->setLastModified(null);
 
         return $response;
     }
