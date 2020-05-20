@@ -33,7 +33,8 @@ class CacheKernel extends HttpCache
     protected function invalidate(Request $request, $catch = false): Response
     {
         if ('PURGE' !== $request->getMethod()) {
-            return parent::invalidate($request, $catch);
+            return parent::{__FUNCTION__}(...func_get_args());
+            //return parent::invalidate($request, $catch);
         }
 
         if ('127.0.0.1' !== $request->getClientIp()) {
