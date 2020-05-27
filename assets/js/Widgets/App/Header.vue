@@ -1,19 +1,19 @@
 <template>
   <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']">
 
-    <!--Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
+    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
       </a>
-    </Slide -->
+    </Slide>
 
     <div class="header__wrap">
       <span class="h1 h1__title">
         <!-- Open Menu-->
-        <!-- span v-on:click="openSlideMenu" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
+        <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30"></svgicon>
-        </span -->
+        </span>
         <a v-bind:href="homepageRoute" v-bind:title="title">
           <span itemprop="name">{{title}}</span>
         </a>
@@ -27,8 +27,14 @@
           </a>
         </li>
 
+        <li class="header__drop" v-if="!this.isNewData" data-hide="mobile">
+          <a v-bind:title="notification.label" v-bind:href="notification.path">
+            <svgicon name="bell" width="30" height="30" color="#e9e9e9"></svgicon>
+          </a>
+        </li>
+
         <!-- data -->
-        <li class="header__drop">
+        <li class="header__drop" data-hide="mobile">
           <a v-on:click="displayDropMenu" v-bind:title="titleData">
             <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
@@ -51,7 +57,7 @@
         </li>
 
         <!-- Observations -->
-        <li class="header__drop">
+        <li class="header__drop" data-hide="mobile">
           <a v-on:click="displayDropMenu" v-bind:title="titleObservation">
             <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
@@ -107,7 +113,8 @@
 
 <script>
   let homeRoute = document.getElementById('appHeader').dataset.homeRoute;
-  // let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuSide);
+  let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuMobile);
+  let notification = JSON.parse(document.getElementById('appHeader').dataset.notification);
   let menuData = JSON.parse(document.getElementById('appHeader').dataset.menuData);
   let menuObservations = JSON.parse(document.getElementById('appHeader').dataset.menuObservation);
   let routeSf = document.getElementById('appHeader').dataset.route;
@@ -119,7 +126,7 @@
   // let titleDayMode = labelsTrans.dayMode;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
-  // import { Slide } from 'vue-burger-menu';
+  import { Slide } from 'vue-burger-menu';
   import './../Icons/index';
 
   window.addEventListener("resize", function(event) {
@@ -139,12 +146,15 @@
   export default {
     name: "Header",
     components: {
-      searchautocomplete
-      // Slide
+      searchautocomplete,
+      Slide
     },
     data() {
       return {
         homepageRoute: homeRoute,
+        leftSideMenu: leftSideMenu,
+        notification: notification,
+        isNewData: false,
         menuData: menuData,
         menuObservations: menuObservations,
         title: labelsTrans.title,
@@ -227,10 +237,10 @@
         } else {
           this.isHome = false
         }
-      }
-      /*openSlideMenu: function () {
+      },
+      openSlideMenu: function () {
         this.$refs.slideMenu.$children[0].openMenu();
-      },*/
+      },
       /*switchTheme: function(theme) {
         this.theme = ("moon" !== theme) ? "moon" : "moon-empty";
         this.titleSwitchMode = ("moon" !== theme) ? titleNightMode : titleDayMode;

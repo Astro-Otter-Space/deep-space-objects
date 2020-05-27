@@ -1,6 +1,7 @@
 /* eslint-disable */
 require('./add-observation')
 require('./bars')
+require('./bell')
 require('./calendar')
 require('./circle')
 require('./constellation')

@@ -11,8 +11,10 @@
 %}
 <div id="appHeader"
  data-home-route="{{ path('homepage', {'_locale': currentLocale}) }}"
+ data-notification="{{ notification|json_encode }}"
  data-menu-data="{{ menuData|json_encode }}"
  data-menu-observation="{{ menuObservations|json_encode }}"
+ data-menu-mobile="{{ leftSideMenu|json_encode }}"
  data-route="{{ _route }}"
  data-locales="{{ listLocales|json_encode }}"
  data-currentlocale="{{ currentLocale }}"

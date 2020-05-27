@@ -12,9 +12,19 @@
   &__notHome {
     background-color: $bgd-dark;
   }
+
   &__barSlideMenu {
-    &:hover {
-      cursor: pointer;
+    @media ($mq-phone) {
+      display: block;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    @media ($mq-desktop) {
+      display: none;
+    }
+    @media ($mq-tablet) {
+      display: none;
     }
   }
 
@@ -96,6 +106,12 @@
       span {
         padding-left: 0.5em;
       }
+    }
+  }
+
+  &__drop[data-hide="mobile"] {
+    @media ($mq-phone) {
+      display: none;
     }
   }
 

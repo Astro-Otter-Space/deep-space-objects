@@ -91,7 +91,11 @@ class LayoutController extends AbstractController
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-//            'leftSideMenu' => $this->buildMenu($currentLocale),
+            'leftSideMenu' => $this->buildMenu($currentLocale, ['lastUpdate' ,'catalog', 'constellation', 'observations', 'addObservations', 'scheduleObs']),
+            'notification' => [
+                'label' => $this->translatorInterface->trans('last_update_title'),
+                'path' => $router->generate(sprintf('last_update_dso.%s', $currentLocale))
+            ],
             'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
             'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs']),
             'routeSearch' => $router->generate(sprintf('search_ajax.%s', $currentLocale), ['_locale' => $currentLocale])
@@ -118,6 +122,11 @@ class LayoutController extends AbstractController
         $routerInterface = $this->get('router');
 
         $menu = [
+            'lastUpdate' => [
+                'label' => $this->translatorInterface->trans('last_update_title'),
+                'path' => $routerInterface->generate(sprintf('last_update_dso.%s', $locale)),
+                'icon_class' => 'bell'
+            ],
             'catalog' => [
                 'label' => $this->translatorInterface->trans('catalogs'),
                 'path' => $routerInterface->generate(sprintf('dso_catalog.%s', $locale)),
@@ -149,7 +158,6 @@ class LayoutController extends AbstractController
                 'path' => $routerInterface->generate(sprintf('add_observation.%s', $locale)),
                 'icon_class' => 'calendar'
             ],
-
             'contact' => [
                 'label' => $this->translatorInterface->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
@@ -158,7 +166,7 @@ class LayoutController extends AbstractController
         ];
 
         return array_filter($menu, function ($key) use ($listKeysMenu) {
-            return in_array($key, $listKeysMenu);
+            return in_array($key, $listKeysMenu, true);
         }, ARRAY_FILTER_USE_KEY);
 
     }

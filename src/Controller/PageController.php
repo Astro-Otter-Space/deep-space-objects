@@ -394,8 +394,7 @@ class PageController extends AbstractController
     {
         $post = $facebookWs->getPost(null);
 
-        $response = new Response();
-        return $response;
+        return new Response();
     }
 
 
