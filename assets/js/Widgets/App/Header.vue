@@ -9,11 +9,12 @@
     </Slide>
 
     <div class="header__wrap">
-      <span class="h1 h1__title">
-        <!-- Open Menu-->
-        <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
-          <svgicon name="bars" width="30" height="30"></svgicon>
+      <!-- Open Menu-->
+      <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
+          <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
         </span>
+
+      <span class="h1 h1__title">
         <a v-bind:href="homepageRoute" v-bind:title="title">
           <span itemprop="name">{{title}}</span>
         </a>

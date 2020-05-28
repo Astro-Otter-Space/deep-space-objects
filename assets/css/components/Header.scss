@@ -16,6 +16,7 @@
   &__barSlideMenu {
     @media ($mq-phone) {
       display: block;
+      top: 0.5em;
       &:hover {
         cursor: pointer;
       }
@@ -109,7 +110,7 @@
     }
   }
 
-  &__drop[data-hide="mobile"] {
+  li[data-hide="mobile"] {
     @media ($mq-phone) {
       display: none;
     }
