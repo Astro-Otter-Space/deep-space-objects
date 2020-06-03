@@ -133,6 +133,7 @@ class Utils
         'sha',
         'shk',
         'sl',
+        'stdr',
         'sto',
         'ter',
         'ton',
