@@ -137,6 +137,7 @@ class Utils
         'sto',
         'ter',
         'ton',
+        'tr',
         'ugc',
         'vdb',
         'vv',
