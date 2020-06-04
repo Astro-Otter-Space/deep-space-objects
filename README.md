@@ -122,13 +122,13 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | Messier | messier | 110 | 110 |
 | New General Catalog | ngc | 7261 | 7840 |
 | Index catalog | ic | 431 | 5386 |
-| Sharpless | sh |149 | 313 |
-| Abell galaxies | agc | 27 | 4073 |
+| Sharpless | sh |160 | 313 |
+| Abell galaxies | agc | 28 | 4073 |
 | Abell planetary nebula | abl |86 | 86 |
-| LDN | ldn | 50 | ? |
-| LBN | lbn | 110 | ? |
+| LDN | ldn | 51 | ? |
+| LBN | lbn | 120 | ? |
 | 3C | 3c | 10 | ? |
-| Arp | arp | 86 | 338 |
+| Arp | arp | 95 | 338 |
 | Arp-Madore |am| 1||
 | Antalova | ant | 4 ||
 | B |b| 158||
@@ -178,7 +178,8 @@ curl -X POST elasticsearch:9200/_bulk?pretty=true -H 'Content-Type: application/
 | |sha| 3||
 | |sl| 7||
 | Stock Open Cluster | sto | 23 | 24 |
-| Terzan |ter| 23 ||
+| Terzan |ter| 11 | 11|
+| Trumpler | tr | 25 | 37
 | UGC | ugc | 278 | 12921 |
 | vdB | vdb | 50 | 158 |
 | | vv | 31 | |
