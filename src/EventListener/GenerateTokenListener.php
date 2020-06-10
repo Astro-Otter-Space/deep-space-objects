@@ -60,6 +60,7 @@ class GenerateTokenListener
         ];
 
         $data['token'] = $this->jwtManager->create($apiUser);
+        $data['refresh_token'] = 'IN PROGRESS';
 
         $this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
     }

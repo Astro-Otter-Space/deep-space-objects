@@ -1,6 +1,11 @@
-<p>
-  <p>Thank you for registration.</p>
-  <p>Here's the token for API :</p>
+<div>
+  <p>Thank you for registration on Astro-Otter API.</p>
+  <p>Here's the token :</p>
 
   <blockquote>{{ token }}</blockquote>
+
+  <p>And the refresh token : </p>
+  <blockquote>{{ refresh_token }}</blockquote>
+
+  <p><a href="{{ absolute_url(path('help_api_page')) }}">Visit the API documentation</a></p>
 </div>
