@@ -54,7 +54,7 @@ class ApiUser implements UserInterface
     private $roles = [];
 
     /**
-     * @var
+     * @var string $pot2Miel
      */
     private $pot2Miel;
 
@@ -159,7 +159,7 @@ class ApiUser implements UserInterface
     /**
      * @return mixed
      */
-    public function getPot2Miel()
+    public function getPot2Miel():? string
     {
         return $this->pot2Miel;
     }
@@ -169,7 +169,7 @@ class ApiUser implements UserInterface
      *
      * @return ApiUser
      */
-    public function setPot2Miel($pot2Miel)
+    public function setPot2Miel($pot2Miel): self
     {
         $this->pot2Miel = $pot2Miel;
         return $this;
@@ -180,13 +180,13 @@ class ApiUser implements UserInterface
      *
      * @return ApiUser
      */
-    public function setIsActive($isActive)
+    public function setIsActive($isActive): self
     {
         $this->isActive = $isActive;
         return $this;
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 

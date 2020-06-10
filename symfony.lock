@@ -92,6 +92,9 @@
             "config/packages/fos_rest.yaml"
         ]
     },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.9.1"
+    },
     "google/recaptcha": {
         "version": "1.1",
         "recipe": {

@@ -10,6 +10,7 @@
         "excelwebzone/recaptcha-bundle": "^1.5",
         "facebook/graph-sdk": "^5.7",
         "friendsofsymfony/rest-bundle": "^2.5",
+        "gesdinet/jwt-refresh-token-bundle": "^0.9.1",
         "hamhamfonfon/astrobin-ws": "^1.0",
         "jms/serializer-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.6",

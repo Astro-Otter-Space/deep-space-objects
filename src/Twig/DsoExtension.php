@@ -105,7 +105,7 @@ class DsoExtension extends AbstractExtension
      */
     public function removeElement($arr, $value): array
     {
-        $index = array_search($value, $arr);
+        $index = array_search($value, $arr, true);
         unset($arr[$index]);
         return $arr;
     }

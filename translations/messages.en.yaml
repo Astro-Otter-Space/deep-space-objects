@@ -431,6 +431,9 @@ api.intro: "\"%sitename%\" expose a read-only Rest-full API and offer to you its
 api.title.endpoints: "List of endpoints"
 api.title.form: "Ask for token"
 api.get_token: Retrieve token
+api.get_token.desc: "This request return your token and a refresh token. Token is available 1 month. After that, when your JWT valid token expires, if you want to get a new one you can proceed in two ways :"
+api.refresh.token_1: "Send you user credentials again to %urlLogin%. This generates another JWT with another Refresh Token."
+api.refresh.token_2: "Ask to renew valid JWT with our refresh token. Make a POST call to %urlRefresh% url with refresh token as payload. In this way, you can always get a valid JWT without asking for user credentials. But you must notice if refresh token is still valid. Your refresh token do not change but valid datetime will increase."
 api.objects.id: Get object by Id
 api.objects.const: Get objects filtered by constellation Id
 api.objects.catalog: Get objects filtered by catalog

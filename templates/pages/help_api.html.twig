@@ -5,7 +5,7 @@
 {% set pageDesc = 'api.intro'|trans({"%sitename%": siteName})|truncate(200) %}
 
 {% block content %}
-  <div>
+  <div id="app">
     <section class="Dso__main">
       <div class="Dso__container Dso__noHeader">
         <h1 class="Dso__title">{{ "api.title"|trans }}</h1>
@@ -36,55 +36,88 @@
 
         <h3 class="Dso__title">{{ "api.title.endpoints"|trans }}</h3>
 
-        <div class="Dso__description">
-          <p><strong>{{ 'api.get_token'|trans }} :</strong></p>
-          <pre>
-            <code>curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'</code>
-          </pre>
-
-
-          <p><strong>{{ 'api.objects.id'|trans }} :</strong></p>
-          <pre>
-            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}</code>
-          </pre>
-
-          <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
-          <pre>
-            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}</code>
-          </pre>
-          <div id="btnCatalog">
-            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('catalog')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
-            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          <div class="Dso__description">
+            <p><strong>{{ 'api.get_token'|trans }} :</strong></p>
+            <pre>
+              <code>curl -X POST -H "Content-Type: application/json" {{ absolute_url(path('api_auth_login')) }} -d '{"username": "YOUR-USERNAME", "password": "YOUR-PASSWORD"}'</code>
+            </pre>
+            <p>{{ 'api.get_token.desc'|trans }}</p>
+            <ul>
+              <li>{{ 'api.refresh.token_1'|trans({'%urlLogin%': absolute_url(path('api_auth_login'))}) }}</li>
+              <li>{{ 'api.refresh.token_2'|trans({'%urlRefresh%': absolute_url(path('gesdinet_jwt_refresh_token'))}) }}</li>
+            </ul>
+            <pre>
+              <code>
+                curl -X POST -d refresh_token='REFRESH_TOKEN' '{{ absolute_url(path('gesdinet_jwt_refresh_token')) }}'
+              </code>
+            </pre>
           </div>
 
 
-          <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
-          <pre>
-            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}</code>
-          </pre>
-          <div id="btnConst">
-            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('constellation')|json_encode }}">{{ 'api.data.filters'|trans }}</button>
-            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          <div class="Dso__description">
+            <p><strong>{{ 'api.objects.id'|trans }} :</strong></p>
+            <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}</code>
+            </pre>
+          </div>
+
+          <div class="Dso__description">
+            <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
+            <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}</code>
+            </pre>
+            <div id="btnCatalog">
+              {{ 'api.data.filters'|trans }}
+              <svgicon name="down" width="20" height="20" v-if="!showCatalog" v-on:click="toggleCatalog()"></svgicon>
+              <svgicon name="up" width="20" height="20" v-if="showCatalog" v-on:click="toggleCatalog()"></svgicon>
+
+              <div class="appGridFacet__list" v-if="showCatalog">
+                {{ build_api_filter('catalog').message|raw }}
+              </div>
+            </div>
           </div>
 
 
-          <p><strong>{{ 'api.objects.type'|trans }} :</strong></p>
-          <pre>
-            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}</code>
-          </pre>
-          <div id="btnType">
-            <button v-on:click="openSimplert" class="appGridBtn" data-filters="{{ build_api_filter('type')|json_encode }}" id="btn_test">{{ 'api.data.filters'|trans }}</button>
-            <simplert :use-radius="false" :use-icon="false" ref="simplert"></simplert>
+          <div class="Dso__description">
+            <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
+            <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}</code>
+            </pre>
+            <div id="btnConst">
+              {{ 'api.data.filters'|trans }}
+              <svgicon name="down" width="20" height="20" v-if="!showConstellation" v-on:click="toggleConstellation()"></svgicon>
+              <svgicon name="up" width="20" height="20" v-if="showConstellation" v-on:click="toggleConstellation()"></svgicon>
+
+              <div class="appGridFacet__list" v-if="showConstellation">
+                {{ build_api_filter('constellation').message|raw }}
+              </div>
+            </div>
           </div>
 
-          <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
-          <pre>
-            <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
-          </pre>
-        </div>
 
+          <div class="Dso__description">
+            <p><strong>{{ 'api.objects.type'|trans }} :</strong></p>
+            <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}</code>
+            </pre>
+            <div id="btnType">
+              {{ 'api.data.filters'|trans }}
+              <svgicon name="down" width="20" height="20" v-if="!showType" v-on:click="toggleType()"></svgicon>
+              <svgicon name="up" width="20" height="20" v-if="showType" v-on:click="toggleType()"></svgicon>
 
-        <p>See documentation</p>
+              <div class="appGridFacet__list" v-if="showType">
+                {{ build_api_filter('type').message|raw }}
+              </div>
+            </div>
+          </div>
+
+          <div class="Dso__description">
+            <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
+            <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
+            </pre>
+          </div>
+
       </div>
     </section>
   </div>
