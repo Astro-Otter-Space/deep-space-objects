@@ -28,7 +28,7 @@
       }
     },
     methods: {
-      getListDso(e) {
+      getListDso: function(e) {
         let paramText = "";
         if (e !== undefined) {
           paramText = e.target.value;

@@ -11,7 +11,7 @@
       </div>
 
       <div class="AppSlider__Research">
-        <h1 class="AppSlider__subTitle" itemprop="title">
+        <h1 class="AppSlider__subTitle" itemprop="title" v-show="!isMobile">
           <label for="homesearch">{{ subTitle }}</label>
         </h1>
         <searchautocomplete
@@ -21,6 +21,9 @@
           :url="urlSearchHome"
           id="homesearch"
         />
+        <h1 class="AppSlider__subTitle" itemprop="title" v-show="isMobile">
+          <label for="homesearch">{{ subTitle }}</label>
+        </h1>
       </div>
 
       <div class="AppSlider__Vignettes" id="appVignette">
@@ -35,6 +38,7 @@
 <script>
   import Searchautocomplete from "./components/Searchautocomplete"
   import Vignette from "./components/Vignette";
+  import deviceDetect from 'mobile-device-detect';
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
   let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
@@ -63,8 +67,9 @@
           '/build/images/background/bg-3.webp',
           '/build/images/background/bg-4.webp'
         ],
-        listVignettes: listVignettes
+        listVignettes: listVignettes,
+        isMobile: deviceDetect.isMobileOnly
       }
-    }
+    },
   }
 </script>

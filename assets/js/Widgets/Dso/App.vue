@@ -159,7 +159,7 @@
     // https://nehalist.io/directly-injecting-data-to-vue-apps-with-symfony-twig/
     // https://stackoverflow.com/questions/42269260/how-to-get-the-values-of-data-attributes-in-vuejs
     methods: {
-      getHeaderClass() {
+      getHeaderClass: function() {
         if (this.imageCover !== '/build/images/default_large.jpg') {
           return 'Dso__container';
         } else {

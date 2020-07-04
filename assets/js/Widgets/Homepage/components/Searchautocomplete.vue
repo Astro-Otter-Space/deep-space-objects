@@ -8,7 +8,7 @@
     label="label"
     :classes="customClasses"
     :onSelect="redirectToItem"
-    :onInput="showDeleteEntry"
+    :onInput="onInputMethod"
     :id="id"
   >
   </autocomplete>
@@ -40,10 +40,10 @@
       }
     },
     methods: {
-      redirectToItem(obj) {
+      redirectToItem: function(obj) {
         window.location.replace(obj.url);
       },
-      showDeleteEntry() {
+      onInputMethod: function() {
 
         // https://stackoverflow.com/questions/6258521/clear-icon-inside-input-text https://jsbin.com/qirurohila/edit?html,css,js,console,output
         let elInput = this.$el.querySelector('.AppSearch__inputText'); //this.$refs.autocomplete
@@ -72,7 +72,7 @@
           //}
         }, false);
       },
-      deleteList() {
+      deleteList: function() {
         let elInput = this.$el.querySelector('.AppSearch__inputText');
         // elInput.classList.remove('AppSearch__inputText__x AppSearch__inputText__onX');
         elInput.value = '';
