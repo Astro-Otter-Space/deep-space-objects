@@ -16,7 +16,7 @@
         </h1>
         <searchautocomplete
           ref="homesearch"
-          :searchPlaceholder="searchPlaceholder"
+          :searchPlaceholder="placeholder"
           :customClasses="classesSearchAutocomplete"
           :url="urlSearchHome"
           id="homesearch"
@@ -42,6 +42,7 @@
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
   let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
+  let searchPlaceholderMobile = document.getElementById('appHome').dataset.searchPlaceholderMobile;
   let urlSearchHome = document.getElementById('appHome').dataset.searchRoute;
   let listVignettes = JSON.parse(document.querySelector('div#appVignette').dataset.vignettes);
 
@@ -54,10 +55,10 @@
     data() {
       return {
         subTitle: homeTitle,
-        searchPlaceholder: searchPlaceholder,
+        placeholder: (deviceDetect.isMobileOnly) ? searchPlaceholderMobile : searchPlaceholder,
         classesSearchAutocomplete: {
           wrapper: 'AppSearch__wrapper',
-          input: 'AppSearch__inputText',
+          input: (deviceDetect.isMobileOnly) ? 'AppSearch__inputText AppSearch__inputTextHome' : 'AppSearch__inputText',
           list: 'AppSearch__list'
         },
         urlSearchHome: urlSearchHome,

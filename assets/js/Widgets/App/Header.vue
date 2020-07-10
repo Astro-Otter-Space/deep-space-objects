@@ -102,7 +102,7 @@
       <transition>
         <searchautocomplete
           ref="search"
-          :searchPlaceholder="searchPlaceholder"
+          :searchPlaceholder="placeholder"
           :customClasses="autoCompleteClasse"
           :url="searchUrl"
           id="search"
@@ -129,6 +129,7 @@
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
   import { Slide } from 'vue-burger-menu';
   import './../Icons/index';
+  import deviceDetect from 'mobile-device-detect';
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
@@ -168,16 +169,17 @@
         hide: false,
         autoCompleteClasse: {
           wrapper: 'AppHeader__wrapper',
-          input: 'AppSearch__inputText',
+          input: (deviceDetect.isMobileOnly) ? 'AppSearch__inputText AppSearch__inputTextHome' : 'AppSearch__inputText',
           list: 'AppHeader__list'
         },
-        searchPlaceholder: labelsTrans.searchPlaceholder,
+        placeholder: (deviceDetect.isMobileOnly) ? labelsTrans.searchPlaceholderMobile : labelsTrans.searchPlaceholder,
         searchUrl: urlSearch,
         titleOpenMenu: labelsTrans.openMenu,
         titleSwitchLang: labelsTrans.switchLang,
         // titleSwitchMode: labelsTrans.nightMode,
         titleData: labelsTrans.titleData,
-        titleObservation: labelsTrans.titleObservation
+        titleObservation: labelsTrans.titleObservation,
+        isMobile: deviceDetect.isMobileOnly
       }
     },
     watch: {

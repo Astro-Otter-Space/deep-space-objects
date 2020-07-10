@@ -127,6 +127,7 @@ de: German
 homepage.message: Descubre bellezas y misterios del universo.
 homepage.desc: "%sitename% is a celestial atlas containing more than 9500 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel."
 home.search.placeholder: Buscar en catálogos...
+home.search.placeholder_mobile: "Buscar..."
 dayImage: Imagen del dia
 # View full
 info: Informacion
