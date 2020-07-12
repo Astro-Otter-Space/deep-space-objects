@@ -36,10 +36,9 @@
     border-radius: 0.3rem;
     line-height: 2;
     font-size: 1.25rem;
-    //background: $bgd-light-grey url('/build/images/layout/close.gif') no-repeat right -1em center;
-
+    background-color: $bgd-light-grey;
     transition: background 0.4s;
-    color: $color-text-dark;;
+    color: $color-text-dark;
     @media($mq-phone) {
       border-radius: 2em;
       padding: .5rem 1rem 0.5rem 3rem;
