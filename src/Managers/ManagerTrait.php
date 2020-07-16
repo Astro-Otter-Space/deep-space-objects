@@ -33,7 +33,7 @@ trait ManagerTrait
                 $valueTranslated = implode(AbstractEntity::DATA_CONCAT_GLUE, array_map(static function($item) use($translatorInterface) {
                     return $translatorInterface->trans($item, ['%count%' => 1]);
                 }, $value));
-                $nbItems = 2;
+                $nbItems = count($value);
             }
 
             return [
