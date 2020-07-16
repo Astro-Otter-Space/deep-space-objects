@@ -87,11 +87,13 @@ final class DsoDataTransformer extends AbstractDataTransformer
             ]
         );
 
+        $constellation = implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]);
+
         $data = [
             'catalog' => $catalog,
             'desigs' => implode(Dso::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
             'type' => implode(Dso::DATA_GLUE, ['type', $entity->getType()]),
-            'constId' => implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+            'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
             'mag' => $entity->getMag(),
             'distAl' => Utils::numberFormatByLocale($entity->getDistAl()),
             'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $entity->getDistAl()),
