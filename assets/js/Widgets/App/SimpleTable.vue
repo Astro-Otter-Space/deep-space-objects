@@ -3,7 +3,7 @@
     <tbody>
       <tr v-bind:class="classTr" v-for="entry in data">
         <td v-bind:class="classTd" v-for="key in columns">
-          {{entry[key]}}
+          <span v-html="entry[key]">{{entry[key]}}</span>
         </td>
       </tr>
     </tbody>

@@ -81,13 +81,12 @@ final class DsoDataTransformer extends AbstractDataTransformer
             return implode(Dso::DATA_GLUE, ['catalog', $itemCatalog]);
         }, $entity->getCatalog());
 
+        $constellation = $this->translator->trans(implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
         $routeConstellation = $this->router->generate('constellation_show', [
-                'id' => implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
-                'name' => Utils::camelCaseUrlTransform($entity->getAlt())
+                'id' => strtolower($entity->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+                'name' => Utils::camelCaseUrlTransform($constellation)
             ]
         );
-
-        $constellation = $this->translator->trans(implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
 
         $data = [
             'catalog' => $catalog,
