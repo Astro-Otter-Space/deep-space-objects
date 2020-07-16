@@ -7,6 +7,7 @@ use App\Classes\Utils;
 use App\Entity\ES\Dso;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -20,14 +21,19 @@ final class DsoDataTransformer extends AbstractDataTransformer
     /** @var TranslatorInterface */
     private $translator;
 
+    /** @var RouterInterface */
+    private $router;
+
     /**
      * DsoDataTransformer constructor.
      *
      * @param TranslatorInterface $translator
+     * @param RouterInterface $router
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, RouterInterface $router)
     {
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     /**
@@ -75,8 +81,14 @@ final class DsoDataTransformer extends AbstractDataTransformer
             return implode(Dso::DATA_GLUE, ['catalog', $itemCatalog]);
         }, $entity->getCatalog());
 
+        $routeConstellation = $this->router->generate('constellation_show', [
+                'id' => implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+                'name' => Utils::camelCaseUrlTransform($entity->getAlt())
+            ]
+        );
+
         $data = [
-            'catalog' => $catalog, //implode(self::DATA_GLUE, ['catalog', $this->getCatalog()]),
+            'catalog' => $catalog,
             'desigs' => implode(Dso::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
             'type' => implode(Dso::DATA_GLUE, ['type', $entity->getType()]),
             'constId' => implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
