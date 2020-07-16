@@ -87,7 +87,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             ]
         );
 
-        $constellation = implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]);
+        $constellation = $this->translator->trans(implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
 
         $data = [
             'catalog' => $catalog,
