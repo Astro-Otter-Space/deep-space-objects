@@ -23,20 +23,22 @@ trait ManagerTrait
      *
      * @return array
      */
-    public function formatEntityData($entityArray, $listFields, TranslatorInterface $translatorInterface)
+    public function formatEntityData($entityArray, $listFields, TranslatorInterface $translatorInterface): array
     {
         return array_map(function($value, $key) use($translatorInterface, $listFields) {
             if (!is_array($value)) {
                 $valueTranslated = $translatorInterface->trans($value, ['%count%' => 1]);
+                $nbItems = 1;
             } else {
-                $valueTranslated = implode(AbstractEntity::DATA_CONCAT_GLUE, array_map(function($item) use($translatorInterface) {
+                $valueTranslated = implode(AbstractEntity::DATA_CONCAT_GLUE, array_map(static function($item) use($translatorInterface) {
                     return $translatorInterface->trans($item, ['%count%' => 1]);
                 }, $value));
+                $nbItems = 2;
             }
 
             return [
-                'col0' => $translatorInterface->trans($key, ['%count%' => 1]),
-                'col1' => (in_array($key, $listFields)) ? $valueTranslated: $value
+                'col0' => $translatorInterface->trans($key, ['%count%' => $nbItems]),
+                'col1' => (in_array($key, $listFields, true)) ? $valueTranslated: $value
             ];
         }, $entityArray, array_keys($entityArray));
 
