@@ -73,5 +73,10 @@
         isMobile: deviceDetect.isMobileOnly
       }
     },
+    methods: {
+      test: function() {
+        console.log('coucou coucou');
+      }
+    }
   }
 </script>
