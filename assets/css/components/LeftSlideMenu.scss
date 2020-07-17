@@ -1,5 +1,4 @@
 .bm-burger {
-
   &-button {
     position: fixed;
     width: 36px;
@@ -12,7 +11,6 @@
   &-bars {
     background-color: $bgd-grey;
   }
-
 }
 
 .line-style {
@@ -33,6 +31,14 @@
   &-button {
     height: 24px;
     width: 24px;
+  }
+}
+
+body {
+  &.bm-overlay {
+    .bm-menu {
+      width: 100% !important;
+    }
   }
 }
 
@@ -61,7 +67,7 @@
 .bm-item-list > * {
   display: flex;
   text-decoration: none;
-  padding: 0.7em;
+  padding: 1em 0em !important;
   color: $color-text !important;
 }
 .bm-item-list > * > span {

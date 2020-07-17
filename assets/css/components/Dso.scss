@@ -66,6 +66,12 @@
     @media($mq-phone) {
       font-size: 0.9rem;
     }
+
+    a {
+      color: $color-text;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
 
   // Slider VueFlux

@@ -1,7 +1,7 @@
 <template>
   <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']">
 
-    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" width="300">
+    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu">
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
@@ -10,9 +10,9 @@
 
     <div class="header__wrap">
       <!-- Open Menu-->
-      <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu">
-          <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
-        </span>
+      <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu" v-if="isMobile">
+        <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
+      </span>
 
       <span class="h1 h1__title">
         <a v-bind:href="homepageRoute" v-bind:title="title">
@@ -23,7 +23,7 @@
       <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <!--Search-->
         <li v-if="!this.isHome">
-          <a v-on:click="displaySearch(hide)" v-bind:title="searchPlaceholder">
+          <a v-on:click="displaySearchHeader(hide)" v-bind:title="searchPlaceholder">
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
@@ -226,7 +226,7 @@
         }
 
       },
-      displaySearch: function(hide) {
+      displaySearchHeader: function(hide) {
         this.hide = !hide;
         if (true === this.hide) {
           this.$nextTick(() => {
