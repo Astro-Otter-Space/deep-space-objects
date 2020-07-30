@@ -198,7 +198,7 @@ Sources :
 - https://telescopius.com/
 
 ### Add new DSO Data
-
+// {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
 ```
     {
       "id": "",
