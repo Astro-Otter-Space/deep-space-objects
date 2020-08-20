@@ -10,45 +10,15 @@ use Elastica\Document;
  */
 abstract class AbstractEntity
 {
-    const DATA_GLUE = '.';
+    public const DATA_GLUE = '.';
 
-    const DATA_CONCAT_GLUE = ' - ';
+    public const DATA_CONCAT_GLUE = ' - ';
 
-    const URL_CONCAT_GLUE = '--';
+    public const URL_CONCAT_GLUE = '--';
 
-    const COMA_GLUE = ',';
+    public const COMA_GLUE = ',';
 
-    const UNASSIGNED = 'unassigned';
-
-    /**
-     * Transform a Result item from ES into Entity
-     * @deprecated
-     * @param Document $document
-     * @return $this
-     */
-    public function buildObject(Document $document)
-    {
-        $this->setElasticId($document->getId());
-
-        foreach ($document->getData() as $field=>$data) {
-            $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', '', $field)));
-            if (is_array($data) && "geometry" != $field) {
-                $object = $this;
-                array_walk($data, function($value, $field) use (&$object) {
-                    $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $field)));
-                    if (true === method_exists($this, $method)) {
-                        $object->$method($value);
-                    }
-                });
-            } /*elseif ("geometry" === $field) {
-                $object->setGeometry()
-            }*/
-            if (true == method_exists($this, $method)) {
-                $this->$method($data, true);
-            }
-        }
-        return $this;
-    }
+    public const UNASSIGNED = 'unassigned';
 
 
     /**
@@ -59,7 +29,7 @@ abstract class AbstractEntity
      * @return $this
      * @throws \ReflectionException
      */
-    public function buildObjectR(Document $document)
+    public function buildObjectR(Document $document): self
     {
         $this->setElasticId($document->getId());
 
@@ -85,7 +55,7 @@ abstract class AbstractEntity
                 continue;
             }
 
-            if (in_array($property->getName(), $this->getListFieldsNoMapping())) {
+            if (in_array($property->getName(), $this->getListFieldsNoMapping(), true)) {
                 $property->setAccessible(true);
                 $property->setValue($this, null);
                 continue;
