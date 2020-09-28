@@ -152,7 +152,7 @@ class ConvertSrcToBulkCommand extends Command
                             'catalog' => 'getCatalog',
                             'order' => 'getItemOrder'
                         ];
-                        $lineReplace = preg_replace_callback('#%(.*?)%#', function($match) use ($mapping, $id) {
+                        $lineReplace = preg_replace_callback('#%(.*?)%#', static function($match) use ($mapping, $id) {
                             $findKey = $match[1];
                             if (in_array($findKey, array_keys($mapping))) {
                                 $method = $mapping[$findKey];
@@ -167,11 +167,11 @@ class ConvertSrcToBulkCommand extends Command
                          */
                         if ('create' === $mode) {
                             if ('delta' === $typeImport) {
-                                array_push($bulkData, [
+                                $bulkData[] = [
                                     'idDoc' => self::md5ForId($id),
                                     'mode' => 'create',
-                                    'data' => json_decode(utf8_decode($lineReplace), true)
-                                ]);
+                                    'data' => json_decode(utf8_decode($lineReplace), true, 512, JSON_THROW_ON_ERROR)
+                                ];
 
                             } elseif ('full' === $typeImport) {
                                 $bulkLine =$this->buildCreateLine($type, $id);
@@ -257,7 +257,7 @@ class ConvertSrcToBulkCommand extends Command
                                         $id = implode(trim($dsoCurrent::URL_CONCAT_GLUE), [$id, $name]);
                                     }
 
-                                    $listMd5Dso = array_merge(array_map(function ($locale) use ($id) {
+                                    $listMd5Dso = array_merge(array_map(static function ($locale) use ($id) {
                                         return md5(sprintf('%s_%s', $id, $locale));
                                     }, $this->listLocales), [md5(sprintf('%s_cover', $id))]);
 
