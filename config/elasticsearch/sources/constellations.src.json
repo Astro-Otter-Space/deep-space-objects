@@ -1,29 +1,26 @@
 [
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "and" } },
   {
     "id": "And",
-    "data": {
-      "gen": "Andromedae",
-      "alt": {
-        "alt": "Andromeda",
-        "alt_fr": "Andromède",
-        "alt_es": "Andrómeda",
-        "alt_de": "Andromeda",
-        "alt_pt": "Andrômeda",
-        "alt_it": "Andromeda"
-      },
-      "description": {
-        "description":"",
-        "description_fr":"Dans la mythologie grecque, Andromède fille du roi Céphée et de la reine Cassiopée, a été enchainé à un rocher pour être offerte un à monstre marin afin d'apaiser Poséidon, dieu des océans. Constellation visible uniquement dans l'hémisphère nord, est trouvable en repérant un grand carré vers le nord : le grand carré de Pégase. Elle contient la magnifique galaxie d'Andromède, visible à l'oeil nu.",
-        "description_es":"",
-        "description_de":"",
-        "description_pt":"",
-        "description_it":""
-      },
-      "rank": "1",
-      "order": "2",
-      "loc": "north"
+    "gen": "Andromedae",
+    "alt": {
+      "alt": "Andromeda",
+      "alt_fr": "Andromède",
+      "alt_es": "Andrómeda",
+      "alt_de": "Andromeda",
+      "alt_pt": "Andrômeda",
+      "alt_it": "Andromeda"
     },
+    "description": {
+      "description":"",
+      "description_fr":"Dans la mythologie grecque, Andromède fille du roi Céphée et de la reine Cassiopée, a été enchainé à un rocher pour être offerte un à monstre marin afin d'apaiser Poséidon, dieu des océans. Constellation visible uniquement dans l'hémisphère nord, est trouvable en repérant un grand carré vers le nord : le grand carré de Pégase. Elle contient la magnifique galaxie d'Andromède, visible à l'oeil nu.",
+      "description_es":"",
+      "description_de":"",
+      "description_pt":"",
+      "description_it":""
+    },
+    "rank": "1",
+    "order": "2",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -131,31 +128,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ant" } },
   {
     "id": "Ant",
-    "data": {
-      "gen": "Antliae",
-      "alt": {
-        "alt": "Antlia",
-        "alt_fr": "Machine pneumatique",
-        "alt_es": "Máquina Neumática",
-        "alt_de": "Luftpumpe",
-        "alt_pt": "",
-        "alt_it": "Macchina Pneumatica"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "52",
-      "loc": "south"
+    "gen": "Antliae",
+    "alt": {
+      "alt": "Antlia",
+      "alt_fr": "Machine pneumatique",
+      "alt_es": "Máquina Neumática",
+      "alt_de": "Luftpumpe",
+      "alt_pt": "",
+      "alt_it": "Macchina Pneumatica"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "52",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -183,31 +177,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "aps" } },
   {
     "id": "Aps",
-    "data": {
-      "gen": "Apodis",
-      "alt": {
-        "alt": "Apus",
-        "alt_fr": "Oiseau de paradis",
-        "alt_es": "Ave del Paraíso",
-        "alt_de": "Paradiesvogel",
-        "alt_pt": "",
-        "alt_it": "Uccello del Paradiso"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "53",
-      "loc": "south"
+    "gen": "Apodis",
+    "alt": {
+      "alt": "Apus",
+      "alt_fr": "Oiseau de paradis",
+      "alt_es": "Ave del Paraíso",
+      "alt_de": "Paradiesvogel",
+      "alt_pt": "",
+      "alt_it": "Uccello del Paradiso"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "53",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -239,31 +230,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "aql" } },
   {
     "id": "Aql",
-    "data": {
-      "gen": "Aquilae",
-      "alt": {
-        "alt": "Aquila",
-        "alt_fr": "L'aigle",
-        "alt_es": "Águila",
-        "alt_de": "Adler",
-        "alt_pt": "Aquila",
-        "alt_it": "Aquila"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "1",
-      "loc": "south"
+    "gen": "Aquilae",
+    "alt": {
+      "alt": "Aquila",
+      "alt_fr": "L'aigle",
+      "alt_es": "Águila",
+      "alt_de": "Adler",
+      "alt_pt": "Aquila",
+      "alt_it": "Aquila"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "1",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -319,31 +307,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "aqr" } },
   {
     "id": "Aqr",
-    "data": {
-      "gen": "Aquarii",
-      "alt": {
-        "alt": "Aquarius",
-        "alt_fr": "Verseau",
-        "alt_es": "Acuario",
-        "alt_de": "Wassermann",
-        "alt_pt": "Aquário",
-        "alt_it": "Aquario"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "86",
-      "loc": "zodiac"
+    "gen": "Aquarii",
+    "alt": {
+      "alt": "Aquarius",
+      "alt_fr": "Verseau",
+      "alt_es": "Acuario",
+      "alt_de": "Wassermann",
+      "alt_pt": "Aquário",
+      "alt_it": "Aquario"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "86",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -443,31 +428,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ara" } },
   {
     "id": "Ara",
-    "data": {
-      "gen": "Arae",
-      "alt": {
-        "alt": "Ara",
-        "alt_fr": "Autel",
-        "alt_es": "Altar",
-        "alt_de": "Altar",
-        "alt_pt": "Altar",
-        "alt_it": "Altare"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "3",
-      "loc": "south"
+    "gen": "Arae",
+    "alt": {
+      "alt": "Ara",
+      "alt_fr": "Autel",
+      "alt_es": "Altar",
+      "alt_de": "Altar",
+      "alt_pt": "Altar",
+      "alt_it": "Altare"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "3",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -511,31 +493,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ari" } },
   {
     "id": "Ari",
-    "data": {
-      "gen": "Arietis",
-      "alt": {
-        "alt": "Aries",
-        "alt_fr": "Bélier",
-        "alt_es": "Carnero",
-        "alt_de": "Widder",
-        "alt_pt": "Carneiro",
-        "alt_it": "Ariete"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "6",
-      "loc": "zodiac"
+    "gen": "Arietis",
+    "alt": {
+      "alt": "Aries",
+      "alt_fr": "Bélier",
+      "alt_es": "Carnero",
+      "alt_de": "Widder",
+      "alt_pt": "Carneiro",
+      "alt_it": "Ariete"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "6",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -567,31 +546,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "aur" } },
   {
     "id": "Aur",
-    "data": {
-      "gen": "Aurigae",
-      "alt": {
-        "alt": "Auriga",
-        "alt_fr": "Le Cocher",
-        "alt_es": "Cochero",
-        "alt_de": "Fuhrmann",
-        "alt_pt": "Auriga",
-        "alt_it": "Auriga"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "19",
-      "loc": "north"
+    "gen": "Aurigae",
+    "alt": {
+      "alt": "Auriga",
+      "alt_fr": "Le Cocher",
+      "alt_es": "Cochero",
+      "alt_de": "Fuhrmann",
+      "alt_pt": "Auriga",
+      "alt_it": "Auriga"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "19",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -651,31 +627,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "boo" } },
   {
     "id": "Boo",
-    "data": {
-      "gen": "Boötis",
-      "alt": {
-        "alt": "Boötes",
-        "alt_fr": "Bouvier",
-        "alt_es": "Boyero",
-        "alt_de": "Bärenhüter",
-        "alt_pt": "Boieiro",
-        "alt_it": "Boote"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "8",
-      "loc": "north"
+    "gen": "Boötis",
+    "alt": {
+      "alt": "Boötes",
+      "alt_fr": "Bouvier",
+      "alt_es": "Boyero",
+      "alt_de": "Bärenhüter",
+      "alt_pt": "Boieiro",
+      "alt_it": "Boote"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "8",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -753,31 +726,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cae" } },
   {
     "id": "Cae",
-    "data": {
-      "gen": "Caeli",
-      "alt": {
-        "alt": "Caelum",
-        "alt_fr": "Burin",
-        "alt_es": "Cincel",
-        "alt_de": "Grabstichel",
-        "alt_pt": "Cinzel",
-        "alt_it": "Bulino"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "9",
-      "loc": "south"
+    "gen": "Caeli",
+    "alt": {
+      "alt": "Caelum",
+      "alt_fr": "Burin",
+      "alt_es": "Cincel",
+      "alt_de": "Grabstichel",
+      "alt_pt": "Cinzel",
+      "alt_it": "Bulino"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "9",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -809,31 +779,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cam" } },
   {
     "id": "Cam",
-    "data": {
-      "gen": "Camelopardalis",
-      "alt": {
-        "alt": "Camelopardalis",
-        "alt_fr": "Giraffe",
-        "alt_es": "Jirafa",
-        "alt_de": "Giraffe",
-        "alt_pt": "Camelopardalis",
-        "alt_it": "Giraffa"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "10",
-      "loc": "north"
+    "gen": "Camelopardalis",
+    "alt": {
+      "alt": "Camelopardalis",
+      "alt_fr": "Giraffe",
+      "alt_es": "Jirafa",
+      "alt_de": "Giraffe",
+      "alt_pt": "Camelopardalis",
+      "alt_it": "Giraffa"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "10",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -887,31 +854,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cap" } },
   {
     "id": "Cap",
-    "data": {
-      "gen": "Capricorni",
-      "alt": {
-        "alt": "Capricornus",
-        "alt_fr": "Le Capricorne",
-        "alt_es": "Capricornio",
-        "alt_de": "Steinbock",
-        "alt_pt": "Capricórnio",
-        "alt_it": "Capricorno"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "12",
-      "loc": "zodiac"
+    "gen": "Capricorni",
+    "alt": {
+      "alt": "Capricornus",
+      "alt_fr": "Le Capricorne",
+      "alt_es": "Capricornio",
+      "alt_de": "Steinbock",
+      "alt_pt": "Capricórnio",
+      "alt_it": "Capricorno"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "12",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -971,31 +935,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "car" } },
   {
     "id": "Car",
-    "data": {
-      "gen": "Carinae",
-      "alt": {
-        "alt": "Carina",
-        "alt_fr": "Carène",
-        "alt_es": "Quilla",
-        "alt_de": "Kiel",
-        "alt_pt": "",
-        "alt_it": "Carena"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "13",
-      "loc": "south"
+    "gen": "Carinae",
+    "alt": {
+      "alt": "Carina",
+      "alt_fr": "Carène",
+      "alt_es": "Quilla",
+      "alt_de": "Kiel",
+      "alt_pt": "",
+      "alt_it": "Carena"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "13",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1093,31 +1054,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cas" } },
   {
     "id": "Cas",
-    "data": {
-      "gen": "Cassiopeiae",
-      "alt": {
-        "alt": "Cassiopeia",
-        "alt_fr": "Cassiopée",
-        "alt_es": "Cassiopea",
-        "alt_de": "Kassiopeia",
-        "alt_pt": "Cassiopeia",
-        "alt_it": "Cassiopea"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "14",
-      "loc": "north"
+    "gen": "Cassiopeiae",
+    "alt": {
+      "alt": "Cassiopeia",
+      "alt_fr": "Cassiopée",
+      "alt_es": "Cassiopea",
+      "alt_de": "Kassiopeia",
+      "alt_pt": "Cassiopeia",
+      "alt_it": "Cassiopea"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "14",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1153,31 +1111,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cen" } },
   {
     "id": "Cen",
-    "data": {
-      "gen": "Centauri",
-      "alt": {
-        "alt": "Centaurus",
-        "alt_fr": "Centaure",
-        "alt_es": "Centaurus",
-        "alt_de": "Zentaur",
-        "alt_pt": "Centaurus",
-        "alt_it": "Centauro"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "15",
-      "loc": "south"
+    "gen": "Centauri",
+    "alt": {
+      "alt": "Centaurus",
+      "alt_fr": "Centaure",
+      "alt_es": "Centaurus",
+      "alt_de": "Zentaur",
+      "alt_pt": "Centaurus",
+      "alt_it": "Centauro"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "15",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1275,31 +1230,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cep" } },
   {
     "id": "Cep",
-    "data": {
-      "gen": "Cephei",
-      "alt": {
-        "alt": "Cepheus",
-        "alt_fr": "Céphée",
-        "alt_es": "Cefeo",
-        "alt_de": "Kepheus",
-        "alt_pt": "Cepheus",
-        "alt_it": "Cefeo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "16",
-      "loc": "north"
+    "gen": "Cephei",
+    "alt": {
+      "alt": "Cepheus",
+      "alt_fr": "Céphée",
+      "alt_es": "Cefeo",
+      "alt_de": "Kepheus",
+      "alt_pt": "Cepheus",
+      "alt_it": "Cefeo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "16",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1369,31 +1321,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cet" } },
   {
     "id": "Cet",
-    "data": {
-      "gen": "Ceti",
-      "alt": {
-        "alt": "Cetus",
-        "alt_fr": "La Baleine",
-        "alt_es": "Ballena",
-        "alt_de": "Wal",
-        "alt_pt": "Baleia",
-        "alt_it": "Balena"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "5",
-      "loc": "north"
+    "gen": "Ceti",
+    "alt": {
+      "alt": "Cetus",
+      "alt_fr": "La Baleine",
+      "alt_es": "Ballena",
+      "alt_de": "Wal",
+      "alt_pt": "Baleia",
+      "alt_it": "Balena"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "5",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1473,31 +1422,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cha" } },
   {
     "id": "Cha",
-    "data": {
-      "gen": "Chamaeleontis",
-      "alt": {
-        "alt": "Chamaeleon",
-        "alt_fr": "Caméléon",
-        "alt_es": "Camaleón",
-        "alt_de": "Chamäleon",
-        "alt_pt": "",
-        "alt_it": "Camaleonte"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "10",
-      "loc": "south"
+    "gen": "Chamaeleontis",
+    "alt": {
+      "alt": "Chamaeleon",
+      "alt_fr": "Caméléon",
+      "alt_es": "Camaleón",
+      "alt_de": "Chamäleon",
+      "alt_pt": "",
+      "alt_it": "Camaleonte"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "10",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1537,31 +1483,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cir" } },
   {
     "id": "Cir",
-    "data": {
-      "gen": "Circini",
-      "alt": {
-        "alt": "Circinus",
-        "alt_fr": "Compas",
-        "alt_es": "Compás",
-        "alt_de": "Zirkel",
-        "alt_pt": "Compasso",
-        "alt_it": "Compasso"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "21",
-      "loc": "south"
+    "gen": "Circini",
+    "alt": {
+      "alt": "Circinus",
+      "alt_fr": "Compas",
+      "alt_es": "Compás",
+      "alt_de": "Zirkel",
+      "alt_pt": "Compasso",
+      "alt_it": "Compasso"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "21",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1589,31 +1532,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cma" } },
   {
     "id": "CMa",
-    "data": {
-      "gen": "Canis Majoris",
-      "alt": {
-        "alt": "Canis Major",
-        "alt_fr": "Le Grand Chien",
-        "alt_es": "Can Mayor",
-        "alt_de": "Großer Hund",
-        "alt_pt": "Cão Maior",
-        "alt_it": "Cane Maggiore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "37",
-      "loc": "north"
+    "gen": "Canis Majoris",
+    "alt": {
+      "alt": "Canis Major",
+      "alt_fr": "Le Grand Chien",
+      "alt_es": "Can Mayor",
+      "alt_de": "Großer Hund",
+      "alt_pt": "Cão Maior",
+      "alt_it": "Cane Maggiore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "37",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1689,31 +1629,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cmi" } },
   {
     "id": "CMi",
-    "data": {
-      "gen": "Canis Minoris",
-      "alt": {
-        "alt": "Canis Minor",
-        "alt_fr": "Le Petit Chien",
-        "alt_es": "Can Menor",
-        "alt_de": "Kleiner Hund",
-        "alt_pt": "",
-        "alt_it": "Cane Minore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "64",
-      "loc": "north"
+    "gen": "Canis Minoris",
+    "alt": {
+      "alt": "Canis Minor",
+      "alt_fr": "Le Petit Chien",
+      "alt_es": "Can Menor",
+      "alt_de": "Kleiner Hund",
+      "alt_pt": "",
+      "alt_it": "Cane Minore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "64",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1737,31 +1674,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cnc" } },
   {
     "id": "Cnc",
-    "data": {
-      "gen": "Cancri",
-      "alt": {
-        "alt": "Cancer",
-        "alt_fr": "Cancer",
-        "alt_es": "Cangrejo",
-        "alt_de": "Krebs",
-        "alt_pt": "Câncer",
-        "alt_it": "Cancro"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "11",
-      "loc": "zodiac"
+    "gen": "Cancri",
+    "alt": {
+      "alt": "Cancer",
+      "alt_fr": "Cancer",
+      "alt_es": "Cangrejo",
+      "alt_de": "Krebs",
+      "alt_pt": "Câncer",
+      "alt_it": "Cancro"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "11",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1803,31 +1737,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "col" } },
   {
     "id": "Col",
-    "data": {
-      "gen": "Columbae",
-      "alt": {
-        "alt": "Columba",
-        "alt_fr": "Colombe",
-        "alt_es": "Paloma",
-        "alt_de": "Taube",
-        "alt_pt": "",
-        "alt_it": "Colomba"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "20",
-      "loc": "south"
+    "gen": "Columbae",
+    "alt": {
+      "alt": "Columba",
+      "alt_fr": "Colombe",
+      "alt_es": "Paloma",
+      "alt_de": "Taube",
+      "alt_pt": "",
+      "alt_it": "Colomba"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "20",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1836,31 +1767,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "com" } },
   {
     "id": "Com",
-    "data": {
-      "gen": "Comae Berenices",
-      "alt": {
-        "alt": "Coma Berenices",
-        "alt_fr": "Chevelure de Bérénice",
-        "alt_es": "Cabellera de Berenice",
-        "alt_de": "Haar der Berenike",
-        "alt_pt": "Coma Berenice",
-        "alt_it": "Chioma di Berenice"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "17",
-      "loc": "north"
+    "gen": "Comae Berenices",
+    "alt": {
+      "alt": "Coma Berenices",
+      "alt_fr": "Chevelure de Bérénice",
+      "alt_es": "Cabellera de Berenice",
+      "alt_de": "Haar der Berenike",
+      "alt_pt": "Coma Berenice",
+      "alt_it": "Chioma di Berenice"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "17",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1888,31 +1816,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cra" } },
   {
     "id": "CrA",
-    "data": {
-      "gen": "Coronae Austrini",
-      "alt": {
-        "alt": "Corona Austrina",
-        "alt_fr": "Couronne australe",
-        "alt_es": "Corona Austral",
-        "alt_de": "Südliche Krone",
-        "alt_pt": "",
-        "alt_it": "Corona Australe"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "24",
-      "loc": "south"
+    "gen": "Coronae Austrini",
+    "alt": {
+      "alt": "Corona Austrina",
+      "alt_fr": "Couronne australe",
+      "alt_es": "Corona Austral",
+      "alt_de": "Südliche Krone",
+      "alt_pt": "",
+      "alt_it": "Corona Australe"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "24",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -1960,31 +1885,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "crb" } },
   {
     "id": "CrB",
-    "data": {
-      "gen": "Coronae Borealis",
-      "alt": {
-        "alt": "Corona Borealis",
-        "alt_fr": "Couronne boréale",
-        "alt_es": "Corona Boreal",
-        "alt_de": "Nördliche Krone",
-        "alt_pt": "",
-        "alt_it": "Corona Boreale"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "25",
-      "loc": "south"
+    "gen": "Coronae Borealis",
+    "alt": {
+      "alt": "Corona Borealis",
+      "alt_fr": "Couronne boréale",
+      "alt_es": "Corona Boreal",
+      "alt_de": "Nördliche Krone",
+      "alt_pt": "",
+      "alt_it": "Corona Boreale"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "25",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2028,31 +1950,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "crt" } },
   {
     "id": "Crt",
-    "data": {
-      "gen": "Crateris",
-      "alt": {
-        "alt": "Crater",
-        "alt_fr": "Coupe",
-        "alt_es": "Copa",
-        "alt_de": "Becher",
-        "alt_pt": "",
-        "alt_it": "Cratere"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "23",
-      "loc": "south"
+    "gen": "Crateris",
+    "alt": {
+      "alt": "Crater",
+      "alt_fr": "Coupe",
+      "alt_es": "Copa",
+      "alt_de": "Becher",
+      "alt_pt": "",
+      "alt_it": "Cratere"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "23",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2114,31 +2033,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cru" } },
   {
     "id": "Cru",
-    "data": {
-      "gen": "Crux",
-      "alt": {
-        "alt": "Crux",
-        "alt_fr": "Croix du Sud",
-        "alt_es": "Cruz del Sur",
-        "alt_de": "Kreuz des Südens",
-        "alt_pt": "Cruzeiro do Sul",
-        "alt_it": "Croce del Sud"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "26",
-      "loc": "south"
+    "gen": "Crux",
+    "alt": {
+      "alt": "Crux",
+      "alt_fr": "Croix du Sud",
+      "alt_es": "Cruz del Sur",
+      "alt_de": "Kreuz des Südens",
+      "alt_pt": "Cruzeiro do Sul",
+      "alt_it": "Croce del Sud"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "26",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2172,31 +2088,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "crv" } },
   {
     "id": "Crv",
-    "data": {
-      "gen": "Corvi",
-      "alt": {
-        "alt": "Corvus",
-        "alt_fr": "Corbeau",
-        "alt_es": "Cuervo",
-        "alt_de": "Rabe",
-        "alt_pt": "",
-        "alt_it": "Corvo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "22",
-      "loc": "south"
+    "gen": "Corvi",
+    "alt": {
+      "alt": "Corvus",
+      "alt_fr": "Corbeau",
+      "alt_es": "Cuervo",
+      "alt_de": "Rabe",
+      "alt_pt": "",
+      "alt_it": "Corvo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "22",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2236,31 +2149,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cvn" } },
   {
     "id": "CVn",
-    "data": {
-      "gen": "Canum Venaticorum",
-      "alt": {
-        "alt": "Canes Venatici",
-        "alt_fr": "Chiens de chasse",
-        "alt_es": "Lebreles",
-        "alt_de": "Jagdhunde",
-        "alt_pt": "Canes Venatici",
-        "alt_it": "Cani da Caccia"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "18",
-      "loc": "north"
+    "gen": "Canum Venaticorum",
+    "alt": {
+      "alt": "Canes Venatici",
+      "alt_fr": "Chiens de chasse",
+      "alt_es": "Lebreles",
+      "alt_de": "Jagdhunde",
+      "alt_pt": "Canes Venatici",
+      "alt_it": "Cani da Caccia"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "18",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2284,31 +2194,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "cyg" } },
   {
     "id": "Cyg",
-    "data": {
-      "gen": "Cygni",
-      "alt": {
-        "alt": "Cygnus",
-        "alt_fr": "Cygne",
-        "alt_es": "Cisne",
-        "alt_de": "Schwan",
-        "alt_pt": "Cygnus",
-        "alt_it": "Cigno"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "27",
-      "loc": "north"
+    "gen": "Cygni",
+    "alt": {
+      "alt": "Cygnus",
+      "alt_fr": "Cygne",
+      "alt_es": "Cisne",
+      "alt_de": "Schwan",
+      "alt_pt": "Cygnus",
+      "alt_it": "Cigno"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "27",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2366,31 +2273,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "del" } },
   {
     "id": "Del",
-    "data": {
-      "gen": "Delphini",
-      "alt": {
-        "alt": "Delphinus",
-        "alt_fr": "Dauphin",
-        "alt_es": "Delfin",
-        "alt_de": "Delphin",
-        "alt_pt": "",
-        "alt_it": "Delfino"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "28",
-      "loc":"south"
+    "gen": "Delphini",
+    "alt": {
+      "alt": "Delphinus",
+      "alt_fr": "Dauphin",
+      "alt_es": "Delfin",
+      "alt_de": "Delphin",
+      "alt_pt": "",
+      "alt_it": "Delfino"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "28",
+    "loc":"south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2430,31 +2334,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "dor" } },
   {
     "id": "Dor",
-    "data": {
-      "gen": "Doradus",
-      "alt": {
-        "alt": "Dorado",
-        "alt_fr": "Dorade",
-        "alt_es": "Dorada",
-        "alt_de": "Schwertfisch",
-        "alt_pt": "",
-        "alt_it": "Dorado"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "29",
-      "loc": "south"
+    "gen": "Doradus",
+    "alt": {
+      "alt": "Dorado",
+      "alt_fr": "Dorade",
+      "alt_es": "Dorada",
+      "alt_de": "Schwertfisch",
+      "alt_pt": "",
+      "alt_it": "Dorado"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "29",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2502,31 +2403,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "dra" } },
   {
     "id": "Dra",
-    "data": {
-      "gen": "Draconis",
-      "alt": {
-        "alt": "Draco",
-        "alt_fr": "Dragon",
-        "alt_es": "Dragón",
-        "alt_de": "Drache",
-        "alt_pt": "Draco",
-        "alt_it": "Dragone"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "30",
-      "loc": "north"
+    "gen": "Draconis",
+    "alt": {
+      "alt": "Draco",
+      "alt_fr": "Dragon",
+      "alt_es": "Dragón",
+      "alt_de": "Drache",
+      "alt_pt": "Draco",
+      "alt_it": "Dragone"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "30",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2618,31 +2516,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "equ" } },
   {
     "id": "Equ",
-    "data": {
-      "gen": "Equulei",
-      "alt": {
-        "alt": "Equuleus",
-        "alt_fr": "Petit Cheval",
-        "alt_es": "Caballito",
-        "alt_de": "Füllen",
-        "alt_pt": "",
-        "alt_it": "Cavallino"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "63",
-      "loc": "north"
+    "gen": "Equulei",
+    "alt": {
+      "alt": "Equuleus",
+      "alt_fr": "Petit Cheval",
+      "alt_es": "Caballito",
+      "alt_de": "Füllen",
+      "alt_pt": "",
+      "alt_it": "Cavallino"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "63",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2670,31 +2565,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "eri" } },
   {
     "id": "Eri",
-    "data": {
-      "gen": "Eridani",
-      "alt": {
-        "alt": "Eridanus",
-        "alt_fr": "Éridan",
-        "alt_es": "Eridano",
-        "alt_de": "Eridanus",
-        "alt_pt": "",
-        "alt_it": "Eridano"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "32",
-      "loc": "south"
+    "gen": "Eridani",
+    "alt": {
+      "alt": "Eridanus",
+      "alt_fr": "Éridan",
+      "alt_es": "Eridano",
+      "alt_de": "Eridanus",
+      "alt_pt": "",
+      "alt_it": "Eridano"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "32",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2818,31 +2710,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "for" } },
   {
     "id": "For",
-    "data": {
-      "gen": "Fornacis",
-      "alt": {
-        "alt": "Fornax",
-        "alt_fr": "Fourneau",
-        "alt_es": "Hornillo",
-        "alt_de": "Chem. Ofen",
-        "alt_pt": "",
-        "alt_it": "Fornace"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "34",
-      "loc": "south"
+    "gen": "Fornacis",
+    "alt": {
+      "alt": "Fornax",
+      "alt_fr": "Fourneau",
+      "alt_es": "Hornillo",
+      "alt_de": "Chem. Ofen",
+      "alt_pt": "",
+      "alt_it": "Fornace"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "34",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2870,31 +2759,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "gem" } },
   {
     "id": "Gem",
-    "data": {
-      "gen": "Geminorum",
-      "alt": {
-        "alt": "Gemini",
-        "alt_fr": "Gémeaux",
-        "alt_es": "Gemelos",
-        "alt_de": "Zwillinge",
-        "alt_pt": "Gêmeos",
-        "alt_it": "Gemelli"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "35",
-      "loc": "zodiac"
+    "gen": "Geminorum",
+    "alt": {
+      "alt": "Gemini",
+      "alt_fr": "Gémeaux",
+      "alt_es": "Gemelos",
+      "alt_de": "Zwillinge",
+      "alt_pt": "Gêmeos",
+      "alt_it": "Gemelli"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "35",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -2964,31 +2850,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "gru" } },
   {
     "id": "Gru",
-    "data": {
-      "gen": "Gruis",
-      "alt": {
-        "alt": "Grus",
-        "alt_fr": "Grue",
-        "alt_es": "Gulla",
-        "alt_de": "Kranich",
-        "alt_pt": "",
-        "alt_it": "Gru"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "39",
-      "loc": "south"
+    "gen": "Gruis",
+    "alt": {
+      "alt": "Grus",
+      "alt_fr": "Grue",
+      "alt_es": "Gulla",
+      "alt_de": "Kranich",
+      "alt_pt": "",
+      "alt_it": "Gru"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "39",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3046,31 +2929,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "her" } },
   {
     "id": "Her",
-    "data": {
-      "gen": "Herculis",
-      "alt": {
-        "alt": "Hercules",
-        "alt_fr": "Hercule",
-        "alt_es": "Hércules",
-        "alt_de": "Herkules",
-        "alt_pt": "Hércules",
-        "alt_it": "Ercole"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "40",
-      "loc": "north"
+    "gen": "Herculis",
+    "alt": {
+      "alt": "Hercules",
+      "alt_fr": "Hercule",
+      "alt_es": "Hércules",
+      "alt_de": "Herkules",
+      "alt_pt": "Hércules",
+      "alt_it": "Ercole"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "40",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3182,31 +3062,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "hor" } },
   {
     "id": "Hor",
-    "data": {
-      "gen": "Horologii",
-      "alt": {
-        "alt": "Horologium",
-        "alt_fr": "Horloge",
-        "alt_es": "Reloj",
-        "alt_de": "Pendeluhr",
-        "alt_pt": "",
-        "alt_it": "Orologio"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "41",
-      "loc": "south"
+    "gen": "Horologii",
+    "alt": {
+      "alt": "Horologium",
+      "alt_fr": "Horloge",
+      "alt_es": "Reloj",
+      "alt_de": "Pendeluhr",
+      "alt_pt": "",
+      "alt_it": "Orologio"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "41",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3246,31 +3123,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "hya" } },
   {
     "id": "Hya",
-    "data": {
-      "gen": "Hydrae",
-      "alt": {
-        "alt": "Hydra",
-        "alt_fr": "Hydre",
-        "alt_es": "Hidra",
-        "alt_de": "Wasserschlange",
-        "alt_pt": "Hydra",
-        "alt_it": "Idra"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "42",
-      "loc": "north"
+    "gen": "Hydrae",
+    "alt": {
+      "alt": "Hydra",
+      "alt_fr": "Hydre",
+      "alt_es": "Hidra",
+      "alt_de": "Wasserschlange",
+      "alt_pt": "Hydra",
+      "alt_it": "Idra"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "42",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3362,31 +3236,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "hyi" } },
   {
     "id": "Hyi",
-    "data": {
-      "gen": "Hydri",
-      "alt": {
-        "alt": "Hydrus",
-        "alt_fr": "Hydre mâle",
-        "alt_es": "Hidra Austral",
-        "alt_de": "Kl. Wasserschlange",
-        "alt_pt": "",
-        "alt_it": "Idra Maschio"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "43",
-      "loc": "south"
+    "gen": "Hydri",
+    "alt": {
+      "alt": "Hydrus",
+      "alt_fr": "Hydre mâle",
+      "alt_es": "Hidra Austral",
+      "alt_de": "Kl. Wasserschlange",
+      "alt_pt": "",
+      "alt_it": "Idra Maschio"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "43",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3426,31 +3297,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ind" } },
   {
     "id": "Ind",
-    "data": {
-      "gen": "Indi",
-      "alt": {
-        "alt": "Indus",
-        "alt_fr": "Indien",
-        "alt_es": "Indio",
-        "alt_de": "Inder",
-        "alt_pt": "",
-        "alt_it": "Indiano"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "44",
-      "loc": "south"
+    "gen": "Indi",
+    "alt": {
+      "alt": "Indus",
+      "alt_fr": "Indien",
+      "alt_es": "Indio",
+      "alt_de": "Inder",
+      "alt_pt": "",
+      "alt_it": "Indiano"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "44",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3490,31 +3358,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lac" } },
   {
     "id": "Lac",
-    "data": {
-      "gen": "Lacertae",
-      "alt": {
-        "alt": "Lacerta",
-        "alt_fr": "Lézard",
-        "alt_es": "Lagarto",
-        "alt_de": "Eidechse",
-        "alt_pt": "",
-        "alt_it": "Lucertola"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "45",
-      "loc": "north"
+    "gen": "Lacertae",
+    "alt": {
+      "alt": "Lacerta",
+      "alt_fr": "Lézard",
+      "alt_es": "Lagarto",
+      "alt_de": "Eidechse",
+      "alt_pt": "",
+      "alt_it": "Lucertola"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "45",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3580,31 +3445,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "leo" } },
   {
     "id": "Leo",
-    "data": {
-      "gen": "Leonis",
-      "alt": {
-        "alt": "Leo",
-        "alt_fr": "Lion",
-        "alt_es": "León",
-        "alt_de": "Löwe",
-        "alt_pt": "Leo",
-        "alt_it": "Leone"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "48",
-      "loc": "zodiac"
+    "gen": "Leonis",
+    "alt": {
+      "alt": "Leo",
+      "alt_fr": "Lion",
+      "alt_es": "León",
+      "alt_de": "Löwe",
+      "alt_pt": "Leo",
+      "alt_it": "Leone"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "48",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3666,31 +3528,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lep" } },
   {
     "id": "Lep",
-    "data": {
-      "gen": "Leporis",
-      "alt": {
-        "alt": "Lepus",
-        "alt_fr": "Lièvre",
-        "alt_es": "Liebre",
-        "alt_de": "Hase",
-        "alt_pt": "Lebre",
-        "alt_it": "Lepre"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "47",
-      "loc": "south"
+    "gen": "Leporis",
+    "alt": {
+      "alt": "Lepus",
+      "alt_fr": "Lièvre",
+      "alt_es": "Liebre",
+      "alt_de": "Hase",
+      "alt_pt": "Lebre",
+      "alt_it": "Lepre"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "47",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3756,31 +3615,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lib" } },
   {
     "id": "Lib",
-    "data": {
-      "gen": "Librae",
-      "alt": {
-        "alt": "Libra",
-        "alt_fr": "Balance",
-        "alt_es": "Balanza",
-        "alt_de": "Waage",
-        "alt_pt": "Balança",
-        "alt_it": "Bilancia"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "4",
-      "loc": "zodiac"
+    "gen": "Librae",
+    "alt": {
+      "alt": "Libra",
+      "alt_fr": "Balance",
+      "alt_es": "Balanza",
+      "alt_de": "Waage",
+      "alt_pt": "Balança",
+      "alt_it": "Bilancia"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "4",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3830,31 +3686,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lmi" } },
   {
     "id": "LMi",
-    "data": {
-      "gen": "Leonis Minoris",
-      "alt": {
-        "alt": "Leo Minor",
-        "alt_fr": "Petit Lion",
-        "alt_es": "León Menor",
-        "alt_de": "Kleiner Löwe",
-        "alt_pt": "",
-        "alt_it": "Leone Minore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "65",
-      "loc": "north"
+    "gen": "Leonis Minoris",
+    "alt": {
+      "alt": "Leo Minor",
+      "alt_fr": "Petit Lion",
+      "alt_es": "León Menor",
+      "alt_de": "Kleiner Löwe",
+      "alt_pt": "",
+      "alt_it": "Leone Minore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "65",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3894,31 +3747,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lup" } },
   {
     "id": "Lup",
-    "data": {
-      "gen": "Lupi",
-      "alt": {
-        "alt": "Lupus",
-        "alt_fr": "Loup",
-        "alt_es": "Lobo",
-        "alt_de": "Wolf",
-        "alt_pt": "",
-        "alt_it": "Lupo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "49",
-      "loc": "south"
+    "gen": "Lupi",
+    "alt": {
+      "alt": "Lupus",
+      "alt_fr": "Loup",
+      "alt_es": "Lobo",
+      "alt_de": "Wolf",
+      "alt_pt": "",
+      "alt_it": "Lupo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "49",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -3992,31 +3842,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lyn" } },
   {
     "id": "Lyn",
-    "data": {
-      "gen": "Lyncis",
-      "alt": {
-        "alt": "Lynx",
-        "alt_fr": "Lynx",
-        "alt_es": "Lince",
-        "alt_de": "Luchs",
-        "alt_pt": "",
-        "alt_it": "Lince"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "50",
-      "loc": "north"
+    "gen": "Lyncis",
+    "alt": {
+      "alt": "Lynx",
+      "alt_fr": "Lynx",
+      "alt_es": "Lince",
+      "alt_de": "Luchs",
+      "alt_pt": "",
+      "alt_it": "Lince"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "50",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4060,31 +3907,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "lyr" } },
   {
     "id": "Lyr",
-    "data": {
-      "gen": "Lyrae",
-      "alt": {
-        "alt": "Lyra",
-        "alt_fr": "Lyre",
-        "alt_es": "Lira",
-        "alt_de": "Leier",
-        "alt_pt": "Lyra",
-        "alt_it": "Lira"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "51",
-      "loc": "north"
+    "gen": "Lyrae",
+    "alt": {
+      "alt": "Lyra",
+      "alt_fr": "Lyre",
+      "alt_es": "Lira",
+      "alt_de": "Leier",
+      "alt_pt": "Lyra",
+      "alt_it": "Lira"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "51",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4132,31 +3976,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "men" } },
   {
     "id": "Men",
-    "data": {
-      "gen": "Mensae",
-      "alt": {
-        "alt": "Mensa",
-        "alt_fr": "Table",
-        "alt_es": "Mesa",
-        "alt_de": "Tafelberg",
-        "alt_pt": "",
-        "alt_it": "Mensa"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "80",
-      "loc": "south"
+    "gen": "Mensae",
+    "alt": {
+      "alt": "Mensa",
+      "alt_fr": "Table",
+      "alt_es": "Mesa",
+      "alt_de": "Tafelberg",
+      "alt_pt": "",
+      "alt_it": "Mensa"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "80",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4188,31 +4029,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "mic" } },
   {
     "id": "Mic",
-    "data": {
-      "gen": "Microscopii",
-      "alt": {
-        "alt": "Microscopium",
-        "alt_fr": "Microscope",
-        "alt_es": "Microscopio",
-        "alt_de": "Mikroskop",
-        "alt_pt": "",
-        "alt_it": "Microscopio"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "53",
-      "loc": "south"
+    "gen": "Microscopii",
+    "alt": {
+      "alt": "Microscopium",
+      "alt_fr": "Microscope",
+      "alt_es": "Microscopio",
+      "alt_de": "Mikroskop",
+      "alt_pt": "",
+      "alt_it": "Microscopio"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "53",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4252,31 +4090,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "mon" } },
   {
     "id": "Mon",
-    "data": {
-      "gen": "Monocerotis",
-      "alt": {
-        "alt": "Monoceros",
-        "alt_fr": "Licorne",
-        "alt_es": "Unicorno",
-        "alt_de": "Einhorn",
-        "alt_pt": "Unicórnio",
-        "alt_it": "Unicorno"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "46",
-      "loc": "north"
+    "gen": "Monocerotis",
+    "alt": {
+      "alt": "Monoceros",
+      "alt_fr": "Licorne",
+      "alt_es": "Unicorno",
+      "alt_de": "Einhorn",
+      "alt_pt": "Unicórnio",
+      "alt_it": "Unicorno"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "46",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4334,31 +4169,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "mus" } },
   {
     "id": "Mus",
-    "data": {
-      "gen": "Muscae",
-      "alt": {
-        "alt": "Musca",
-        "alt_fr": "Mouche",
-        "alt_es": "Mosca",
-        "alt_de": "Fliege",
-        "alt_pt": "",
-        "alt_it": "Mosca"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "50",
-      "loc": "south"
+    "gen": "Muscae",
+    "alt": {
+      "alt": "Musca",
+      "alt_fr": "Mouche",
+      "alt_es": "Mosca",
+      "alt_de": "Fliege",
+      "alt_pt": "",
+      "alt_it": "Mosca"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "50",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4402,31 +4234,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "nor" } },
   {
     "id": "Nor",
-    "data": {
-      "gen": "Normae",
-      "alt": {
-        "alt": "Norma",
-        "alt_fr": "Règle",
-        "alt_es": "Escuadra",
-        "alt_de": "Winkelmaß",
-        "alt_pt": "",
-        "alt_it": "Regolo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "73",
-      "loc": "south"
+    "gen": "Normae",
+    "alt": {
+      "alt": "Norma",
+      "alt_fr": "Règle",
+      "alt_es": "Escuadra",
+      "alt_de": "Winkelmaß",
+      "alt_pt": "",
+      "alt_it": "Regolo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "73",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4462,31 +4291,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "oct" } },
   {
     "id": "Oct",
-    "data": {
-      "gen": "Octantis",
-      "alt": {
-        "alt": "Octans",
-        "alt_fr": "Octant",
-        "alt_es": "Octante",
-        "alt_de": "Oktant",
-        "alt_pt": "",
-        "alt_it": "Ottante"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "55",
-      "loc": "south"
+    "gen": "Octantis",
+    "alt": {
+      "alt": "Octans",
+      "alt_fr": "Octant",
+      "alt_es": "Octante",
+      "alt_de": "Oktant",
+      "alt_pt": "",
+      "alt_it": "Ottante"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "55",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4518,31 +4344,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "oph" } },
   {
     "id": "Oph",
-    "data": {
-      "gen": "Ophiuchi",
-      "alt": {
-        "alt": "Ophiuchus",
-        "alt_fr": "Ophiuchus",
-        "alt_es": "Ofiuco",
-        "alt_de": "Schlangenträger",
-        "alt_pt": "Serpentário",
-        "alt_it": "Ofiuco"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "57",
-      "loc": "zodiac"
+    "gen": "Ophiuchi",
+    "alt": {
+      "alt": "Ophiuchus",
+      "alt_fr": "Ophiuchus",
+      "alt_es": "Ofiuco",
+      "alt_de": "Schlangenträger",
+      "alt_pt": "Serpentário",
+      "alt_it": "Ofiuco"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "57",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4642,31 +4465,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ori" } },
   {
     "id": "Ori",
-    "data": {
-      "gen": "Orionis",
-      "alt": {
-        "alt": "Orion",
-        "alt_fr": "Orion",
-        "alt_es": "Orión",
-        "alt_de": "Orion",
-        "alt_pt": "Órion",
-        "alt_it": "Orione"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "La constellation d'Orion, le Chasseur, est une des principale constellation de l'hiver. Visible en regardant vèrs le sud, elle contient 7 étoiles principales, dont la très célèbre Bételgeuse. La ceinture, composée des 3 étoiles Alnitak, Alnilam et Mintaka, contient la très célèbre nébuleuse à tête de cheval. Mais la grande star de la constellatioon est la nébuleuse d'Orion.",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "58",
-      "loc": "north"
+    "gen": "Orionis",
+    "alt": {
+      "alt": "Orion",
+      "alt_fr": "Orion",
+      "alt_es": "Orión",
+      "alt_de": "Orion",
+      "alt_pt": "Órion",
+      "alt_it": "Orione"
     },
+    "description": {
+      "description": "",
+      "description_fr": "La constellation d'Orion, le Chasseur, est une des principale constellation de l'hiver. Visible en regardant vèrs le sud, elle contient 7 étoiles principales, dont la très célèbre Bételgeuse. La ceinture, composée des 3 étoiles Alnitak, Alnilam et Mintaka, contient la très célèbre nébuleuse à tête de cheval. Mais la grande star de la constellatioon est la nébuleuse d'Orion.",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "58",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4800,31 +4620,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "pav" } },
   {
     "id": "Pav",
-    "data": {
-      "gen": "Pavonis",
-      "alt": {
-        "alt": "Pavo",
-        "alt_fr": "Paon",
-        "alt_es": "Pavo",
-        "alt_de": "Pfau",
-        "alt_pt": "",
-        "alt_it": "Pavone"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "59",
-      "loc": "south"
+    "gen": "Pavonis",
+    "alt": {
+      "alt": "Pavo",
+      "alt_fr": "Paon",
+      "alt_es": "Pavo",
+      "alt_de": "Pfau",
+      "alt_pt": "",
+      "alt_it": "Pavone"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "59",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4884,31 +4701,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "peg" } },
   {
     "id": "Peg",
-    "data": {
-      "gen": "Pegasi",
-      "alt": {
-        "alt": "Pegasus",
-        "alt_fr": "Pégase",
-        "alt_es": "Pegaso",
-        "alt_de": "Pegasus",
-        "alt_pt": "",
-        "alt_it": "Pegaso"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "60",
-      "loc": "north"
+    "gen": "Pegasi",
+    "alt": {
+      "alt": "Pegasus",
+      "alt_fr": "Pégase",
+      "alt_es": "Pegaso",
+      "alt_de": "Pegasus",
+      "alt_pt": "",
+      "alt_it": "Pegaso"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "60",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -4990,31 +4804,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "per" } },
   {
     "id": "Per",
-    "data": {
-      "gen": "Persei",
-      "alt": {
-        "alt": "Perseus",
-        "alt_fr": "Persée",
-        "alt_es": "Perseo",
-        "alt_de": "Perseus",
-        "alt_pt": "Perseu",
-        "alt_it": "Perseo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "62",
-      "loc": "north"
+    "gen": "Persei",
+    "alt": {
+      "alt": "Perseus",
+      "alt_fr": "Persée",
+      "alt_es": "Perseo",
+      "alt_de": "Perseus",
+      "alt_pt": "Perseu",
+      "alt_it": "Perseo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "62",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5138,31 +4949,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "phe" } },
   {
     "id": "Phe",
-    "data": {
-      "gen": "Phoenicis",
-      "alt": {
-        "alt": "Phoenix",
-        "alt_fr": "Phénix",
-        "alt_es": "Fénix",
-        "alt_de": "Phönix",
-        "alt_pt": "",
-        "alt_it": "Fenice"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "68",
-      "loc": "south"
+    "gen": "Phoenicis",
+    "alt": {
+      "alt": "Phoenix",
+      "alt_fr": "Phénix",
+      "alt_es": "Fénix",
+      "alt_de": "Phönix",
+      "alt_pt": "",
+      "alt_it": "Fenice"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "68",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5210,31 +5018,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "pic" } },
   {
     "id": "Pic",
-    "data": {
-      "gen": "Pictoris",
-      "alt": {
-        "alt": "Pictor",
-        "alt_fr": "Peintre",
-        "alt_es": "Pintor",
-        "alt_de": "Maler",
-        "alt_pt": "",
-        "alt_it": "Pittore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "61",
-      "loc": "south"
+    "gen": "Pictoris",
+    "alt": {
+      "alt": "Pictor",
+      "alt_fr": "Peintre",
+      "alt_es": "Pintor",
+      "alt_de": "Maler",
+      "alt_pt": "",
+      "alt_it": "Pittore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "61",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5262,31 +5067,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "psa" } },
   {
     "id": "PsA",
-    "data": {
-      "gen": "Piscis Austrini",
-      "alt": {
-        "alt": "Piscis Austrinus",
-        "alt_fr": "Poisson austral",
-        "alt_es": "Pez Austral",
-        "alt_de": "Südlicher Fisch",
-        "alt_pt": "",
-        "alt_it": "Pesce Australe"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "69",
-      "loc": "south"
+    "gen": "Piscis Austrini",
+    "alt": {
+      "alt": "Piscis Austrinus",
+      "alt_fr": "Poisson austral",
+      "alt_es": "Pez Austral",
+      "alt_de": "Südlicher Fisch",
+      "alt_pt": "",
+      "alt_it": "Pesce Australe"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "69",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5342,31 +5144,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "psc" } },
   {
     "id": "Psc",
-    "data": {
-      "gen": "Piscium",
-      "alt": {
-        "alt": "Pisces",
-        "alt_fr": "Poissons",
-        "alt_es": "Peces",
-        "alt_de": "Fische",
-        "alt_pt": "Peixes",
-        "alt_it": "Pesci"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "71",
-      "loc": "zodiac"
+    "gen": "Piscium",
+    "alt": {
+      "alt": "Pisces",
+      "alt_fr": "Poissons",
+      "alt_es": "Peces",
+      "alt_de": "Fische",
+      "alt_pt": "Peixes",
+      "alt_it": "Pesci"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "71",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5484,31 +5283,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "pup" } },
   {
     "id": "Pup",
-    "data": {
-      "gen": "Puppis",
-      "alt": {
-        "alt": "Puppis",
-        "alt_fr": "Poupe",
-        "alt_es": "Popa",
-        "alt_de": "Achterdeck",
-        "alt_pt": "Cão Menor",
-        "alt_it": "Poppa"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "72",
-      "loc": "north"
+    "gen": "Puppis",
+    "alt": {
+      "alt": "Puppis",
+      "alt_fr": "Poupe",
+      "alt_es": "Popa",
+      "alt_de": "Achterdeck",
+      "alt_pt": "Cão Menor",
+      "alt_it": "Poppa"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "72",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5578,31 +5374,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "pyx" } },
   {
     "id": "Pyx",
-    "data": {
-      "gen": "Pyxidis",
-      "alt": {
-        "alt": "Pyxis",
-        "alt_fr": "Boussole",
-        "alt_es": "Brújula",
-        "alt_de": "Schiffskompass",
-        "alt_pt": "Bússola",
-        "alt_it": "Bussola"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "7",
-      "loc": "south"
+    "gen": "Pyxidis",
+    "alt": {
+      "alt": "Pyxis",
+      "alt_fr": "Boussole",
+      "alt_es": "Brújula",
+      "alt_de": "Schiffskompass",
+      "alt_pt": "Bússola",
+      "alt_it": "Bussola"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "7",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5634,31 +5427,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ret" } },
   {
     "id": "Ret",
-    "data": {
-      "gen": "Reticuli",
-      "alt": {
-        "alt": "Reticulum",
-        "alt_fr": "Réticule",
-        "alt_es": "Retículo",
-        "alt_de": "Netz",
-        "alt_pt": "",
-        "alt_it": "Reticolo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "74",
-      "loc": "south"
+    "gen": "Reticuli",
+    "alt": {
+      "alt": "Reticulum",
+      "alt_fr": "Réticule",
+      "alt_es": "Retículo",
+      "alt_de": "Netz",
+      "alt_pt": "",
+      "alt_it": "Reticolo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "74",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5694,31 +5484,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "sco" } },
   {
     "id": "Sco",
-    "data": {
-      "gen": "Scorpii",
-      "alt": {
-        "alt": "Scorpius",
-        "alt_fr": "Scorpion",
-        "alt_es": "Escorpión",
-        "alt_de": "Skorpion",
-        "alt_pt": "Escorpião",
-        "alt_it": "Scorpione"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "76",
-      "loc": "zodiac"
+    "gen": "Scorpii",
+    "alt": {
+      "alt": "Scorpius",
+      "alt_fr": "Scorpion",
+      "alt_es": "Escorpión",
+      "alt_de": "Skorpion",
+      "alt_pt": "Escorpião",
+      "alt_it": "Scorpione"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "76",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5796,31 +5583,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "scl" } },
   {
     "id": "Scl",
-    "data": {
-      "gen": "Sculptoris",
-      "alt": {
-        "alt": "Sculptor",
-        "alt_fr": "Sculpteur",
-        "alt_es": "Escultor",
-        "alt_de": "Bildhauer",
-        "alt_pt": "",
-        "alt_it": "Scultore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "77",
-      "loc": "south"
+    "gen": "Sculptoris",
+    "alt": {
+      "alt": "Sculptor",
+      "alt_fr": "Sculpteur",
+      "alt_es": "Escultor",
+      "alt_de": "Bildhauer",
+      "alt_pt": "",
+      "alt_it": "Scultore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "77",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5852,31 +5636,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "sct" } },
   {
     "id": "Sct",
-    "data": {
-      "gen": "Scuti",
-      "alt": {
-        "alt": "Scutum",
-        "alt_fr": "Écu de Sobieski",
-        "alt_es": "Escudo",
-        "alt_de": "Schild",
-        "alt_pt": "Scutum",
-        "alt_it": "Scudo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "31",
-      "loc": "north"
+    "gen": "Scuti",
+    "alt": {
+      "alt": "Scutum",
+      "alt_fr": "Écu de Sobieski",
+      "alt_es": "Escudo",
+      "alt_de": "Schild",
+      "alt_pt": "Scutum",
+      "alt_it": "Scudo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "31",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5912,31 +5693,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "ser" } },
   {
     "id": "Ser",
-    "data": {
-      "gen": "Serpentis",
-      "alt": {
-        "alt": "Serpens",
-        "alt_fr": "Serpent",
-        "alt_es": "Serpiente",
-        "alt_de": "Schlange",
-        "alt_pt": "Serpente",
-        "alt_it": "Serpente"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "78",
-      "loc": "north"
+    "gen": "Serpentis",
+    "alt": {
+      "alt": "Serpens",
+      "alt_fr": "Serpent",
+      "alt_es": "Serpiente",
+      "alt_de": "Schlange",
+      "alt_pt": "Serpente",
+      "alt_it": "Serpente"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "78",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -5988,31 +5766,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "sex" } },
   {
     "id": "Sex",
-    "data": {
-      "gen": "Sextantis",
-      "alt": {
-        "alt": "Sextans",
-        "alt_fr": "Sextant",
-        "alt_es": "Sextante",
-        "alt_de": "Sextant",
-        "alt_pt": "",
-        "alt_it": "Sestante"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "79",
-      "loc": "south"
+    "gen": "Sextantis",
+    "alt": {
+      "alt": "Sextans",
+      "alt_fr": "Sextant",
+      "alt_es": "Sextante",
+      "alt_de": "Sextant",
+      "alt_pt": "",
+      "alt_it": "Sestante"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "79",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6044,31 +5819,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "sge" } },
   {
     "id": "Sge",
-    "data": {
-      "gen": "Sagittae",
-      "alt": {
-        "alt": "Sagitta",
-        "alt_fr": "La Flèche",
-        "alt_es": "Flecha",
-        "alt_de": "Pfeil",
-        "alt_pt": "Flecha",
-        "alt_it": "Freccia"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "33",
-      "loc": "north"
+    "gen": "Sagittae",
+    "alt": {
+      "alt": "Sagitta",
+      "alt_fr": "La Flèche",
+      "alt_es": "Flecha",
+      "alt_de": "Pfeil",
+      "alt_pt": "Flecha",
+      "alt_it": "Freccia"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "33",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6106,31 +5878,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "sgr" } },
   {
     "id": "Sgr",
-    "data": {
-      "gen": "Sagittarii",
-      "alt": {
-        "alt": "Sagittarius",
-        "alt_fr": "Sagittaire",
-        "alt_es": "Sagitario",
-        "alt_de": "Schütze",
-        "alt_pt": "Sagitário",
-        "alt_it": "Sagittario"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "75",
-      "loc": "zodiac"
+    "gen": "Sagittarii",
+    "alt": {
+      "alt": "Sagittarius",
+      "alt_fr": "Sagittaire",
+      "alt_es": "Sagitario",
+      "alt_de": "Schütze",
+      "alt_pt": "Sagitário",
+      "alt_it": "Sagittario"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "75",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6284,31 +6053,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "tau" } },
   {
     "id": "Tau",
-    "data": {
-      "gen": "Tauri",
-      "alt": {
-        "alt": "Taurus",
-        "alt_fr": "Taureau",
-        "alt_es": "Toro",
-        "alt_de": "Stier",
-        "alt_pt": "Touro",
-        "alt_it": "Toro"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "81",
-      "loc": "zodiac"
+    "gen": "Tauri",
+    "alt": {
+      "alt": "Taurus",
+      "alt_fr": "Taureau",
+      "alt_es": "Toro",
+      "alt_de": "Stier",
+      "alt_pt": "Touro",
+      "alt_it": "Toro"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "81",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6384,31 +6150,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "tel" } },
   {
     "id": "Tel",
-    "data": {
-      "gen": "Telescopii",
-      "alt": {
-        "alt": "Telescopium",
-        "alt_fr": "Téléscope",
-        "alt_es": "Telescopio",
-        "alt_de": "Teleskop",
-        "alt_pt": "",
-        "alt_it": "Telescopio"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "82",
-      "loc": "south"
+    "gen": "Telescopii",
+    "alt": {
+      "alt": "Telescopium",
+      "alt_fr": "Téléscope",
+      "alt_es": "Telescopio",
+      "alt_de": "Teleskop",
+      "alt_pt": "",
+      "alt_it": "Telescopio"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "82",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6436,31 +6199,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "tra" } },
   {
     "id": "TrA",
-    "data": {
-      "gen": "Trianguli Australis",
-      "alt": {
-        "alt": "Triangulum Australe",
-        "alt_fr": "Triangle australe",
-        "alt_es": "Triángulo Austral",
-        "alt_de": "Südliches Dreieck",
-        "alt_pt": "",
-        "alt_it": "Triangolo Australe"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "85",
-      "loc": "south"
+    "gen": "Trianguli Australis",
+    "alt": {
+      "alt": "Triangulum Australe",
+      "alt_fr": "Triangle australe",
+      "alt_es": "Triángulo Austral",
+      "alt_de": "Südliches Dreieck",
+      "alt_pt": "",
+      "alt_it": "Triangolo Australe"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "85",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6492,31 +6252,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "tri" } },
   {
     "id": "Tri",
-    "data": {
-      "gen": "Trianguli",
-      "alt": {
-        "alt": "Triangulum",
-        "alt_fr": "Triangle",
-        "alt_es": "Triángulo",
-        "alt_de": "Dreieck",
-        "alt_pt": "Triângulo",
-        "alt_it": "Triangolo"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "84",
-      "loc": "north"
+    "gen": "Trianguli",
+    "alt": {
+      "alt": "Triangulum",
+      "alt_fr": "Triangle",
+      "alt_es": "Triángulo",
+      "alt_de": "Dreieck",
+      "alt_pt": "Triângulo",
+      "alt_it": "Triangolo"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "84",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6548,31 +6305,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "tuc" } },
   {
     "id": "Tuc",
-    "data": {
-      "gen": "Tucanae",
-      "alt": {
-        "alt": "Tucana",
-        "alt_fr": "Toucan",
-        "alt_es": "Tucán",
-        "alt_de": "Tukan",
-        "alt_pt": "",
-        "alt_it": "Tucano"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "83",
-      "loc": "south"
+    "gen": "Tucanae",
+    "alt": {
+      "alt": "Tucana",
+      "alt_fr": "Toucan",
+      "alt_es": "Tucán",
+      "alt_de": "Tukan",
+      "alt_pt": "",
+      "alt_it": "Tucano"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "83",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6616,31 +6370,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "uma" } },
   {
     "id": "UMa",
-    "data": {
-      "gen": "Ursae Majoris",
-      "alt": {
-        "alt": "Ursa Major",
-        "alt_fr": "Grande Ourse",
-        "alt_es": "Osa Mayor",
-        "alt_de": "Großer Bär",
-        "alt_pt": "Ursa Maior",
-        "alt_it": "Orsa Maggiore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "38",
-      "loc": "north"
+    "gen": "Ursae Majoris",
+    "alt": {
+      "alt": "Ursa Major",
+      "alt_fr": "Grande Ourse",
+      "alt_es": "Osa Mayor",
+      "alt_de": "Großer Bär",
+      "alt_pt": "Ursa Maior",
+      "alt_it": "Orsa Maggiore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "38",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6780,31 +6531,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "umi" } },
   {
     "id": "UMi",
-    "data": {
-      "gen": "Ursae Minoris",
-      "alt": {
-        "alt": "Ursa Minor",
-        "alt_fr": "Petite Ourse",
-        "alt_es": "Osa Menor",
-        "alt_de": "Kleiner Bär",
-        "alt_pt": "",
-        "alt_it": "Orsa Minore"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "67",
-      "loc": "north"
+    "gen": "Ursae Minoris",
+    "alt": {
+      "alt": "Ursa Minor",
+      "alt_fr": "Petite Ourse",
+      "alt_es": "Osa Menor",
+      "alt_de": "Kleiner Bär",
+      "alt_pt": "",
+      "alt_it": "Orsa Minore"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "67",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6852,31 +6600,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "vel" } },
   {
     "id": "Vel",
-    "data": {
-      "gen": "Velorum",
-      "alt": {
-        "alt": "Vela",
-        "alt_fr": "Voiles",
-        "alt_es": "Velas",
-        "alt_de": "Segel",
-        "alt_pt": "",
-        "alt_it": "Vele"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "2",
-      "order": "88",
-      "loc": "south"
+    "gen": "Velorum",
+    "alt": {
+      "alt": "Vela",
+      "alt_fr": "Voiles",
+      "alt_es": "Velas",
+      "alt_de": "Segel",
+      "alt_pt": "",
+      "alt_it": "Vele"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "2",
+    "order": "88",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -6924,31 +6669,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "vir" } },
   {
     "id": "Vir",
-    "data": {
-      "gen": "Virginis",
-      "alt": {
-        "alt": "Virgo",
-        "alt_fr": "Vièrge",
-        "alt_es": "Virgen",
-        "alt_de": "Jungfrau",
-        "alt_pt": "Virgem",
-        "alt_it": "Vergine"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "1",
-      "order": "87",
-      "loc": "zodiac"
+    "gen": "Virginis",
+    "alt": {
+      "alt": "Virgo",
+      "alt_fr": "Vièrge",
+      "alt_es": "Virgen",
+      "alt_de": "Jungfrau",
+      "alt_pt": "Virgem",
+      "alt_it": "Vergine"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "1",
+    "order": "87",
+    "loc": "zodiac",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -7028,31 +6770,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "vol" } },
   {
     "id": "Vol",
-    "data": {
-      "gen": "Volantis",
-      "alt": {
-        "alt": "Volans",
-        "alt_fr": "Poisson volant",
-        "alt_es": "Pez Volador",
-        "alt_de": "Fliegender Fisch",
-        "alt_pt": "",
-        "alt_it": "Pesce Volante"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "70",
-      "loc": "south"
+    "gen": "Volantis",
+    "alt": {
+      "alt": "Volans",
+      "alt_fr": "Poisson volant",
+      "alt_es": "Pez Volador",
+      "alt_de": "Fliegender Fisch",
+      "alt_pt": "",
+      "alt_it": "Pesce Volante"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "70",
+    "loc": "south",
     "geometry": {
       "type": "Point",
       "coordinates": [
@@ -7096,31 +6835,28 @@
       ]
     }
   },
-  {"create": {"_index": "constellations", "_type": "_doc", "_id": "vul" } },
   {
     "id": "Vul",
-    "data": {
-      "gen": "Vulpeculae",
-      "alt": {
-        "alt": "Vulpecula",
-        "alt_fr": "Petit Renard",
-        "alt_es": "Zorra",
-        "alt_de": "Fuchs",
-        "alt_pt": "Raposa",
-        "alt_it": "Volpetta"
-      },
-      "description": {
-        "description": "",
-        "description_fr": "",
-        "description_es": "",
-        "description_de": "",
-        "description_pt": "",
-        "description_it": ""
-      },
-      "rank": "3",
-      "order": "66",
-      "loc": "north"
+    "gen": "Vulpeculae",
+    "alt": {
+      "alt": "Vulpecula",
+      "alt_fr": "Petit Renard",
+      "alt_es": "Zorra",
+      "alt_de": "Fuchs",
+      "alt_pt": "Raposa",
+      "alt_it": "Volpetta"
     },
+    "description": {
+      "description": "",
+      "description_fr": "",
+      "description_es": "",
+      "description_de": "",
+      "description_pt": "",
+      "description_it": ""
+    },
+    "rank": "3",
+    "order": "66",
+    "loc": "north",
     "geometry": {
       "type": "Point",
       "coordinates": [
