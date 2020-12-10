@@ -5,7 +5,7 @@ namespace App\Entity\ES;
 
 use App\Classes\Utils;
 use App\Repository\DsoRepository;
-use Astrobin\Response\Image;
+use AstrobinWs\Response\Image;
 
 /**
  * Class Dso

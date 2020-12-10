@@ -110,6 +110,15 @@
             "config/packages/google_recaptcha.yaml"
         ]
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.2.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4.0"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.7.0"
+    },
     "guzzlehttp/ringphp": {
         "version": "1.1.1"
     },
@@ -178,8 +187,17 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.1.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "react/promise": {
         "version": "v2.7.0"
@@ -225,6 +243,9 @@
     },
     "symfony/dependency-injection": {
         "version": "v4.2.0"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
         "version": "v4.2.0"

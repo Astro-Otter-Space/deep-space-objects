@@ -3,16 +3,13 @@
 
 namespace App\Command;
 
-use App\Helpers\MailHelper;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
-use Astrobin\Exceptions\WsException;
-use Astrobin\Exceptions\WsResponseException;
-use Astrobin\Services\GetImage;
+use AstrobinWs\Exceptions\WsException;
+use AstrobinWs\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 /**

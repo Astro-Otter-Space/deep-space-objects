@@ -154,7 +154,7 @@ class ConvertSrcToBulkCommand extends Command
                         ];
                         $lineReplace = preg_replace_callback('#%(.*?)%#', static function($match) use ($mapping, $id) {
                             $findKey = $match[1];
-                            if (in_array($findKey, array_keys($mapping))) {
+                            if (array_key_exists($findKey, $mapping)) {
                                 $method = $mapping[$findKey];
                                 return self::$method($id);
                             } else {

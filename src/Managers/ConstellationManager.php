@@ -6,7 +6,7 @@ use App\Classes\Utils;
 use App\Entity\ES\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
-use Astrobin\Response\Image;
+use AstrobinWs\Response\Image;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
