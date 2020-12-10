@@ -12,18 +12,18 @@ use DateTimeInterface;
  */
 class Utils
 {
-    const PARSEC = 0.3066020852;
-    const UNASSIGNED = 'unassigned';
+    public const PARSEC = 0.3066020852;
+    public const UNASSIGNED = 'unassigned';
 
-    const GLUE_DASH = ' - ';
+    public const GLUE_DASH = ' - ';
 
-    const IMG_DEFAULT = '/build/images/default.png';
-    const IMG_LARGE_DEFAULT = '/build/images/default_large.jpg';
+    public const IMG_DEFAULT = '/build/images/default.png';
+    public const IMG_LARGE_DEFAULT = '/build/images/default_large.jpg';
 
-    const FORMAT_DATE_ES = DateTimeInterface::RFC3339;
+    public const FORMAT_DATE_ES = DateTimeInterface::RFC3339;
 
-    const CSV_DELIMITER = ';';
-    const CSV_ENCLOSURE = '"';
+    public const CSV_DELIMITER = ';';
+    public const CSV_ENCLOSURE = '"';
 
     private static $catalogMapping = [
         'NG' => 'ngc',
@@ -287,7 +287,7 @@ class Utils
 
         $ret = $matches[0];
         foreach ($ret as &$match) {
-            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+            $match = $match === strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
 
         return implode(trim(self::GLUE_DASH), $ret);
@@ -343,7 +343,7 @@ class Utils
         if (!is_null($dec)) {
 
             $deg = (float)$matches[0][0];
-            $isNegative = ($deg < 0)? true : false;
+            $isNegative = $deg < 0;
 
             $deg = (float)str_replace('-', '', $matches[0][0]);
             $mn = (float)$matches[0][1];
