@@ -25,7 +25,7 @@ class DsoExtension extends AbstractExtension
     /**
      * @return array|\Twig_Filter[]
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('convert_ly_pc', [$this, 'convertLyToPc']),
@@ -38,7 +38,7 @@ class DsoExtension extends AbstractExtension
     /**
      * @return array|\Twig_Function[]
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('uasort', [$this, 'uasort']),
@@ -72,7 +72,7 @@ class DsoExtension extends AbstractExtension
      * @param $number
      * @return string
      */
-    public function numberFormatByLocale($number)
+    public function numberFormatByLocale($number): string
     {
         return Utils::numberFormatByLocale($number);
     }
@@ -93,7 +93,7 @@ class DsoExtension extends AbstractExtension
      */
     public function uasort($tab, $key)
     {
-        uasort($tab, function($a, $b) use($key) {
+        uasort($tab, static function($a, $b) use($key) {
             return ($a[$key] < $b[$key]) ? -1 : 1;
         });
         return $tab;
