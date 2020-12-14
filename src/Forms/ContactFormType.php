@@ -45,7 +45,7 @@ class ContactFormType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('lastname', TextType::class, [
             'label' => 'contact.form.lastname',
@@ -184,7 +184,7 @@ class ContactFormType extends AbstractType
     /**
      * @return string
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'contactus';
     }
