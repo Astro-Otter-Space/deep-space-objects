@@ -2,6 +2,8 @@
 
 namespace App\Entity\DTO;
 
+use App\Entity\ES\Dso;
+
 /**
  * Class DsoDTO
  *
@@ -9,38 +11,78 @@ namespace App\Entity\DTO;
  */
 final class DsoDTO
 {
-
+    /**
+     * META
+     */
     /** @var  */
     private $id;
     /** @var  */
-    private $title;
+    private $elasticSearchId;
     /** @var  */
+    private $fullUrl;
+    /** @var  */
+    private $locale;
+
+    /** @var Dso */
+    private $dso;
+
+    /**
+     * Data
+     */
+    /**
+     * @var
+     */
+    private $name;
+    private $catalogs;
     private $desigs;
-    /** @var  */
-    private $constellation;
-    /** @var  */
+    private $alt;
+    private $description;
     private $type;
-    /** @var  */
-    private $catalog;
-
-
-    /** @var  */
     private $magnitude;
-
-    /** @var  */
-    private $dim;
-    /** @var  */
+    private $constellation;
     private $distAl;
-    /** @var  */
-    private $distPC;
-    /** @var  */
+    private $distPc;
     private $discover;
-    /** @var  */
     private $discoverYear;
-    /** @var  */
-    private $ra;
-    /** @var  */
-    private $dec;
+    private $astrobin;
+    private $geometry;
+    private $dim;
+
+    /**
+     * DsoDTO constructor.
+     *
+     * @param Dso $dso
+     * @param string $locale
+     * @param string $elasticId
+     */
+    public function __construct(Dso $dso, string $locale, string $elasticId)
+    {
+        $this->setDso($dso)
+            ->setLocale($locale)
+            ->setElasticSearchId($elasticId);
+    }
+
+    /**
+     * @param mixed $locale
+     *
+     * @return DsoDTO
+     */
+    public function setLocale($locale): DsoDTO
+    {
+        $this->locale = $locale;
+        return $this;
+    }
+
+    /**
+     * @param Dso $dso
+     *
+     * @return DsoDTO
+     */
+    public function setDso(Dso $dso): DsoDTO
+    {
+        $this->dso = $dso;
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -55,7 +97,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setId(?string $id): self
+    public function setId($id): DsoDTO
     {
         $this->id = $id;
         return $this;
@@ -64,19 +106,76 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getElasticSearchId()
     {
-        return $this->title;
+        return $this->elasticSearchId;
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $elasticSearchId
      *
      * @return DsoDTO
      */
-    public function setTitle(?string $title): self
+    public function setElasticSearchId($elasticSearchId): DsoDTO
     {
-        $this->title = $title;
+        $this->elasticSearchId = $elasticSearchId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullUrl()
+    {
+        return $this->fullUrl;
+    }
+
+    /**
+     * @param mixed $fullUrl
+     *
+     * @return DsoDTO
+     */
+    public function setFullUrl($fullUrl): DsoDTO
+    {
+        $this->fullUrl = $fullUrl;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     *
+     * @return DsoDTO
+     */
+    public function setName($name): DsoDTO
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCatalogs()
+    {
+        return $this->catalogs;
+    }
+
+    /**
+     * @param mixed $catalogs
+     *
+     * @return DsoDTO
+     */
+    public function setCatalogs($catalogs): DsoDTO
+    {
+        $this->catalogs = $catalogs;
         return $this;
     }
 
@@ -93,7 +192,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setDesigs($desigs)
+    public function setDesigs($desigs): DsoDTO
     {
         $this->desigs = $desigs;
         return $this;
@@ -102,19 +201,38 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getCatalog()
+    public function getAlt()
     {
-        return $this->catalog;
+        return $this->alt;
     }
 
     /**
-     * @param mixed $catalog
+     * @param mixed $alt
      *
      * @return DsoDTO
      */
-    public function setCatalog($catalog): self
+    public function setAlt($alt): DsoDTO
     {
-        $this->catalog = $catalog;
+        $this->alt = $alt;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     *
+     * @return DsoDTO
+     */
+    public function setDescription($description): DsoDTO
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -131,7 +249,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setType(?string $type): self
+    public function setType($type): DsoDTO
     {
         $this->type = $type;
         return $this;
@@ -150,7 +268,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setMagnitude($magnitude): self
+    public function setMagnitude($magnitude): DsoDTO
     {
         $this->magnitude = $magnitude;
         return $this;
@@ -169,47 +287,9 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setConstellation($constellation): self
+    public function setConstellation($constellation): DsoDTO
     {
         $this->constellation = $constellation;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAlt()
-    {
-        return $this->alt;
-    }
-
-    /**
-     * @param mixed $alt
-     *
-     * @return DsoDTO
-     */
-    public function setAlt($alt): self
-    {
-        $this->alt = $alt;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDim()
-    {
-        return $this->dim;
-    }
-
-    /**
-     * @param mixed $dim
-     *
-     * @return DsoDTO
-     */
-    public function setDim($dim): self
-    {
-        $this->dim = $dim;
         return $this;
     }
 
@@ -226,7 +306,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setDistAl($distAl): self
+    public function setDistAl($distAl): DsoDTO
     {
         $this->distAl = $distAl;
         return $this;
@@ -235,19 +315,19 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getDistPC()
+    public function getDistPc()
     {
-        return $this->distPC;
+        return $this->distPc;
     }
 
     /**
-     * @param mixed $distPC
+     * @param mixed $distPc
      *
      * @return DsoDTO
      */
-    public function setDistPC($distPC)
+    public function setDistPc($distPc): DsoDTO
     {
-        $this->distPC = $distPC;
+        $this->distPc = $distPc;
         return $this;
     }
 
@@ -264,7 +344,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setDiscover($discover): self
+    public function setDiscover($discover): DsoDTO
     {
         $this->discover = $discover;
         return $this;
@@ -283,7 +363,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setDiscoverYear($discoverYear): self
+    public function setDiscoverYear($discoverYear): DsoDTO
     {
         $this->discoverYear = $discoverYear;
         return $this;
@@ -292,41 +372,58 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getRa()
+    public function getAstrobin()
     {
-        return $this->ra;
+        return $this->astrobin;
     }
 
     /**
-     * @param mixed $ra
+     * @param mixed $astrobin
      *
      * @return DsoDTO
      */
-    public function setRa($ra): self
+    public function setAstrobin($astrobin): DsoDTO
     {
-        $this->ra = $ra;
+        $this->astrobin = $astrobin;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getDec()
+    public function getGeometry()
     {
-        return $this->dec;
+        return $this->geometry;
     }
 
     /**
-     * @param mixed $dec
+     * @param mixed $geometry
      *
      * @return DsoDTO
      */
-    public function setDec($dec): self
+    public function setGeometry($geometry): DsoDTO
     {
-        $this->dec = $dec;
+        $this->geometry = $geometry;
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDim()
+    {
+        return $this->dim;
+    }
 
+    /**
+     * @param mixed $dim
+     *
+     * @return DsoDTO
+     */
+    public function setDim($dim): DsoDTO
+    {
+        $this->dim = $dim;
+        return $this;
+    }
 
 }
