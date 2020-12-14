@@ -24,7 +24,7 @@ class ListDso implements \IteratorAggregate
     /**
      * @param Dso $dso
      */
-    public function addDso(Dso $dso)
+    public function addDso(Dso $dso): void
     {
         $this->listDso[] = $dso;
     }

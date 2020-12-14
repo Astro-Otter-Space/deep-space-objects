@@ -24,7 +24,7 @@ class ListConstellation implements \IteratorAggregate
     /**
      * @param Constellation $constellation
      */
-    public function addConstellation(Constellation $constellation)
+    public function addConstellation(Constellation $constellation): void
     {
         $this->listConstellation[] = $constellation;
     }

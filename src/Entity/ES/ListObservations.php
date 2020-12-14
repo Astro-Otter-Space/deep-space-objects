@@ -24,7 +24,7 @@ class ListObservations implements \IteratorAggregate
     /**
      * @param Observation $observation
      */
-    public function addObservation(Observation $observation)
+    public function addObservation(Observation $observation): void
     {
         $this->listObservations[] = $observation;
     }
