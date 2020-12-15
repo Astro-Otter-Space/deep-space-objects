@@ -27,12 +27,12 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
-    const FROM = 0;
-    const SMALL_SIZE = 10;
-    const SIZE = 20;
-    const MAX_SIZE = 9999;
-    const SORT_ASC = 'asc';
-    const SORT_DESC = 'desc';
+    public const FROM = 0;
+    public const SMALL_SIZE = 10;
+    public const SIZE = 20;
+    public const MAX_SIZE = 9999;
+    public const SORT_ASC = 'asc';
+    public const SORT_DESC = 'desc';
 
     /**
      * AbstractRepository constructor.
@@ -46,7 +46,7 @@ abstract class AbstractRepository
     /**
      * @return mixed
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         if (is_null($this->locale)) {
             $this->locale = 'en';
@@ -59,7 +59,7 @@ abstract class AbstractRepository
      *
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale($locale): AbstractRepository
     {
         $this->locale = $locale;
         return $this;
@@ -87,7 +87,7 @@ abstract class AbstractRepository
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
-        return $search->addIndex($this->getType())->search($matchQuery);
+        return $search->addIndex($this->getIndex())->search($matchQuery);
     }
 
 
@@ -96,9 +96,9 @@ abstract class AbstractRepository
      * @param $listSearchFields
      * @return ResultSet
      */
-    public function requestBySearchTerms($searchTerm, $listSearchFields)
+    public function requestBySearchTerms($searchTerm, $listSearchFields): ResultSet
     {
-        $this->client->getIndex($this->getType());
+        $this->client->getIndex($this->getIndex());
 
         /** @var Query\MultiMatch $query */
         $query = new Query\MultiMatch();
@@ -108,7 +108,7 @@ abstract class AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search->addIndex($this->getType());
+        $search->addIndex($this->getIndex());
 
         return $search->search($query);
     }
@@ -121,7 +121,7 @@ abstract class AbstractRepository
     public function addNewDocument(Document $document): Response
     {
         /** @var Index $elasticIndex */
-        $elasticIndex = $this->client->getIndex($this->getType());
+        $elasticIndex = $this->client->getIndex($this->getIndex());
         /** @var Type $elasticType */
         $elasticType = $elasticIndex->getType('_doc');
 
@@ -143,7 +143,7 @@ abstract class AbstractRepository
     {
         /** @var Bulk $bulk */
         $bulk = new Bulk($this->client);
-        $bulk->setIndex($this->getType())->setType('_doc');
+        $bulk->setIndex($this->getIndex())->setType('_doc');
 
         foreach ($listItems as $doc) {
             /** @var Document $doc */
@@ -162,12 +162,12 @@ abstract class AbstractRepository
         $responseBulk = $bulk->send();
 
         // Refresh index
-        $this->client->getIndex($this->getType())->refresh();
+        $this->client->getIndex($this->getIndex())->refresh();
 
         return $responseBulk->isOk();
     }
 
     abstract protected function getEntity();
-
-    abstract protected function getType();
+    abstract protected function getDTO();
+    abstract protected function getIndex();
 }

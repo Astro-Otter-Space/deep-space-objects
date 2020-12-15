@@ -127,13 +127,13 @@ final class ConstellationRepository extends AbstractRepository
      */
     public function getEntity(): string
     {
-        return 'App\Entity\ES\Constellation';
+        return Constellation::class;
     }
 
     /**
      * @return string
      */
-    public function getType(): string
+    public function getIndex(): string
     {
         return self::INDEX_NAME;
     }

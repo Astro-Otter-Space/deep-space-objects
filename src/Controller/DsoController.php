@@ -34,7 +34,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DsoController extends AbstractController
 {
-    const DEFAULT_PAGE = 1;
+    public const DEFAULT_PAGE = 1;
 
     use DsoTrait;
 
@@ -207,7 +207,7 @@ class DsoController extends AbstractController
      * @throws WsException
      * @throws \ReflectionException
      */
-    private function getListImages($dsoId)
+    private function getListImages($dsoId): array
     {
         $tabImages = [];
 
@@ -267,7 +267,7 @@ class DsoController extends AbstractController
      *
      * @return RedirectResponse
      */
-    public function catalogRedirect(Request $request, ?string $catalog)
+    public function catalogRedirect(Request $request, ?string $catalog): RedirectResponse
     {
         return $this->redirectToRoute('dso_catalog', ['catalog' => $catalog]);
     }
@@ -308,18 +308,18 @@ class DsoController extends AbstractController
             $authorizedFilters = $this->dsoRepository->getListAggregates(true);
 
             // Removed unauthorized keys
-            $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
-                return in_array($key, $authorizedFilters);
+            $filters = array_filter($request->query->all(), static function($key) use($authorizedFilters) {
+                return in_array($key, $authorizedFilters, true);
             }, ARRAY_FILTER_USE_KEY);
 
             // Sanitize data (todo : try better)
-            array_walk($filters, function (&$value, $key) {
+            array_walk($filters, static function (&$value, $key) {
                 $value = filter_var($value, FILTER_SANITIZE_STRING);
             });
         }
 
         // Search results
-        list($listDso, $listAggregates, $nbItems) = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters);
+        [$listDso, $listAggregates, $nbItems] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters, null, true);
 
         // List facets
         $allQueryParameters = $request->query->all();
@@ -335,7 +335,7 @@ class DsoController extends AbstractController
             }, $listFacets);
 
             $routeDelete = '';
-            if (in_array($type, array_keys($filters))) {
+            if (array_key_exists($type, $filters)) {
                 $routeDelete = $router->generate(
                   'dso_catalog',
                     array_diff_key(

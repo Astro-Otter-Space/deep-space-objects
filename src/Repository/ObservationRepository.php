@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Repository;
 
 use App\Entity\ES\ListObservations;
@@ -19,7 +18,7 @@ use Elastica\Search;
  */
 final class ObservationRepository extends AbstractRepository
 {
-    const INDEX_NAME = 'observations';
+    public const INDEX_NAME = 'observations';
 
     private static $listSearchFields = [
         'id',
@@ -42,16 +41,19 @@ final class ObservationRepository extends AbstractRepository
             $observationDoc = $document->getResults()[0]->getDocument();
 
             return $this->buildEntityFromDocument($observationDoc);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
 
     /**
      * Build list of Observation from search term
+     *
      * @param $terms
+     *
      * @return array
+     * @throws \ReflectionException
      */
     public function getObservationsBySearchTerms($terms): array
     {
@@ -104,7 +106,7 @@ final class ObservationRepository extends AbstractRepository
      *
      * @return Response
      */
-    public function add($observationArray, $id)
+    public function add(array $observationArray, $id): Response
     {
         /** @var Document $document */
         $document = new Document($id, $observationArray);
@@ -116,15 +118,15 @@ final class ObservationRepository extends AbstractRepository
     /**
      * @return string
      */
-    protected function getEntity()
+    protected function getEntity(): string
     {
-        return 'App\Entity\ES\Observation';
+        return Observation::class;
     }
 
     /**
      * @return string
      */
-    public function getType(): string
+    public function getIndex(): string
     {
         return self::INDEX_NAME;
     }
