@@ -1,5 +1,6 @@
 # Deep Space Objects
 Atlas for deep space objects (Symfony 4 / Elastic Search / Vue.js)
+Version 1.1.0
 
 Installation
 ==
@@ -81,7 +82,7 @@ Symfony app :
 ### Instal dependencies - PROD
 ```
 cd /path/to/project
-php72 composer.phar install --no-dev --optimize-autoloader
+php73 composer.phar install --no-dev --optimize-autoloader
 yarn install
 yarn encore prod
 ```
@@ -205,32 +206,30 @@ Sources :
       "catalog": null,
       "updated_at": null,
       "order": null,
-      "data": {
-        "desigs": [""],
-        "alt": {
-          "alt": "",
-          "alt_fr": "",
-          "alt_es": "",
-          "alt_de": "",
-          "alt_pt": "",
-          "alt_it": ""
-        },
-        "description": {
-            "description": "",
-            "description_fr": ""
-        },
-        "type": "",
-        "mag": 999,
-        "dim": "",
-        "const_id": "",
-        "cl": "",
-        "dist_al": null,
-        "discover": "",
-        "discover_year": 0,
-        "ra": "",
-        "dec": "",
-        "astrobin_id": null
+      "desigs": [""],
+      "alt": {
+        "alt": "",
+        "alt_fr": "",
+        "alt_es": "",
+        "alt_de": "",
+        "alt_pt": "",
+        "alt_it": ""
       },
+      "description": {
+        "description": "",
+        "description_fr": ""
+      },
+      "type": "",
+      "mag": 999,
+      "dim": "",
+      "const_id": "",
+      "cl": "",
+      "dist_al": null,
+      "discover": "",
+      "discover_year": 0,
+      "ra": "",
+      "dec": "",
+      "astrobin_id": null
       "geometry": {
         "type": "Point",
         "coordinates": [

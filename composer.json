@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "license": "proprietary",
     "require": {
         "php": "^7.3.0",
@@ -90,7 +90,9 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.12",
+      "roave/security-advisories": "dev-master"
+      ,
+      "symfony/maker-bundle": "^1.12",
         "symfony/profiler-pack": "^1.0",
         "symfony/var-dumper": "^4.4"
     }
