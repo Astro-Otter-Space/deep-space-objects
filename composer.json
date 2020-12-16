@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "license": "proprietary",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.3.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "abraham/twitteroauth": "^1.1",

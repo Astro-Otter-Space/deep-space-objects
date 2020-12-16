@@ -37,6 +37,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
     }
 
     /**
+     * @deprecated
      * @param $dso
      *
      * @return DsoDTO|null
@@ -77,11 +78,11 @@ final class DsoDataTransformer extends AbstractDataTransformer
      */
     public function toArray($entity):? array
     {
-        $catalog = array_map(function($itemCatalog) {
-            return implode(Dso::DATA_GLUE, ['catalog', $itemCatalog]);
+        $catalog = array_map(static function($itemCatalog) {
+            return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
         }, $entity->getCatalog());
 
-        $constellation = $this->translator->trans(implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
+        $constellation = $this->translator->trans(implode(Utils::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
         $routeConstellation = $this->router->generate('constellation_show', [
                 'id' => strtolower($entity->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
                 'name' => Utils::camelCaseUrlTransform($constellation)
@@ -90,8 +91,8 @@ final class DsoDataTransformer extends AbstractDataTransformer
 
         $data = [
             'catalog' => $catalog,
-            'desigs' => implode(Dso::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
-            'type' => implode(Dso::DATA_GLUE, ['type', $entity->getType()]),
+            'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
+            'type' => implode(Utils::DATA_GLUE, ['type', $entity->getType()]),
             'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
             'mag' => $entity->getMag(),
             'distAl' => Utils::numberFormatByLocale($entity->getDistAl()),
@@ -103,7 +104,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'astrobin.credit' => (!is_null($entity->getAstrobinId())) ? sprintf('"%s" %s %s', $entity->getImage()->title, Dso::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
         ];
 
-        return array_filter($data, function($value) {
+        return array_filter($data, static function($value) {
             return (false === empty($value));
         });
     }

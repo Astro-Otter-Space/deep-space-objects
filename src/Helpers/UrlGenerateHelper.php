@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
@@ -42,10 +43,10 @@ class UrlGenerateHelper
      *
      * @return string
      */
-    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, string $locale = null)
+    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, string $locale = null): string
     {
         $url = '';
-        if ($entity instanceof Dso
+        if ($entity instanceof DsoDTO
             || $entity instanceof Constellation
             || $entity instanceof Observation
             || $entity instanceof Event
@@ -102,11 +103,5 @@ class UrlGenerateHelper
             }
         }
         return $url;
-    }
-
-    //todo
-    private function buildIdUrl($entity)
-    {
-
     }
 }

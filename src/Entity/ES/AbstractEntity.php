@@ -10,15 +10,7 @@ use Elastica\Document;
  */
 abstract class AbstractEntity
 {
-    public const DATA_GLUE = '.';
 
-    public const DATA_CONCAT_GLUE = ' - ';
-
-    public const URL_CONCAT_GLUE = '--';
-
-    public const COMA_GLUE = ',';
-
-    public const UNASSIGNED = 'unassigned';
 
 
     /**
@@ -41,7 +33,7 @@ abstract class AbstractEntity
         }
 
         // Transform snake_case keys into CamelCase keys
-        $keys = array_map(function ($i) {
+        $keys = array_map(static function ($i) {
             $parts = explode('_', $i);
             return array_shift($parts). implode('', array_map('ucfirst', $parts));
         }, array_keys($dataDocument));

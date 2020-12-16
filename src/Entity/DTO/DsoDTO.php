@@ -2,14 +2,17 @@
 
 namespace App\Entity\DTO;
 
+use App\Classes\Utils;
 use App\Entity\ES\Dso;
+use AstrobinWs\Response\Image;
+use Entity\DTO\DTOInterface;
 
 /**
  * Class DsoDTO
  *
  * @package App\Entity\DTO
  */
-final class DsoDTO
+final class DsoDTO implements DTOInterface
 {
     /**
      * META
@@ -39,11 +42,13 @@ final class DsoDTO
     private $description;
     private $type;
     private $magnitude;
+    private $constellationId;
     private $constellation;
     private $distAl;
     private $distPc;
     private $discover;
     private $discoverYear;
+    private $astrobinId;
     private $astrobin;
     private $geometry;
     private $dim;
@@ -59,7 +64,12 @@ final class DsoDTO
     {
         $this->setDso($dso)
             ->setLocale($locale)
-            ->setElasticSearchId($elasticId);
+            ->setElasticSearchId($elasticId)
+            ->setId(strtolower($dso->getId()))
+            ->setCatalogs($dso->getCatalog())
+            ->setDesigs($dso->getDesigs())
+            ->setAlt($dso->getAlt())
+        ;
     }
 
     /**
@@ -104,14 +114,6 @@ final class DsoDTO
     }
 
     /**
-     * @return mixed
-     */
-    public function getElasticSearchId()
-    {
-        return $this->elasticSearchId;
-    }
-
-    /**
      * @param mixed $elasticSearchId
      *
      * @return DsoDTO
@@ -122,10 +124,36 @@ final class DsoDTO
         return $this;
     }
 
+    public function guid(): string
+    {
+        return md5(sprintf('%s_%s', $this->getId(), $this->locale));
+    }
+
+    /**
+     * @return string
+     */
+    public function title(): string
+    {
+        // Fist we retrieve desigs and other desigs
+        $desig = (is_array($this->getDesigs())) ? current($this->getDesigs()) : $this->getDesigs();
+
+        // If Alt is set, we merge desig and alt
+        $title = (empty($this->getAlt()))
+            ? $desig
+            : implode (Dso::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
+
+        // If title still empty, we put Id
+        $title = (empty($title))
+            ? $this->getId()
+            : $title;
+
+        return $title;
+    }
+
     /**
      * @return mixed
      */
-    public function getFullUrl()
+    public function fullUrl(): string
     {
         return $this->fullUrl;
     }
@@ -277,7 +305,26 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getConstellation()
+    public function getConstellationId(): string
+    {
+        return $this->constellationId;
+    }
+
+    /**
+     * @param mixed $constellationId
+     *
+     * @return DsoDTO
+     */
+    public function setConstellationId(string $constellationId): self
+    {
+        $this->constellationId = $constellationId;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstellation(): DTOInterface
     {
         return $this->constellation;
     }
@@ -287,7 +334,7 @@ final class DsoDTO
      *
      * @return DsoDTO
      */
-    public function setConstellation($constellation): DsoDTO
+    public function setConstellation(DTOInterface $constellation): DsoDTO
     {
         $this->constellation = $constellation;
         return $this;
@@ -298,7 +345,7 @@ final class DsoDTO
      */
     public function getDistAl()
     {
-        return $this->distAl;
+        return Utils::numberFormatByLocale($this->distAl);
     }
 
     /**
@@ -317,7 +364,7 @@ final class DsoDTO
      */
     public function getDistPc()
     {
-        return $this->distPc;
+        return Utils::numberFormatByLocale(Utils::PARSEC * $this->distPc);
     }
 
     /**
@@ -372,19 +419,38 @@ final class DsoDTO
     /**
      * @return mixed
      */
-    public function getAstrobin()
+    public function getAstrobin(): Image
     {
         return $this->astrobin;
     }
 
     /**
-     * @param mixed $astrobin
+     * @param Image $astrobin
      *
      * @return DsoDTO
      */
-    public function setAstrobin($astrobin): DsoDTO
+    public function setAstrobin(Image $astrobin): DsoDTO
     {
         $this->astrobin = $astrobin;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAstrobinId()
+    {
+        return $this->astrobinId;
+    }
+
+    /**
+     * @param mixed $astrobinId
+     *
+     * @return DsoDTO
+     */
+    public function setAstrobinId($astrobinId): DsoDTO
+    {
+        $this->astrobinId = $astrobinId;
         return $this;
     }
 
@@ -405,6 +471,23 @@ final class DsoDTO
     {
         $this->geometry = $geometry;
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function geoJson(): array
+    {
+        return  [
+            "type" => "Feature",
+            "id" => $this->getId(),
+            "geometry" => $this->getGeometry(),
+            "properties" => [
+                "name" => $this->title(),
+                "type" => $this->getType(),
+                "mag" => $this->getMag()
+            ]
+        ];
     }
 
     /**

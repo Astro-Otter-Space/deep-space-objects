@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use Elastica\Aggregation\Range;
@@ -196,7 +197,9 @@ class DsoRepository extends AbstractRepository
      * Search autocomplete
      *
      * @param $searchTerm
+     *
      * @return array
+     * @throws \ReflectionException
      */
     public function getObjectsBySearchTerms($searchTerm): array
     {
@@ -515,13 +518,13 @@ class DsoRepository extends AbstractRepository
      */
     private function buildEntityFromDocument(Document $document): Dso
     {
-        $entity = $this->getEntity();
+//        $entity = $this->getEntity();
         /** @var Dso $dso */
-        $dso = new $entity;
+//        $dso = new $entity;
 
-        $dso->setLocale($this->getLocale())->buildObjectR($document);
+//        $dso->setLocale($this->getLocale())->buildObjectR($document);
 
-        return $dso;
+        return $this->buildDTO($document);
     }
 
     /**
@@ -535,8 +538,18 @@ class DsoRepository extends AbstractRepository
     /**
      * @return string
      */
-    public function getIndex(): string {
+    public function getIndex(): string
+    {
         return self::INDEX_NAME;
+    }
+
+
+    /**
+     * @return string
+     */
+    protected function getDTO(): string
+    {
+        return DsoDTO::class;
     }
 
     /**

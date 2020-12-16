@@ -413,7 +413,7 @@ class PageController extends AbstractController
 
         $dso = $dsoManager->buildDso($id);
 
-        $title = $dsoManager->buildTitle($dso);
+        $title = $dso->title();
         $url = $dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
         $image = null; //$dso->getImage();
 
@@ -438,7 +438,7 @@ class PageController extends AbstractController
         $limit = 313;
         $i = 1;
 
-        $fullArray = array_map(function($i) {
+        $fullArray = array_map(static function($i) {
             return sprintf('Sh2-%d', $i);
         }, range(1, $limit, $i));
 
@@ -446,17 +446,17 @@ class PageController extends AbstractController
         $results = $dsoRepository->getObjectsCatalogByFilters(0,['catalog' => 'sh'], 1000);
         /** @var Dso $dso */
         foreach ($results[0] as $dso) {
-            if (0 === strpos(strtolower($dso->getId()), 'sh')) {
-                array_push($data, $dso->getId());
+            if (0 === stripos($dso->getId(), 'sh')) {
+                $data[] = $dso->getId();
             } else {
                 $item = preg_grep('/^Sh2-\d*/', $dso->getDesigs());
                 if (false !== reset($item)) {
-                    array_push($data, reset($item));
+                    $data[] = reset($item);
                 }
             }
         }
 
-        usort($data, function($a, $b) {
+        usort($data, static function($a, $b) {
             [, $nA] = explode('-', $a);
             [, $nB] = explode('-', $b);
 

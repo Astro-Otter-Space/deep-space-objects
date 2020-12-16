@@ -25,6 +25,11 @@ class Utils
     public const CSV_DELIMITER = ';';
     public const CSV_ENCLOSURE = '"';
 
+    public const DATA_GLUE = '.';
+    public const DATA_CONCAT_GLUE = ' - ';
+    public const URL_CONCAT_GLUE = '--';
+    public const COMA_GLUE = ',';
+
     private static $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',
@@ -279,7 +284,7 @@ class Utils
      *
      * @return string
      */
-    public static function camelCaseUrlTransform($input)
+    public static function camelCaseUrlTransform($input): string
     {
         /** @var \Transliterator $transliterator */
         $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);

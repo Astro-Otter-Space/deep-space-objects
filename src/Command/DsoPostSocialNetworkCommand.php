@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\BDD\ItemShared;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
@@ -127,9 +128,9 @@ class DsoPostSocialNetworkCommand extends Command
     /**
      * @param Dso $dso
      */
-    private function sendToTwitter(Dso $dso)
+    private function sendToTwitter(DsoDTO $dso)
     {
-        $title = $this->dsoManager->buildTitle($dso);
+        $title = $dso->title();
         $link = $this->dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
         $fileTmpPath = null;
         /**

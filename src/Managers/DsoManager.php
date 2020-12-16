@@ -5,6 +5,7 @@ namespace App\Managers;
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\DataTransformer\DsoDataTransformer;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
@@ -13,6 +14,7 @@ use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Services\GetImage;
+use Entity\DTO\DTOInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -64,17 +66,16 @@ class DsoManager
         $this->dsoDataTransformer = $dsoDataTransformer;
     }
 
-
     /**
      * Build a complete Dso Entity, with Astrobin image and URL
      *
      * @param $id
      *
-     * @return Dso
+     * @return DsoDTO
      * @throws WsException
      * @throws \ReflectionException
      */
-    public function buildDso($id): Dso
+    public function buildDso($id): DsoDTO
     {
         $idMd5 = md5(sprintf('%s_%s', $id, $this->locale));
         $idMd5Cover = md5(sprintf('%s_cover', $id));
@@ -88,21 +89,20 @@ class DsoManager
                 $dso = $dsoFromCache;
             }
         } else {
-            /** @var Dso $dso */
+            /** @var DsoDTO|DTOInterface $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
             if (!is_null($dso)) {
 
                 // Add astrobin image
-                /** @var Image $astrobinImage */
                 $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
-                $dso->setImage($astrobinImage);
+                $dso->setAstrobin($astrobinImage);
 
                 // Add URl
-                $dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
+                //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
-                $this->cacheUtils->saveItem($idMd5, serialize($dso));
-                if ($dso->getImage()->url_hd !== basename(Utils::IMG_DEFAULT)) {
-                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getImage()));
+                $this->cacheUtils->saveItem($dso->guid(), serialize($dso));
+                if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
+                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
                 }
             } else {
                 throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
@@ -124,21 +124,22 @@ class DsoManager
         /** @var Dso $unserializedDso */
         $unserializedDso = unserialize($dsoSerialized);
 
-        return ($unserializedDso instanceof Dso) ? $unserializedDso : null;
+        return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
 
     /**
      * Get Dso from a constellation identifier and build list
      *
-     * @param Dso $dso
+     * @param DsoDTO $dso
      * @param $limit
+     *
      * @return ListDso
      * @throws \ReflectionException
      */
-    public function getListDsoFromConst(Dso $dso, $limit)
+    public function getListDsoFromConst(DsoDTO $dso, $limit): ListDso
     {
         /** @var ListDso $listDso */
-        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstId(), $dso->getId(), 0, $limit);
+        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstellationId(), $dso->getId(), 0, $limit, true);
     }
 
     /**
@@ -175,31 +176,34 @@ class DsoManager
      * @param null $typeReturn
      *
      * @return mixed
+     * @throws \ReflectionException
      */
     public function searchDsoByTerms($searchTerms, $typeReturn = null)
     {
         $resultDso = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
 
-        return call_user_func("array_merge", array_map(function(Dso $dso) use ($typeReturn) {
+        return array_merge(array_map(function (Dso $dso) use ($typeReturn) {
             if ('id' === $typeReturn) {
                 return $dso->getId();
-            } else {
-                return $this->buildSearchListDso($dso);
             }
+
+            return $this->buildSearchListDso($dso);
 
         }, $resultDso));
     }
 
     /**
+     * @todo to check
      * Data returned for autocomplete search
      *
-     * @param Dso $dso
+     * @param DsoDTO $dso
+     *
      * @return array
      */
-    public function buildSearchListDso(Dso $dso): array
+    public function buildSearchListDso(DsoDTO $dso): array
     {
         $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstId())) : null;
-        $title = $this->buildTitle($dso);
+        $title = $dso->title();
 
         $otherDesigs = $dso->getDesigs();
         $removeDesigs = (is_array($otherDesigs))
@@ -226,36 +230,33 @@ class DsoManager
      */
     public function getAstrobinImage($astrobinId): Image
     {
-        /** @var Image $defautImage */
         $defautImage = new Image();
         $defautImage->url_hd = Utils::IMG_LARGE_DEFAULT;
         $defautImage->url_regular = Utils::IMG_LARGE_DEFAULT;
-        $defautImage->user = 'Default image';
-        $defautImage->title = 'Default image';
+        $defautImage->user = null;
+        $defautImage->title = null;
 
         try {
             /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
-            if (!is_null($imageAstrobin) && $imageAstrobin instanceof Image) {
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
+            if ($imageAstrobin instanceof Image) {
                 return $imageAstrobin;
-            } else {
-                return $defautImage;
             }
-        } catch(WsResponseException $e) {
+
             return $defautImage;
-        } catch (\Exception $e) {
+        } catch(WsResponseException | \Exception $e) {
             return $defautImage;
         }
-        return $defautImage;
     }
 
     /**
+     * @todo refactoring
      * @param Dso $dso
      * @param string $typeUrl
      *
      * @return string
      */
-    public function getDsoUrl(Dso $dso, string $typeUrl)
+    public function getDsoUrl(Dso $dso, string $typeUrl): string
     {
         return $this->urlGenerateHelper->generateUrl($dso, $typeUrl, $this->locale);
     }
@@ -298,70 +299,17 @@ class DsoManager
     }
 
     /**
-     * Return a formated title
-     *
-     * @param Dso $dso
-     * @return string
-     */
-    public function buildTitle(Dso $dso): string
-    {
-        return self::buildTitleStatic($dso);
-    }
-
-    /**
-     * Return a formated title
-     * @param Dso $dso
-     *
-     * @return mixed|string
-     */
-    public static function buildTitleStatic(Dso $dso)
-    {
-        // Fist we retrieve desigs and other desigs
-        $desig = (is_array($dso->getDesigs())) ? current($dso->getDesigs()) : $dso->getDesigs();
-
-        // If Alt is set, we merge desig and alt
-        $title = (empty($dso->getAlt()))
-            ? $desig
-            : implode (Dso::DATA_CONCAT_GLUE, [$dso->getAlt(), $desig]);
-
-        // If title still empty, we put Id
-        $title = (empty($title))
-            ? $dso->getId()
-            : $title;
-
-        return $title;
-    }
-
-
-    /**
      * TODO : move to ConstellationManager
      * @param $constId
      * @return string|null
      */
-    public function buildTitleConstellation($constId)
+    public function buildTitleConstellation($constId): ?string
     {
         if (!is_null($constId)) {
             return $this->translatorInterface->trans('constId', ['%count%' => 1]) . ' “' . $this->translatorInterface->trans(sprintf('constellation.%s', strtolower($constId))) . '”';
-        } else {
-            return null;
         }
+
+        return null;
     }
 
-    /**
-     * @param Dso $dso
-     * @return array
-     */
-    public function buildgeoJson(Dso $dso): array
-    {
-        return [
-            "type" => "Feature",
-            "id" => $dso->getId(),
-            "geometry" => $dso->getGeometry(),
-            "properties" => [
-                "name" => $this->buildTitle($dso),
-                "type" => $dso->getType(),
-                "mag" => $dso->getMag()
-            ]
-        ];
-    }
 }

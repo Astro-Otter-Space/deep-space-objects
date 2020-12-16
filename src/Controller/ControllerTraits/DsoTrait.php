@@ -3,12 +3,14 @@
 
 namespace App\Controller\ControllerTraits;
 
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;
+use Entity\DTO\DTOInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -81,9 +83,9 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildJsonApi($data, $codeHttp): array
+    public function buildJsonApi($data, int $codeHttp): array
     {
-        $status = (in_array(substr($codeHttp, 0, 1), [4, 5])) ? 'error' : 'success';
+        $status = (in_array(substr($codeHttp, 0, 1), [4, 5], true)) ? 'error' : 'success';
         $dataResponse = [
             'status' => $status,
             'code' => $codeHttp,
@@ -99,13 +101,12 @@ trait DsoTrait
 
 
     /**
-     * @param AbstractEntity|null $entity
+     * @param DTOInterface|null $entity
      * @param RouterInterface $router
-     * @param string $title
      *
      * @return array
      */
-    public function buildBreadcrumbs(?AbstractEntity $entity, RouterInterface $router, string $title): array
+    public function buildBreadcrumbs(?DTOInterface $entity, RouterInterface $router): array
     {
        $breadcrumbs = [];
 
@@ -118,7 +119,7 @@ trait DsoTrait
             $class = get_class($entity);
 
             switch ($class) {
-                case Dso::class:
+                case DsoDTO::class:
                     $breadcrumbs['level_2'] = [
                         'label' => $this->translatorInterface->trans('catalogs'),
                         'url' => $router->generate('dso_catalog')
@@ -144,7 +145,7 @@ trait DsoTrait
 
 
         $breadcrumbs['level_3'] = [
-            'label' => $title,
+            'label' => $entity->title(),
             'url' => null
         ];
 

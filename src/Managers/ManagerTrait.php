@@ -3,6 +3,7 @@
 
 namespace App\Managers;
 
+use App\Classes\Utils;
 use App\Entity\ES\AbstractEntity;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -25,12 +26,12 @@ trait ManagerTrait
      */
     public function formatEntityData($entityArray, $listFields, TranslatorInterface $translatorInterface): array
     {
-        return array_map(function($value, $key) use($translatorInterface, $listFields) {
+        return array_map(static function($value, $key) use($translatorInterface, $listFields) {
             if (!is_array($value)) {
                 $valueTranslated = $translatorInterface->trans($value, ['%count%' => 1]);
                 $nbItems = 1;
             } else {
-                $valueTranslated = implode(AbstractEntity::DATA_CONCAT_GLUE, array_map(static function($item) use($translatorInterface) {
+                $valueTranslated = implode(Utils::GLUE_DASH, array_map(static function($item) use($translatorInterface) {
                     return $translatorInterface->trans($item, ['%count%' => 1]);
                 }, $value));
                 $nbItems = count($value);

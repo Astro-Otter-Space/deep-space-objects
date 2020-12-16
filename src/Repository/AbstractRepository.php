@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
@@ -15,6 +16,12 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Type;
+use Entity\DTO\DTOInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class AbstractRepository
@@ -27,6 +34,9 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
+    /** @var SerializerInterface */
+    protected $serializer;
+
     public const FROM = 0;
     public const SMALL_SIZE = 10;
     public const SIZE = 20;
@@ -36,11 +46,14 @@ abstract class AbstractRepository
 
     /**
      * AbstractRepository constructor.
+     *
      * @param Client $client
+     * @param SerializerInterface $serializer
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, SerializerInterface $serializer)
     {
         $this->client = $client;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -63,6 +76,31 @@ abstract class AbstractRepository
     {
         $this->locale = $locale;
         return $this;
+    }
+
+    /**
+     * Build DTO from Entity from ElasticSearch Document
+     *
+     * @param $document
+     *
+     * @return DTOInterface
+     */
+    public function buildDTO(Document $document): DTOInterface
+    {
+        $entity = $this->getEntity();
+
+        $normalizer = [new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())];
+        $encoder = [new JsonEncoder()];
+        $serializer = new Serializer($normalizer, $encoder);
+
+        /** @var AbstractEntity $object */
+        $object = $serializer->deserialize($document, $entity, 'json');
+
+        $dto = $this->getDTO();
+
+        /** @var DsoDTO|DTOInterface $dto */
+        $dto = new $dto($object, $this->getLocale(), $document->getId());
+        $dto->setFullUrl();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\Entity\BDD\UpdateData;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\AbstractEntity;
@@ -86,22 +87,22 @@ class DsoController extends AbstractController
         $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $id);
         $id = reset($id);
 
-        /** @var Dso $dso */
+        /** @var DsoDTO $dso */
         $dso = $this->dsoManager->buildDso($id);
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
             $params['type'] = sprintf('type.%s', $dso->getType());
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
-            $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstId());
-            $params['title'] = $fillTitle = $this->dsoManager->buildTitle($dso);
+            $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstellation()->title());
+            $params['title'] = $fillTitle = $dso->title();
             $params['description'] = $dso->getDescription() ?? '';
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
-            $params['magnitude'] = Utils::numberFormatByLocale($dso->getMag());
+            $params['magnitude'] = Utils::numberFormatByLocale($dso->getMagnitude());
 
             // Image cover
-            $params['imgCover'] = $dso->getImage()->url_regular;
-            $params['imgCoverAlt'] = ($dso->getImage()->title) ? sprintf('"%s" by %s', $dso->getImage()->title, $dso->getImage()->user) : null;
+            $params['imgCover'] = $dso->getAstrobin()->url_regular;
+            $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
             // List of Dso from same constellation
             /** @var ListDso $listDso */
@@ -113,9 +114,9 @@ class DsoController extends AbstractController
             // Map
             $params['geojsonDso'] = [
                 "type" => "FeatureCollection",
-                "features" =>  [$this->dsoManager->buildgeoJson($dso)]
+                "features" =>  [$dso->geoJson()]
             ];
-            $params['constId'] = $dso->getConstId();
+            $params['constId'] = $dso->getConstellationId();
             $params['centerMap'] = $dso->getGeometry()['coordinates'];
 
             // Images
@@ -131,7 +132,7 @@ class DsoController extends AbstractController
             throw new NotFoundException();
         }
 
-        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $fillTitle);
+        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'));
 
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
@@ -240,10 +241,10 @@ class DsoController extends AbstractController
      */
     public function geoJson(string $id): JsonResponse
     {
-        /** @var Dso $dso */
+        /** @var DsoDTO $dso */
         $dso = $this->dsoManager->buildDso($id);
 
-        $geoJsonData = $this->dsoManager->buildgeoJson($dso);
+        $geoJsonData = $dso->geoJson();
 
         /** @var JsonResponse $jsonResponse */
         $jsonResponse = new JsonResponse($geoJsonData, Response::HTTP_OK);
