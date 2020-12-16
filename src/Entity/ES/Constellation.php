@@ -8,12 +8,8 @@ use App\Repository\ConstellationRepository;
  * Class Constellation
  * @package App\Entity
  */
-class Constellation extends AbstractEntity
+class Constellation
 {
-    private $locale;
-
-    private $elasticId;
-
     /** @var  */
     private $id;
 
@@ -49,8 +45,6 @@ class Constellation extends AbstractEntity
 
     /** @var  */
     private $image;
-
-    private static $listFieldsNoMapping = ['elasticId', 'locale', 'fullUrl', 'listDso', 'map', 'image'];
 
     /**
      * @return mixed

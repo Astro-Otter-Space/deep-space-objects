@@ -100,7 +100,10 @@ abstract class AbstractRepository
 
         /** @var DsoDTO|DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
-        $dto->setFullUrl();
+        //$dto->setFullUrl();
+
+
+        return $dto;
     }
 
     /**

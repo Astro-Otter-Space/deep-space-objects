@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @package App\Entity
  */
-class Observation extends AbstractEntity
+class Observation
 {
 
     /** @var  */
