@@ -51,6 +51,8 @@ final class DsoDTO implements DTOInterface
     private $astrobin;
     private $geometry;
     private $dim;
+    private $declinaison;
+    private $rightAscencion;
 
     /**
      * DsoDTO constructor.
@@ -321,9 +323,9 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return null|DTOInterface
      */
-    public function getConstellation(): DTOInterface
+    public function getConstellation(): ?DTOInterface
     {
         return $this->constellation;
     }
@@ -484,7 +486,7 @@ final class DsoDTO implements DTOInterface
             "properties" => [
                 "name" => $this->title(),
                 "type" => $this->getType(),
-                "mag" => $this->getMag()
+                "mag" => $this->getMagnitude()
             ]
         ];
     }
@@ -507,5 +509,45 @@ final class DsoDTO implements DTOInterface
         $this->dim = $dim;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDeclinaison()
+    {
+        return $this->declinaison;
+    }
+
+    /**
+     * @param mixed $declinaison
+     *
+     * @return DsoDTO
+     */
+    public function setDeclinaison($declinaison)
+    {
+        $this->declinaison = $declinaison;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRightAscencion()
+    {
+        return $this->rightAscencion;
+    }
+
+    /**
+     * @param mixed $rightAscencion
+     *
+     * @return DsoDTO
+     */
+    public function setRightAscencion($rightAscencion)
+    {
+        $this->rightAscencion = $rightAscencion;
+        return $this;
+    }
+
+
 
 }

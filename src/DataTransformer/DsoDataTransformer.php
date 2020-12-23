@@ -82,11 +82,11 @@ final class DsoDataTransformer extends AbstractDataTransformer
     {
         $catalog = array_map(static function($itemCatalog) {
             return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
-        }, $dto->getCatalog());
+        }, $dto->getCatalogs());
 
         $constellation = $this->translator->trans(implode(Utils::DATA_GLUE, ['constellation', strtolower($dto->getConstellation()->title())]));
         $routeConstellation = $this->router->generate('constellation_show', [
-                'id' => strtolower($dto->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+                'id' => strtolower($dto->getConstellation()->getId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
                 'name' => Utils::camelCaseUrlTransform($constellation)
             ]
         );
@@ -96,13 +96,13 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
             'type' => implode(Utils::DATA_GLUE, ['type', $dto->getType()]),
             'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
-            'mag' => $dto->getMag(),
+            'mag' => $dto->getMagnitude(),
             'distAl' => $dto->getDistAl(),
             'distPc' => $dto->getDistPc(),
             'discover' => $dto->getDiscover(),
             'discoverYear' => $dto->getDiscoverYear(),
-            'ra' => $dto->getRa(),
-            'dec' => $dto->getDec(),
+            'ra' => $dto->getRightAscencion(),
+            'dec' => $dto->getDeclinaison(),
             'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobinImage()->title, Utils::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
         ];
 
