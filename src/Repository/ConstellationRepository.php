@@ -7,6 +7,7 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Search;
+use Entity\DTO\ConstellationDTO;
 
 /**
  * Class ConstellationRepository
@@ -136,5 +137,13 @@ final class ConstellationRepository extends AbstractRepository
     public function getIndex(): string
     {
         return self::INDEX_NAME;
+    }
+
+    /**
+     *
+     */
+    protected function getDTO(): string
+    {
+        return ConstellationDTO::class;
     }
 }

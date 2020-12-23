@@ -16,7 +16,7 @@ use Elastica\Search;
  *
  * @package App\Repository
  */
-final class ObservationRepository extends AbstractRepository
+final class ObservationRepository //extends AbstractRepository
 {
     public const INDEX_NAME = 'observations';
 

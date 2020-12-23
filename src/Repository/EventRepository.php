@@ -18,7 +18,7 @@ use Elastica\Search;
  * Class EventRepository
  * @package App\Repository
  */
-class EventRepository extends AbstractRepository
+class EventRepository //extends AbstractRepository
 {
     public const INDEX_NAME = 'events';
 
