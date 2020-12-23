@@ -19,7 +19,7 @@ class Dso
     /** @var int */
     private $order;
 
-    /** @var \DateTimeInterface */
+    /** @var string */
     private $updatedAt;
 
     /** @var array */
@@ -125,19 +125,19 @@ class Dso
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return string
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?string
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTimeInterface|null $updatedAt
+     * @param string|null $updatedAt
      *
      * @return Dso
      */
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): Dso
+    public function setUpdatedAt(?string $updatedAt): Dso
     {
         $this->updatedAt = $updatedAt;
         return $this;

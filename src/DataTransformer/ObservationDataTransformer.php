@@ -28,7 +28,7 @@ final class ObservationDataTransformer extends AbstractDataTransformer
             'focal' => $entity->getFocal(),
             'report' => Utils::numberFormatByLocale($entity->getFocal()/$entity->getDiameter()),
             'mount' => $entity->getMount(),
-            'ocular' => implode(Observation::DATA_CONCAT_GLUE, $entity->getOcular())
+            'ocular' => implode(Utils::DATA_CONCAT_GLUE, $entity->getOcular())
         ];
 
         return array_filter($data, function($value) {

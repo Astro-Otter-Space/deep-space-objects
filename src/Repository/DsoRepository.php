@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Classes\Utils;
 use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use Elastica\Aggregation\Range;
@@ -11,6 +12,7 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
+use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
@@ -81,18 +83,19 @@ class DsoRepository extends AbstractRepository
      * @return Dso|Document|null
      * @throws \ReflectionException
      */
-    public function getObjectById($id, $hydrate = true)
+    public function getObjectById($id, bool $hydrate)
     {
+        /** @var ResultSet $resultDocument */
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
             if ($hydrate) {
-                return $this->buildEntityFromDocument($resultDocument->getDocuments()[0]);
-            } else {
-                return $resultDocument->getDocuments()[0];
+                $document = $resultDocument->getDocuments()[0];
+                return $this->buildEntityFromDocument($document);
             }
-        } else {
-            return null;
+            return $resultDocument->getDocuments()[0]->getData();
         }
+
+        return null;
     }
 
     /**
@@ -513,17 +516,10 @@ class DsoRepository extends AbstractRepository
      *
      * @param Document $document
      *
-     * @return Dso
-     * @throws \ReflectionException
+     * @return DTOInterface
      */
-    private function buildEntityFromDocument(Document $document): Dso
+    private function buildEntityFromDocument(Document $document): DTOInterface
     {
-//        $entity = $this->getEntity();
-        /** @var Dso $dso */
-//        $dso = new $entity;
-
-//        $dso->setLocale($this->getLocale())->buildObjectR($document);
-
         return $this->buildDTO($document);
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Entity\DTO;
+namespace App\Entity\DTO;
 
 interface DTOInterface
 {

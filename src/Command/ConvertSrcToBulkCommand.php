@@ -47,8 +47,8 @@ class ConvertSrcToBulkCommand extends Command
         'constellations' => 'constellations'
     ];
 
-    const PATH_SOURCE = '/config/elasticsearch/sources/';
-    const BULK_SOURCE = '/config/elasticsearch/bulk/';
+    public const PATH_SOURCE = '/config/elasticsearch/sources/';
+    public const BULK_SOURCE = '/config/elasticsearch/bulk/';
 
     /**
      * ConvertSrcToBulkCommand constructor.
@@ -102,7 +102,7 @@ class ConvertSrcToBulkCommand extends Command
         $output->writeln(sprintf("Last update : %s", $lastImportDate->format(Utils::FORMAT_DATE_ES)));
         $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
 
-        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
+        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType, true)) {
 
             $type = $input->getArgument('type');
 

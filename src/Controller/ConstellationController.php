@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
-use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;

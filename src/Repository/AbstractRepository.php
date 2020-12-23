@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\DTO\DTOInterface;
 use App\Entity\DTO\DsoDTO;
-use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
@@ -16,7 +16,6 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Type;
-use Entity\DTO\DTOInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -81,7 +80,7 @@ abstract class AbstractRepository
     /**
      * Build DTO from Entity from ElasticSearch Document
      *
-     * @param $document
+     * @param Document $document
      *
      * @return DTOInterface
      */
@@ -93,15 +92,12 @@ abstract class AbstractRepository
         $encoder = [new JsonEncoder()];
         $serializer = new Serializer($normalizer, $encoder);
 
-        /** @var AbstractEntity $object */
-        $object = $serializer->deserialize($document, $entity, 'json');
-
+        /** @var $object */
+        $object = $serializer->deserialize(json_encode($document->getData()), $entity, 'json');
         $dto = $this->getDTO();
 
         /** @var DsoDTO|DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
-        //$dto->setFullUrl();
-
 
         return $dto;
     }
@@ -114,11 +110,11 @@ abstract class AbstractRepository
      */
     protected function findById($id): ResultSet
     {
-        /** @var Constellation|Observation|Dso|AbstractEntity $entity */
+        /** @var Constellation|Observation|Dso $entity */
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
-        $this->client->getIndex($entity::getIndex());
+        $this->client->getIndex($this->getIndex());
 
         /** @var Query\Term $term */
         $matchQuery = new Query\Match();

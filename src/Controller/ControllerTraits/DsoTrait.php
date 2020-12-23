@@ -4,7 +4,6 @@
 namespace App\Controller\ControllerTraits;
 
 use App\Entity\DTO\DsoDTO;
-use App\Entity\ES\AbstractEntity;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Event;

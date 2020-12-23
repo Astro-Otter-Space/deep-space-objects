@@ -49,24 +49,6 @@ class Constellation
     /**
      * @return mixed
      */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * @param $locale
-     * @return Constellation
-     */
-    public function setLocale($locale): Constellation
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
@@ -209,61 +191,6 @@ class Constellation
         $this->geometryLine = $geometryLine;
     }
 
-    /**
-     * @return string
-     */
-    public static function getIndex()
-    {
-        return ConstellationRepository::INDEX_NAME;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getElasticId()
-    {
-        return $this->elasticId;
-    }
-
-    /**
-     * @param mixed $elasticId
-     */
-    public function setElasticId($elasticId): void
-    {
-        $this->elasticId = $elasticId;
-    }
-
-    /**
-     * @return ListDso
-     */
-    public function getListDso()
-    {
-        return $this->listDso;
-    }
-
-    /**
-     * @param mixed $listDso
-     */
-    public function setListDso(ListDso $listDso): void
-    {
-        $this->listDso = $listDso;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFullUrl()
-    {
-        return $this->fullUrl;
-    }
-
-    /**
-     * @param mixed $fullUrl
-     */
-    public function setFullUrl($fullUrl): void
-    {
-        $this->fullUrl = $fullUrl;
-    }
 
     /**
      * @return mixed
@@ -295,14 +222,6 @@ class Constellation
     public function setImage($image): void
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return array
-     */
-    public function getListFieldsNoMapping()
-    {
-        return self::$listFieldsNoMapping;
     }
 
 }

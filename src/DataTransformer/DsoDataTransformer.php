@@ -4,6 +4,7 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
@@ -72,36 +73,37 @@ final class DsoDataTransformer extends AbstractDataTransformer
 
     /**
      * Convert Dso into Array
-     * @param Dso|null $entity
+     *
+     * @param DTOInterface $dto
      *
      * @return array|null
      */
-    public function toArray($entity):? array
+    public function toArray(DTOInterface $dto):? array
     {
         $catalog = array_map(static function($itemCatalog) {
             return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
-        }, $entity->getCatalog());
+        }, $dto->getCatalog());
 
-        $constellation = $this->translator->trans(implode(Utils::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
+        $constellation = $this->translator->trans(implode(Utils::DATA_GLUE, ['constellation', strtolower($dto->getConstellation()->title())]));
         $routeConstellation = $this->router->generate('constellation_show', [
-                'id' => strtolower($entity->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+                'id' => strtolower($dto->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
                 'name' => Utils::camelCaseUrlTransform($constellation)
             ]
         );
 
         $data = [
             'catalog' => $catalog,
-            'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
-            'type' => implode(Utils::DATA_GLUE, ['type', $entity->getType()]),
+            'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
+            'type' => implode(Utils::DATA_GLUE, ['type', $dto->getType()]),
             'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
-            'mag' => $entity->getMag(),
-            'distAl' => Utils::numberFormatByLocale($entity->getDistAl()),
-            'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $entity->getDistAl()),
-            'discover' => $entity->getDiscover(),
-            'discoverYear' => $entity->getDiscoverYear(),
-            'ra' => $entity->getRa(),
-            'dec' => $entity->getDec(),
-            'astrobin.credit' => (!is_null($entity->getAstrobinId())) ? sprintf('"%s" %s %s', $entity->getImage()->title, Dso::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
+            'mag' => $dto->getMag(),
+            'distAl' => $dto->getDistAl(),
+            'distPc' => $dto->getDistPc(),
+            'discover' => $dto->getDiscover(),
+            'discoverYear' => $dto->getDiscoverYear(),
+            'ra' => $dto->getRa(),
+            'dec' => $dto->getDec(),
+            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobinImage()->title, Utils::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
         ];
 
         return array_filter($data, static function($value) {

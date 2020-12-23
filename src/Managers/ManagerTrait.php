@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Managers;
 
 use App\Classes\Utils;
-use App\Entity\ES\AbstractEntity;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**

@@ -5,7 +5,6 @@ namespace App\Entity\DTO;
 use App\Classes\Utils;
 use App\Entity\ES\Dso;
 use AstrobinWs\Response\Image;
-use Entity\DTO\DTOInterface;
 
 /**
  * Class DsoDTO
@@ -140,7 +139,7 @@ final class DsoDTO implements DTOInterface
         // If Alt is set, we merge desig and alt
         $title = (empty($this->getAlt()))
             ? $desig
-            : implode (Dso::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
+            : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
 
         // If title still empty, we put Id
         $title = (empty($title))

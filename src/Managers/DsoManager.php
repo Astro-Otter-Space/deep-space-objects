@@ -90,7 +90,7 @@ class DsoManager
             }
         } else {
             /** @var DsoDTO|DTOInterface $dso */
-            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
+            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id, true);
             if (!is_null($dso)) {
 
                 // Add astrobin image
@@ -100,9 +100,9 @@ class DsoManager
                 // Add URl
                 //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
-                $this->cacheUtils->saveItem($dso->guid(), serialize($dso));
+                //$this->cacheUtils->saveItem($dso->guid(), serialize($dso));
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
-                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
+                    //$this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
                 }
             } else {
                 throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
@@ -264,10 +264,11 @@ class DsoManager
     /**
      * Translate data vor display in VueJs
      *
-     * @param Dso $dso
+     * @param DsoDTO $dso
+     *
      * @return array
      */
-    public function formatVueData(Dso $dso): array
+    public function formatVueData(DsoDTO $dso): array
     {
         $dsoArray = $this->dsoDataTransformer->toArray($dso);
         return $this->formatEntityData($dsoArray, self::$listFieldToTranslate, $this->translatorInterface);

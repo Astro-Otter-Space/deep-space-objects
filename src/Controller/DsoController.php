@@ -9,7 +9,6 @@ use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
-use App\Entity\ES\AbstractEntity;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
@@ -84,7 +83,7 @@ class DsoController extends AbstractController
     {
         $params = [];
 
-        $id = explode(trim(AbstractEntity::URL_CONCAT_GLUE), $id);
+        $id = explode(trim(Utils::URL_CONCAT_GLUE), $id);
         $id = reset($id);
 
         /** @var DsoDTO $dso */

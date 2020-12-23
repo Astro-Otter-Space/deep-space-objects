@@ -3,7 +3,6 @@
 namespace App\Service\SocialNetworks\WebServices;
 
 use App\Entity\SocialNetworks\FacebookPost;
-use App\Entity\ES\AbstractEntity;
 use App\Service\SocialNetworks\Singleton\Facebook;
 use Facebook\Authentication\AccessToken;
 use Facebook\Authentication\OAuth2Client;
@@ -239,12 +238,11 @@ class FacebookWs implements socialNetworkInterface
 
 
     /**
-     * @param AbstractEntity $object
      *
      * @return FacebookResponse
      * @throws FacebookSDKException
      */
-    public function sendPost(?AbstractEntity $object)
+    public function sendPost($object)
     {
         /** @var \DateTimeInterface $publishDate */
         $publishDate = new \DateTime();
