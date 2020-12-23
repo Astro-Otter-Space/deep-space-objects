@@ -126,10 +126,10 @@ RUN apt-get install -y yarn
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#CMD ["php-fpm", "-F"]
-#EXPOSE 9000
+CMD ["php-fpm", "-F"]
+EXPOSE 9000
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+#RUN chmod +x /usr/local/bin/docker-entrypoint
 
-ENTRYPOINT ["docker-entrypoint"]
+#ENTRYPOINT ["docker-entrypoint"]
