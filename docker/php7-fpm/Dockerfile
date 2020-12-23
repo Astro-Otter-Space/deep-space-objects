@@ -1,5 +1,5 @@
 # Source : https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
-FROM php:7.3-fpm
+FROM php:7.3-fpm-stretch
 #USER root
 ARG TIMEZONE
 ARG UID
@@ -87,8 +87,8 @@ RUN { \
     } > /usr/local/etc/php/conf.d/php.ini
 
 # Install XDebug
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
+#RUN pecl install xdebug
+#RUN docker-php-ext-enable xdebug
 
 # Errors
 
@@ -98,11 +98,11 @@ RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebu
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 # XDEBUG
-RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
+#RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
 # Custom options
 RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
 RUN echo "memory_limit= 512M" >> /usr/local/etc/php/conf.d/030-custom.ini
@@ -126,9 +126,10 @@ RUN apt-get install -y yarn
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-CMD ["php-fpm", "-F"]
-EXPOSE 9000
+#CMD ["php-fpm", "-F"]
+#EXPOSE 9000
 
-#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-#RUN chmod +x /usr/local/bin/docker-entrypoint
-#ENTRYPOINT ["docker-entrypoint"]
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ENTRYPOINT ["docker-entrypoint"]
