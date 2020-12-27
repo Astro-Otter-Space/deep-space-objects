@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle =  'dso.title.seo'|trans({'%title%': title, '%type%': type|trans|lower }) %}
+{% set pageTitle =  'dso.title.seo'|trans({'%title%': title, '%type%': dso.type|trans|lower }) %}
 {% set pageImage = imgCover %}
 
-{% set descDefaut = 'dso.desc.seo'|trans({'%title%': title,'%constId%': constTitle|lower,'%type%': type|trans|lower, '%mag%': magnitude }) %}
-{% set pageDesc = description|truncate(200)|default(descDefaut) %}
+{% set descDefaut = 'dso.desc.seo'|trans({'%title%': dso.title,'%constId%': dso.constellation.title|lower,'%type%': dso.type|trans|lower, '%mag%': dso.magnitude }) %}
+{% set pageDesc = dso.description|truncate(200)|default(descDefaut) %}
 {% set pageImageDesc = imgCoverAlt %}
 
 {#https://coxpi.draftium.site/#}
@@ -12,16 +12,16 @@
 {% block content %}
   <div id="appDso"
     data-dso-widget
-    data-imgcover="{{ imgCover|default('default') }}"
+    data-imgcover="{{ dso.astrobin.url_regular|default('default') }}"
     data-imgcoveralt="{{ imgCoverAlt|default('') }}"
     data-dso="{{ dsoData|json_encode }}"
     data-title="{{ dso.title }}"
-    data-description="{{ description }}"
+    data-description="{{ dso.description }}"
     data-title-map="{{ 'skymap'|trans }}"
     data-title-gallery="{{ 'galery'|trans }}"
     data-images="{{ images|json_encode|default({}) }}"
     data-astrobin-msg="{{ 'astrobin.message'|trans }}"
-    data-title-const="{{ constTitle }}"
+    data-title-const="{{ dso.constellation.title }}"
     data-dso-const="{{ dso_by_const|json_encode }}"
     data-filter="{{ list_types_filters|json_encode }}"
     data-breadcrumbs="{{ breadcrumbs|json_encode }}"
@@ -29,8 +29,8 @@
   </div>
   <div id="geojson"
        data-dso="{{ geojsonDso|json_encode }}"
-       data-center="{{ centerMap|json_encode }}"
-       data-const="{{ constId|raw }}"
+       data-center="{{ dso.geometry['coordinates']|json_encode }}"
+       data-const="{{ dso.constellationId|raw }}"
        data-zoom="10" aria-hidden="true"></div>
 {% endblock %}
 

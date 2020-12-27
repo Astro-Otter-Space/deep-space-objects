@@ -9,6 +9,7 @@ use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
+use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
@@ -101,7 +102,11 @@ class DsoManager
                 //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
                 // add Constellation
-                $constellationDto = $this->con
+                $constellationDto = null; //$this->con
+                if (!is_null($constellationDto)) {
+                    $dso->setConstellation($constellationDto);
+                }
+
 
                 //$this->cacheUtils->saveItem($dso->guid(), serialize($dso));
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {

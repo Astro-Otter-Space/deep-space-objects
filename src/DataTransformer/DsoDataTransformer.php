@@ -94,7 +94,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
         $data = [
             'catalog' => $catalog,
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
-            'type' => implode(Utils::DATA_GLUE, ['type', $dto->getType()]),
+            'type' => $dto->getType(),
             'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
             'mag' => $dto->getMagnitude(),
             'distAl' => $dto->getDistAl(),

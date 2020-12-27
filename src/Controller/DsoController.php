@@ -91,16 +91,12 @@ class DsoController extends AbstractController
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
-            $params['type'] = sprintf('type.%s', $dso->getType());
+            $params['dso'] = $dso;
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
-            $params['constTitle'] = $this->dsoManager->buildTitleConstellation($dso->getConstellation()->title());
-            $params['title'] = $fillTitle = $dso->title();
-            $params['description'] = $dso->getDescription() ?? '';
+            $params['constTitle'] = ($dso->getConstellation()->title());
             $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
-            $params['magnitude'] = Utils::numberFormatByLocale($dso->getMagnitude());
 
             // Image cover
-            $params['imgCover'] = $dso->getAstrobin()->url_regular;
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
             // List of Dso from same constellation
@@ -115,8 +111,6 @@ class DsoController extends AbstractController
                 "type" => "FeatureCollection",
                 "features" =>  [$dso->geoJson()]
             ];
-            $params['constId'] = $dso->getConstellationId();
-            $params['centerMap'] = $dso->getGeometry()['coordinates'];
 
             // Images
             try {

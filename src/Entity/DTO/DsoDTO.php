@@ -270,7 +270,7 @@ final class DsoDTO implements DTOInterface
      */
     public function getType()
     {
-        return $this->type;
+        return sprintf('type.%s', $this->type);
     }
 
     /**
