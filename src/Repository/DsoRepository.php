@@ -80,8 +80,8 @@ class DsoRepository extends AbstractRepository
      *
      * @param $id
      * @param boolean $hydrate
-     * @return Dso|Document|null
-     * @throws \ReflectionException
+     *
+     * @return DTOInterface|array
      */
     public function getObjectById($id, bool $hydrate)
     {

@@ -16,7 +16,7 @@ trait ManagerTrait
 {
 
     /**
-     * Build a "table" of data (translated if needed) from Entity with translated label
+     * Build a "table" of data (translated if needed) from DTO with translated label
      *
      * @param $entityArray
      * @param $listFields

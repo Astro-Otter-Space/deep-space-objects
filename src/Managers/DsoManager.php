@@ -100,6 +100,9 @@ class DsoManager
                 // Add URl
                 //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
+                // add Constellation
+                $constellationDto = $this->con
+
                 //$this->cacheUtils->saveItem($dso->guid(), serialize($dso));
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
                     //$this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));

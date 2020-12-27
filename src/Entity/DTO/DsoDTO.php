@@ -494,7 +494,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDim()
+    public function getDim(): ?string
     {
         return $this->dim;
     }
@@ -513,26 +513,26 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDeclinaison()
+    public function getDeclinaison(): ?string
     {
         return $this->declinaison;
     }
 
     /**
-     * @param mixed $declinaison
+     * @param string|null $declinaison
      *
      * @return DsoDTO
      */
-    public function setDeclinaison($declinaison)
+    public function setDeclinaison(?string $declinaison): DsoDTO
     {
         $this->declinaison = $declinaison;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
-    public function getRightAscencion()
+    public function getRightAscencion(): ?string
     {
         return $this->rightAscencion;
     }
@@ -542,7 +542,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setRightAscencion($rightAscencion)
+    public function setRightAscencion(?string $rightAscencion): DsoDTO
     {
         $this->rightAscencion = $rightAscencion;
         return $this;
