@@ -2,7 +2,6 @@
 
 namespace App\Entity\ES;
 
-use App\Repository\ConstellationRepository;
 
 /**
  * Class Constellation
@@ -10,218 +9,193 @@ use App\Repository\ConstellationRepository;
  */
 class Constellation
 {
-    /** @var  */
+    /** @var string */
     private $id;
-
-    /** @var  */
+    /** @var array */
+    private $geometry;
+    /** @var array */
+    private $geometryLine;
+    /** @var string */
     private $gen;
-
-    /** @var  */
+    /** @var array */
     private $alt;
-
-    /** @var  */
+    /** @var array */
     private $description;
-
-    /** @var  */
+    /** @var float */
     private $rank;
-
-    /** @var  */
+    /** @var float */
+    private $order;
+    /** @var string */
     private $loc;
 
-    /** @var  */
-    private $geometry;
-
-    /** @var  */
-    private $geometryLine;
-
-    /** @var  */
-    private $listDso;
-
-    /** @var  */
-    private $fullUrl;
-
-    /** @var  */
-    private $map;
-
-    /** @var  */
-    private $image;
-
     /**
-     * @return mixed
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param string $id
+     *
+     * @return Constellation
      */
-    public function setId($id): void
+    public function setId(string $id): Constellation
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGen()
-    {
-        return $this->gen;
-    }
-
-    /**
-     * @param mixed $gen
-     */
-    public function setGen($gen): void
-    {
-        $this->gen = $gen;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAlt()
-    {
-        return $this->alt;
-    }
-
-    /**
-     * @param mixed $alt
-     *
-     * @return Constellation
-     */
-    public function setAlt($alt): self
-    {
-        if (!$this->locale || 'en' === $this->locale) {
-            $this->alt = $alt['alt'];
-        } else {
-            $this->alt = $alt[sprintf('alt_%s', $this->locale)];
-        }
-
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param $description
-     *
-     * @return Constellation
-     */
-    public function setDescription($description): self
-    {
-        $this->description = $description;
-
-        if (!$this->locale || 'en' === $this->locale) {
-            $this->description = $description['description'];
-        } else {
-            $this->description = $description[sprintf('description_%s', $this->locale)];
-        }
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRank()
-    {
-        return $this->rank;
-    }
-
-    /**
-     * @param mixed $rank
-     */
-    public function setRank($rank): void
-    {
-        $this->rank = $rank;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLoc()
-    {
-        return $this->loc;
-    }
-
-    /**
-     * @param mixed $loc
-     */
-    public function setLoc($loc): void
-    {
-        $this->loc = $loc;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGeometry()
+    public function getGeometry(): array
     {
         return $this->geometry;
     }
 
     /**
-     * @param mixed $geometry
+     * @param array $geometry
+     *
+     * @return Constellation
      */
-    public function setGeometry($geometry): void
+    public function setGeometry(array $geometry): Constellation
     {
         $this->geometry = $geometry;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getGeometryLine()
+    public function getGeometryLine(): array
     {
         return $this->geometryLine;
     }
 
     /**
-     * @param mixed $geometryLine
+     * @param array $geometryLine
+     *
+     * @return Constellation
      */
-    public function setGeometryLine($geometryLine): void
+    public function setGeometryLine(array $geometryLine): Constellation
     {
         $this->geometryLine = $geometryLine;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getMap()
-    {
-        return $this->map;
+        return $this;
     }
 
     /**
-     * @param mixed $map
+     * @return string
      */
-    public function setMap($map): void
+    public function getGen(): string
     {
-        $this->map = $map;
+        return $this->gen;
     }
 
     /**
-     * @return mixed
+     * @param string $gen
+     *
+     * @return Constellation
      */
-    public function getImage()
+    public function setGen(string $gen): Constellation
     {
-        return $this->image;
+        $this->gen = $gen;
+        return $this;
     }
 
     /**
-     * @param mixed $image
+     * @return array
      */
-    public function setImage($image): void
+    public function getAlt(): array
     {
-        $this->image = $image;
+        return $this->alt;
     }
 
+    /**
+     * @param array $alt
+     *
+     * @return Constellation
+     */
+    public function setAlt(array $alt): Constellation
+    {
+        $this->alt = $alt;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDescription(): array
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param array $description
+     *
+     * @return Constellation
+     */
+    public function setDescription(array $description): Constellation
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRank(): float
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param float $rank
+     *
+     * @return Constellation
+     */
+    public function setRank(float $rank): Constellation
+    {
+        $this->rank = $rank;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getOrder(): float
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param float $order
+     *
+     * @return Constellation
+     */
+    public function setOrder(float $order): Constellation
+    {
+        $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLoc(): string
+    {
+        return $this->loc;
+    }
+
+    /**
+     * @param string $loc
+     *
+     * @return Constellation
+     */
+    public function setLoc(string $loc): Constellation
+    {
+        $this->loc = $loc;
+        return $this;
+    }
 }

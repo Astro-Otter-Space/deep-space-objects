@@ -2,14 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Entity\DTO;
+namespace App\Entity\DTO;
+
+
+use App\Entity\ES\Constellation;
 
 /**
  * Class ConstellationDTO
  * @package Entity\DTO
  */
-class ConstellationDTO implements DTOInterface
+final class ConstellationDTO implements DTOInterface
 {
+    /**
+     * META
+     */
+    /** @var  */
+    private $id;
+    /** @var  */
+    private $elasticSearchId;
+    /** @var  */
+    private $fullUrl;
+    /** @var  */
+    private $locale;
+
+    /** @var Constellation */
+    private $constellation;
+
+
 
     public function guid(): string
     {

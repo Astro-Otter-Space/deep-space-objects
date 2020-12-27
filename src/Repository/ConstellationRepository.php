@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\ListConstellation;
 use Elastica\Document;
@@ -32,19 +33,25 @@ final class ConstellationRepository extends AbstractRepository
     ];
 
     /**
-     * @param $id
+     * @param string $id
+     * @param bool $hydrate
+     *
      * @return Constellation
      * @throws \ReflectionException
      */
-    public function getObjectById($id):? Constellation
+    public function getObjectById(string $id, bool $hydrate): ?Constellation
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-            $dataDocument = $resultDocument->getResults()[0]->getDocument();
-            return $this->buildEntityFromDocument($dataDocument);
-        } else {
-            return null;
+
+            if ($hydrate) {
+                $document = $resultDocument->getDocuments()[0];
+                return $this->buildEntityFromDocument($document);
+            }
+            return $resultDocument->getDocuments()[0]->getData();
         }
+
+        return null;
     }
 
 
@@ -81,15 +88,17 @@ final class ConstellationRepository extends AbstractRepository
      * Search autocomplete
      *
      * @param $searchTerm
+     *
      * @return array
+     * @throws \ReflectionException
      */
     public function getConstellationsBySearchTerms($searchTerm): array
     {
         $list = [];
 
         if ('en' !== $this->getLocale()) {
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
+            self::$listSearchFields[] = sprintf('data.alt.alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('data.alt.alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
@@ -104,14 +113,16 @@ final class ConstellationRepository extends AbstractRepository
 
     /**
      * Build an entity from result
+     *
      * @param Document $document
-     * @return Constellation
+     *
+     * @return DTOInterface
      * @throws \ReflectionException
      */
-    private function buildEntityFromDocument(Document $document): Constellation
+    private function buildEntityFromDocument(Document $document): DTOInterface
     {
         /** @var Constellation $constellation */
-        $entity = $this->getEntity();
+        /**$entity = $this->getEntity();
         $constellation = new $entity;
 
         $constellation = $constellation->setLocale($this->getLocale())
@@ -119,8 +130,8 @@ final class ConstellationRepository extends AbstractRepository
 
         $constellation->setMap(sprintf(self::URL_MAP, strtoupper($constellation->getId())));
         $constellation->setImage(sprintf(self::URL_IMG, strtolower($constellation->getId())));
-
-        return $constellation;
+        **/
+        return $this->buildDTO($document);
     }
 
     /**
