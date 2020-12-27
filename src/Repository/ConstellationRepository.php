@@ -121,16 +121,6 @@ final class ConstellationRepository extends AbstractRepository
      */
     private function buildEntityFromDocument(Document $document): DTOInterface
     {
-        /** @var Constellation $constellation */
-        /**$entity = $this->getEntity();
-        $constellation = new $entity;
-
-        $constellation = $constellation->setLocale($this->getLocale())
-            ->buildObjectR($document);
-
-        $constellation->setMap(sprintf(self::URL_MAP, strtoupper($constellation->getId())));
-        $constellation->setImage(sprintf(self::URL_IMG, strtolower($constellation->getId())));
-        **/
         return $this->buildDTO($document);
     }
 
