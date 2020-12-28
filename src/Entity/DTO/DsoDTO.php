@@ -25,6 +25,8 @@ final class DsoDTO implements DTOInterface
     /** @var  */
     private $locale;
 
+    private $updatedAt;
+
     /** @var Dso */
     private $dso;
 
@@ -44,7 +46,6 @@ final class DsoDTO implements DTOInterface
     private $constellationId;
     private $constellation;
     private $distAl;
-    private $distPc;
     private $discover;
     private $discoverYear;
     private $astrobinId;
@@ -552,6 +553,25 @@ final class DsoDTO implements DTOInterface
     public function setRightAscencion(?string $rightAscencion): DsoDTO
     {
         $this->rightAscencion = $rightAscencion;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     *
+     * @return DsoDTO
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
