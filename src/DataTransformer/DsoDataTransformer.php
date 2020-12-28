@@ -74,36 +74,35 @@ final class DsoDataTransformer extends AbstractDataTransformer
     /**
      * Convert Dso into Array
      *
-     * @param DTOInterface $dto
+     * @param DsoDTO|DTOInterface $dto
      *
      * @return array|null
      */
     public function toArray(DTOInterface $dto):? array
     {
-        $catalog = array_map(static function($itemCatalog) {
+        $catalogs = array_map(static function($itemCatalog) {
             return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
         }, $dto->getCatalogs());
 
-        $constellation = $this->translator->trans(implode(Utils::DATA_GLUE, ['constellation', strtolower($dto->getConstellation()->title())]));
         $routeConstellation = $this->router->generate('constellation_show', [
                 'id' => strtolower($dto->getConstellation()->getId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
-                'name' => Utils::camelCaseUrlTransform($constellation)
+                'name' => Utils::camelCaseUrlTransform($dto->getConstellation()->title())
             ]
         );
 
         $data = [
-            'catalog' => $catalog,
+            'catalog' => $catalogs,
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
             'type' => $dto->getType(),
-            'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
+            'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $dto->getConstellation()->title(), $dto->getConstellation()->title()),
             'mag' => $dto->getMagnitude(),
-            'distAl' => $dto->getDistAl(),
-            'distPc' => $dto->getDistPc(),
+            'distAl' => $dto->distanceLightYears(),
+            'distPc' => $dto->distanceParsecs(),
             'discover' => $dto->getDiscover(),
             'discoverYear' => $dto->getDiscoverYear(),
             'ra' => $dto->getRightAscencion(),
             'dec' => $dto->getDeclinaison(),
-            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobinImage()->title, Utils::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
+            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
         ];
 
         return array_filter($data, static function($value) {

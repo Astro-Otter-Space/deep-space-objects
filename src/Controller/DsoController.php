@@ -94,7 +94,7 @@ class DsoController extends AbstractController
             $params['dso'] = $dso;
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = ($dso->getConstellation()->title());
-            $params['last_update'] = $dso->getUpdatedAt()->format('Y-m-d');
+            $params['last_update'] = null; //$dso->()->format('Y-m-d');
 
             // Image cover
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
@@ -122,7 +122,7 @@ class DsoController extends AbstractController
                 }
             } catch (WsResponseException $e) {}
         } else {
-            throw new NotFoundException();
+            throw new NotFoundException('Object not found');
         }
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'));

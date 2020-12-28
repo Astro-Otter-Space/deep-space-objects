@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\DTO;
 
-
-use App\Classes\Utils;
 use App\Entity\ES\Constellation;
 use App\Repository\ConstellationRepository;
 

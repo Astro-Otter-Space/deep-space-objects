@@ -149,9 +149,11 @@ final class DsoDTO implements DTOInterface
         $desig = (is_array($this->getDesigs())) ? current($this->getDesigs()) : $this->getDesigs();
 
         // If Alt is set, we merge desig and alt
-        $title = (empty($this->getAlt()))
+
+        $fieldAlt = ('en' !== $this->locale) ? sprintf('alt_%s', $this->locale): 'alt';
+        $title = (empty($this->getAlt()[$fieldAlt]))
             ? $desig
-            : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
+            : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt()[$fieldAlt], $desig]);
 
         // If title still empty, we put Id
         $title = (empty($title))
@@ -333,7 +335,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return null|DTOInterface
+     * @return null|ConstellationDTO|DTOInterface
      */
     public function getConstellation(): ?DTOInterface
     {
@@ -354,9 +356,9 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDistAl()
+    private function getDistAl()
     {
-        return Utils::numberFormatByLocale($this->distAl);
+        return $this->distAl;
     }
 
     /**
@@ -370,10 +372,15 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
+    public function distanceLightYears()
+    {
+        return Utils::numberFormatByLocale($this->distAl);
+    }
+
     /**
      * @return mixed
      */
-    public function getDistPc()
+    public function distanceParsecs()
     {
         return Utils::numberFormatByLocale(Utils::PARSEC * $this->getDistAl());
     }

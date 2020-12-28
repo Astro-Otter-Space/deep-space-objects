@@ -120,7 +120,7 @@ class DsoManager
                 throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
             }
         }
-        dump($dso->getConstellation()->title()); die();
+
         return $dso;
     }
 

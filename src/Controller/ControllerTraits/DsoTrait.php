@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\Controller\ControllerTraits;
 
 use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;
-use Entity\DTO\DTOInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

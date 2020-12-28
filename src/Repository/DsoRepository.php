@@ -24,14 +24,14 @@ class DsoRepository extends AbstractRepository
     private static $listSearchFields = [
         'id',
         'id.raw',
-        'data.desigs',
-        'data.alt.alt',
-        'data.discover'
+        'desigs',
+        'alt.alt',
+        'discover'
     ];
 
     private static $listAggregates = [
         'constellation' => [
-            'field' => 'data.const_id.keyword',
+            'field' => 'const_id.keyword',
             'size' => 100
         ],
         'catalog' => [
@@ -39,14 +39,14 @@ class DsoRepository extends AbstractRepository
             'size' => 100
         ],
         'type' => [
-            'field' => 'data.type.keyword',
+            'field' => 'type.keyword',
             'size' => 100
         ]
     ];
 
     private static $listAggregatesRange = [
         'magnitude' => [
-            'field' => 'data.mag',
+            'field' => 'mag',
             'ranges' => [
                 ['to' => 5, 'key' => 'low'],
                 ['from' => 5, 'to' => 10, 'key' => 'average'],
@@ -58,7 +58,7 @@ class DsoRepository extends AbstractRepository
 
     public const INDEX_NAME = 'deepspaceobjects';
 
-    public const ASTROBIN_FIELD = 'data.astrobin_id';
+    public const ASTROBIN_FIELD = 'astrobin_id';
 
     /**
      * Get aggregates proprieties
@@ -144,7 +144,7 @@ class DsoRepository extends AbstractRepository
 
         $query->addSort(
             [
-                'data.mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
+                'mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
             ]
 
         );
@@ -553,19 +553,19 @@ class DsoRepository extends AbstractRepository
         'aggregates' => [
             'type' => [
                 'terms' => [
-                    'field' => 'data.type.keyword',
+                    'field' => 'type.keyword',
                     'size' => 20
                 ]
             ],
             'const_id' => [
                 'terms' => [
-                'field' => 'data.const_id.keyword',
+                'field' => 'const_id.keyword',
                 'size' => 100
                 ]
             ],
             'mag' => [
                 'range' => [
-                    'field' => 'data.mag',
+                    'field' => 'mag',
                     'ranges' => [
                         ['to' => 5],
                         ['from' => 5, 'to' => 10],
