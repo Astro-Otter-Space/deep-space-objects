@@ -1,14 +1,15 @@
 <?php
+
 namespace App\Repository;
 
 use App\Entity\DTO\DTOInterface;
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\ListConstellation;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
 use Elastica\Search;
-use Entity\DTO\ConstellationDTO;
 
 /**
  * Class ConstellationRepository
@@ -36,10 +37,10 @@ final class ConstellationRepository extends AbstractRepository
      * @param string $id
      * @param bool $hydrate
      *
-     * @return Constellation
+     * @return DTOInterface|null
      * @throws \ReflectionException
      */
-    public function getObjectById(string $id, bool $hydrate): ?Constellation
+    public function getObjectById(string $id, bool $hydrate): ?DTOInterface
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {

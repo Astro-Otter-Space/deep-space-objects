@@ -107,17 +107,17 @@ class Constellation
     /**
      * @return array
      */
-    public function getAlt(): array
+    public function getAlt(): ?array
     {
         return $this->alt;
     }
 
     /**
-     * @param array $alt
+     * @param array|null $alt
      *
      * @return Constellation
      */
-    public function setAlt(array $alt): Constellation
+    public function setAlt(?array $alt): Constellation
     {
         $this->alt = $alt;
         return $this;
@@ -126,17 +126,17 @@ class Constellation
     /**
      * @return array
      */
-    public function getDescription(): array
+    public function getDescription(): ?array
     {
         return $this->description;
     }
 
     /**
-     * @param array $description
+     * @param array|null $description
      *
      * @return Constellation
      */
-    public function setDescription(array $description): Constellation
+    public function setDescription(?array $description): Constellation
     {
         $this->description = $description;
         return $this;

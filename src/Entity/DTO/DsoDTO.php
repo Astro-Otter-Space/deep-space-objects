@@ -67,9 +67,19 @@ final class DsoDTO implements DTOInterface
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
             ->setId(strtolower($dso->getId()))
+            ->setAlt($dso->getAlt())
+            ->setAstrobinId($dso->getAstrobinId())
+            ->setConstellationId($dso->getConstId())
             ->setCatalogs($dso->getCatalog())
             ->setDesigs($dso->getDesigs())
-            ->setAlt($dso->getAlt())
+            ->setDeclinaison($dso->getDec())
+            ->setDescription($dso->getDescription())
+            ->setDesigs($dso->getDesigs())
+            ->setDiscover($dso->getDiscover())
+            ->setDiscoverYear($dso->getDiscoverYear())
+            ->setDistAl($dso->getDistAl())
+            ->setMagnitude($dso->getMag())
+            ->setRightAscencion($dso->getRa())
         ;
     }
 
@@ -209,9 +219,9 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getDesigs()
+    public function getDesigs(): array
     {
         return $this->desigs;
     }
@@ -365,19 +375,9 @@ final class DsoDTO implements DTOInterface
      */
     public function getDistPc()
     {
-        return Utils::numberFormatByLocale(Utils::PARSEC * $this->distPc);
+        return Utils::numberFormatByLocale(Utils::PARSEC * $this->getDistAl());
     }
 
-    /**
-     * @param mixed $distPc
-     *
-     * @return DsoDTO
-     */
-    public function setDistPc($distPc): DsoDTO
-    {
-        $this->distPc = $distPc;
-        return $this;
-    }
 
     /**
      * @return mixed

@@ -89,7 +89,7 @@ class ConvertSrcToBulkCommand extends Command
      * @return int|null|void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         /** @var UpdateData $updateData */
         $lastImport = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);

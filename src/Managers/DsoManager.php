@@ -5,6 +5,7 @@ namespace App\Managers;
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\DataTransformer\DsoDataTransformer;
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
@@ -15,7 +16,6 @@ use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Services\GetImage;
-use Entity\DTO\DTOInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -45,7 +45,8 @@ class DsoManager
     private $locale;
     /** @var DsoDataTransformer */
     private $dsoDataTransformer;
-
+    /** @var ConstellationRepository */
+    private $constellationRepository;
     /**
      * DsoManager constructor.
      *
@@ -55,8 +56,9 @@ class DsoManager
      * @param CacheInterface $cacheUtils
      * @param $locale
      * @param DsoDataTransformer $dsoDataTransformer
+     * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer)
+    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
@@ -65,6 +67,7 @@ class DsoManager
         $this->cacheUtils = $cacheUtils;
         $this->locale = $locale ?? 'en';
         $this->dsoDataTransformer = $dsoDataTransformer;
+        $this->constellationRepository = $constellationRepository;
     }
 
     /**
@@ -102,11 +105,12 @@ class DsoManager
                 //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
                 // add Constellation
-                $constellationDto = null; //$this->con
-                if (!is_null($constellationDto)) {
+                $constellationDto = $this->constellationRepository
+                    ->setLocale($this->locale)
+                    ->getObjectById($dso->getConstellationId(), true);
+                if ($constellationDto instanceof ConstellationDTO) {
                     $dso->setConstellation($constellationDto);
                 }
-
 
                 //$this->cacheUtils->saveItem($dso->guid(), serialize($dso));
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
@@ -116,7 +120,7 @@ class DsoManager
                 throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
             }
         }
-
+        dump($dso->getConstellation()->title()); die();
         return $dso;
     }
 
@@ -125,14 +129,14 @@ class DsoManager
      *
      * @return Dso|null
      */
-    private function getDsoFromCache($idMd5):? Dso
+    private function getDsoFromCache($idMd5): ?\App\Entity\DTO\DTOInterface
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
 
         /** @var Dso $unserializedDso */
-        $unserializedDso = unserialize($dsoSerialized);
+        $unserializedDso = unserialize($dsoSerialized, [DsoDTO::class]);
 
-        return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
+        return ($unserializedDso instanceof \App\Entity\DTO\DTOInterface) ? $unserializedDso : null;
     }
 
     /**

@@ -35,6 +35,7 @@ final class ConstellationDTO implements DTOInterface
     private $image;
     private $map;
     private $generic;
+    private $alt;
     private $description;
 
     /**
@@ -50,6 +51,7 @@ final class ConstellationDTO implements DTOInterface
             ->setElasticSearchId($elasticId)
             ->setLocale($locale)
             ->setId($constellation->getId())
+            ->setAlt($constellation->getAlt())
             ->setDescription($constellation->getDescription())
             ->setGeneric($constellation->getGen())
             ->setGeometry($constellation->getGeometry())
@@ -71,8 +73,10 @@ final class ConstellationDTO implements DTOInterface
      */
     public function title(): string
     {
-        return ucfirst($this->getConstellation()->getAlt()[$this->locale]);
+        $field = ('en' !== $this->locale)? sprintf('alt_%s',$this->locale): 'alt';
+        return ucfirst($this->getAlt()[$field]);
     }
+
 
     public function fullUrl(): string
     {
@@ -92,7 +96,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setId($id)
+    public function setId($id): ConstellationDTO
     {
         $this->id = $id;
         return $this;
@@ -111,7 +115,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setElasticSearchId($elasticSearchId)
+    public function setElasticSearchId($elasticSearchId): ConstellationDTO
     {
         $this->elasticSearchId = $elasticSearchId;
         return $this;
@@ -130,7 +134,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setFullUrl($fullUrl)
+    public function setFullUrl($fullUrl): ConstellationDTO
     {
         $this->fullUrl = $fullUrl;
         return $this;
@@ -149,7 +153,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setLocale($locale)
+    public function setLocale($locale): ConstellationDTO
     {
         $this->locale = $locale;
         return $this;
@@ -166,6 +170,26 @@ final class ConstellationDTO implements DTOInterface
         $this->constellation = $constellation;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAlt(): ?array
+    {
+        return $this->alt;
+    }
+
+    /**
+     * @param mixed $alt
+     *
+     * @return ConstellationDTO
+     */
+    public function setAlt(array $alt): ConstellationDTO
+    {
+        $this->alt = $alt;
+        return $this;
+    }
+
 
     /**
      * @return mixed
