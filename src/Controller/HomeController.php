@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     /** @var DsoManager  */
     private $dsoManager;
 
-    const DSO_VIGNETTES = 3;
+    public const DSO_VIGNETTES = 3;
 
     /**
      * HomeController constructor.
@@ -55,7 +55,7 @@ class HomeController extends AbstractController
      */
     public function vignettesDso(Request $request): Response
     {
-        $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES) ?? [];
+        $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
 
         /** @var Response $response */
         $response = new Response();

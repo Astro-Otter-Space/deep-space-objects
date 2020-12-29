@@ -417,7 +417,7 @@ class DsoRepository extends AbstractRepository
      *      "bool": {
      *        "must": {
      *          "exists": {
-     *            "field": "data.astrobin_id"
+     *            "field": "astrobin_id"
      *          }
      *        }
      *      }
@@ -502,7 +502,7 @@ class DsoRepository extends AbstractRepository
         if (0 < $results->count()) {
             /** @var Document $document */
             foreach ($results->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document);
+                yield $this->buildEntityFromDocument($document)->getId();
             }
         }
     }

@@ -120,7 +120,6 @@ class DsoController extends AbstractController
                 } else {
                     $params['images'] = $this->getListImages($dso->getId());
                 }
-                dump($params['images']); die();
             } catch (WsResponseException $e) {}
         } else {
             throw new NotFoundException('Object not found');

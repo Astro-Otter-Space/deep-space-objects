@@ -75,13 +75,13 @@
     <body>
     {% block body %}
       {% block header %}
-        {{ render(controller('App\\Controller\\LayoutController::header')) }}
+        {#{ render(controller('App\\Controller\\LayoutController::header')) }#}
       {% endblock %}
 
       <main>{% block content %}{% endblock %}</main>
 
       {% block footer %}
-        {{ render(controller('App\\Controller\\LayoutController::footer')) }}
+        {# { render(controller('App\\Controller\\LayoutController::footer')) } #}
       {% endblock %}
     {% endblock %}
 

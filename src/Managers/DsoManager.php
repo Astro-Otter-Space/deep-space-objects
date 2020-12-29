@@ -226,7 +226,7 @@ class DsoManager
      */
     public function buildSearchListDso(DsoDTO $dso): array
     {
-        $constellation = ('unassigned' !== $dso->getConstId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstId())) : null;
+        $constellation = ('unassigned' !== $dso->getConstellationId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstellationId())) : null;
         $title = $dso->title();
 
         $otherDesigs = $dso->getDesigs();
@@ -300,12 +300,13 @@ class DsoManager
 
     /**
      * https://discuss.elastic.co/t/elasticsearch-get-random-document-atleast-5-from-each-category/120015
-     * @param $limit
+     * @param int $limit
      *
-     * @return array
-     * @throws \Exception
+     * @return ListDso
+     * @throws WsException
+     * @throws \ReflectionException
      */
-    public function randomDsoWithImages($limit): array
+    public function randomDsoWithImages(int $limit): ListDso
     {
         /**
          * @return \Generator
@@ -316,11 +317,12 @@ class DsoManager
 
         /** @var ListDso $listDso */
         $listDso = new ListDso();
-        foreach ($getRandomDso() as $dso) {
-            $listDso->addDso($dso);
+        foreach ($getRandomDso() as $dsoId) {
+            $dsoDto = $this->buildDso($dsoId);
+            $listDso->addDso($dsoDto);
         }
 
-        return $this->buildListDso($listDso);
+        return $listDso;
     }
 
     /**
