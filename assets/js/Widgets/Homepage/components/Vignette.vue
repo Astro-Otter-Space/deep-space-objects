@@ -2,7 +2,7 @@
   <section class="Vignettes__container">
     <a v-for="dso in vignettes" :href="dso.url" class="Vignettes__vignette"
        v-bind:style="imgStyle(dso)"
-       v-bind:title="dso.image.title"
+       v-bind:title="dso.astrobin.title"
     >
     </a>
   </section>
