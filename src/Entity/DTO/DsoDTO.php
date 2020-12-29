@@ -574,7 +574,4 @@ final class DsoDTO implements DTOInterface
         $this->updatedAt = $updatedAt;
         return $this;
     }
-
-
-
 }
