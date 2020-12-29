@@ -7,6 +7,7 @@ use App\Classes\Utils;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
@@ -129,14 +130,14 @@ class DsoManager
      *
      * @return Dso|null
      */
-    private function getDsoFromCache($idMd5): ?\App\Entity\DTO\DTOInterface
+    private function getDsoFromCache($idMd5): ?DTOInterface
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
 
         /** @var Dso $unserializedDso */
-        $unserializedDso = unserialize($dsoSerialized, [DsoDTO::class]);
+        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => DsoDTO::class]);
 
-        return ($unserializedDso instanceof \App\Entity\DTO\DTOInterface) ? $unserializedDso : null;
+        return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
 
     /**
@@ -147,14 +148,25 @@ class DsoManager
      *
      * @return ListDso
      * @throws \ReflectionException
+     * @throws WsException
      */
     public function getListDsoFromConst(DsoDTO $dso, $limit): ListDso
     {
-        /** @var ListDso $listDso */
-        return $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstellationId(), $dso->getId(), 0, $limit, true);
+        $getListDso = function() use($dso, $limit) {
+            yield from $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstellationId(), $dso->getId(), 0, $limit, true);
+        };
+
+        $listDso = new ListDso();
+        foreach ($getListDso() as $dsoId) {
+            $dsoDto = $this->buildDso($dsoId);
+            $listDso->addDso($dsoDto);
+        }
+
+        return $listDso;
     }
 
     /**
+     * TODO : useless
      * Format a list of Dso
      * @param $listDso
      * @return array $dataDsoList
@@ -169,7 +181,7 @@ class DsoManager
             $idCover = md5(sprintf('%s_cover', $dsoChild->getId()));
 
             if ($cacheUtils->hasItem($idCover)) {
-                $imgCached = unserialize($cacheUtils->getItem($idCover));
+                $imgCached = unserialize($cacheUtils->getItem($idCover), ['allowed_classes' => DsoDTO::class]);
                 $dsoChild->setImage($imgCached);
             } else {
                 /** @var Image $imageAstrobin */
@@ -185,7 +197,7 @@ class DsoManager
 
     /**
      * @param $searchTerms
-     * @param null $typeReturn
+     * @param null $typeReturn>
      *
      * @return mixed
      * @throws \ReflectionException

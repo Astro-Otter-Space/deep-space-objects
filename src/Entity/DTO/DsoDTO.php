@@ -76,11 +76,14 @@ final class DsoDTO implements DTOInterface
             ->setDeclinaison($dso->getDec())
             ->setDescription($dso->getDescription())
             ->setDesigs($dso->getDesigs())
+            ->setDim($dso->getDim())
             ->setDiscover($dso->getDiscover())
             ->setDiscoverYear($dso->getDiscoverYear())
             ->setDistAl($dso->getDistAl())
+            ->setGeometry($dso->getGeometry())
             ->setMagnitude($dso->getMag())
             ->setRightAscencion($dso->getRa())
+            ->setType($dso->getType())
         ;
     }
 
@@ -203,7 +206,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return array|string|null
      */
     public function getCatalogs()
     {
@@ -211,7 +214,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $catalogs
+     * @param array|string|null $catalogs
      *
      * @return DsoDTO
      */
@@ -557,11 +560,12 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        $updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
+        return (false !== $updatedAt) ? $updatedAt : null;
     }
 
     /**
@@ -569,7 +573,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(string $updatedAt): DsoDTO
     {
         $this->updatedAt = $updatedAt;
         return $this;

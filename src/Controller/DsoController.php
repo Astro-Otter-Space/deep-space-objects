@@ -83,18 +83,18 @@ class DsoController extends AbstractController
     {
         $params = [];
 
-        $id = explode(trim(Utils::URL_CONCAT_GLUE), $id);
+        $separator = trim(Utils::URL_CONCAT_GLUE);
+        $id = explode($separator, $id, null);
         $id = reset($id);
 
-        /** @var DsoDTO $dso */
         $dso = $this->dsoManager->buildDso($id);
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
             $params['dso'] = $dso;
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
-            $params['constTitle'] = ($dso->getConstellation()->title());
-            $params['last_update'] = null; //$dso->()->format('Y-m-d');
+            $params['constTitle'] = $dso->getConstellation()->title();
+            $params['last_update'] = $dso->getUpdatedAt();
 
             // Image cover
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
@@ -103,7 +103,7 @@ class DsoController extends AbstractController
             /** @var ListDso $listDso */
             $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
 
-            $params['dso_by_const'] = $this->dsoManager->buildListDso($listDso);
+            $params['dso_by_const'] = $listDso;
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map
@@ -111,12 +111,12 @@ class DsoController extends AbstractController
                 "type" => "FeatureCollection",
                 "features" =>  [$dso->geoJson()]
             ];
-
+            dump($params); die();
             // Images
             try {
                 $params['images'] = [];
                 if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
-                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')));
+                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => false]);
                 } else {
                     $params['images'] = $this->getListImages($dso->getId());
                 }

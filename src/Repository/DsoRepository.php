@@ -107,10 +107,10 @@ class DsoRepository extends AbstractRepository
      * @param int|null $limit
      * @param bool $hydrate
      *
-     * @return ListDso|array
+     * @return \Generator
      * @throws \ReflectionException
      */
-    public function getObjectsByConstId(string $constId, ?string $excludedId, ?int $offset, ?int $limit, bool $hydrate)
+    public function getObjectsByConstId(string $constId, ?string $excludedId, ?int $offset, ?int $limit, bool $hydrate): \Generator
     {
         if (is_null($offset )) {
             $offset = parent::FROM;
@@ -119,8 +119,7 @@ class DsoRepository extends AbstractRepository
         if (is_null($limit)) {
             $limit = (int)parent::SIZE;
         }
-        /** @var ListDso $dsoList */
-        $dsoList = new ListDso();
+
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query $query */
@@ -128,7 +127,7 @@ class DsoRepository extends AbstractRepository
 
         /** @var Query\Term $mustQuery */
         $mustQuery = new Query\Term();
-        $mustQuery->setTerm('data.const_id', strtolower($constId));
+        $mustQuery->setTerm('const_id', strtolower($constId));
 
         $mustNotQuery = new Query\Term();
         $mustNotQuery->setTerm('id', strtolower($excludedId));
@@ -158,11 +157,9 @@ class DsoRepository extends AbstractRepository
                 return $search->getDocuments();
             }
             foreach ($search->getDocuments() as $document) {
-                $dsoList->addDso($this->buildEntityFromDocument($document));
+                yield $this->buildEntityFromDocument($document)->getId();
             }
         }
-
-        return $dsoList;
     }
 
     /**
@@ -206,10 +203,9 @@ class DsoRepository extends AbstractRepository
      */
     public function getObjectsBySearchTerms($searchTerm): array
     {
-        $list = [];
         if ('en' !== $this->getLocale()) {
-            self::$listSearchFields[] = sprintf('data.alt.alt_%s', $this->getLocale());
-            self::$listSearchFields[] = sprintf('data.alt.alt_%s.keyword', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt.alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt.alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);

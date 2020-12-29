@@ -13,7 +13,7 @@ class Dso
     /** @var string */
     private $id;
 
-    /** @var array */
+    /** @var array|string */
     private $catalog;
 
     /** @var int */
@@ -87,19 +87,19 @@ class Dso
     }
 
     /**
-     * @return array
+     * @return array|string
      */
-    public function getCatalog(): array
+    public function getCatalog()
     {
         return $this->catalog;
     }
 
     /**
-     * @param array|null $catalog
+     * @param array|string|null $catalog
      *
      * @return Dso
      */
-    public function setCatalog(?array $catalog): Dso
+    public function setCatalog($catalog): Dso
     {
         $this->catalog = $catalog;
         return $this;
@@ -108,19 +108,19 @@ class Dso
     /**
      * @return int
      */
-    public function getOrder(): int
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
     /**
-     * @param int|null $order
+     * @param int|string|null $order
      *
      * @return Dso
      */
-    public function setOrder(?int $order): Dso
+    public function setOrder($order): Dso
     {
-        $this->order = $order;
+        $this->order = (int)$order;
         return $this;
     }
 
@@ -156,9 +156,9 @@ class Dso
      *
      * @return Dso
      */
-    public function setDesigs(?array $desigs): Dso
+    public function setDesigs($desigs): Dso
     {
-        $this->desigs = $desigs;
+        $this->desigs = (is_array($desigs)) ? $desigs: [$desigs];
         return $this;
     }
 

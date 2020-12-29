@@ -2,6 +2,8 @@
 
 namespace App\Entity\ES;
 
+use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use Traversable;
 
 /**
@@ -22,9 +24,9 @@ class ListDso implements \IteratorAggregate
     }
 
     /**
-     * @param Dso $dso
+     * @param DTOInterface $dso
      */
-    public function addDso(Dso $dso): void
+    public function addDso(DTOInterface $dso): void
     {
         $this->listDso[] = $dso;
     }

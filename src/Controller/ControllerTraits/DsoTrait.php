@@ -47,10 +47,10 @@ trait DsoTrait
         if (0 < $listDso->getIterator()->count()) {
             $listDso = ($listDso instanceof ListDso) ? iterator_to_array($listDso) : $listDso;
 
-            $this->listFilters = array_map(function(Dso $dsoData) {
+            $this->listFilters = array_map(function(DTOInterface $dsoData) {
                 return [
-                    'value' => $dsoData->getType(),
-                    'label' => $this->translatorInterface->trans(sprintf('type.%s', $dsoData->getType()))
+                    'value' => substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1),
+                    'label' => $this->translatorInterface->trans($dsoData->getType())
                 ];
             }, $listDso);
         }
