@@ -84,6 +84,7 @@ final class DsoDTO implements DTOInterface
             ->setMagnitude($dso->getMag())
             ->setRightAscencion($dso->getRa())
             ->setType($dso->getType())
+            ->setUpdatedAt($dso->getUpdatedAt())
         ;
     }
 
