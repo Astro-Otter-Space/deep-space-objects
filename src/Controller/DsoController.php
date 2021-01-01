@@ -363,7 +363,7 @@ class DsoController extends AbstractController
         }
 
         // Params
-        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso) //$this->dsoManager->buildListDso($listDso);
+        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso); //$this->dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = (int)$nbItems;
         $result['current_page'] = $page;
