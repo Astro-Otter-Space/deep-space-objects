@@ -144,16 +144,36 @@ class DsoManager
      * Get Dso from a constellation identifier and build list
      *
      * @param DsoDTO $dso
-     * @param $limit
+     * @param int $limit
      *
      * @return ListDso
-     * @throws \ReflectionException
      * @throws WsException
+     * @throws \ReflectionException
      */
-    public function getListDsoFromConst(DsoDTO $dso, $limit): ListDso
+    public function getListDsoFromConst(DsoDTO $dso, int $limit): ListDso
     {
         $getListDso = function() use($dso, $limit) {
             yield from $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstellationId(), $dso->getId(), 0, $limit, true);
+        };
+
+        $listDso = new ListDso();
+        foreach ($getListDso() as $dsoId) {
+            $dsoDto = $this->buildDso($dsoId);
+            $listDso->addDso($dsoDto);
+        }
+
+        return $listDso;
+    }
+
+    /**
+     * @return ListDso
+     * @throws WsException
+     * @throws \ReflectionException
+     */
+    public function getListDsoLastUpdated(): ListDso
+    {
+        $getListDso = function () {
+            yield from $this->dsoRepository->getLastUpdated();
         };
 
         $listDso = new ListDso();
@@ -217,7 +237,7 @@ class DsoManager
     }
 
     /**
-     * @todo to check
+     * @todo remove
      * Data returned for autocomplete search
      *
      * @param DsoDTO $dso
@@ -226,23 +246,7 @@ class DsoManager
      */
     public function buildSearchListDso(DsoDTO $dso): array
     {
-        $constellation = ('unassigned' !== $dso->getConstellationId()) ? $this->translatorInterface->trans('constellation.' . strtolower($dso->getConstellationId())) : null;
-        $title = $dso->title();
-
-        $otherDesigs = $dso->getDesigs();
-        $removeDesigs = (is_array($otherDesigs))
-            ? array_shift($otherDesigs)
-            : null;
-
-        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
-        return [
-            'id' => $dso->getId(),
-            'value' => $title,
-            'ajaxValue' => $ajaxValue,
-            'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
-            'label' => implode(Utils::GLUE_DASH, array_filter([$this->translatorInterface->trans('type.' . $dso->getType()) , $constellation])),
-            'url' => $this->getDsoUrl($dso, Router::ABSOLUTE_PATH)
-        ];
+        return $this->dsoDataTransformer->vignetteView($dso);
     }
 
     /**
@@ -294,8 +298,7 @@ class DsoManager
      */
     public function formatVueData(DsoDTO $dso): array
     {
-        $dsoArray = $this->dsoDataTransformer->toArray($dso);
-        return $this->formatEntityData($dsoArray, self::$listFieldToTranslate, $this->translatorInterface);
+        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate, $this->translatorInterface);
     }
 
     /**
@@ -323,20 +326,6 @@ class DsoManager
         }
 
         return $listDso;
-    }
-
-    /**
-     * TODO : move to ConstellationManager
-     * @param $constId
-     * @return string|null
-     */
-    public function buildTitleConstellation($constId): ?string
-    {
-        if (!is_null($constId)) {
-            return $this->translatorInterface->trans('constId', ['%count%' => 1]) . ' “' . $this->translatorInterface->trans(sprintf('constellation.%s', strtolower($constId))) . '”';
-        }
-
-        return null;
     }
 
 }

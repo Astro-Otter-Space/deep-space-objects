@@ -7,7 +7,9 @@ use App\Classes\Utils;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\DTO\DsoDTO;
+use App\Entity\ES\ListDso;
 use App\Managers\DsoManager;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -37,38 +39,51 @@ final class DsoDataTransformer extends AbstractDataTransformer
         $this->router = $router;
     }
 
-    /**
-     * @deprecated
-     * @param $dso
-     *
-     * @return DsoDTO|null
-     */
-    public function transform($dso):? DsoDTO
+    /**public function searchView(DTOInterface $dto): array
     {
-        if ($dso instanceof Dso) {
-            /** @var DsoDTO $dsoDto */
-            $dsoDto = new DsoDTO();
+        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
+        return [
+            'id' => $dto->getId(),
+            'value' => $dto->title(),
+            'ajaxValue' => $ajaxValue,
+        ];
+    }**/
 
-            $dsoDto->setId($dso->getId());
-            $dsoDto->setTitle(DsoManager::buildTitleStatic($dso));
-            $dsoDto->setConstellation($this->translator->trans(sprintf('constellation.%s', strtolower($dso->getConstId()))));
-            $dsoDto->setDesigs($dso->getDesigs());
-            $dsoDto->setType($this->translator->trans(sprintf('type.%s', $dso->getType())));
-            $dsoDto->setCatalog($dso->getCatalog());
-
-            $dsoDto->setMagnitude($dso->getMag());
-            $dsoDto->setDistAl(Utils::numberFormatByLocale($dso->getDistAl()));
-            $dsoDto->setDistPC(Utils::numberFormatByLocale(Utils::PARSEC * $dso->getDistAl()));
-
-            $dsoDto->setDiscover($dso->getDiscover());
-            $dsoDto->setDiscoverYear($dso->getDiscoverYear());
-            $dsoDto->setDec($dso->getDec());
-            $dsoDto->setRa($dso->getRa());
-
-            return $dsoDto;
+    /**
+     * @param ListDso $listDso
+     *
+     * @return array
+     */
+    public function listVignettesView(ListDso $listDso): array
+    {
+        $cards = [];
+        foreach ($listDso as $dsoDTO) {
+            $cards[] = $this->vignetteView($dsoDTO);
         }
 
-        return null;
+        return $cards;
+    }
+
+    public function vignetteView(DTOInterface $dto): array
+    {
+        $title = $dto->title();
+
+        $otherDesigs = $dto->getDesigs();
+        $removeDesigs = (is_array($otherDesigs))
+            ? array_shift($otherDesigs)
+            : null;
+
+        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
+        return [
+            'id' => $dto->getId(),
+            'value' => $title,
+            'ajaxValue' => $ajaxValue,
+            'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
+            'label' => implode(Utils::GLUE_DASH, array_filter([$this->translator->trans($dto->getType()) , $dto->getConstellation()->title()])),
+            'url' => $dto->getFullUrl(),
+            'filter' => $dto->getType(), // TODO : remove first part,
+            'image' => $dto->getAstrobin()
+        ];
     }
 
     /**
@@ -78,7 +93,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
      *
      * @return array|null
      */
-    public function toArray(DTOInterface $dto):? array
+    public function longView(DTOInterface $dto):? array
     {
         $catalogs = array_map(static function($itemCatalog) {
             return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
@@ -110,4 +125,33 @@ final class DsoDataTransformer extends AbstractDataTransformer
         });
     }
 
+
+    /**
+     * Build a "table" of data (translated if needed) from DTO with translated label
+     * todo : move to parent method ?
+     * @param DTOInterface $dto
+     * @param $listFields
+     *
+     * @return array
+     */
+    public function buildTableData(DTOInterface $dto, array $listFields): array
+    {
+        $dtoArray = $this->longView($dto);
+        return array_map(function($value, $key) use($listFields) {
+            if (!is_array($value)) {
+                $valueTranslated = $this->translator->trans($value, ['%count%' => 1]);
+                $nbItems = 1;
+            } else {
+                $valueTranslated = implode(Utils::GLUE_DASH, array_map(function($item) {
+                    return $this->translator->trans($item, ['%count%' => 1]);
+                }, $value));
+                $nbItems = count($value);
+            }
+
+            return [
+                'col0' => $this->translator->trans($key, ['%count%' => $nbItems]),
+                'col1' => (in_array($key, $listFields, true)) ? $valueTranslated: $value
+            ];
+        }, $dtoArray, array_keys($dtoArray));
+    }
 }

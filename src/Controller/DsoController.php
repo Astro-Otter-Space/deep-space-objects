@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
+use App\DataTransformer\DsoDataTransformer;
 use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
@@ -40,12 +41,14 @@ class DsoController extends AbstractController
 
     /** @var CacheInterface  */
     private $cacheUtil;
-    /** @var DsoManager  */
+    /** @var DsoManager */
     private $dsoManager;
-    /** @var DsoRepository  */
+    /** @var DsoRepository */
     private $dsoRepository;
-    /** @var TranslatorInterface  */
+    /** @var TranslatorInterface */
     private $translatorInterface;
+    /** @var DsoDataTransformer */
+    private $dsoDataTransformer;
 
     /**
      * DsoController constructor.
@@ -55,12 +58,13 @@ class DsoController extends AbstractController
      * @param DsoRepository $dsoRepository
      * @param TranslatorInterface $translatorInterface
      */
-    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface, DsoDataTransformer $dataTransformer)
     {
         $this->cacheUtil = $cacheUtil;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         $this->translatorInterface = $translatorInterface;
+        $this->dsoDataTransformer = $dataTransformer;
     }
 
     /**
@@ -103,7 +107,7 @@ class DsoController extends AbstractController
             /** @var ListDso $listDso */
             $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
 
-            $params['dso_by_const'] = $listDso;
+            $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map
@@ -156,7 +160,7 @@ class DsoController extends AbstractController
      * @param EntityManagerInterface $doctrineManager
      *
      * @return Response
-     * @throws \ReflectionException
+     * @throws \ReflectionException|WsException
      * @Route({
      *   "en": "/last-update",
      *   "fr": "/mises-a-jour"
@@ -164,8 +168,7 @@ class DsoController extends AbstractController
      */
     public function getLastUpdatedDso(Request $request, EntityManagerInterface $doctrineManager): Response
     {
-        /** @var  $listDso */
-        $listDso = $this->dsoManager->buildListDso($this->dsoRepository->getLastUpdated());
+        $listDso = $this->dsoManager->getListDsoLastUpdated();
 
         /** @var RouterInterface $router */
         $router = $this->get('router');
@@ -180,7 +183,7 @@ class DsoController extends AbstractController
         $params = [
             'title' => $title,
             'breadcrumbs' => $this->buildBreadcrumbs(null, $router, $titleBr),
-            'list_dso' => $listDso
+            'list_dso' => $this->dsoDataTransformer->listVignettesView($listDso)
         ];
 
         /** @var Response $response */
@@ -215,7 +218,7 @@ class DsoController extends AbstractController
             $tabImages = $listImages->url_regular;
 
         } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
-            $tabImages = array_map(function (Image $image) {
+            $tabImages = array_map(static function (Image $image) {
                 return $image->url_regular;
             }, iterator_to_array($listImages));
         }
@@ -344,7 +347,7 @@ class DsoController extends AbstractController
             // Specific sort for catalog
             if ('catalog' === $type) {
                 usort($listFacetsByType, function($facetA, $facetB) use ($ordering) {
-                    return (array_search($facetA['code'], $ordering) > array_search($facetB['code'], $ordering));
+                    return (array_search($facetA['code'], $ordering, true) > array_search($facetB['code'], $ordering, true));
                 });
             } elseif ('constellation' === $type) {
                 usort($listFacetsByType, function($kFacetA, $kFacetB) {
@@ -360,18 +363,15 @@ class DsoController extends AbstractController
         }
 
         // Params
-        $result['list_dso'] = $this->dsoManager->buildListDso($listDso);
+        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso) //$this->dsoManager->buildListDso($listDso);
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = (int)$nbItems;
         $result['current_page'] = $page;
         $result['nb_pages'] = $nbPages = ceil($nbItems/DsoRepository::SIZE);
 
         $queryAll = $request->query->all();
-        $result['filters'] = call_user_func("array_merge", array_map(function($val, $key) use($router, $queryAll) {
-            return [
-                'label' => $this->translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))),
-                'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))
-            ];
+        $result['filters'] = array_merge(array_map(function ($val, $key) use ($router, $queryAll) {
+            return ['label' => $this->translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))), 'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))];
         }, $filters, array_keys($filters)));
 
         unset($queryAll['page']);

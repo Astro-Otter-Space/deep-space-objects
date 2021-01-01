@@ -19,5 +19,5 @@ abstract class AbstractDataTransformer
      *
      * @return mixed
      */
-    abstract protected function toArray(DTOInterface $dto);
+    abstract protected function longView(DTOInterface $dto);
 }

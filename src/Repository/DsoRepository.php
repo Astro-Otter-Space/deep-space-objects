@@ -165,10 +165,9 @@ class DsoRepository extends AbstractRepository
     /**
      * Get last updated items
      *
-     * @return ListDso
-     * @throws \ReflectionException
+     * @return \Generator
      */
-    public function getLastUpdated(): ListDso
+    public function getLastUpdated(): \Generator
     {
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
@@ -186,11 +185,9 @@ class DsoRepository extends AbstractRepository
 
         if (0 < $search->count()) {
             foreach ($search->getDocuments() as $document) {
-                $dsoList->addDso($this->buildEntityFromDocument($document));
+                yield $this->buildEntityFromDocument($document)->getId();
             }
         }
-
-        return $dsoList;
     }
 
     /**

@@ -15,34 +15,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 trait ManagerTrait
 {
 
-    /**
-     * Build a "table" of data (translated if needed) from DTO with translated label
-     *
-     * @param $entityArray
-     * @param $listFields
-     * @param TranslatorInterface $translatorInterface
-     *
-     * @return array
-     */
-    public function formatEntityData($entityArray, $listFields, TranslatorInterface $translatorInterface): array
-    {
-        return array_map(static function($value, $key) use($translatorInterface, $listFields) {
-            if (!is_array($value)) {
-                $valueTranslated = $translatorInterface->trans($value, ['%count%' => 1]);
-                $nbItems = 1;
-            } else {
-                $valueTranslated = implode(Utils::GLUE_DASH, array_map(static function($item) use($translatorInterface) {
-                    return $translatorInterface->trans($item, ['%count%' => 1]);
-                }, $value));
-                $nbItems = count($value);
-            }
 
-            return [
-                'col0' => $translatorInterface->trans($key, ['%count%' => $nbItems]),
-                'col1' => (in_array($key, $listFields, true)) ? $valueTranslated: $value
-            ];
-        }, $entityArray, array_keys($entityArray));
-
-    }
 
 }
