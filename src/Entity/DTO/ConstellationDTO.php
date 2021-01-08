@@ -122,7 +122,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getFullUrl()
+    public function getFullUrl(): string
     {
         return $this->fullUrl;
     }

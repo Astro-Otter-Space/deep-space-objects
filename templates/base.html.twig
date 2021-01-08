@@ -1,23 +1,21 @@
 {% block layout %}
-  {% spaceless %}
-    {% set pageLang = app.request.locale %}
-    {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
+  {% set pageLang = app.request.locale %}
+  {% set pageTitle = 'dso'|trans ~ ' - ' ~ pageTitle|default('') %}
 
-    {% set pageDescDefault = 'homepage.desc'|trans({'%sitename%': 'dso'|trans}) %}
-    {% set pageDesc = pageDesc|default(pageDescDefault) %}
+  {% set pageDescDefault = 'homepage.desc'|trans({'%sitename%': 'dso'|trans}) %}
+  {% set pageDesc = pageDesc|default(pageDescDefault) %}
 
-    {% set pageUrl = app.request.uri %}
-    {% set pageImage = pageImage|default('/build/images/logos/astro_otter_500-500.png') %}
-    {% set pageImage200 = '/build/images/logos/astro_otter_200-200.png' %}
-    {% set pageOgImage = pageImage|default(pageImage200) %}
-    {% set pageImageDesc = pageImageDesc|default('') %}
-    {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
+  {% set pageUrl = app.request.uri %}
+  {% set pageImage = pageImage|default('/build/images/logos/astro_otter_500-500.png') %}
+  {% set pageImage200 = '/build/images/logos/astro_otter_200-200.png' %}
+  {% set pageOgImage = pageImage|default(pageImage200) %}
+  {% set pageImageDesc = pageImageDesc|default('') %}
+  {% set pageUrlCanonical = app.request.getSchemeAndHttpHost ~ app.request.baseUrl ~ app.request.pathInfo %}
 
-    {% set favicon = favicon|default('') %}
-    {% set facebookId = facebookId|default(null) %}
+  {% set favicon = favicon|default('') %}
+  {% set facebookId = facebookId|default(null) %}
 
-    {% set analyticsId = analyticsId|default('') %}
-  {% endspaceless %}
+  {% set analyticsId = analyticsId|default('') %}
   <!DOCTYPE html>
   <html lang="{{ pageLang }}">
     <head>
@@ -75,13 +73,13 @@
     <body>
     {% block body %}
       {% block header %}
-        {#{ render(controller('App\\Controller\\LayoutController::header')) }#}
+        {{ render(controller('App\\Controller\\LayoutController::header')) }}
       {% endblock %}
 
       <main>{% block content %}{% endblock %}</main>
 
       {% block footer %}
-        {# { render(controller('App\\Controller\\LayoutController::footer')) } #}
+         {{ render(controller('App\\Controller\\LayoutController::footer')) }}
       {% endblock %}
     {% endblock %}
 

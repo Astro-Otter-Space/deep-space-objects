@@ -169,9 +169,9 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function fullUrl(): string
+    public function fullUrl(): ?string
     {
         return $this->fullUrl;
     }

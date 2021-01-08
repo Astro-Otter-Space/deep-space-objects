@@ -116,7 +116,7 @@ class LayoutController extends AbstractController
      * @param array $listKeysMenu
      * @return array
      */
-    private function buildMenu(string $locale = 'en', array $listKeysMenu): array
+    private function buildMenu(string $locale, array $listKeysMenu): array
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');

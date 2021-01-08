@@ -8,5 +8,5 @@ interface DTOInterface
 {
     public function guid(): string;
     public function title(): string;
-    public function fullUrl(): string;
+    public function fullUrl(): ?string;
 }

@@ -254,8 +254,12 @@ class DsoRepository extends AbstractRepository
                     $keyRange = array_search($val, array_column(self::$listAggregatesRange[$type]['ranges'], 'key'), true);
                     $range = self::$listAggregatesRange[$type]['ranges'][$keyRange];
 
-                    if (array_key_exists('to', $range)) $paramRange['lte'] =  $range['to'];
-                    if (array_key_exists('from', $range)) $paramRange['gte'] =  $range['from'];
+                    if (array_key_exists('to', $range)) {
+                        $paramRange['lte'] = $range['to'];
+                    }
+                    if (array_key_exists('from', $range)) {
+                        $paramRange['gte'] = $range['from'];
+                    }
 
                     $rangeQuery->addField($field, $paramRange);
 
@@ -316,10 +320,10 @@ class DsoRepository extends AbstractRepository
             return [$search->getDocuments(), $nbItems];
         }
 
-        /** @var ListDso $listDso */
-        $listDso = new ListDso();
-        foreach ($search->getDocuments() as $doc) {
-            $listDso->addDso($this->buildEntityFromDocument($doc));
+
+        $listDsoId = [];
+        foreach ($search->getDocuments() as $document) {
+            $listDsoId[] = $this->buildEntityFromDocument($document)->getId();
         }
 
         $listAggregations = [];
@@ -334,7 +338,7 @@ class DsoRepository extends AbstractRepository
             return ((array_search($k1, $listSort, true) > array_search($k2, $listSort, true)) ? 1 : -1);
         });
 
-        return [$listDso, $listAggregations, $nbItems];
+        return [$listDsoId, $listAggregations, $nbItems];
     }
 
     /**

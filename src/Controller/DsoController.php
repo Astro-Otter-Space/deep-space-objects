@@ -283,6 +283,7 @@ class DsoController extends AbstractController
      *
      * @return Response
      * @throws \ReflectionException
+     * @throws WsException
      */
     public function catalog(Request $request): Response
     {
@@ -316,7 +317,12 @@ class DsoController extends AbstractController
         }
 
         // Search results
-        [$listDso, $listAggregates, $nbItems] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters, null, true);
+        [$listDsoId, $listAggregates, $nbItems] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters, null, true);
+        $listDso = new ListDso();
+        foreach ($listDsoId as $dsoId) {
+            $dsoDto = $this->dsoManager->buildDso($dsoId);
+            $listDso->addDso($dsoDto);
+        }
 
         // List facets
         $allQueryParameters = $request->query->all();

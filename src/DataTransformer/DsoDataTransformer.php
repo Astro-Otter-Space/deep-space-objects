@@ -80,8 +80,8 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'ajaxValue' => $ajaxValue,
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translator->trans($dto->getType()) , $dto->getConstellation()->title()])),
-            'url' => $dto->getFullUrl(),
-            'filter' => $dto->getType(), // TODO : remove first part,
+            'url' => $dto->fullUrl(),
+            'filter' => $dto->getType(),
             'image' => $dto->getAstrobin()
         ];
     }
