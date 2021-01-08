@@ -119,13 +119,6 @@ final class ConstellationDTO implements DTOInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFullUrl(): string
-    {
-        return $this->fullUrl;
-    }
 
     /**
      * @param mixed $fullUrl
@@ -211,7 +204,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getGeometryLine()
+    public function getGeometryLine(): ?array
     {
         return $this->geometryLine;
     }
@@ -221,7 +214,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setGeometryLine($geometryLine): ConstellationDTO
+    public function setGeometryLine(array $geometryLine): ConstellationDTO
     {
         $this->geometryLine = $geometryLine;
         return $this;

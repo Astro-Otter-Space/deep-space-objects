@@ -64,6 +64,12 @@ final class DsoDataTransformer extends AbstractDataTransformer
         return $cards;
     }
 
+
+    /**
+     * @param DTOInterface $dto
+     *
+     * @return array
+     */
     public function vignetteView(DTOInterface $dto): array
     {
         $title = $dto->title();

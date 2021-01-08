@@ -468,9 +468,9 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return array|null
      */
-    public function getGeometry()
+    public function getGeometry(): ?array
     {
         return $this->geometry;
     }
@@ -480,7 +480,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setGeometry($geometry): DsoDTO
+    public function setGeometry($geometry): ?DsoDTO
     {
         $this->geometry = $geometry;
         return $this;

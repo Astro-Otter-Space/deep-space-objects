@@ -3,6 +3,7 @@
 namespace App\Managers;
 
 use App\Classes\Utils;
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\ES\Constellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
@@ -49,8 +50,8 @@ class ConstellationManager
      */
     public function buildConstellation($id): Constellation
     {
-        /** @var Constellation $constellation */
-        $constellation = $this->constellationRepository->setlocale($this->locale)->getObjectById($id);
+        /** @var ConstellationDTO $constellation */
+        $constellation = $this->constellationRepository->setlocale($this->locale)->getObjectById($id, true);
         $constellation->setFullUrl($this->urlGeneratorHelper->generateUrl($constellation));
 
         return $constellation;
@@ -63,11 +64,14 @@ class ConstellationManager
     public function buildListConstellation(): array
     {
         /** @return \Generator
+         * @throws \ReflectionException
          * @var \Generator $listConstellation
          */
         $listConstellation = function() {
             yield from $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
         };
+
+        dump($listConstellation()->current()->getImage()); die();
 
         return array_map(function(Constellation $constellation) {
             /** @var Image $image */

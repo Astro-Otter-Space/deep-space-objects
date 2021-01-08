@@ -63,13 +63,12 @@ final class ConstellationRepository extends AbstractRepository
     public function getAllConstellation(): \Generator
     {
         /** @var ListConstellation $listConstellation */
-        //$listConstellation = new ListConstellation();
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query $query */
         $query = new Query();
         $query->setSize(100);
-        $query->addSort(['data.order' => ['order' => 'asc']]);
+        $query->addSort(['order' => ['order' => 'asc']]);
 
         /** @var Search $search */
         $search = new Search($this->client);
@@ -78,11 +77,8 @@ final class ConstellationRepository extends AbstractRepository
         if (0 < $result->count()) {
             foreach ($result->getDocuments() as $document) {
                 yield $this->buildEntityFromDocument($document);
-                //$listConstellation->addConstellation($constellation);
             }
         }
-
-        //return $listConstellation;
     }
 
     /**
@@ -98,8 +94,8 @@ final class ConstellationRepository extends AbstractRepository
         $list = [];
 
         if ('en' !== $this->getLocale()) {
-            self::$listSearchFields[] = sprintf('data.alt.alt_%s', $this->getLocale());
-            self::$listSearchFields[] = sprintf('data.alt.alt_%s.keyword', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt.alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt.alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);

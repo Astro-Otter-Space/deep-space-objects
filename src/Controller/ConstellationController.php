@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
+use App\Entity\DTO\ConstellationDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
@@ -43,17 +45,15 @@ class ConstellationController extends AbstractController
     /**
      * ConstellationController constructor.
      *
-     * @param $constellationManager
-     * @param $dsoManager
-     * @param $dsoRepository
-     * @param $translatorInterface
+     * @param ConstellationManager $constellationManager
+     * @param DsoManager $dsoManager
+     * @param DsoRepository $dsoRepository
      */
-    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface)
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository)
     {
         $this->constellationManager = $constellationManager;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
-        $this->translatorInterface = $translatorInterface;
     }
 
 
@@ -76,7 +76,7 @@ class ConstellationController extends AbstractController
         /** @var Serializer $serializer */
         $serializer = $this->container->get('serializer');
 
-        /** @var Constellation $constellation */
+        /** @var ConstellationDTO $constellation */
         $constellation = $this->constellationManager->buildConstellation($id);
 
         // Retrieve list of Dso from the constellation
@@ -91,13 +91,13 @@ class ConstellationController extends AbstractController
         $result['list_types_filters'] = $this->buildFiltersWithAll($listDsoLimited) ?? [];
 
         // List types of DSO for map legend
-        $result['list_types'] = call_user_func_array("array_merge", array_map(function ($data) {
+        $result['list_types'] = array_merge(...array_map(static function ($data) {
             return [$data['value'] => $data['label']];
         }, $this->buildFilters($listDso)));
 
         // GeoJson for display dso on map
-        $listDsoFeatures = array_map(function(Dso $dso) {
-            return ($dso->getGeometry()) ? $this->dsoManager->buildgeoJson($dso): null;
+        $listDsoFeatures = array_map(static function(DTOInterface $dso) {
+            return $dso->getGeometry();
         }, iterator_to_array($constellation->getListDso()->getIterator()));
 
         $geoJsonDso = [
