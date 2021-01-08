@@ -129,7 +129,7 @@ class DsoController extends AbstractController
             throw new NotFoundException('Object not found');
         }
 
-        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'));
+        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
 
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);

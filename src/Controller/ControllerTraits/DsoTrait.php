@@ -101,10 +101,11 @@ trait DsoTrait
     /**
      * @param DTOInterface|null $entity
      * @param RouterInterface $router
+     * @param string|null $title
      *
      * @return array
      */
-    public function buildBreadcrumbs(?DTOInterface $entity, RouterInterface $router): array
+    public function buildBreadcrumbs(?DTOInterface $entity, RouterInterface $router, ?string $title): array
     {
        $breadcrumbs = [];
 
@@ -141,12 +142,14 @@ trait DsoTrait
             }
         }
 
+        if (!is_null($title)) {
+            $breadcrumbs['level_3'] = [
+                'label' => $title,
+                'url' => null
+            ];
+        }
 
-        $breadcrumbs['level_3'] = [
-            'label' => $entity->title(),
-            'url' => null
-        ];
 
-       return $breadcrumbs;
+        return $breadcrumbs;
     }
 }
