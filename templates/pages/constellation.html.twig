@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set constellation = constellation|json_decode %}
-{% set title = constellation.alt %}
+{% set title = constellation.title %}
 {% set pageTitle = "const_id"|transchoice(0) ~ ' - ' ~ title %}
 {% set pageImage = constellation.image %}
 {% set pageDesc = constellation.description|raw %}

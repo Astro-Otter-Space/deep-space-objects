@@ -201,43 +201,43 @@ Sources :
 ### Add new DSO Data
 // {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
 ```
-    {
-      "id": "",
-      "catalog": null,
-      "updated_at": null,
-      "order": null,
-      "desigs": [""],
-      "alt": {
-        "alt": "",
-        "alt_fr": "",
-        "alt_es": "",
-        "alt_de": "",
-        "alt_pt": "",
-        "alt_it": ""
-      },
-      "description": {
-        "description": "",
-        "description_fr": ""
-      },
-      "type": "",
-      "mag": 999,
-      "dim": "",
-      "const_id": "",
-      "cl": "",
-      "dist_al": null,
-      "discover": "",
-      "discover_year": 0,
-      "ra": "",
-      "dec": "",
-      "astrobin_id": null
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          0,
-          0
-        ]
-      }
-    }
+{
+  "id": "",
+  "catalog": null,
+  "updated_at": null,
+  "order": null,
+  "desigs": [""],
+  "alt": {
+    "alt": "",
+    "alt_fr": "",
+    "alt_es": "",
+    "alt_de": "",
+    "alt_pt": "",
+    "alt_it": ""
+  },
+  "description": {
+    "description": "",
+    "description_fr": ""
+  },
+  "type": "",
+  "mag": 999,
+  "dim": "",
+  "const_id": "",
+  "cl": "",
+  "dist_al": null,
+  "discover": "",
+  "discover_year": 0,
+  "ra": "",
+  "dec": "",
+  "astrobin_id": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  }
+}
  ```
 Conversion ra -> long :
 `long = (H + m/60 + s/3600)*15`
