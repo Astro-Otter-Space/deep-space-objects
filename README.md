@@ -108,7 +108,7 @@ NB : not delete indexes if deployed in prod yet
 
 ### Create bulk from source
 ```
-php bin/console dso:convert-bulk <type>
+php bin/console dso:convert-bulk <type> --import=full|delta
 ```
 List of values for <type> : dso20, constellations
 
