@@ -29,9 +29,9 @@ final class DataController extends AbstractFOSRestController
 
     use DsoTrait;
 
-    const JSON_FORMAT = 'json';
+    public const JSON_FORMAT = 'json';
 
-    const LIMIT = 20;
+    public const LIMIT = 20;
 
     private static $authorizedTypes = [
         'constellation' => 'const_id',
@@ -76,11 +76,11 @@ final class DataController extends AbstractFOSRestController
 
         if (is_null($dso)) {
             throw new NotFoundException(sprintf("%s is not an correct item", $id));
-        } else {
-            $codeHttp = Response::HTTP_OK;
-            /** @var DsoDTO|null $data */
-            $data = $this->dsoDataTransformer->transform($dso);
         }
+
+        $codeHttp = Response::HTTP_OK;
+        /** @var DsoDTO|null $data */
+        $data = $this->dsoDataTransformer->transform($dso);
 
         $formatedData = $this->buildJsonApi($data, $codeHttp);
 
@@ -111,12 +111,12 @@ final class DataController extends AbstractFOSRestController
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
 
-        $constellation = ("" != $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
+        $constellation = ("" !== $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
         if (!is_null($constellation)) {
             $filters['constellation'] = $constellation;
         }
 
-        $catalog = ("" != $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
+        $catalog = ("" !== $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
         if (!is_null($catalog)) {
             if (in_array($catalog, Utils::getOrderCatalog())) {
                 $filters['catalog'] = $catalog;
@@ -125,7 +125,7 @@ final class DataController extends AbstractFOSRestController
             }
         }
 
-        $type = ("" != $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
+        $type = ("" !== $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
         if (!is_null($type)) {
             if (in_array($type, Utils::getListTypeDso())) {
                 $filters['type'] = $type;
@@ -134,7 +134,7 @@ final class DataController extends AbstractFOSRestController
             }
         }
 
-        array_walk($filters, function (&$value, $key) {
+        array_walk($filters, static function (&$value, $key) {
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         });
 
