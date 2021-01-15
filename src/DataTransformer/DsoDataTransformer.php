@@ -1,15 +1,13 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Dso;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\ListDso;
-use App\Managers\DsoManager;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

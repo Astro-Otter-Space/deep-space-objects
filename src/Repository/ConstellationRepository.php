@@ -94,8 +94,8 @@ final class ConstellationRepository extends AbstractRepository
         $list = [];
 
         if ('en' !== $this->getLocale()) {
-            self::$listSearchFields[] = sprintf('alt.alt_%s', $this->getLocale());
-            self::$listSearchFields[] = sprintf('alt.alt_%s.keyword', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);

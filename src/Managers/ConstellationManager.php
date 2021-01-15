@@ -5,6 +5,7 @@ namespace App\Managers;
 use App\Classes\Utils;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\ES\Constellation;
+use App\Entity\ES\ListConstellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use AstrobinWs\Response\Image;
@@ -44,15 +45,21 @@ class ConstellationManager
 
     /**
      * Build a constellation entoty from ElasticSearch request by $id
+     *
      * @param $id
-     * @return Constellation
+     *
+     * @return ConstellationDTO
      * @throws \ReflectionException
      */
-    public function buildConstellation($id): Constellation
+    public function buildConstellation($id): ConstellationDTO
     {
         /** @var ConstellationDTO $constellation */
-        $constellation = $this->constellationRepository->setlocale($this->locale)->getObjectById($id, true);
-        $constellation->setFullUrl($this->urlGeneratorHelper->generateUrl($constellation));
+        $constellation = $this->constellationRepository
+            ->setlocale($this->locale)
+            ->getObjectById($id, true);
+
+        $constellation
+            ->setFullUrl($this->urlGeneratorHelper->generateUrl($constellation));
 
         return $constellation;
     }
@@ -61,47 +68,38 @@ class ConstellationManager
     /**
      * Get all constellation and build formated data for template
      */
-    public function buildListConstellation(): array
+    public function buildListConstellation(): ListConstellation
     {
         /** @return \Generator
          * @throws \ReflectionException
          * @var \Generator $listConstellation
          */
-        $listConstellation = function() {
+        $getConstellation = function() {
             yield from $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
         };
 
-        dump($listConstellation()->current()->getImage()); die();
+        $listConstellation = new ListConstellation();
+        foreach ($getConstellation() as $constellation) {
+            $listConstellation->addConstellation($constellation);
+        }
 
-        return array_map(function(Constellation $constellation) {
-            /** @var Image $image */
-            $image = new Image();
-            $image->url_regular = $constellation->getImage();
-            $image->user = $constellation->getAlt();
-            $image->title = $constellation->getAlt();
-
-            return [
-                'id' => $constellation->getId(),
-                'value' => $constellation->getAlt(),
-                'label' => $constellation->getGen(),
-                'url' => $this->buildUrl($constellation, RouterInterface::RELATIVE_PATH),
-                'image' => $image,
-                'filter' => $constellation->getLoc()
-            ];
-        }, iterator_to_array($listConstellation()));
+        return $listConstellation;
     }
 
 
     /**
      * Build search by terms
+     *
      * @param $searchTerms
+     *
      * @return mixed
+     * @throws \ReflectionException
      */
     public function searchConstellationsByTerms($searchTerms)
     {
         $resultConstellation = $this->constellationRepository->setLocale($this->locale)->getConstellationsBySearchTerms($searchTerms);
 
-        return call_user_func("array_merge", array_map(function(Constellation $constellation) {
+        return array_merge(array_map(function (Constellation $constellation) {
             return $this->buildSearchListConst($constellation);
         }, $resultConstellation));
     }

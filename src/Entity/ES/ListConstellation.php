@@ -2,6 +2,7 @@
 
 namespace App\Entity\ES;
 
+use App\Entity\DTO\DTOInterface;
 use Traversable;
 
 /**
@@ -22,9 +23,9 @@ class ListConstellation implements \IteratorAggregate
     }
 
     /**
-     * @param Constellation $constellation
+     * @param DTOInterface $constellation
      */
-    public function addConstellation(Constellation $constellation): void
+    public function addConstellation(DTOInterface $constellation): void
     {
         $this->listConstellation[] = $constellation;
     }

@@ -35,6 +35,7 @@ final class ConstellationDTO implements DTOInterface
     private $generic;
     private $alt;
     private $description;
+    private $kind;
 
     /**
      * ConstellationDTO constructor.
@@ -52,6 +53,7 @@ final class ConstellationDTO implements DTOInterface
             ->setAlt($constellation->getAlt())
             ->setDescription($constellation->getDescription())
             ->setGeneric($constellation->getGen())
+            ->setKind($constellation->getLoc())
             ->setGeometry($constellation->getGeometry())
             ->setGeometryLine($constellation->getGeometryLine());
         ;
@@ -272,6 +274,26 @@ final class ConstellationDTO implements DTOInterface
     public function setDescription($description): ConstellationDTO
     {
         $this->description = $description;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getKind(): string
+    {
+        return $this->kind;
+    }
+
+    /**
+     * @param mixed $kind
+     *
+     * @return ConstellationDTO
+     */
+    public function setKind(string $kind): ConstellationDTO
+    {
+        $this->kind = $kind;
         return $this;
     }
 

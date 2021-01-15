@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
+use App\DataTransformer\ConstellationDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
@@ -40,7 +41,7 @@ class ConstellationController extends AbstractController
     /** @var DsoRepository  */
     private $dsoRepository;
     /** @var TranslatorInterface  */
-    private $translatorInterface;
+    private $translator;
 
     /**
      * ConstellationController constructor.
@@ -149,14 +150,18 @@ class ConstellationController extends AbstractController
     /**
      * @Route("/constellations", name="constellation_list")
      *
+     * @param Request $request
+     * @param ConstellationDataTransformer $constellationDataTransformer
+     *
      * @return Response
-     * @throws \ReflectionException
      */
-    public function list(): Response
+    public function list(Request $request, ConstellationDataTransformer $constellationDataTransformer): Response
     {
         $result = [];
 
-        $result['list_constellation'] = $this->constellationManager->buildListConstellation();
+        $listConstellations = $this->constellationManager->buildListConstellation();
+
+        $result['list_constellation'] = $constellationDataTransformer->listVignettesView($listConstellations);
 
         /** @var Response $response */
         $response = $this->render('pages/constellations.html.twig', $result);

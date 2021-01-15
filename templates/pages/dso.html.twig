@@ -10,7 +10,7 @@
 {#https://coxpi.draftium.site/#}
 
 {% block content %}
-  <!-- div id="appDso"
+  <div id="appDso"
     data-dso-widget
     data-imgcover="{{ dso.astrobin.url_regular|default('default') }}"
     data-imgcoveralt="{{ imgCoverAlt|default('') }}"
@@ -26,16 +26,16 @@
     data-filter="{{ list_types_filters|json_encode }}"
     data-breadcrumbs="{{ breadcrumbs|json_encode }}"
   >
-  </div -->
-  <!--div id="geojson"
+  </div>
+  <div id="geojson"
        data-dso="{{ geojsonDso|json_encode }}"
        data-center="{{ dso.geometry['coordinates']|json_encode }}"
        data-const="{{ dso.constellationId|raw }}"
-       data-zoom="10" aria-hidden="true"></div -->
+       data-zoom="10" aria-hidden="true"></div>
 {% endblock %}
 
-{#  % block javascripts %}
+{% block javascripts %}
   {{ parent() }}
   {{ encore_entry_script_tags('dso') }}
   {{ encore_entry_script_tags('skymap') }}
-{% endblock %#}
+{% endblock %
