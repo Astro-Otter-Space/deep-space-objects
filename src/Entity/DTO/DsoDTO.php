@@ -89,6 +89,14 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
+     * @return string
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    /**
      * @param mixed $locale
      *
      * @return DsoDTO

@@ -42,7 +42,8 @@
         "symfony/webpack-encore-bundle": "^1.0",
         "symfony/yaml": "^4.4",
         "twig/extensions": "^1.5",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-intl": "*"
     },
     "config": {
         "preferred-install": {

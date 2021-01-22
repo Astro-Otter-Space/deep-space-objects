@@ -24,21 +24,23 @@ class ConstellationManager
     /** @var UrlGenerateHelper  */
     private $urlGeneratorHelper;
     /** @var TranslatorInterface  */
-    private $translatorInterface;
+    private $translator;
     /** @var string */
     private $locale;
 
     /**
      * ConstellationManager constructor.
-     * @param $constellationRepository
-     * @param $urlGeneratorHelper
-     * @param $translatorInterface
+     *
+     * @param ConstellationRepository $constellationRepository
+     * @param UrlGenerateHelper $urlGeneratorHelper
+     * @param TranslatorInterface $translator
+     * @param string $locale
      */
-    public function __construct(ConstellationRepository $constellationRepository, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translatorInterface, $locale)
+    public function __construct(ConstellationRepository $constellationRepository, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator, string $locale)
     {
         $this->constellationRepository = $constellationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->locale = $locale;
     }
 
@@ -57,9 +59,6 @@ class ConstellationManager
         $constellation = $this->constellationRepository
             ->setlocale($this->locale)
             ->getObjectById($id, true);
-
-        $constellation
-            ->setFullUrl($this->urlGeneratorHelper->generateUrl($constellation));
 
         return $constellation;
     }
@@ -117,7 +116,7 @@ class ConstellationManager
             'id' => $constellation->getId(),
             'value' => $constellationName,
             'ajaxValue' => $constellationName,
-            'label' => implode(Utils::GLUE_DASH, [$this->translatorInterface->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
+            'label' => implode(Utils::GLUE_DASH, [$this->translator->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
             'url' => $this->buildUrl($constellation, Router::ABSOLUTE_PATH),
         ];
     }

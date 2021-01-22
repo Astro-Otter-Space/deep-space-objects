@@ -39,7 +39,7 @@ class DsoManager
     /** @var UrlGenerateHelper  */
     private $urlGenerateHelper;
     /** @var TranslatorInterface */
-    private $translatorInterface;
+    private $translator;
     /** @var CacheInterface */
     private $cacheUtils;
     /** @var  */
@@ -53,18 +53,18 @@ class DsoManager
      *
      * @param DsoRepository $dsoRepository
      * @param UrlGenerateHelper $urlGenerateHelper
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
      * @param CacheInterface $cacheUtils
      * @param $locale
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translatorInterface, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
+    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translator, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
         $this->urlGenerateHelper = $urlGenerateHelper;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->cacheUtils = $cacheUtils;
         $this->locale = $locale ?? 'en';
         $this->dsoDataTransformer = $dsoDataTransformer;
@@ -79,6 +79,7 @@ class DsoManager
      * @return DsoDTO
      * @throws WsException
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function buildDso($id): DsoDTO
     {
@@ -97,13 +98,9 @@ class DsoManager
             /** @var DsoDTO|DTOInterface $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id, true);
             if (!is_null($dso)) {
-
                 // Add astrobin image
                 $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
                 $dso->setAstrobin($astrobinImage);
-
-                // Add URl
-                //$dso->setFullUrl($this->getDsoUrl($dso, Router::RELATIVE_PATH));
 
                 // add Constellation
                 $constellationDto = $this->constellationRepository
@@ -143,17 +140,18 @@ class DsoManager
     /**
      * Get Dso from a constellation identifier and build list
      *
-     * @param DsoDTO $dso
+     * @param string $constellationId
+     * @param string|null $excludedId
      * @param int $limit
      *
      * @return ListDso
      * @throws WsException
      * @throws \ReflectionException
      */
-    public function getListDsoFromConst(DsoDTO $dso, int $limit): ListDso
+    public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $limit): ListDso
     {
-        $getListDso = function() use($dso, $limit) {
-            yield from $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($dso->getConstellationId(), $dso->getId(), 0, $limit, true);
+        $getListDso = function() use($constellationId, $excludedId, $limit) {
+            yield from $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, 0, $limit, true);
         };
 
         $listDso = new ListDso();
@@ -184,36 +182,6 @@ class DsoManager
 
         return $listDso;
     }
-
-    /**
-     * TODO : useless
-     * Format a list of Dso
-     * @param $listDso
-     * @return array $dataDsoList
-     */
-    public function buildListDso(ListDso $listDso): array
-    {
-        /** @var CacheInterface $cacheUtils */
-        $cacheUtils = $this->cacheUtils;
-
-        return array_map(function(Dso $dsoChild) use ($cacheUtils) {
-
-            $idCover = md5(sprintf('%s_cover', $dsoChild->getId()));
-
-            if ($cacheUtils->hasItem($idCover)) {
-                $imgCached = unserialize($cacheUtils->getItem($idCover), ['allowed_classes' => DsoDTO::class]);
-                $dsoChild->setImage($imgCached);
-            } else {
-                /** @var Image $imageAstrobin */
-                $imageAstrobin = $this->getAstrobinImage($dsoChild->getAstrobinId());
-                $dsoChild->setImage($imageAstrobin);
-                $cacheUtils->saveItem($idCover, serialize($dsoChild->getImage()));
-            }
-
-            return array_merge($this->buildSearchListDso($dsoChild), ['image' => $dsoChild->getImage(), 'filter' => $dsoChild->getType()]);
-        }, iterator_to_array($listDso->getIterator()));
-    }
-
 
     /**
      * @param $searchTerms
@@ -298,7 +266,7 @@ class DsoManager
      */
     public function formatVueData(DsoDTO $dso): array
     {
-        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate, $this->translatorInterface);
+        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate, $this->translator);
     }
 
     /**

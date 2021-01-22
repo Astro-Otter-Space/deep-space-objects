@@ -5,7 +5,6 @@ namespace App\Controller\ControllerTraits;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;
@@ -23,16 +22,16 @@ trait DsoTrait
     private $listFilters = [];
 
     /** @var TranslatorInterface */
-    private $translatorInterface;
+    private $translator;
 
     /**
-     * @param mixed $translatorInterface
+     * @param TranslatorInterface $translator
      *
      * @return DsoTrait
      */
-    public function setTranslatorInterface(TranslatorInterface $translatorInterface): self
+    public function setTranslator(TranslatorInterface $translator): self
     {
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         return $this;
     }
 
@@ -50,7 +49,7 @@ trait DsoTrait
             $this->listFilters = array_map(function(DTOInterface $dsoData) {
                 return [
                     'value' => substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1),
-                    'label' => $this->translatorInterface->trans($dsoData->getType())
+                    'label' => $this->translator->trans($dsoData->getType())
                 ];
             }, $listDso);
         }
@@ -63,12 +62,12 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildFiltersWithAll($listDso): array
+    public function buildFiltersWithAll(ListDso $listDso): array
     {
         $allFilters = [
             [
                 'value' => 1,
-                'label' => $this->translatorInterface->trans('hem.all')
+                'label' => $this->translator->trans('hem.all')
             ]
         ];
 
@@ -110,7 +109,7 @@ trait DsoTrait
        $breadcrumbs = [];
 
         $breadcrumbs['level_1'] = [
-            'label' => $this->translatorInterface->trans('menu.homepage'),
+            'label' => $this->translator->trans('menu.homepage'),
             'url' => $router->generate('homepage')
         ];
 
@@ -120,14 +119,14 @@ trait DsoTrait
             switch ($class) {
                 case DsoDTO::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('catalogs'),
+                        'label' => $this->translator->trans('catalogs'),
                         'url' => $router->generate('dso_catalog')
                     ];
                     break;
 
                 case Constellation::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
+                        'label' => $this->translator->trans('constId', ['%count%' => 2]),
                         'url' => $router->generate('constellation_list')
                     ];
                     break;
@@ -135,7 +134,7 @@ trait DsoTrait
                 case Event::class:
                 case Observation::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('listObservations'),
+                        'label' => $this->translator->trans('listObservations'),
                         'url' => $router->generate('observation_list')
                     ];
                     break;

@@ -41,7 +41,7 @@ class PageController extends AbstractController
     private $dsoRepository;
 
     /** @var TranslatorInterface */
-    private $translatorInterface;
+    private $translator;
 
     /** @var LoggerInterface */
     private $logger;
@@ -50,13 +50,13 @@ class PageController extends AbstractController
      * PageController constructor.
      *
      * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
      * @param LoggerInterface $logger
      */
-    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translatorInterface, LoggerInterface $logger)
+    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translator, LoggerInterface $logger)
     {
         $this->dsoRepository = $dsoRepository;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->logger = $logger;
     }
 
@@ -107,7 +107,7 @@ class PageController extends AbstractController
                     'text' => 'includes/emails/contact.txt.twig'
                 ];
 
-                $subject = '[Contact] - ' . $this->translatorInterface->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
+                $subject = '[Contact] - ' . $this->translator->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
                 $content['contact'] = $contactData;
 
                 try {
@@ -160,17 +160,17 @@ class PageController extends AbstractController
         /** @var RouterInterface $router */
         $router = $this->get('router');
 
-        $result['title'] = $this->translatorInterface->trans('legal_notice.title');
-        $result['first_line'] = $this->translatorInterface->trans('legal_notice.line_first', ['%dso%' => $this->translatorInterface->trans('dso')]);
-        $result['second_line'] = $this->translatorInterface->trans('legal_notice.line_sec');
+        $result['title'] = $this->translator->trans('legal_notice.title');
+        $result['first_line'] = $this->translator->trans('legal_notice.line_first', ['%dso%' => $this->translator->trans('dso')]);
+        $result['second_line'] = $this->translator->trans('legal_notice.line_sec');
         $result['host'] = [
-            'name' => $this->translatorInterface->trans('legal_notice.host.name'),
-            'adress' => $this->translatorInterface->trans('legal_notice.host.adress'),
-            'cp' => $this->translatorInterface->trans('legal_notice.host.cp'),
-            'city' => $this->translatorInterface->trans('legal_notice.host.city'),
-            'country' => $this->translatorInterface->trans('legal_notice.host.country')
+            'name' => $this->translator->trans('legal_notice.host.name'),
+            'adress' => $this->translator->trans('legal_notice.host.adress'),
+            'cp' => $this->translator->trans('legal_notice.host.cp'),
+            'city' => $this->translator->trans('legal_notice.host.city'),
+            'country' => $this->translator->trans('legal_notice.host.country')
         ];
-        $result['third_line'] = $this->translatorInterface->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translatorInterface->trans('contact.title')]);
+        $result['third_line'] = $this->translator->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translator->trans('contact.title')]);
 
         /** @var Response $response */
         $response = $this->render('pages/random.html.twig', $result);
@@ -259,14 +259,14 @@ class PageController extends AbstractController
 
         $header = [
             'Id',
-            $this->translatorInterface->trans('desigs'),
+            $this->translator->trans('desigs'),
             'Name',
-            $this->translatorInterface->trans('type'),
+            $this->translator->trans('type'),
             'Constellation',
-            $this->translatorInterface->trans('magnitude'),
-            $this->translatorInterface->trans('ra'),
-            $this->translatorInterface->trans('dec'),
-            $this->translatorInterface->trans('distAl')
+            $this->translator->trans('magnitude'),
+            $this->translator->trans('ra'),
+            $this->translator->trans('dec'),
+            $this->translator->trans('distAl')
         ];
 
         // Retrieve list filters
@@ -290,7 +290,7 @@ class PageController extends AbstractController
                 $dso->getId(),
                 implode(Dso::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getAlt(),
-                $this->translatorInterface->trans(sprintf('type.%s', $dso->getType())),
+                $this->translator->trans(sprintf('type.%s', $dso->getType())),
                 $dso->getConstId(),
                 $dso->getMag(),
                 $dso->getRa(),

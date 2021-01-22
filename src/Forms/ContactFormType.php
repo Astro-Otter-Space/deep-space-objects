@@ -24,20 +24,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ContactFormType extends AbstractType
 {
     /** @var TranslatorInterface  */
-    private $translatorInterface;
+    private $translator;
 
     private $locale;
 
-    const CLASS_LABEL = 'Form__label';
+    public const CLASS_LABEL = 'Form__label';
 
     /**
      * ContactFormType constructor.
      *
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
+     * @param string $locale
      */
-    public function __construct(TranslatorInterface $translatorInterface, $locale)
+    public function __construct(TranslatorInterface $translator, string $locale)
     {
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->locale = $locale;
     }
 

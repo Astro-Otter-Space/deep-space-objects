@@ -39,6 +39,7 @@ final class ConstellationRepository extends AbstractRepository
      *
      * @return DTOInterface|null
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function getObjectById(string $id, bool $hydrate): ?DTOInterface
     {
@@ -114,7 +115,7 @@ final class ConstellationRepository extends AbstractRepository
      * @param Document $document
      *
      * @return DTOInterface
-     * @throws \ReflectionException
+     * @throws \JsonException
      */
     private function buildEntityFromDocument(Document $document): DTOInterface
     {

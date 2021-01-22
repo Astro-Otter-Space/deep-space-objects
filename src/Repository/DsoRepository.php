@@ -154,10 +154,11 @@ class DsoRepository extends AbstractRepository
 
         if (0 < $search->count()) {
             if (false === $hydrate) {
-                return $search->getDocuments();
+                yield $search->getDocuments();
             }
             foreach ($search->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document)->getId();
+                $dto = $this->buildEntityFromDocument($document);
+                yield $dto->getId();
             }
         }
     }

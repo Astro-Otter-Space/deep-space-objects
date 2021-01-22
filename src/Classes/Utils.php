@@ -10,7 +10,7 @@ use DateTimeInterface;
  *
  * @package App\Classes
  */
-class Utils
+final class Utils
 {
     public const PARSEC = 0.3066020852;
     public const UNASSIGNED = 'unassigned';

@@ -80,7 +80,7 @@ final class ConstellationDTO implements DTOInterface
 
     public function fullUrl(): string
     {
-        // TODO: Implement fullUrl() method.
+        return $this->getFullUrl();
     }
 
     /**
@@ -134,9 +134,17 @@ final class ConstellationDTO implements DTOInterface
     }
 
     /**
+     * @return string
+     */
+    public function getFullUrl(): string
+    {
+        return $this->fullUrl;
+    }
+
+    /**
      * @return mixed
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }

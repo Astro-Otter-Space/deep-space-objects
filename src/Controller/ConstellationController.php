@@ -4,14 +4,14 @@ namespace App\Controller;
 
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\ConstellationDataTransformer;
+use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Mime\FileinfoMimeTypeGuesser;
@@ -31,7 +31,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ConstellationController extends AbstractController
 {
-
     use DsoTrait;
 
     /** @var ConstellationManager  */
@@ -49,12 +48,14 @@ class ConstellationController extends AbstractController
      * @param ConstellationManager $constellationManager
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
+     * @param TranslatorInterface $translator
      */
-    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository)
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translator)
     {
         $this->constellationManager = $constellationManager;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
+        $this->translator = $translator;
     }
 
 
@@ -63,11 +64,14 @@ class ConstellationController extends AbstractController
      *
      * @param string $id
      * @param string $name
+     * @param DsoManager $dsoManager
+     * @param DsoDataTransformer $dsoDataTransformer
      *
      * @return Response
+     * @throws WsException
      * @throws \ReflectionException
      */
-    public function show(string $id, string $name): Response
+    public function show(string $id, string $name, DsoManager $dsoManager, DsoDataTransformer $dsoDataTransformer): Response
     {
         $result = [];
 
@@ -80,16 +84,11 @@ class ConstellationController extends AbstractController
         /** @var ConstellationDTO $constellation */
         $constellation = $this->constellationManager->buildConstellation($id);
 
-        // Retrieve list of Dso from the constellation
-        /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, 300);
-        $listDsoLimited = $this->dsoRepository->getObjectsByConstId($constellation->getId(), null, DsoRepository::FROM, DsoRepository::SMALL_SIZE);
-
-        $constellation->setListDso($listDso);
-        $result['list_dso'] = $this->dsoManager->buildListDso($listDsoLimited) ?? [];
+        $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), null, DsoRepository::SMALL_SIZE);
+        $result['list_dso'] = $listDsoCards = $dsoDataTransformer->listVignettesView($listDso);
 
         // Filter for Grid Cards dso
-        $result['list_types_filters'] = $this->buildFiltersWithAll($listDsoLimited) ?? [];
+        $result['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
         // List types of DSO for map legend
         $result['list_types'] = array_merge(...array_map(static function ($data) {
@@ -99,7 +98,7 @@ class ConstellationController extends AbstractController
         // GeoJson for display dso on map
         $listDsoFeatures = array_map(static function(DTOInterface $dso) {
             return $dso->getGeometry();
-        }, iterator_to_array($constellation->getListDso()->getIterator()));
+        }, iterator_to_array($listDso));
 
         $geoJsonDso = [
             "type" => "FeatureCollection",
@@ -114,11 +113,12 @@ class ConstellationController extends AbstractController
         $result['geojsonDso'] = $geoJsonDso ?? null;
         $result['centerMap'] = $constellation->getGeometry()['coordinates'];
         $result['ajax_dso_by_const'] = $router->generate('get_dso_by_const_ajax', ['constId' => $constellation->getId()]);
-        $result['breadcrumbs'] = $this->buildBreadcrumbs($constellation, $router, $constellation->getAlt());
+        $result['breadcrumbs'] = $this->buildBreadcrumbs($constellation, $router, $constellation->title());
 
+        dump($result); die();
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
-        $response->headers->set('X-Constellation-Id', $constellation->getElasticId());
+        $response->headers->set('X-Constellation-Id', $constellation->getElasticSearchId());
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
@@ -132,16 +132,16 @@ class ConstellationController extends AbstractController
      * @return JsonResponse
      * @throws \ReflectionException
      */
-    public function dsoByConstellationAjax(Request $request, $constId)
+    public function dsoByConstellationAjax(Request $request, $constId): JsonResponse
     {
         $offset = $request->query->get('offset');
 
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE, true);
         $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
         $result['dso'] = $listDsoCards ?? [];
 
-        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE);
+        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE, true);
         $result['filters'] = $this->buildFiltersWithAll($listDsoAll) ?? [];
 
         return new JsonResponse($result);

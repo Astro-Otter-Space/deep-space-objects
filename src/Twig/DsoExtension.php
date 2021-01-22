@@ -15,11 +15,11 @@ use Twig\TwigFunction;
 class DsoExtension extends AbstractExtension
 {
     /** @var TranslatorInterface */
-    private $translatorInterface;
+    private $translator;
 
-    public function __construct(TranslatorInterface $translatorInterface)
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
     }
 
     /**
@@ -135,7 +135,7 @@ class DsoExtension extends AbstractExtension
         foreach ($data as $item) {
             $html .= '<tr>';
             $html .= sprintf('<td>%s</td>', $item);
-            $html .= sprintf('<td>%s</td>', $this->translatorInterface->trans(sprintf('%s.%s',$filter, $item)));
+            $html .= sprintf('<td>%s</td>', $this->translator->trans(sprintf('%s.%s',$filter, $item)));
             $html .= '</tr>';
         }
 

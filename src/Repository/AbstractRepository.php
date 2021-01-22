@@ -7,6 +7,7 @@ use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
+use App\Helpers\UrlGenerateHelper;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
@@ -36,6 +37,9 @@ abstract class AbstractRepository
     /** @var SerializerInterface */
     protected $serializer;
 
+    /** @var UrlGenerateHelper */
+    protected $urlGeneratorHelper;
+
     public const FROM = 0;
     public const SMALL_SIZE = 10;
     public const SIZE = 20;
@@ -48,11 +52,13 @@ abstract class AbstractRepository
      *
      * @param Client $client
      * @param SerializerInterface $serializer
+     * @param UrlGenerateHelper $urlGeneratorHelper
      */
-    public function __construct(Client $client, SerializerInterface $serializer)
+    public function __construct(Client $client, SerializerInterface $serializer, UrlGenerateHelper $urlGeneratorHelper)
     {
         $this->client = $client;
         $this->serializer = $serializer;
+        $this->urlGeneratorHelper = $urlGeneratorHelper;
     }
 
     /**
@@ -83,6 +89,7 @@ abstract class AbstractRepository
      * @param Document $document
      *
      * @return DTOInterface
+     * @throws \JsonException
      */
     public function buildDTO(Document $document): DTOInterface
     {
@@ -93,11 +100,13 @@ abstract class AbstractRepository
         $serializer = new Serializer($normalizer, $encoder);
 
         /** @var $object */
-        $object = $serializer->deserialize(json_encode($document->getData()), $entity, 'json');
+        $object = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
         $dto = $this->getDTO();
 
-        /** @var DsoDTO|DTOInterface $dto */
+        /** @var DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
+        $url = $this->urlGeneratorHelper->generateUrl($dto);
+        $dto->setFullUrl($this->urlGeneratorHelper->generateUrl($dto));
 
         return $dto;
     }

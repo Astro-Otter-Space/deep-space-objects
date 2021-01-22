@@ -46,7 +46,7 @@ class DsoController extends AbstractController
     /** @var DsoRepository */
     private $dsoRepository;
     /** @var TranslatorInterface */
-    private $translatorInterface;
+    private $translator;
     /** @var DsoDataTransformer */
     private $dsoDataTransformer;
 
@@ -56,14 +56,15 @@ class DsoController extends AbstractController
      * @param CacheInterface $cacheUtil
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
+     * @param DsoDataTransformer $dataTransformer
      */
-    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translatorInterface, DsoDataTransformer $dataTransformer)
+    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translator, DsoDataTransformer $dataTransformer)
     {
         $this->cacheUtil = $cacheUtil;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->dsoDataTransformer = $dataTransformer;
     }
 
@@ -105,7 +106,7 @@ class DsoController extends AbstractController
 
             // List of Dso from same constellation
             /** @var ListDso $listDso */
-            $listDso = $this->dsoManager->getListDsoFromConst($dso, 20);
+            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellationId(), $dso->getId(), 20);
 
             $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
@@ -176,10 +177,10 @@ class DsoController extends AbstractController
         /** @var UpdateData $lastUpdateData */
         $lastUpdateData = $doctrineManager->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
 
-        $lastUpdateDate = $lastUpdateData->getDate()->format($this->translatorInterface->trans('dateFormatLong'));
+        $lastUpdateDate = $lastUpdateData->getDate()->format($this->translator->trans('dateFormatLong'));
 
-        $title = $this->translatorInterface->trans('last_update_item', ['%date%' => $lastUpdateDate]);
-        $titleBr = $this->translatorInterface->trans('last_update_title');
+        $title = $this->translator->trans('last_update_item', ['%date%' => $lastUpdateDate]);
+        $titleBr = $this->translator->trans('last_update_title');
         $params = [
             'title' => $title,
             'breadcrumbs' => $this->buildBreadcrumbs(null, $router, $titleBr),
@@ -196,13 +197,14 @@ class DsoController extends AbstractController
 
     /**
      * Retrieve list of images for carousel
-
+     *
      * @param $dsoId
      *
      * @return array
      * @throws WsResponseException
      * @throws WsException
      * @throws \ReflectionException
+      *@throws \JsonException
      */
     private function getListImages($dsoId): array
     {
@@ -327,11 +329,11 @@ class DsoController extends AbstractController
         // List facets
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
-            $typeTr = $this->translatorInterface->trans($type, ['%count%' => count($listFacets)]);
+            $typeTr = $this->translator->trans($type, ['%count%' => count($listFacets)]);
             $listFacetsByType = array_map(function($facet) use ($router, $allQueryParameters, $type) {
                 return [
                     'code' => key($facet),
-                    'value' => $this->translatorInterface->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
+                    'value' => $this->translator->trans(sprintf('%s.%s', $type, strtolower(key($facet)))),
                     'number' => reset($facet),
                     'full_url' => $router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
                 ];
@@ -377,7 +379,7 @@ class DsoController extends AbstractController
 
         $queryAll = $request->query->all();
         $result['filters'] = array_merge(array_map(function ($val, $key) use ($router, $queryAll) {
-            return ['label' => $this->translatorInterface->trans(sprintf('%s.%s', $key, strtolower($val))), 'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))];
+            return ['label' => $this->translator->trans(sprintf('%s.%s', $key, strtolower($val))), 'delete_url' => $router->generate('dso_catalog', array_diff_key($queryAll, [$key => $val]))];
         }, $filters, array_keys($filters)));
 
         unset($queryAll['page']);
@@ -387,10 +389,10 @@ class DsoController extends AbstractController
         ];
 
         // Description
-        $result['pageDesc'] = $this->translatorInterface->trans('filteringList');
+        $result['pageDesc'] = $this->translator->trans('filteringList');
         if ($request->query->has('catalog')) {
             $catalog = $request->query->get('catalog');
-            $desc = $this->translatorInterface->trans('description.' . $catalog);
+            $desc = $this->translator->trans('description.' . $catalog);
             if (!empty($desc) && $desc !== 'description.' . $catalog) {
                 $result['pageDesc'] = $desc;
             }
