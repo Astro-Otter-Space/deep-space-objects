@@ -107,6 +107,7 @@ class ConstellationController extends AbstractController
 
         // Serialize Collection entity
         $result['constellation'] = $serializer->serialize($constellation, 'json');
+        $result['title'] = $constellation->title();
 
         // Link to download map
         $result['link_download'] = $router->generate('download_map', ['id' => $constellation->getId()]);
@@ -115,7 +116,6 @@ class ConstellationController extends AbstractController
         $result['ajax_dso_by_const'] = $router->generate('get_dso_by_const_ajax', ['constId' => $constellation->getId()]);
         $result['breadcrumbs'] = $this->buildBreadcrumbs($constellation, $router, $constellation->title());
 
-        dump($result); die();
         /** @var Response $response */
         $response = $this->render('pages/constellation.html.twig', $result);
         $response->headers->set('X-Constellation-Id', $constellation->getElasticSearchId());
@@ -127,12 +127,12 @@ class ConstellationController extends AbstractController
     /**
      * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
      * @param Request $request
-     * @param $constId
+     * @param string $constId
      *
      * @return JsonResponse
      * @throws \ReflectionException
      */
-    public function dsoByConstellationAjax(Request $request, $constId): JsonResponse
+    public function dsoByConstellationAjax(Request $request, string $constId): JsonResponse
     {
         $offset = $request->query->get('offset');
 
