@@ -106,7 +106,7 @@ class ConstellationController extends AbstractController
         ];
 
         // Serialize Collection entity
-        $result['constellation'] = $serializer->serialize($constellation, 'json');
+        $result['constellation'] = $constellation; //$serializer->serialize($constellation, 'json');
         $result['title'] = $constellation->title();
 
         // Link to download map

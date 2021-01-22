@@ -28,10 +28,11 @@
   >
   </div>
   <div id="geojson"
-       data-dso="{{ geojsonDso|json_encode }}"
-       data-center="{{ dso.geometry['coordinates']|json_encode }}"
-       data-const="{{ dso.constellationId|raw }}"
-       data-zoom="10" aria-hidden="true"></div>
+    data-dso="{{ geojsonDso|json_encode }}"
+    data-center="{{ dso.geometry['coordinates']|json_encode }}"
+    data-const="{{ dso.constellationId|raw }}"
+    data-zoom="10" aria-hidden="true">
+  </div>
 {% endblock %}
 
 {% block javascripts %}

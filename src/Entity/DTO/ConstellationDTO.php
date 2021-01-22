@@ -46,12 +46,15 @@ final class ConstellationDTO implements DTOInterface
      */
     public function __construct(Constellation $constellation, string $locale, string $elasticId)
     {
+        $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $this->locale): 'description';
+        $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $this->locale): 'alt';
+
         $this->setConstellation($constellation)
             ->setElasticSearchId($elasticId)
             ->setLocale($locale)
             ->setId($constellation->getId())
-            ->setAlt($constellation->getAlt())
-            ->setDescription($constellation->getDescription())
+            ->setAlt($constellation->getAlt()[$fieldAlt])
+            ->setDescription($constellation->getDescription()[$fieldDescription])
             ->setGeneric($constellation->getGen())
             ->setKind($constellation->getLoc())
             ->setGeometry($constellation->getGeometry())
@@ -73,11 +76,12 @@ final class ConstellationDTO implements DTOInterface
      */
     public function title(): string
     {
-        $field = ('en' !== $this->locale)? sprintf('alt_%s',$this->locale): 'alt';
-        return ucfirst($this->getAlt()[$field]);
+        return ucfirst($this->getAlt());
     }
 
-
+    /**
+     * @return string
+     */
     public function fullUrl(): string
     {
         return $this->getFullUrl();
@@ -175,7 +179,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getAlt(): ?array
+    public function getAlt(): ?string
     {
         return $this->alt;
     }
@@ -185,7 +189,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setAlt(array $alt): ConstellationDTO
+    public function setAlt(string $alt): ConstellationDTO
     {
         $this->alt = $alt;
         return $this;
@@ -269,17 +273,17 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      *
      * @return ConstellationDTO
      */
-    public function setDescription($description): ConstellationDTO
+    public function setDescription(string $description): ConstellationDTO
     {
         $this->description = $description;
         return $this;

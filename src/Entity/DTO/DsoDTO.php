@@ -64,17 +64,20 @@ final class DsoDTO implements DTOInterface
      */
     public function __construct(Dso $dso, string $locale, string $elasticId)
     {
+        $fieldAlt = ('en' !== $locale) ? sprintf('alt_%s', $locale) : 'alt';
+        $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
+
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
             ->setId(strtolower($dso->getId()))
-            ->setAlt($dso->getAlt())
+            ->setAlt($dso->getAlt()[$fieldAlt])
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
             ->setCatalogs($dso->getCatalog())
             ->setDesigs($dso->getDesigs())
             ->setDeclinaison($dso->getDec())
-            ->setDescription($dso->getDescription())
+            ->setDescription($dso->getDescription()[$fieldDescription])
             ->setDesigs($dso->getDesigs())
             ->setDim($dso->getDim())
             ->setDiscover($dso->getDiscover())
@@ -253,9 +256,9 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAlt()
+    public function getAlt(): string
     {
         return $this->alt;
     }
@@ -265,7 +268,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setAlt($alt): DsoDTO
+    public function setAlt(string $alt): DsoDTO
     {
         $this->alt = $alt;
         return $this;
@@ -274,7 +277,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -284,7 +287,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDescription($description): DsoDTO
+    public function setDescription(string $description): DsoDTO
     {
         $this->description = $description;
         return $this;
@@ -488,7 +491,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setGeometry($geometry): ?DsoDTO
+    public function setGeometry($geometry): self
     {
         $this->geometry = $geometry;
         return $this;

@@ -105,7 +105,6 @@ abstract class AbstractRepository
 
         /** @var DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
-        $url = $this->urlGeneratorHelper->generateUrl($dto);
         $dto->setFullUrl($this->urlGeneratorHelper->generateUrl($dto));
 
         return $dto;

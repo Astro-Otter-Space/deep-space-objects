@@ -83,6 +83,7 @@ class DsoController extends AbstractController
      * @return Response
      * @throws WsException
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function show(Request $request, string $id): Response
     {
@@ -98,7 +99,7 @@ class DsoController extends AbstractController
         if (!is_null($dso)) {
             $params['dso'] = $dso;
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
-            $params['constTitle'] = $dso->getConstellation()->title();
+            $params['constTitle'] = $dso->getConstellation()->title() ?? "";
             $params['last_update'] = $dso->getUpdatedAt();
 
             // Image cover
@@ -125,13 +126,15 @@ class DsoController extends AbstractController
                 } else {
                     $params['images'] = $this->getListImages($dso->getId());
                 }
-            } catch (WsResponseException $e) {}
+            } catch (WsResponseException | \JsonException | WsException | \ReflectionException $e) {
+                dump($e->getMessage());
+            }
         } else {
             throw new NotFoundException('Object not found');
         }
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
-
+dump($params); die();
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
 

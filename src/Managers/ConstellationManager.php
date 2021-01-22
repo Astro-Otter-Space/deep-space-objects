@@ -52,6 +52,7 @@ class ConstellationManager
      *
      * @return ConstellationDTO
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function buildConstellation($id): ConstellationDTO
     {

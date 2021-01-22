@@ -60,6 +60,7 @@ final class ConstellationRepository extends AbstractRepository
     /**
      * Build a list of all constellation (88)
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function getAllConstellation(): \Generator
     {
@@ -89,6 +90,7 @@ final class ConstellationRepository extends AbstractRepository
      *
      * @return array
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function getConstellationsBySearchTerms($searchTerm): array
     {
