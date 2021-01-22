@@ -395,36 +395,6 @@ class PageController extends AbstractController
         return new Response();
     }
 
-
-    /**
-     * @param TwitterWs $twitterWs
-     * @param DsoManager $dsoManager
-     *
-     * @param RouterInterface $router
-     *
-     * @return Response
-     * @throws WsException
-     * @throws \ReflectionException
-     * @Route("/twitter", name="twiiter_test")
-     */
-    public function testTwitter(TwitterWs $twitterWs, DsoManager $dsoManager, RouterInterface $router): Response
-    {
-        $id = 'm42';
-
-        $dso = $dsoManager->buildDso($id);
-
-        $title = $dso->title();
-        $url = $dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
-        $image = null; //$dso->getImage();
-
-        $tweet = $twitterWs->postLink($title, $url, $image);
-
-        /** @var Response $response */
-        $response = new Response();
-        return $response;
-    }
-
-
     /**
      * @Route("/notindexed", name="not_indexed")
      * @param DsoRepository $dsoRepository

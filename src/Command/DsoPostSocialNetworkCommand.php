@@ -100,7 +100,6 @@ class DsoPostSocialNetworkCommand extends Command
     {
         // 1 Get all inserted
         $listSharedItems = $this->em->getRepository(ItemShared::class)->findAll();
-        dump($listSharedItems);
 
         // 2 Get random item, filtered by above
         $listResult = $this->dsoRepository->getAstrobinId($listSharedItems);
@@ -131,7 +130,7 @@ class DsoPostSocialNetworkCommand extends Command
     private function sendToTwitter(DsoDTO $dso)
     {
         $title = $dso->title();
-        $link = $this->dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
+        $link = $dso->fullUrl();
         $fileTmpPath = null;
         /**
          * We cant send to twitter a distant image, so we doanload into local file and delete after sendind tweet

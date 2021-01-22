@@ -18,19 +18,17 @@ use Elastica\Search;
 final class ConstellationRepository extends AbstractRepository
 {
 
-    const INDEX_NAME = 'constellations';
+    public const INDEX_NAME = 'constellations';
 
-    const SEARCH_SIZE = 15;
+    public const URL_MAP = '/build/images/const_maps/%s.gif';
 
-    const URL_MAP = '/build/images/const_maps/%s.gif';
-
-    const URL_IMG = '/build/images/const_thumbs/%s.jpg';
+    public const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
     private static $listSearchFields = [
         'id',
         'id.raw',
-        'data.gen',
-        'data.alt.alt'
+        'gen',
+        'alt.alt'
     ];
 
     /**

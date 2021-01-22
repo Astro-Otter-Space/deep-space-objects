@@ -97,6 +97,7 @@ class DsoManager
         } else {
             /** @var DsoDTO|DTOInterface $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id, true);
+
             if (!is_null($dso)) {
                 // Add astrobin image
                 $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
@@ -106,6 +107,7 @@ class DsoManager
                 $constellationDto = $this->constellationRepository
                     ->setLocale($this->locale)
                     ->getObjectById($dso->getConstellationId(), true);
+
                 if ($constellationDto instanceof ConstellationDTO) {
                     $dso->setConstellation($constellationDto);
                 }
@@ -246,18 +248,6 @@ class DsoManager
     }
 
     /**
-     * @todo refactoring
-     * @param Dso $dso
-     * @param string $typeUrl
-     *
-     * @return string
-     */
-    public function getDsoUrl(Dso $dso, string $typeUrl): string
-    {
-        return $this->urlGenerateHelper->generateUrl($dso, $typeUrl, $this->locale);
-    }
-
-    /**
      * Translate data vor display in VueJs
      *
      * @param DsoDTO $dso
@@ -266,7 +256,7 @@ class DsoManager
      */
     public function formatVueData(DsoDTO $dso): array
     {
-        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate, $this->translator);
+        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate);
     }
 
     /**

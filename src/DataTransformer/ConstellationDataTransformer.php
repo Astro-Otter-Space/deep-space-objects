@@ -8,7 +8,6 @@ use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\ListConstellation;
 use AstrobinWs\Response\Image;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Class CollectionDataTransformer

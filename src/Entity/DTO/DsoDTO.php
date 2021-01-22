@@ -67,17 +67,20 @@ final class DsoDTO implements DTOInterface
         $fieldAlt = ('en' !== $locale) ? sprintf('alt_%s', $locale) : 'alt';
         $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
 
+        $description = $dso->getDescription()[$fieldDescription] ?? null;
+        $alt = $dso->getAlt()[$fieldAlt] ?? null;
+
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
             ->setId(strtolower($dso->getId()))
-            ->setAlt($dso->getAlt()[$fieldAlt])
+            ->setAlt($alt)
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
             ->setCatalogs($dso->getCatalog())
             ->setDesigs($dso->getDesigs())
             ->setDeclinaison($dso->getDec())
-            ->setDescription($dso->getDescription()[$fieldDescription])
+            ->setDescription($description)
             ->setDesigs($dso->getDesigs())
             ->setDim($dso->getDim())
             ->setDiscover($dso->getDiscover())
@@ -89,6 +92,8 @@ final class DsoDTO implements DTOInterface
             ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
         ;
+
+
     }
 
     /**
@@ -258,17 +263,17 @@ final class DsoDTO implements DTOInterface
     /**
      * @return string
      */
-    public function getAlt(): string
+    public function getAlt(): ?string
     {
         return $this->alt;
     }
 
     /**
-     * @param mixed $alt
+     * @param string|null $alt
      *
-     * @return DsoDTO
+     * @return $this
      */
-    public function setAlt(string $alt): DsoDTO
+    public function setAlt(?string $alt): DsoDTO
     {
         $this->alt = $alt;
         return $this;
@@ -283,11 +288,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $description
+     * @param string|null $description
      *
      * @return DsoDTO
      */
-    public function setDescription(string $description): DsoDTO
+    public function setDescription(?string $description): DsoDTO
     {
         $this->description = $description;
         return $this;
@@ -296,7 +301,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getType()
+    public function getType(): string
     {
         return sprintf('type.%s', $this->type);
     }
@@ -306,7 +311,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setType($type): DsoDTO
+    public function setType(string $type): DsoDTO
     {
         $this->type = $type;
         return $this;

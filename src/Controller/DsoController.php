@@ -87,8 +87,6 @@ class DsoController extends AbstractController
      */
     public function show(Request $request, string $id): Response
     {
-        $params = [];
-
         $separator = trim(Utils::URL_CONCAT_GLUE);
         $id = explode($separator, $id, null);
         $id = reset($id);
@@ -127,7 +125,6 @@ class DsoController extends AbstractController
                     $params['images'] = $this->getListImages($dso->getId());
                 }
             } catch (WsResponseException | \JsonException | WsException | \ReflectionException $e) {
-                dump($e->getMessage());
             }
         } else {
             throw new NotFoundException('Object not found');

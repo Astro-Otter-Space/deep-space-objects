@@ -46,8 +46,8 @@ final class ConstellationDTO implements DTOInterface
      */
     public function __construct(Constellation $constellation, string $locale, string $elasticId)
     {
-        $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $this->locale): 'description';
-        $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $this->locale): 'alt';
+        $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
+        $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $locale): 'alt';
 
         $this->setConstellation($constellation)
             ->setElasticSearchId($elasticId)

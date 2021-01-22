@@ -58,8 +58,7 @@ class UrlGenerateHelper
             switch (get_class($entity)) {
                 case DsoDTO::class:
                     if (!empty($entity->title())) {
-                        $fieldAlt = ('en' !== $entity->getLocale()) ? sprintf('alt_%s', $entity->getLocale()): 'alt';
-                        $name = Utils::camelCaseUrlTransform($entity->getAlt()[$fieldAlt]);
+                        $name = Utils::camelCaseUrlTransform($entity->getAlt());
                         $id = implode(trim(Utils::URL_CONCAT_GLUE), [$id, $name]);
                     }
 
