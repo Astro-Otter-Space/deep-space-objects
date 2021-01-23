@@ -231,7 +231,6 @@ class DsoRepository extends AbstractRepository
     {
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
-        $nbItems = 0;
 
         /** @var Query $query */
         $query = new Query();
@@ -280,11 +279,11 @@ class DsoRepository extends AbstractRepository
         $query->setFrom($from)->setSize($size);
 
         // Sort
-        $query->addSort([
+        /**$query->addSort([
             'order' => [
                 'order' => parent::SORT_ASC
             ]
-        ]);
+        ]);**/
 
         // Aggregates
         array_walk(self::$listAggregates, static function($tab, $type) use($query) {
@@ -320,7 +319,6 @@ class DsoRepository extends AbstractRepository
         if (false === $hydrate) {
             return [$search->getDocuments(), $nbItems];
         }
-
 
         $listDsoId = [];
         foreach ($search->getDocuments() as $document) {
