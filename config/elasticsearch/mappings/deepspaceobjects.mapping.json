@@ -30,7 +30,12 @@
           }
         },
         "order": {
-          "type": "integer"
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
         },
         "updated_at": {
           "type": "date",

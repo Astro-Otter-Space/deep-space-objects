@@ -70,6 +70,7 @@ final class DsoDTO implements DTOInterface
         $description = $dso->getDescription()[$fieldDescription] ?? null;
         $alt = $dso->getAlt()[$fieldAlt] ?? null;
 
+        $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
@@ -88,6 +89,7 @@ final class DsoDTO implements DTOInterface
             ->setDistAl($dso->getDistAl())
             ->setGeometry($dso->getGeometry())
             ->setMagnitude($dso->getMag())
+            ->setName($name)
             ->setRightAscencion($dso->getRa())
             ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
@@ -172,17 +174,18 @@ final class DsoDTO implements DTOInterface
         // If Alt is set, we merge desig and alt
 
         $fieldAlt = ('en' !== $this->locale) ? sprintf('alt_%s', $this->locale): 'alt';
-        $title = (empty($this->getAlt()[$fieldAlt]))
+        $title = (empty($this->getAlt()))
             ? $desig
-            : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt()[$fieldAlt], $desig]);
+            : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
 
         // If title still empty, we put Id
         $title = (empty($title))
-            ? $this->getId()
+            ? $this->getName()
             : $title;
 
         return $title;
     }
+
 
     /**
      * @return string|null

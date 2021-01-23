@@ -15,6 +15,7 @@ use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
+use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Services\GetImage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -236,8 +237,8 @@ class DsoManager
 
         try {
             /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
-            if ($imageAstrobin instanceof Image) {
+            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
+            if ($imageAstrobin instanceof AstrobinResponse) {
                 return $imageAstrobin;
             }
 

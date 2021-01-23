@@ -131,7 +131,7 @@ class DsoController extends AbstractController
         }
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
-dump($params); die();
+
         /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
 
@@ -319,7 +319,10 @@ dump($params); die();
         }
 
         // Search results
-        [$listDsoId, $listAggregates, $nbItems] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters($from, $filters, null, true);
+        [$listDsoId, $listAggregates, $nbItems] = $this->dsoRepository
+            ->setLocale($request->getLocale())
+            ->getObjectsCatalogByFilters($from, $filters, null, true);
+
         $listDso = new ListDso();
         foreach ($listDsoId as $dsoId) {
             $dsoDto = $this->dsoManager->buildDso($dsoId);
@@ -354,11 +357,11 @@ dump($params); die();
             // Sort here because dont know ho to do in aggregates query...
             // Specific sort for catalog
             if ('catalog' === $type) {
-                usort($listFacetsByType, function($facetA, $facetB) use ($ordering) {
+                usort($listFacetsByType, static function($facetA, $facetB) use ($ordering) {
                     return (array_search($facetA['code'], $ordering, true) > array_search($facetB['code'], $ordering, true));
                 });
             } elseif ('constellation' === $type) {
-                usort($listFacetsByType, function($kFacetA, $kFacetB) {
+                usort($listFacetsByType, static function($kFacetA, $kFacetB) {
                     return strcmp($kFacetA['code'], $kFacetB['code']);
                 });
             }
@@ -371,7 +374,7 @@ dump($params); die();
         }
 
         // Params
-        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso); //$this->dsoManager->buildListDso($listDso);
+        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso);
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = (int)$nbItems;
         $result['current_page'] = $page;

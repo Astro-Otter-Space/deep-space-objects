@@ -57,7 +57,7 @@ class UrlGenerateHelper
 
             switch (get_class($entity)) {
                 case DsoDTO::class:
-                    if (!empty($entity->title())) {
+                    if (!empty($entity->getAlt())) {
                         $name = Utils::camelCaseUrlTransform($entity->getAlt());
                         $id = implode(trim(Utils::URL_CONCAT_GLUE), [$id, $name]);
                     }

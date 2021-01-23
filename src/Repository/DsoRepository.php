@@ -279,11 +279,11 @@ class DsoRepository extends AbstractRepository
         $query->setFrom($from)->setSize($size);
 
         // Sort
-        /**$query->addSort([
-            'order' => [
+        $query->addSort([
+            'order.keyword' => [
                 'order' => parent::SORT_ASC
             ]
-        ]);**/
+        ]);
 
         // Aggregates
         array_walk(self::$listAggregates, static function($tab, $type) use($query) {
@@ -321,6 +321,7 @@ class DsoRepository extends AbstractRepository
         }
 
         $listDsoId = [];
+        dump($search->getQuery()->getQuery()->toArray());
         foreach ($search->getDocuments() as $document) {
             $listDsoId[] = $this->buildEntityFromDocument($document)->getId();
         }

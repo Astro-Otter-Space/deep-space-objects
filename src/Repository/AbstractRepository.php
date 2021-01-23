@@ -135,7 +135,6 @@ abstract class AbstractRepository
         return $search->addIndex($this->getIndex())->search($matchQuery);
     }
 
-
     /**
      * @param $searchTerm
      * @param $listSearchFields
@@ -177,7 +176,6 @@ abstract class AbstractRepository
 
         return $response;
     }
-
 
     /**
      * @param $listItems

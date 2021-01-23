@@ -70,7 +70,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
      */
     public function vignetteView(DTOInterface $dto): array
     {
-        $title = $dto->title();
+        $title = $dto->title() ?? $dto->getName();
 
         $otherDesigs = $dto->getDesigs();
         $removeDesigs = (is_array($otherDesigs))
