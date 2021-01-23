@@ -71,6 +71,8 @@ final class DsoDTO implements DTOInterface
         $alt = $dso->getAlt()[$fieldAlt] ?? null;
 
         $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
+        $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
+
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
@@ -78,7 +80,7 @@ final class DsoDTO implements DTOInterface
             ->setAlt($alt)
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
-            ->setCatalogs($dso->getCatalog())
+            ->setCatalogs($catalogs)
             ->setDesigs($dso->getDesigs())
             ->setDeclinaison($dso->getDec())
             ->setDescription($description)
@@ -228,7 +230,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return array|string|null
      */
-    public function getCatalogs()
+    public function getCatalogs(): array
     {
         return $this->catalogs;
     }
@@ -238,7 +240,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setCatalogs($catalogs): DsoDTO
+    public function setCatalogs(array $catalogs): DsoDTO
     {
         $this->catalogs = $catalogs;
         return $this;

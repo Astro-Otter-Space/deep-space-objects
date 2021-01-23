@@ -8,7 +8,6 @@ use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
-use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
@@ -19,6 +18,8 @@ use AstrobinWs\Response\ListImages;
 use AstrobinWs\Services\GetImage;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Exception\NotFoundException;
+use JsonException;
+use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -82,8 +83,8 @@ class DsoController extends AbstractController
      *
      * @return Response
      * @throws WsException
-     * @throws \ReflectionException
-     * @throws \JsonException
+     * @throws ReflectionException
+     * @throws JsonException
      */
     public function show(Request $request, string $id): Response
     {
@@ -104,7 +105,6 @@ class DsoController extends AbstractController
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
             // List of Dso from same constellation
-            /** @var ListDso $listDso */
             $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellationId(), $dso->getId(), 20);
 
             $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
@@ -115,16 +115,16 @@ class DsoController extends AbstractController
                 "type" => "FeatureCollection",
                 "features" =>  [$dso->geoJson()]
             ];
-
             // Images
             try {
                 $params['images'] = [];
                 if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
                     $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => false]);
                 } else {
-                    $params['images'] = $this->getListImages($dso->getId());
+                    $params['images'] = $this->getListImages($dso->getName());
                 }
-            } catch (WsResponseException | \JsonException | WsException | \ReflectionException $e) {
+            } catch (WsResponseException | JsonException | WsException | ReflectionException $e) {
+                dump($e->getMessage());
             }
         } else {
             throw new NotFoundException('Object not found');
@@ -132,7 +132,6 @@ class DsoController extends AbstractController
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
 
-        /** @var Response $response */
         $response = $this->render('pages/dso.html.twig', $params);
 
         // cache expiration
@@ -161,7 +160,7 @@ class DsoController extends AbstractController
      * @param EntityManagerInterface $doctrineManager
      *
      * @return Response
-     * @throws \ReflectionException|WsException
+     * @throws ReflectionException|WsException
      * @Route({
      *   "en": "/last-update",
      *   "fr": "/mises-a-jour"
@@ -198,23 +197,23 @@ class DsoController extends AbstractController
     /**
      * Retrieve list of images for carousel
      *
-     * @param $dsoId
+     * @param string $dsoId
      *
-     * @return array
-     * @throws WsResponseException
+     * @return null|array
      * @throws WsException
-     * @throws \ReflectionException
-      *@throws \JsonException
+     * @throws ReflectionException
+     * @throws JsonException
      */
-    private function getListImages($dsoId): array
+    private function getListImages(string $dsoId): ?array
     {
-        $tabImages = [];
-
-        /** @var GetImage $astrobinWs */
         $astrobinWs = new GetImage();
-
-        /** @var ListImages|Image $listImages */
-        $listImages = $astrobinWs->getImagesBySubject($dsoId, 5);
+        $listImages = $tabImages = null;
+        try {
+            /** @var ListImages|Image $listImages */
+            $listImages = $astrobinWs->getImagesByTitle($dsoId, 5);
+        } catch (WsResponseException | WsException $e) {
+            //dump($e->getMessage());
+        }
 
         if ($listImages instanceof Image) {
             $tabImages = $listImages->url_regular;
@@ -235,7 +234,7 @@ class DsoController extends AbstractController
      *
      * @return JsonResponse
      * @throws WsException
-     * @throws \ReflectionException
+     * @throws ReflectionException|JsonException
      */
     public function geoJson(string $id): JsonResponse
     {
@@ -284,7 +283,7 @@ class DsoController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws WsException
      */
     public function catalog(Request $request): Response
@@ -418,7 +417,7 @@ class DsoController extends AbstractController
      *
      * @return Response
      * @throws WsException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @Route("/debug-astrobin/{offset}", name="debug_astrobin")
      */
     public function debugAstrobinImage(Request $request, $offset = 0): Response
@@ -432,7 +431,7 @@ class DsoController extends AbstractController
             $listDso->addDso($dso);
         }
 
-        $params['dso'] = $this->dsoManager->buildListDso($listDso);
+        $params['dso'] = $this->dsoDataTransformer->listVignettesView($listDso);
 
         return $this->render('pages/debug_astrobin.html.twig', $params);
     }
