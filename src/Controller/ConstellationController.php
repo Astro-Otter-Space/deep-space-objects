@@ -98,7 +98,7 @@ class ConstellationController extends AbstractController
 
         // GeoJson for display dso on map
         $listDsoFeatures = array_map(static function(DTOInterface $dso) {
-            return $dso->getGeometry();
+            return $dso->geoJson();
         }, iterator_to_array($listDso));
 
         $geoJsonDso = [
@@ -162,10 +162,8 @@ class ConstellationController extends AbstractController
         $result = [];
 
         $listConstellations = $this->constellationManager->buildListConstellation();
-
         $result['list_constellation'] = $constellationDataTransformer->listVignettesView($listConstellations);
 
-        /** @var Response $response */
         $response = $this->render('pages/constellations.html.twig', $result);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 

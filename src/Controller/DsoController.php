@@ -134,7 +134,7 @@ class DsoController extends AbstractController
         }
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
-
+        dump($params); die();
         $response = $this->render('pages/dso.html.twig', $params);
 
         // cache expiration
