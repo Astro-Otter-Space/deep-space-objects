@@ -57,12 +57,13 @@ class  SearchController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function searchAjax(Request $request)
+    public function searchAjax(Request $request): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
-            $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm);
+            $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm, null);
+            // TODO : build as vignette view
 
             $dataConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
             $data = array_merge($dataDso, $dataConstellation);

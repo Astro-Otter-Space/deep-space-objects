@@ -161,6 +161,7 @@ class DsoController extends AbstractController
      *
      * @return Response
      * @throws ReflectionException|WsException
+     * @throws JsonException
      * @Route({
      *   "en": "/last-update",
      *   "fr": "/mises-a-jour"

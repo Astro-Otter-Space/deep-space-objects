@@ -19,7 +19,6 @@ use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Services\GetImage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -28,7 +27,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DsoManager
 {
-
     use ManagerTrait;
 
     private static $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
@@ -49,23 +47,20 @@ class DsoManager
     private $dsoDataTransformer;
     /** @var ConstellationRepository */
     private $constellationRepository;
+
     /**
      * DsoManager constructor.
      *
      * @param DsoRepository $dsoRepository
-     * @param UrlGenerateHelper $urlGenerateHelper
-     * @param TranslatorInterface $translator
      * @param CacheInterface $cacheUtils
      * @param $locale
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(DsoRepository $dsoRepository, UrlGenerateHelper $urlGenerateHelper, TranslatorInterface $translator, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
+    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
-        $this->urlGenerateHelper = $urlGenerateHelper;
-        $this->translator = $translator;
         $this->cacheUtils = $cacheUtils;
         $this->locale = $locale ?? 'en';
         $this->dsoDataTransformer = $dsoDataTransformer;
@@ -77,12 +72,12 @@ class DsoManager
      *
      * @param $id
      *
-     * @return DsoDTO
+     * @return \Generator
      * @throws WsException
-     * @throws \ReflectionException
      * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function buildDso($id): DsoDTO
+    public function buildDso($id): \Generator
     {
         $idMd5 = md5(sprintf('%s_%s', $id, $this->locale));
         $idMd5Cover = md5(sprintf('%s_cover', $id));
@@ -97,8 +92,7 @@ class DsoManager
             }
         } else {
             /** @var DsoDTO|DTOInterface $dso */
-            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id, true);
-
+            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
             if (!is_null($dso)) {
                 // Add astrobin image
                 $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
@@ -122,7 +116,7 @@ class DsoManager
             }
         }
 
-        return $dso;
+        yield $dso;
     }
 
     /**
@@ -140,87 +134,21 @@ class DsoManager
         return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
 
-    /**
-     * Get Dso from a constellation identifier and build list
-     *
-     * @param string $constellationId
-     * @param string|null $excludedId
-     * @param int $limit
-     *
-     * @return ListDso
-     * @throws WsException
-     * @throws \ReflectionException
-     */
-    public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $limit): ListDso
-    {
-        $getListDso = function() use($constellationId, $excludedId, $limit) {
-            yield from $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, 0, $limit, true);
-        };
-
-        $listDso = new ListDso();
-        foreach ($getListDso() as $dsoId) {
-            $dsoDto = $this->buildDso($dsoId);
-            $listDso->addDso($dsoDto);
-        }
-
-        return $listDso;
-    }
 
     /**
-     * @return ListDso
-     * @throws WsException
-     * @throws \ReflectionException
-     */
-    public function getListDsoLastUpdated(): ListDso
-    {
-        $getListDso = function () {
-            yield from $this->dsoRepository->getLastUpdated();
-        };
-
-        $listDso = new ListDso();
-        foreach ($getListDso() as $dsoId) {
-            $dsoDto = $this->buildDso($dsoId);
-            $listDso->addDso($dsoDto);
-        }
-
-        return $listDso;
-    }
-
-    /**
-     * @param $searchTerms
-     * @param null $typeReturn>
-     *
-     * @return mixed
-     * @throws \ReflectionException
-     */
-    public function searchDsoByTerms($searchTerms, $typeReturn = null)
-    {
-        $resultDso = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
-
-        return array_merge(array_map(function (Dso $dso) use ($typeReturn) {
-            if ('id' === $typeReturn) {
-                return $dso->getId();
-            }
-
-            return $this->buildSearchListDso($dso);
-
-        }, $resultDso));
-    }
-
-    /**
-     * @todo remove
-     * Data returned for autocomplete search
+     * Translate data vor display in VueJs
      *
      * @param DsoDTO $dso
      *
      * @return array
      */
-    public function buildSearchListDso(DsoDTO $dso): array
+    public function formatVueData(DsoDTO $dso): array
     {
-        return $this->dsoDataTransformer->vignetteView($dso);
+        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate);
     }
 
     /**
+     * @todo move to AstrobinServic
      * Get image (and his owner) from Astrobin
      *
      * @param $astrobinId
@@ -249,39 +177,87 @@ class DsoManager
     }
 
     /**
-     * Translate data vor display in VueJs
+     * Get Dso from a constellation identifier and build list
      *
-     * @param DsoDTO $dso
-     *
-     * @return array
-     */
-    public function formatVueData(DsoDTO $dso): array
-    {
-        return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate);
-    }
-
-    /**
-     * https://discuss.elastic.co/t/elasticsearch-get-random-document-atleast-5-from-each-category/120015
+     * @param string $constellationId
+     * @param string|null $excludedId
      * @param int $limit
      *
      * @return ListDso
      * @throws WsException
+     * @throws \JsonException
      * @throws \ReflectionException
+     */
+    public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $limit): ListDso
+    {
+        $listDsoIdByConst = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, 0, $limit);
+        return $this->buildListDso($listDsoIdByConst);
+    }
+
+    /**
+     * @return ListDso
+     * @throws WsException
+     * @throws \ReflectionException|\JsonException
+     */
+    public function getListDsoLastUpdated(): ListDso
+    {
+        $listDsoIdLastUpdated = $this->dsoRepository->getLastUpdated();
+        return $this->buildListDso($listDsoIdLastUpdated);
+    }
+
+    /**
+     * Get list Dso by search terms
+     *
+     * @param string $searchTerms
+     * @param string|null $typeReturn >
+     *
+     * @return mixed
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
+     */
+    public function searchDsoByTerms(string $searchTerms, ?string $typeReturn): ListDso
+    {
+        $resultDsoId = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
+        return $this->buildListDso($resultDsoId);
+    }
+
+
+    /**
+     * Get random with Dso where AstrobinId is not null
+     * @param int $limit
+     *
+     * @return ListDso
+     * @throws WsException
+     * @throws \ReflectionException|\JsonException
+     *
+     * https://discuss.elastic.co/t/elasticsearch-get-random-document-atleast-5-from-each-category/120015
      */
     public function randomDsoWithImages(int $limit): ListDso
     {
-        /**
-         * @return \Generator
-         */
-        $getRandomDso = function () use($limit) {
-            yield from $this->dsoRepository->setLocale($this->locale)->getRandomDso($limit);
+        $randomDsoId = $this->dsoRepository->setLocale($this->locale)->getRandomDso($limit);
+        return $this->buildListDso($randomDsoId);
+    }
+
+    /**
+     * @param array $listDsoId
+     *
+     * @return ListDso
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
+     */
+    private function buildListDso(array $listDsoId): ListDso
+    {
+        $getDso = function () use ($listDsoId) {
+            foreach ($listDsoId as $dsoId) {
+                yield from $this->buildDso($dsoId);
+            }
         };
 
-        /** @var ListDso $listDso */
         $listDso = new ListDso();
-        foreach ($getRandomDso() as $dsoId) {
-            $dsoDto = $this->buildDso($dsoId);
-            $listDso->addDso($dsoDto);
+        foreach ($getDso() as $dso) {
+            $listDso->addDso($dso);
         }
 
         return $listDso;

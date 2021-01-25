@@ -125,6 +125,8 @@ class ConstellationController extends AbstractController
     }
 
     /**
+     * todo : build dso
+     *
      * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
      * @param Request $request
      * @param string $constId
@@ -137,11 +139,11 @@ class ConstellationController extends AbstractController
         $offset = $request->query->get('offset');
 
         /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE, true);
+        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE);
         $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
         $result['dso'] = $listDsoCards ?? [];
 
-        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE, true);
+        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE);
         $result['filters'] = $this->buildFiltersWithAll($listDsoAll) ?? [];
 
         return new JsonResponse($result);

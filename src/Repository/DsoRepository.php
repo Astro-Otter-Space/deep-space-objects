@@ -78,23 +78,19 @@ class DsoRepository extends AbstractRepository
     /**
      * Retrieve object by his Id
      *
-     * @param $id
-     * @param boolean $hydrate
+     * @param string $id
      *
-     * @return DTOInterface|array
+     * @return DTOInterface|null
+     * @throws \JsonException
      */
-    public function getObjectById($id, bool $hydrate)
+    public function getObjectById(string $id): ?DTOInterface
     {
         /** @var ResultSet $resultDocument */
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-            if ($hydrate) {
-                $document = $resultDocument->getDocuments()[0];
-                return $this->buildEntityFromDocument($document);
-            }
-            return $resultDocument->getDocuments()[0]->getData();
+            $document = $resultDocument->getDocuments()[0];
+            return $this->buildEntityFromDocument($document);
         }
-
         return null;
     }
 
@@ -105,12 +101,10 @@ class DsoRepository extends AbstractRepository
      * @param string|null $excludedId
      * @param int|null $offset
      * @param int|null $limit
-     * @param bool $hydrate
      *
-     * @return \Generator
-     * @throws \ReflectionException
+     * @return array
      */
-    public function getObjectsByConstId(string $constId, ?string $excludedId, ?int $offset, ?int $limit, bool $hydrate): \Generator
+    public function getObjectsByConstId(string $constId, ?string $excludedId, ?int $offset, ?int $limit): array
     {
         if (is_null($offset )) {
             $offset = parent::FROM;
@@ -138,9 +132,7 @@ class DsoRepository extends AbstractRepository
             ->addMustNot($mustNotQuery);
 
         $query->setQuery($boolQuery);
-
         $query->setFrom($offset)->setSize($limit);
-
         $query->addSort(
             [
                 'mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
@@ -152,15 +144,14 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
+        $listDsoId = [];
         if (0 < $search->count()) {
-            if (false === $hydrate) {
-                yield $search->getDocuments();
-            }
             foreach ($search->getDocuments() as $document) {
-                $dto = $this->buildEntityFromDocument($document);
-                yield $dto->getId();
+                $listDsoId[] = $document->getData()['id'];
             }
         }
+
+        return $listDsoId;
     }
 
     /**
@@ -168,10 +159,9 @@ class DsoRepository extends AbstractRepository
      *
      * @return \Generator
      */
-    public function getLastUpdated(): \Generator
+    public function getLastUpdated(): array
     {
-        /** @var ListDso $dsoList */
-        $dsoList = new ListDso();
+        $listDsoId = [];
 
         /** @var Query $query */
         $query = new Query();
@@ -186,37 +176,42 @@ class DsoRepository extends AbstractRepository
 
         if (0 < $search->count()) {
             foreach ($search->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document)->getId();
+                $listDsoId[] = $document->getData()['id'];
             }
         }
+
+        return $listDsoId;
     }
 
     /**
+     * @todo : get Id
      * Search autocomplete
      *
      * @param $searchTerm
      *
      * @return array
-     * @throws \ReflectionException
      */
     public function getObjectsBySearchTerms($searchTerm): array
     {
+        $listDsoId = [];
         if ('en' !== $this->getLocale()) {
-            self::$listSearchFields[] = sprintf('alt.alt_%s', $this->getLocale());
-            self::$listSearchFields[] = sprintf('alt.alt_%s.keyword', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
         if (0 < $result->getTotalHits()) {
-            $list = array_map(function(Result $doc) {
-                return $this->buildEntityFromDocument($doc->getDocument());
+
+            $listDsoId = array_map(function(Result $doc) {
+                return $doc->getDocument();
             }, $result->getResults());
         }
 
-        return $list;
+        return $listDsoId;
     }
 
     /**
+     * @todo : refactor
      * Catalog Research, with|without filters
      * Get aggregates
      *
@@ -321,7 +316,6 @@ class DsoRepository extends AbstractRepository
         }
 
         $listDsoId = [];
-        dump($search->getQuery()->getQuery()->toArray());
         foreach ($search->getDocuments() as $document) {
             $listDsoId[] = $this->buildEntityFromDocument($document)->getId();
         }
@@ -342,6 +336,7 @@ class DsoRepository extends AbstractRepository
     }
 
     /**
+     * TODO: refactor
      * Retrieve last updated Dso
      * @param \DateTimeInterface $lastUpdate
      *
@@ -470,13 +465,15 @@ class DsoRepository extends AbstractRepository
 
 
     /**
-     * @param int $limit
+     * get random Dso
      *
-     * @return \Generator
-     * @throws \Exception
+     * @param int $limit
+     * @return array
      */
-    public function getRandomDso(int $limit = 1): \Generator
+    public function getRandomDso(int $limit = 1): array
     {
+        $listDsoId = [];
+
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
         $seed = $now->getTimestamp();
@@ -503,9 +500,10 @@ class DsoRepository extends AbstractRepository
         if (0 < $results->count()) {
             /** @var Document $document */
             foreach ($results->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document)->getId();
+                $listDsoId[] = $document->getData()['id'];
             }
         }
+        return $listDsoId;
     }
 
     /**
@@ -514,6 +512,7 @@ class DsoRepository extends AbstractRepository
      * @param Document $document
      *
      * @return DTOInterface
+     * @throws \JsonException
      */
     private function buildEntityFromDocument(Document $document): DTOInterface
     {

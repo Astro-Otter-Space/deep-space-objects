@@ -72,7 +72,7 @@ final class DataController extends AbstractFOSRestController
     public function getDso(string $id): Response
     {
         /** @var Document $dso */
-        $dso = $this->dsoRepository->getObjectById($id, true);
+        $dso = $this->dsoRepository->getObjectById($id);
 
         if (is_null($dso)) {
             throw new NotFoundException(sprintf("%s is not an correct item", $id));
