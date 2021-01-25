@@ -28,9 +28,9 @@
   >
   </div>
   <div id="geojson"
-    data-dso="{{ geojsonDso|json_encode }}"
-    data-center="{{ dso.geometry['coordinates']|json_encode }}"
-    data-const="{{ dso.constellationId|raw }}"
+    data-dso="{{ geojson_dso|json_encode }}"
+    data-center="{{ geojson_center|json_encode }}"
+    data-const="{{ dso.constellation.id|raw }}"
     data-zoom="10" aria-hidden="true">
   </div>
 {% endblock %}

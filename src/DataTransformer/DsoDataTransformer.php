@@ -85,7 +85,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
             'label' => implode(Utils::GLUE_DASH, array_filter([$this->translator->trans($dto->getType()) , $dto->getConstellation()->title()])),
             'url' => $dto->fullUrl(),
-            'filter' => $dto->getType(),
+            'filter' => substr($dto->getType(), strrpos($dto->getType() ,'.')+1),
             'image' => $dto->getAstrobin()
         ];
     }

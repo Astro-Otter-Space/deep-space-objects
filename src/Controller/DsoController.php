@@ -7,6 +7,8 @@ use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\BDD\UpdateData;
+use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
@@ -94,6 +96,7 @@ class DsoController extends AbstractController
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
+            /** @var DsoDTO|DTOInterface */
             $params['dso'] = $dso;
             $params['dsoData'] = $this->dsoManager->formatVueData($dso);
             $params['constTitle'] = $dso->getConstellation()->title() ?? "";
@@ -103,16 +106,18 @@ class DsoController extends AbstractController
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
             // List of Dso from same constellation
-            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellationId(), $dso->getId(), 0, 20);
+            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellation()->getId(), $dso->getId(), 0, 20);
 
             $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
             // Map
-            $params['geojsonDso'] = [
+            $params['geojson_dso'] = [
                 "type" => "FeatureCollection",
-                "features" =>  [$dso->geoJson()]
+                "features" => [$dso->geoJson()]
             ];
+            $params['geojson_center'] = $dso->getGeometry()['coordinates'];
+
             // Images
             try {
                 $params['images'] = [];
@@ -122,7 +127,7 @@ class DsoController extends AbstractController
                     $params['images'] = $this->getListImages($dso->getName());
                 }
             } catch (WsResponseException | JsonException | WsException | ReflectionException $e) {
-                dump($e->getMessage());
+                //dump($e->getMessage());
             }
         } else {
             throw new NotFoundException('Object not found');

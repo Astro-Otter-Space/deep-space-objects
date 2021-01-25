@@ -518,7 +518,7 @@ final class DsoDTO implements DTOInterface
             "geometry" => $this->getGeometry(),
             "properties" => [
                 "name" => $this->title(),
-                "type" => $this->getType(),
+                "type" => substr($this->getType(), strrpos($this->getType() ,'.')+1),
                 "mag" => $this->getMagnitude()
             ]
         ];
