@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\ControllerTraits;
 
 use App\Entity\DTO\DsoDTO;
@@ -47,9 +49,11 @@ trait DsoTrait
             $listDso = ($listDso instanceof ListDso) ? iterator_to_array($listDso) : $listDso;
 
             $this->listFilters = array_map(function(DTOInterface $dsoData) {
+                $fullType = $dsoData->getType();
+                $subType = substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1);
                 return [
-                    'value' => substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1),
-                    'label' => $this->translator->trans($dsoData->getType())
+                    'value' => $subType,
+                    'label' => $this->translator->trans($fullType)
                 ];
             }, $listDso);
         }
@@ -147,7 +151,6 @@ trait DsoTrait
                 'url' => null
             ];
         }
-
 
         return $breadcrumbs;
     }

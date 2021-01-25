@@ -70,6 +70,7 @@ class ConstellationController extends AbstractController
      * @return Response
      * @throws WsException
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function show(string $id, string $name, DsoManager $dsoManager, DsoDataTransformer $dsoDataTransformer): Response
     {
@@ -84,7 +85,7 @@ class ConstellationController extends AbstractController
         /** @var ConstellationDTO $constellation */
         $constellation = $this->constellationManager->buildConstellation($id);
 
-        $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), null, DsoRepository::SMALL_SIZE);
+        $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), null, 0,DsoRepository::SMALL_SIZE);
         $result['list_dso'] = $listDsoCards = $dsoDataTransformer->listVignettesView($listDso);
 
         // Filter for Grid Cards dso
@@ -125,26 +126,25 @@ class ConstellationController extends AbstractController
     }
 
     /**
-     * todo : build dso
-     *
      * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
      * @param Request $request
      * @param string $constId
+     * @param DsoDataTransformer $dsoDataTransformer
      *
      * @return JsonResponse
+     * @throws WsException
+     * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function dsoByConstellationAjax(Request $request, string $constId): JsonResponse
+    public function dsoByConstellationAjax(Request $request, string $constId, DsoDataTransformer $dsoDataTransformer): JsonResponse
     {
         $offset = $request->query->get('offset');
 
-        /** @var ListDso $listDso */
-        $listDso = $this->dsoRepository->getObjectsByConstId($constId, null, $offset, DsoRepository::SMALL_SIZE);
-        $listDsoCards = $this->dsoManager->buildListDso($listDso) ?? [];
-        $result['dso'] = $listDsoCards ?? [];
+        $listDso = $dsoDataTransformer->listVignettesView($this->dsoManager->getListDsoFromConst($constId, null,  $offset, DsoRepository::SMALL_SIZE));
+        $listDsoAll = $this->dsoManager->getListDsoFromConst($constId, null, 0, DsoRepository::SMALL_SIZE);
 
-        $listDsoAll = $this->dsoRepository->getObjectsByConstId($constId, null, 0, $offset+DsoRepository::SMALL_SIZE);
-        $result['filters'] = $this->buildFiltersWithAll($listDsoAll) ?? [];
+        $result['dso'] = $listDso;
+        $result['filters'] = $this->buildFiltersWithAll($listDsoAll);
 
         return new JsonResponse($result);
     }

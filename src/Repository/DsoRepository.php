@@ -460,17 +460,9 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $results->count()) {
-//            /** @var Document $document */
-//            foreach ($results->getDocuments() as $document) {
-//                $listDsoId[] = $document->getData()['id'];
-//            }
-
-            $listDsoId = array_map(static function(Result $doc) {
-                return $doc->getDocument()->getData()['id'];
-            }, $results->getResults());
-        }
-        return $listDsoId;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
     }
 
     /**
@@ -546,5 +538,3 @@ class DsoRepository extends AbstractRepository
 **/
 
 }
-
-

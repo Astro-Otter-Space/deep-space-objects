@@ -103,7 +103,7 @@ class DsoController extends AbstractController
             $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
             // List of Dso from same constellation
-            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellationId(), $dso->getId(), 20);
+            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellationId(), $dso->getId(), 0, 20);
 
             $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
             $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];

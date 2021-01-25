@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Managers;
 
 use App\Classes\CacheInterface;
@@ -198,6 +200,7 @@ class DsoManager
      *
      * @param string $constellationId
      * @param string|null $excludedId
+     * @param int $offset
      * @param int $limit
      *
      * @return ListDso
@@ -205,9 +208,9 @@ class DsoManager
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $limit): ListDso
+    public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $offset, int $limit): ListDso
     {
-        $listDsoIdByConst = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, 0, $limit);
+        $listDsoIdByConst = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, $offset, $limit);
         return $this->buildListDso($listDsoIdByConst);
     }
 
@@ -253,7 +256,6 @@ class DsoManager
         return $this->buildListDso($resultDsoId);
     }
 
-
     /**
      * Get random with Dso where AstrobinId is not null
      * @param int $limit
@@ -290,8 +292,6 @@ class DsoManager
         foreach ($getDso() as $dso) {
             $listDso->addDso($dso);
         }
-
         return $listDso;
     }
-
 }
