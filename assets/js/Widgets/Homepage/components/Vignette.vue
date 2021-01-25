@@ -19,7 +19,7 @@
     },
     methods: {
       imgStyle: (dso) => {
-        var bgImage = dso.image.url_regular;
+        var bgImage = dso.astrobin.url_regular;
         return {
           "background": `url(${bgImage}) no-repeat center center`,
           "background-size": `cover`

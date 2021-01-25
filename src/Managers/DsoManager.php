@@ -77,7 +77,7 @@ class DsoManager
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function buildDso($id): \Generator
+    private function buildDso($id): \Generator
     {
         $idMd5 = md5(sprintf('%s_%s', $id, $this->locale));
         $idMd5Cover = md5(sprintf('%s_cover', $id));
@@ -145,6 +145,23 @@ class DsoManager
     public function formatVueData(DsoDTO $dso): array
     {
         return $this->dsoDataTransformer->buildTableData($dso, self::$listFieldToTranslate);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return DTOInterface
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
+     */
+    public function getDso($id): DTOInterface
+    {
+        $getDso = function($id) {
+            yield from $this->buildDso($id);
+        };
+
+        return $getDso($id)->current();
     }
 
     /**
@@ -247,7 +264,7 @@ class DsoManager
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    private function buildListDso(array $listDsoId): ListDso
+    public function buildListDso(array $listDsoId): ListDso
     {
         $getDso = function () use ($listDsoId) {
             foreach ($listDsoId as $dsoId) {

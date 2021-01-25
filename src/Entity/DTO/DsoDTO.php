@@ -278,16 +278,16 @@ final class DsoDTO implements DTOInterface
      *
      * @return $this
      */
-    public function setAlt(?string $alt): DsoDTO
+    public function setAlt(?string $alt): ?DsoDTO
     {
         $this->alt = $alt;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -297,14 +297,14 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDescription(?string $description): DsoDTO
+    public function setDescription(?string $description): ?DsoDTO
     {
         $this->description = $description;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getType(): string
     {
@@ -425,7 +425,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDiscover($discover): DsoDTO
+    public function setDiscover(?string $discover): DsoDTO
     {
         $this->discover = $discover;
         return $this;
@@ -434,7 +434,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDiscoverYear()
+    public function getDiscoverYear(): ?int
     {
         return $this->discoverYear;
     }
@@ -444,7 +444,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDiscoverYear($discoverYear): DsoDTO
+    public function setDiscoverYear(?int $discoverYear): DsoDTO
     {
         $this->discoverYear = $discoverYear;
         return $this;
@@ -459,11 +459,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param Image $astrobin
+     * @param Image|null $astrobin
      *
      * @return DsoDTO
      */
-    public function setAstrobin(Image $astrobin): DsoDTO
+    public function setAstrobin(?Image $astrobin): DsoDTO
     {
         $this->astrobin = $astrobin;
         return $this;
@@ -472,7 +472,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getAstrobinId()
+    public function getAstrobinId(): ?string
     {
         return $this->astrobinId;
     }
@@ -482,7 +482,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setAstrobinId($astrobinId): DsoDTO
+    public function setAstrobinId(?string $astrobinId): DsoDTO
     {
         $this->astrobinId = $astrobinId;
         return $this;
@@ -501,7 +501,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setGeometry($geometry): self
+    public function setGeometry(array $geometry): self
     {
         $this->geometry = $geometry;
         return $this;
@@ -533,11 +533,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $dim
+     * @param string|null $dim
      *
-     * @return DsoDTO
+     * @return $this
      */
-    public function setDim($dim): DsoDTO
+    public function setDim(?string $dim): DsoDTO
     {
         $this->dim = $dim;
         return $this;
@@ -556,7 +556,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDeclinaison(?string $declinaison): DsoDTO
+    public function setDeclinaison(?string $declinaison): ?DsoDTO
     {
         $this->declinaison = $declinaison;
         return $this;
@@ -575,7 +575,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setRightAscencion(?string $rightAscencion): DsoDTO
+    public function setRightAscencion(?string $rightAscencion): ?DsoDTO
     {
         $this->rightAscencion = $rightAscencion;
         return $this;

@@ -317,7 +317,7 @@ class DsoRepository extends AbstractRepository
 
         $listDsoId = [];
         foreach ($search->getDocuments() as $document) {
-            $listDsoId[] = $this->buildEntityFromDocument($document)->getId();
+            $listDsoId[] = $document->getData()['id'];
         }
 
         $listAggregations = [];

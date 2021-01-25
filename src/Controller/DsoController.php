@@ -92,7 +92,7 @@ class DsoController extends AbstractController
         $id = explode($separator, $id, null);
         $id = reset($id);
 
-        $dso = $this->dsoManager->buildDso($id);
+        $dso = $this->dsoManager->getDso($id);
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
@@ -239,9 +239,7 @@ class DsoController extends AbstractController
      */
     public function geoJson(string $id): JsonResponse
     {
-        /** @var DsoDTO $dso */
-        $dso = $this->dsoManager->buildDso($id);
-
+        $dso = $this->dsoManager->getDso($id);
         $geoJsonData = $dso->geoJson();
 
         /** @var JsonResponse $jsonResponse */
@@ -323,11 +321,7 @@ class DsoController extends AbstractController
             ->setLocale($request->getLocale())
             ->getObjectsCatalogByFilters($from, $filters, null, true);
 
-        $listDso = new ListDso();
-        foreach ($listDsoId as $dsoId) {
-            $dsoDto = $this->dsoManager->buildDso($dsoId);
-            $listDso->addDso($dsoDto);
-        }
+        $listDso = $this->dsoManager->buildListDso($listDsoId);
 
         // List facets
         $allQueryParameters = $request->query->all();
@@ -419,6 +413,7 @@ class DsoController extends AbstractController
      * @return Response
      * @throws WsException
      * @throws ReflectionException
+     * @throws JsonException
      * @Route("/debug-astrobin/{offset}", name="debug_astrobin")
      */
     public function debugAstrobinImage(Request $request, $offset = 0): Response
@@ -426,12 +421,7 @@ class DsoController extends AbstractController
         $items = $this->dsoRepository->getAstrobinId(null);
         ksort($items);
         $items = array_slice($items, $offset, 50);
-        $listDso = new ListDso();
-        foreach (array_keys($items) as $dsoId) {
-            $dso = $this->dsoManager->buildDso($dsoId);
-            $listDso->addDso($dso);
-        }
-
+        $listDso = $this->dsoManager->buildListDso(array_keys($items));
         $params['dso'] = $this->dsoDataTransformer->listVignettesView($listDso);
 
         return $this->render('pages/debug_astrobin.html.twig', $params);
