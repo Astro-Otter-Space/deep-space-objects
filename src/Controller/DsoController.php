@@ -118,9 +118,9 @@ class DsoController extends AbstractController
             ];
             $params['geojson_center'] = $dso->getGeometry()['coordinates'];
 
+            $params['images'] = [];
             // Images
             try {
-                $params['images'] = [];
                 if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
                     $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => false]);
                 } else {
@@ -134,7 +134,7 @@ class DsoController extends AbstractController
         }
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
-        dump($params); die();
+
         $response = $this->render('pages/dso.html.twig', $params);
 
         // cache expiration
@@ -208,10 +208,10 @@ class DsoController extends AbstractController
      * @throws ReflectionException
      * @throws JsonException
      */
-    private function getListImages(string $dsoId): ?array
+    private function getListImages(string $dsoId): array
     {
         $astrobinWs = new GetImage();
-        $listImages = $tabImages = null;
+        $listImages = $tabImages = [];
         try {
             /** @var ListImages|Image $listImages */
             $listImages = $astrobinWs->getImagesByTitle($dsoId, 5);
