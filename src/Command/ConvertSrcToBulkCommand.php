@@ -7,6 +7,7 @@ use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -30,6 +31,9 @@ class ConvertSrcToBulkCommand extends Command
 
     /** @var EntityManagerInterface */
     private $em;
+
+    /** @var DsoManager  */
+    private $dsoManager;
 
     /** @var DsoRepository */
     private $dsoRepository;
@@ -56,14 +60,16 @@ class ConvertSrcToBulkCommand extends Command
      * @param KernelInterface $kernel
      * @param CacheInterface $cacheUtil
      * @param EntityManagerInterface $em
+     * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoManager $dsoManager ,DsoRepository $dsoRepository, $listLocales)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
         $this->em = $em;
+        $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         $this->listLocales = explode('|', $listLocales);
         parent::__construct();
@@ -196,7 +202,7 @@ class ConvertSrcToBulkCommand extends Command
                                     $bulkData[] = [
                                         'idDoc' => self::md5ForId($id),
                                         'mode' => 'update',
-                                        'data' => json_decode(utf8_decode($lineReplace), true)
+                                        'data' => json_decode(utf8_decode($lineReplace), true, 512, JSON_THROW_ON_ERROR)
                                     ];
                                     $output->writeln(sprintf('[%s] item %s', $mode, $id));
                                 }
@@ -224,13 +230,13 @@ class ConvertSrcToBulkCommand extends Command
                              * Step 3 : get list of updated data
                              */
                             /** @var ListDso $listDso */
-                            $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastImportDate);
+                            $listDso = $this->dsoManager->getListDsoAfter($lastImportDate);
                             if (0 < $listDso->getIterator()->count()) {
                                 /**
                                  * STEP 4 : update DB
                                  * TODO : move to repository
                                  */
-                                $listDsoAsArray = array_map(function (Dso $dso) {
+                                $listDsoAsArray = array_map(static function (Dso $dso) {
                                     return $dso->getId();
                                 }, iterator_to_array($listDso));
 

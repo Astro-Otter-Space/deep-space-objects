@@ -156,13 +156,10 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Get last updated items
-     *
-     * @return \Generator
+     * @return array
      */
     public function getLastUpdated(): array
     {
-        $listDsoId = [];
-
         /** @var Query $query */
         $query = new Query();
 
@@ -172,19 +169,14 @@ class DsoRepository extends AbstractRepository
         ]);
 
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+        $result = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $search->count()) {
-            foreach ($search->getDocuments() as $document) {
-                $listDsoId[] = $document->getData()['id'];
-            }
-        }
-
-        return $listDsoId;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
-     * @todo : get Id
      * Search autocomplete
      *
      * @param $searchTerm
@@ -200,18 +192,13 @@ class DsoRepository extends AbstractRepository
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
-        if (0 < $result->getTotalHits()) {
 
-            $listDsoId = array_map(function(Result $doc) {
-                return $doc->getDocument();
-            }, $result->getResults());
-        }
-
-        return $listDsoId;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
-     * @todo : refactor
      * Catalog Research, with|without filters
      * Get aggregates
      *
@@ -220,7 +207,6 @@ class DsoRepository extends AbstractRepository
      * @param int|null $to
      * @param bool $hydrate
      * @return array
-     * @throws \ReflectionException
      */
     public function getObjectsCatalogByFilters(int $from, array $filters, ?int $to, ?bool $hydrate): array
     {
@@ -308,20 +294,19 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
-        $nbItems = $search->getTotalHits();
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $nbItems = $results->getTotalHits();
 
         if (false === $hydrate) {
-            return [$search->getDocuments(), $nbItems];
+            return [$results->getDocuments(), $nbItems];
         }
 
-        $listDsoId = [];
-        foreach ($search->getDocuments() as $document) {
-            $listDsoId[] = $document->getData()['id'];
-        }
+        $listDsoId = array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
 
         $listAggregations = [];
-        foreach ($search->getAggregations() as $type=>$aggregations) {
+        foreach ($results->getAggregations() as $type=>$aggregations) {
             $listAggregations[$type] = array_map(static function($item) {
                 return [$item['key'] => $item['doc_count']];
             }, $aggregations['buckets']);
@@ -336,14 +321,12 @@ class DsoRepository extends AbstractRepository
     }
 
     /**
-     * TODO: refactor
      * Retrieve last updated Dso
-     * @param \DateTimeInterface $lastUpdate
      *
-     * @return ListDso
-     * @throws \Exception
+     * @param \DateTimeInterface $lastUpdate
+     * @return array
      */
-    public function getObjectsUpdatedAfter(\DateTimeInterface $lastUpdate): ListDso
+    public function getUpdatedAfter(\DateTimeInterface $lastUpdate): array
     {
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
@@ -374,31 +357,11 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $search->count()) {
-            /**
-             * @param $listDocuments
-             *
-             * @return \Generator
-             */
-            $listDsoGenerator = function($listDocuments) {
-                foreach ($listDocuments as $document) {
-                    yield $this->buildEntityFromDocument($document);
-                }
-            };
-
-            $listDsoIterator = $listDsoGenerator($search->getDocuments());
-            while($listDsoIterator->valid()) {
-                /** @var Dso $dso */
-                $dso = $listDsoIterator->current();
-
-                $dsoList->addDso($dso);
-                $listDsoIterator->next();
-            }
-        }
-
-        return $dsoList;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
     }
 
     /**
@@ -498,10 +461,14 @@ class DsoRepository extends AbstractRepository
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
         if (0 < $results->count()) {
-            /** @var Document $document */
-            foreach ($results->getDocuments() as $document) {
-                $listDsoId[] = $document->getData()['id'];
-            }
+//            /** @var Document $document */
+//            foreach ($results->getDocuments() as $document) {
+//                $listDsoId[] = $document->getData()['id'];
+//            }
+
+            $listDsoId = array_map(static function(Result $doc) {
+                return $doc->getDocument()->getData()['id'];
+            }, $results->getResults());
         }
         return $listDsoId;
     }

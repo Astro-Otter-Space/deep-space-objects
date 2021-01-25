@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\DsoDataTransformer;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Managers\EventManager;
 use App\Managers\ObservationManager;
+use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,18 +56,22 @@ class  SearchController extends AbstractController
      * )
      *
      * @param Request $request
+     * @param DsoDataTransformer $dsoDataTransformer
      *
      * @return JsonResponse
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function searchAjax(Request $request): JsonResponse
+    public function searchAjax(Request $request, DsoDataTransformer $dsoDataTransformer): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
-            $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm, null);
-            // TODO : build as vignette view
+            $listDso = $this->dsoManager->searchDsoByTerms($searchTerm, null);
+            $dataDso = $dsoDataTransformer->listVignettesView($listDso);
 
-            $dataConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
+            $dataConstellation = []; //$this->constellationManager->searchConstellationsByTerms($searchTerm);
             $data = array_merge($dataDso, $dataConstellation);
         }
 
@@ -148,7 +154,7 @@ class  SearchController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function starsFiltered(Request $request, $id)
+    public function starsFiltered(Request $request, string $id): JsonResponse
     {
         $webPath = $this->getParameter('kernel.project_dir') . '/public/';
         $file = $webPath . 'build/data/stars.8.json';

@@ -7,8 +7,6 @@ use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\BDD\UpdateData;
-use App\Entity\DTO\DsoDTO;
-use App\Entity\ES\ListDso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
