@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListConstellation;
+use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
+use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +64,7 @@ class LayoutController extends AbstractController
      *
      * @return Response
      */
-    public function header(Request $request, String $listLocales): Response
+    public function header(Request $request, string $listLocales): Response
     {
         /** @var Request $mainRequest */
         $mainRequest = $this->get('request_stack')->getMasterRequest();
@@ -143,7 +146,7 @@ class LayoutController extends AbstractController
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
                 'icon_class' => 'planet'
             ],
-            'observations' => [
+            /*'observations' => [
                 'label' => $this->translator->trans('listObservations'),
                 'path' => $routerInterface->generate(sprintf('observation_list.%s', $locale)),
                 'icon_class' => 'telescop'
@@ -157,7 +160,7 @@ class LayoutController extends AbstractController
                 'label' => $this->translator->trans('addObservation'),
                 'path' => $routerInterface->generate(sprintf('add_observation.%s', $locale)),
                 'icon_class' => 'calendar'
-            ],
+            ],*/
             'contact' => [
                 'label' => $this->translator->trans('contact.title'),
                 'path' => $routerInterface->generate(sprintf('contact.%s', $locale)),
@@ -177,7 +180,7 @@ class LayoutController extends AbstractController
      *
      * @return array
      */
-    public function buildSubMenu(string $locale = 'en', $listCatalogs): array
+    public function buildSubMenu(string $locale, array $listCatalogs): array
     {
         /** @var Router $routerInterface */
         $routerInterface = $this->get('router');
@@ -195,9 +198,10 @@ class LayoutController extends AbstractController
      * Footer
      *
      * @param Request $request
-     * @param $githubLink
-     * @param $paypalLink
-     * @param $facebookLink
+     * @param string|null $githubLink
+     * @param string|null $paypalLink
+     * @param string|null $facebookLink
+     * @param string|null $twitterLink
      *
      * @return Response
      * @deprecated
@@ -243,9 +247,9 @@ class LayoutController extends AbstractController
 
 
     /**
-     * @param string $githubLink
-     * @param string $facebookLink
-     * @param string $twitterLink
+     * @param string|null $githubLink
+     * @param string|null $facebookLink
+     * @param string|null $twitterLink
      *
      * @return array
      */
@@ -287,11 +291,13 @@ class LayoutController extends AbstractController
      *
      * @param Request $request
      * @param string $listLocales
+     * @param DsoManager $dsoManager
      *
      * @return Response
+     * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function sitemap(Request $request, string $listLocales): Response
+    public function sitemap(Request $request, string $listLocales, DsoManager $dsoManager): Response
     {
         $params = [];
 
@@ -308,43 +314,43 @@ class LayoutController extends AbstractController
         $params['urls'] = [
             'home' => [
                 'loc' => $router->generate('homepage', [],Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('homepage.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'catalog' => [
                 'loc' => $router->generate('dso_catalog', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('dso_catalog.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'constellation_list' => [
                 'loc' => $router->generate('constellation_list', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('constellation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'contact' => [
                 'loc' => $router->generate('contact', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('contact.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'skymap' => [
                 'loc' => $router->generate('skymap', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('skymap.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales)),
             ],
             'obs_list' => [
                 'loc' => $router->generate('observation_list', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('observation_list.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'last_udapte' => [
                 'loc' => $router->generate('last_update_dso', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('last_update_dso.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
@@ -356,53 +362,50 @@ class LayoutController extends AbstractController
             ],*/
             'add_obs' => [
                 'loc' => $router->generate('add_observation', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('add_observation.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'help_api' => [
                 'loc' => $router->generate('help_api_page', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('help_api_page.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'legalnotice' => [
                 'loc'=> $router->generate('legal_notice', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('legal_notice.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ],
             'helpus' => [
                 'loc'=> $router->generate('help_astro-otter', [], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router) {
                     return [$locale => $router->generate(sprintf('help_astro-otter.%s', $locale), ['_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ]
         ];
 
-        /** @var  $listDso */
-        [$listDsoMessier,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000);
-        [$listDsoNgc,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'ngc'], 8000);
+        /** @var array $listDsoMessier */
+        [$listDsoMessier,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000, true);
+        /** @var array $listDsoNgc */
+        [$listDsoNgc,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'ngc'], 8000, true);
 
-        /** @var Dso $dso */
-        foreach ($listDsoMessier as $dso) {
+        /** @var DTOInterface $dso */
+        foreach ($dsoManager->buildListDso($listDsoMessier) as $dso) {
             $params['urls'][$dso->getId()] = [
-                'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($dso) {
-                    return [
-                        $locale => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL, $locale)
-                    ];
+                'loc' => $dso->fullUrl(),
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($dso) {
+                    return [$locale => $dso->fullUrl()];
                 }, $listLocales)),
                 'lastmod' => $dso->getUpdatedAt()->format('Y-m-d')
             ];
         }
-        foreach ($listDsoNgc as $dso) {
+        foreach ($dsoManager->buildListDso($listDsoNgc) as $dso) {
             $params['urls'][$dso->getId()] = [
-                'loc' => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($dso) {
-                    return [
-                        $locale => $this->urlGenerateHelper->generateUrl($dso, Router::ABSOLUTE_URL, $locale)
-                    ];
+                'loc' => $dso->fullUrl(),
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($dso) {
+                    return [$locale => $dso->fullUrl()];
                 }, $listLocales)),
                 'lastmod' => $dso->getUpdatedAt()->format('Y-m-d')
             ];
@@ -415,10 +418,8 @@ class LayoutController extends AbstractController
         foreach ($listConstellation as $constellation) {
             $params['urls'][$constellation->getId()] = [
                 'loc' => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(function($locale) use ($constellation) {
-                    return [
-                        $locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)
-                    ];
+                'urlLoc' => array_merge(...array_map(function ($locale) use ($constellation) {
+                    return [$locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)];
                 }, $listLocales))
             ];
         }
@@ -426,7 +427,7 @@ class LayoutController extends AbstractController
         foreach (['messier', 'ngc', 'ic', 'sh'] as $catalog) {
             $params['urls']['catalog_'.$catalog] = [
                 'loc' => $router->generate('dso_catalog_redirect', ['catalog' => $catalog], Router::ABSOLUTE_URL),
-                'urlLoc' => call_user_func_array("array_merge", array_map(static function($locale) use ($router, $catalog) {
+                'urlLoc' => array_merge(...array_map(static function ($locale) use ($router, $catalog) {
                     return [$locale => $router->generate(sprintf('dso_catalog_redirect.%s', $locale), ['catalog' => $catalog, '_locale' => $locale], Router::ABSOLUTE_URL)];
                 }, $listLocales))
             ];
@@ -462,10 +463,10 @@ class LayoutController extends AbstractController
 
         if ($matches) {
             $match = $matches[1];
-            if (in_array($match, [6,8,14])) {
+            if (in_array($match, [6, 8, 14], true)) {
                 $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/' . sprintf('stars.%d.json', $match));
 
-                $geojson = json_decode($fileJson);
+                $geojson = json_decode($fileJson, true);
             } else {
                 /** @var \Generator $readFile */
                 /*$readFile = function($file) {
@@ -479,8 +480,8 @@ class LayoutController extends AbstractController
                 $fileJson = $readFile($kernel->getProjectDir() . '/public/build/data/stars.14.json');*/
 
                 $fileJson = file_get_contents($kernel->getProjectDir() . '/public/build/data/stars.8.json');
-                $dataJson = json_decode($fileJson, true);
-                $filteredStars = array_filter($dataJson['features'], function ($starData) use ($match) {
+                $dataJson = json_decode($fileJson, true, 512, JSON_THROW_ON_ERROR);
+                $filteredStars = array_filter($dataJson['features'], static function ($starData) use ($match) {
                     return $match === $starData['properties']['con'];
                 });
 
@@ -493,13 +494,13 @@ class LayoutController extends AbstractController
             $filePath = $kernel->getProjectDir() . sprintf('/public/build/data/%s', $file);
             if (file_exists($filePath)) {
                 $fileJson = file_get_contents($filePath);
-                $geojson = json_decode($fileJson);
+                $geojson = json_decode($fileJson, true);
             }
         }
 
         /** @var JsonResponse $jsonResponse */
         $jsonResponse = new JsonResponse($geojson, Response::HTTP_OK);
-        $jsonResponse->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $jsonResponse->setSharedMaxAge(self::HTTP_TTL);
         $jsonResponse->setPublic();
 
         return $jsonResponse;

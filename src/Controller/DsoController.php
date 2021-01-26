@@ -287,6 +287,7 @@ class DsoController extends AbstractController
      * @return Response
      * @throws ReflectionException
      * @throws WsException
+     * @throws JsonException
      */
     public function catalog(Request $request): Response
     {
