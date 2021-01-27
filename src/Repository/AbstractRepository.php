@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\DTO\DTOInterface;
-use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;

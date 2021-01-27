@@ -122,7 +122,7 @@ class DsoController extends AbstractController
             // Images
             try {
                 if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
-                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => false]);
+                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => Image::class]);
                 } else {
                     $params['images'] = $this->getListImages($dso->getName());
                 }

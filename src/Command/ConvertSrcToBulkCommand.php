@@ -60,16 +60,14 @@ class ConvertSrcToBulkCommand extends Command
      * @param KernelInterface $kernel
      * @param CacheInterface $cacheUtil
      * @param EntityManagerInterface $em
-     * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoManager $dsoManager ,DsoRepository $dsoRepository, $listLocales)
+    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
     {
         $this->kernel = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
         $this->em = $em;
-        $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         $this->listLocales = explode('|', $listLocales);
         parent::__construct();
@@ -230,7 +228,7 @@ class ConvertSrcToBulkCommand extends Command
                              * Step 3 : get list of updated data
                              */
                             /** @var ListDso $listDso */
-                            $listDso = $this->dsoManager->getListDsoAfter($lastImportDate);
+                            $listDso = null; // BUG $this->dsoManager->getListDsoAfter($lastImportDate);
                             if (0 < $listDso->getIterator()->count()) {
                                 /**
                                  * STEP 4 : update DB

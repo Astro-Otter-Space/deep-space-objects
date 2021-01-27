@@ -10,6 +10,7 @@ use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
+use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
@@ -109,9 +110,9 @@ class DsoManager
                     $dso->setConstellation($constellationDto);
                 }
 
-                //$this->cacheUtils->saveItem($dso->guid(), serialize($dso));
+                $this->cacheUtils->saveItem($dso->guid(), serialize($dso));
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
-                    //$this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
+                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
                 }
             } else {
                 throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
@@ -129,9 +130,8 @@ class DsoManager
     private function getDsoFromCache($idMd5): ?DTOInterface
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
-
         /** @var Dso $unserializedDso */
-        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => DsoDTO::class]);
+        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => [DsoDTO::class, ConstellationDTO::class, Image::class, Dso::class, Constellation::class]]);
 
         return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
