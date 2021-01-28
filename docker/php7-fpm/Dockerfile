@@ -1,16 +1,20 @@
-# Source : https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
-FROM php:7.3-fpm-stretch
-#USER root
+# Sources :
+# - https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
+# - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
+ARG PHP_VERSION=7.3
 ARG TIMEZONE
 ARG UID
+
+FROM php:${PHP_VERSION}-fpm
+USER root
 
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 
 # Utils
 RUN set -eux; \
   apt-get update; \
-  apt-get -y install curl less vim libicu-dev libmemcached-dev zlib1g-dev libc-client-dev \
-  openssl wget nano libzip-dev pax-utils sudo gnupg unzip libpng-dev
+  apt-get -y install acl curl less vim libicu-dev libmemcached-dev zlib1g-dev libc-client-dev \
+  openssl wget nano libzip-dev pax-utils sudo gnupg unzip libpng-dev libsodium-dev
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -18,8 +22,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && chmod 755 /usr/local/bin/composer
 
 # Change uid and gid nginx user
-RUN usermod -u ${UID} www-data \
-    && groupmod -g ${UID} www-data
+#RUN usermod -u ${UID} www-data \
+#    && groupmod -g ${UID} www-data
 
 # Create directeories and add rights
 RUN mkdir -p /var/www/.composer \
@@ -33,16 +37,18 @@ RUN "date"
 
 # Install
 RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install intl
 RUN docker-php-ext-configure zip --with-libzip
 RUN docker-php-ext-install zip
-
-# APCU
-RUN pecl install apcu \
-    && docker-php-ext-enable apcu
+RUN docker-php-ext-install sodium
 
 # OPCACHE
 RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
+
+# APCU
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
 
 # memcached
 #RUN pecl install memcached-3.0.4 \
@@ -71,7 +77,7 @@ RUN { \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
 # Others
-RUN docker-php-ext-install -j$(nproc) intl mbstring ; \
+RUN docker-php-ext-install -j$(nproc) mbstring ; \
     \
     runDeps="$( \
         scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
@@ -105,12 +111,13 @@ RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docke
 #RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
 # Custom options
 RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
-RUN echo "memory_limit= 512M" >> /usr/local/etc/php/conf.d/030-custom.ini
+RUN echo "memory_limit= 2G" >> /usr/local/etc/php/conf.d/030-custom.ini
 
 # NPM & Node
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
 RUN apt-get install -y nodejs npm \
-  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 9
+  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+
 # build tools
 RUN apt-get install -y build-essential
 
@@ -126,10 +133,11 @@ RUN apt-get install -y yarn
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-CMD ["php-fpm", "-F"]
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
+
 EXPOSE 9000
 
-#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-#RUN chmod +x /usr/local/bin/docker-entrypoint
+ENTRYPOINT ["docker-entrypoint"]
 
-#ENTRYPOINT ["docker-entrypoint"]
+CMD ["php-fpm"]
