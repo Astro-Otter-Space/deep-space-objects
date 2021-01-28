@@ -105,7 +105,7 @@ class DsoManager
                 // add Constellation
                 $constellationDto = $this->constellationRepository
                     ->setLocale($this->locale)
-                    ->getObjectById($dso->getConstellationId(), true);
+                    ->getObjectById($dso->getConstellationId());
 
                 if ($constellationDto instanceof ConstellationDTO) {
                     $dso->setConstellation($constellationDto);

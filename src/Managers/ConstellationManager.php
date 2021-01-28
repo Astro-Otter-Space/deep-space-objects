@@ -8,9 +8,7 @@ use App\Entity\ES\Constellation;
 use App\Entity\ES\ListConstellation;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
-use AstrobinWs\Response\Image;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -21,8 +19,6 @@ class ConstellationManager
 {
     /** @var ConstellationRepository  */
     private $constellationRepository;
-    /** @var UrlGenerateHelper  */
-    private $urlGeneratorHelper;
     /** @var TranslatorInterface  */
     private $translator;
     /** @var string */
@@ -32,53 +28,55 @@ class ConstellationManager
      * ConstellationManager constructor.
      *
      * @param ConstellationRepository $constellationRepository
-     * @param UrlGenerateHelper $urlGeneratorHelper
      * @param TranslatorInterface $translator
      * @param string $locale
      */
-    public function __construct(ConstellationRepository $constellationRepository, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator, string $locale)
+    public function __construct(ConstellationRepository $constellationRepository, TranslatorInterface $translator, string $locale)
     {
         $this->constellationRepository = $constellationRepository;
-        $this->urlGeneratorHelper = $urlGeneratorHelper;
         $this->translator = $translator;
         $this->locale = $locale;
     }
 
 
     /**
-     * Build a constellation entoty from ElasticSearch request by $id
+     * Build a constellation entity from ElasticSearch request by $id
      *
-     * @param $id
+     * @param string $id
      *
-     * @return ConstellationDTO
-     * @throws \ReflectionException
+     * @return \Generator
      * @throws \JsonException
      */
-    public function buildConstellation($id): ConstellationDTO
+    private function buildConstellation(string $id): \Generator
     {
         /** @var ConstellationDTO $constellation */
         $constellation = $this->constellationRepository
             ->setlocale($this->locale)
-            ->getObjectById($id, true);
+            ->getObjectById($id);
 
-        return $constellation;
+        yield $constellation;
     }
 
 
     /**
      * Get all constellation and build formated data for template
+     *
+     * @param array $listConstIds
+     *
+     * @return ListConstellation
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function buildListConstellation(): ListConstellation
+    private function buildListConstellation(array $listConstIds): ListConstellation
     {
-        /** @return \Generator
-         * @throws \ReflectionException
-         * @var \Generator $listConstellation
-         */
-        $getConstellation = function() {
-            yield from $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
+        $getConstellation = function() use($listConstIds){
+            foreach ($listConstIds as $constellationId) {
+                yield from $this->buildConstellation($constellationId);
+            }
         };
 
         $listConstellation = new ListConstellation();
+        /** @var ConstellationDTO $constellation */
         foreach ($getConstellation() as $constellation) {
             $listConstellation->addConstellation($constellation);
         }
@@ -94,42 +92,38 @@ class ConstellationManager
      *
      * @return mixed
      * @throws \ReflectionException
+     * @throws \JsonException
      */
-    public function searchConstellationsByTerms($searchTerms)
+    public function searchConstellationsByTerms($searchTerms): ListConstellation
     {
-        $resultConstellation = $this->constellationRepository->setLocale($this->locale)->getConstellationsBySearchTerms($searchTerms);
-
-        return array_merge(array_map(function (Constellation $constellation) {
-            return $this->buildSearchListConst($constellation);
-        }, $resultConstellation));
+        $resultConstellationsId = $this->constellationRepository->setLocale($this->locale)->getConstellationsBySearchTerms($searchTerms);
+        return $this->buildListConstellation($resultConstellationsId);
     }
 
 
     /**
-     * Format data constellation for Ajax research
-     * @param Constellation $constellation
-     * @return array
+     * @return ListConstellation
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function buildSearchListConst(Constellation $constellation)
+    public function getAllConstellations(): ListConstellation
     {
-        $constellationName = $constellation->getAlt();
-        return [
-            'id' => $constellation->getId(),
-            'value' => $constellationName,
-            'ajaxValue' => $constellationName,
-            'label' => implode(Utils::GLUE_DASH, [$this->translator->trans('const_id', ['%count%' => 1]), $constellation->getGen()]),
-            'url' => $this->buildUrl($constellation, Router::ABSOLUTE_PATH),
-        ];
+        $resultAllConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
+        return $this->buildListConstellation($resultAllConstellation);
     }
 
     /**
-     * @param Constellation $constellation
-     * @param string $typeUrl
+     * @param string $id
      *
-     * @return string
+     * @return ConstellationDTO
+     * @throws \JsonException
      */
-    private function buildUrl(Constellation $constellation, string $typeUrl)
+    public function getConstellationById(string $id): ?ConstellationDTO
     {
-        return $this->urlGeneratorHelper->generateUrl($constellation, $typeUrl, $this->locale);
+        $getConstellation = function($id) {
+            yield from $this->buildConstellation($id);
+        };
+
+        return $getConstellation($id)->current();
     }
 }

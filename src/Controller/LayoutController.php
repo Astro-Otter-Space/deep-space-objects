@@ -419,7 +419,7 @@ class LayoutController extends AbstractController
         }*/
 
         /** @var \Generator $listConstellation */
-        $listConstellation = $constellationManager->buildListConstellation();
+        $listConstellation = $constellationManager->getAllConstellations();
 
         /** @var ConstellationDTO $constellation */
         foreach ($listConstellation as $constellation) {

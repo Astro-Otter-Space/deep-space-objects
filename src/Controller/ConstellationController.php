@@ -83,7 +83,7 @@ class ConstellationController extends AbstractController
         $serializer = $this->container->get('serializer');
 
         /** @var ConstellationDTO $constellation */
-        $constellation = $this->constellationManager->buildConstellation($id);
+        $constellation = $this->constellationManager->getConstellationById($id);
 
         $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), null, 0,DsoRepository::SMALL_SIZE);
         $result['list_dso'] = $listDsoCards = $dsoDataTransformer->listVignettesView($listDso);
@@ -156,12 +156,13 @@ class ConstellationController extends AbstractController
      * @param ConstellationDataTransformer $constellationDataTransformer
      *
      * @return Response
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
     public function list(Request $request, ConstellationDataTransformer $constellationDataTransformer): Response
     {
         $result = [];
-
-        $listConstellations = $this->constellationManager->buildListConstellation();
+        $listConstellations = $this->constellationManager->getAllConstellations();
         $result['list_constellation'] = $constellationDataTransformer->listVignettesView($listConstellations);
 
         $response = $this->render('pages/constellations.html.twig', $result);

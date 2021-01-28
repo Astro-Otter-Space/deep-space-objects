@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\ConstellationDataTransformer;
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
@@ -57,13 +58,14 @@ class  SearchController extends AbstractController
      *
      * @param Request $request
      * @param DsoDataTransformer $dsoDataTransformer
+     * @param ConstellationDataTransformer $constellationDataTransformer
      *
      * @return JsonResponse
      * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function searchAjax(Request $request, DsoDataTransformer $dsoDataTransformer): JsonResponse
+    public function searchAjax(Request $request, DsoDataTransformer $dsoDataTransformer, ConstellationDataTransformer $constellationDataTransformer): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
@@ -71,7 +73,8 @@ class  SearchController extends AbstractController
             $listDso = $this->dsoManager->searchDsoByTerms($searchTerm, null);
             $dataDso = $dsoDataTransformer->listVignettesView($listDso);
 
-            $dataConstellation = []; //$this->constellationManager->searchConstellationsByTerms($searchTerm);
+            $listConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
+            $dataConstellation = $constellationDataTransformer->listVignettesView($listConstellation);
             $data = array_merge($dataDso, $dataConstellation);
         }
 
@@ -166,7 +169,7 @@ class  SearchController extends AbstractController
 
         if (file_exists($file)) {
 
-            $jsonContent = $starsData = json_decode(file_get_contents($file), true)['features'];
+            $jsonContent = $starsData = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'];
 
             if (isset($id) && !empty($id)) {
                 $jsonContent = array_filter($jsonContent, function($tab) use ($id) {

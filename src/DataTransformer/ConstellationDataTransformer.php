@@ -31,6 +31,12 @@ final class ConstellationDataTransformer extends AbstractDataTransformer
         return $cards;
     }
 
+
+    /**
+     * @param ConstellationDTO $constellationDTO
+     *
+     * @return array
+     */
     public function vignetteView(ConstellationDTO $constellationDTO): array
     {
         /** @var Image $image */
@@ -43,6 +49,7 @@ final class ConstellationDataTransformer extends AbstractDataTransformer
             'id' => $constellationDTO->getId(),
             'value' => $constellationDTO->title(),
             'label' => $constellationDTO->getGeneric(),
+            'ajaxValue' => $constellationDTO->title(),
             'url' => $constellationDTO->relativeUrl(),
             'image' => $image,
             'filter' => $constellationDTO->getKind()
