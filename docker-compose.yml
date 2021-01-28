@@ -23,6 +23,7 @@ services:
             - 9000:9000
         volumes:
             - .:/var/www/deep-space-objects:cached
+            -  ./docker/php7-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "${SSH_AUTH_SOCK}:/ssh-agent"
         user: ${SITE_UID}
