@@ -42,18 +42,10 @@ class AuthController extends AbstractController
         $user->setIsActive(true);
         $user->setPassword($encoder->encodePassword($user, $rawPassword));
 
-        try {
-            $em->persist($user);
-            $em->flush();
+        $em->persist($user);
+        $em->flush();
 
-            $response = ['success' => $user->getUsername(), 'code' => Response::HTTP_OK];
-        } catch (DBALException $e) {
-            $response = [
-                'status' => 'error',
-                'code' => $e->getCode(),
-                'message' => $e->getMessage()
-            ];
-        }
+        $response = ['success' => $user->getUsername(), 'code' => Response::HTTP_CREATED];
 
         return new JsonResponse($response);
     }

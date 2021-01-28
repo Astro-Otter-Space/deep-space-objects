@@ -16,6 +16,7 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Type;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -104,7 +105,9 @@ abstract class AbstractRepository
 
         /** @var DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
-        $dto->setFullUrl($this->urlGeneratorHelper->generateUrl($dto));
+        $dto
+            ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
+            ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
 
         return $dto;
     }

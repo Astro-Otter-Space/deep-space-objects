@@ -40,12 +40,12 @@ class UrlGenerateHelper
      * Build URL for entities
      *
      * @param DTOInterface $entity
-     * @param int $typeUrl
-     * @param string $locale
+     * @param int|null $typeUrl
+     * @param string|null $locale
      *
      * @return string
      */
-    public function generateUrl(DTOInterface $entity, $typeUrl = Router::ABSOLUTE_PATH, string $locale = null): string
+    public function generateUrl(DTOInterface $entity, ?int $typeUrl, ?string $locale): string
     {
         $url = '';
         if ($entity instanceof DsoDTO

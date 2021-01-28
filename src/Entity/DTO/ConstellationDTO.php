@@ -20,8 +20,11 @@ final class ConstellationDTO implements DTOInterface
     private $id;
     /** @var  */
     private $elasticSearchId;
-    /** @var  */
-    private $fullUrl;
+    /** @var string */
+    private $absoluteUrl;
+    /** @var string */
+    private $relativeUrl;
+
     /** @var  */
     private $locale;
 
@@ -82,10 +85,41 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return string
      */
-    public function fullUrl(): string
+    public function relativeUrl(): string
     {
-        return $this->getFullUrl();
+        return $this->relativeUrl;
     }
+
+    /**
+     * @return string|null
+     */
+    public function absoluteUrl(): ?string
+    {
+        return $this->absoluteUrl;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return DTOInterface
+     */
+    public function setRelativeUrl(string $url): DTOInterface
+    {
+        $this->relativeUrl = $url;
+        return $this;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return DTOInterface
+     */
+    public function setAbsoluteUrl(string $url): DTOInterface
+    {
+        $this->absoluteUrl = $url;
+        return $this;
+    }
+
 
     /**
      * @return mixed

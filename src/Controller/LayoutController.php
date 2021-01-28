@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
-use App\Entity\ES\ListConstellation;
-use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
+use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
@@ -293,12 +291,14 @@ class LayoutController extends AbstractController
      * @param Request $request
      * @param string $listLocales
      * @param DsoManager $dsoManager
+     * @param ConstellationManager $constellationManager
      *
      * @return Response
+     * @throws WsException
      * @throws \JsonException
-     * @throws \ReflectionException|WsException
+     * @throws \ReflectionException
      */
-    public function sitemap(Request $request, string $listLocales, DsoManager $dsoManager): Response
+    public function sitemap(Request $request, string $listLocales, DsoManager $dsoManager, ConstellationManager $constellationManager): Response
     {
         $params = [];
 
@@ -388,24 +388,27 @@ class LayoutController extends AbstractController
 
 
         /** @var array $listDsoMessier */
-        [$listDsoMessier,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 1000, true);
+        [$listDsoMessier,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'messier'], 110, true);
+//        $listDsoMessier = $dsoManager->buildListDso($listDsoMessier);
 
         /** @var array $listDsoNgc */
         [$listDsoNgc,,] = $this->dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'ngc'], 8000, true);
+        //$listDsoNgc = $dsoManager->buildListDso($listDsoNgc);
 
         /** @var DTOInterface $dso */
-        foreach ($dsoManager->buildListDso($listDsoMessier) as $dso) {
-            dump($dso);
-            /*$params['urls'][$dso->getId()] = [
-                'loc' => $dso->fullUrl(),
-                'urlLoc' => array_merge(...array_map(static function ($locale) use ($dso) {
-                    return [$locale => $dso->fullUrl()];
+        foreach ($listDsoMessier as $dsoId) {
+            $dso = $dsoManager->getDso($dsoId);
+            $params['urls'][$dso->getId()] = [
+                'loc' => $dso->absoluteUrl(),
+                'urlLoc' => array_merge(...array_map(function ($locale) use ($dsoManager, $dsoId) {
+                    $dsoLocal = $dsoManager->getDsoFromCache(sprintf('%s_%s', $dsoId, $locale)) ?? $this->dsoRepository->setLocale($locale)->getObjectById($dsoId);
+                    return [$locale => $dsoLocal->absoluteUrl()];
                 }, $listLocales)),
                 'lastmod' => $dso->getUpdatedAt()->format('Y-m-d')
-            ];*/
+            ];
         }
-        dump($params); die();
-        /**foreach ($dsoManager->buildListDso($listDsoNgc) as $dso) {
+
+        /**foreach ($listDsoNgc as $dso) {
             $params['urls'][$dso->getId()] = [
                 'loc' => $dso->fullUrl(),
                 'urlLoc' => array_merge(...array_map(static function ($locale) use ($dso) {
@@ -416,17 +419,17 @@ class LayoutController extends AbstractController
         }*/
 
         /** @var \Generator $listConstellation */
-        //$listConstellation = $this->constellationRepository->getAllConstellation();
+        $listConstellation = $constellationManager->buildListConstellation();
 
-        /** @var Constellation $constellation */
-        /*foreach ($listConstellation as $constellation) {
+        /** @var ConstellationDTO $constellation */
+        foreach ($listConstellation as $constellation) {
             $params['urls'][$constellation->getId()] = [
-                'loc' => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL),
-                'urlLoc' => array_merge(...array_map(function ($locale) use ($constellation) {
+                'loc' => $constellation->absoluteUrl()
+                /*'urlLoc' => array_merge(...array_map(function ($locale) use ($constellation) {
                     return [$locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)];
-                }, $listLocales))
+                }, $listLocales))*/
             ];
-        }*/
+        }
 
         foreach (['messier', 'ngc', 'ic', 'sh'] as $catalog) {
             $params['urls']['catalog_'.$catalog] = [
@@ -436,8 +439,6 @@ class LayoutController extends AbstractController
                 }, $listLocales))
             ];
         }
-
-        dump($params); die();
 
         $xml = $this->renderView('sitemap.xml.twig', $params);
 

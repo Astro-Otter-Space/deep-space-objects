@@ -18,11 +18,13 @@ final class DsoDTO implements DTOInterface
      */
     /** @var  */
     private $id;
-    /** @var  */
+    /** @var string */
     private $elasticSearchId;
-    /** @var  */
-    private $fullUrl;
-    /** @var  */
+    /** @var string */
+    private $relativeUrl;
+    /** @var string */
+    private $absoluteUrl;
+    /** @var string */
     private $locale;
 
     private $updatedAt;
@@ -188,25 +190,44 @@ final class DsoDTO implements DTOInterface
         return $title;
     }
 
-
     /**
-     * @return string|null
+     * @return string
      */
-    public function fullUrl(): ?string
+    public function relativeUrl(): string
     {
-        return $this->fullUrl;
+        return $this->relativeUrl;
     }
 
     /**
-     * @param mixed $fullUrl
-     *
-     * @return DsoDTO
+     * @return string
      */
-    public function setFullUrl($fullUrl): DsoDTO
+    public function absoluteUrl(): string
     {
-        $this->fullUrl = $fullUrl;
+        return $this->absoluteUrl;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return DTOInterface
+     */
+    public function setRelativeUrl(string $url): DTOInterface
+    {
+        $this->relativeUrl = $url;
         return $this;
     }
+
+    /**
+     * @param string $url
+     *
+     * @return DTOInterface
+     */
+    public function setAbsoluteUrl(string $url): DTOInterface
+    {
+        $this->absoluteUrl = $url;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -278,7 +299,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return $this
      */
-    public function setAlt(?string $alt): ?DsoDTO
+    public function setAlt(?string $alt): DsoDTO
     {
         $this->alt = $alt;
         return $this;
@@ -297,7 +318,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDescription(?string $description): ?DsoDTO
+    public function setDescription(?string $description): DsoDTO
     {
         $this->description = $description;
         return $this;
@@ -556,7 +577,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDeclinaison(?string $declinaison): ?DsoDTO
+    public function setDeclinaison(?string $declinaison): DsoDTO
     {
         $this->declinaison = $declinaison;
         return $this;
@@ -575,7 +596,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setRightAscencion(?string $rightAscencion): ?DsoDTO
+    public function setRightAscencion(?string $rightAscencion): DsoDTO
     {
         $this->rightAscencion = $rightAscencion;
         return $this;

@@ -43,7 +43,7 @@ final class ConstellationDataTransformer extends AbstractDataTransformer
             'id' => $constellationDTO->getId(),
             'value' => $constellationDTO->title(),
             'label' => $constellationDTO->getGeneric(),
-            'url' => $constellationDTO->fullUrl(),
+            'url' => $constellationDTO->relativeUrl(),
             'image' => $image,
             'filter' => $constellationDTO->getKind()
         ];

@@ -18,6 +18,7 @@ use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
+use AstrobinWs\Response\AstrobinError;
 use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Services\GetImage;
@@ -73,14 +74,14 @@ class DsoManager
     /**
      * Build a complete Dso Entity, with Astrobin image and URL
      *
-     * @param $id
+     * @param string $id
      *
      * @return \Generator
      * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    private function buildDso($id): \Generator
+    private function buildDso(string $id): \Generator
     {
         $idMd5 = md5(sprintf('%s_%s', $id, $this->locale));
         $idMd5Cover = md5(sprintf('%s_cover', $id));
@@ -127,11 +128,11 @@ class DsoManager
      *
      * @return Dso|null
      */
-    private function getDsoFromCache($idMd5): ?DTOInterface
+    public function getDsoFromCache($idMd5): ?DTOInterface
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
         /** @var Dso $unserializedDso */
-        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => [DsoDTO::class, ConstellationDTO::class, Image::class, Dso::class, Constellation::class]]);
+        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => [DsoDTO::class, ConstellationDTO::class, Image::class, Dso::class, Constellation::class, AstrobinError::class]]);
 
         return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
@@ -185,6 +186,9 @@ class DsoManager
         try {
             /** @var Image $imageAstrobin */
             $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
+            if ($imageAstrobin instanceof AstrobinError) {
+                return $defautImage;
+            }
             if ($imageAstrobin instanceof AstrobinResponse) {
                 return $imageAstrobin;
             }
