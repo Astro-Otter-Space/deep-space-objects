@@ -108,11 +108,6 @@ abstract class AbstractRepository
             ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
             ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
 
-        if ($dto instanceof ConstellationDTO) {
-            echo '<pre>'; var_dump($dto->getId(), $dto->title());
-        }
-
-
         return $dto;
     }
 
