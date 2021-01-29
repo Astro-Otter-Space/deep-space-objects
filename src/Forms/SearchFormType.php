@@ -38,13 +38,12 @@ class SearchFormType extends AbstractType
                 new Blank(['message' => 'form.constraint.empty'])
             ]
         ]);
-
     }
 
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_protection' => true,
@@ -55,7 +54,7 @@ class SearchFormType extends AbstractType
     /**
      * @return string|null
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): ?string
     {
         return 'search';
     }

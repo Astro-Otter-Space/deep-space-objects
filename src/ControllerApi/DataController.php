@@ -18,6 +18,7 @@ use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class DsoController
@@ -29,22 +30,19 @@ final class DataController extends AbstractFOSRestController
 
     use DsoTrait;
 
-    const JSON_FORMAT = 'json';
+    public const JSON_FORMAT = 'json';
 
-    const LIMIT = 20;
+    public const LIMIT = 20;
 
-    private static $authorizedTypes = [
+    private static array $authorizedTypes = [
         'constellation' => 'const_id',
         'catalog' => 'catalog',
         'type' => 'type'
     ];
 
-    /** @var DsoRepository  */
-    private $dsoRepository;
-    /** @var ConstellationRepository */
-    private $constellationRepository;
-    /** @var DsoDataTransformer */
-    private $dsoDataTransformer;
+    private DsoRepository $dsoRepository;
+    private ConstellationRepository $constellationRepository;
+    private DsoDataTransformer $dsoDataTransformer;
 
     /**
      * DataController constructor.
@@ -52,12 +50,14 @@ final class DataController extends AbstractFOSRestController
      * @param DsoRepository $dsoRepository
      * @param ConstellationRepository $constellationRepository
      * @param DsoDataTransformer $dsoDataTransformer
+     * @param TranslatorInterface $translator
      */
-    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer)
+    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer, TranslatorInterface $translator)
     {
         $this->dsoRepository = $dsoRepository;
         $this->constellationRepository = $constellationRepository;
         $this->dsoDataTransformer = $dsoDataTransformer;
+        $this->setTranslator($translator);
     }
 
 
@@ -72,15 +72,15 @@ final class DataController extends AbstractFOSRestController
     public function getDso(string $id): Response
     {
         /** @var Document $dso */
-        $dso = $this->dsoRepository->getObjectById($id, true);
+        $dso = $this->dsoRepository->getObjectById($id);
 
         if (is_null($dso)) {
             throw new NotFoundException(sprintf("%s is not an correct item", $id));
-        } else {
-            $codeHttp = Response::HTTP_OK;
-            /** @var DsoDTO|null $data */
-            $data = $this->dsoDataTransformer->transform($dso);
         }
+
+        $codeHttp = Response::HTTP_OK;
+        /** @var DsoDTO|null $data */
+        $data = $this->dsoDataTransformer->transform($dso);
 
         $formatedData = $this->buildJsonApi($data, $codeHttp);
 
@@ -111,12 +111,12 @@ final class DataController extends AbstractFOSRestController
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
 
-        $constellation = ("" != $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
+        $constellation = ("" !== $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
         if (!is_null($constellation)) {
             $filters['constellation'] = $constellation;
         }
 
-        $catalog = ("" != $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
+        $catalog = ("" !== $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
         if (!is_null($catalog)) {
             if (in_array($catalog, Utils::getOrderCatalog())) {
                 $filters['catalog'] = $catalog;
@@ -125,7 +125,7 @@ final class DataController extends AbstractFOSRestController
             }
         }
 
-        $type = ("" != $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
+        $type = ("" !== $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
         if (!is_null($type)) {
             if (in_array($type, Utils::getListTypeDso())) {
                 $filters['type'] = $type;
@@ -134,7 +134,7 @@ final class DataController extends AbstractFOSRestController
             }
         }
 
-        array_walk($filters, function (&$value, $key) {
+        array_walk($filters, static function (&$value, $key) {
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         });
 

@@ -19,28 +19,18 @@ use Twig\Error\SyntaxError;
  */
 class MailService
 {
-    /** @var Environment */
-    private $templateEngine;
-
-    /** @var string */
-    private $senderMail;
-
-    /** @var string */
-    private $userMail;
-
-    /** @var string */
-    private $pwdMail;
+    private Environment $templateEngine;
+    private string $userMail;
+    private string $pwdMail;
 
     /**
      * MailService constructor.
      *
      * @param Environment $templateEngine
-     * @param string $senderMail
      */
-    public function __construct(Environment $templateEngine, string $senderMail)
+    public function __construct(Environment $templateEngine)
     {
         $this->templateEngine = $templateEngine;
-        $this->senderMail = $senderMail;
     }
 
     /**
@@ -137,11 +127,7 @@ class MailService
             }
 
             return $email;
-        } catch (LoaderError $e) {
-            return null;
-        } catch (RuntimeError $e) {
-            return null;
-        } catch (SyntaxError $e) {
+        } catch (LoaderError | RuntimeError | SyntaxError $e) {
             return null;
         }
     }

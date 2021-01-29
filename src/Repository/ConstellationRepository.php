@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Repository;
 
+use App\Entity\DTO\DTOInterface;
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\ListConstellation;
 use Elastica\Document;
@@ -15,111 +18,94 @@ use Elastica\Search;
 final class ConstellationRepository extends AbstractRepository
 {
 
-    const INDEX_NAME = 'constellations';
+    public const INDEX_NAME = 'constellations';
 
-    const SEARCH_SIZE = 15;
+    public const URL_MAP = '/build/images/const_maps/%s.gif';
 
-    const URL_MAP = '/build/images/const_maps/%s.gif';
+    public const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
-    const URL_IMG = '/build/images/const_thumbs/%s.jpg';
-
-    private static $listSearchFields = [
+    private static array $listSearchFields = [
         'id',
         'id.raw',
-        'data.gen',
-        'data.alt.alt'
+        'gen',
+        'alt.alt'
     ];
 
     /**
-     * @param $id
-     * @return Constellation
-     * @throws \ReflectionException
+     * @param string $id
+     *
+     * @return DTOInterface|null
+     * @throws \JsonException
      */
-    public function getObjectById($id):? Constellation
+    public function getObjectById(string $id): ?DTOInterface
     {
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-            $dataDocument = $resultDocument->getResults()[0]->getDocument();
-            return $this->buildEntityFromDocument($dataDocument);
-        } else {
-            return null;
+            $document = $resultDocument->getDocuments()[0];
+            return $this->buildEntityFromDocument($document);
         }
+
+        return null;
     }
 
 
     /**
      * Build a list of all constellation (88)
      * @throws \ReflectionException
+     * @throws \JsonException
      */
-    public function getAllConstellation(): \Generator
+    public function getAllConstellation(): array
     {
         /** @var ListConstellation $listConstellation */
-        //$listConstellation = new ListConstellation();
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query $query */
         $query = new Query();
         $query->setSize(100);
-        $query->addSort(['data.order' => ['order' => 'asc']]);
+        $query->addSort(['order' => ['order' => 'asc']]);
 
         /** @var Search $search */
         $search = new Search($this->client);
         $result = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $result->count()) {
-            foreach ($result->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document);
-                //$listConstellation->addConstellation($constellation);
-            }
-        }
-
-        //return $listConstellation;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
      * Search autocomplete
      *
      * @param $searchTerm
+     *
      * @return array
+     * @throws \JsonException
      */
     public function getConstellationsBySearchTerms($searchTerm): array
     {
-        $list = [];
-
         if ('en' !== $this->getLocale()) {
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
+            self::$listSearchFields[] = sprintf('alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
-        if (0 < $result->getTotalHits()) {
-            $list = array_map(function(Result $doc) {
-                return $this->buildEntityFromDocument($doc->getDocument());
-            }, $result->getResults());
-        }
 
-        return $list;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
      * Build an entity from result
+     *
      * @param Document $document
-     * @return Constellation
-     * @throws \ReflectionException
+     *
+     * @return DTOInterface
+     * @throws \JsonException
      */
-    private function buildEntityFromDocument(Document $document): Constellation
+    private function buildEntityFromDocument(Document $document): DTOInterface
     {
-        /** @var Constellation $constellation */
-        $entity = $this->getEntity();
-        $constellation = new $entity;
-
-        $constellation = $constellation->setLocale($this->getLocale())
-            ->buildObjectR($document);
-
-        $constellation->setMap(sprintf(self::URL_MAP, strtoupper($constellation->getId())));
-        $constellation->setImage(sprintf(self::URL_IMG, strtolower($constellation->getId())));
-
-        return $constellation;
+        return $this->buildDTO($document);
     }
 
     /**
@@ -127,14 +113,22 @@ final class ConstellationRepository extends AbstractRepository
      */
     public function getEntity(): string
     {
-        return 'App\Entity\ES\Constellation';
+        return Constellation::class;
     }
 
     /**
      * @return string
      */
-    public function getType(): string
+    public function getIndex(): string
     {
         return self::INDEX_NAME;
+    }
+
+    /**
+     *
+     */
+    protected function getDTO(): string
+    {
+        return ConstellationDTO::class;
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Service\SocialNetworks\WebServices;
 
 use App\Entity\SocialNetworks\FacebookPost;
-use App\Entity\ES\AbstractEntity;
 use App\Service\SocialNetworks\Singleton\Facebook;
 use Facebook\Authentication\AccessToken;
 use Facebook\Authentication\OAuth2Client;
@@ -179,11 +178,9 @@ class FacebookWs implements socialNetworkInterface
             /** @var AccessToken $accessToken */
             $accessToken = $helper->getAccessToken();
         } catch (FacebookResponseException $e) {
-            //dump($e->getMessage());
             exit;
 
         } catch (FacebookSDKException $e) {
-            //dump($e->getMessage());
             exit;
         }
 
@@ -199,15 +196,13 @@ class FacebookWs implements socialNetworkInterface
                 $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
 //                $response = $this->facebookWs->get('/me/accounts', $accessToken);
 
-//                dump($response);
 //                die();
 //                $this->setAppAccessToken($value);
             } catch (FacebookSDKException $e) {
-                dump($e->getMessage());
                 exit;
             }
         } else {
-            dump($helper->getError(), $helper->getErrorDescription(), $helper->getErrorReason());
+//            dump($helper->getError(), $helper->getErrorDescription(), $helper->getErrorReason());
         }
     }
 
@@ -239,12 +234,11 @@ class FacebookWs implements socialNetworkInterface
 
 
     /**
-     * @param AbstractEntity $object
      *
      * @return FacebookResponse
      * @throws FacebookSDKException
      */
-    public function sendPost(?AbstractEntity $object)
+    public function sendPost($object)
     {
         /** @var \DateTimeInterface $publishDate */
         $publishDate = new \DateTime();

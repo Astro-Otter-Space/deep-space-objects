@@ -24,13 +24,14 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
+ * @deprecated
  * Class ObservationFormType
  *
  * @package App\Forms
  */
 class ObservationFormType extends AbstractType
 {
-    private $security;
+    private Security $security;
 
     /**
      * ObservationFormType constructor.

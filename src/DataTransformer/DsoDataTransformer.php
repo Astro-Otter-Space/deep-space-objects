@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
-use App\Entity\ES\Dso;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\DTO\DsoDTO;
-use App\Managers\DsoManager;
+use App\Entity\ES\ListDso;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -18,11 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class DsoDataTransformer extends AbstractDataTransformer
 {
-    /** @var TranslatorInterface */
-    private $translator;
-
-    /** @var RouterInterface */
-    private $router;
+    private TranslatorInterface $translator;
+    private RouterInterface $router;
 
     /**
      * DsoDataTransformer constructor.
@@ -36,76 +34,125 @@ final class DsoDataTransformer extends AbstractDataTransformer
         $this->router = $router;
     }
 
-    /**
-     * @param $dso
-     *
-     * @return DsoDTO|null
-     */
-    public function transform($dso):? DsoDTO
+    /**public function searchView(DTOInterface $dto): array
     {
-        if ($dso instanceof Dso) {
-            /** @var DsoDTO $dsoDto */
-            $dsoDto = new DsoDTO();
+        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
+        return [
+            'id' => $dto->getId(),
+            'value' => $dto->title(),
+            'ajaxValue' => $ajaxValue,
+        ];
+    }**/
 
-            $dsoDto->setId($dso->getId());
-            $dsoDto->setTitle(DsoManager::buildTitleStatic($dso));
-            $dsoDto->setConstellation($this->translator->trans(sprintf('constellation.%s', strtolower($dso->getConstId()))));
-            $dsoDto->setDesigs($dso->getDesigs());
-            $dsoDto->setType($this->translator->trans(sprintf('type.%s', $dso->getType())));
-            $dsoDto->setCatalog($dso->getCatalog());
-
-            $dsoDto->setMagnitude($dso->getMag());
-            $dsoDto->setDistAl(Utils::numberFormatByLocale($dso->getDistAl()));
-            $dsoDto->setDistPC(Utils::numberFormatByLocale(Utils::PARSEC * $dso->getDistAl()));
-
-            $dsoDto->setDiscover($dso->getDiscover());
-            $dsoDto->setDiscoverYear($dso->getDiscoverYear());
-            $dsoDto->setDec($dso->getDec());
-            $dsoDto->setRa($dso->getRa());
-
-            return $dsoDto;
+    /**
+     * @param ListDso $listDso
+     *
+     * @return array
+     */
+    public function listVignettesView(ListDso $listDso): array
+    {
+        $cards = [];
+        foreach ($listDso as $dsoDTO) {
+            $cards[] = $this->vignetteView($dsoDTO);
         }
 
-        return null;
+        return $cards;
+    }
+
+
+    /**
+     * @param DTOInterface $dto
+     *
+     * @return array
+     */
+    public function vignetteView(DTOInterface $dto): array
+    {
+        $title = $dto->title() ?? $dto->getName();
+
+        $otherDesigs = $dto->getDesigs();
+        $removeDesigs = (is_array($otherDesigs))
+            ? array_shift($otherDesigs)
+            : null;
+
+        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
+        return [
+            'id' => $dto->getId(),
+            'value' => $title,
+            'ajaxValue' => $ajaxValue,
+            'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
+            'label' => implode(Utils::GLUE_DASH, array_filter([$this->translator->trans($dto->getType()) , $dto->getConstellation()->title()])),
+            'url' => $dto->relativeUrl(),
+            'filter' => substr($dto->getType(), strrpos($dto->getType() ,'.')+1),
+            'image' => $dto->getAstrobin()
+        ];
     }
 
     /**
      * Convert Dso into Array
-     * @param Dso|null $entity
+     *
+     * @param DsoDTO|DTOInterface $dto
      *
      * @return array|null
      */
-    public function toArray($entity):? array
+    public function longView(DTOInterface $dto):? array
     {
-        $catalog = array_map(function($itemCatalog) {
-            return implode(Dso::DATA_GLUE, ['catalog', $itemCatalog]);
-        }, $entity->getCatalog());
+        $catalogs = array_map(static function($itemCatalog) {
+            return implode(Utils::DATA_GLUE, ['catalog', $itemCatalog]);
+        }, $dto->getCatalogs());
 
-        $constellation = $this->translator->trans(implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]));
         $routeConstellation = $this->router->generate('constellation_show', [
-                'id' => strtolower($entity->getConstId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
-                'name' => Utils::camelCaseUrlTransform($constellation)
+                'id' => strtolower($dto->getConstellation()->getId()), //implode(Dso::DATA_GLUE, ['constellation', strtolower($entity->getConstId())]),
+                'name' => Utils::camelCaseUrlTransform($dto->getConstellation()->title())
             ]
         );
 
         $data = [
-            'catalog' => $catalog,
-            'desigs' => implode(Dso::DATA_CONCAT_GLUE, array_filter($entity->getDesigs())),
-            'type' => implode(Dso::DATA_GLUE, ['type', $entity->getType()]),
-            'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $constellation, $constellation),
-            'mag' => $entity->getMag(),
-            'distAl' => Utils::numberFormatByLocale($entity->getDistAl()),
-            'distPc' => Utils::numberFormatByLocale(Utils::PARSEC * $entity->getDistAl()),
-            'discover' => $entity->getDiscover(),
-            'discoverYear' => $entity->getDiscoverYear(),
-            'ra' => $entity->getRa(),
-            'dec' => $entity->getDec(),
-            'astrobin.credit' => (!is_null($entity->getAstrobinId())) ? sprintf('"%s" %s %s', $entity->getImage()->title, Dso::DATA_CONCAT_GLUE, $entity->getImage()->user ) : ''
+            'catalog' => $catalogs,
+            'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
+            'type' => $dto->getType(),
+            'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $dto->getConstellation()->title(), $dto->getConstellation()->title()),
+            'mag' => $dto->getMagnitude(),
+            'distAl' => $dto->distanceLightYears(),
+            'distPc' => $dto->distanceParsecs(),
+            'discover' => $dto->getDiscover(),
+            'discoverYear' => $dto->getDiscoverYear(),
+            'ra' => $dto->getRightAscencion(),
+            'dec' => $dto->getDeclinaison(),
+            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
         ];
 
-        return array_filter($data, function($value) {
+        return array_filter($data, static function($value) {
             return (false === empty($value));
         });
     }
 
+
+    /**
+     * Build a "table" of data (translated if needed) from DTO with translated label
+     * todo : move to parent method ?
+     * @param DTOInterface $dto
+     * @param $listFields
+     *
+     * @return array
+     */
+    public function buildTableData(DTOInterface $dto, array $listFields): array
+    {
+        $dtoArray = $this->longView($dto);
+        return array_map(function($value, $key) use($listFields) {
+            if (!is_array($value)) {
+                $valueTranslated = $this->translator->trans($value, ['%count%' => 1]);
+                $nbItems = 1;
+            } else {
+                $valueTranslated = implode(Utils::GLUE_DASH, array_map(function($item) {
+                    return $this->translator->trans($item, ['%count%' => 1]);
+                }, $value));
+                $nbItems = count($value);
+            }
+
+            return [
+                'col0' => $this->translator->trans($key, ['%count%' => $nbItems]),
+                'col1' => (in_array($key, $listFields, true)) ? $valueTranslated: $value
+            ];
+        }, $dtoArray, array_keys($dtoArray));
+    }
 }

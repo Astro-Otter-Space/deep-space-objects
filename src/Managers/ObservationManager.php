@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
+ * @deprecated
  * Class ObservationManager
  *
  * @package App\Managers
@@ -27,20 +28,13 @@ class ObservationManager
 {
     use ManagerTrait;
 
-    /** @var ObservationRepository  */
-    private $observationRepository;
-    /** @var UrlGenerateHelper  */
-    private $urlGeneratorHelper;
-    /** @var CacheInterface  */
-    private $cacheUtil;
-    /** @var  */
-    private $locale;
-    /** @var  */
-    private $dsoManager;
-    /** @var TranslatorInterface */
-    private $translatorInterface;
-    /** @var ObservationDataTransformer */
-    private $obsDataTransformer;
+    private ObservationRepository $observationRepository;
+    private UrlGenerateHelper $urlGeneratorHelper;
+    private CacheInterface $cacheUtil;
+    private string $locale;
+    private DsoManager $dsoManager;
+    private TranslatorInterface $translator;
+    private ObservationDataTransformer $obsDataTransformer;
 
     /**
      * ObservationManager constructor.
@@ -50,17 +44,17 @@ class ObservationManager
      * @param CacheInterface $cacheUtil
      * @param $locale
      * @param DsoManager $dsoManager
-     * @param TranslatorInterface $translatorInterface
-     * @param $obsDataTransformer
+     * @param TranslatorInterface $translator
+     * @param ObservationDataTransformer $obsDataTransformer
      */
-    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translatorInterface, ObservationDataTransformer $obsDataTransformer)
+    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translator, ObservationDataTransformer $obsDataTransformer)
     {
         $this->observationRepository = $observationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
         $this->cacheUtil = $cacheUtil;
         $this->locale = $locale;
         $this->dsoManager = $dsoManager;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->obsDataTransformer = $obsDataTransformer;
     }
 
@@ -87,7 +81,7 @@ class ObservationManager
 
                 $listIdDso = array_values($observation->getDsoList());
                 array_walk($listIdDso, function($id) use ($dsoList) {
-                    $dso = $this->dsoManager->buildDso($id);
+//                    $dso = $this->dsoManager->buildDso($id);
                     $dsoList->addDso($dso);
                 });
             }
@@ -103,10 +97,10 @@ class ObservationManager
      *
      * @return array
      */
-    public function formatVueData(Observation $observation)
+    public function formatVueData(Observation $observation): array
     {
         $observationArray = $this->obsDataTransformer->toArray($observation);
-        return $this->formatEntityData($observationArray, [], $this->translatorInterface);
+        return $this->formatEntityData($observationArray, [], $this->translator);
     }
 
 

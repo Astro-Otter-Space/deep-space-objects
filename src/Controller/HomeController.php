@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class HomeController extends AbstractController
 {
-    /** @var DsoManager  */
-    private $dsoManager;
+    private DsoManager $dsoManager;
 
-    const DSO_VIGNETTES = 3;
+    public const DSO_VIGNETTES = 3;
 
     /**
      * HomeController constructor.
@@ -39,7 +39,6 @@ class HomeController extends AbstractController
      */
     public function homepage(Request $request): Response
     {
-
         /** @var Response $response */
         $response = $this->render('pages/home.html.twig', ['currentLocale' => $request->getLocale()]);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL);
@@ -49,13 +48,18 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @param DsoDataTransformer $dataTransformer
+     *
      * @return Response
-     * @throws \Exception
+     * @throws \AstrobinWs\Exceptions\WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
      * @var Request $request
      */
-    public function vignettesDso(Request $request): Response
+    public function vignettesDso(Request $request, DsoDataTransformer $dataTransformer): Response
     {
-        $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES) ?? [];
+        $vignettes = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
+        $params['vignettes'] = $dataTransformer->listVignettesView($vignettes);
 
         /** @var Response $response */
         $response = new Response();

@@ -17,12 +17,8 @@ use Twig\Error\SyntaxError;
  */
 final class ExceptionListener
 {
-    /** @var Environment  */
-    private $twigEngine;
-
-    /** @var string  */
-    private $env;
-
+    private Environment $twigEngine;
+    private string $env;
 
     /**
      * ExceptionListener constructor.
@@ -30,7 +26,7 @@ final class ExceptionListener
      * @param Environment $twigEngine
      * @param string $env
      */
-    public function __construct(Environment $twigEngine, $env)
+    public function __construct(Environment $twigEngine, string $env)
     {
         $this->twigEngine = $twigEngine;
         $this->env = $env;
@@ -43,7 +39,7 @@ final class ExceptionListener
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function onKernelException(ExceptionEvent $event)
+    public function onKernelException(ExceptionEvent $event): void
     {
         /** @var \Throwable $exception */
         $exception = $event->getThrowable();

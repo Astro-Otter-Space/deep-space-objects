@@ -65,7 +65,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getFirstname():? string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -84,7 +84,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getLastname():? string
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -103,7 +103,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getEmail():? string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -122,7 +122,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getCountry():? string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -160,7 +160,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getMessage():? string
+    public function getMessage(): ?string
     {
         return $this->message;
     }
@@ -195,7 +195,7 @@ class Contact
     /**
      * @return mixed
      */
-    public function getLabelCountry():? string
+    public function getLabelCountry(): ?string
     {
         return $this->labelCountry;
     }

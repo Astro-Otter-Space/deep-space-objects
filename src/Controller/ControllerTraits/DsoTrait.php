@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller\ControllerTraits;
 
-use App\Entity\ES\AbstractEntity;
+use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;
@@ -19,20 +20,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 trait DsoTrait
 {
-    /** @var  */
-    private $listFilters = [];
+    private array $listFilters = [];
 
-    /** @var TranslatorInterface */
-    private $translatorInterface;
+    private TranslatorInterface $translator;
 
     /**
-     * @param mixed $translatorInterface
+     * @param TranslatorInterface $translator
      *
      * @return DsoTrait
      */
-    public function setTranslatorInterface(TranslatorInterface $translatorInterface): self
+    public function setTranslator(TranslatorInterface $translator): self
     {
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         return $this;
     }
 
@@ -47,10 +46,12 @@ trait DsoTrait
         if (0 < $listDso->getIterator()->count()) {
             $listDso = ($listDso instanceof ListDso) ? iterator_to_array($listDso) : $listDso;
 
-            $this->listFilters = array_map(function(Dso $dsoData) {
+            $this->listFilters = array_map(function(DTOInterface $dsoData) {
+                $fullType = $dsoData->getType();
+                $subType = substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1);
                 return [
-                    'value' => $dsoData->getType(),
-                    'label' => $this->translatorInterface->trans(sprintf('type.%s', $dsoData->getType()))
+                    'value' => $subType,
+                    'label' => $this->translator->trans($fullType)
                 ];
             }, $listDso);
         }
@@ -63,12 +64,12 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildFiltersWithAll($listDso): array
+    public function buildFiltersWithAll(ListDso $listDso): array
     {
         $allFilters = [
             [
                 'value' => 1,
-                'label' => $this->translatorInterface->trans('hem.all')
+                'label' => $this->translator->trans('hem.all')
             ]
         ];
 
@@ -81,9 +82,9 @@ trait DsoTrait
      *
      * @return array
      */
-    public function buildJsonApi($data, $codeHttp): array
+    public function buildJsonApi($data, int $codeHttp): array
     {
-        $status = (in_array(substr($codeHttp, 0, 1), [4, 5])) ? 'error' : 'success';
+        $status = (in_array(substr($codeHttp, 0, 1), [4, 5], true)) ? 'error' : 'success';
         $dataResponse = [
             'status' => $status,
             'code' => $codeHttp,
@@ -99,18 +100,18 @@ trait DsoTrait
 
 
     /**
-     * @param AbstractEntity|null $entity
+     * @param DTOInterface|null $entity
      * @param RouterInterface $router
-     * @param string $title
+     * @param string|null $title
      *
      * @return array
      */
-    public function buildBreadcrumbs(?AbstractEntity $entity, RouterInterface $router, string $title): array
+    public function buildBreadcrumbs(?DTOInterface $entity, RouterInterface $router, ?string $title): array
     {
        $breadcrumbs = [];
 
         $breadcrumbs['level_1'] = [
-            'label' => $this->translatorInterface->trans('menu.homepage'),
+            'label' => $this->translator->trans('menu.homepage'),
             'url' => $router->generate('homepage')
         ];
 
@@ -118,16 +119,16 @@ trait DsoTrait
             $class = get_class($entity);
 
             switch ($class) {
-                case Dso::class:
+                case DsoDTO::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('catalogs'),
+                        'label' => $this->translator->trans('catalogs'),
                         'url' => $router->generate('dso_catalog')
                     ];
                     break;
 
                 case Constellation::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('constId', ['%count%' => 2]),
+                        'label' => $this->translator->trans('constId', ['%count%' => 2]),
                         'url' => $router->generate('constellation_list')
                     ];
                     break;
@@ -135,19 +136,20 @@ trait DsoTrait
                 case Event::class:
                 case Observation::class:
                     $breadcrumbs['level_2'] = [
-                        'label' => $this->translatorInterface->trans('listObservations'),
+                        'label' => $this->translator->trans('listObservations'),
                         'url' => $router->generate('observation_list')
                     ];
                     break;
             }
         }
 
+        if (!is_null($title)) {
+            $breadcrumbs['level_3'] = [
+                'label' => $title,
+                'url' => null
+            ];
+        }
 
-        $breadcrumbs['level_3'] = [
-            'label' => $title,
-            'url' => null
-        ];
-
-       return $breadcrumbs;
+        return $breadcrumbs;
     }
 }

@@ -31,31 +31,24 @@ class ObservationController extends AbstractController
 {
     use DsoTrait;
 
-    /** @var ObservationManager  */
-    private $observationManager;
-    /** @var DsoManager  */
-    private $dsoManager;
-    /** @var TranslatorInterface */
-    private $translatorInterface;
-    /** @var EventManager  */
-    private $eventManager;
-    /** @var UrlGenerateHelper */
-    private $urlGeneratorHelper;
+    private ObservationManager $observationManager;
+    private DsoManager $dsoManager;
+    private EventManager $eventManager;
+    private UrlGenerateHelper $urlGeneratorHelper;
 
     /**
      * ObservationController constructor.
      *
      * @param ObservationManager $observationManager
      * @param DsoManager $dsoManager
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
      * @param EventManager $eventManager
      * @param UrlGenerateHelper $urlGeneratorHelper
      */
-    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager, TranslatorInterface $translatorInterface, EventManager $eventManager, UrlGenerateHelper $urlGeneratorHelper)
+    public function __construct(ObservationManager $observationManager, DsoManager $dsoManager, TranslatorInterface $translator, EventManager $eventManager, UrlGenerateHelper $urlGeneratorHelper)
     {
         $this->observationManager = $observationManager;
         $this->dsoManager = $dsoManager;
-        $this->translatorInterface = $translatorInterface;
         $this->eventManager = $eventManager;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
     }
@@ -224,13 +217,13 @@ class ObservationController extends AbstractController
 
                 $isValid = $this->observationManager->addObservation($observation);
                 if (true === $isValid) {
-                    $messageOk = $this->translatorInterface->trans('form.ok.addDoc', ['%url%' => $this->urlGeneratorHelper->generateUrl($observation)]);
+                    $messageOk = $this->translator->trans('form.ok.addDoc', ['%url%' => $this->urlGeneratorHelper->generateUrl($observation)]);
                     $this->addFlash('form.success', $messageOk);
                 } else {
-                    $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.addDoc'));
+                    $this->addFlash('form.failed', $this->translator->trans('form.error.addDoc'));
                 }
             } else {
-                $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.message'));
+                $this->addFlash('form.failed', $this->translator->trans('form.error.message'));
             }
         }
 
@@ -286,13 +279,13 @@ class ObservationController extends AbstractController
 
                 $isValid = $this->eventManager->addEvent($event);
                 if (true === $isValid) {
-                    $messageOk = $this->translatorInterface->trans('form.ok.addDoc', ['%url%' => $this->urlGeneratorHelper->generateUrl($event)]);
+                    $messageOk = $this->translator->trans('form.ok.addDoc', ['%url%' => $this->urlGeneratorHelper->generateUrl($event)]);
                     $this->addFlash('form.success', $messageOk);
                 } else {
-                    $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.addDoc'));
+                    $this->addFlash('form.failed', $this->translator->trans('form.error.addDoc'));
                 }
             } else {
-                $this->addFlash('form.failed', $this->translatorInterface->trans('form.error.message'));
+                $this->addFlash('form.failed', $this->translator->trans('form.error.message'));
             }
         }
 

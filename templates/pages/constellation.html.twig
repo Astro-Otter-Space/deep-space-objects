@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% set constellation = constellation|json_decode %}
-{% set title = constellation.alt %}
 {% set pageTitle = "const_id"|transchoice(0) ~ ' - ' ~ title %}
 {% set pageImage = constellation.image %}
 {% set pageDesc = constellation.description|raw %}
@@ -9,7 +7,7 @@
 {% block content %}
   <div id="appConst"
      data-const-widget
-     data-title="{{ title|trans }}"
+     data-title="{{ title }}"
      data-title-map="{{ 'skymap'|trans }}"
      data-desc="{{ constellation.description|raw }}"
      data-imgcover="{{ constellation.image }}"

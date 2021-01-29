@@ -15,14 +15,15 @@ use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
+ * @deprecated
  * Class EventRepository
  * @package App\Repository
  */
-class EventRepository extends AbstractRepository
+class EventRepository //extends AbstractRepository
 {
-    const INDEX_NAME = 'events';
+    public const INDEX_NAME = 'events';
 
-    private static $listSearchFields = ['name', 'description', 'locationLabel', 'organiserName'];
+    private static array $listSearchFields = ['name', 'description', 'locationLabel', 'organiserName'];
 
     /**
      * @param $id
@@ -30,7 +31,7 @@ class EventRepository extends AbstractRepository
      * @return Event|null
      * @throws \ReflectionException
      */
-    public function getEventById($id):? Event
+    public function getEventById($id): ?Event
     {
         /** @var ResultSet $observationDoc */
         $document = $this->findById($id);
@@ -39,9 +40,9 @@ class EventRepository extends AbstractRepository
             $eventDoc = $document->getResults()[0]->getDocument();
 
             return $this->buildEntityFromDocument($eventDoc);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
 
@@ -51,7 +52,7 @@ class EventRepository extends AbstractRepository
      * @return \Generator
      * @throws \ReflectionException
      */
-    public function getEventBySearchTerms($terms)
+    public function getEventBySearchTerms($terms): \Generator
     {
         $list = [];
         /** @var ResultSet $result */
@@ -106,7 +107,7 @@ class EventRepository extends AbstractRepository
      *
      * @return Response
      */
-    public function addEvent($id, $eventData)
+    public function addEvent($id, $eventData): Response
     {
         /** @var Document $document */
         $document = new Document($id, $eventData, '', self::INDEX_NAME);
@@ -133,18 +134,16 @@ class EventRepository extends AbstractRepository
     /**
      * @return string
      */
-    protected function getEntity()
+    protected function getEntity(): string
     {
-        return 'App\Entity\ES\Event';
+        return Event::class;
     }
-
 
     /**
      * @return string
      */
-    protected function getType()
+    protected function getIndex(): string
     {
         return self::INDEX_NAME;
     }
-
 }
