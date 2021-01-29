@@ -1,7 +1,7 @@
 # Sources :
 # - https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
 # - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
-ARG PHP_VERSION=7.3
+ARG PHP_VERSION=7.4
 ARG TIMEZONE
 ARG UID
 
@@ -14,7 +14,7 @@ MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 RUN set -eux; \
   apt-get update; \
   apt-get -y install acl curl less vim libicu-dev libmemcached-dev zlib1g-dev libc-client-dev \
-  openssl wget nano libzip-dev pax-utils sudo gnupg unzip libpng-dev libsodium-dev
+  openssl wget nano libzip-dev zip pax-utils sudo gnupg unzip libpng-dev libsodium-dev
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -38,7 +38,6 @@ RUN "date"
 # Install
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
-RUN docker-php-ext-configure zip --with-libzip
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install sodium
 
