@@ -17,7 +17,7 @@ class Constellation
     private ?array $description = null;
     private float $rank;
     private float $order;
-    private string $loc;
+    private ?string $loc;
 
     /**
      * @return string
@@ -180,11 +180,11 @@ class Constellation
     }
 
     /**
-     * @param string $loc
+     * @param string|null $loc
      *
      * @return Constellation
      */
-    public function setLoc(string $loc): Constellation
+    public function setLoc(?string $loc): Constellation
     {
         $this->loc = $loc;
         return $this;
