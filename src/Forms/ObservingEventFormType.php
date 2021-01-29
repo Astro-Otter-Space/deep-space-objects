@@ -24,6 +24,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @deprecated
  * Class ObservingEventFormType
  *
  * @package App\Forms

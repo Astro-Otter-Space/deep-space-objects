@@ -12,6 +12,7 @@ use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
+ * @deprecated
  * Class ObservationRepository
  *
  * @package App\Repository
@@ -20,7 +21,7 @@ final class ObservationRepository //extends AbstractRepository
 {
     public const INDEX_NAME = 'observations';
 
-    private static $listSearchFields = [
+    private static array $listSearchFields = [
         'id',
         'username',
         'location_label'

@@ -15,6 +15,7 @@ use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
+ * @deprecated
  * Class EventRepository
  * @package App\Repository
  */
@@ -22,7 +23,7 @@ class EventRepository //extends AbstractRepository
 {
     public const INDEX_NAME = 'events';
 
-    private static $listSearchFields = ['name', 'description', 'locationLabel', 'organiserName'];
+    private static array $listSearchFields = ['name', 'description', 'locationLabel', 'organiserName'];
 
     /**
      * @param $id

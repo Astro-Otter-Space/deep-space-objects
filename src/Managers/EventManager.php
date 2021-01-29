@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
+ * @deprecated
  * Class EventManager
  *
  * @package App\Managers

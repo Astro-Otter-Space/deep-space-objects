@@ -19,6 +19,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
+ * @deprecated
  * Class ObservationManager
  *
  * @package App\Managers
@@ -27,20 +28,13 @@ class ObservationManager
 {
     use ManagerTrait;
 
-    /** @var ObservationRepository  */
-    private $observationRepository;
-    /** @var UrlGenerateHelper  */
-    private $urlGeneratorHelper;
-    /** @var CacheInterface  */
-    private $cacheUtil;
-    /** @var  */
-    private $locale;
-    /** @var  */
-    private $dsoManager;
-    /** @var TranslatorInterface */
-    private $translator;
-    /** @var ObservationDataTransformer */
-    private $obsDataTransformer;
+    private ObservationRepository $observationRepository;
+    private UrlGenerateHelper $urlGeneratorHelper;
+    private CacheInterface $cacheUtil;
+    private string $locale;
+    private DsoManager $dsoManager;
+    private TranslatorInterface $translator;
+    private ObservationDataTransformer $obsDataTransformer;
 
     /**
      * ObservationManager constructor.
@@ -87,7 +81,7 @@ class ObservationManager
 
                 $listIdDso = array_values($observation->getDsoList());
                 array_walk($listIdDso, function($id) use ($dsoList) {
-                    $dso = $this->dsoManager->buildDso($id);
+//                    $dso = $this->dsoManager->buildDso($id);
                     $dsoList->addDso($dso);
                 });
             }

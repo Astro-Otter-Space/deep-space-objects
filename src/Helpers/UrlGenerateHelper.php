@@ -21,11 +21,9 @@ use Symfony\Component\Routing\RouterInterface;
  * Class UrlGenerateHelper
  * @package App\Helpers
  */
-class UrlGenerateHelper
+final class UrlGenerateHelper
 {
-
-    /** @var RouterInterface  */
-    private $router;
+    private RouterInterface $router;
 
     /**
      * UrlGenerateHelper constructor.

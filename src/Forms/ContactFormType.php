@@ -23,24 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ContactFormType extends AbstractType
 {
-    /** @var TranslatorInterface  */
-    private $translator;
-
-    private $locale;
-
     public const CLASS_LABEL = 'Form__label';
-
-    /**
-     * ContactFormType constructor.
-     *
-     * @param TranslatorInterface $translator
-     * @param string $locale
-     */
-    public function __construct(TranslatorInterface $translator, string $locale)
-    {
-        $this->translator = $translator;
-        $this->locale = $locale;
-    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -168,11 +151,10 @@ class ContactFormType extends AbstractType
         ]);
     }
 
-
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_protection' => false,

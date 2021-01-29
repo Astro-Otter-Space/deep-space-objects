@@ -2,13 +2,9 @@
 
 namespace App\Managers;
 
-use App\Classes\Utils;
 use App\Entity\DTO\ConstellationDTO;
-use App\Entity\ES\Constellation;
 use App\Entity\ES\ListConstellation;
-use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
-use Symfony\Component\Routing\Router;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -18,23 +14,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ConstellationManager
 {
     /** @var ConstellationRepository  */
-    private $constellationRepository;
-    /** @var TranslatorInterface  */
-    private $translator;
+    private ConstellationRepository $constellationRepository;
     /** @var string */
-    private $locale;
+    private string $locale;
 
     /**
      * ConstellationManager constructor.
      *
      * @param ConstellationRepository $constellationRepository
-     * @param TranslatorInterface $translator
      * @param string $locale
      */
-    public function __construct(ConstellationRepository $constellationRepository, TranslatorInterface $translator, string $locale)
+    public function __construct(ConstellationRepository $constellationRepository, string $locale)
     {
         $this->constellationRepository = $constellationRepository;
-        $this->translator = $translator;
         $this->locale = $locale;
     }
 

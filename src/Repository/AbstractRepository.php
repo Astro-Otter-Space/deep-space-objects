@@ -34,11 +34,8 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
-    /** @var SerializerInterface */
-    protected $serializer;
-
-    /** @var UrlGenerateHelper */
-    protected $urlGeneratorHelper;
+    protected SerializerInterface $serializer;
+    protected UrlGenerateHelper $urlGeneratorHelper;
 
     public const FROM = 0;
     public const SMALL_SIZE = 10;

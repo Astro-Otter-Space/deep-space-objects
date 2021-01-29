@@ -21,7 +21,7 @@ use Elastica\Search;
  */
 class DsoRepository extends AbstractRepository
 {
-    private static $listSearchFields = [
+    private static array $listSearchFields = [
         'id',
         'id.raw',
         'desigs',
@@ -29,7 +29,7 @@ class DsoRepository extends AbstractRepository
         'discover'
     ];
 
-    private static $listAggregates = [
+    private static array $listAggregates = [
         'constellation' => [
             'field' => 'const_id.keyword',
             'size' => 100
@@ -44,7 +44,7 @@ class DsoRepository extends AbstractRepository
         ]
     ];
 
-    private static $listAggregatesRange = [
+    private static array $listAggregatesRange = [
         'magnitude' => [
             'field' => 'mag',
             'ranges' => [

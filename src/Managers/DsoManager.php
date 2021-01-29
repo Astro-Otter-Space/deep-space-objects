@@ -33,24 +33,16 @@ class DsoManager
 {
     use ManagerTrait;
 
-    private static $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
+    private static array $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
 
-    /** @var DsoRepository  */
-    private $dsoRepository;
-    /** @var GetImage  */
-    private $astrobinImage;
-    /** @var UrlGenerateHelper  */
-    private $urlGenerateHelper;
-    /** @var TranslatorInterface */
-    private $translator;
-    /** @var CacheInterface */
-    private $cacheUtils;
-    /** @var  */
-    private $locale;
-    /** @var DsoDataTransformer */
-    private $dsoDataTransformer;
-    /** @var ConstellationRepository */
-    private $constellationRepository;
+    private DsoRepository $dsoRepository;
+    private GetImage $astrobinImage;
+    private UrlGenerateHelper $urlGenerateHelper;
+    private TranslatorInterface $translator;
+    private CacheInterface $cacheUtils;
+    private string $locale;
+    private DsoDataTransformer $dsoDataTransformer;
+    private ConstellationRepository $constellationRepository;
 
     /**
      * DsoManager constructor.

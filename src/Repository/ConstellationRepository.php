@@ -24,7 +24,7 @@ final class ConstellationRepository extends AbstractRepository
 
     public const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
-    private static $listSearchFields = [
+    private static array $listSearchFields = [
         'id',
         'id.raw',
         'gen',
@@ -33,7 +33,6 @@ final class ConstellationRepository extends AbstractRepository
 
     /**
      * @param string $id
-     * @param bool $hydrate
      *
      * @return DTOInterface|null
      * @throws \JsonException
