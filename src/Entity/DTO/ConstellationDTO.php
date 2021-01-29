@@ -74,6 +74,9 @@ final class ConstellationDTO implements DTOInterface
      */
     public function title(): string
     {
+        if (is_null($this->getAlt())) {
+            var_dump($this->getId(), $this->constellation->getId()); die();
+        }
         return ucfirst($this->getAlt());
     }
 
