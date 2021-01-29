@@ -42,7 +42,6 @@ final class ConstellationRepository extends AbstractRepository
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
             $document = $resultDocument->getDocuments()[0];
-            echo '<pre>'; var_dump(__METHOD__, $document);
             return $this->buildEntityFromDocument($document);
         }
 
