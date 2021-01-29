@@ -99,7 +99,7 @@ abstract class AbstractRepository
         /** @var $object */
         $object = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
         $dto = $this->getDTO();
-
+        var_dump($dto);
         /** @var DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
         $dto

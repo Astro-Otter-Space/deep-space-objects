@@ -94,7 +94,6 @@ class DsoManager
                 $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
                 $dso->setAstrobin($astrobinImage);
 
-                var_dump($dso->getConstellationId()); die();
                 // add Constellation
                 $constellationDto = $this->constellationRepository
                     ->setLocale($this->locale)
