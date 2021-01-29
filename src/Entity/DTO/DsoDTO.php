@@ -426,7 +426,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDiscover(): string
+    public function getDiscover(): ?string
     {
         return $this->discover;
     }
