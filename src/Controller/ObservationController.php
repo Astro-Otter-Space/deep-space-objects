@@ -31,16 +31,10 @@ class ObservationController extends AbstractController
 {
     use DsoTrait;
 
-    /** @var ObservationManager  */
-    private $observationManager;
-    /** @var DsoManager  */
-    private $dsoManager;
-    /** @var TranslatorInterface */
-    private $translator;
-    /** @var EventManager  */
-    private $eventManager;
-    /** @var UrlGenerateHelper */
-    private $urlGeneratorHelper;
+    private ObservationManager $observationManager;
+    private DsoManager $dsoManager;
+    private EventManager $eventManager;
+    private UrlGenerateHelper $urlGeneratorHelper;
 
     /**
      * ObservationController constructor.
@@ -55,7 +49,6 @@ class ObservationController extends AbstractController
     {
         $this->observationManager = $observationManager;
         $this->dsoManager = $dsoManager;
-        $this->translator = $translator;
         $this->eventManager = $eventManager;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
     }

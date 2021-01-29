@@ -4,6 +4,7 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Observation;
 
 /**
@@ -18,7 +19,7 @@ final class ObservationDataTransformer extends AbstractDataTransformer
      *
      * @return mixed|void
      */
-    public function longView($dto): array
+    public function longView(DTOInterface $dto): array
     {
         $data = [
             'user' => $dto->getUsername(),
@@ -31,7 +32,7 @@ final class ObservationDataTransformer extends AbstractDataTransformer
             'ocular' => implode(Utils::DATA_CONCAT_GLUE, $dto->getOcular())
         ];
 
-        return array_filter($data, function($value) {
+        return array_filter($data, static function($value) {
             return (false === empty($value));
         });
     }

@@ -2,7 +2,7 @@
   <section class="Vignettes__container">
     <a v-for="dso in vignettes" :href="dso.url" class="Vignettes__vignette"
        v-bind:style="imgStyle(dso)"
-       v-bind:title="dso.astrobin.title"
+       v-bind:title="dso.value"
     >
     </a>
   </section>
@@ -19,7 +19,7 @@
     },
     methods: {
       imgStyle: (dso) => {
-        var bgImage = dso.astrobin.url_regular;
+        var bgImage = dso.image.url_regular;
         return {
           "background": `url(${bgImage}) no-repeat center center`,
           "background-size": `cover`

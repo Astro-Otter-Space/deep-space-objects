@@ -19,11 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class DsoDataTransformer extends AbstractDataTransformer
 {
-    /** @var TranslatorInterface */
-    private $translator;
-
-    /** @var RouterInterface */
-    private $router;
+    private TranslatorInterface $translator;
+    private RouterInterface $router;
 
     /**
      * DsoDataTransformer constructor.

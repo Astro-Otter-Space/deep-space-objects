@@ -30,7 +30,7 @@ final class Utils
     public const URL_CONCAT_GLUE = '--';
     public const COMA_GLUE = ',';
 
-    private static $catalogMapping = [
+    private static array $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',
         'LD' => 'ldn',
@@ -71,7 +71,7 @@ final class Utils
         'Vd' => 'vdb', 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
     ];
 
-    private static $orderCatalog = [
+    private static array $orderCatalog = [
         // Main catalogs
         'messier',
         'ngc',
@@ -150,7 +150,7 @@ final class Utils
         self::UNASSIGNED
     ];
 
-    private static $listTypeDso = [
+    private static array $listTypeDso = [
         'gg',
         'g',
         's',
@@ -178,7 +178,7 @@ final class Utils
     /**
      * @var array
      */
-    private static $listTopics = [
+    private static array $listTopics = [
         'contact' => 'contact.option.contact', // Simple contact
         'data' => 'contact.option.data', // Modifier/ajouter une donnée
         'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
@@ -191,7 +191,7 @@ final class Utils
     /**
      * @var array
      */
-    private static $listPublics = [
+    private static array $listPublics = [
         'all' => 'event.option.all',
         'deb' => 'event.option.deb',
         'conf' => 'event.option.conf'
@@ -229,7 +229,7 @@ final class Utils
      */
     public static function utf8_converter($array): array
     {
-        array_walk_recursive($array, function (&$item, $key) {
+        array_walk_recursive($array, static function (&$item, $key) {
             if (!mb_detect_encoding($item, 'utf-8', true)) {
                 $item = utf8_encode($item);
             }
@@ -272,7 +272,6 @@ final class Utils
      */
     public static function numberFormatByLocale($number)
     {
-        /** @var \NumberFormatter $numberFormat */
         $numberFormat = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::DECIMAL);
         return $numberFormat->format($number);
     }

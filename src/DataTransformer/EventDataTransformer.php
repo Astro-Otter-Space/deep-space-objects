@@ -4,6 +4,7 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Event;
 
 /**
@@ -18,8 +19,10 @@ final class EventDataTransformer extends AbstractDataTransformer
      * @inheritDoc
      *
      * @param Event $dto
+     *
+     * @return array
      */
-    public function longView($dto): array
+    public function longView(DTOInterface $dto): array
     {
 
         $data = [

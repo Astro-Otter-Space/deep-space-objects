@@ -3,9 +3,6 @@
 namespace App\DataTransformer;
 
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Dso;
-use App\Entity\ES\Event;
-use App\Entity\ES\Observation;
 
 /**
  * Class AbstractDataTransformer

@@ -21,17 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class  SearchController extends AbstractController
 {
-    /** @var DsoManager  */
-    private $dsoManager;
-
-    /** @var ConstellationManager  */
-    private $constellationManager;
-
-    /** @var ObservationManager  */
-    private $observationManager;
-
-    /** @var EventManager */
-    private $eventManager;
+    private DsoManager $dsoManager;
+    private ConstellationManager $constellationManager;
+    private ObservationManager $observationManager;
+    private EventManager $eventManager;
 
     /**
      * SearchController constructor.

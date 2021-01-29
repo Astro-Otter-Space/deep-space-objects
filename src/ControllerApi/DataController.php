@@ -18,6 +18,7 @@ use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class DsoController
@@ -33,18 +34,15 @@ final class DataController extends AbstractFOSRestController
 
     public const LIMIT = 20;
 
-    private static $authorizedTypes = [
+    private static array $authorizedTypes = [
         'constellation' => 'const_id',
         'catalog' => 'catalog',
         'type' => 'type'
     ];
 
-    /** @var DsoRepository  */
-    private $dsoRepository;
-    /** @var ConstellationRepository */
-    private $constellationRepository;
-    /** @var DsoDataTransformer */
-    private $dsoDataTransformer;
+    private DsoRepository $dsoRepository;
+    private ConstellationRepository $constellationRepository;
+    private DsoDataTransformer $dsoDataTransformer;
 
     /**
      * DataController constructor.
@@ -52,12 +50,14 @@ final class DataController extends AbstractFOSRestController
      * @param DsoRepository $dsoRepository
      * @param ConstellationRepository $constellationRepository
      * @param DsoDataTransformer $dsoDataTransformer
+     * @param TranslatorInterface $translator
      */
-    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer)
+    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer, TranslatorInterface $translator)
     {
         $this->dsoRepository = $dsoRepository;
         $this->constellationRepository = $constellationRepository;
         $this->dsoDataTransformer = $dsoDataTransformer;
+        $this->setTranslator($translator);
     }
 
 

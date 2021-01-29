@@ -30,7 +30,7 @@ final class DsoDTO implements DTOInterface
     private $updatedAt;
 
     /** @var Dso */
-    private $dso;
+    private Dso $dso;
 
     /**
      * Data

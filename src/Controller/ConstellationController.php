@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ConstellationController
@@ -31,21 +31,21 @@ class ConstellationController extends AbstractController
 {
     use DsoTrait;
 
-    /** @var ConstellationManager  */
-    private $constellationManager;
-    /** @var DsoManager  */
-    private $dsoManager;
+    private ConstellationManager $constellationManager;
+    private DsoManager $dsoManager;
 
     /**
      * ConstellationController constructor.
      *
      * @param ConstellationManager $constellationManager
      * @param DsoManager $dsoManager
+     * @param TranslatorInterface $translator
      */
-    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager)
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, TranslatorInterface $translator)
     {
         $this->constellationManager = $constellationManager;
         $this->dsoManager = $dsoManager;
+        $this->setTranslator($translator);
     }
 
     /**
@@ -67,9 +67,6 @@ class ConstellationController extends AbstractController
 
         /** @var Router $router */
         $router = $this->get('router');
-
-        /** @var Serializer $serializer */
-        $serializer = $this->container->get('serializer');
 
         /** @var ConstellationDTO $constellation */
         $constellation = $this->constellationManager->getConstellationById($id);

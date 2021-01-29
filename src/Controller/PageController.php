@@ -8,12 +8,9 @@ use App\Entity\BDD\Contact;
 use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
-use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use App\Service\SocialNetworks\WebServices\FacebookWs;
-use App\Service\SocialNetworks\WebServices\TwitterWs;
-use AstrobinWs\Exceptions\WsException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Facebook\Exceptions\FacebookSDKException;
 use Psr\Log\LoggerInterface;
@@ -36,15 +33,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class PageController extends AbstractController
 {
-
-    /** @var DsoRepository */
-    private $dsoRepository;
-
-    /** @var TranslatorInterface */
-    private $translator;
-
-    /** @var LoggerInterface */
-    private $logger;
+    private DsoRepository $dsoRepository;
+    private TranslatorInterface $translator;
+    private LoggerInterface $logger;
 
     /**
      * PageController constructor.
@@ -196,7 +187,6 @@ class PageController extends AbstractController
     public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $isValid = false;
-        /** @var ApiUser $apiUser */
         $apiUser = new ApiUser();
 
         $optionsForm = [
@@ -204,7 +194,6 @@ class PageController extends AbstractController
             'action' => $this->get('router')->generate('help_api_page', ['_locale' => $request->getLocale()])
         ];
 
-        /** @var FormInterface $registerApiUserForm */
         $registerApiUserForm = $this->createForm(RegisterApiUsersFormType::class, $apiUser, $optionsForm);
 
         $registerApiUserForm->handleRequest($request);
@@ -254,7 +243,6 @@ class PageController extends AbstractController
      */
     public function download(Request $request): StreamedResponse
     {
-        $nbItems = 0;
         $data = $filters = [];
 
         $header = [
@@ -274,12 +262,12 @@ class PageController extends AbstractController
             $authorizedFilters = $this->dsoRepository->getListAggregates(true);
 
             // Removed unauthorized keys
-            $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
-                return in_array($key, $authorizedFilters);
+            $filters = array_filter($request->query->all(), static function($key) use($authorizedFilters) {
+                return in_array($key, $authorizedFilters, true);
             }, ARRAY_FILTER_USE_KEY);
 
             // Sanitize data (todo : try better)
-            array_walk($filters, function (&$value, $key) {
+            array_walk($filters, static function (&$value, $key) {
                 $value = filter_var($value, FILTER_SANITIZE_STRING);
             });
         }
@@ -288,7 +276,7 @@ class PageController extends AbstractController
         $data = array_map(function(Dso $dso) {
             return [
                 $dso->getId(),
-                implode(Dso::COMA_GLUE, array_filter($dso->getDesigs())),
+                implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getAlt(),
                 $this->translator->trans(sprintf('type.%s', $dso->getType())),
                 $dso->getConstId(),
@@ -331,11 +319,8 @@ class PageController extends AbstractController
      */
     public function skymap(): Response
     {
-        $params = [];
-
-
         /** @var Response $response */
-        $response = $this->render('pages/skymap.html.twig', $params);
+        $response = $this->render('pages/skymap.html.twig', []);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
@@ -348,7 +333,7 @@ class PageController extends AbstractController
      * }, name="help_astro-otter")
      *
      * @param Request $request
-     * @param string $paypalLink
+     * @param string|null $paypalLink
      * @param string|null $tipeeeLink
      *
      * @return Response
@@ -378,21 +363,6 @@ class PageController extends AbstractController
         //$response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
 
         return $response;
-    }
-
-
-    /**
-     * @Route("/facebook", name="facebook_test")
-     * @param FacebookWs $facebookWs
-     *
-     * @return Response
-     * @throws FacebookSDKException
-     */
-    public function testFacebook(FacebookWs $facebookWs): Response
-    {
-        $post = $facebookWs->getPost(null);
-
-        return new Response();
     }
 
     /**

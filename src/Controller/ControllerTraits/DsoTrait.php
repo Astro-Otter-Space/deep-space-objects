@@ -20,11 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 trait DsoTrait
 {
-    /** @var  */
-    private $listFilters = [];
+    private array $listFilters = [];
 
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /**
      * @param TranslatorInterface $translator

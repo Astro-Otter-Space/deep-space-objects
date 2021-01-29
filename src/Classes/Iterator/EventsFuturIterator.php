@@ -29,11 +29,10 @@ class EventsFuturIterator extends \FilterIterator
         $this->dateFilter = new \DateTime();
     }
 
-
     /**
      * @return bool
      */
-    public function accept()
+    public function accept(): bool
     {
         /** @var Event $event */
         $event = $this->getInnerIterator()->current();

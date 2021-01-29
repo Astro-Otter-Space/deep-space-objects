@@ -40,16 +40,10 @@ class DsoController extends AbstractController
 
     use DsoTrait;
 
-    /** @var CacheInterface  */
-    private $cacheUtil;
-    /** @var DsoManager */
-    private $dsoManager;
-    /** @var DsoRepository */
-    private $dsoRepository;
-    /** @var TranslatorInterface */
-    private $translator;
-    /** @var DsoDataTransformer */
-    private $dsoDataTransformer;
+    private CacheInterface $cacheUtil;
+    private DsoManager $dsoManager;
+    private DsoRepository $dsoRepository;
+    private DsoDataTransformer $dsoDataTransformer;
 
     /**
      * DsoController constructor.
@@ -57,16 +51,16 @@ class DsoController extends AbstractController
      * @param CacheInterface $cacheUtil
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translator
      * @param DsoDataTransformer $dataTransformer
+     * @param TranslatorInterface $translator
      */
-    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translator, DsoDataTransformer $dataTransformer)
+    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
     {
         $this->cacheUtil = $cacheUtil;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
-        $this->translator = $translator;
         $this->dsoDataTransformer = $dataTransformer;
+        $this->setTranslator($translator);
     }
 
     /**

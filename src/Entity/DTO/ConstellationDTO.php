@@ -16,20 +16,11 @@ final class ConstellationDTO implements DTOInterface
     /**
      * META
      */
-    /** @var  */
     private $id;
-    /** @var  */
     private $elasticSearchId;
-    /** @var string */
-    private $absoluteUrl;
-    /** @var string */
-    private $relativeUrl;
-
-    /** @var  */
-    private $locale;
-
-    /** @var Constellation */
-    private $constellation;
+    private string $absoluteUrl;
+    private string $relativeUrl;
+    private string $locale;
 
     private $geometry;
     private $geometryLine;
@@ -39,6 +30,7 @@ final class ConstellationDTO implements DTOInterface
     private $alt;
     private $description;
     private $kind;
+    private Constellation $constellation;
 
     /**
      * ConstellationDTO constructor.
