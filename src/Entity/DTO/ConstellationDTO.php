@@ -126,7 +126,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setId($id): ConstellationDTO
+    public function setId(string $id): ConstellationDTO
     {
         $this->id = $id;
         return $this;
@@ -145,30 +145,10 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setElasticSearchId($elasticSearchId): ConstellationDTO
+    public function setElasticSearchId(string $elasticSearchId): ConstellationDTO
     {
         $this->elasticSearchId = $elasticSearchId;
         return $this;
-    }
-
-
-    /**
-     * @param mixed $fullUrl
-     *
-     * @return ConstellationDTO
-     */
-    public function setFullUrl($fullUrl): ConstellationDTO
-    {
-        $this->fullUrl = $fullUrl;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullUrl(): string
-    {
-        return $this->fullUrl;
     }
 
     /**
@@ -184,7 +164,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setLocale($locale): ConstellationDTO
+    public function setLocale(string $locale): ConstellationDTO
     {
         $this->locale = $locale;
         return $this;
@@ -215,7 +195,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setAlt(string $alt): ConstellationDTO
+    public function setAlt(?string $alt): ConstellationDTO
     {
         $this->alt = $alt;
         return $this;
@@ -235,7 +215,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setGeometry($geometry): ConstellationDTO
+    public function setGeometry(array $geometry): ConstellationDTO
     {
         $this->geometry = $geometry;
         return $this;
@@ -290,7 +270,7 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setGeneric($generic): ConstellationDTO
+    public function setGeneric(?string $generic): ConstellationDTO
     {
         $this->generic = $generic;
         return $this;
@@ -305,11 +285,11 @@ final class ConstellationDTO implements DTOInterface
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      *
      * @return ConstellationDTO
      */
-    public function setDescription(string $description): ConstellationDTO
+    public function setDescription(?string $description): ConstellationDTO
     {
         $this->description = $description;
         return $this;
@@ -319,7 +299,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getKind(): string
+    public function getKind(): ?string
     {
         return $this->kind;
     }
@@ -329,18 +309,10 @@ final class ConstellationDTO implements DTOInterface
      *
      * @return ConstellationDTO
      */
-    public function setKind(string $kind): ConstellationDTO
+    public function setKind(?string $kind): ConstellationDTO
     {
         $this->kind = $kind;
         return $this;
-    }
-
-
-    public function geoJson(): array
-    {
-        return [
-
-        ];
     }
 
 }
