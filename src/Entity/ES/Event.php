@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Entity\ES;
 
 use App\Classes\Utils;
@@ -13,9 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
-    private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
+    private static array $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 
-    private static $fieldsObjectToJson = ['id', 'name', 'description', 'eventDate', 'createdAt', 'locationLabel', 'location', 'tarif', 'public', 'numberEntrant', 'organiserName', 'organiserTel', 'organiserMail'];
+    private static array $fieldsObjectToJson = ['id', 'name', 'description', 'eventDate', 'createdAt', 'locationLabel', 'location', 'tarif', 'public', 'numberEntrant', 'organiserName', 'organiserTel', 'organiserMail'];
 
     /** @var string */
     private $id;

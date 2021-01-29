@@ -11,7 +11,7 @@ use Traversable;
  */
 class ListObservations implements \IteratorAggregate
 {
-    protected $listObservations = [];
+    protected array $listObservations = [];
 
     /**
      * @return \ArrayIterator|Traversable

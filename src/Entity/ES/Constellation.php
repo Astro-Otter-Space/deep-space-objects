@@ -9,24 +9,15 @@ namespace App\Entity\ES;
  */
 class Constellation
 {
-    /** @var string */
-    private $id;
-    /** @var array */
-    private $geometry;
-    /** @var array */
-    private $geometryLine;
-    /** @var string */
-    private $gen;
-    /** @var array */
-    private $alt;
-    /** @var array */
-    private $description;
-    /** @var float */
-    private $rank;
-    /** @var float */
-    private $order;
-    /** @var string */
-    private $loc;
+    private string $id;
+    private array $geometry;
+    private array $geometryLine;
+    private ?string $gen;
+    private ?array $alt;
+    private ?array $description;
+    private float $rank;
+    private float $order;
+    private string $loc;
 
     /**
      * @return string
@@ -88,17 +79,17 @@ class Constellation
     /**
      * @return string
      */
-    public function getGen(): string
+    public function getGen(): ?string
     {
         return $this->gen;
     }
 
     /**
-     * @param string $gen
+     * @param string|null $gen
      *
      * @return Constellation
      */
-    public function setGen(string $gen): Constellation
+    public function setGen(?string $gen): Constellation
     {
         $this->gen = $gen;
         return $this;

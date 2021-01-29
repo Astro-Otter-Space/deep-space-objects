@@ -3,7 +3,6 @@
 namespace App\Entity\ES;
 
 use App\Classes\Utils;
-use App\Repository\ObservationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,7 +26,7 @@ class Observation
      * @var string|null
      * @Assert\NotBlank(message="contact.constraint.not_blank", groups={"add_observation"})
      */
-    private $username;
+    private ?string $username;
 
     /**
      * @var
