@@ -58,7 +58,6 @@ final class ConstellationDTO implements DTOInterface
         } else {
             throw new InvalidArgumentException("Error init constellation");
         }
-
     }
 
 
@@ -75,10 +74,11 @@ final class ConstellationDTO implements DTOInterface
      */
     public function title(): string
     {
-        if (empty($this->getAlt())) {
+        /*if (empty($this->getAlt())) {
             return $this->getGeneric();
         }
-        return $this->getAlt();
+        return $this->getAlt();*/
+        return 'test_constellation_' . $this->getId();
     }
 
     /**
@@ -123,7 +123,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -142,7 +142,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getElasticSearchId()
+    public function getElasticSearchId(): string
     {
         return $this->elasticSearchId;
     }
@@ -212,7 +212,7 @@ final class ConstellationDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getGeometry()
+    public function getGeometry(): array
     {
         return $this->geometry;
     }
