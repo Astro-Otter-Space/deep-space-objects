@@ -26,7 +26,7 @@ final class ConstellationDTO implements DTOInterface
     private array $geometryLine;
     private $image;
     private $map;
-    private string $generic;
+    private ?string $generic;
     private ?string $alt = null;
     private ?string $description = null;
     private $kind;
@@ -265,9 +265,9 @@ final class ConstellationDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getGeneric()
+    public function getGeneric(): ?string
     {
         return $this->generic;
     }
@@ -284,9 +284,9 @@ final class ConstellationDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
