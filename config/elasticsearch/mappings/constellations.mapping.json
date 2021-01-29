@@ -89,7 +89,8 @@
           "type": "integer"
         },
         "order": {
-          "type": "integer"
+          "type": "integer",
+          "fielddata": true
         },
         "loc": {
           "type": "text"

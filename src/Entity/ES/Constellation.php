@@ -8,15 +8,15 @@ namespace App\Entity\ES;
  */
 class Constellation
 {
-    private string $id;
-    private array $geometry;
-    private array $geometryLine;
-    private ?string $gen = null;
-    private ?array $alt = null;
-    private ?array $description = null;
-    private float $rank;
-    private float $order;
-    private ?string $loc = null;
+    private $id;
+    private $geometry;
+    private $geometryLine;
+    private $gen;
+    private $alt;
+    private $description;
+    private $rank;
+    private $order;
+    private $loc;
 
     /**
      * @return string
