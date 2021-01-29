@@ -16,17 +16,16 @@ final class ConstellationDTO implements DTOInterface
     /**
      * META
      */
-    private $id;
-    private $elasticSearchId;
+    private string $id;
+    private string $elasticSearchId;
     private string $absoluteUrl;
     private string $relativeUrl;
     private string $locale;
-
-    private $geometry;
-    private $geometryLine;
+    private array $geometry;
+    private array $geometryLine;
     private $image;
     private $map;
-    private $generic;
+    private string $generic;
     private ?string $alt = null;
     private ?string $description = null;
     private $kind;
