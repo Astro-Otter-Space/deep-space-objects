@@ -82,7 +82,7 @@ Symfony app :
 ### Instal dependencies - PROD
 ```
 cd /path/to/project
-php73 composer.phar install --no-dev --optimize-autoloader
+php74 composer.phar install --no-dev --optimize-autoloader
 yarn install
 yarn encore prod
 ```
