@@ -18,8 +18,8 @@
       "description_pt":"",
       "description_it":""
     },
-    "rank": "1",
-    "order": "2",
+    "rank": 1,
+    "order": 2,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -147,8 +147,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "52",
+    "rank": 3,
+    "order": 52,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -196,8 +196,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "53",
+    "rank": 3,
+    "order": 53,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -249,8 +249,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "1",
+    "rank": 1,
+    "order": 1,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -326,8 +326,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "86",
+    "rank": 2,
+    "order": 86,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -447,8 +447,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "3",
+    "rank": 3,
+    "order": 3,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -512,8 +512,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "6",
+    "rank": 1,
+    "order": 6,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -565,8 +565,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "19",
+    "rank": 1,
+    "order": 19,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -646,8 +646,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "8",
+    "rank": 1,
+    "order": 8,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -745,8 +745,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "9",
+    "rank": 3,
+    "order": 9,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -798,8 +798,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "10",
+    "rank": 2,
+    "order": 10,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -873,8 +873,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "12",
+    "rank": 2,
+    "order": 12,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -954,8 +954,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "13",
+    "rank": 1,
+    "order": 13,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1073,8 +1073,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "14",
+    "rank": 1,
+    "order": 14,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1130,8 +1130,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "15",
+    "rank": 1,
+    "order": 15,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1249,8 +1249,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "16",
+    "rank": 2,
+    "order": 16,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1340,8 +1340,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "5",
+    "rank": 1,
+    "order": 5,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1441,8 +1441,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "10",
+    "rank": 3,
+    "order": 10,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1502,8 +1502,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "21",
+    "rank": 3,
+    "order": 21,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1551,8 +1551,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "37",
+    "rank": 1,
+    "order": 37,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1648,8 +1648,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "64",
+    "rank": 2,
+    "order": 64,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1693,8 +1693,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "11",
+    "rank": 2,
+    "order": 11,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -1756,8 +1756,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "20",
+    "rank": 3,
+    "order": 20,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1819,8 +1819,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "17",
+    "rank": 3,
+    "order": 17,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -1868,8 +1868,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "24",
+    "rank": 3,
+    "order": 24,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -1937,8 +1937,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "25",
+    "rank": 2,
+    "order": 25,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2002,8 +2002,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "23",
+    "rank": 3,
+    "order": 23,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2085,8 +2085,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "26",
+    "rank": 2,
+    "order": 26,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2140,8 +2140,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "22",
+    "rank": 3,
+    "order": 22,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2201,8 +2201,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "18",
+    "rank": 2,
+    "order": 18,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -2246,8 +2246,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "27",
+    "rank": 1,
+    "order": 27,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -2325,8 +2325,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "28",
+    "rank": 3,
+    "order": 28,
     "loc":"south",
     "geometry": {
       "type": "Point",
@@ -2386,8 +2386,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "29",
+    "rank": 3,
+    "order": 29,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2455,8 +2455,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "30",
+    "rank": 2,
+    "order": 30,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -2568,8 +2568,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "63",
+    "rank": 3,
+    "order": 63,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -2617,8 +2617,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "32",
+    "rank": 1,
+    "order": 32,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2762,8 +2762,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "34",
+    "rank": 3,
+    "order": 34,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2811,8 +2811,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "35",
+    "rank": 1,
+    "order": 35,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -2902,8 +2902,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "39",
+    "rank": 3,
+    "order": 39,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -2981,8 +2981,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "40",
+    "rank": 2,
+    "order": 40,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -3114,8 +3114,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "41",
+    "rank": 3,
+    "order": 41,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -3175,8 +3175,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "42",
+    "rank": 2,
+    "order": 42,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -3288,8 +3288,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "43",
+    "rank": 3,
+    "order": 43,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -3349,8 +3349,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "44",
+    "rank": 3,
+    "order": 44,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -3410,8 +3410,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "45",
+    "rank": 3,
+    "order": 45,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -3497,8 +3497,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "48",
+    "rank": 1,
+    "order": 48,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -3580,8 +3580,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "47",
+    "rank": 3,
+    "order": 47,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -3667,8 +3667,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "4",
+    "rank": 2,
+    "order": 4,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -3738,8 +3738,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "65",
+    "rank": 3,
+    "order": 65,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -3799,8 +3799,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "49",
+    "rank": 3,
+    "order": 49,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -3894,8 +3894,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "50",
+    "rank": 3,
+    "order": 50,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -3959,8 +3959,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "51",
+    "rank": 2,
+    "order": 51,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -4028,8 +4028,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "80",
+    "rank": 3,
+    "order": 80,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4081,8 +4081,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "53",
+    "rank": 3,
+    "order": 53,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4142,8 +4142,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "46",
+    "rank": 2,
+    "order": 46,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -4221,8 +4221,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "50",
+    "rank": 3,
+    "order": 50,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4286,8 +4286,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "73",
+    "rank": 3,
+    "order": 73,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4343,8 +4343,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "55",
+    "rank": 3,
+    "order": 55,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4396,8 +4396,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "57",
+    "rank": 2,
+    "order": 57,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -4517,8 +4517,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "58",
+    "rank": 1,
+    "order": 58,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -4672,8 +4672,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "59",
+    "rank": 2,
+    "order": 59,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -4753,8 +4753,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "60",
+    "rank": 1,
+    "order": 60,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -4856,8 +4856,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "62",
+    "rank": 1,
+    "order": 62,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -5001,8 +5001,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "68",
+    "rank": 2,
+    "order": 68,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5070,8 +5070,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "61",
+    "rank": 3,
+    "order": 61,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5119,8 +5119,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "69",
+    "rank": 2,
+    "order": 69,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5196,8 +5196,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "71",
+    "rank": 2,
+    "order": 71,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -5335,8 +5335,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "72",
+    "rank": 2,
+    "order": 72,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -5426,8 +5426,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "7",
+    "rank": 3,
+    "order": 7,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5479,8 +5479,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "74",
+    "rank": 3,
+    "order": 74,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5536,8 +5536,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "76",
+    "rank": 1,
+    "order": 76,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -5635,8 +5635,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "77",
+    "rank": 3,
+    "order": 77,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5688,8 +5688,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "31",
+    "rank": 3,
+    "order": 31,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -5745,8 +5745,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "78",
+    "rank": 3,
+    "order": 78,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -5818,8 +5818,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "79",
+    "rank": 3,
+    "order": 79,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -5871,8 +5871,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "33",
+    "rank": 3,
+    "order": 33,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -5930,8 +5930,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "75",
+    "rank": 1,
+    "order": 75,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -6105,8 +6105,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "81",
+    "rank": 1,
+    "order": 81,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -6202,8 +6202,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "82",
+    "rank": 3,
+    "order": 82,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -6251,8 +6251,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "85",
+    "rank": 2,
+    "order": 85,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -6304,8 +6304,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "84",
+    "rank": 3,
+    "order": 84,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -6357,8 +6357,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "83",
+    "rank": 3,
+    "order": 83,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -6422,8 +6422,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "38",
+    "rank": 1,
+    "order": 38,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -6583,8 +6583,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "67",
+    "rank": 2,
+    "order": 67,
     "loc": "north",
     "geometry": {
       "type": "Point",
@@ -6652,8 +6652,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "2",
-    "order": "88",
+    "rank": 2,
+    "order": 88,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -6721,8 +6721,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "1",
-    "order": "87",
+    "rank": 1,
+    "order": 87,
     "loc": "zodiac",
     "geometry": {
       "type": "Point",
@@ -6822,8 +6822,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "70",
+    "rank": 3,
+    "order": 70,
     "loc": "south",
     "geometry": {
       "type": "Point",
@@ -6887,8 +6887,8 @@
       "description_pt": "",
       "description_it": ""
     },
-    "rank": "3",
-    "order": "66",
+    "rank": 3,
+    "order": 66,
     "loc": "north",
     "geometry": {
       "type": "Point",
