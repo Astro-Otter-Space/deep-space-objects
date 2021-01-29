@@ -30,7 +30,7 @@ final class ConstellationDTO implements DTOInterface
     private ?string $alt = null;
     private ?string $description = null;
     private $kind;
-    private Constellation $constellation;
+    private $constellation;
 
     /**
      * ConstellationDTO constructor.
