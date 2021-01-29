@@ -6,6 +6,7 @@ namespace App\Entity\DTO;
 
 use App\Entity\ES\Constellation;
 use App\Repository\ConstellationRepository;
+use Psr\Log\InvalidArgumentException;
 
 /**
  * Class ConstellationDTO
@@ -43,17 +44,21 @@ final class ConstellationDTO implements DTOInterface
         $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
         $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $locale): 'alt';
 
-        $this->setConstellation($constellation)
-            ->setElasticSearchId($elasticId)
-            ->setLocale($locale)
-            ->setId($constellation->getId())
-            ->setAlt($constellation->getAlt()[$fieldAlt])
-            ->setDescription($constellation->getDescription()[$fieldDescription])
-            ->setGeneric($constellation->getGen())
-            ->setKind($constellation->getLoc())
-            ->setGeometry($constellation->getGeometry())
-            ->setGeometryLine($constellation->getGeometryLine());
-        ;
+        if ($constellation instanceof Constellation) {
+            $this->setConstellation($constellation)
+                ->setElasticSearchId($elasticId)
+                ->setLocale($locale)
+                ->setId($constellation->getId())
+                ->setAlt($constellation->getAlt()[$fieldAlt])
+                ->setDescription($constellation->getDescription()[$fieldDescription])
+                ->setGeneric($constellation->getGen())
+                ->setKind($constellation->getLoc())
+                ->setGeometry($constellation->getGeometry())
+                ->setGeometryLine($constellation->getGeometryLine());
+        } else {
+            throw new InvalidArgumentException("Error init constellation");
+        }
+
     }
 
 
