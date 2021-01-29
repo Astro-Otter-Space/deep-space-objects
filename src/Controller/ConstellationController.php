@@ -7,7 +7,6 @@ use App\DataTransformer\ConstellationDataTransformer;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\ListDso;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
@@ -23,7 +22,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ConstellationController
@@ -37,27 +35,18 @@ class ConstellationController extends AbstractController
     private $constellationManager;
     /** @var DsoManager  */
     private $dsoManager;
-    /** @var DsoRepository  */
-    private $dsoRepository;
-    /** @var TranslatorInterface  */
-    private $translator;
 
     /**
      * ConstellationController constructor.
      *
      * @param ConstellationManager $constellationManager
      * @param DsoManager $dsoManager
-     * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translator
      */
-    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, DsoRepository $dsoRepository, TranslatorInterface $translator)
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager)
     {
         $this->constellationManager = $constellationManager;
         $this->dsoManager = $dsoManager;
-        $this->dsoRepository = $dsoRepository;
-        $this->translator = $translator;
     }
-
 
     /**
      * @Route("/constellation/{id}/{name}", name="constellation_show")

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,9 +54,10 @@ class HomeController extends AbstractController
      * @throws \Exception
      * @var Request $request
      */
-    public function vignettesDso(Request $request): Response
+    public function vignettesDso(Request $request, DsoDataTransformer $dataTransformer): Response
     {
-        $params['vignettes'] = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
+        $vignettes = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
+        $params['vignettes'] = $dataTransformer->listVignettesView($vignettes);
 
         /** @var Response $response */
         $response = new Response();

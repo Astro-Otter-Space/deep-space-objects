@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Helpers\UrlGenerateHelper;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
-use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,34 +23,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class LayoutController extends AbstractController
 {
-    const HTTP_TTL = 31556952;
+    public const HTTP_TTL = 31556952;
 
     /** @var TranslatorInterface  */
     private $translator;
 
-    /** @var ConstellationRepository */
-    private $constellationRepository;
-
     /** @var DsoRepository */
     private $dsoRepository;
-
-    /** @var UrlGenerateHelper */
-    private $urlGenerateHelper;
 
     /**
      * LayoutController constructor.
      *
      * @param TranslatorInterface $translator
-     * @param ConstellationRepository $constellationRepository
      * @param DsoRepository $dsoRepository
-     * @param UrlGenerateHelper $urlGeneratorHelper
      */
-    public function __construct(TranslatorInterface $translator, ConstellationRepository $constellationRepository, DsoRepository $dsoRepository, UrlGenerateHelper $urlGeneratorHelper)
+    public function __construct(TranslatorInterface $translator, DsoRepository $dsoRepository)
     {
         $this->translator = $translator;
-        $this->constellationRepository = $constellationRepository;
         $this->dsoRepository = $dsoRepository;
-        $this->urlGenerateHelper = $urlGeneratorHelper;
     }
 
     /**
@@ -98,8 +86,11 @@ class LayoutController extends AbstractController
                 'label' => $this->translator->trans('last_update_title'),
                 'path' => $router->generate(sprintf('last_update_dso.%s', $currentLocale))
             ],
-            'menuData' => $this->buildMenu($currentLocale, ['catalog', 'constellation', 'map']),
-            'menuObservations' => $this->buildMenu($currentLocale, ['observations', 'addObservations', 'scheduleObs']),
+            'constellation' => [
+                'label' => $this->translator->trans('constId', ['%count%' => 2]),
+                'path' => $router->generate(sprintf('constellation_list.%s', $currentLocale))
+            ],
+            'menuData' => $this->buildMenu($currentLocale, ['catalog', 'map']),
             'routeSearch' => $router->generate(sprintf('search_ajax.%s', $currentLocale), ['_locale' => $currentLocale])
         ];
 
@@ -135,11 +126,11 @@ class LayoutController extends AbstractController
                 'icon_class' => 'shape',
                 'subMenu' => $this->buildSubMenu($locale, ['messier', 'ngc', 'ic', 'sh'])
             ],
-            'constellation' => [
+            /*'constellation' => [
                 'label' => $this->translator->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
                 'icon_class' => 'constellation'
-            ],
+            ],*/
             'map' => [
                 'label' => $this->translator->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),
