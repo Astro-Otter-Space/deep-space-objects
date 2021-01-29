@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
@@ -99,13 +100,18 @@ abstract class AbstractRepository
         /** @var $object */
         $object = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
         $dto = $this->getDTO();
-        echo '<pre>'; var_dump($object);
+
         /** @var DTOInterface $dto */
         $dto = new $dto($object, $this->getLocale(), $document->getId());
-        echo '<pre>'; var_dump($dto);
+
         $dto
             ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
             ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
+
+        if ($dto instanceof ConstellationDTO) {
+            echo '<pre>'; var_dump($dto->title());
+        }
+
 
         return $dto;
     }
