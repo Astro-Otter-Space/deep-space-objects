@@ -12,9 +12,9 @@ class Constellation
     private string $id;
     private array $geometry;
     private array $geometryLine;
-    private ?string $gen;
-    private ?array $alt;
-    private ?array $description;
+    private ?string $gen = null;
+    private ?array $alt = null;
+    private ?array $description = null;
     private float $rank;
     private float $order;
     private string $loc;
