@@ -16,46 +16,35 @@ final class DsoDTO implements DTOInterface
     /**
      * META
      */
-    /** @var  */
-    private $id;
-    /** @var string */
-    private $elasticSearchId;
-    /** @var string */
-    private $relativeUrl;
-    /** @var string */
-    private $absoluteUrl;
-    /** @var string */
-    private $locale;
-
-    private $updatedAt;
-
-    /** @var Dso */
+    private string $id;
+    private string $elasticSearchId;
+    private string $relativeUrl;
+    private string $absoluteUrl;
+    private string $locale;
+    private ?string $updatedAt;
     private Dso $dso;
 
     /**
      * Data
      */
-    /**
-     * @var
-     */
-    private $name;
+    private string $name;
     private $catalogs;
-    private $desigs;
-    private $alt;
-    private $description;
-    private $type;
+    private array $desigs;
+    private ?string $alt;
+    private ?string $description;
+    private string $type;
     private $magnitude;
-    private $constellationId;
+    private string $constellationId;
     private $constellation;
     private $distAl;
-    private $discover;
-    private $discoverYear;
-    private $astrobinId;
+    private ?string $discover;
+    private ?int $discoverYear;
+    private ?string $astrobinId;
     private $astrobin;
-    private $geometry;
-    private $dim;
-    private $declinaison;
-    private $rightAscencion;
+    private ?array $geometry;
+    private string $dim;
+    private string $declinaison;
+    private string $rightAscencion;
 
     /**
      * DsoDTO constructor.
@@ -98,8 +87,6 @@ final class DsoDTO implements DTOInterface
             ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
         ;
-
-
     }
 
     /**
@@ -135,7 +122,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -145,7 +132,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setId($id): DsoDTO
+    public function setId(string $id): DsoDTO
     {
         $this->id = $id;
         return $this;
@@ -156,12 +143,15 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setElasticSearchId($elasticSearchId): DsoDTO
+    public function setElasticSearchId(string $elasticSearchId): DsoDTO
     {
         $this->elasticSearchId = $elasticSearchId;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function guid(): string
     {
         return md5(sprintf('%s_%s', $this->getId(), $this->locale));
@@ -232,7 +222,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -242,7 +232,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setName($name): DsoDTO
+    public function setName(string $name): DsoDTO
     {
         $this->name = $name;
         return $this;
@@ -436,7 +426,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getDiscover()
+    public function getDiscover(): string
     {
         return $this->discover;
     }

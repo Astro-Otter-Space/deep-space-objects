@@ -18,15 +18,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class GenerateTokenListener
 {
-
-    /** @var JWTTokenManagerInterface */
-    private $jwtManager;
-    /** @var MailService  */
-    private $mailService;
-    /** @var TranslatorInterface */
-    private $translator;
-    /** @var string */
-    private $senderMail;
+    private JWTTokenManagerInterface $jwtManager;
+    private MailService $mailService;
+    private TranslatorInterface $translator;
+    private string $senderMail;
 
     /**
      * GenerateTokenListener constructor.
