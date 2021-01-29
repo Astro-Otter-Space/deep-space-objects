@@ -59,7 +59,7 @@ class GenerateTokenListener
 
         $data['token'] = $this->jwtManager->create($apiUser);
         $data['refresh_token'] = $this->refreshEvent->getLastFromUsername($apiUser->getEmail());
-        
+
         $this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
     }
 }
