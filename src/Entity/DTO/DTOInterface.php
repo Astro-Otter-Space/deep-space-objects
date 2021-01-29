@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\DTO;
 
-use Doctrine\ORM\Tools\Console\Command\InfoCommand;
-
 interface DTOInterface
 {
     public function guid(): string;
