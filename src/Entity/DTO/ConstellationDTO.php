@@ -74,11 +74,7 @@ final class ConstellationDTO implements DTOInterface
      */
     public function title(): string
     {
-        /*if (empty($this->getAlt())) {
-            return $this->getGeneric();
-        }
-        return $this->getAlt();*/
-        return 'test_constellation_' . $this->getId();
+        return $this->getGeneric();
     }
 
     /**
