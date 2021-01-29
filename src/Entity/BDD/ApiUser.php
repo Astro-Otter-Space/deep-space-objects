@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\Table(name="api_users")
  * @ORM\EntityListeners({"App\EventListener\GenerateTokenListener"})
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"email"}, groups={"api_user"}, message="registration.constraint.unique")
  */
 class ApiUser implements UserInterface

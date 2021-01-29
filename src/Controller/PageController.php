@@ -10,12 +10,9 @@ use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
-use App\Service\SocialNetworks\WebServices\FacebookWs;
 use Doctrine\Common\Persistence\ObjectManager;
-use Facebook\Exceptions\FacebookSDKException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -62,7 +59,6 @@ class PageController extends AbstractController
      *
      * @param Request $request
      * @param MailService $mailService
-     *
      * @param string $receiverMail
      *
      * @return Response
@@ -90,7 +86,6 @@ class PageController extends AbstractController
             if ($contactForm->isValid()) {
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
-
                 $contactData->setLabelCountry(Countries::getName($contactData->getCountry(), $request->getLocale()));
 
                 $templates = [
@@ -243,7 +238,7 @@ class PageController extends AbstractController
      */
     public function download(Request $request): StreamedResponse
     {
-        $data = $filters = [];
+        $filters = [];
 
         $header = [
             'Id',
@@ -319,7 +314,6 @@ class PageController extends AbstractController
      */
     public function skymap(): Response
     {
-        /** @var Response $response */
         $response = $this->render('pages/skymap.html.twig', []);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
@@ -358,7 +352,6 @@ class PageController extends AbstractController
         ];
 
 
-        /** @var Response $response */
         $response = $this->render('pages/support.html.twig', $params);
         //$response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
 
