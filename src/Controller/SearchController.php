@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\ConstellationDataTransformer;
+use App\DataTransformer\DsoDataTransformer;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Managers\EventManager;
 use App\Managers\ObservationManager;
+use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,17 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class  SearchController extends AbstractController
 {
-    /** @var DsoManager  */
-    private $dsoManager;
-
-    /** @var ConstellationManager  */
-    private $constellationManager;
-
-    /** @var ObservationManager  */
-    private $observationManager;
-
-    /** @var EventManager */
-    private $eventManager;
+    private DsoManager $dsoManager;
+    private ConstellationManager $constellationManager;
+    private ObservationManager $observationManager;
+    private EventManager $eventManager;
 
     /**
      * SearchController constructor.
@@ -54,17 +50,24 @@ class  SearchController extends AbstractController
      * )
      *
      * @param Request $request
+     * @param DsoDataTransformer $dsoDataTransformer
+     * @param ConstellationDataTransformer $constellationDataTransformer
      *
      * @return JsonResponse
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function searchAjax(Request $request)
+    public function searchAjax(Request $request, DsoDataTransformer $dsoDataTransformer, ConstellationDataTransformer $constellationDataTransformer): JsonResponse
     {
         $data = [];
         if ($request->query->has('q')) {
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
-            $dataDso = $this->dsoManager->searchDsoByTerms($searchTerm);
+            $listDso = $this->dsoManager->searchDsoByTerms($searchTerm, null);
+            $dataDso = $dsoDataTransformer->listVignettesView($listDso);
 
-            $dataConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
+            $listConstellation = $this->constellationManager->searchConstellationsByTerms($searchTerm);
+            $dataConstellation = $constellationDataTransformer->listVignettesView($listConstellation);
             $data = array_merge($dataDso, $dataConstellation);
         }
 
@@ -147,7 +150,7 @@ class  SearchController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function starsFiltered(Request $request, $id)
+    public function starsFiltered(Request $request, string $id): JsonResponse
     {
         $webPath = $this->getParameter('kernel.project_dir') . '/public/';
         $file = $webPath . 'build/data/stars.8.json';
@@ -159,7 +162,7 @@ class  SearchController extends AbstractController
 
         if (file_exists($file)) {
 
-            $jsonContent = $starsData = json_decode(file_get_contents($file), true)['features'];
+            $jsonContent = $starsData = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'];
 
             if (isset($id) && !empty($id)) {
                 $jsonContent = array_filter($jsonContent, function($tab) use ($id) {

@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocaleSubscriber implements EventSubscriberInterface
 {
 
-    private $defaultLocale;
+    private string $defaultLocale;
 
     /**
      * LocaleSubscriber constructor.
@@ -29,7 +29,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     /**
      * @param RequestEvent $event
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         /** @var Request $request */
         $request = $event->getRequest();
@@ -47,11 +47,10 @@ class LocaleSubscriber implements EventSubscriberInterface
         }
     }
 
-
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => [
@@ -59,6 +58,4 @@ class LocaleSubscriber implements EventSubscriberInterface
             ]
         ];
     }
-
-
 }

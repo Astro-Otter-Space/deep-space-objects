@@ -7,6 +7,7 @@ use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -31,6 +32,9 @@ class ConvertSrcToBulkCommand extends Command
     /** @var EntityManagerInterface */
     private $em;
 
+    /** @var DsoManager  */
+    private $dsoManager;
+
     /** @var DsoRepository */
     private $dsoRepository;
 
@@ -47,8 +51,8 @@ class ConvertSrcToBulkCommand extends Command
         'constellations' => 'constellations'
     ];
 
-    const PATH_SOURCE = '/config/elasticsearch/sources/';
-    const BULK_SOURCE = '/config/elasticsearch/bulk/';
+    public const PATH_SOURCE = '/config/elasticsearch/sources/';
+    public const BULK_SOURCE = '/config/elasticsearch/bulk/';
 
     /**
      * ConvertSrcToBulkCommand constructor.
@@ -72,7 +76,7 @@ class ConvertSrcToBulkCommand extends Command
     /**
      *
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Convert source file into bulk for Elastic Search')
@@ -89,7 +93,7 @@ class ConvertSrcToBulkCommand extends Command
      * @return int|null|void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         /** @var UpdateData $updateData */
         $lastImport = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
@@ -102,7 +106,7 @@ class ConvertSrcToBulkCommand extends Command
         $output->writeln(sprintf("Last update : %s", $lastImportDate->format(Utils::FORMAT_DATE_ES)));
         $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
 
-        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType)) {
+        if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType, true)) {
 
             $type = $input->getArgument('type');
 
@@ -114,7 +118,9 @@ class ConvertSrcToBulkCommand extends Command
             $outputDirName = dirname($outputFilename);
 
             if (!file_exists($outputDirName)) {
-                mkdir(dirname($outputFilename), '0755');
+                if (!mkdir($concurrentDirectory = dirname($outputFilename), '0755') && !is_dir($concurrentDirectory)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+                }
             }
 
             if (!file_exists($outputFilename)) {
@@ -146,7 +152,7 @@ class ConvertSrcToBulkCommand extends Command
                             $inputData['updated_at'] = $newUpdatedAt->format(Utils::FORMAT_DATE_ES);
                         }
 
-                        $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                        $line = json_encode(Utils::utf8_encode_deep($inputData), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                         $mapping = [
                             'randId' => 'md5ForId',
                             'catalog' => 'getCatalog',
@@ -157,9 +163,9 @@ class ConvertSrcToBulkCommand extends Command
                             if (array_key_exists($findKey, $mapping)) {
                                 $method = $mapping[$findKey];
                                 return self::$method($id);
-                            } else {
-                                return "%s".$findKey."%s";
                             }
+
+                            return "%s".$findKey."%s";
                         }, $line);
 
                         /**
@@ -191,11 +197,11 @@ class ConvertSrcToBulkCommand extends Command
                                 if (0 === $lastImportDate->diff($lastUpdateData)->invert) {
 
 
-                                    array_push($bulkData, [
+                                    $bulkData[] = [
                                         'idDoc' => self::md5ForId($id),
                                         'mode' => 'update',
-                                        'data' => json_decode(utf8_decode($lineReplace), true)
-                                    ]);
+                                        'data' => json_decode(utf8_decode($lineReplace), true, 512, JSON_THROW_ON_ERROR)
+                                    ];
                                     $output->writeln(sprintf('[%s] item %s', $mode, $id));
                                 }
 
@@ -222,13 +228,13 @@ class ConvertSrcToBulkCommand extends Command
                              * Step 3 : get list of updated data
                              */
                             /** @var ListDso $listDso */
-                            $listDso = $this->dsoRepository->getObjectsUpdatedAfter($lastImportDate);
+                            $listDso = null; // BUG $this->dsoManager->getListDsoAfter($lastImportDate);
                             if (0 < $listDso->getIterator()->count()) {
                                 /**
                                  * STEP 4 : update DB
                                  * TODO : move to repository
                                  */
-                                $listDsoAsArray = array_map(function (Dso $dso) {
+                                $listDsoAsArray = array_map(static function (Dso $dso) {
                                     return $dso->getId();
                                 }, iterator_to_array($listDso));
 
@@ -254,7 +260,7 @@ class ConvertSrcToBulkCommand extends Command
                                     $id = strtolower($dsoCurrent->getId());
                                     if (!empty($dsoCurrent->getAlt())) {
                                         $name = Utils::camelCaseUrlTransform($dsoCurrent->getAlt());
-                                        $id = implode(trim($dsoCurrent::URL_CONCAT_GLUE), [$id, $name]);
+                                        $id = implode(trim(Utils::URL_CONCAT_GLUE), [$id, $name]);
                                     }
 
                                     $listMd5Dso = array_merge(array_map(static function ($locale) use ($id) {
@@ -288,11 +294,15 @@ class ConvertSrcToBulkCommand extends Command
 
     /**
      * Open file and convert into array
+     *
      * @param $file
+     *
      * @return mixed
+     * @throws \JsonException
      */
-    private function openFile($file): array {
-        return json_decode(file_get_contents($file), true);
+    private function openFile($file): ?array
+    {
+        return json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
     }
 
 

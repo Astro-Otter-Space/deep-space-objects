@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @package App\Entity
  */
-class Observation extends AbstractEntity
+class Observation
 {
 
     /** @var  */
@@ -515,13 +515,6 @@ class Observation extends AbstractEntity
         return self::$fieldsObjectToJson;
     }
 
-    /**
-     * @return string
-     */
-    public static function getIndex(): string
-    {
-        return ObservationRepository::INDEX_NAME;
-    }
 
     /**
      * @return string

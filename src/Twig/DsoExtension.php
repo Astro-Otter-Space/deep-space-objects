@@ -14,12 +14,16 @@ use Twig\TwigFunction;
  */
 class DsoExtension extends AbstractExtension
 {
-    /** @var TranslatorInterface */
-    private $translatorInterface;
+    private TranslatorInterface $translator;
 
-    public function __construct(TranslatorInterface $translatorInterface)
+    /**
+     * DsoExtension constructor.
+     *
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
     }
 
     /**
@@ -50,10 +54,12 @@ class DsoExtension extends AbstractExtension
 
     /**
      * Convert distance in Light-Year into Parsec
+     *
      * @param $dist
-     * @return float|int
+     *
+     * @return string
      */
-    public function convertLyToPc($dist)
+    public function convertLyToPc($dist): string
     {
         return Utils::numberFormatByLocale($dist*(Utils::PARSEC));
     }
@@ -79,25 +85,29 @@ class DsoExtension extends AbstractExtension
 
     /**
      * @param $str
+     *
      * @return mixed
+     * @throws \JsonException
      */
     public function jsonDecode($str)
     {
-        return json_decode($str, true);
+        return json_decode($str, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
-     * @param $tab
+     * @param array $tab
      * @param $key
-     * @return
+     *
+     * @return mixed
      */
-    public function uasort($tab, $key)
+    public function uasort(array $tab, $key): array
     {
         uasort($tab, static function($a, $b) use($key) {
             return ($a[$key] < $b[$key]) ? -1 : 1;
         });
         return $tab;
     }
+
     /**
      * @param $arr
      * @param $value
@@ -135,7 +145,7 @@ class DsoExtension extends AbstractExtension
         foreach ($data as $item) {
             $html .= '<tr>';
             $html .= sprintf('<td>%s</td>', $item);
-            $html .= sprintf('<td>%s</td>', $this->translatorInterface->trans(sprintf('%s.%s',$filter, $item)));
+            $html .= sprintf('<td>%s</td>', $this->translator->trans(sprintf('%s.%s',$filter, $item)));
             $html .= '</tr>';
         }
 

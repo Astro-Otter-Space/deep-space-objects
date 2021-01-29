@@ -4,6 +4,7 @@
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Observation;
 
 /**
@@ -14,24 +15,24 @@ use App\Entity\ES\Observation;
 final class ObservationDataTransformer extends AbstractDataTransformer
 {
     /**
-     * @param $entity
+     * @param $dto
      *
      * @return mixed|void
      */
-    public function toArray($entity): array
+    public function longView(DTOInterface $dto): array
     {
         $data = [
-            'user' => $entity->getUsername(),
-            'location' => $entity->getLocationLabel(),
-            'instrument' => $entity->getInstrument(),
-            'diameter' => $entity->getDiameter(),
-            'focal' => $entity->getFocal(),
-            'report' => Utils::numberFormatByLocale($entity->getFocal()/$entity->getDiameter()),
-            'mount' => $entity->getMount(),
-            'ocular' => implode(Observation::DATA_CONCAT_GLUE, $entity->getOcular())
+            'user' => $dto->getUsername(),
+            'location' => $dto->getLocationLabel(),
+            'instrument' => $dto->getInstrument(),
+            'diameter' => $dto->getDiameter(),
+            'focal' => $dto->getFocal(),
+            'report' => Utils::numberFormatByLocale($dto->getFocal()/$dto->getDiameter()),
+            'mount' => $dto->getMount(),
+            'ocular' => implode(Utils::DATA_CONCAT_GLUE, $dto->getOcular())
         ];
 
-        return array_filter($data, function($value) {
+        return array_filter($data, static function($value) {
             return (false === empty($value));
         });
     }

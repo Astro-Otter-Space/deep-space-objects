@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Event
  * @package App\Entity\ES
  */
-class Event extends AbstractEntity
+class Event
 {
     private static $listFieldsNoMapping = ['locale', 'fullUrl', 'elasticId'];
 

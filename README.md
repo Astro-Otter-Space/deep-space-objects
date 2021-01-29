@@ -1,5 +1,6 @@
 # Deep Space Objects
 Atlas for deep space objects (Symfony 4 / Elastic Search / Vue.js)
+Version 1.1.0
 
 Installation
 ==
@@ -81,7 +82,7 @@ Symfony app :
 ### Instal dependencies - PROD
 ```
 cd /path/to/project
-php72 composer.phar install --no-dev --optimize-autoloader
+php73 composer.phar install --no-dev --optimize-autoloader
 yarn install
 yarn encore prod
 ```
@@ -107,7 +108,7 @@ NB : not delete indexes if deployed in prod yet
 
 ### Create bulk from source
 ```
-php bin/console dso:convert-bulk <type>
+php bin/console dso:convert-bulk <type> --import=full|delta
 ```
 List of values for <type> : dso20, constellations
 
@@ -200,45 +201,43 @@ Sources :
 ### Add new DSO Data
 // {"create": {"_index": "deepspaceobjects", "_type": "_doc", "_id": "%randId%"}},
 ```
-    {
-      "id": "",
-      "catalog": null,
-      "updated_at": null,
-      "order": null,
-      "data": {
-        "desigs": [""],
-        "alt": {
-          "alt": "",
-          "alt_fr": "",
-          "alt_es": "",
-          "alt_de": "",
-          "alt_pt": "",
-          "alt_it": ""
-        },
-        "description": {
-            "description": "",
-            "description_fr": ""
-        },
-        "type": "",
-        "mag": 999,
-        "dim": "",
-        "const_id": "",
-        "cl": "",
-        "dist_al": null,
-        "discover": "",
-        "discover_year": 0,
-        "ra": "",
-        "dec": "",
-        "astrobin_id": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          0,
-          0
-        ]
-      }
-    }
+{
+  "id": "",
+  "catalog": null,
+  "updated_at": null,
+  "order": null,
+  "desigs": [""],
+  "alt": {
+    "alt": "",
+    "alt_fr": "",
+    "alt_es": "",
+    "alt_de": "",
+    "alt_pt": "",
+    "alt_it": ""
+  },
+  "description": {
+    "description": "",
+    "description_fr": ""
+  },
+  "type": "",
+  "mag": 999,
+  "dim": "",
+  "const_id": "",
+  "cl": "",
+  "dist_al": null,
+  "discover": "",
+  "discover_year": 0,
+  "ra": "",
+  "dec": "",
+  "astrobin_id": null,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      0,
+      0
+    ]
+  }
+}
  ```
 Conversion ra -> long :
 `long = (H + m/60 + s/3600)*15`

@@ -2,9 +2,7 @@
 
 namespace App\DataTransformer;
 
-use App\Entity\ES\Dso;
-use App\Entity\ES\Event;
-use App\Entity\ES\Observation;
+use App\Entity\DTO\DTOInterface;
 
 /**
  * Class AbstractDataTransformer
@@ -14,8 +12,9 @@ use App\Entity\ES\Observation;
 abstract class AbstractDataTransformer
 {
     /**
-     * @param Dso|Observation|Event $entity
+     * @param DTOInterface $dto
+     *
      * @return mixed
      */
-    abstract protected function toArray($entity);
+    abstract protected function longView(DTOInterface $dto);
 }

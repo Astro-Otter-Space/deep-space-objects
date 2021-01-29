@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\ES\AbstractEntity;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
+use App\Helpers\UrlGenerateHelper;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
@@ -15,6 +16,12 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Type;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class AbstractRepository
@@ -27,26 +34,34 @@ abstract class AbstractRepository
     /** @var Search  */
     protected $client;
 
-    const FROM = 0;
-    const SMALL_SIZE = 10;
-    const SIZE = 20;
-    const MAX_SIZE = 9999;
-    const SORT_ASC = 'asc';
-    const SORT_DESC = 'desc';
+    protected SerializerInterface $serializer;
+    protected UrlGenerateHelper $urlGeneratorHelper;
+
+    public const FROM = 0;
+    public const SMALL_SIZE = 10;
+    public const SIZE = 20;
+    public const MAX_SIZE = 9999;
+    public const SORT_ASC = 'asc';
+    public const SORT_DESC = 'desc';
 
     /**
      * AbstractRepository constructor.
+     *
      * @param Client $client
+     * @param SerializerInterface $serializer
+     * @param UrlGenerateHelper $urlGeneratorHelper
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, SerializerInterface $serializer, UrlGenerateHelper $urlGeneratorHelper)
     {
         $this->client = $client;
+        $this->serializer = $serializer;
+        $this->urlGeneratorHelper = $urlGeneratorHelper;
     }
 
     /**
      * @return mixed
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         if (is_null($this->locale)) {
             $this->locale = 'en';
@@ -59,10 +74,39 @@ abstract class AbstractRepository
      *
      * @return $this
      */
-    public function setLocale($locale)
+    public function setLocale($locale): AbstractRepository
     {
         $this->locale = $locale;
         return $this;
+    }
+
+    /**
+     * Build DTO from Entity from ElasticSearch Document
+     *
+     * @param Document $document
+     *
+     * @return DTOInterface
+     * @throws \JsonException
+     */
+    public function buildDTO(Document $document): DTOInterface
+    {
+        $entity = $this->getEntity();
+
+        $normalizer = [new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())];
+        $encoder = [new JsonEncoder()];
+        $serializer = new Serializer($normalizer, $encoder);
+
+        /** @var $object */
+        $object = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
+        $dto = $this->getDTO();
+
+        /** @var DTOInterface $dto */
+        $dto = new $dto($object, $this->getLocale(), $document->getId());
+        $dto
+            ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
+            ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
+
+        return $dto;
     }
 
     /**
@@ -73,11 +117,11 @@ abstract class AbstractRepository
      */
     protected function findById($id): ResultSet
     {
-        /** @var Constellation|Observation|Dso|AbstractEntity $entity */
+        /** @var Constellation|Observation|Dso $entity */
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
-        $this->client->getIndex($entity::getIndex());
+        $this->client->getIndex($this->getIndex());
 
         /** @var Query\Term $term */
         $matchQuery = new Query\Match();
@@ -87,18 +131,17 @@ abstract class AbstractRepository
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
-        return $search->addIndex($this->getType())->search($matchQuery);
+        return $search->addIndex($this->getIndex())->search($matchQuery);
     }
-
 
     /**
      * @param $searchTerm
      * @param $listSearchFields
      * @return ResultSet
      */
-    public function requestBySearchTerms($searchTerm, $listSearchFields)
+    public function requestBySearchTerms($searchTerm, $listSearchFields): ResultSet
     {
-        $this->client->getIndex($this->getType());
+        $this->client->getIndex($this->getIndex());
 
         /** @var Query\MultiMatch $query */
         $query = new Query\MultiMatch();
@@ -108,7 +151,7 @@ abstract class AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search->addIndex($this->getType());
+        $search->addIndex($this->getIndex());
 
         return $search->search($query);
     }
@@ -121,7 +164,7 @@ abstract class AbstractRepository
     public function addNewDocument(Document $document): Response
     {
         /** @var Index $elasticIndex */
-        $elasticIndex = $this->client->getIndex($this->getType());
+        $elasticIndex = $this->client->getIndex($this->getIndex());
         /** @var Type $elasticType */
         $elasticType = $elasticIndex->getType('_doc');
 
@@ -133,7 +176,6 @@ abstract class AbstractRepository
         return $response;
     }
 
-
     /**
      * @param $listItems
      *
@@ -143,7 +185,7 @@ abstract class AbstractRepository
     {
         /** @var Bulk $bulk */
         $bulk = new Bulk($this->client);
-        $bulk->setIndex($this->getType())->setType('_doc');
+        $bulk->setIndex($this->getIndex())->setType('_doc');
 
         foreach ($listItems as $doc) {
             /** @var Document $doc */
@@ -162,12 +204,12 @@ abstract class AbstractRepository
         $responseBulk = $bulk->send();
 
         // Refresh index
-        $this->client->getIndex($this->getType())->refresh();
+        $this->client->getIndex($this->getIndex())->refresh();
 
         return $responseBulk->isOk();
     }
 
     abstract protected function getEntity();
-
-    abstract protected function getType();
+    abstract protected function getDTO();
+    abstract protected function getIndex();
 }

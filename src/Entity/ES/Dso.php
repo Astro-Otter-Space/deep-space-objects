@@ -1,447 +1,430 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Entity\ES;
-
-use App\Classes\Utils;
-use App\Repository\DsoRepository;
-use AstrobinWs\Response\Image;
 
 /**
  * Class Dso
  * @package App\Entity
  */
-class Dso extends AbstractEntity
+class Dso
 {
-    private $locale;
+    /** @var string */
     private $id;
-    private $elasticId;
+
+    /** @var array|string */
     private $catalog;
-    private $desigs;
-    private $type;
-    private $mag;
-    private $constId;
-    private $alt;
-    private $description;
-    private $dim;
-    private $distAl;
-    private $discover;
-    private $discoverYear;
-    private $ra;
-    private $dec;
+
+    /** @var int */
+    private $order;
+
+    /** @var string */
     private $updatedAt;
+
+    /** @var array */
+    private $desigs;
+
+    /** @var array */
+    private $alt;
+
+    /** @var array */
+    private $description;
+
+    /** @var string */
+    private $type;
+
+    /** @var string */
+    private $constId;
+
+    /** @var float */
+    private $mag;
+
+    /** @var string */
+    private $dim;
+
+    /** @var string */
+    private $cl;
+
+    /** @var float */
+    private $distAl;
+
+    /** @var string */
+    private $discover;
+
+    /** @var float */
+    private $discoverYear;
+
+    /** @var string */
+    private $ra;
+
+    /** @var string */
+    private $dec;
+
+    /** @var string */
     private $astrobinId;
-    /** @var Image */
-    private $image;
-    private $fullUrl;
+
+    /** @var array */
     private $geometry;
-    private $hash;
-
-    private static $listFieldsNoMapping = ['locale', 'image', 'fullUrl', 'elasticId', 'order', 'data', 'hash'];
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    /**
-     * @param mixed $locale
-     * @return Dso
-     */
-    public function setLocale($locale): Dso
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param string $id
+     *
+     * @return Dso
      */
-    public function setId($id): void
+    public function setId(string $id): Dso
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
-     * @return mixed
-     */
-    public function getElasticId()
-    {
-        return $this->elasticId;
-    }
-
-    /**
-     * @param mixed $elasticId
-     */
-    public function setElasticId($elasticId): void
-    {
-        $this->elasticId = $elasticId;
-    }
-
-    /**
-     * @return mixed
+     * @return array|string
      */
     public function getCatalog()
     {
-        if (empty($this->catalog)) {
-            $this->catalog = [parent::UNASSIGNED];
-        }
-
-        if (!is_array($this->catalog)) {
-            $this->catalog = [$this->catalog];
-        }
-
         return $this->catalog;
     }
 
     /**
-     * @param mixed $catalog
+     * @param array|string|null $catalog
+     *
+     * @return Dso
      */
-    public function setCatalog($catalog): void
+    public function setCatalog($catalog): Dso
     {
         $this->catalog = $catalog;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDesigs()
-    {
-        if (!is_array($this->desigs)) {
-            $this->desigs = [$this->desigs];
-        }
-        return $this->desigs;
-    }
-
-    /**
-     * @param mixed $desigs
-     */
-    public function setDesigs($desigs): void
-    {
-        $this->desigs = $desigs;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type): void
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMag()
-    {
-        return $this->mag;
-    }
-
-    /**
-     * @param mixed $mag
-     */
-    public function setMag($mag): void
-    {
-        $this->mag = $mag;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getConstId()
-    {
-        return $this->constId;
-    }
-
-    /**
-     * @param mixed $constId
-     */
-    public function setConstId($constId): void
-    {
-        $this->constId = $constId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAlt()
-    {
-        return $this->alt;
-    }
-
-    /**
-     * @param mixed $alt
-     */
-    public function setAlt($alt): void
-    {
-        if (!$this->locale || 'en' === $this->locale) {
-            $this->alt = $alt['alt'];
-        } else {
-            $this->alt = $alt[sprintf('alt_%s', $this->locale)];
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param mixed $description
-     *
-     * @return Dso
-     */
-    public function setDescription($description): self
-    {
-        $this->description = $description;
-
-        if (!$this->locale || 'en' === $this->locale) {
-            $this->description = $description['description'];
-        } else {
-            $this->description = $description[sprintf('description_%s', $this->locale)];
-        }
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getDim()
+    public function getOrder(): ?int
     {
-        return $this->dim;
+        return $this->order;
     }
 
     /**
-     * @param mixed $dim
-     */
-    public function setDim($dim): void
-    {
-        $this->dim = $dim;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDistAl()
-    {
-        return $this->distAl;
-    }
-
-    /**
-     * @param mixed $distAl
-     */
-    public function setDistAl($distAl): void
-    {
-        $this->distAl = $distAl;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDiscover()
-    {
-        return $this->discover;
-    }
-
-    /**
-     * @param mixed $discover
-     */
-    public function setDiscover($discover): void
-    {
-        $this->discover = $discover;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDiscoverYear()
-    {
-        return $this->discoverYear;
-    }
-
-    /**
-     * @param mixed $discoverYear
-     */
-    public function setDiscoverYear($discoverYear): void
-    {
-        $this->discoverYear = $discoverYear;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRa()
-    {
-        return $this->ra;
-    }
-
-    /**
-     * @param mixed $ra
-     */
-    public function setRa($ra): void
-    {
-        $this->ra = $ra;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDec()
-    {
-        return $this->dec;
-    }
-
-    /**
-     * @param mixed $dec
-     */
-    public function setDec($dec): void
-    {
-        $this->dec = $dec;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAstrobinId()
-    {
-        return $this->astrobinId;
-    }
-
-    /**
-     * @param mixed $astrobinId
-     */
-    public function setAstrobinId($astrobinId): void
-    {
-        $this->astrobinId = $astrobinId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImage():? Image
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param Image $image
+     * @param int|string|null $order
      *
      * @return Dso
      */
-    public function setImage(Image $image): self
+    public function setOrder($order): Dso
     {
-        $this->image = $image;
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt():? \DateTime
-    {
-        if (is_string($this->updatedAt)) {
-            $this->updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
-        }
-
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     *
-     * @return Dso
-     */
-    public function setUpdatedAt($updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
+        $this->order = (int)$order;
         return $this;
     }
 
     /**
      * @return string
      */
-    public static function getIndex()
+    public function getUpdatedAt(): ?string
     {
-        return DsoRepository::INDEX_NAME;
+        return $this->updatedAt;
     }
 
     /**
-     * @return mixed
+     * @param string|null $updatedAt
+     *
+     * @return Dso
      */
-    public function getFullUrl()
+    public function setUpdatedAt(?string $updatedAt): Dso
     {
-        return $this->fullUrl;
-    }
-
-    /**
-     * @param mixed $fullUrl
-     */
-    public function setFullUrl($fullUrl): void
-    {
-        $this->fullUrl = $fullUrl;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGeometry()
-    {
-        return $this->geometry;
-    }
-
-    /**
-     * @param mixed $geometry
-     */
-    public function setGeometry($geometry): void
-    {
-        $this->geometry = $geometry;
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 
     /**
      * @return array
      */
-    public function getListFieldsNoMapping()
+    public function getDesigs(): ?array
     {
-        return self::$listFieldsNoMapping;
+        return $this->desigs;
     }
 
     /**
-     * @return mixed
+     * @param array|null $desigs
+     *
+     * @return Dso
      */
-    public function getHash()
+    public function setDesigs($desigs): Dso
     {
-        return $this->hash;
+        $this->desigs = (is_array($desigs)) ? $desigs: [$desigs];
+        return $this;
     }
 
     /**
-     * @param mixed $hash
+     * @return array
      */
-    public function setHash($hash): void
+    public function getAlt(): ?array
     {
-        $this->hash = $hash;
+        return $this->alt;
     }
 
+    /**
+     * @param array|null $alt
+     *
+     * @return Dso
+     */
+    public function setAlt(?array $alt): Dso
+    {
+        $this->alt = $alt;
+        return $this;
+    }
 
+    /**
+     * @return array
+     */
+    public function getDescription(): ?array
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param array|null $description
+     *
+     * @return Dso
+     */
+    public function setDescription(?array $description): Dso
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string|null $type
+     *
+     * @return Dso
+     */
+    public function setType(?string $type): Dso
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConstId(): ?string
+    {
+        return $this->constId;
+    }
+
+    /**
+     * @param string|null $constId
+     *
+     * @return Dso
+     */
+    public function setConstId(?string $constId): Dso
+    {
+        $this->constId = $constId;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMag(): ?float
+    {
+        return $this->mag;
+    }
+
+    /**
+     * @param float|null $mag
+     *
+     * @return Dso
+     */
+    public function setMag(?float $mag): Dso
+    {
+        $this->mag = $mag;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDim(): ?string
+    {
+        return $this->dim;
+    }
+
+    /**
+     * @param string|null $dim
+     *
+     * @return Dso
+     */
+    public function setDim(?string $dim): Dso
+    {
+        $this->dim = $dim;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCl(): ?string
+    {
+        return $this->cl;
+    }
+
+    /**
+     * @param string|null $cl
+     *
+     * @return Dso
+     */
+    public function setCl(?string $cl): Dso
+    {
+        $this->cl = $cl;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDistAl(): ?float
+    {
+        return $this->distAl;
+    }
+
+    /**
+     * @param float|null $distAl
+     *
+     * @return Dso
+     */
+    public function setDistAl(?float $distAl): Dso
+    {
+        $this->distAl = $distAl;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscover(): ?string
+    {
+        return $this->discover;
+    }
+
+    /**
+     * @param string|null $discover
+     *
+     * @return Dso
+     */
+    public function setDiscover(?string $discover): Dso
+    {
+        $this->discover = $discover;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscoverYear(): ?float
+    {
+        return $this->discoverYear;
+    }
+
+    /**
+     * @param float|null $discoverYear
+     *
+     * @return Dso
+     */
+    public function setDiscoverYear(?float $discoverYear): Dso
+    {
+        $this->discoverYear = $discoverYear;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRa(): ?string
+    {
+        return $this->ra;
+    }
+
+    /**
+     * @param string|null $ra
+     *
+     * @return Dso
+     */
+    public function setRa(?string $ra): Dso
+    {
+        $this->ra = $ra;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDec(): ?string
+    {
+        return $this->dec;
+    }
+
+    /**
+     * @param string|null $dec
+     *
+     * @return Dso
+     */
+    public function setDec(?string $dec): Dso
+    {
+        $this->dec = $dec;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAstrobinId(): ?string
+    {
+        return $this->astrobinId;
+    }
+
+    /**
+     * @param string|null $astrobinId
+     *
+     * @return Dso
+     */
+    public function setAstrobinId(?string $astrobinId): Dso
+    {
+        $this->astrobinId = $astrobinId;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGeometry(): ?array
+    {
+        return $this->geometry;
+    }
+
+    /**
+     * @param array|null $geometry
+     *
+     * @return Dso
+     */
+    public function setGeometry(?array $geometry): Dso
+    {
+        $this->geometry = $geometry;
+        return $this;
+    }
 }

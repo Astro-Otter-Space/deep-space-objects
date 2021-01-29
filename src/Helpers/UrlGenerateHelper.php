@@ -3,6 +3,9 @@
 namespace App\Helpers;
 
 use App\Classes\Utils;
+use App\Entity\DTO\ConstellationDTO;
+use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Event;
@@ -18,11 +21,9 @@ use Symfony\Component\Routing\RouterInterface;
  * Class UrlGenerateHelper
  * @package App\Helpers
  */
-class UrlGenerateHelper
+final class UrlGenerateHelper
 {
-
-    /** @var RouterInterface  */
-    private $router;
+    private RouterInterface $router;
 
     /**
      * UrlGenerateHelper constructor.
@@ -36,26 +37,27 @@ class UrlGenerateHelper
     /**
      * Build URL for entities
      *
-     * @param Dso|Constellation|Observation|Event $entity
-     * @param int $typeUrl
-     * @param string $locale
+     * @param DTOInterface $entity
+     * @param int|null $typeUrl
+     * @param string|null $locale
      *
      * @return string
      */
-    public function generateUrl($entity, $typeUrl = Router::ABSOLUTE_PATH, string $locale = null)
+    public function generateUrl(DTOInterface $entity, ?int $typeUrl, ?string $locale): string
     {
         $url = '';
-        if ($entity instanceof Dso
-            || $entity instanceof Constellation
-            || $entity instanceof Observation
-            || $entity instanceof Event
+        if ($entity instanceof DsoDTO
+            || $entity instanceof ConstellationDTO
+//            || $entity instanceof Observation
+//            || $entity instanceof Event
         ) {
             $id = strtolower($entity->getId());
-            switch ($entity::getIndex()) {
-                case DsoRepository::INDEX_NAME:
+
+            switch (get_class($entity)) {
+                case DsoDTO::class:
                     if (!empty($entity->getAlt())) {
                         $name = Utils::camelCaseUrlTransform($entity->getAlt());
-                        $id = implode(trim($entity::URL_CONCAT_GLUE), [$id, $name]);
+                        $id = implode(trim(Utils::URL_CONCAT_GLUE), [$id, $name]);
                     }
 
                     $route = "dso_show";
@@ -68,16 +70,14 @@ class UrlGenerateHelper
                     $url = $this->router->generate($route, $params, $typeUrl);
                     break;
 
-                case ConstellationRepository::INDEX_NAME:
+                case ConstellationDTO::class:
                     $route = "constellation_show";
 
-                    $name = Utils::camelCaseUrlTransform($entity->getAlt());
+                    $name = Utils::camelCaseUrlTransform($entity->title());
                     $params = ['id' => $id, 'name' => $name];
                     if (!is_null($locale)) {
-                        //$route = sprintf('%s.%s', $route, $locale);
                         $params = ['id' => $id, 'name' => $name, '_locale' => $locale];
                     }
-
 
                     if (!is_null($locale)) {
                         $route = sprintf('%s.%s', $route, $locale);
@@ -87,7 +87,7 @@ class UrlGenerateHelper
                     $url = $this->router->generate($route, $params, $typeUrl);
                     break;
 
-                case ObservationRepository::INDEX_NAME:
+               /* case ObservationRepository::INDEX_NAME:
                     $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
                     $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
                     break;
@@ -95,18 +95,12 @@ class UrlGenerateHelper
                 case EventRepository::INDEX_NAME:
                     $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
                     $url = $this->router->generate('event_show', ['name' => $name], $typeUrl);
-                    break;
+                    break;*/
 
                 default:
                     $url = $this->router->generate('homepage');
             }
         }
         return $url;
-    }
-
-    //todo
-    private function buildIdUrl($entity)
-    {
-
     }
 }

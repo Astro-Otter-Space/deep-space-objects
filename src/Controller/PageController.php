@@ -8,17 +8,11 @@ use App\Entity\BDD\Contact;
 use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
-use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
-use App\Service\SocialNetworks\WebServices\FacebookWs;
-use App\Service\SocialNetworks\WebServices\TwitterWs;
-use AstrobinWs\Exceptions\WsException;
 use Doctrine\Common\Persistence\ObjectManager;
-use Facebook\Exceptions\FacebookSDKException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -36,27 +30,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class PageController extends AbstractController
 {
-
-    /** @var DsoRepository */
-    private $dsoRepository;
-
-    /** @var TranslatorInterface */
-    private $translatorInterface;
-
-    /** @var LoggerInterface */
-    private $logger;
+    private DsoRepository $dsoRepository;
+    private TranslatorInterface $translator;
+    private LoggerInterface $logger;
 
     /**
      * PageController constructor.
      *
      * @param DsoRepository $dsoRepository
-     * @param TranslatorInterface $translatorInterface
+     * @param TranslatorInterface $translator
      * @param LoggerInterface $logger
      */
-    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translatorInterface, LoggerInterface $logger)
+    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translator, LoggerInterface $logger)
     {
         $this->dsoRepository = $dsoRepository;
-        $this->translatorInterface = $translatorInterface;
+        $this->translator = $translator;
         $this->logger = $logger;
     }
 
@@ -71,7 +59,6 @@ class PageController extends AbstractController
      *
      * @param Request $request
      * @param MailService $mailService
-     *
      * @param string $receiverMail
      *
      * @return Response
@@ -99,7 +86,6 @@ class PageController extends AbstractController
             if ($contactForm->isValid()) {
                 /** @var Contact $contactData */
                 $contactData = $contactForm->getData();
-
                 $contactData->setLabelCountry(Countries::getName($contactData->getCountry(), $request->getLocale()));
 
                 $templates = [
@@ -107,7 +93,7 @@ class PageController extends AbstractController
                     'text' => 'includes/emails/contact.txt.twig'
                 ];
 
-                $subject = '[Contact] - ' . $this->translatorInterface->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
+                $subject = '[Contact] - ' . $this->translator->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
                 $content['contact'] = $contactData;
 
                 try {
@@ -160,17 +146,17 @@ class PageController extends AbstractController
         /** @var RouterInterface $router */
         $router = $this->get('router');
 
-        $result['title'] = $this->translatorInterface->trans('legal_notice.title');
-        $result['first_line'] = $this->translatorInterface->trans('legal_notice.line_first', ['%dso%' => $this->translatorInterface->trans('dso')]);
-        $result['second_line'] = $this->translatorInterface->trans('legal_notice.line_sec');
+        $result['title'] = $this->translator->trans('legal_notice.title');
+        $result['first_line'] = $this->translator->trans('legal_notice.line_first', ['%dso%' => $this->translator->trans('dso')]);
+        $result['second_line'] = $this->translator->trans('legal_notice.line_sec');
         $result['host'] = [
-            'name' => $this->translatorInterface->trans('legal_notice.host.name'),
-            'adress' => $this->translatorInterface->trans('legal_notice.host.adress'),
-            'cp' => $this->translatorInterface->trans('legal_notice.host.cp'),
-            'city' => $this->translatorInterface->trans('legal_notice.host.city'),
-            'country' => $this->translatorInterface->trans('legal_notice.host.country')
+            'name' => $this->translator->trans('legal_notice.host.name'),
+            'adress' => $this->translator->trans('legal_notice.host.adress'),
+            'cp' => $this->translator->trans('legal_notice.host.cp'),
+            'city' => $this->translator->trans('legal_notice.host.city'),
+            'country' => $this->translator->trans('legal_notice.host.country')
         ];
-        $result['third_line'] = $this->translatorInterface->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translatorInterface->trans('contact.title')]);
+        $result['third_line'] = $this->translator->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translator->trans('contact.title')]);
 
         /** @var Response $response */
         $response = $this->render('pages/random.html.twig', $result);
@@ -196,7 +182,6 @@ class PageController extends AbstractController
     public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $isValid = false;
-        /** @var ApiUser $apiUser */
         $apiUser = new ApiUser();
 
         $optionsForm = [
@@ -204,7 +189,6 @@ class PageController extends AbstractController
             'action' => $this->get('router')->generate('help_api_page', ['_locale' => $request->getLocale()])
         ];
 
-        /** @var FormInterface $registerApiUserForm */
         $registerApiUserForm = $this->createForm(RegisterApiUsersFormType::class, $apiUser, $optionsForm);
 
         $registerApiUserForm->handleRequest($request);
@@ -254,19 +238,18 @@ class PageController extends AbstractController
      */
     public function download(Request $request): StreamedResponse
     {
-        $nbItems = 0;
-        $data = $filters = [];
+        $filters = [];
 
         $header = [
             'Id',
-            $this->translatorInterface->trans('desigs'),
+            $this->translator->trans('desigs'),
             'Name',
-            $this->translatorInterface->trans('type'),
+            $this->translator->trans('type'),
             'Constellation',
-            $this->translatorInterface->trans('magnitude'),
-            $this->translatorInterface->trans('ra'),
-            $this->translatorInterface->trans('dec'),
-            $this->translatorInterface->trans('distAl')
+            $this->translator->trans('magnitude'),
+            $this->translator->trans('ra'),
+            $this->translator->trans('dec'),
+            $this->translator->trans('distAl')
         ];
 
         // Retrieve list filters
@@ -274,12 +257,12 @@ class PageController extends AbstractController
             $authorizedFilters = $this->dsoRepository->getListAggregates(true);
 
             // Removed unauthorized keys
-            $filters = array_filter($request->query->all(), function($key) use($authorizedFilters) {
-                return in_array($key, $authorizedFilters);
+            $filters = array_filter($request->query->all(), static function($key) use($authorizedFilters) {
+                return in_array($key, $authorizedFilters, true);
             }, ARRAY_FILTER_USE_KEY);
 
             // Sanitize data (todo : try better)
-            array_walk($filters, function (&$value, $key) {
+            array_walk($filters, static function (&$value, $key) {
                 $value = filter_var($value, FILTER_SANITIZE_STRING);
             });
         }
@@ -288,9 +271,9 @@ class PageController extends AbstractController
         $data = array_map(function(Dso $dso) {
             return [
                 $dso->getId(),
-                implode(Dso::COMA_GLUE, array_filter($dso->getDesigs())),
+                implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getAlt(),
-                $this->translatorInterface->trans(sprintf('type.%s', $dso->getType())),
+                $this->translator->trans(sprintf('type.%s', $dso->getType())),
                 $dso->getConstId(),
                 $dso->getMag(),
                 $dso->getRa(),
@@ -331,11 +314,7 @@ class PageController extends AbstractController
      */
     public function skymap(): Response
     {
-        $params = [];
-
-
-        /** @var Response $response */
-        $response = $this->render('pages/skymap.html.twig', $params);
+        $response = $this->render('pages/skymap.html.twig', []);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
 
         return $response;
@@ -348,7 +327,7 @@ class PageController extends AbstractController
      * }, name="help_astro-otter")
      *
      * @param Request $request
-     * @param string $paypalLink
+     * @param string|null $paypalLink
      * @param string|null $tipeeeLink
      *
      * @return Response
@@ -373,57 +352,11 @@ class PageController extends AbstractController
         ];
 
 
-        /** @var Response $response */
         $response = $this->render('pages/support.html.twig', $params);
         //$response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
 
         return $response;
     }
-
-
-    /**
-     * @Route("/facebook", name="facebook_test")
-     * @param FacebookWs $facebookWs
-     *
-     * @return Response
-     * @throws FacebookSDKException
-     */
-    public function testFacebook(FacebookWs $facebookWs): Response
-    {
-        $post = $facebookWs->getPost(null);
-
-        return new Response();
-    }
-
-
-    /**
-     * @param TwitterWs $twitterWs
-     * @param DsoManager $dsoManager
-     *
-     * @param RouterInterface $router
-     *
-     * @return Response
-     * @throws WsException
-     * @throws \ReflectionException
-     * @Route("/twitter", name="twiiter_test")
-     */
-    public function testTwitter(TwitterWs $twitterWs, DsoManager $dsoManager, RouterInterface $router): Response
-    {
-        $id = 'm42';
-
-        $dso = $dsoManager->buildDso($id);
-
-        $title = $dsoManager->buildTitle($dso);
-        $url = $dsoManager->getDsoUrl($dso, Router::ABSOLUTE_URL);
-        $image = null; //$dso->getImage();
-
-        $tweet = $twitterWs->postLink($title, $url, $image);
-
-        /** @var Response $response */
-        $response = new Response();
-        return $response;
-    }
-
 
     /**
      * @Route("/notindexed", name="not_indexed")
@@ -438,7 +371,7 @@ class PageController extends AbstractController
         $limit = 313;
         $i = 1;
 
-        $fullArray = array_map(function($i) {
+        $fullArray = array_map(static function($i) {
             return sprintf('Sh2-%d', $i);
         }, range(1, $limit, $i));
 
@@ -446,17 +379,17 @@ class PageController extends AbstractController
         $results = $dsoRepository->getObjectsCatalogByFilters(0,['catalog' => 'sh'], 1000);
         /** @var Dso $dso */
         foreach ($results[0] as $dso) {
-            if (0 === strpos(strtolower($dso->getId()), 'sh')) {
-                array_push($data, $dso->getId());
+            if (0 === stripos($dso->getId(), 'sh')) {
+                $data[] = $dso->getId();
             } else {
                 $item = preg_grep('/^Sh2-\d*/', $dso->getDesigs());
                 if (false !== reset($item)) {
-                    array_push($data, reset($item));
+                    $data[] = reset($item);
                 }
             }
         }
 
-        usort($data, function($a, $b) {
+        usort($data, static function($a, $b) {
             [, $nA] = explode('-', $a);
             [, $nB] = explode('-', $b);
 

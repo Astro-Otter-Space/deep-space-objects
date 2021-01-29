@@ -17,7 +17,7 @@ class ListEvents implements \IteratorAggregate
     /**
      * @param Event $event
      */
-    public function addEvent(Event $event)
+    public function addEvent(Event $event): void
     {
         $this->listEvents[] = $event;
     }

@@ -26,7 +26,7 @@ class UserProvider implements UserProviderInterface
      *
      * @throws UsernameNotFoundException if the user is not found
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): UserInterface
     {
         // Load a User object from your data source or throw UsernameNotFoundException.
         // The $username argument may not actually be a username:
@@ -48,7 +48,7 @@ class UserProvider implements UserProviderInterface
      *
      * @return UserInterface
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
@@ -62,7 +62,7 @@ class UserProvider implements UserProviderInterface
     /**
      * Tells Symfony to use this provider for this User class.
      */
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return User::class === $class;
     }

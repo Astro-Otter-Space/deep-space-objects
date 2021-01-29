@@ -23,7 +23,7 @@
       <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <!--Search-->
         <li v-if="!this.isHome">
-          <a v-on:click="displaySearchHeader(hide)" v-bind:title="searchPlaceholder">
+          <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
             <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
@@ -57,20 +57,10 @@
           </ul>
         </li>
 
-        <!-- Observations -->
         <li class="header__drop" data-hide="mobile">
-          <a v-on:click="displayDropMenu" v-bind:title="titleObservation">
-            <svgicon name="telescop" width="30" height="30" color="#e9e9e9"></svgicon>
+          <a v-bind:title="constellation.label" v-bind:href="constellation.path">
+            <svgicon name="constellation" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
-
-          <ul class="header__drop_menu">
-            <li v-for="menu in menuObservations" >
-              <a v-bind:href="menu.path" v-bind:title="menu.label">
-                <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-                <span>{{ menu.label }}</span>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <!-- Dark/day mod -->
@@ -117,7 +107,7 @@
   let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuMobile);
   let notification = JSON.parse(document.getElementById('appHeader').dataset.notification);
   let menuData = JSON.parse(document.getElementById('appHeader').dataset.menuData);
-  let menuObservations = JSON.parse(document.getElementById('appHeader').dataset.menuObservation);
+  let constellation = JSON.parse(document.getElementById('appHeader').dataset.constellation);
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
@@ -136,11 +126,11 @@
   });
 
   let KEY_THEME = 'theme';
-  var themeLocalStorage = {
-    fetch: function() {
+  const themeLocalStorage = {
+    fetch: function () {
       return localStorage.getItem(KEY_THEME) || 'moon';
     },
-    save: function(theme) {
+    save: function (theme) {
       localStorage.setItem(KEY_THEME, theme);
     }
   };
@@ -156,9 +146,9 @@
         homepageRoute: homeRoute,
         leftSideMenu: leftSideMenu,
         notification: notification,
+        constellation: constellation,
         isNewData: false,
         menuData: menuData,
-        menuObservations: menuObservations,
         title: labelsTrans.title,
         listLocales: listLocales,
         currentLocale: currentLocale,
@@ -178,7 +168,6 @@
         titleSwitchLang: labelsTrans.switchLang,
         // titleSwitchMode: labelsTrans.nightMode,
         titleData: labelsTrans.titleData,
-        titleObservation: labelsTrans.titleObservation,
         isMobile: deviceDetect.isMobileOnly
       }
     },
@@ -204,8 +193,8 @@
           }
 
           // because of click on svg, we need to access to grandParent and not parent
-          var drop_menus = document.getElementsByClassName("header__drop_menu");
-          var drop_menu = item.getElementsByClassName("header__drop_menu")[0];
+          const drop_menus = document.getElementsByClassName("header__drop_menu");
+          const drop_menu = item.getElementsByClassName("header__drop_menu")[0];
 
           Array.from(drop_menus).forEach(function(e) {
             if(e !== drop_menu){
@@ -235,11 +224,7 @@
         }
       },
       isHomepage: function() {
-        if(this.currentRoute === this.homeRoute) {
-          this.isHome = true;
-        } else {
-          this.isHome = false
-        }
+        this.isHome = this.currentRoute === this.homeRoute;
       },
       openSlideMenu: function () {
         this.$refs.slideMenu.$children[0].openMenu();
@@ -256,12 +241,12 @@
   }
 
   function closeAllMenu() {
-    var lis = document.getElementById("headerMenu").getElementsByTagName("li");
+    const lis = document.getElementById("headerMenu").getElementsByTagName("li");
     Array.from(lis).forEach(function(e){
       e.style.marginTop = 0;
     });
 
-    var drop_menus = document.getElementsByClassName("header__drop_menu");
+    const drop_menus = document.getElementsByClassName("header__drop_menu");
     Array.from(drop_menus).forEach(function(e){
       e.classList.remove("header__display");
     });

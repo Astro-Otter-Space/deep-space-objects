@@ -3,7 +3,7 @@ import geo from './../../node_modules/d3-celestial/lib/d3.geo.projection.min';
 import { color } from './legendSkyMap';
 import Celestial from 'd3-celestial/celestial.min';
 
-var MAP_MODULE = (function(c, constId, color) {
+const MAP_MODULE = (function (c, constId, color) {
 
   let PROXIMITY_LIMIT = 20;
 
@@ -26,7 +26,7 @@ var MAP_MODULE = (function(c, constId, color) {
       colors: true,
       names: true,
       proper: true,
-      style: { fill: "#ffffff", opacity: 1 },
+      style: {fill: "#ffffff", opacity: 1},
       namelimit: 2,
       limit: 8,
       size: 5,
@@ -41,29 +41,29 @@ var MAP_MODULE = (function(c, constId, color) {
       namelimit: 1000,
       symbols: {  //DSO symbol styles, 'stroke'-parameter present = outline
         // Galaxies
-        gg: { shape: "circle", fill: color.gc }, // Galaxy cluster
-        g: { shape: "ellipse", fill: color.g },  // Generic galaxy
-        s: { shape: "ellipse", fill: color.s },  // Spiral galaxy
-        s0: { shape: "ellipse", fill: color.s0 }, // Lenticular galaxy
-        sd: { shape: "ellipse", fill: color.sd },  // Dwarf galaxy
-        e: { shape: "ellipse", fill: color.e }, // Elliptical galaxy
-        i: { shape: "ellipse", fill: color.i }, // Irregular galaxy
+        gg: {shape: "circle", fill: color.gc}, // Galaxy cluster
+        g: {shape: "ellipse", fill: color.g},  // Generic galaxy
+        s: {shape: "ellipse", fill: color.s},  // Spiral galaxy
+        s0: {shape: "ellipse", fill: color.s0}, // Lenticular galaxy
+        sd: {shape: "ellipse", fill: color.sd},  // Dwarf galaxy
+        e: {shape: "ellipse", fill: color.e}, // Elliptical galaxy
+        i: {shape: "ellipse", fill: color.i}, // Irregular galaxy
         // Cluster
-        oc: { shape: "circle", fill: color.oc, stroke: color.oc, width: 1.5 },
-        gc: { shape: "circle", fill: color.gc, stroke: color.gc, width: 2  },
+        oc: {shape: "circle", fill: color.oc, stroke: color.oc, width: 1.5},
+        gc: {shape: "circle", fill: color.gc, stroke: color.gc, width: 2},
         // Nebula
-        en: { shape: "square", fill: color.en },
-        rn: { shape: "square", fill: color.rn },
-        pn: { shape: "diamond", fill: color.pn },
-        snr: { shape: "diamond", fill: color.snr },
-        sfr: { shape: "square", fill: color.sfr, stroke: color.sfr, width: 2 },
+        en: {shape: "square", fill: color.en},
+        rn: {shape: "square", fill: color.rn},
+        pn: {shape: "diamond", fill: color.pn},
+        snr: {shape: "diamond", fill: color.snr},
+        sfr: {shape: "square", fill: color.sfr, stroke: color.sfr, width: 2},
 
-        bn: { shape: "square", fill: color.bn, stroke: color.bn, width: 2 }, // Generic bright nebula
-        dn: { shape: "square", fill: color.dn, stroke: color.dn, width: 2 },               // Dark nebula grey
+        bn: {shape: "square", fill: color.bn, stroke: color.bn, width: 2}, // Generic bright nebula
+        dn: {shape: "square", fill: color.dn, stroke: color.dn, width: 2},               // Dark nebula grey
         // TODO : bipolar nebula
         // Other
-        pos: { shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5 }              // Generic marker
-       }
+        pos: {shape: "marker", fill: "#cccccc", stroke: "#cccccc", width: 1.5}              // Generic marker
+      }
     },
     // CONSTELLATIONS
     constellations: {
@@ -77,15 +77,15 @@ var MAP_MODULE = (function(c, constId, color) {
           "11px Helvetica, Arial, sans-serif"]
       },// ranked constellations
       lines: true,   // Show constellation lines, style below
-      linestyle: { stroke: "#cccccc", width: 1, opacity: 0.6 },
+      linestyle: {stroke: "#cccccc", width: 1, opacity: 0.6},
       bounds: true, // Show constellation boundaries, style below
-      boundstyle: { stroke: "#cccc00", width: 0.5, opacity: 0.8, dash: [2, 4] }
+      boundstyle: {stroke: "#cccc00", width: 0.5, opacity: 0.8, dash: [2, 4]}
     },
     // MILKY WAY
     mw: {
       show: true,
       data: 'mw.json',
-      style: { fill: "#ffffff", opacity: 0.15 }
+      style: {fill: "#ffffff", opacity: 0.15}
     },
     /**planets: {
       show: false,
@@ -96,11 +96,11 @@ var MAP_MODULE = (function(c, constId, color) {
       graticule: {
         show: true, stroke: "#cccccc", width: 0.6, opacity: 0.8,
         // grid values: "outline", "center", or [lat,...] specific position
-        lon: { pos: [""], fill: "#eee", font: "10px Helvetica, Arial, sans-serif" },
+        lon: {pos: [""], fill: "#eee", font: "10px Helvetica, Arial, sans-serif"},
         // grid values: "outline", "center", or [lon,...] specific position
-        lat: { pos: [""], fill: "#eee", font: "10px Helvetica, Arial, sans-serif" }
+        lat: {pos: [""], fill: "#eee", font: "10px Helvetica, Arial, sans-serif"}
       },
-      equatorial: { show: false, stroke: "#aaaaaa", width: 1.3, opacity: 0.7 },
+      equatorial: {show: false, stroke: "#aaaaaa", width: 1.3, opacity: 0.7},
     },
     // BACKGROUND
     background: {
@@ -126,7 +126,7 @@ var MAP_MODULE = (function(c, constId, color) {
    * @returns {number}
    */
   function distance(p1, p2) {
-    var d1 = p2[0] - p1[0],
+    const d1 = p2[0] - p1[0],
       d2 = p2[1] - p1[1];
     return Math.sqrt(d1 * d1 + d2 * d2);
   }
@@ -138,32 +138,33 @@ var MAP_MODULE = (function(c, constId, color) {
    */
   function buildMap(zoom, jsonDso) {
     if (jsonDso !== undefined && "" !== jsonDso) {
-      var pointStyle = {
+      const pointStyle = {
           stroke: "rgba(255, 0, 204, 1)",
           fill: "rgba(255, 0, 204, 0.15)"
         },
         textStyle = {
-          fill:"rgba(255, 0, 204, 1)",
+          fill: "rgba(255, 0, 204, 1)",
           font: "normal bold 15px Helvetica, Arial, sans-serif",
           align: "left",
           baseline: "bottom"
         };
 
-      c.add({type: "raw", callback: function(error, json) {
-        if (error) return console.warn("WARNING CELESTAL : " + error.message);
+      c.add({
+        type: "raw", callback: function (error, json) {
+          if (error) return console.warn("WARNING CELESTAL : " + error.message);
 
-        var dso = c.getData(jsonDso, config.transform);
-        c.container.selectAll(".dsos")
-          .data(dso.features)
-          .enter().append("path")
-          .attr("class", "dso");
-        c.redraw();
+          const dso = c.getData(jsonDso, config.transform);
+          c.container.selectAll(".dsos")
+            .data(dso.features)
+            .enter().append("path")
+            .attr("class", "dso");
+          c.redraw();
         },
-        redraw: function() {
+        redraw: function () {
           //var m = c.metrics(),
           //quadtree = d3.geom.quadtree().extent([[-1, -1], [m.width + 1, m. height + 1]])([]);
 
-          c.container.selectAll(".dsos").each(function(d) {
+          c.container.selectAll(".dsos").each(function (d) {
             if (c.clip(d.geometry.coordinates)) {
               // get point coordinates
               var pt = c.mapProjection(d.geometry.coordinates);
@@ -208,7 +209,6 @@ var MAP_MODULE = (function(c, constId, color) {
     } else {
       c.display(config);
     }
-
   }
 
   return {

@@ -24,9 +24,7 @@ class CurlService
     /** @var  */
     private $env;
 
-    const GET_REQUEST = 'GET';
-
-    const POST_REQUEST = 'POST';
+    public const GET_REQUEST = 'GET';
 
     /**
      * CurlService constructor.

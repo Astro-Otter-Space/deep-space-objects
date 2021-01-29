@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Classes\Utils;
+use App\Entity\DTO\DsoDTO;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use Elastica\Aggregation\Range;
@@ -10,6 +12,7 @@ use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Result;
+use Elastica\ResultSet;
 use Elastica\Search;
 
 /**
@@ -18,17 +21,17 @@ use Elastica\Search;
  */
 class DsoRepository extends AbstractRepository
 {
-    private static $listSearchFields = [
+    private static array $listSearchFields = [
         'id',
         'id.raw',
-        'data.desigs',
-        'data.alt.alt',
-        'data.discover'
+        'desigs',
+        'alt.alt',
+        'discover'
     ];
 
-    private static $listAggregates = [
+    private static array $listAggregates = [
         'constellation' => [
-            'field' => 'data.const_id.keyword',
+            'field' => 'const_id.keyword',
             'size' => 100
         ],
         'catalog' => [
@@ -36,14 +39,14 @@ class DsoRepository extends AbstractRepository
             'size' => 100
         ],
         'type' => [
-            'field' => 'data.type.keyword',
+            'field' => 'type.keyword',
             'size' => 100
         ]
     ];
 
-    private static $listAggregatesRange = [
+    private static array $listAggregatesRange = [
         'magnitude' => [
-            'field' => 'data.mag',
+            'field' => 'mag',
             'ranges' => [
                 ['to' => 5, 'key' => 'low'],
                 ['from' => 5, 'to' => 10, 'key' => 'average'],
@@ -53,9 +56,9 @@ class DsoRepository extends AbstractRepository
         ]
     ];
 
-    const INDEX_NAME = 'deepspaceobjects';
+    public const INDEX_NAME = 'deepspaceobjects';
 
-    const ASTROBIN_FIELD = 'data.astrobin_id';
+    public const ASTROBIN_FIELD = 'astrobin_id';
 
     /**
      * Get aggregates proprieties
@@ -63,58 +66,54 @@ class DsoRepository extends AbstractRepository
      *
      * @return array
      */
-    public function getListAggregates($onlyKeys = false)
+    public function getListAggregates($onlyKeys = false): array
     {
         if ($onlyKeys) {
             return array_merge(array_keys(self::$listAggregates), array_keys(self::$listAggregatesRange));
-        } else {
-            return self::$listAggregates;
         }
+
+        return self::$listAggregates;
     }
 
     /**
      * Retrieve object by his Id
      *
-     * @param $id
-     * @param boolean $hydrate
-     * @return Dso|Document|null
-     * @throws \ReflectionException
+     * @param string $id
+     *
+     * @return DTOInterface|null
+     * @throws \JsonException
      */
-    public function getObjectById($id, $hydrate = true)
+    public function getObjectById(string $id): ?DTOInterface
     {
+        /** @var ResultSet $resultDocument */
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
-            if ($hydrate) {
-                return $this->buildEntityFromDocument($resultDocument->getDocuments()[0]);
-            } else {
-                return $resultDocument->getDocuments()[0];
-            }
-        } else {
-            return null;
+            $document = $resultDocument->getDocuments()[0];
+            return $this->buildEntityFromDocument($document);
         }
+        return null;
     }
 
     /**
      * Retrieve  list of Dso objects in a constellation
-     * @param $constId
-     * @param null $excludedId
-     * @param int $offset
-     * @param int $limit
-     * @param bool $hydrate
-     * @return ListDso|array
-     * @throws \ReflectionException
+     *
+     * @param string $constId
+     * @param string|null $excludedId
+     * @param int|null $offset
+     * @param int|null $limit
+     *
+     * @return array
      */
-    public function getObjectsByConstId($constId, $excludedId = null, $offset, $limit, $hydrate = true)
+    public function getObjectsByConstId(string $constId, ?string $excludedId, ?int $offset, ?int $limit): array
     {
-        if (empty($offset) || is_null($offset)) {
+        if (is_null($offset )) {
             $offset = parent::FROM;
         }
 
-        if (empty($limit) || is_null($limit)) {
+        if (is_null($limit)) {
             $limit = (int)parent::SIZE;
         }
-        /** @var ListDso $dsoList */
-        $dsoList = new ListDso();
+
         $this->client->getIndex(self::INDEX_NAME);
 
         /** @var Query $query */
@@ -122,7 +121,7 @@ class DsoRepository extends AbstractRepository
 
         /** @var Query\Term $mustQuery */
         $mustQuery = new Query\Term();
-        $mustQuery->setTerm('data.const_id', strtolower($constId));
+        $mustQuery->setTerm('const_id', strtolower($constId));
 
         $mustNotQuery = new Query\Term();
         $mustNotQuery->setTerm('id', strtolower($excludedId));
@@ -133,12 +132,10 @@ class DsoRepository extends AbstractRepository
             ->addMustNot($mustNotQuery);
 
         $query->setQuery($boolQuery);
-
         $query->setFrom($offset)->setSize($limit);
-
         $query->addSort(
             [
-                'data.mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
+                'mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
             ]
 
         );
@@ -147,29 +144,22 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $search = $search->addIndex(self::INDEX_NAME)->search($query);
 
+        $listDsoId = [];
         if (0 < $search->count()) {
-            if (false === $hydrate) {
-                return $search->getDocuments();
-            }
             foreach ($search->getDocuments() as $document) {
-                $dsoList->addDso($this->buildEntityFromDocument($document));
+                $listDsoId[] = $document->getData()['id'];
             }
         }
 
-        return $dsoList;
+        return $listDsoId;
     }
 
     /**
      * Get last updated items
-     *
-     * @return ListDso
-     * @throws \ReflectionException
+     * @return array
      */
-    public function getLastUpdated(): ListDso
+    public function getLastUpdated(): array
     {
-        /** @var ListDso $dsoList */
-        $dsoList = new ListDso();
-
         /** @var Query $query */
         $query = new Query();
 
@@ -179,39 +169,33 @@ class DsoRepository extends AbstractRepository
         ]);
 
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+        $result = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $search->count()) {
-            foreach ($search->getDocuments() as $document) {
-                $dsoList->addDso($this->buildEntityFromDocument($document));
-            }
-        }
-
-        return $dsoList;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
      * Search autocomplete
      *
      * @param $searchTerm
+     *
      * @return array
      */
     public function getObjectsBySearchTerms($searchTerm): array
     {
-        $list = [];
+        $listDsoId = [];
         if ('en' !== $this->getLocale()) {
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s', $this->getLocale()));
-            array_push(self::$listSearchFields, sprintf('data.alt.alt_%s.keyword', $this->getLocale()));
+            self::$listSearchFields[] = sprintf('alt_%s', $this->getLocale());
+            self::$listSearchFields[] = sprintf('alt_%s.keyword', $this->getLocale());
         }
 
         $result = $this->requestBySearchTerms($searchTerm, self::$listSearchFields);
-        if (0 < $result->getTotalHits()) {
-            $list = array_map(function(Result $doc) {
-                return $this->buildEntityFromDocument($doc->getDocument());
-            }, $result->getResults());
-        }
 
-        return $list;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $result->getResults());
     }
 
     /**
@@ -223,13 +207,11 @@ class DsoRepository extends AbstractRepository
      * @param int|null $to
      * @param bool $hydrate
      * @return array
-     * @throws \ReflectionException
      */
-    public function getObjectsCatalogByFilters($from = 0, $filters = [], $to = null, $hydrate = true): array
+    public function getObjectsCatalogByFilters(int $from, array $filters, ?int $to, ?bool $hydrate): array
     {
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
-        $nbItems = 0;
 
         /** @var Query $query */
         $query = new Query();
@@ -250,11 +232,15 @@ class DsoRepository extends AbstractRepository
                 $field = ('magnitude' === $type) ? self::$listAggregatesRange[$type]['field'] : self::$listAggregates[$type]['field'];
 
                 if ('magnitude' === $type) {
-                    $keyRange = array_search($val , array_column(self::$listAggregatesRange[$type]['ranges'], 'key'));
+                    $keyRange = array_search($val, array_column(self::$listAggregatesRange[$type]['ranges'], 'key'), true);
                     $range = self::$listAggregatesRange[$type]['ranges'][$keyRange];
 
-                    if (array_key_exists('to', $range)) $paramRange['lte'] =  $range['to'];
-                    if (array_key_exists('from', $range)) $paramRange['gte'] =  $range['from'];
+                    if (array_key_exists('to', $range)) {
+                        $paramRange['lte'] = $range['to'];
+                    }
+                    if (array_key_exists('from', $range)) {
+                        $paramRange['gte'] = $range['from'];
+                    }
 
                     $rangeQuery->addField($field, $paramRange);
 
@@ -275,13 +261,13 @@ class DsoRepository extends AbstractRepository
 
         // Sort
         $query->addSort([
-            'order' => [
+            'order.keyword' => [
                 'order' => parent::SORT_ASC
             ]
         ]);
 
         // Aggregates
-        array_walk(self::$listAggregates, function($tab, $type) use($query) {
+        array_walk(self::$listAggregates, static function($tab, $type) use($query) {
             /** @var Terms $aggregation */
             $aggregation = new Terms($type);
             $aggregation->setField($tab['field']);
@@ -291,7 +277,7 @@ class DsoRepository extends AbstractRepository
         });
 
         // Aggregates range
-        array_walk(self::$listAggregatesRange, function ($tab, $type) use ($query){
+        array_walk(self::$listAggregatesRange, static function ($tab, $type) use ($query){
             /** @var Range $aggregateRange */
             $aggregationRange = new Range($type);
             $aggregationRange->setField($tab['field']);
@@ -308,42 +294,39 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
-        $nbItems = $search->getTotalHits();
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $nbItems = $results->getTotalHits();
 
         if (false === $hydrate) {
-            return [$search->getDocuments(), $nbItems];
+            return [$results->getDocuments(), $nbItems];
         }
 
-        /** @var ListDso $listDso */
-        $listDso = new ListDso();
-        foreach ($search->getDocuments() as $doc) {
-            $listDso->addDso($this->buildEntityFromDocument($doc));
-        }
+        $listDsoId = array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
 
         $listAggregations = [];
-        foreach ($search->getAggregations() as $type=>$aggregations) {
-            $listAggregations[$type] = array_map(function($item) {
+        foreach ($results->getAggregations() as $type=>$aggregations) {
+            $listAggregations[$type] = array_map(static function($item) {
                 return [$item['key'] => $item['doc_count']];
             }, $aggregations['buckets']);
         }
 
         $listSort = $this->getListAggregates(true);
-        uksort($listAggregations, function ($k1, $k2) use ($listSort) {
-            return ((array_search($k1, $listSort) > array_search($k2, $listSort)) ? 1 : -1);
+        uksort($listAggregations, static function ($k1, $k2) use ($listSort) {
+            return ((array_search($k1, $listSort, true) > array_search($k2, $listSort, true)) ? 1 : -1);
         });
 
-        return [$listDso, $listAggregations, $nbItems];
+        return [$listDsoId, $listAggregations, $nbItems];
     }
 
     /**
      * Retrieve last updated Dso
-     * @param \DateTimeInterface $lastUpdate
      *
-     * @return ListDso
-     * @throws \Exception
+     * @param \DateTimeInterface $lastUpdate
+     * @return array
      */
-    public function getObjectsUpdatedAfter(\DateTimeInterface $lastUpdate): ListDso
+    public function getUpdatedAfter(\DateTimeInterface $lastUpdate): array
     {
         /** @var ListDso $dsoList */
         $dsoList = new ListDso();
@@ -374,31 +357,11 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $search->count()) {
-            /**
-             * @param $listDocuments
-             *
-             * @return \Generator
-             */
-            $listDsoGenerator = function($listDocuments) {
-                foreach ($listDocuments as $document) {
-                    yield $this->buildEntityFromDocument($document);
-                }
-            };
-
-            $listDsoIterator = $listDsoGenerator($search->getDocuments());
-            while($listDsoIterator->valid()) {
-                /** @var Dso $dso */
-                $dso = $listDsoIterator->current();
-
-                $dsoList->addDso($dso);
-                $listDsoIterator->next();
-            }
-        }
-
-        return $dsoList;
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
     }
 
     /**
@@ -413,7 +376,7 @@ class DsoRepository extends AbstractRepository
      *      "bool": {
      *        "must": {
      *          "exists": {
-     *            "field": "data.astrobin_id"
+     *            "field": "astrobin_id"
      *          }
      *        }
      *      }
@@ -465,13 +428,15 @@ class DsoRepository extends AbstractRepository
 
 
     /**
-     * @param int $limit
+     * get random Dso
      *
-     * @return \Generator
-     * @throws \Exception
+     * @param int $limit
+     * @return array
      */
-    public function getRandomDso(int $limit = 1): \Generator
+    public function getRandomDso(int $limit = 1): array
     {
+        $listDsoId = [];
+
         /** @var \DateTimeInterface $now */
         $now = new \DateTime();
         $seed = $now->getTimestamp();
@@ -495,20 +460,9 @@ class DsoRepository extends AbstractRepository
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
-        if (0 < $results->count()) {
-            /** @var Document $document */
-            foreach ($results->getDocuments() as $document) {
-                yield $this->buildEntityFromDocument($document);
-            }
-        }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getEntity()
-    {
-        return 'App\Entity\ES\Dso';
+        return array_map(static function(Result $doc) {
+            return $doc->getDocument()->getData()['id'];
+        }, $results->getResults());
     }
 
     /**
@@ -516,25 +470,37 @@ class DsoRepository extends AbstractRepository
      *
      * @param Document $document
      *
-     * @return Dso
-     * @throws \ReflectionException
+     * @return DTOInterface
+     * @throws \JsonException
      */
-    private function buildEntityFromDocument(Document $document): Dso
+    private function buildEntityFromDocument(Document $document): DTOInterface
     {
-        $entity = $this->getEntity();
-        /** @var Dso $dso */
-        $dso = new $entity;
-
-        $dso->setLocale($this->getLocale())->buildObjectR($document);
-
-        return $dso;
+        return $this->buildDTO($document);
     }
 
     /**
      * @return string
      */
-    public function getType(): string {
+    protected function getEntity(): string
+    {
+        return Dso::class;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIndex(): string
+    {
         return self::INDEX_NAME;
+    }
+
+
+    /**
+     * @return string
+     */
+    protected function getDTO(): string
+    {
+        return DsoDTO::class;
     }
 
     /**
@@ -542,19 +508,19 @@ class DsoRepository extends AbstractRepository
         'aggregates' => [
             'type' => [
                 'terms' => [
-                    'field' => 'data.type.keyword',
+                    'field' => 'type.keyword',
                     'size' => 20
                 ]
             ],
             'const_id' => [
                 'terms' => [
-                'field' => 'data.const_id.keyword',
+                'field' => 'const_id.keyword',
                 'size' => 100
                 ]
             ],
             'mag' => [
                 'range' => [
-                    'field' => 'data.mag',
+                    'field' => 'mag',
                     'ranges' => [
                         ['to' => 5],
                         ['from' => 5, 'to' => 10],
@@ -572,5 +538,3 @@ class DsoRepository extends AbstractRepository
 **/
 
 }
-
-

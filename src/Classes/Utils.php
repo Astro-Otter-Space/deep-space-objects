@@ -10,7 +10,7 @@ use DateTimeInterface;
  *
  * @package App\Classes
  */
-class Utils
+final class Utils
 {
     public const PARSEC = 0.3066020852;
     public const UNASSIGNED = 'unassigned';
@@ -25,7 +25,12 @@ class Utils
     public const CSV_DELIMITER = ';';
     public const CSV_ENCLOSURE = '"';
 
-    private static $catalogMapping = [
+    public const DATA_GLUE = '.';
+    public const DATA_CONCAT_GLUE = ' - ';
+    public const URL_CONCAT_GLUE = '--';
+    public const COMA_GLUE = ',';
+
+    private static array $catalogMapping = [
         'NG' => 'ngc',
         'IC' => 'ic',
         'LD' => 'ldn',
@@ -66,7 +71,7 @@ class Utils
         'Vd' => 'vdb', 'VV' => self::UNASSIGNED, 'vy' => self::UNASSIGNED, 'VY' => self::UNASSIGNED
     ];
 
-    private static $orderCatalog = [
+    private static array $orderCatalog = [
         // Main catalogs
         'messier',
         'ngc',
@@ -145,7 +150,7 @@ class Utils
         self::UNASSIGNED
     ];
 
-    private static $listTypeDso = [
+    private static array $listTypeDso = [
         'gg',
         'g',
         's',
@@ -173,7 +178,7 @@ class Utils
     /**
      * @var array
      */
-    private static $listTopics = [
+    private static array $listTopics = [
         'contact' => 'contact.option.contact', // Simple contact
         'data' => 'contact.option.data', // Modifier/ajouter une donnée
         'astrobin' => 'contact.option.astrobin', // Demande d ajout image Astrobin
@@ -186,7 +191,7 @@ class Utils
     /**
      * @var array
      */
-    private static $listPublics = [
+    private static array $listPublics = [
         'all' => 'event.option.all',
         'deb' => 'event.option.deb',
         'conf' => 'event.option.conf'
@@ -224,7 +229,7 @@ class Utils
      */
     public static function utf8_converter($array): array
     {
-        array_walk_recursive($array, function (&$item, $key) {
+        array_walk_recursive($array, static function (&$item, $key) {
             if (!mb_detect_encoding($item, 'utf-8', true)) {
                 $item = utf8_encode($item);
             }
@@ -267,7 +272,6 @@ class Utils
      */
     public static function numberFormatByLocale($number)
     {
-        /** @var \NumberFormatter $numberFormat */
         $numberFormat = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::DECIMAL);
         return $numberFormat->format($number);
     }
@@ -279,7 +283,7 @@ class Utils
      *
      * @return string
      */
-    public static function camelCaseUrlTransform($input)
+    public static function camelCaseUrlTransform($input): string
     {
         /** @var \Transliterator $transliterator */
         $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
