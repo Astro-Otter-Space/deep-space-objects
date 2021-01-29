@@ -2,7 +2,6 @@
 
 namespace App\Entity\ES;
 
-
 /**
  * Class Constellation
  * @package App\Entity
@@ -17,7 +16,7 @@ class Constellation
     private ?array $description = null;
     private float $rank;
     private float $order;
-    private ?string $loc;
+    private ?string $loc = null;
 
     /**
      * @return string
@@ -174,7 +173,7 @@ class Constellation
     /**
      * @return string
      */
-    public function getLoc(): string
+    public function getLoc(): ?string
     {
         return $this->loc;
     }

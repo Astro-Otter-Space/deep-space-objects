@@ -27,8 +27,8 @@ final class ConstellationDTO implements DTOInterface
     private $image;
     private $map;
     private $generic;
-    private $alt;
-    private $description;
+    private ?string $alt = null;
+    private ?string $description = null;
     private $kind;
     private Constellation $constellation;
 
