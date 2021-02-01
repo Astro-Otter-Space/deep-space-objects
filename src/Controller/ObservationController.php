@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
+ * @deprecated
  * Class Observation
  *
  * @package App\Controller
@@ -54,7 +55,7 @@ class ObservationController extends AbstractController
     }
 
     /**
-     * @Route({
+     * @ Route({
      *  "en": "/observations-list",
      *  "fr": "/liste-des-observations",
      *  "es": "/observations-list",
@@ -77,7 +78,7 @@ class ObservationController extends AbstractController
 
 
     /**
-     * @Route({
+     * @ Route({
      *  "en": "/_observations",
      *  "fr": "/_observations",
      *  "es": "/_observations",
@@ -109,7 +110,7 @@ class ObservationController extends AbstractController
 
 
     /**
-     * @Route({
+     * @ Route({
      *  "en": "/_events",
      *  "fr": "/_events",
      *  "es": "/_events",
@@ -138,7 +139,7 @@ class ObservationController extends AbstractController
     }
 
     /**
-     * @Route("/observation/{name}", name="observation_show")
+     * @ Route("/observation/{name}", name="observation_show")
      *
      * @param string $name
      *
@@ -179,7 +180,7 @@ class ObservationController extends AbstractController
     /**
      * Add observation page
      *
-     * @Route({
+     * @ Route({
      *  "en": "/add-observation",
      *  "fr": "/ajouter-observation",
      *  "es": "/add-observation",
@@ -243,7 +244,7 @@ class ObservationController extends AbstractController
      *
      * @return Response
      *
-     * @Route({
+     * @ Route({
      *  "en": "/schedule-observing-event",
      *  "fr": "/organiser-une-soiree-observation",
      *  "es": "/schedule-observing-event",
@@ -300,9 +301,10 @@ class ObservationController extends AbstractController
     }
 
     /**
+     *
      * @param Request $request
      * @param $name
-     * @Route({
+     * @ Route({
      *  "en": "/event/{name}",
      *  "fr": "/evenement/{name}",
      *  "es": "/event/{name}",
