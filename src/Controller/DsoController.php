@@ -198,7 +198,6 @@ class DsoController extends AbstractController
      * @param string $dsoId
      *
      * @return null|array
-     * @throws WsException
      * @throws ReflectionException
      * @throws JsonException
      */
@@ -214,7 +213,7 @@ class DsoController extends AbstractController
         }
 
         if ($listImages instanceof Image) {
-            $tabImages = $listImages->url_regular;
+            $tabImages[] = $listImages->url_regular;
 
         } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
             $tabImages = array_map(static function (Image $image) {
