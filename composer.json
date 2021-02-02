@@ -6,10 +6,12 @@
         "php": "^7.4.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
         "abraham/twitteroauth": "^1.1",
         "excelwebzone/recaptcha-bundle": "^1.5",
         "facebook/graph-sdk": "^5.7",
-        "friendsofsymfony/rest-bundle": "^2.5",
+        "friendsofsymfony/rest-bundle": "^3.0",
         "gesdinet/jwt-refresh-token-bundle": "^0.9.1",
         "hamhamfonfon/astrobin-ws": "^2.0",
         "jms/serializer-bundle": "^3.3",
@@ -40,9 +42,7 @@
         "symfony/validator": "^4.4",
         "symfony/webpack-encore-bundle": "^1.0",
         "symfony/yaml": "^4.4",
-        "twig/extensions": "^1.5",
-        "ext-json": "*",
-        "ext-intl": "*"
+        "twig/extensions": "^1.5"
     },
     "config": {
         "preferred-install": {
