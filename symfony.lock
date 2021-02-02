@@ -160,6 +160,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
     },
+    "lcobucci/clock": {
+        "version": "2.0.0"
+    },
     "lcobucci/jwt": {
         "version": "3.3.1"
     },
@@ -213,9 +216,6 @@
     },
     "react/promise": {
         "version": "v2.7.0"
-    },
-    "roave/security-advisories": {
-        "version": "dev-master"
     },
     "ruflin/elastica": {
         "version": "6.0.2"
