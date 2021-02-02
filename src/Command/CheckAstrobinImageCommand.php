@@ -102,7 +102,5 @@ class CheckAstrobinImageCommand extends Command
         } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
         }
-
     }
-
 }
