@@ -6,6 +6,8 @@ namespace App\Command;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
+use AstrobinWs\Exceptions\WsResponseException;
+use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,18 +21,18 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class CheckAstrobinImageCommand extends Command
 {
 
-    protected static $defaultName = "dso:check-astrobin";
+    protected static string $defaultName = "dso:check-astrobin";
 
     /** @var DsoRepository */
-    protected $dsoRepository;
+    protected DsoRepository $dsoRepository;
 
     /** @var MailService */
-    protected $mailHelper;
+    protected MailService $mailHelper;
 
-    protected $senderMail;
+    protected string $senderMail;
 
     /** @var string */
-    protected $receiverMail;
+    protected string $receiverMail;
 
     /**
      * CheckAstrobinImageCommand constructor.
@@ -75,9 +77,9 @@ class CheckAstrobinImageCommand extends Command
                 $image = new GetImage();
 
                 try {
-                    $result = $image->debugImageById($astrobinId);
+                    /** @var AstrobinResponse $result */
+                    $result = $image->getById($astrobinId);
                 } catch (WsException $e) {
-                    $failedAstrobinId[] = $astrobinId . ' - ' . $e->getMessage();
                 }
 
                 if (property_exists($result, 'http_code')) {
