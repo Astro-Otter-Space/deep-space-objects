@@ -6,7 +6,6 @@ namespace App\Command;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
@@ -20,8 +19,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
  */
 class CheckAstrobinImageCommand extends Command
 {
-
-    protected static string $defaultName = "dso:check-astrobin";
+    protected static $defaultName = "dso:check-astrobin";
 
     /** @var DsoRepository */
     protected DsoRepository $dsoRepository;
@@ -54,7 +52,7 @@ class CheckAstrobinImageCommand extends Command
     /**
      *
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('return Astrobin ImageId failed');
     }
@@ -67,7 +65,7 @@ class CheckAstrobinImageCommand extends Command
      * @return int|void|null
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $failedAstrobinId = [];
         $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
