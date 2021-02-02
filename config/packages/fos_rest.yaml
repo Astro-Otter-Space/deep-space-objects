@@ -1,6 +1,6 @@
 # Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
-fos_rest: null
-#    param_fetcher_listener:  true
+fos_rest:
+    param_fetcher_listener: true
 #    allowed_methods_listener:  true
 #    routing_loader: true
 #    view:

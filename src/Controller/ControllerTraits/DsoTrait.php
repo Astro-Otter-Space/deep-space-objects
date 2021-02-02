@@ -77,14 +77,15 @@ trait DsoTrait
     }
 
     /**
-     * @param array|ListDso $data
+     * @param DTOInterface|ListDso $data
      * @param int $codeHttp
      *
      * @return array
      */
     public function buildJsonApi($data, int $codeHttp): array
     {
-        $status = (in_array(substr($codeHttp, 0, 1), [4, 5], true)) ? 'error' : 'success';
+        $firstNumber = (int)($codeHttp / 100);
+        $status = (in_array($firstNumber, [4, 5], true)) ? 'error' : 'success';
         $dataResponse = [
             'status' => $status,
             'code' => $codeHttp,

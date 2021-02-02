@@ -5,17 +5,19 @@ namespace App\ControllerApi;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
-use App\Entity\ES\Dso;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\ListDso;
 use App\Entity\DTO\DsoDTO;
+use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
-use Elastica\Document;
+use AstrobinWs\Exceptions\WsException;
 use Elastica\Exception\NotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -43,21 +45,22 @@ final class DataController extends AbstractFOSRestController
     private DsoRepository $dsoRepository;
     private ConstellationRepository $constellationRepository;
     private DsoDataTransformer $dsoDataTransformer;
+    private DsoManager $dsoManager;
 
     /**
      * DataController constructor.
      *
+     * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
-     * @param ConstellationRepository $constellationRepository
      * @param DsoDataTransformer $dsoDataTransformer
      * @param TranslatorInterface $translator
      */
-    public function __construct(DsoRepository $dsoRepository, ConstellationRepository $constellationRepository, DsoDataTransformer $dsoDataTransformer, TranslatorInterface $translator)
+    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dsoDataTransformer, TranslatorInterface $translator)
     {
         $this->dsoRepository = $dsoRepository;
-        $this->constellationRepository = $constellationRepository;
         $this->dsoDataTransformer = $dsoDataTransformer;
         $this->setTranslator($translator);
+        $this->dsoManager = $dsoManager;
     }
 
 
@@ -71,16 +74,17 @@ final class DataController extends AbstractFOSRestController
      */
     public function getDso(string $id): Response
     {
-        /** @var Document $dso */
-        $dso = $this->dsoRepository->getObjectById($id);
+        /** @var DTOInterface $dso */
+        $dso = $this->dsoManager->getDso($id);
 
         if (is_null($dso)) {
             throw new NotFoundException(sprintf("%s is not an correct item", $id));
         }
 
         $codeHttp = Response::HTTP_OK;
+
         /** @var DsoDTO|null $data */
-        $data = $this->dsoDataTransformer->transform($dso);
+        $data = $this->dsoDataTransformer->longView($dso);
 
         $formatedData = $this->buildJsonApi($data, $codeHttp);
 
@@ -94,8 +98,9 @@ final class DataController extends AbstractFOSRestController
      * @param ParamFetcher $paramFetcher
      *
      * @return Response
+     * @throws WsException
+     * @throws \JsonException
      * @throws \ReflectionException
-     *
      * @Rest\Get("/dso/get_objects_by", name="api_dso_get_items")
      *
      * @Rest\QueryParam(name="constellation", requirements="\w+", default="")
@@ -118,7 +123,7 @@ final class DataController extends AbstractFOSRestController
 
         $catalog = ("" !== $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
         if (!is_null($catalog)) {
-            if (in_array($catalog, Utils::getOrderCatalog())) {
+            if (in_array($catalog, Utils::getOrderCatalog(), true)) {
                 $filters['catalog'] = $catalog;
             } else {
                 throw new InvalidParameterException("Parameter \"$catalog\" for catalog does not exist");
@@ -127,7 +132,7 @@ final class DataController extends AbstractFOSRestController
 
         $type = ("" !== $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
         if (!is_null($type)) {
-            if (in_array($type, Utils::getListTypeDso())) {
+            if (in_array($type, Utils::getListTypeDso(), true)) {
                 $filters['type'] = $type;
             } else {
                 throw new InvalidParameterException("Parameter \"$type\" for type does not exist");
@@ -138,15 +143,16 @@ final class DataController extends AbstractFOSRestController
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         });
 
-        /** @var ListDso $listDso */
-        list($listDso, ) = $this->dsoRepository->getObjectsCatalogByFilters($offset, $filters, $limit, true);
+        [$listDsoId, ,] = $this->dsoRepository
+            ->setLocale('en')
+            ->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
-        /** @var ListDso $listDso */
-        $listDso = array_map(function(Dso $document) {
-            return $this->dsoDataTransformer->transform($document);
-        }, iterator_to_array($listDso->getIterator()));
+        $listDso = $this->dsoManager->buildListDso($listDsoId);
 
-        $formatedData = $this->buildJsonApi($listDso, Response::HTTP_OK);
+        /** @var array $listDso */
+        $listDsoView = $this->dsoDataTransformer->listVignettesView($listDso);
+
+        $formatedData = $this->buildJsonApi($listDsoView, Response::HTTP_OK);
 
         $view = $this->view($formatedData, Response::HTTP_OK);
         $view->setFormat(self::JSON_FORMAT);
@@ -161,14 +167,14 @@ final class DataController extends AbstractFOSRestController
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
-     * @param ParamFetcher $paramFetcher
+     * @param ParamFetcherInterface $paramFetcher
      * @param string $constellation
      *
      * @return View
      *
      * Doc : https://zestedesavoir.com/tutoriels/1280/creez-une-api-rest-avec-symfony-3/amelioration-de-lapi-rest/quand-utiliser-les-query-string/
      */
-    public function getDsoByConstellation(ParamFetcher $paramFetcher, string $constellation): View
+    public function getDsoByConstellation(ParamFetcherInterface $paramFetcher, string $constellation): View
     {
         $offset = (int)$paramFetcher->get('offset') ?? null;
         $limit = (int)$paramFetcher->get('limit') ?? null;
@@ -177,7 +183,7 @@ final class DataController extends AbstractFOSRestController
         if (!is_null($offset)) {
             $params['offset'] = $offset;
         }
-        if (!is_null($limit) && isset($limit)) {
+        if (!is_null($limit)) {
             $params['limit'] = $limit;
         }
 
@@ -186,7 +192,7 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @param ParamFetcher $paramFetcher
+     * @param ParamFetcherInterface $paramFetcher
      * @param string $catalog
      *
      * @return View
@@ -194,9 +200,9 @@ final class DataController extends AbstractFOSRestController
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      */
-    public function getDsoByCatalog(ParamFetcher $paramFetcher, string $catalog): View
+    public function getDsoByCatalog(ParamFetcherInterface $paramFetcher, string $catalog): View
     {
-        if (!in_array($catalog, Utils::getOrderCatalog())) {
+        if (!in_array($catalog, Utils::getOrderCatalog(), true)) {
             throw new InvalidParameterException("Parameter \"$catalog\" for catalog does not exist");
         }
 
@@ -216,7 +222,7 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @param ParamFetcher $paramFetcher
+     * @param ParamFetcherInterface $paramFetcher
      * @param string $type
      *
      * @return View
@@ -225,9 +231,9 @@ final class DataController extends AbstractFOSRestController
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      */
-    public function getDsoByType(ParamFetcher $paramFetcher, string $type): View
+    public function getDsoByType(ParamFetcherInterface $paramFetcher, string $type): View
     {
-        if (!in_array($type, Utils::getListTypeDso())) {
+        if (!in_array($type, Utils::getListTypeDso(), true)) {
             throw new InvalidParameterException("Parameter \"$type\" for type does not exist");
         }
 

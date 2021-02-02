@@ -57,9 +57,9 @@ class GenerateTokenListener
             'text' => 'includes/emails/api_register.txt.twig'
         ];
 
-        $data['token'] = $this->jwtManager->create($apiUser);
-        $data['refresh_token'] = $this->refreshEvent->getLastFromUsername($apiUser->getEmail());
+        //$data['token'] = $this->jwtManager->create($apiUser);
+        //$data['refresh_token'] = $this->refreshEvent->getLastFromUsername($apiUser->getEmail());
 
-        $this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
+        //$this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
     }
 }
