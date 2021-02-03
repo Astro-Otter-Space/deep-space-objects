@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set pageTitle = 'support.title'|trans %}
-{% set pageDesc = 'support.desc'|trans|truncate(200) %}
+{% set pageDesc = 'support.desc'|trans[:200] %}
 
 {% block content %}
   <div>

@@ -2,7 +2,7 @@
 
 {% set siteName = 'dso'|trans %}
 {% set pageTitle = "api.title"|trans %}
-{% set pageDesc = 'api.intro'|trans({"%sitename%": siteName})|truncate(200) %}
+{% set pageDesc = 'api.intro'|trans({"%sitename%": siteName})[:200] %}
 
 {% block content %}
   <div id="app">

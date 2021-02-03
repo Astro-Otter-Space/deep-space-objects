@@ -4,7 +4,7 @@
 {% set pageImage = dso.astrobin.url_regular|default('default') %}
 
 {% set descDefaut = 'dso.desc.seo'|trans({'%title%': dso.title, '%constId%': dso.constellation.title|lower,'%type%': dso.type|trans|lower, '%mag%': dso.magnitude }) %}
-{% set pageDesc = dso.description|truncate(200)|default(descDefaut) %}
+{% set pageDesc = dso.description[:200]|default(descDefaut) %}
 {% set pageImageDesc = imgCoverAlt %}
 
 {#https://coxpi.draftium.site/#}
