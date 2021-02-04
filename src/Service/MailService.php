@@ -84,7 +84,6 @@ class MailService
      */
     public function sendMail(string $from, string $to, string $subject, array $template, array $content): void
     {
-        /** @var GmailSmtpTransport $transport */
         $transport = new GmailSmtpTransport($this->getUserMail(), $this->getPwdMail());
 
         /** @var MailerInterface $mailer */
