@@ -36,8 +36,5 @@ framework:
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
 #        app: cache.adapter.apcu
     form: true
-    templating:
-        engines:
-            - twig
     validation: { enable_annotations: true }
 

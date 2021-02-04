@@ -202,6 +202,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
     "psr/http-client": {
         "version": "1.0.1"
     },
@@ -382,6 +385,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.22.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.10.0"
     },
@@ -411,6 +417,9 @@
     },
     "symfony/property-access": {
         "version": "v4.2.0"
+    },
+    "symfony/property-info": {
+        "version": "v5.2.3"
     },
     "symfony/requirements-checker": {
         "version": "1.0",
@@ -459,6 +468,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.1"
+    },
+    "symfony/string": {
+        "version": "v5.2.3"
     },
     "symfony/templating": {
         "version": "v4.2.1"
