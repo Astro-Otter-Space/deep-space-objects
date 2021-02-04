@@ -421,7 +421,7 @@ class DsoRepository extends AbstractRepository
             /** @var Document $document */
             foreach($results->getDocuments() as $document) {
                 $dataDocument = $document->getData();
-                $listAstrobinId[$dataDocument['id']] = $dataDocument['data']['astrobin_id'];
+                $listAstrobinId[$dataDocument['id']] = $dataDocument['astrobin_id'];
             }
         }
         return $listAstrobinId;
