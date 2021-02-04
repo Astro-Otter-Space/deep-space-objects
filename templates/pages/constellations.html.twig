@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle = 'constId'|transchoice(list_constellation|length)  %}
+{% set pageTitle = 'constId'|trans({'%count%': list_constellation|length})  %}
 {% set pageDesc = 'constellationListDesc'|trans %}
 {% set pageImage = asset('/build/images/constellation_list.jpg') %}
 
@@ -28,7 +28,7 @@
 
   <div id="appListConst"
       data-constellations
-      data-title-const="{{ 'constId'|transchoice(list_constellation|length) }}"
+      data-title-const="{{ pageTitle }}"
       data-list-const="{{ list_constellation|json_encode }}"
       data-imgcover="{{ pageImage }}"
       data-filter="{{ tabFilterConstellation|json_encode }}"

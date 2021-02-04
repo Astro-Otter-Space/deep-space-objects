@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set pageTitle = "const_id"|transchoice(0) ~ ' - ' ~ title %}
+{% set pageTitle = "const_id"|trans({'%count%': 0}) ~ ' - ' ~ title %}
 {% set pageImage = constellation.image %}
 {% set pageDesc = constellation.description|raw %}
 
