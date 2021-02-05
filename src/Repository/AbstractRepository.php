@@ -183,7 +183,7 @@ abstract class AbstractRepository
      *
      * @return bool
      */
-    public function bulkImport($listItems): bool
+    public function bulkImport(array $listItems): bool
     {
         /** @var Bulk $bulk */
         $bulk = new Bulk($this->client);

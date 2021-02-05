@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace App\Command;
 
@@ -21,17 +21,10 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
  */
 class CheckAstrobinImageCommand extends Command
 {
-    protected static string $defaultName = "dso:check-astrobin";
-
-    /** @var DsoRepository */
+    protected static $defaultName = "dso:check-astrobin";
     protected DsoRepository $dsoRepository;
-
-    /** @var MailService */
     protected MailService $mailHelper;
-
     protected string $senderMail;
-
-    /** @var string */
     protected string $receiverMail;
 
     /**
@@ -98,10 +91,11 @@ class CheckAstrobinImageCommand extends Command
             if (0 < count($failedAstrobinId)) {
                 $this->mailHelper->sendMail($this->senderMail, $this->receiverMail, $subject, $template, $content);
             }
+            return Command::SUCCESS;
         } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
-        }
 
-        return 0;
+        }
+        return Command::FAILURE;
     }
 }

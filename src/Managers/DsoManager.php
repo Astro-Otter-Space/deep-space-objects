@@ -53,7 +53,7 @@ class DsoManager
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
      */
-    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
+    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinImage = new GetImage();
