@@ -44,23 +44,21 @@ final class ExceptionListener
         /** @var \Throwable $exception */
         $exception = $event->getThrowable();
 
-        //if ("dev" !== $this->env) {
-            if ($exception instanceof HttpExceptionInterface || $exception instanceof NotFoundHttpException) {
-                $template = $this->twigEngine->render('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
+        if ($exception instanceof HttpExceptionInterface || $exception instanceof NotFoundHttpException) {
+            $template = $this->twigEngine->render('exceptions/exceptions.html.twig', ['exception' => $exception, 'env' => $this->env]);
 
-                /** @var Response $response */
-                $response = new Response($template);
-                $response->setStatusCode($exception->getStatusCode());
-                $response->headers->replace($exception->getHeaders());
-            } else {
-                /** @var Response $response */
-                $response = new Response();
-                $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
-                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
+            /** @var Response $response */
+            $response = new Response($template);
+            $response->setStatusCode($exception->getStatusCode());
+            $response->headers->replace($exception->getHeaders());
+        } else {
+            /** @var Response $response */
+            $response = new Response();
+            $response->setContent(sprintf("%s with code: %s", $exception->getMessage(), $exception->getCode()));
+            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
-            $event->setResponse($response);
-        //}
+        $event->setResponse($response);
     }
 
 }
