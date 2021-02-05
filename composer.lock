@@ -2166,16 +2166,16 @@
         },
         {
             "name": "hamhamfonfon/astrobin-ws",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HamHamFonFon/Astrobin-WebServices.git",
-                "reference": "75e84fe4f8bb08caa0213d60e89b540936b3bc7f"
+                "reference": "38a270de3ab6b9ed8c03d89927f322c1247594ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-WebServices/zipball/75e84fe4f8bb08caa0213d60e89b540936b3bc7f",
-                "reference": "75e84fe4f8bb08caa0213d60e89b540936b3bc7f",
+                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-WebServices/zipball/38a270de3ab6b9ed8c03d89927f322c1247594ca",
+                "reference": "38a270de3ab6b9ed8c03d89927f322c1247594ca",
                 "shasum": ""
             },
             "require": {
@@ -2217,9 +2217,9 @@
             ],
             "support": {
                 "issues": "https://github.com/HamHamFonFon/Astrobin-WebServices/issues",
-                "source": "https://github.com/HamHamFonFon/Astrobin-WebServices/tree/2.2.4"
+                "source": "https://github.com/HamHamFonFon/Astrobin-WebServices/tree/2.2.5"
             },
-            "time": "2021-02-05T15:19:02+00:00"
+            "time": "2021-02-05T16:09:22+00:00"
         },
         {
             "name": "jms/metadata",
