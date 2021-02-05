@@ -4,8 +4,8 @@ namespace App\EventListener;
 
 use App\Entity\BDD\ApiUser;
 use App\Service\MailService;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface as RefreshToken;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
+//use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface as RefreshToken;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -15,13 +15,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Get Bearer token from new user and sending him by email
  * @package App\EventListener
  */
-class GenerateTokenListener
+final class GenerateTokenListener
 {
     private JWTTokenManagerInterface $jwtManager;
     private MailService $mailService;
     private TranslatorInterface $translator;
     private string $senderMail;
-    private RefreshToken $refreshEvent;
+//    private RefreshToken $refreshEvent;
 
     /**
      * GenerateTokenListener constructor.
@@ -30,15 +30,14 @@ class GenerateTokenListener
      * @param MailService $mailService
      * @param TranslatorInterface $translator
      * @param string $senderMail
-     * @param RefreshToken $refreshEvent
      */
-    public function __construct(JWTTokenManagerInterface $jwtManager, MailService $mailService, TranslatorInterface $translator, string $senderMail, RefreshToken $refreshEvent)
+    public function __construct(JWTTokenManagerInterface $jwtManager, MailService $mailService, TranslatorInterface $translator, string $senderMail/*, RefreshToken $refreshEvent*/)
     {
         $this->jwtManager = $jwtManager;
         $this->mailService = $mailService;
         $this->translator = $translator;
         $this->senderMail = $senderMail;
-        $this->refreshEvent = $refreshEvent;
+        //$this->refreshEvent = $refreshEvent;
     }
 
     /**
@@ -47,7 +46,7 @@ class GenerateTokenListener
      *
      * @throws TransportExceptionInterface
      */
-    public function __invoke(ApiUser $apiUser, LifecycleEventArgs $event): void
+    public function postPersist(ApiUser $apiUser, LifecycleEventArgs $event): void
     {
         $to = $apiUser->getEmail();
         $subject = sprintf('[API "%s"] Here\'s your bearer Token', $this->translator->trans('dso'));
@@ -57,9 +56,9 @@ class GenerateTokenListener
             'text' => 'includes/emails/api_register.txt.twig'
         ];
 
-        //$data['token'] = $this->jwtManager->create($apiUser);
+        $data['token'] = $this->jwtManager->create($apiUser);
         //$data['refresh_token'] = $this->refreshEvent->getLastFromUsername($apiUser->getEmail());
 
-        //$this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
+        $this->mailService->sendMail($this->senderMail, $to, $subject, $template, $data);
     }
 }

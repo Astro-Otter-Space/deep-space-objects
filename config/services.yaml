@@ -68,10 +68,6 @@ services:
         arguments:
             $cachePool: '@app.cache.dso'
 
-    App\Service\CurlService:
-        bind:
-            $env: '%kernel.environment%'
-
     App\Service\MailService:
         autowire: true
         autoconfigure: true
@@ -82,24 +78,6 @@ services:
             -   method: setPwdMail
                 arguments:
                     - '%env(GMAIL_APP_PWD)%'
-
-    # Web services
-    App\Service\SocialNetworks\WebServices\FacebookWs:
-        autowire: true
-        autoconfigure: true
-        bind:
-            $appId: '%env(FACEBOOK_APP_ID)%'
-            $appSecret: '%env(FACEBOOK_SECRET_ID)%'
-            $pageId: '%env(FACEBOOK_PAGE_ID)%'
-
-    App\Service\SocialNetworks\WebServices\TwitterWs:
-        autowire: true
-        autoconfigure: true
-        bind:
-            $consumerKey: '%env(TWITTER_CONSUMER_KEY)%'
-            $consumerSecretKey: '%env(TWITTER_CONSUMER_SECRET)%'
-            $accessToken: '%env(TWITTER_OAUTH_ACCESS_TOKEN)%'
-            $accessTokenSecret: '%env(TWITTER_OAUTH_ACCESS_TOKEN_SECRET)%'
 
     # Exception listener
     App\EventListener\ExceptionListener:

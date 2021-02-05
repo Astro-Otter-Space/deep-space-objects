@@ -1,3 +1,0 @@
-gesdinet_jwt_refresh_token:
-    user_identity_field: email
-    ttl: '%env(int:JWT_TTL)%'

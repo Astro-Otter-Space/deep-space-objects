@@ -6,7 +6,6 @@ use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\ListDso;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
@@ -167,17 +166,17 @@ final class DataController extends AbstractFOSRestController
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
-     * @param ParamFetcherInterface $paramFetcher
+     * @param ParamFetcher $paramFetcher
      * @param string $constellation
      *
      * @return View
      *
      * Doc : https://zestedesavoir.com/tutoriels/1280/creez-une-api-rest-avec-symfony-3/amelioration-de-lapi-rest/quand-utiliser-les-query-string/
      */
-    public function getDsoByConstellation(ParamFetcherInterface $paramFetcher, string $constellation): View
+    public function getDsoByConstellation(ParamFetcher $paramFetcher, string $constellation): View
     {
-        $offset = (int)$paramFetcher->get('offset') ?? null;
-        $limit = (int)$paramFetcher->get('limit') ?? null;
+        $offset = (int) $paramFetcher->get('offset') ?? null;
+        $limit = (int) $paramFetcher->get('limit') ?? null;
 
         $params = ['constellation' => $constellation];
         if (!is_null($offset)) {

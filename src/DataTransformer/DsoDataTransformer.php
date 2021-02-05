@@ -138,19 +138,20 @@ final class DsoDataTransformer extends AbstractDataTransformer
     public function buildTableData(DTOInterface $dto, array $listFields): array
     {
         $dtoArray = $this->longView($dto);
+
         return array_map(function($value, $key) use($listFields) {
             if (!is_array($value)) {
-                $valueTranslated = $this->translator->trans($value, ['%count%' => 1]);
+                $valueTranslated = $this->translator->trans((string)$value, ['%count%' => 1]);
                 $nbItems = 1;
             } else {
                 $valueTranslated = implode(Utils::GLUE_DASH, array_map(function($item) {
-                    return $this->translator->trans($item, ['%count%' => 1]);
+                    return $this->translator->trans((string)$item, ['%count%' => 1]);
                 }, $value));
                 $nbItems = count($value);
             }
 
             return [
-                'col0' => $this->translator->trans($key, ['%count%' => $nbItems]),
+                'col0' => $this->translator->trans($key, ['%count%' => (string)$nbItems]),
                 'col1' => (in_array($key, $listFields, true)) ? $valueTranslated: $value
             ];
         }, $dtoArray, array_keys($dtoArray));

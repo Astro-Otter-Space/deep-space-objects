@@ -1,10 +1,13 @@
 <?php
 
+//declare(strict_types=1);
+
 namespace App\Command;
 
 use App\Classes\CacheInterface;
 use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
+use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
 use App\Managers\DsoManager;
@@ -23,30 +26,19 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class ConvertSrcToBulkCommand extends Command
 {
-    /** @var KernelInterface */
-    private $kernel;
-
-    /** @var CacheInterface */
-    private $cacheUtil;
-
-    /** @var EntityManagerInterface */
-    private $em;
-
-    /** @var DsoManager  */
-    private $dsoManager;
-
-    /** @var DsoRepository */
-    private $dsoRepository;
-
-    /** @var array  */
-    protected $listLocales;
-
     protected static $defaultName = "dso:convert-bulk";
 
-    protected static $listTypeImport = ['full', 'delta'];
-    protected static $listIndexType = ['dso20', 'constellations'];
+    private string $kernelRoute;
+    private CacheInterface $cacheUtil;
+    private EntityManagerInterface $em;
+    private DsoManager $dsoManager;
+    private DsoRepository $dsoRepository;
+    protected array $listLocales;
 
-    protected static $mapping = [
+    protected static array $listTypeImport = ['full', 'delta'];
+    protected static array $listIndexType = ['dso20', 'constellations'];
+
+    protected static array $mapping = [
         'dso20' => 'deepspaceobjects',
         'constellations' => 'constellations'
     ];
@@ -65,7 +57,7 @@ class ConvertSrcToBulkCommand extends Command
      */
     public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
     {
-        $this->kernel = $kernel->getProjectDir();
+        $this->kernelRoute = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
         $this->em = $em;
         $this->dsoRepository = $dsoRepository;
@@ -93,7 +85,7 @@ class ConvertSrcToBulkCommand extends Command
      * @return int|null|void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var UpdateData $updateData */
         $lastImport = $this->em->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
@@ -111,9 +103,9 @@ class ConvertSrcToBulkCommand extends Command
             $type = $input->getArgument('type');
 
             $inputFilename = sprintf('%s.src.json', $type);
-            $inputFile = $this->kernel . self::PATH_SOURCE . $inputFilename;
+            $inputFile = $this->kernelRoute . self::PATH_SOURCE . $inputFilename;
 
-            $outputFilename = $this->kernel . self::BULK_SOURCE . sprintf('%s.bulk.json', $type);
+            $outputFilename = $this->kernelRoute . self::BULK_SOURCE . sprintf('%s.bulk.json', $type);
 
             $outputDirName = dirname($outputFilename);
 
@@ -227,8 +219,7 @@ class ConvertSrcToBulkCommand extends Command
                             /**
                              * Step 3 : get list of updated data
                              */
-                            /** @var ListDso $listDso */
-                            $listDso = null; // BUG $this->dsoManager->getListDsoAfter($lastImportDate);
+                            $listDso = $this->dsoManager->getListDsoAfter($lastImportDate);
                             if (0 < $listDso->getIterator()->count()) {
                                 /**
                                  * STEP 4 : update DB
@@ -254,7 +245,7 @@ class ConvertSrcToBulkCommand extends Command
                                 /**
                                  * STEP 5 empty cache
                                  */
-                                /** @var Dso $dsoCurrent */
+                                /** @var DsoDTO $dsoCurrent */
                                 foreach (iterator_to_array($listDso) as $dsoCurrent) {
 
                                     $id = strtolower($dsoCurrent->getId());
@@ -281,15 +272,18 @@ class ConvertSrcToBulkCommand extends Command
                     }
 
                     fclose($handle);
-                } else {
-                    $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));
+                    return Command::SUCCESS;
                 }
+
+                $output->writeln(sprintf("Error JSON : %s", json_last_error_msg()));
             } else {
                 $output->writeln(sprintf("File %s not readable", $inputFile));
             }
         } else {
             $output->writeln(sprintf("Argument %s not available", $input->getArgument('type')));
         }
+
+        return Command::FAILURE;
     }
 
     /**
@@ -348,11 +342,10 @@ class ConvertSrcToBulkCommand extends Command
     }
 
     /**
-     * @return null
+     * @return void
      */
-    public static function getItemOrder()
+    public static function getItemOrder(): void
     {
-        return null;
     }
 
 }

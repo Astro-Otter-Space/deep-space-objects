@@ -1,5 +1,6 @@
 <?php
 
+//declare(strict_types=1);
 
 namespace App\Command;
 
@@ -11,6 +12,7 @@ use AstrobinWs\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 /**
@@ -20,16 +22,9 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 class CheckAstrobinImageCommand extends Command
 {
     protected static $defaultName = "dso:check-astrobin";
-
-    /** @var DsoRepository */
     protected DsoRepository $dsoRepository;
-
-    /** @var MailService */
     protected MailService $mailHelper;
-
     protected string $senderMail;
-
-    /** @var string */
     protected string $receiverMail;
 
     /**
@@ -62,10 +57,10 @@ class CheckAstrobinImageCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|void|null
+     * @return int|null
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $failedAstrobinId = [];
         $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
@@ -76,12 +71,9 @@ class CheckAstrobinImageCommand extends Command
 
                 try {
                     /** @var AstrobinResponse $result */
-                    $result = $image->getById($astrobinId);
+                    $result = $image->getById((string)$astrobinId);
                 } catch (WsException $e) {
-                }
-
-                if (property_exists($result, 'http_code')) {
-                    $failedAstrobinId[$result->http_code] = [$dsoId => $result->data];
+                    $failedAstrobinId[Response::HTTP_NOT_FOUND][$dsoId] = $astrobinId;
                 }
             }
         }
@@ -99,8 +91,11 @@ class CheckAstrobinImageCommand extends Command
             if (0 < count($failedAstrobinId)) {
                 $this->mailHelper->sendMail($this->senderMail, $this->receiverMail, $subject, $template, $content);
             }
+            return Command::SUCCESS;
         } catch (TransportExceptionInterface $e) {
             $output->writeln($e->getMessage());
+
         }
+        return Command::FAILURE;
     }
 }

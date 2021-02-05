@@ -139,6 +139,11 @@ dso.desc.seo: "\"%title%\" is a %type% (magnitude %mag%) you can find in %constI
 info: Informations
 desigs: Other designations
 magnitude: Magnitude
+#constellation: >-
+#    {count, plural,
+#        one   {Constellation}
+#        other {Constellations}
+#    }
 constellation: Constellation|Constellations
 const_id: Constellation|Constellations
 constId: Constellation|Constellations
