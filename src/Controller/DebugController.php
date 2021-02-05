@@ -37,7 +37,7 @@ class DebugController extends AbstractController
      */
     public function debugAstrobinImage(Request $request, string $id): Response
     {
-        $imageWs = new GetImage();
+        $imageWs = new GetImage(null, null);
         try {
             $image = $imageWs->getById($id);
         } catch (WsException $e) {

@@ -203,7 +203,7 @@ class DsoController extends AbstractController
      */
     private function getListImages(string $dsoId): array
     {
-        $astrobinWs = new GetImage();
+        $astrobinWs = new GetImage(null, null);
         $listImages = $tabImages = [];
         try {
             /** @var ListImages|Image $listImages */
