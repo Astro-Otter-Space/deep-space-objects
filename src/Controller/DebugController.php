@@ -30,12 +30,17 @@ class DebugController extends AbstractController
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function testAstrobin(Request $request, string $id): Response
+    public function debugAstrobinImage(Request $request, string $id): Response
     {
         $imageWs = new GetImage();
-        $image = $imageWs->getById($id);
+        try {
+            $image = $imageWs->getById($id);
+        } catch (WsException $e) {
+            var_dump($e->getMessage());
+        }
 
-        return new Response($image);
+
+        return $this->render('pages/debug.html.twig', ['data' => $image]);
     }
 
     /**
