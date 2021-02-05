@@ -10,7 +10,6 @@ use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
-use Doctrine\Common\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

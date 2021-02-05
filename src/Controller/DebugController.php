@@ -15,12 +15,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * Class DebugController
+ * @package App\Controller
+ */
 class DebugController extends AbstractController
 {
 
 
     /**
-     * @Route("/debug/astrobin/image/{id}", name="debug_astrobin_image")
+     * @Route("/astrobin/image/{id}", name="debug_astrobin_image")
      * @param Request $request
      * @param string $id
      *
@@ -55,7 +60,7 @@ class DebugController extends AbstractController
      * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
-     * @Route("/debug/astrobin/list/{offset}", name="debug_astrobin_list")
+     * @Route("/astrobin/list/{offset}", name="debug_astrobin_list")
      */
     public function debugListAstrobinImage(Request $request, int $offset, DsoRepository $dsoRepository, DsoManager $dsoManager, DsoDataTransformer $dataTransformer): Response
     {
