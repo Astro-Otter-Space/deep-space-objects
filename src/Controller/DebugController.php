@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DataTransformer\DsoDataTransformer;
+use App\Managers\DsoManager;
+use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Services\GetImage;
@@ -14,8 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DebugController extends AbstractController
 {
+
+
     /**
-     * @Route("/debug/astrobin/{id}", name="debug_astrobin")
+     * @Route("/debug/astrobin/image/{id}", name="debug_astrobin_image")
      * @param Request $request
      * @param string $id
      *
@@ -31,5 +36,30 @@ class DebugController extends AbstractController
         $image = $imageWs->getById($id);
 
         return new Response($image);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @param int $offset
+     * @param DsoRepository $dsoRepository
+     * @param DsoManager $dsoManager
+     * @param DsoDataTransformer $dataTransformer
+     *
+     * @return Response
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
+     * @Route("/debug/astrobin/list/{offset}", name="debug_astrobin_list")
+     */
+    public function debugListAstrobinImage(Request $request, int $offset, DsoRepository $dsoRepository, DsoManager $dsoManager, DsoDataTransformer $dataTransformer): Response
+    {
+        $items = $dsoRepository->getAstrobinId(null);
+        ksort($items);
+        $items = array_slice($items, $offset, 50);
+        $listDso = $dsoManager->buildListDso(array_keys($items));
+        $params['dso'] = $dataTransformer->listVignettesView($listDso);
+
+        return $this->render('pages/debug_astrobin.html.twig', $params);
     }
 }

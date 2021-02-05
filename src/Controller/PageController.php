@@ -352,10 +352,9 @@ class PageController extends AbstractController
         ];
 
 
-        $response = $this->render('pages/support.html.twig', $params);
         //$response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
 
-        return $response;
+        return $this->render('pages/support.html.twig', $params);
     }
 
     /**

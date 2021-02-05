@@ -402,25 +402,4 @@ class DsoController extends AbstractController
         return $response;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @param int $offset
-     *
-     * @return Response
-     * @throws WsException
-     * @throws ReflectionException
-     * @throws JsonException
-     * @Route("/debug-astrobin/{offset}", name="debug_astrobin")
-     */
-    public function debugAstrobinImage(Request $request, $offset = 0): Response
-    {
-        $items = $this->dsoRepository->getAstrobinId(null);
-        ksort($items);
-        $items = array_slice($items, $offset, 50);
-        $listDso = $this->dsoManager->buildListDso(array_keys($items));
-        $params['dso'] = $this->dsoDataTransformer->listVignettesView($listDso);
-
-        return $this->render('pages/debug_astrobin.html.twig', $params);
-    }
 }
