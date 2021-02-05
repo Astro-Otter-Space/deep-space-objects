@@ -32,11 +32,11 @@ final class AstrobinService
 
 
     /**
-     * @param string $astrobinId
+     * @param string|null $astrobinId
      *
      * @return Image
      */
-    public function getAstrobinImage(string $astrobinId): Image
+    public function getAstrobinImage(?string $astrobinId): Image
     {
         $defautImage = new Image();
         $defautImage->url_hd = Utils::IMG_LARGE_DEFAULT;
