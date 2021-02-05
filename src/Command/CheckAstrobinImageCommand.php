@@ -35,7 +35,7 @@ class CheckAstrobinImageCommand extends Command
      * @param string $senderMail
      * @param string $receiverMail
      */
-    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail,string $receiverMail)
+    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
@@ -67,7 +67,7 @@ class CheckAstrobinImageCommand extends Command
         if (0 < count($listDsoAstrobin)) {
             foreach ($listDsoAstrobin as $dsoId => $astrobinId) {
                 /** @var GetImage $image */
-                $image = new GetImage();
+                $image = new GetImage($astrobinApiKey, $astrobinApiSecret);
 
                 try {
                     /** @var AstrobinResponse $result */

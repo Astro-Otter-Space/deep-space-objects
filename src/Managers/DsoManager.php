@@ -16,12 +16,10 @@ use App\Entity\ES\ListDso;
 use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
+use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\AstrobinError;
-use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
-use AstrobinWs\Services\GetImage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,7 +34,7 @@ class DsoManager
     private static array $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
 
     private DsoRepository $dsoRepository;
-    private GetImage $astrobinImage;
+    private AstrobinService $astrobinService;
     private UrlGenerateHelper $urlGenerateHelper;
     private TranslatorInterface $translator;
     private CacheInterface $cacheUtils;
@@ -49,14 +47,15 @@ class DsoManager
      *
      * @param DsoRepository $dsoRepository
      * @param CacheInterface $cacheUtils
-     * @param $locale
+     * @param string|null $locale
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
+     * @param AstrobinService $astrobinService
      */
-    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository)
+    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository, AstrobinService $astrobinService)
     {
         $this->dsoRepository = $dsoRepository;
-        $this->astrobinImage = new GetImage();
+        $this->astrobinService = $astrobinService;
         $this->cacheUtils = $cacheUtils;
         $this->locale = $locale ?? 'en';
         $this->dsoDataTransformer = $dsoDataTransformer;
@@ -91,7 +90,7 @@ class DsoManager
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
             if (!is_null($dso)) {
                 // Add astrobin image
-                $astrobinImage = $this->getAstrobinImage($dso->getAstrobinId());
+                $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());
                 $dso->setAstrobin($astrobinImage);
 
                 // add Constellation
@@ -157,38 +156,6 @@ class DsoManager
         };
 
         return $getDso($id)->current();
-    }
-
-    /**
-     * @todo move to AstrobinServic
-     * Get image (and his owner) from Astrobin
-     *
-     * @param $astrobinId
-     *
-     * @return Image
-     */
-    public function getAstrobinImage($astrobinId): Image
-    {
-        $defautImage = new Image();
-        $defautImage->url_hd = Utils::IMG_LARGE_DEFAULT;
-        $defautImage->url_regular = Utils::IMG_LARGE_DEFAULT;
-        $defautImage->user = null;
-        $defautImage->title = null;
-
-        try {
-            /** @var Image $imageAstrobin */
-            $imageAstrobin = (!is_null($astrobinId)) ? $this->astrobinImage->getImageById($astrobinId) : basename(Utils::IMG_LARGE_DEFAULT);
-            if ($imageAstrobin instanceof AstrobinError) {
-                return $defautImage;
-            }
-            if ($imageAstrobin instanceof AstrobinResponse) {
-                return $imageAstrobin;
-            }
-
-            return $defautImage;
-        } catch(WsResponseException | \Exception $e) {
-            return $defautImage;
-        }
     }
 
     /**

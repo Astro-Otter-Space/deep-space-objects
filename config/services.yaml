@@ -12,6 +12,8 @@ parameters:
     facebook.link: '%env(FACEBOOK_PAGE)%'
     twitter.link: '%env(TWITTER_PAGE)%'
     tipeee.link: '%env(TIPEEE_PAGE)%'
+    astrobinApiKey: '%env(ASTROBIN_API_KEY)%'
+    astrobinApiSecret: '%env(ASTROBIN_API_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -78,6 +80,11 @@ services:
             -   method: setPwdMail
                 arguments:
                     - '%env(GMAIL_APP_PWD)%'
+
+    App\Service\AstrobinService:
+        arguments:
+            $astrobinApiKey: '%astrobinApiKey%'
+            $astrobinApiSecret: '%astrobinApiSecret%'
 
     # Exception listener
     App\EventListener\ExceptionListener:
