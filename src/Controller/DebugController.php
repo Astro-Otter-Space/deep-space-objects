@@ -44,7 +44,6 @@ class DebugController extends AbstractController
             var_dump($e->getMessage());
         }
 
-
         return $this->render('pages/debug.html.twig', ['data' => $image]);
     }
 

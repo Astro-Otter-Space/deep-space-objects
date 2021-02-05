@@ -91,7 +91,6 @@ services:
             -
                 name: doctrine.orm.entity_listener
                 event: postPersist
-                entity: App\Entity\BDD\ApiUser
                 lazy: true
 
     # add more service definitions when explicit configuration is needed
