@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DebugController extends AbstractController
 {
     /**
-     * @Route(path="/debug/astrobin/{id}", name="debug_astrobin")
+     * @Route("/debug/astrobin/{id}", name="debug_astrobin")
      * @param Request $request
      * @param string $id
      *
