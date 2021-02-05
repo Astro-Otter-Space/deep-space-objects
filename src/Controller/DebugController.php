@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Controller;
+namespace App\Controller;
 
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
@@ -19,12 +19,13 @@ class DebugController extends AbstractController
      * @param Request $request
      * @param string $id
      *
+     * @return Response
      * @throws WsException
      * @throws WsResponseException
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function testAstrobin(Request $request, string $id)
+    public function testAstrobin(Request $request, string $id): Response
     {
         $imageWs = new GetImage();
         $image = $imageWs->getById($id);
