@@ -11,6 +11,7 @@ use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\Image;
@@ -74,13 +75,14 @@ class DsoController extends AbstractController
      *
      * @param Request $request
      * @param string $id
+     * @param AstrobinService $astrobinService
      *
      * @return Response
-     * @throws WsException
-     * @throws ReflectionException
      * @throws JsonException
+     * @throws ReflectionException
+     * @throws WsException
      */
-    public function show(Request $request, string $id): Response
+    public function show(Request $request, string $id, AstrobinService $astrobinService): Response
     {
         $separator = trim(Utils::URL_CONCAT_GLUE);
         $id = explode($separator, $id, null);
@@ -112,17 +114,10 @@ class DsoController extends AbstractController
             ];
             $params['geojson_center'] = $dso->getGeometry()['coordinates'];
 
-            $params['images'] = [];
-            // Images
-            try {
-                if ($this->cacheUtil->hasItem(md5($id . '_list_images'))) {
-                    $params['images'] = unserialize($this->cacheUtil->getItem(md5($id . '_list_images')), ['allowed_classes' => Image::class]);
-                } else {
-                    $params['images'] = $this->getListImages($dso->getName());
-                }
-            } catch (WsResponseException | JsonException | WsException | ReflectionException $e) {
-                //dump($e->getMessage());
-            }
+            // List images
+            $params['images'] = array_map(static function(Image $image) {
+                return $image->url_regular;
+            }, $astrobinService->listImagesBy($dso->getId()));
         } else {
             throw new NotFoundException('Object not found');
         }
@@ -203,26 +198,7 @@ class DsoController extends AbstractController
      */
     private function getListImages(string $dsoId): array
     {
-        $astrobinWs = new GetImage(null, null);
-        $listImages = $tabImages = [];
-        try {
-            /** @var ListImages|Image $listImages */
-            $listImages = $astrobinWs->getImagesByTitle($dsoId, 5);
-        } catch (WsResponseException | WsException $e) {
-            //dump($e->getMessage());
-        }
 
-        if ($listImages instanceof Image) {
-            $tabImages[] = $listImages->url_regular;
-
-        } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
-            $tabImages = array_map(static function (Image $image) {
-                return $image->url_regular;
-            }, iterator_to_array($listImages));
-        }
-
-        $this->cacheUtil->saveItem(md5($dsoId . '_list_images'), serialize($tabImages));
-        return $tabImages;
     }
 
     /**
