@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\CacheInterface;
+use App\Classes\CachePoolInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
@@ -41,7 +41,7 @@ class DsoController extends AbstractController
 
     use DsoTrait;
 
-    private CacheInterface $cacheUtil;
+    private CachePoolInterface $cacheUtil;
     private DsoManager $dsoManager;
     private DsoRepository $dsoRepository;
     private DsoDataTransformer $dsoDataTransformer;
@@ -49,13 +49,13 @@ class DsoController extends AbstractController
     /**
      * DsoController constructor.
      *
-     * @param CacheInterface $cacheUtil
+     * @param CachePoolInterface $cacheUtil
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param DsoDataTransformer $dataTransformer
      * @param TranslatorInterface $translator
      */
-    public function __construct(CacheInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
+    public function __construct(CachePoolInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
     {
         $this->cacheUtil = $cacheUtil;
         $this->dsoManager = $dsoManager;
@@ -85,10 +85,10 @@ class DsoController extends AbstractController
     public function show(Request $request, string $id, AstrobinService $astrobinService): Response
     {
         $separator = trim(Utils::URL_CONCAT_GLUE);
-        $id = explode($separator, $id, null);
-        $id = reset($id);
 
-        $dso = $this->dsoManager->getDso($id);
+        [$idDso, ] = explode($separator, $id);
+
+        $dso = $this->dsoManager->getDso($idDso);
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
 
         if (!is_null($dso)) {
@@ -117,7 +117,7 @@ class DsoController extends AbstractController
             // List images
             $params['images'] = array_map(static function(Image $image) {
                 return $image->url_regular;
-            }, $astrobinService->listImagesBy($dso->getId()));
+            }, iterator_to_array($astrobinService->listImagesBy($dso->getId())));
         } else {
             throw new NotFoundException('Object not found');
         }

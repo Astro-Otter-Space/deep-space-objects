@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Service;
+declare(strict_types=1);
 
-use App\Classes\CacheInterface;
-use Symfony\Contracts\Cache\CacheInterface as SfCacheInterface;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Cache\Adapter\MemcachedAdapter;
+namespace App\Service\Cache;
+
+use App\Classes\CachePoolInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * Class CachepoolService
@@ -13,17 +13,16 @@ use Symfony\Component\Cache\Adapter\MemcachedAdapter;
  * @package App\Service
  * @source http://www.inanzzz.com/index.php/post/ruhe/symfony-memcached-and-redis-adapter-as-cache-pool
  */
-class CachepoolService implements CacheInterface
+final class CachepoolService implements CachePoolInterface
 {
-    /** @var MemcachedAdapter  */
-    private $cachePool;
+    private CacheInterface $cachePool;
 
     /**
      * CachepoolService constructor.
      *
-     * @param SfCacheInterface $cachePool
+     * @param CacheInterface $cachePool
      */
-    public function __construct(SfCacheInterface $cachePool)
+    public function __construct(CacheInterface $cachePool)
     {
         $this->cachePool = $cachePool;
     }
@@ -32,13 +31,12 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool|mixed
-     * @throws InvalidArgumentException
      */
-    public function getItem($key): string
+    public function getItem(string $key): ?string
     {
         $cacheItem = $this->cachePool->getItem($key);
 
-        return ($cacheItem->isHit()) ? $cacheItem->get(): false;
+        return ($cacheItem->isHit()) ? $cacheItem->get(): null;
     }
 
 
@@ -47,9 +45,8 @@ class CachepoolService implements CacheInterface
      * @param $value
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
-    public function saveItem($key, $value): bool
+    public function saveItem(string $key, $value): bool
     {
         $cacheItem = $this->cachePool->getItem($key);
         $cacheItem->set($value);
@@ -61,9 +58,8 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
-    public function hasItem($key): bool
+    public function hasItem(string $key): bool
     {
         return $this->cachePool->hasItem($key);
     }
@@ -72,9 +68,8 @@ class CachepoolService implements CacheInterface
      * @param $key
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
-    public function deleteItem($key): bool
+    public function deleteItem(string $key): bool
     {
         return $this->cachePool->deleteItem($key);
     }

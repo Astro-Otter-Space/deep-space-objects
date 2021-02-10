@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Managers;
 
-use App\Classes\CacheInterface;
+use App\Classes\CachePoolInterface;
 use App\Classes\Utils;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
@@ -37,7 +37,7 @@ class DsoManager
     private AstrobinService $astrobinService;
     private UrlGenerateHelper $urlGenerateHelper;
     private TranslatorInterface $translator;
-    private CacheInterface $cacheUtils;
+    private CachePoolInterface $cacheUtils;
     private string $locale;
     private DsoDataTransformer $dsoDataTransformer;
     private ConstellationRepository $constellationRepository;
@@ -46,13 +46,13 @@ class DsoManager
      * DsoManager constructor.
      *
      * @param DsoRepository $dsoRepository
-     * @param CacheInterface $cacheUtils
+     * @param CachePoolInterface $cacheUtils
      * @param string|null $locale
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
      * @param AstrobinService $astrobinService
      */
-    public function __construct(DsoRepository $dsoRepository, CacheInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository, AstrobinService $astrobinService)
+    public function __construct(DsoRepository $dsoRepository, CachePoolInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository, AstrobinService $astrobinService)
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinService = $astrobinService;
@@ -79,6 +79,7 @@ class DsoManager
 
         if ($this->cacheUtils->hasItem($idMd5)) {
             $dsoFromCache = $this->getDsoFromCache($idMd5);
+
             if (is_null($dsoFromCache)) {
                 $this->cacheUtils->deleteItem($idMd5);
                 $dso = $this->buildDso($id);
@@ -102,7 +103,8 @@ class DsoManager
                     $dso->setConstellation($constellationDto);
                 }
 
-                $this->cacheUtils->saveItem($dso->guid(), serialize($dso));
+                $this->cacheUtils->saveItem($idMd5, serialize($dso));
+
                 if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
                     $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
                 }
@@ -123,7 +125,17 @@ class DsoManager
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
         /** @var Dso $unserializedDso */
-        $unserializedDso = unserialize($dsoSerialized, ['allowed_classes' => [DsoDTO::class, ConstellationDTO::class, Image::class, Dso::class, Constellation::class, AstrobinError::class]]);
+
+        $unserializedDso = unserialize($dsoSerialized, [
+            'allowed_classes' => [
+                DsoDTO::class,
+                ConstellationDTO::class,
+                Image::class,
+                Dso::class,
+                Constellation::class,
+                AstrobinError::class
+            ]
+        ]);
 
         return ($unserializedDso instanceof DTOInterface) ? $unserializedDso : null;
     }
@@ -149,7 +161,7 @@ class DsoManager
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function getDso($id): DTOInterface
+    public function getDso(string $id): DTOInterface
     {
         $getDso = function($id) {
             yield from $this->buildDso($id);

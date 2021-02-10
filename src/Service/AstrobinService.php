@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Classes\CacheInterface;
+use App\Classes\CachePoolInterface;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\AstrobinError;
@@ -23,16 +23,16 @@ final class AstrobinService
 {
     private GetImage $imageWs;
 
-    private CacheInterface $cachePool;
+    private CachePoolInterface $cachePool;
 
     /**
      * AstrobinService constructor.
      *
      * @param string $astrobinApiKey
      * @param string $astrobinApiSecret
-     * @param CacheInterface $cachePool
+     * @param CachePoolInterface $cachePool
      */
-    public function __construct(string $astrobinApiKey, string $astrobinApiSecret, CacheInterface $cachePool)
+    public function __construct(string $astrobinApiKey, string $astrobinApiSecret, CachePoolInterface $cachePool)
     {
         $this->imageWs = new GetImage($astrobinApiKey, $astrobinApiSecret);
         $this->cachePool = $cachePool;
@@ -71,40 +71,27 @@ final class AstrobinService
     /**
      * @param string $subject
      *
-     * @return array
+     * @return ListImages
      * @throws JsonException
      * @throws \ReflectionException
      */
-    public function listImagesBy(string $subject): array
+    public function listImagesBy(string $subject): ListImages
     {
-        $tabImages = [];
         $idCache = md5(sprintf('%s_list_images', strtolower($subject)));
 
         if($this->cachePool->hasItem($idCache)) {
-            return unserialize($this->cachePool->getItem($idCache), ['allowed_classes' => Image::class]);
+            $imagesSerialized = $this->cachePool->getItem($idCache);
+            $listImages = unserialize($imagesSerialized, ['allowed_classes' => [Image::class, ListImages::class, AstrobinResponse::class]]);
+        } else {
+            try {
+                /** @var ListImages|Image $listImages */
+                $listImages = $this->imageWs->getImagesByTitle($subject, 5);
+                $this->cachePool->saveItem($idCache, serialize($listImages));
+            } catch (WsResponseException | WsException $e) {
+                return [];
+            }
         }
 
-        try {
-            /** @var ListImages|Image $listImages */
-            $listImages = $this->imageWs->getImagesByTitle($subject, 5);
-        } catch (WsResponseException | WsException $e) {
-            return [];
-        }
-
-        if ($listImages instanceof Image) {
-            $tabImages[] = $listImages;
-
-        } elseif ($listImages instanceof ListImages && 0 < $listImages->count) {
-            $tabImages = array_map(static function (Image $image) {
-                return $image;
-            }, iterator_to_array($listImages));
-        }
-
-        if (!empty($tabImages)) {
-            $this->cachePool->saveItem($idCache, serialize($tabImages));
-        }
-
-        return $tabImages;
+        return $listImages;
     }
-
 }

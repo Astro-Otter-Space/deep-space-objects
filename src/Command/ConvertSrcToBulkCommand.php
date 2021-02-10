@@ -4,7 +4,7 @@
 
 namespace App\Command;
 
-use App\Classes\CacheInterface;
+use App\Classes\CachePoolInterface;
 use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
@@ -29,7 +29,7 @@ class ConvertSrcToBulkCommand extends Command
     protected static $defaultName = "dso:convert-bulk";
 
     private string $kernelRoute;
-    private CacheInterface $cacheUtil;
+    private CachePoolInterface $cacheUtil;
     private EntityManagerInterface $em;
     private DsoManager $dsoManager;
     private DsoRepository $dsoRepository;
@@ -50,12 +50,12 @@ class ConvertSrcToBulkCommand extends Command
      * ConvertSrcToBulkCommand constructor.
      *
      * @param KernelInterface $kernel
-     * @param CacheInterface $cacheUtil
+     * @param CachePoolInterface $cacheUtil
      * @param EntityManagerInterface $em
      * @param DsoRepository $dsoRepository
      * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CacheInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
+    public function __construct(KernelInterface $kernel, CachePoolInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
     {
         $this->kernelRoute = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;

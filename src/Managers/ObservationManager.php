@@ -2,7 +2,7 @@
 
 namespace App\Managers;
 
-use App\Classes\CacheInterface;
+use App\Classes\CachePoolInterface;
 use App\DataTransformer\ObservationDataTransformer;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;
@@ -30,7 +30,7 @@ class ObservationManager
 
     private ObservationRepository $observationRepository;
     private UrlGenerateHelper $urlGeneratorHelper;
-    private CacheInterface $cacheUtil;
+    private CachePoolInterface $cacheUtil;
     private string $locale;
     private DsoManager $dsoManager;
     private TranslatorInterface $translator;
@@ -41,13 +41,13 @@ class ObservationManager
      *
      * @param ObservationRepository $observationRepository
      * @param UrlGenerateHelper $urlGeneratorHelper
-     * @param CacheInterface $cacheUtil
+     * @param CachePoolInterface $cacheUtil
      * @param $locale
      * @param DsoManager $dsoManager
      * @param TranslatorInterface $translator
      * @param ObservationDataTransformer $obsDataTransformer
      */
-    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CacheInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translator, ObservationDataTransformer $obsDataTransformer)
+    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CachePoolInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translator, ObservationDataTransformer $obsDataTransformer)
     {
         $this->observationRepository = $observationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;

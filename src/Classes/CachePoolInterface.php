@@ -6,14 +6,14 @@ namespace App\Classes;
  * Interface CacheInterface
  * @package App\Classes
  */
-interface CacheInterface
+interface CachePoolInterface
 {
     /**
      * @param $key
      *
      * @return string|null
      */
-    public function getItem($key): ?string;
+    public function getItem(string $key): ?string;
 
     /**
      * @param $key
@@ -21,22 +21,21 @@ interface CacheInterface
      *
      * @return bool
      */
-    public function saveItem($key, $value): bool;
+    public function saveItem(string $key, $value): bool;
 
     /**
      * @param $key
      *
      * @return bool
      */
-    public function hasItem($key): bool;
-
+    public function hasItem(string $key): bool;
 
     /**
      * @param $key
      *
      * @return bool
      */
-    public function deleteItem($key): bool;
+    public function deleteItem(string $key): bool;
 
     /**
      * @return bool
