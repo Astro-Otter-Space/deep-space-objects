@@ -5,7 +5,6 @@ namespace App\Managers;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\ES\ListConstellation;
 use App\Repository\ConstellationRepository;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ConstellationManager
@@ -57,7 +56,6 @@ class ConstellationManager
      *
      * @return ListConstellation
      * @throws \JsonException
-     * @throws \ReflectionException
      */
     private function buildListConstellation(array $listConstIds): ListConstellation
     {
@@ -83,7 +81,6 @@ class ConstellationManager
      * @param $searchTerms
      *
      * @return mixed
-     * @throws \ReflectionException
      * @throws \JsonException
      */
     public function searchConstellationsByTerms($searchTerms): ListConstellation

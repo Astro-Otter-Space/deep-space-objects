@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Classes\CachePoolInterface;
+use App\Service\Cache\CachePoolInterface;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\AstrobinError;

@@ -4,12 +4,11 @@
 
 namespace App\Command;
 
-use App\Classes\CachePoolInterface;
+use App\Service\Cache\CachePoolInterface;
 use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Dso;
-use App\Entity\ES\ListDso;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Doctrine\ORM\EntityManagerInterface;

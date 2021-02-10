@@ -6,8 +6,6 @@ use App\DataTransformer\ConstellationDataTransformer;
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
-use App\Managers\EventManager;
-use App\Managers\ObservationManager;
 use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,23 +21,17 @@ class  SearchController extends AbstractController
 {
     private DsoManager $dsoManager;
     private ConstellationManager $constellationManager;
-    private ObservationManager $observationManager;
-    private EventManager $eventManager;
 
     /**
      * SearchController constructor.
      *
      * @param DsoManager $dsoManager
      * @param ConstellationManager $constellationManager
-     * @param ObservationManager $observationManager
-     * @param EventManager $eventManager
      */
-    public function __construct(DsoManager $dsoManager, ConstellationManager $constellationManager, ObservationManager $observationManager, EventManager $eventManager)
+    public function __construct(DsoManager $dsoManager, ConstellationManager $constellationManager)
     {
         $this->dsoManager = $dsoManager;
         $this->constellationManager = $constellationManager;
-        $this->observationManager = $observationManager;
-        $this->eventManager = $eventManager;
     }
 
     /**
@@ -110,7 +102,7 @@ class  SearchController extends AbstractController
 
     /**
      * Search events and dso planner by autocomplete
-     *
+     * @deprecated
      * @Route(
      *     "/_search-observation",
      *     name="search_observation_ajax",
@@ -127,8 +119,8 @@ class  SearchController extends AbstractController
         if ($request->query->has('q')) {
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
             $data = array_merge(
-                $this->observationManager->buildSearchObservationByTerms($searchTerm),
-                $this->eventManager->buildSearchEventByTerms($searchTerm)
+//                $this->observationManager->buildSearchObservationByTerms($searchTerm),
+//                $this->eventManager->buildSearchEventByTerms($searchTerm)
             );
         }
 

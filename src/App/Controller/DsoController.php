@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\CachePoolInterface;
+use App\Service\Cache\CachePoolInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
@@ -13,10 +13,7 @@ use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\Image;
-use AstrobinWs\Response\ListImages;
-use AstrobinWs\Services\GetImage;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Exception\NotFoundException;
 use JsonException;

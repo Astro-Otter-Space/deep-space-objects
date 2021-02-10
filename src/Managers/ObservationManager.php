@@ -2,7 +2,7 @@
 
 namespace App\Managers;
 
-use App\Classes\CachePoolInterface;
+use App\Service\Cache\CachePoolInterface;
 use App\DataTransformer\ObservationDataTransformer;
 use App\Entity\ES\ListDso;
 use App\Entity\ES\Observation;

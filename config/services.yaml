@@ -66,7 +66,7 @@ services:
                 port: '%env(ELK_PORT)%'
 
     # Cache pool
-    App\Service\CachepoolService:
+    App\Service\Cache\CachepoolService:
         arguments:
             $cachePool: '@app.cache.dso'
 

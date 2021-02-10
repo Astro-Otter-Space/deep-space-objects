@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Managers;
 
-use App\Classes\CachePoolInterface;
+use App\Service\Cache\CachePoolInterface;
 use App\Classes\Utils;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
