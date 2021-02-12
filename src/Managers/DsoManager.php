@@ -124,7 +124,9 @@ class DsoManager
     public function getDsoFromCache($idMd5): ?DTOInterface
     {
         $dsoSerialized = $this->cacheUtils->getItem($idMd5);
-        /** @var Dso $unserializedDso */
+        if (is_null($dsoSerialized)) {
+            return null;
+        }
 
         $unserializedDso = unserialize($dsoSerialized, [
             'allowed_classes' => [

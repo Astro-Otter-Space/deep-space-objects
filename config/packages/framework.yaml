@@ -9,7 +9,7 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
-    esi: true
+    esi: { enabled: true }
     fragments: { path: /_fragment }
     php_errors:
         log: true

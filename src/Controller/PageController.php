@@ -374,7 +374,7 @@ class PageController extends AbstractController
         }, range(1, $limit, $i));
 
 
-        $results = $dsoRepository->getObjectsCatalogByFilters(0,['catalog' => 'sh'], 1000);
+        $results = $dsoRepository->getObjectsCatalogByFilters(0, ['catalog' => 'sh'], 1000, true);
         /** @var Dso $dso */
         foreach ($results[0] as $dso) {
             if (0 === stripos($dso->getId(), 'sh')) {
