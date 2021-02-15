@@ -187,7 +187,6 @@ class ConvertSrcToBulkCommand extends Command
                                 $lastUpdateData = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $inputData['updated_at']);
                                 if (0 === $lastImportDate->diff($lastUpdateData)->invert) {
 
-
                                     $bulkData[] = [
                                         'idDoc' => self::md5ForId($id),
                                         'mode' => 'update',
