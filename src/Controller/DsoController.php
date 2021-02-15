@@ -118,6 +118,7 @@ class DsoController extends AbstractController
                     return $image->url_regular;
                 }, iterator_to_array($listImages));
             }*/
+            $params['images'] = [];
         } else {
             throw new NotFoundException('Object not found');
         }
