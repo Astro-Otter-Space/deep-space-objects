@@ -112,10 +112,10 @@ class DsoController extends AbstractController
             $params['geojson_center'] = $dso->getGeometry()['coordinates'];
 
             // List images
-            $listImages = array_map(static function(Image $image) {
+            /*$listImages = array_map(static function(Image $image) {
                 return $image->url_regular ?? null;
-            }, iterator_to_array($astrobinService->listImagesBy($dso->getId())) ?? []);
-            $params['images'] = array_filter($listImages);
+            }, iterator_to_array($astrobinService->listImagesBy($dso->getId())) ?? []);*/
+            $params['images'] = []; //array_filter($listImages);
         } else {
             throw new NotFoundException('Object not found');
         }
