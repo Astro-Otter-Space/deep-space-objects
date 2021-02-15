@@ -71,11 +71,11 @@ final class AstrobinService
     /**
      * @param string $subject
      *
-     * @return ListImages
+     * @return AstrobinError|AstrobinResponse|ListImages|null
      * @throws JsonException
      * @throws \ReflectionException
      */
-    public function listImagesBy(string $subject): ?ListImages
+    public function listImagesBy(string $subject): ?AstrobinResponse
     {
         $idCache = md5(sprintf('%s_list_images', strtolower($subject)));
         $listImages = null;
@@ -84,14 +84,14 @@ final class AstrobinService
             $listImages = unserialize($imagesSerialized, ['allowed_classes' => [Image::class, ListImages::class, AstrobinResponse::class]]);
         } else {
             try {
-                /** @var ListImages|Image $listImages */
+                /** @var AstrobinResponse|AstrobinError $listImages */
                 $listImages = $this->imageWs->getImagesByTitle($subject, 5);
+                if ($listImages instanceof AstrobinError) {
+                    $this->cachePool->deleteItem($idCache);
+                    return null;
+                }
                 if ($listImages instanceof AstrobinResponse) {
                     $this->cachePool->saveItem($idCache, serialize($listImages));
-                } else {
-                    if ($this->cachePool->hasItem($idCache)) {
-                        $this->cachePool->deleteItem($idCache);
-                    }
                 }
 
             } catch (WsResponseException | WsException $e) {
