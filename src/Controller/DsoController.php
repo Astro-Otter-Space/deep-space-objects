@@ -150,7 +150,6 @@ class DsoController extends AbstractController
      * Get last updated items
      *
      * @param Request $request
-     *
      * @param EntityManagerInterface $doctrineManager
      *
      * @return Response
