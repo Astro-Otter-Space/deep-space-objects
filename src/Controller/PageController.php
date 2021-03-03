@@ -10,6 +10,7 @@ use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -193,7 +194,7 @@ class PageController extends AbstractController
         $registerApiUserForm->handleRequest($request);
         if ($registerApiUserForm->isSubmitted()) {
             if ($registerApiUserForm->isValid()) {
-                /** @var ObjectManager $em */
+                /** @var EntityManagerInterface $em */
                 $em = $this->getDoctrine()->getManager();
 
                 $apiUser->setPassword(
@@ -398,5 +399,13 @@ class PageController extends AbstractController
         $notIndexedItems = array_diff($fullArray, $data);
 
         return new Response(print_r(array_values($notIndexedItems)));
+    }
+
+    /**
+     * @Route("/phpinfo", name="phpinfo")
+     */
+    public function phpinfo()
+    {
+        echo phpinfo();
     }
 }

@@ -17,8 +17,6 @@ class HomeController extends AbstractController
 {
     private DsoManager $dsoManager;
 
-    private string $env;
-
     public const DSO_VIGNETTES = 3;
 
     /**
@@ -73,14 +71,5 @@ class HomeController extends AbstractController
 
         return $this->render('includes/components/vignettes.html.twig', $params, $response);
     }
-
-    /**
-     * @Route("/phpinfo", name="phpinfo")
-     */
-    public function phpinfo()
-    {
-        echo phpinfo();
-    }
-
 
 }
