@@ -22,7 +22,7 @@ framework:
 
         # The app cache caches to the filesystem by default.
         # Other options include:
-        default_memcached_provider: '%env(MEMCACHED_URL)%'
+        default_memcached_provider: '%env(resolve:MEMCACHED_URL)%'
         pools:
             app.cache.dso:
                 adapter: cache.adapter.memcached

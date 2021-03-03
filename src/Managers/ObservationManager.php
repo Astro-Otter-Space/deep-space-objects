@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Managers;
 
 use App\Service\Cache\CachePoolInterface;
@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  *
  * @package App\Managers
  */
-class ObservationManager
+/*class ObservationManager
 {
     use ManagerTrait;
 
@@ -47,7 +47,7 @@ class ObservationManager
      * @param TranslatorInterface $translator
      * @param ObservationDataTransformer $obsDataTransformer
      */
-    public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CachePoolInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translator, ObservationDataTransformer $obsDataTransformer)
+    /*public function __construct(ObservationRepository $observationRepository, UrlGenerateHelper $urlGeneratorHelper, CachePoolInterface $cacheUtil, $locale, DsoManager $dsoManager, TranslatorInterface $translator, ObservationDataTransformer $obsDataTransformer)
     {
         $this->observationRepository = $observationRepository;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
@@ -64,9 +64,9 @@ class ObservationManager
      * @return Observation
      * @throws ReflectionException
      */
-    public function buildObservation($id): Observation
+    /*public function buildObservation($id): Observation
     {
-        /** @var Observation $observation */
+        /** @var Observation $observation
         $observation = $this->observationRepository->setLocale($this->locale)->getObservationById($id);
         if (is_null($observation)) {
             throw new NotFoundException();
@@ -74,7 +74,7 @@ class ObservationManager
 
         if ($observation instanceof Observation) {
             $observation->setFullUrl($this->urlGeneratorHelper->generateUrl($observation));
-            /** @var ListDso $dsoList */
+            /** @var ListDso $dsoList
             $dsoList = new ListDso();
 
             if (!is_null($observation->getDsoList()) && 0 < count($observation->getDsoList())) {
@@ -96,7 +96,7 @@ class ObservationManager
      * @param Observation $observation
      *
      * @return array
-     */
+
     public function formatVueData(Observation $observation): array
     {
         $observationArray = $this->obsDataTransformer->toArray($observation);
@@ -109,7 +109,7 @@ class ObservationManager
      * @param $terms
      *
      * @return mixed
-     */
+
     public function buildSearchObservationByTerms($terms)
     {
         $listObservation = $this->observationRepository->setLocale($this->locale)->getObservationsBySearchTerms($terms);
@@ -129,10 +129,10 @@ class ObservationManager
     /**
      * @return array
      * @throws ReflectionException
-     */
+
     public function getAllObservation()
     {
-        /** @var UrlGenerateHelper $urlGenerator */
+        /** @var UrlGenerateHelper $urlGenerator
         $urlGenerator = $this->urlGeneratorHelper;
 
         return array_map(function(Observation $observation) use($urlGenerator) {
@@ -167,13 +167,13 @@ class ObservationManager
      *
      * @return true|string
      * @throws ExceptionInterface
-     */
+
     public function addObservation(Observation $observation)
     {
-        /** @var ObjectNormalizer $normalizer */
+        /** @var ObjectNormalizer $normalizer
         $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
 
-        /** @var Serializer $serialize */
+        /** @var Serializer $serialize
         $serialize = new Serializer([$normalizer]);
 
         $observationData = $serialize->normalize($observation, null, ['attributes' => $observation->getFieldsObjectToJson()]);

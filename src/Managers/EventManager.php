@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace App\Managers;
 
 use App\Classes\Iterator\EventsFuturIterator;
@@ -21,24 +21,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Class EventManager
  *
  * @package App\Managers
- */
+
 class EventManager
 {
     use ManagerTrait;
 
-    /** @var EventRepository  */
+    /** @var EventRepository
     private $eventRepository;
 
-    /** @var string */
+    /** @var string
     private $locale;
 
-    /** @var UrlGenerateHelper */
+    /** @var UrlGenerateHelper
     private $urlGeneratorHelper;
 
-    /** @var TranslatorInterface  */
+    /** @var TranslatorInterface
     private $translator;
 
-    /** @var EventDataTransformer */
+    /** @var EventDataTransformer
     private $eventDataTransformer;
 
     /**
@@ -49,7 +49,7 @@ class EventManager
      * @param UrlGenerateHelper $urlGeneratorHelper
      * @param TranslatorInterface $translator
      * @param EventDataTransformer $eventDataTransformer
-     */
+
     public function __construct(EventRepository $eventRepository, $locale, UrlGenerateHelper $urlGeneratorHelper, TranslatorInterface $translator, EventDataTransformer $eventDataTransformer)
     {
         $this->eventRepository = $eventRepository;
@@ -64,10 +64,10 @@ class EventManager
      *
      * @return Event|null
      * @throws \ReflectionException
-     */
+
     public function buildEvent($id)
     {
-        /** @var Event|null $event */
+        /** @var Event|null $event
         $event = $this->eventRepository->setLocale($this->locale)->getEventById($id);
         if (!is_null($event)) {
             $event->setEventDate($event->getEventDate(), false); // transform string date to datetime
@@ -81,7 +81,7 @@ class EventManager
      * @param Event $event
      *
      * @return array
-     */
+
     public function formatVueData(Event $event)
     {
         $eventArray = $this->eventDataTransformer->toArray($event);
@@ -94,23 +94,23 @@ class EventManager
      *
      * @return array
      * @throws \Exception
-     */
+
     public function buildSearchEventByTerms($terms): array
     {
         /**
          * @return \Generator
-         */
+
         $listResults = function() use ($terms) {
             yield from $this->eventRepository->setLocale($this->locale)->getEventBySearchTerms($terms);
         };
 
-        /** @var EventsFuturIterator $listEventsFiltered */
+        /** @var EventsFuturIterator $listEventsFiltered
         $listEventsFiltered = new EventsFuturIterator($listResults());
 
         return call_user_func("array_merge", array_map(function (Event $event) {
             $formatDate = $this->translator->trans('dateFormatLong');
 
-            /** @var \DateTimeInterface $eventDate */
+            /** @var \DateTimeInterface $eventDate
             $event->setEventDate($event->getEventDate(), false);
 
             return [
@@ -125,18 +125,18 @@ class EventManager
 
     /**
      * @return array
-     */
+
     public function getAllEvents(): array
     {
         /** @return \Generator
          * @var  $listEvents
-         */
+
         $listEvents = function() {
             yield from $this->eventRepository->setLocale($this->locale)->getAllFuturEvents();
         };
 
         return array_map(function(Event $event) {
-            /** @var \IntlDateFormatter $formatter */
+            /** @var \IntlDateFormatter $formatter
             $formatter = \IntlDateFormatter::create(
                 $this->locale,
                 \IntlDateFormatter::SHORT,
@@ -168,13 +168,13 @@ class EventManager
      *
      * @return bool|string
      * @throws ExceptionInterface
-     */
+
     public function addEvent(Event $event)
     {
-        /** @var ObjectNormalizer $normalizer */
+        /** @var ObjectNormalizer $normalizer
         $normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
 
-        /** @var Serializer $serialize */
+        /** @var Serializer $serialize
         $serialize = new Serializer([$normalizer]);
 
         $eventData = $serialize->normalize($event, null, ['attributes' => $event->getFieldsObjectToJson()]);
