@@ -11,9 +11,11 @@ use App\Forms\RegisterApiUsersFormType;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\MemcachedAdapter;
+use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -404,12 +406,14 @@ class PageController extends AbstractController
 
     /**
      * @Route("/memcache", name="phpinfo")
+     * @throws CacheException|InvalidArgumentException
      */
     public function memcache(): Response
     {
-        echo $this->getParameter('memcachedUrl');
-        $memcached = new MemcachedAdapter('app.cache.dso');
-        $m42 = $memcached->getItem(md5('m42'));
+        $memcached = new \Memcached();
+        $memcached->addServer("localhost", 11211);
+        $memcachedAdapter = new MemcachedAdapter($memcached);
+        $m42 = $memcachedAdapter->getItem(md5('m42'));
 
         return new Response($m42);
     }
