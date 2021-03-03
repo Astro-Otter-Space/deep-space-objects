@@ -407,7 +407,7 @@ class PageController extends AbstractController
      */
     public function memcache(): Response
     {
-        echo $this->container->getEnv('MEMCACHED_URL');
+        echo $this->getParameter('%env(MEMCACHED_URL)%');
         $memcached = new MemcachedAdapter('app.cache.dso');
         $m42 = $memcached->getItem(md5('m42'));
 
