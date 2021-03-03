@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Cache;
 
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
 
 /**
@@ -14,14 +15,14 @@ use Symfony\Contracts\Cache\CacheInterface;
  */
 final class CachepoolService implements CachePoolInterface
 {
-    private CacheInterface $cachePool;
+    private AbstractAdapter $cachePool;
 
     /**
      * CachepoolService constructor.
      *
-     * @param CacheInterface $cachePool
+     * @param AbstractAdapter $cachePool
      */
-    public function __construct(CacheInterface $cachePool)
+    public function __construct(AbstractAdapter $cachePool)
     {
         $this->cachePool = $cachePool;
     }
