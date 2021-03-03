@@ -17,6 +17,8 @@ class HomeController extends AbstractController
 {
     private DsoManager $dsoManager;
 
+    private string $env;
+
     public const DSO_VIGNETTES = 3;
 
     /**
@@ -73,11 +75,12 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @param string $env
      * @Route("/phpinfo", name="phpinfo")
      */
-    public function phpinfo($env)
+    public function phpinfo()
     {
-        echo ('prod' !== $env) ? phpinfo() : new Response();
+        echo phpinfo();
     }
+
+
 }
