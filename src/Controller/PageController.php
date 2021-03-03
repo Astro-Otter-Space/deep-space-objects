@@ -13,6 +13,7 @@ use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -402,10 +403,14 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/phpinfo", name="phpinfo")
+     * @Route("/memcache", name="phpinfo")
      */
-    public function phpinfo()
+    public function memcache(): Response
     {
-        echo phpinfo();
+        echo $this->container->getEnv('MEMCACHED_URL');
+        $memcached = new MemcachedAdapter('app.cache.dso');
+        $m42 = $memcached->getItem(md5('m42'));
+
+        return new Response($m42);
     }
 }
