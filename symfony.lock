@@ -74,6 +74,12 @@
     "excelwebzone/recaptcha-bundle": {
         "version": "v1.5.13"
     },
+    "ezimuel/guzzlestreams": {
+        "version": "3.0.1"
+    },
+    "ezimuel/ringphp": {
+        "version": "1.1.2"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
