@@ -405,16 +405,10 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/memcache", name="phpinfo")
-     * @throws CacheException|InvalidArgumentException
+     * @Route("/dmcupphiirjvaesw", name="debug")
      */
-    public function memcache(): Response
+    public function debug(): void
     {
-        $memcached = new \Memcached();
-        $memcached->addServer("localhost", 11211);
-        $memcachedAdapter = new MemcachedAdapter($memcached);
-        $m42 = $memcachedAdapter->getItem(md5('m42'));
-
-        return new Response($m42);
+        echo phpinfo();
     }
 }
