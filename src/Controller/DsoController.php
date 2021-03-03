@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Service\Cache\CachePoolInterface;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
@@ -38,7 +37,6 @@ class DsoController extends AbstractController
 
     use DsoTrait;
 
-    private CachePoolInterface $cacheUtil;
     private DsoManager $dsoManager;
     private DsoRepository $dsoRepository;
     private DsoDataTransformer $dsoDataTransformer;
@@ -46,15 +44,13 @@ class DsoController extends AbstractController
     /**
      * DsoController constructor.
      *
-     * @param CachePoolInterface $cacheUtil
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param DsoDataTransformer $dataTransformer
      * @param TranslatorInterface $translator
      */
-    public function __construct(CachePoolInterface $cacheUtil, DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
+    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
     {
-        $this->cacheUtil = $cacheUtil;
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         $this->dsoDataTransformer = $dataTransformer;

@@ -26,10 +26,10 @@ class LayoutController extends AbstractController
     public const HTTP_TTL = 31556952;
 
     /** @var TranslatorInterface  */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /** @var DsoRepository */
-    private $dsoRepository;
+    private DsoRepository $dsoRepository;
 
     /**
      * LayoutController constructor.

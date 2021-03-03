@@ -141,6 +141,7 @@ class  SearchController extends AbstractController
      * @param $id
      *
      * @return JsonResponse
+     * @throws \JsonException
      */
     public function starsFiltered(Request $request, string $id): JsonResponse
     {

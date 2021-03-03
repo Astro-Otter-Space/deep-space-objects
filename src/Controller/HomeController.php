@@ -48,13 +48,14 @@ class HomeController extends AbstractController
     }
 
     /**
+     * @var Request $request
      * @param DsoDataTransformer $dataTransformer
      *
      * @return Response
      * @throws \AstrobinWs\Exceptions\WsException
      * @throws \JsonException
      * @throws \ReflectionException
-     * @var Request $request
+
      */
     public function vignettesDso(Request $request, DsoDataTransformer $dataTransformer): Response
     {
