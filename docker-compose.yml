@@ -22,7 +22,7 @@ services:
         ports:
             - 9000:9000
         volumes:
-            - .:/var/www/deep-space-objects:cached
+            - .:/var/www/deep-space-objects
             -  ./docker/php7-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf
             - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "${SSH_AUTH_SOCK}:/ssh-agent"
@@ -53,7 +53,7 @@ services:
         depends_on:
             - php
         volumes:
-            - .:/var/www/deep-space-objects:cached
+            - .:/var/www/deep-space-objects
             - ./logs/nginx/:/var/log/nginx:cached
             #- /etc/letsencrypt/:/etc/letsencrypt/
         env_file:
