@@ -110,9 +110,13 @@ class DsoController extends AbstractController
             // List images
             $images = $astrobinService->listImagesBy($dso->getId());
             if (!is_null($images)) {
-                $listImages = array_map(static function(Image $image) {
-                    return $image->url_regular;
-                }, iterator_to_array($images));
+                if (1 < $images->count) {
+                    $listImages = array_map(static function(Image $image) {
+                        return $image->url_regular;
+                    }, iterator_to_array($images));
+                } elseif(1 === $images->count) {
+                    $listImages = [$images->getIterator()->current()->url_regular];
+                }
             }
 
             $params['images'] = $listImages ?? []; //array_filter($listImages);
