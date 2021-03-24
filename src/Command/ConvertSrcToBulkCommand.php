@@ -245,9 +245,9 @@ class ConvertSrcToBulkCommand extends Command
                                         return md5(sprintf('%s_%s', $id, $locale));
                                     }, $this->listLocales), [md5(sprintf('%s_cover', $id))]);
 
-                                    array_walk($listMd5Dso, function ($idMd5) use ($dsoCurrent, $output) {
+                                    array_walk($listMd5Dso, function ($idMd5) use ($id, $output) {
                                         if ($this->cacheUtil->hasItem($idMd5)) {
-                                            $output->writeln(sprintf("[Cache pool %s] Empty cache %s", $dsoCurrent->getId(), $idMd5));
+                                            $output->writeln(sprintf("[Cache pool %s] Empty cache %s", $id, $idMd5));
                                             $this->cacheUtil->deleteItem($idMd5);
                                         }
                                     });
