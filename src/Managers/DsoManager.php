@@ -202,19 +202,6 @@ class DsoManager
         return $this->buildListDso($listDsoIdLastUpdated);
     }
 
-    /**
-     * @param \DateTimeInterface $lastUpdate
-     *
-     * @return ListDso
-     * @throws WsException
-     * @throws \JsonException
-     * @throws \ReflectionException
-     */
-    public function getListDsoAfter(\DateTimeInterface $lastUpdate): ListDso
-    {
-        $listDsoId = $this->dsoRepository->getUpdatedAfter($lastUpdate);
-        return $this->buildListDso($listDsoId);
-    }
 
     /**
      * Get list Dso by search terms

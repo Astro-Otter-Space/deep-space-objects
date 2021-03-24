@@ -30,7 +30,6 @@ class ConvertSrcToBulkCommand extends Command
     private string $kernelRoute;
     private CachePoolInterface $cacheUtil;
     private EntityManagerInterface $em;
-    private DsoManager $dsoManager;
     private DsoRepository $dsoRepository;
     protected array $listLocales;
 
@@ -92,7 +91,6 @@ class ConvertSrcToBulkCommand extends Command
         /** @var \DateTimeInterface $lastUpdateDate */
         $lastImportDate = $lastImport->getDate() ?? new \DateTime('now');
         $lastImportDate->setTimezone(new \DateTimeZone('Europe/Paris'));
-
 
         $output->writeln(sprintf("Last update : %s", $lastImportDate->format(Utils::FORMAT_DATE_ES)));
         $typeImport = $input->hasOption('import') ? $input->getOption('import') : 'delta';
@@ -217,16 +215,12 @@ class ConvertSrcToBulkCommand extends Command
                             /**
                              * Step 3 : get list of updated data
                              */
-                            $listDso = $this->dsoManager->getListDsoAfter($lastImportDate);
-                            if (0 < $listDso->getIterator()->count()) {
+                            $listDsoAsArray = $this->dsoRepository->getUpdatedAfter($lastImportDate);
+
+                            if (0 < count($listDsoAsArray)) {
                                 /**
                                  * STEP 4 : update DB
-                                 * TODO : move to repository
                                  */
-                                $listDsoAsArray = array_map(static function (Dso $dso) {
-                                    return $dso->getId();
-                                }, iterator_to_array($listDso));
-
                                 /** @var \DateTimeInterface $now */
                                 $now = new \DateTime('now');
                                 $now->setTimezone(new \DateTimeZone('Europe/Paris'));
@@ -244,13 +238,8 @@ class ConvertSrcToBulkCommand extends Command
                                  * STEP 5 empty cache
                                  */
                                 /** @var DsoDTO $dsoCurrent */
-                                foreach (iterator_to_array($listDso) as $dsoCurrent) {
-
-                                    $id = strtolower($dsoCurrent->getId());
-                                    if (!empty($dsoCurrent->getAlt())) {
-                                        $name = Utils::camelCaseUrlTransform($dsoCurrent->getAlt());
-                                        $id = implode(trim(Utils::URL_CONCAT_GLUE), [$id, $name]);
-                                    }
+                                foreach ($listDsoAsArray as $dsoId) {
+                                    $id = strtolower($dsoId);
 
                                     $listMd5Dso = array_merge(array_map(static function ($locale) use ($id) {
                                         return md5(sprintf('%s_%s', $id, $locale));
@@ -296,7 +285,6 @@ class ConvertSrcToBulkCommand extends Command
     {
         return json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
     }
-
 
     /**
      * @param $type
