@@ -13,7 +13,7 @@ use Traversable;
 class ListDso implements \IteratorAggregate
 {
 
-    protected $listDso = [];
+    protected array $listDso = [];
 
     /**
      * @return \ArrayIterator|Traversable
