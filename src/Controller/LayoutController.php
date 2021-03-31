@@ -237,6 +237,7 @@ class LayoutController extends AbstractController
 
 
     /**
+     * todo: transform arguments as private function ctaFooter(...$links)
      * @param string|null $githubLink
      * @param string|null $facebookLink
      * @param string|null $twitterLink
@@ -486,4 +487,26 @@ class LayoutController extends AbstractController
         return $jsonResponse;
     }
 
+    /**
+     * @param Request $request
+     * @param string|null $paypalLink
+     * @param string|null $facebookLink
+     * @param string|null $twitterLink
+     *
+     * @return Response
+     */
+    public function modalSocialNetwork(Request $request, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): Response
+    {
+        $displayPage = 2;
+        $popupState = "";
+
+        $listSocialNetworks =
+
+        $params = [
+            'popupState' => $popupState,
+            'displayPage' => $displayPage,
+            'social_networks' => $this->ctaFooter()
+        ];
+        return $this->render('includes/components/modal_social_network.html.twig', $params);
+    }
 }

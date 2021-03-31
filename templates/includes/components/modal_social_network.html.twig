@@ -1,0 +1,22 @@
+<div id="Popup--news" class="Popup Popup--news" data-popup-state="{{ popupState }}" data-popup-displaypage="{{ displayPage }}" aria-hidden="true">
+
+  {# Background filter #}
+  <div class="Popup-background">
+    <div id="PopupEscape" class="Popup-escape"></div>
+    {# Content #}
+    <div class="Popup-content">
+      <div class="Popup-container Wysiwyg RichText">
+        <div class="Popup-innerContainer">
+
+          <div class="Popup-body">
+            {{ description|raw }}
+          </div>
+
+          <button class="Popup-close" id="PopupNewsletterClose" type="button" title="{{ 'close'|trans }}">
+            {{ icon('JLicon-Cross') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -83,8 +83,11 @@
       {% endblock %}
     {% endblock %}
 
+    {{ render_esi(controller('App\\Controller\\LayoutController::modalSocialNetwork')) }}
+
     {% block javascripts %}
       {{ encore_entry_script_tags('app') }}
+      {{ encore_entry_script_tags('modal_social_network') }}
     {% endblock %}
     </body>
   </html>
