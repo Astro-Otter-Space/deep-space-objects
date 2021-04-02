@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\Cache;
 
-use Symfony\Component\Cache\Adapter\AbstractAdapter;
-use Symfony\Contracts\Cache\CacheInterface;
+use Psr\Cache\InvalidArgumentException;
+//use Symfony\Component\Cache\Adapter\AbstractAdapter;
+use Symfony\Contracts\Cache\CacheInterface as AbstractAdapter;
 
 /**
  * Class CachepoolService
@@ -31,11 +32,11 @@ final class CachepoolService implements CachePoolInterface
      * @param $key
      *
      * @return bool|mixed
+     * @throws InvalidArgumentException
      */
     public function getItem(string $key): ?string
     {
         $cacheItem = $this->cachePool->getItem($key);
-
         return ($cacheItem->isHit()) ? $cacheItem->get(): null;
     }
 
@@ -45,6 +46,7 @@ final class CachepoolService implements CachePoolInterface
      * @param $value
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function saveItem(string $key, $value): bool
     {
@@ -58,6 +60,7 @@ final class CachepoolService implements CachePoolInterface
      * @param $key
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function hasItem(string $key): bool
     {
@@ -68,6 +71,7 @@ final class CachepoolService implements CachePoolInterface
      * @param $key
      *
      * @return bool
+     * @throws InvalidArgumentException
      */
     public function deleteItem(string $key): bool
     {

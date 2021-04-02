@@ -237,7 +237,6 @@ class LayoutController extends AbstractController
 
 
     /**
-     * todo: transform arguments as private function ctaFooter(...$links)
      * @param string|null $githubLink
      * @param string|null $facebookLink
      * @param string|null $twitterLink
@@ -247,7 +246,6 @@ class LayoutController extends AbstractController
     private function ctaFooter(?string $githubLink, ?string $facebookLink, ?string $twitterLink): array
     {
         $tab = [];
-
         if ($facebookLink) {
             $tab['facebook'] = [
                 'label' => ucfirst('facebook'),
@@ -500,12 +498,13 @@ class LayoutController extends AbstractController
         $displayPage = 2;
         $popupState = "";
 
-        $listSocialNetworks =
+//        $listSocialNetworks =
 
         $params = [
             'popupState' => $popupState,
             'displayPage' => $displayPage,
-            'social_networks' => $this->ctaFooter()
+            'social_networks' => $this->ctaFooter(null, $facebookLink, $twitterLink),
+            'description' => null
         ];
         return $this->render('includes/components/modal_social_network.html.twig', $params);
     }

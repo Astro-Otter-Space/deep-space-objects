@@ -3,6 +3,7 @@
     <div v-if="imageCover !== '/build/images/default_large.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
+        :title="title"
         :alt-image="imageCoverAlt"
       />
     </div>

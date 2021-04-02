@@ -3,42 +3,44 @@
 # - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
 ARG PHP_VERSION=7.4
 ARG TIMEZONE
-ARG UID
+ARG SITE_UID
+ARG SITE_GID
 
 FROM php:${PHP_VERSION}-fpm
+MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
 USER root
 
-MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
-
 # Utils
-RUN set -eux; \
-  apt-get update; \
-  apt-get -y install acl curl less vim libicu-dev libmemcached-dev zlib1g-dev libc-client-dev \
-  openssl wget nano libzip-dev zip pax-utils sudo gnupg unzip libpng-dev libsodium-dev
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer --version \
-    && chmod 755 /usr/local/bin/composer
-
-# Change uid and gid nginx user
-#RUN usermod -u ${UID} www-data \
-#    && groupmod -g ${UID} www-data
-
-# Create directeories and add rights
-RUN mkdir -p /var/www/.composer \
-    && mkdir -p /var/www/.npm \
-    && chown -R www-data:www-data /var/www
-
-# Set timezone
-RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
-RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini
-RUN "date"
+RUN apt-get update && \
+    apt-get install -y \
+    acl \
+    curl \
+    less \
+    vim \
+    libicu-dev \
+    libmemcached-dev \
+    zlib1g-dev \
+    libc-client-dev \
+    openssl \
+    wget \
+    nano \
+    libzip-dev \
+    zip \
+    pax-utils \
+    sudo \
+    gnupg \
+    unzip \
+    libpng-dev \
+    libsodium-dev \
+    ca-certificates \
+    apt-transport-https
 
 # Install
+RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install gd
 RUN docker-php-ext-install sodium
 
 # OPCACHE
@@ -46,8 +48,26 @@ RUN docker-php-ext-configure opcache --enable-opcache \
     && docker-php-ext-install opcache
 
 # APCU
-RUN pecl install apcu \
-    && docker-php-ext-enable apcu
+RUN pecl install apcu && docker-php-ext-enable apcu
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer --version \
+    && chmod 755 /usr/local/bin/composer
+
+# Change uid and gid nginx user
+#RUN usermod -u ${SITE_UID} www-data \
+#    && groupmod -g ${SITE_UID} www-data
+
+# Create directeories and add rights
+RUN mkdir -p /var/www/.composer \
+    && mkdir -p /var/www/.npm \
+#    && chown -R www-data:www-data /var/www
+
+# Set timezone
+RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
+RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini
+RUN "date"
 
 # memcached
 #RUN pecl install memcached-3.0.4 \
@@ -96,12 +116,12 @@ RUN { \
 #RUN docker-php-ext-enable xdebug
 
 # Errors
-
 RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 # XDEBUG
 #RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 #RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -132,11 +152,19 @@ RUN apt-get install -y yarn
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+#RUN chmod +x /usr/local/bin/docker-entrypoint
+
+#USER 1000
+#ENTRYPOINT ["docker-entrypoint"]
+
+# Add user for Symfony application
+RUN groupadd -g ${SITE_GID} www
+RUN useradd -u  ${SITE_UID} -ms /bin/bash -g www www
+
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www/deep-space-objects
+USER www
 
 EXPOSE 9000
-
-ENTRYPOINT ["docker-entrypoint"]
-
 CMD ["php-fpm"]
