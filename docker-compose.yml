@@ -16,9 +16,7 @@ services:
             context: docker/php7-fpm
             args:
                 TIMEZONE: ${TIMEZONE}
-                SITE_UID: ${SITE_UID}
-                SITE_GID: ${SITE_GID}
-        user: ${SITE_UID:-1000}:${SITE_GID:-1000}
+        user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
         restart: unless-stopped
         container_name: dso_php
         hostname: php

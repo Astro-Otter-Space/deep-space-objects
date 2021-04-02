@@ -3,8 +3,6 @@
 # - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
 ARG PHP_VERSION=7.4
 ARG TIMEZONE
-ARG SITE_UID
-ARG SITE_GID
 
 FROM php:${PHP_VERSION}-fpm
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
@@ -60,8 +58,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #    && groupmod -g ${SITE_UID} www-data
 
 # Create directeories and add rights
-RUN mkdir -p /var/www/.composer \
-    && mkdir -p /var/www/.npm \
+RUN mkdir -p /var/www/.composer && \
+    mkdir -p /var/www/.npm
 #    && chown -R www-data:www-data /var/www
 
 # Set timezone
@@ -154,17 +152,16 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 #COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 #RUN chmod +x /usr/local/bin/docker-entrypoint
-
-#USER 1000
 #ENTRYPOINT ["docker-entrypoint"]
 
 # Add user for Symfony application
-RUN groupadd -g ${SITE_GID} www
-RUN useradd -u  ${SITE_UID} -ms /bin/bash -g www www
+#RUN addgroup --gid ${SITE_GID} www && adduser --uid ${SITE_UID} --gid www www
+RUN addgroup --system --gid 1000 site && \
+    adduser --system --uid 1000 --gid 1000 site
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/deep-space-objects
-USER www
+COPY --chown=site:site . /var/www/deep-space-objects
+USER site
 
 EXPOSE 9000
 CMD ["php-fpm"]
