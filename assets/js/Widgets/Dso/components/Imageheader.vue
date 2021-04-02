@@ -8,10 +8,9 @@
       v-bind:class="headerLazyBackground"
     >
       <div slot="content" slot-scope="{ visible }">
-        <h1 class="Dso__title">Titre test</h1>
+        <p>{{ title }}</p>
         <figure>
           <img :src="coverImage" v-bind:class="headerImgCover" v-bind:alt="altImage" />
-          <figcaption>{{ altImage }}</figcaption>
         </figure>
       </div>
     </lazy-background>
@@ -38,7 +37,7 @@
       title: {
         default: '',
         type: String
-      }
+      },
       altImage: {
         default: '',
         type: String

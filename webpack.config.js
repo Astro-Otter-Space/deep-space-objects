@@ -37,7 +37,7 @@ Encore
   .addEntry('leaflet', './assets/js/leaflet.js')
   .addEntry('tags', './assets/js/tags.js')
   // Component
-  // .addEntry('modal_social_network', './assets/js/modal_social_network.js')
+  .addEntry('modal_social_network', './assets/js/modal_social_network.js')
   // debug
   .addEntry('astrobin', './assets/js/astrobin.js')
 

@@ -20,23 +20,22 @@
           {{ title }}
         </h1>
 
-        <social-sharing
-          :url="urlShare"
-          :title="title"
-          :description="description"
-          hashtags=""
-          twitter-user=""
-          inline-template
-        >
-          <div>
-            <network network="facebook">
-              <svgicon name="facebook" width="15" height="15"></svgicon>
-            </network>
-            <network network="twitter">
-              <svgicon name="twitter" width="15" height="15"></svgicon>
-            </network>
-          </div>
-        </social-sharing>
+        <div class="share-network-list">
+          <ShareNetwork
+            v-for="network in networks"
+              :network="network.network"
+              :key="network.network"
+              :style="{backgroundColor: network.color}"
+              :url="sharing.url"
+              :title="sharing.title"
+              :description="sharing.description"
+              :hashtags="sharing.hashtags"
+              :twitterUser="sharing.twitterUser"
+          >
+            <svgicon v-bind:name="network.network" width="30" height="30"></svgicon>
+            <span>{{ network.name }}</span>
+          </ShareNetwork>
+        </div>
 
         <!--Description-->
         <a id="#description"></a>
@@ -104,6 +103,10 @@
   import CardsGrid from './components/CardsGrid'
   import './../Icons/facebook';
   import './../Icons/twitter';
+  import './../Icons/pinterest';
+  import './../Icons/whatsapp';
+  import './../Icons/email';
+  import './../Icons/messenger';
   import './../Icons/up';
   import './../Icons/home';
   import BackToTop from 'vue-backtotop';
@@ -148,12 +151,26 @@
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",
-        urlShare: document.querySelector("link[rel='canonical']").href,
         description: description,
         astrobinMsg: astrobinMsg,
         itemsDso: dsoList,
         filters: filters,
-        bugAstrobin: false
+        bugAstrobin: false,
+        sharing: {
+          title: title,
+          url: document.querySelector("link[rel='canonical']").href,
+          description: description,
+          hashtags: 'astronomy',
+          twitterUser: '@otter_astro'
+        },
+        networks: [
+          { network: 'facebook', name: 'Facebook', color: '#1877f2' },
+          { network: 'twitter', name: 'Twitter', color: '#1da1f2' },
+          { network: 'whatsapp', name: 'Whatsapp', color: '#25d366' },
+          { network: 'messenger', name: 'Messenger', color: '#2529d8' },
+          { network: 'pinterest', name: 'Pinterest', color: '#bd081c' },
+          { network: 'email', name: 'Email', color: '#333333' },
+        ]
       }
     },
     // TODO : better way

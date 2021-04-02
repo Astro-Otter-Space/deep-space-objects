@@ -38,7 +38,7 @@
         "vue-plain-pagination": "^0.3.0",
         "vue-pure-lightbox": "^2.1.8",
         "vue-router": "^3.0.7",
-        "vue-social-sharing": "^2.4.5",
+        "vue-social-sharing": "^3.0.7",
         "vue-template-compiler": "^2.6.10",
         "vue2-autocomplete-js": "^0.2.2",
         "vue2-leaflet": "^2.1.1",

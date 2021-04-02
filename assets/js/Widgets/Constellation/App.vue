@@ -16,6 +16,23 @@
           {{ title }}
         </h1>
 
+        <div class="share-network-list">
+          <ShareNetwork
+            v-for="network in networks"
+            :network="network.network"
+            :key="network.network"
+            :style="{backgroundColor: network.color}"
+            :url="sharing.url"
+            :title="sharing.title"
+            :description="sharing.description"
+            :hashtags="sharing.hashtags"
+            :twitterUser="sharing.twitterUser"
+          >
+            <svgicon v-bind:name="network.network" width="30" height="30"></svgicon>
+            <span>{{ network.name }}</span>
+          </ShareNetwork>
+        </div>
+
         <a id="#description"></a>
         <div class="Dso__description" v-show="0 < description.length">
           {{ description }}
@@ -100,7 +117,22 @@
         legendMap: legendMap, //Object.keys(legendMap).map((key) => legendMap[key]),
         listColors: color,
         controls: listFilter,
-        urlAjax: urlAjax
+        urlAjax: urlAjax,
+        sharing: {
+          title: title,
+          url: document.querySelector("link[rel='canonical']").href,
+          description: description,
+          hashtags: 'astronomy',
+          twitterUser: '@otter_astro'
+        },
+        networks: [
+          { network: 'facebook', name: 'Facebook', color: '#1877f2' },
+          { network: 'twitter', name: 'Twitter', color: '#1da1f2' },
+          { network: 'whatsapp', name: 'Whatsapp', color: '#25d366' },
+          { network: 'messenger', name: 'Messenger', color: '#2529d8' },
+          { network: 'pinterest', name: 'Pinterest', color: '#bd081c' },
+          { network: 'email', name: 'Email', color: '#333333' },
+        ]
       }
     }
   }

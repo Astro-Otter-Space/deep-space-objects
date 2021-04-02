@@ -1,4 +1,4 @@
-import { default as fade } from "components/fade";
+import { default as fade } from "./components/fade";
 
 /**
  *
@@ -118,7 +118,7 @@ import { default as fade } from "components/fade";
     document.cookie = COOKIE_NAME +'=; Max-Age=-99999999;';
   };
 
-  document.addEventListener("click touchend", function () {
+  /*document.addEventListener("click touchend", function () {
     if (0 !== document.getElementById(CONTAINER_POPIN).length) {
       // When user click on popup to close it, set cookie to "1"
       setCookie(365);
@@ -128,5 +128,5 @@ import { default as fade } from "components/fade";
 
   document.addEventListener("DOMContentLoaded", () => {
     init();
-  });
+  });*/
 })();
