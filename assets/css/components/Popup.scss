@@ -28,7 +28,7 @@
     margin-top: 0;
   }
 
-  .close {
+  &__close {
     position: absolute;
     top: 20px;
     right: 30px;
@@ -36,10 +36,10 @@
     font-size: 30px;
     font-weight: bold;
     text-decoration: none;
-    color: #333;
+    color: $bgd-grey;
 
     &:hover {
-      color: #06D85F;
+      color: $bgd-dark;
     }
   }
 

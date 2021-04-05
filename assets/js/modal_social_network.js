@@ -14,7 +14,7 @@ import { default as fade } from "./components/fade";
    * Init checking cookie
    */
   let init = () => {
-    //writePageCount();
+    writePageCount();
     if (
         0 === document.getElementById(CONTAINER_POPIN).length
       || "disabled" === document.getElementById(CONTAINER_POPIN).dataset.popupState
@@ -22,6 +22,7 @@ import { default as fade } from "./components/fade";
       // remove cookie
       eraseCookie(COOKIE_NAME);
     } else {
+      document.querySelector('[data-popup-close]').addEventListener('click', setCookieAndClosePopin);
       checkCookie();
     }
   };

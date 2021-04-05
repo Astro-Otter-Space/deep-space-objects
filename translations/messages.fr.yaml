@@ -447,3 +447,7 @@ support:
     second: "Si vous souhaitez m'aider à subvenir au frais du site, vos dons sont les bienvenus. Vous pouvez faire un don via PayPal ou Tipeee en cliquant sur un des boutons ci-dessous :"
     third: En vous remerciant d'avance :).
     fourth: Stéphane, webmaster de %sitename%
+# social network
+social_network:
+    follow_us: Suivez-nous
+    description: Venez nous retrouver sur Facebook et Twitter pour suivre notre actualité ainsi que découvrir les plus beaux objets du ciel profond.

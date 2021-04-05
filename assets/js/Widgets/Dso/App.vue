@@ -19,7 +19,10 @@
         <h1 class="Dso__title">
           {{ title }}
         </h1>
-
+        <div>
+          <svgicon name="clock" width="16" height="16"></svgicon>
+          <span v-html="lastUpdate"></span>
+        </div>
         <div class="share-network-list">
           <ShareNetwork
             v-for="network in networks"
@@ -109,6 +112,7 @@
   import './../Icons/messenger';
   import './../Icons/up';
   import './../Icons/home';
+  import './../Icons/clock';
   import BackToTop from 'vue-backtotop';
   import Breadcrumbs from "../App/Breadcrumbs";
 
@@ -118,6 +122,7 @@
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let breadcrumbsData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.breadcrumbs);
   let description = document.querySelector('div[data-dso-widget]').dataset.description;
+  let lastUpdate = document.querySelector('div[data-dso-widget]').dataset.lastUpdate;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
   let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
   let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
@@ -143,6 +148,7 @@
         imagesDso: images,
         linksBreadcrumbs: breadcrumbsData,
         title: title,
+        lastUpdate: lastUpdate,
         titleGallery: titleGallery,
         titleConst: titleConst,
         titleMap: titleMap,
