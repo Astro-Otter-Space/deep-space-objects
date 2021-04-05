@@ -25,13 +25,11 @@
 
 #}
 {% macro icon(name, alt, width, height, option) %}
-  {% spaceless %}
     {#
         Config: change defaultUrl.
         This is where the browser should look for symbols.
         If your icons are inlined in the HTML document, use ''
     #}
-    {#{% set defaultUrl = _base ~ icon_sprite %}#}
     {% set defaultUrl = icon_sprite %}
     {#
         Private variables: don't touch unless you want to change the macro's behavior
@@ -62,6 +60,4 @@
       {% if alt %}<title>{{ alt }}</title>{% endif %}
       <use xlink:href="{{ url ~ '#' ~ key }}"></use>
     </svg>
-
-  {% endspaceless %}
 {% endmacro %}

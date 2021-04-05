@@ -7068,12 +7068,10 @@ vue-router@^3.0.7:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.7.tgz#b36ca107b4acb8ff5bc4ff824584059c23fcb87b"
   integrity sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ==
 
-vue-social-sharing@^2.4.5:
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/vue-social-sharing/-/vue-social-sharing-2.4.5.tgz#37e298b290771e8e7482a911b13544c1aa429dc3"
-  integrity sha512-6hZ1fcHdDPLzpvd44yt+3DOCfUiqAAiFQF+odhdpFQ5MU3HJ2eofD0UZqgwPLP08duYuNesx+ntldAZG4GV5Xw==
-  dependencies:
-    vue "^2.2.4"
+vue-social-sharing@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/vue-social-sharing/-/vue-social-sharing-3.0.7.tgz#8dee6a955ce72d0391481204dcb306804373c9f9"
+  integrity sha512-6FS+9t9qJQXY/Km0oyfpJv7rtjhqvrQodpVc/cbBc6TvQdhXc64pHi4yoqa3Jv797veNAlFuLztYyir9jONhBg==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
@@ -7138,7 +7136,7 @@ vue2-touch-events@^1.1.2:
   resolved "https://registry.yarnpkg.com/vue2-touch-events/-/vue2-touch-events-1.1.2.tgz#e900eb22ae067c3915976e1d38454be08cec0a7d"
   integrity sha512-xY5y76R9Rrhjs1ezrJE+GPI5C38JGj1Bz2aB2KAF+COwdVuW9ghaLj77JjOapVUXqqBL36ZObsZ68LD3DZzjmA==
 
-vue@2.*.*, vue@^2.2.4, vue@^2.3.3, vue@^2.4.2, vue@^2.5.0, vue@^2.5.17, vue@^2.5.21, vue@^2.6.10:
+vue@2.*.*, vue@^2.3.3, vue@^2.4.2, vue@^2.5.0, vue@^2.5.17, vue@^2.5.21, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==

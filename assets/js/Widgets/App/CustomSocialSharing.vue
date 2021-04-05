@@ -1,4 +1,4 @@
-<!--https://vuejsexamples.com/a-vue-js-component-for-sharing-links-to-social-networks/-->
+<!--https://vuejsexamples.com/a-vue-js-component-for-sharing-links-to-social-networks/ -->
 <template>
   <social-sharing
     :url="urlShare"

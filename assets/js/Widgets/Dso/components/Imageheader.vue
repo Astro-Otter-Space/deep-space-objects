@@ -8,9 +8,9 @@
       v-bind:class="headerLazyBackground"
     >
       <div slot="content" slot-scope="{ visible }">
+        <p>{{ title }}</p>
         <figure>
           <img :src="coverImage" v-bind:class="headerImgCover" v-bind:alt="altImage" />
-          <figcaption>{{ altImage }}</figcaption>
         </figure>
       </div>
     </lazy-background>
@@ -32,6 +32,10 @@
     props: {
       coverImage: {
         default: '/build/images/default.png',
+        type: String
+      },
+      title: {
+        default: '',
         type: String
       },
       altImage: {

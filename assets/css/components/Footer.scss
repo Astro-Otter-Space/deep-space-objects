@@ -32,7 +32,6 @@
       margin: 0 0.5em;
     }
     &_bloc2 {
-
     }
   }
 
@@ -41,8 +40,9 @@
     width: 100%;
     text-align: center;
     @media ($mq-phone) {
-      text-align: left;
+      text-align: center;
     }
+
     ul {
       margin: 0;
       padding: 0;
@@ -55,13 +55,19 @@
       font-size: 1.1rem;
       @media ($mq-phone) {
         margin: 0 0.2em;
-        font-size: 0.8rem;
+        font-size: 1em;
       }
 
       a {
         text-decoration: none;
         background: none;
         color: $color-text;
+      }
+    }
+
+    &_buttons {
+      li {
+        margin: 0 2em;
       }
     }
 
@@ -77,6 +83,28 @@
     &:last-child{
       margin-left: 1%;
       text-align: right;
+      @media ($mq-phone) {
+        display: none;
+      }
     }
+  }
+
+  &__separator {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid $bgd-grey;
+    justify-content: space-between;
+    @media ($mq-phone) {
+      display: none;
+    }
+  }
+
+  &__social {
+    display: flex;
+    padding-bottom: 40px;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 }

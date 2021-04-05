@@ -1,0 +1,24 @@
+{% from 'helpers/icon.html.twig' import icon %}
+<div id="popup1"
+   class="popup-overlay"
+   data-popup-state="{{ popupState|default('disabled') }}"
+   data-popup-displaypage="{{ displayPage|default(10000) }}"
+>
+  <div class="popup">
+    <h2 class="Dso__title">{{ 'social_network.follow_us'|trans }}</h2>
+    <a class="popup__close" href="#" data-popup-close>&times;</a>
+    <div class="content">
+      <img src="{{ pageImage200 }}" alt="{{ 'dso'|trans }}" class="center_image">
+      <p>
+        {{ 'social_network.description'|trans }}
+      </p>
+      <div class="content__left">
+        <a href="{{ facebook.path }}"{% if true is same as(facebook.blank) %} target="_blank" {% endif %}>{{ facebook.label }}</a>
+      </div>
+
+      <div class="content__right">
+        <a href="{{ twitter.path }}"{% if true is same as(twitter.blank) %} target="_blank" {% endif %}>{{ twitter.label }}</a>
+      </div>
+    </div>
+  </div>
+</div>

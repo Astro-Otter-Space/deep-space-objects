@@ -3,6 +3,7 @@
     <div v-if="imageCover !== '/build/images/default_large.jpg'" class="Dso_header">
       <image-header
         :cover-image="imageCover"
+        :title="title"
         :alt-image="imageCoverAlt"
       />
     </div>
@@ -18,24 +19,27 @@
         <h1 class="Dso__title">
           {{ title }}
         </h1>
+        <div class="Dso__text">
+          <svgicon name="clock" width="16" height="16"></svgicon>
+          <span v-html="lastUpdate"></span>
+        </div>
 
-        <social-sharing
-          :url="urlShare"
-          :title="title"
-          :description="description"
-          hashtags=""
-          twitter-user=""
-          inline-template
-        >
-          <div>
-            <network network="facebook">
-              <svgicon name="facebook" width="15" height="15"></svgicon>
-            </network>
-            <network network="twitter">
-              <svgicon name="twitter" width="15" height="15"></svgicon>
-            </network>
-          </div>
-        </social-sharing>
+        <div class="share-network-list">
+          <ShareNetwork
+            v-for="network in networks"
+              :network="network.network"
+              :key="network.network"
+              :style="{backgroundColor: network.color}"
+              :url="sharing.url"
+              :title="sharing.title"
+              :description="sharing.description"
+              :hashtags="sharing.hashtags"
+              :twitterUser="sharing.twitterUser"
+          >
+            <svgicon v-bind:name="network.network" width="30" height="30"></svgicon>
+            <span>{{ network.name }}</span>
+          </ShareNetwork>
+        </div>
 
         <!--Description-->
         <a id="#description"></a>
@@ -63,7 +67,7 @@
           <images-dso-slider
             :fluxImages="imagesDso"
           />
-          <div v-html="astrobinMsg"></div>
+          <div class="Dso__text" v-html="astrobinMsg"></div>
         </div>
 
         <!--Sky Map-->
@@ -103,8 +107,13 @@
   import CardsGrid from './components/CardsGrid'
   import './../Icons/facebook';
   import './../Icons/twitter';
+  import './../Icons/pinterest';
+  import './../Icons/whatsapp';
+  import './../Icons/email';
+  import './../Icons/messenger';
   import './../Icons/up';
   import './../Icons/home';
+  import './../Icons/clock';
   import BackToTop from 'vue-backtotop';
   import Breadcrumbs from "../App/Breadcrumbs";
 
@@ -114,6 +123,7 @@
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let breadcrumbsData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.breadcrumbs);
   let description = document.querySelector('div[data-dso-widget]').dataset.description;
+  let lastUpdate = document.querySelector('div[data-dso-widget]').dataset.lastUpdate;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
   let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
   let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
@@ -139,6 +149,7 @@
         imagesDso: images,
         linksBreadcrumbs: breadcrumbsData,
         title: title,
+        lastUpdate: lastUpdate,
         titleGallery: titleGallery,
         titleConst: titleConst,
         titleMap: titleMap,
@@ -147,12 +158,26 @@
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",
-        urlShare: document.querySelector("link[rel='canonical']").href,
         description: description,
         astrobinMsg: astrobinMsg,
         itemsDso: dsoList,
         filters: filters,
-        bugAstrobin: false
+        bugAstrobin: false,
+        sharing: {
+          title: title,
+          url: document.querySelector("link[rel='canonical']").href,
+          description: description,
+          hashtags: 'astronomy',
+          twitterUser: '@otter_astro'
+        },
+        networks: [
+          { network: 'facebook', name: 'Facebook', color: '#1877f2' },
+          { network: 'twitter', name: 'Twitter', color: '#1da1f2' },
+          { network: 'whatsapp', name: 'Whatsapp', color: '#25d366' },
+          { network: 'messenger', name: 'Messenger', color: '#2529d8' },
+          { network: 'pinterest', name: 'Pinterest', color: '#bd081c' },
+          { network: 'email', name: 'Email', color: '#333333' },
+        ]
       }
     },
     // TODO : better way
