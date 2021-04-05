@@ -9,7 +9,11 @@
   &__title {
     color: $color-text-dark;
     border-bottom: 1px solid $bgd-dark;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
+  }
+
+  &__text {
+    margin: 0.5em 0 1em 0;
   }
 
   &__container {
@@ -28,7 +32,7 @@
   }
 
   &__description {
-    margin: 2em 0;
+    margin: 1.2em 0;
     p {
       line-height: 1.5em;
     }

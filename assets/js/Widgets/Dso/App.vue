@@ -19,10 +19,11 @@
         <h1 class="Dso__title">
           {{ title }}
         </h1>
-        <div>
+        <div class="Dso__text">
           <svgicon name="clock" width="16" height="16"></svgicon>
           <span v-html="lastUpdate"></span>
         </div>
+
         <div class="share-network-list">
           <ShareNetwork
             v-for="network in networks"
@@ -66,7 +67,7 @@
           <images-dso-slider
             :fluxImages="imagesDso"
           />
-          <div v-html="astrobinMsg"></div>
+          <div class="Dso__text" v-html="astrobinMsg"></div>
         </div>
 
         <!--Sky Map-->
