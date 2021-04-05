@@ -495,16 +495,18 @@ class LayoutController extends AbstractController
      */
     public function modalSocialNetwork(Request $request, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): Response
     {
-        $displayPage = 2;
-        $popupState = "";
+        $displayPopupPage = $this->getParameter('displayPopupPage') ?? 2;
+        $popupState = $this->getParameter('popupState') ?? 'disabled';
 
-//        $listSocialNetworks =
+        ['facebook' => $facebook, 'twitter' => $twitter] = $this->ctaFooter(null, $facebookLink, $twitterLink);
 
         $params = [
             'popupState' => $popupState,
-            'displayPage' => $displayPage,
-            'social_networks' => $this->ctaFooter(null, $facebookLink, $twitterLink),
-            'description' => null
+            'displayPage' => $displayPopupPage,
+            'facebook' =>  $facebook,
+            'twitter' => $twitter,
+            'description' => null,
+            'pageImage200' => '/build/images/logos/astro_otter_200-200.png'
         ];
         return $this->render('includes/components/modal_social_network.html.twig', $params);
     }

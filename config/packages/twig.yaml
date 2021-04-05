@@ -16,3 +16,5 @@ twig:
         twitter_name: '%env(TWITTER_ACCOUNT)%'
         twitterPage: '%env(TWITTER_PAGE)%'
         analyticsId: '%env(GOOGLE_ANALYTICS_ID)%'
+        path:
+            macros: 'helpers/icon.html.twig'

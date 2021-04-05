@@ -23,7 +23,6 @@ const fadeIn = (el, display) => {
   })();
 };
 
-
 export default {
   fadeIn: fadeIn,
   fadeOut: fadeOut

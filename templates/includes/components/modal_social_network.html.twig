@@ -1,21 +1,20 @@
-<div id="Popup--news" class="Popup Popup--news" data-popup-state="{{ popupState }}" data-popup-displaypage="{{ displayPage }}" aria-hidden="true">
-
-  {# Background filter #}
-  <div class="Popup-background">
-    <div id="PopupEscape" class="Popup-escape"></div>
-    {# Content #}
-    <div class="Popup-content">
-      <div class="Popup-container Wysiwyg RichText">
-        <div class="Popup-innerContainer">
-
-          <div class="Popup-body">
-            <p>Follow US on social media</p>
-          </div>
-
-          <button class="Popup-close" id="PopupNewsletterClose" type="button" title="{{ 'close'|trans }}">
-{#            {{ icon('JLicon-Cross') }}#}
-          </button>
-        </div>
+<div id="popup1"
+   class="popup-overlay"
+   data-popup-state="{{ popupState|default('disabled') }}"
+   data-popup-displaypage="{{ displayPage|default(10000) }}"
+>
+  <div class="popup">
+    <h2 class="Dso__title">Follow us</h2>
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+      <img src="{{ pageImage200 }}" alt="{{ 'dso'|trans }}" class="center_image">
+      <div class="content_left">
+        <svgicon name="{{ facebook.icon_class }}" width="20" height="20"></svgicon>
+        <a href="{{ facebook.path }}"{% if true is same as(facebook.blank) %} target="_blank" {% endif %}>{{ facebook.label }}</a>
+      </div>
+      <div class="content_right">
+        <svgicon name="{{ twitter.icon_class }}" width="20" height="20"></svgicon>
+        <a href="{{ twitter.path }}"{% if true is same as(twitter.blank) %} target="_blank" {% endif %}>{{ twitter.label }}</a>
       </div>
     </div>
   </div>

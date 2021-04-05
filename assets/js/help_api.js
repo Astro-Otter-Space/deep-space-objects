@@ -1,9 +1,6 @@
 "use strict";
 import Vue from 'vue';
 
-//import Simplert from 'vue2-simplert-plugin'
-//Vue.use(Simplert);
-
 new Vue({
   el: "#app",
   name: "btn-catalog",

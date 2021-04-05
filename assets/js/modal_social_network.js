@@ -6,15 +6,15 @@ import { default as fade } from "./components/fade";
  */
 ;(function() {
 
-  const CONTAINER_POPIN = 'Popup--news';
+  const CONTAINER_POPIN = 'popup1';
 
-  const COOKIE_NAME = "popup_newsletter";
+  const COOKIE_NAME = "popup_social";
 
   /**
    * Init checking cookie
    */
   let init = () => {
-    writePageCount();
+    //writePageCount();
     if (
         0 === document.getElementById(CONTAINER_POPIN).length
       || "disabled" === document.getElementById(CONTAINER_POPIN).dataset.popupState
@@ -26,16 +26,16 @@ import { default as fade } from "./components/fade";
     }
   };
 
-
   /**
    * Check cookie and display/hide popin
    */
   let checkCookie = () => {
     const isCookie = getCookie();
+    var el = document.getElementById(CONTAINER_POPIN);
 
     // If there is a cookie, we hide popup
     if ("1" === isCookie) {
-      hidePopin();
+      hidePopin(el);
     } else {
       // Get nb page view by user
       var nbPageUser = parseInt(localStorage.getItem("pageCount"));
@@ -46,22 +46,22 @@ import { default as fade } from "./components/fade";
       var showPopin = parseInt(document.getElementById(CONTAINER_POPIN).dataset.popupDisplaypage);
 
       if (nbPageUser >= showPopin) {
-        displayPopin();
+        displayPopin(el);
       } else {
-        hidePopin();
+        hidePopin(el);
       }
     }
   };
 
-  let displayPopin = () => {
+  let displayPopin = (el) => {
     setTimeout(function() {
-      fade.fadeIn(CONTAINER_POPIN);
-    }, 4000)
+      fade.fadeIn(el);
+    }, 2000)
   };
 
-  let hidePopin = () => {
+  let hidePopin = (el) => {
     setTimeout(function() {
-      fade.fadeOut(CONTAINER_POPIN)
+      fade.fadeOut(el)
     }, 4000)
   };
 
@@ -69,11 +69,11 @@ import { default as fade } from "./components/fade";
    *
    */
   const writePageCount = () => {
-    let pageCount = localStorage.getItem('pageCount');
+    let pageCount = parseInt(localStorage.getItem('pageCount'));
     if (null === pageCount) {
       localStorage.setItem('pageCount', 1);
     } else {
-      pageCount = parseInt(pageCount) + 1;
+      pageCount = pageCount + 1;
       localStorage.setItem('pageCount', pageCount);
     }
   };
@@ -85,6 +85,7 @@ import { default as fade } from "./components/fade";
   const getCookie = () => {
     let cookieValue = 0;
     let cookies;
+    let i = 0;
     if (document.cookie !== "") {
       cookies = document.cookie.split("; ");
       for (i = 0; i < cookies.length; i++) {
@@ -114,19 +115,23 @@ import { default as fade } from "./components/fade";
   /**
    * Delete cookie
    */
-  let eraseCookie = () => {
+  const eraseCookie = () => {
     document.cookie = COOKIE_NAME +'=; Max-Age=-99999999;';
   };
 
-  /*document.addEventListener("click touchend", function () {
-    if (0 !== document.getElementById(CONTAINER_POPIN).length) {
+  const setCookieAndClosePopin = () => {
+    var el = document.getElementById(CONTAINER_POPIN);
+    if (0 !== el.length) {
       // When user click on popup to close it, set cookie to "1"
       setCookie(365);
-      hidePopin();
+      hidePopin(el);
     }
-  });
+  };
+
+  document.addEventListener("touchend", setCookieAndClosePopin);
+  document.addEventListener("click", setCookieAndClosePopin);
 
   document.addEventListener("DOMContentLoaded", () => {
     init();
-  });*/
+  });
 })();
