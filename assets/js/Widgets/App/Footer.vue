@@ -17,7 +17,7 @@
         <p v-if="!this.isHome" class="footer__main_bloc2">{{desc}}</p>
       </div>
     </div>
-    <div class="footer__social">
+    <div class="footer__social" v-if="!this.isHome">
       <div class="footer__separator"></div>
       <div class="footer__share footer__share_buttons">
         <buttons-links
