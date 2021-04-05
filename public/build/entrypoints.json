@@ -1,9 +1,12 @@
 {
   "entrypoints": {
-    "event": {
+    "observations": {
       "js": [
         "/build/runtime.js",
-        "/build/event.js"
+        "/build/observations.js"
+      ],
+      "css": [
+        "/build/observations.css"
       ]
     },
     "app": {
@@ -66,19 +69,16 @@
         "/build/observation.js"
       ]
     },
+    "event": {
+      "js": [
+        "/build/runtime.js",
+        "/build/event.js"
+      ]
+    },
     "home": {
       "js": [
         "/build/runtime.js",
         "/build/home.js"
-      ]
-    },
-    "observations": {
-      "js": [
-        "/build/runtime.js",
-        "/build/observations.js"
-      ],
-      "css": [
-        "/build/observations.css"
       ]
     },
     "notfound": {
@@ -121,6 +121,12 @@
       ],
       "css": [
         "/build/tags.css"
+      ]
+    },
+    "modal_social_network": {
+      "js": [
+        "/build/runtime.js",
+        "/build/modal_social_network.js"
       ]
     },
     "astrobin": {

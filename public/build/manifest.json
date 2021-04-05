@@ -16,6 +16,7 @@
   "build/last_update.css": "/build/last_update.css",
   "build/last_update.js": "/build/last_update.js",
   "build/leaflet.js": "/build/leaflet.js",
+  "build/modal_social_network.js": "/build/modal_social_network.js",
   "build/notfound.css": "/build/notfound.css",
   "build/notfound.js": "/build/notfound.js",
   "build/observation.js": "/build/observation.js",
@@ -260,8 +261,10 @@
   "build/images/marker-icon.png": "/build/images/marker-icon.2273e3d8.png",
   "build/images/marker-shadow.png": "/build/images/marker-shadow.44a526ee.png",
   "build/images/markers/dsoplanner.svg": "/build/images/markers/dsoplanner.svg",
+  "build/images/markers/facebook.svg": "/build/images/markers/facebook.svg",
   "build/images/markers/telescop.svg": "/build/images/markers/telescop.svg",
   "build/images/markers/telescope.png": "/build/images/markers/telescope.png",
+  "build/images/markers/twitter.svg": "/build/images/markers/twitter.svg",
   "build/images/markers/user.svg": "/build/images/markers/user.svg",
   "build/images/notfound/interstellar-black-hole.jpg": "/build/images/notfound/interstellar-black-hole.jpg",
   "build/images/notfound/interstellar-black-hole2.jpg": "/build/images/notfound/interstellar-black-hole2.jpg"
