@@ -60,7 +60,7 @@ class LayoutController extends AbstractController
         $router = $this->get('router');
         $currentLocale = $mainRequest->getLocale() ?? 'en';
 
-        $listLocales = array_filter(explode('|', $listLocales), function($value) use ($currentLocale) {
+        $listLocales = array_filter(explode('|', $listLocales), static function($value) use ($currentLocale) {
             return !empty($value) && ($value !== $currentLocale);
         });
 
