@@ -119,7 +119,7 @@ abstract class AbstractRepository
      */
     protected function findById($id): ResultSet
     {
-        /** @var Constellation|Observation|Dso $entity */
+        /** @var Constellation|Dso $entity */
         $entityName = $this->getEntity();
         $entity = new $entityName;
 
