@@ -31,20 +31,20 @@ import { default as fade } from "./components/fade";
    * Check cookie and display/hide popin
    */
   let checkCookie = () => {
-    const isCookie = getCookie();
-    var el = document.getElementById(CONTAINER_POPIN);
+    const isCookie = 0; //getCookie();
+    const el = document.getElementById(CONTAINER_POPIN);
 
     // If there is a cookie, we hide popup
     if ("1" === isCookie) {
       hidePopin(el);
     } else {
       // Get nb page view by user
-      var nbPageUser = parseInt(localStorage.getItem("pageCount"));
+      let nbPageUser = parseInt(localStorage.getItem("pageCount"));
       if (isNaN(nbPageUser)) {
         nbPageUser = 1;
       }
       // Get the number of page (1 or 2) when popin appear
-      var showPopin = parseInt(document.getElementById(CONTAINER_POPIN).dataset.popupDisplaypage);
+      const showPopin = parseInt(document.getElementById(CONTAINER_POPIN).dataset.popupDisplaypage);
 
       if (nbPageUser >= showPopin) {
         displayPopin(el);
@@ -106,7 +106,7 @@ import { default as fade } from "./components/fade";
     let expires = "";
     if (days) {
       /** @var Date */
-      var date = new Date();
+      const date = new Date();
       date.setTime(date.getTime() + (days * 24 *60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
     }
@@ -124,13 +124,14 @@ import { default as fade } from "./components/fade";
     var el = document.getElementById(CONTAINER_POPIN);
     if (0 !== el.length) {
       // When user click on popup to close it, set cookie to "1"
-      setCookie(365);
+      setCookie(30);
       hidePopin(el);
     }
   };
 
   document.addEventListener("touchend", setCookieAndClosePopin);
   document.addEventListener("click", setCookieAndClosePopin);
+  // document.querySelector('button[data-popup-close]').addEventListener("click", setCookieAndClosePopin);
 
   document.addEventListener("DOMContentLoaded", () => {
     init();
