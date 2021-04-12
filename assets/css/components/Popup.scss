@@ -43,16 +43,22 @@
     }
   }
 
-  .content {
-    max-height: 30%;
-    overflow: auto;
-
-    &__left {
-      float: left;
-    }
-    &__right {
-      border-left: 1px solid $bgd-grey;
-      float: right;
-    }
+  &__container {
+    display: grid;
+    grid-template-columns: 10em 10em;
+    grid-template-rows: 4em 4em 4em 4em;
+    gap: 1em 1em;
+    grid-template-areas:
+      "popup__title_1 popup__title_1"
+      "popup__content_1 popup__content_2"
+      "popup__title_2 popup__title_2"
+      "popup__content_3 popup__content_4";
   }
+
+  &__title_1 { grid-area: popup__title_1; }
+  &__content_1 { grid-area: popup__content_1; }
+  &__content_2 { grid-area: popup__content_2; }
+  &__title_2 { grid-area: popup__title_2; }
+  &__content_3 { grid-area: popup__content_3; }
+  &__content_4 { grid-area: popup__content_4; }
 }
