@@ -86,21 +86,21 @@ class DsoExtension extends AbstractExtension
     /**
      * @param $str
      *
-     * @return mixed
+     * @return array
      * @throws \JsonException
      */
-    public function jsonDecode($str)
+    public function jsonDecode($str): array
     {
         return json_decode($str, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
      * @param array $tab
-     * @param $key
+     * @param string $key
      *
      * @return mixed
      */
-    public function uasort(array $tab, $key): array
+    public function uasort(array $tab, string $key): array
     {
         uasort($tab, static function($a, $b) use($key) {
             return ($a[$key] < $b[$key]) ? -1 : 1;
@@ -120,13 +120,12 @@ class DsoExtension extends AbstractExtension
         return $arr;
     }
 
-
     /**
-     * @param $filter
+     * @param string $filter
      *
      * @return array
      */
-    public function buildApiListFilters($filter): array
+    public function buildApiListFilters(string $filter): array
     {
         switch($filter) {
             case 'catalog':

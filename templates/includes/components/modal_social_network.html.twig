@@ -18,12 +18,12 @@
         </div>
         <div class="popup__content popup__content_1">
           <a href="{{ facebook.path }}"{% if true is same as(facebook.blank) %} target="_blank" {% endif %}>
-            {{ facebook.label }}
+            <svgicon name="{{ facebook.label }}" width="20" height="20"></svgicon>
           </a>
         </div>
         <div class="popup__content popup__content_2">
           <a href="{{ twitter.path }}"{% if true is same as(twitter.blank) %} target="_blank" {% endif %}>
-            {{ twitter.label }}
+            <svgicon name="{{ twitter.label }}" width="20" height="20"></svgicon>
           </a>
         </div>
         <div class="popup__title_2">
@@ -31,18 +31,18 @@
         </div>
         <div class="popup__content popup__content_3">
           <a href="{{ tipeee.path }}"{% if true is same as(tipeee.blank) %} target="_blank" {% endif %}>
-            {{ tipeee.label }}
+            <svgicon name="{{ tipeee.label }}" width="20" height="20"></svgicon>
           </a>
         </div>
         <div class="popup__content popup__content_4">
           <a href="{{ paypal.path }}"{% if true is same as(paypal.blank) %} target="_blank" {% endif %}>
-            {{ paypal.label }}
+            <svgicon name="{{ paypal.label }}" width="20" height="20"></svgicon>
           </a>
         </div>
       </div>
     </div>
     <div class="popup__footer">
-      <input type="button" value="{{ 'close'|trans }}" data-popup-close>
+      <button class="Form__submit" data-popup-close v-on:click="closeAndSetCookie">{{ 'close'|trans }}</button>
     </div>
   </div>
 </div>
