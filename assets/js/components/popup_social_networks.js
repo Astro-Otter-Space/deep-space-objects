@@ -1,25 +1,24 @@
-import { default as fade } from "./fade";
+import {fadeIn, fadeOut} from "./fade";
 
 const CONTAINER_POPIN = 'popup1';
-const COOKIE_NAME = "popup_social";
+const COOKIE_NAME = "astro-otter-popup";
 const el = document.getElementById(CONTAINER_POPIN);
 
 /**
  * Init checking cookie
  */
 let init = () => {
-  console.log("INIT");
+  displayPopin(); /*
   writePageCount();
   if (
-    0 === document.getElementById(CONTAINER_POPIN).length
+    false === !!document.getElementById(CONTAINER_POPIN)
     || "disabled" === document.getElementById(CONTAINER_POPIN).dataset.popupState
   ) {
     // remove cookie
     eraseCookie(COOKIE_NAME);
   } else {
-    document.querySelector('[data-popup-close]').addEventListener('click', setCookieAndClosePopin);
     checkCookie();
-  }
+  }*/
 };
 
 /**
@@ -27,7 +26,7 @@ let init = () => {
  * Check cookie and display/hide popin
  */
 let checkCookie = () => {
-  const isCookie = 0; //getCookie();
+  const isCookie = getCookie();
 
   // If there is a cookie, we hide popup
   if ("1" === isCookie) {
@@ -49,30 +48,26 @@ let checkCookie = () => {
   }
 };
 
-  let displayPopin = () => {
-    setTimeout(function() {
-      fade.fadeIn(el);
-    }, 2000)
-  };
+let displayPopin = () => {
+  fadeIn(el, 2000);
+};
 
-  let hidePopin = () => {
-    setTimeout(function() {
-      fade.fadeOut(el)
-    }, 4000)
-  };
+let hidePopin = () => {
+  fadeOut(el, 4000);
+};
 
-  /**
-   *
-   */
-  const writePageCount = () => {
-    let pageCount = parseInt(localStorage.getItem('pageCount'));
-    if (null === pageCount) {
-      localStorage.setItem('pageCount', 1);
-    } else {
-      pageCount = pageCount + 1;
-      localStorage.setItem('pageCount', pageCount);
-    }
-  };
+/**
+ *
+ */
+const writePageCount = () => {
+  let pageCount = parseInt(localStorage.getItem('pageCount'));
+  if (null === pageCount || true === Number.isNaN(pageCount)) {
+    localStorage.setItem('pageCount', 1);
+  } else {
+    pageCount = pageCount + 1;
+    localStorage.setItem('pageCount', pageCount);
+  }
+};
 
   /**
  * Retrieve cookie by name
@@ -119,7 +114,7 @@ const setCookieAndClosePopin = () => {
   if (0 !== el.length) {
     // When user click on popup to close it, set cookie to "1"
     setCookie(30);
-    hidePopin(el);
+    hidePopin();
   }
 };
 
@@ -128,9 +123,7 @@ export default {
   hidePopin: hidePopin,
   setCookieAndClosePopin: setCookieAndClosePopin
 };
-/*document.addEventListener("touchend", setCookieAndClosePopin);
-document.addEventListener("click", setCookieAndClosePopin);
 
-document.addEventListener("DOMContentLoaded", () => {
-  init();
-});*/
+/*
+document.addEventListener("touchend", setCookieAndClosePopin);
+*/

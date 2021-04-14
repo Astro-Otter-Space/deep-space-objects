@@ -21,7 +21,7 @@
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 50%;
+  width: 40%;
   position: relative;
   transition: all 5s ease-in-out;
   @media($mq-phone) {
@@ -59,7 +59,10 @@
       "popup__content_3 popup__content_4";
     @media($mq-phone) {
       gap: 0.5em 0.5em;
+      margin: 0.2em;
     }
+    border-bottom: 1px solid $bgd-dark;
+    margin: 0.5em;
   }
 
   &__content {
@@ -72,4 +75,9 @@
   &__title_2 { grid-area: popup__title_2; }
   &__content_3 { grid-area: popup__content_3; }
   &__content_4 { grid-area: popup__content_4; }
+
+  &__footer {
+    margin: 0.5em 0;
+    display: flex;
+  }
 }
