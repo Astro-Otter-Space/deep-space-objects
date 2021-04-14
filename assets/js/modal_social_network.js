@@ -23,6 +23,9 @@ new Vue({
       PopupSocialNetwork.setCookieAndClosePopin()
     }
   },
+  beforeMount() {
+    document.addEventListener("touchend", this.hidePopin);
+  },
   mounted() {
     document.onreadystatechange = () => {
       if (document.readyState === "complete") {

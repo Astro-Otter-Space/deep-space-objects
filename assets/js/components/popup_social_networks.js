@@ -123,7 +123,3 @@ export default {
   hidePopin: hidePopin,
   setCookieAndClosePopin: setCookieAndClosePopin
 };
-
-/*
-document.addEventListener("touchend", setCookieAndClosePopin);
-*/
