@@ -2,13 +2,11 @@ import {fadeIn, fadeOut} from "./fade";
 
 const CONTAINER_POPIN = 'popup1';
 const COOKIE_NAME = "astro-otter-popup";
-const el = document.getElementById(CONTAINER_POPIN);
 
 /**
  * Init checking cookie
  */
 let init = () => {
-  displayPopin(); /*
   writePageCount();
   if (
     false === !!document.getElementById(CONTAINER_POPIN)
@@ -18,11 +16,10 @@ let init = () => {
     eraseCookie(COOKIE_NAME);
   } else {
     checkCookie();
-  }*/
+  }
 };
 
 /**
- * @TODO CHANGE
  * Check cookie and display/hide popin
  */
 let checkCookie = () => {
@@ -49,11 +46,13 @@ let checkCookie = () => {
 };
 
 let displayPopin = () => {
-  fadeIn(el, 2000);
+  const popin = document.getElementById(CONTAINER_POPIN);
+  fadeIn(popin, 1000);
 };
 
 let hidePopin = () => {
-  fadeOut(el, 4000);
+  const popin = document.getElementById(CONTAINER_POPIN);
+  fadeOut(popin, 1000);
 };
 
 /**
@@ -110,10 +109,14 @@ const eraseCookie = () => {
   document.cookie = COOKIE_NAME +'=; Max-Age=-99999999;';
 };
 
-const setCookieAndClosePopin = () => {
-  if (0 !== el.length) {
+const setDaysCookie = (days) => {
+  if (!days) {
+    let days = 30;
+  }
+  const popin = document.getElementById(CONTAINER_POPIN);
+  if (0 !== popin.length) {
     // When user click on popup to close it, set cookie to "1"
-    setCookie(30);
+    setCookie(days);
     hidePopin();
   }
 };
@@ -121,5 +124,5 @@ const setCookieAndClosePopin = () => {
 export default {
   init: init,
   hidePopin: hidePopin,
-  setCookieAndClosePopin: setCookieAndClosePopin
+  setDaysCookie: setDaysCookie
 };

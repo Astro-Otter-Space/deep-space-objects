@@ -12,25 +12,26 @@ new Vue({
   name: "popup-social-network",
   data() {
     return {
-      svgBtnColor: '#3e3d40'
+      svgBtnColor: '#3e3d40',
+      nbDays: 30
     }
   },
   methods: {
-    hidePopin: () => {
+    hidePopin() {
       PopupSocialNetwork.hidePopin()
     },
-    closeAndSetCookie: () => {
-      PopupSocialNetwork.setCookieAndClosePopin()
+    closeAndSetCookie() {
+      PopupSocialNetwork.setDaysCookie(this.nbDays)
     }
   },
   beforeMount() {
     document.addEventListener("touchend", this.hidePopin);
   },
   mounted() {
-    document.onreadystatechange = () => {
-      if (document.readyState === "complete") {
+    this.$nextTick(() => {
+      setTimeout(() => {
         PopupSocialNetwork.init();
-      }
-    }
+      }, 2000);
+    });
   }
 });

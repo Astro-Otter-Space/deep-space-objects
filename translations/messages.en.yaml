@@ -461,3 +461,4 @@ support:
 social_network:
     follow_us: Follow us
     description: Join us on Facebook and Twitter to follow our news as well as discover the most beautiful deep sky objects.
+    closePopin: Close
