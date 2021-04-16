@@ -16,7 +16,7 @@ parameters:
     astrobinApiSecret: '%env(ASTROBIN_API_SECRET)%'
     memcachedUrl: '%env(MEMCACHED_URL)%'
     displayPopupPage: 2
-    popupState: "disabled"
+    popupState: "enabled"
 
 services:
     # default configuration for services in *this* file

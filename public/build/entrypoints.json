@@ -102,6 +102,12 @@
         "/build/support.js"
       ]
     },
+    "modal_social_network": {
+      "js": [
+        "/build/runtime.js",
+        "/build/modal_social_network.js"
+      ]
+    },
     "skymap": {
       "js": [
         "/build/runtime.js",
@@ -121,12 +127,6 @@
       ],
       "css": [
         "/build/tags.css"
-      ]
-    },
-    "modal_social_network": {
-      "js": [
-        "/build/runtime.js",
-        "/build/modal_social_network.js"
       ]
     },
     "astrobin": {
