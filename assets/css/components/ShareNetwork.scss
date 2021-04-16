@@ -7,6 +7,7 @@
   margin: auto;
   @media($mq-phone) {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 a[class^="share-network-"] {
