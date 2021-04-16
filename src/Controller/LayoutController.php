@@ -488,12 +488,13 @@ class LayoutController extends AbstractController
     /**
      * @param Request $request
      * @param string|null $paypalLink
+     * @param string|null $tipeeeLink
      * @param string|null $facebookLink
      * @param string|null $twitterLink
      *
      * @return Response
      */
-    public function modalSocialNetwork(Request $request, ?string $paypalLink, ?string $facebookLink, ?string $twitterLink): Response
+    public function modalSocialNetwork(Request $request, ?string $paypalLink, ?string $tipeeeLink, ?string $facebookLink, ?string $twitterLink): Response
     {
         $displayPopupPage = $this->getParameter('displayPopupPage') ?? 2;
         $popupState = $this->getParameter('popupState') ?? 'disabled';
@@ -505,6 +506,18 @@ class LayoutController extends AbstractController
             'displayPage' => $displayPopupPage,
             'facebook' =>  $facebook,
             'twitter' => $twitter,
+            'paypal' => [
+                'label' => ucfirst('paypal'),
+                'path' => $paypalLink,
+                'blank' => true,
+                'icon_class' => 'paypal'
+            ],
+            'tipeee' => [
+                'label' => ucfirst('tipeee'),
+                'path' => $tipeeeLink,
+                'blank' => true,
+                'icon_class' => 'tipeee'
+            ],
             'description' => null,
             'pageImage200' => '/build/images/logos/astro_otter_200-200.png'
         ];

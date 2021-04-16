@@ -32,12 +32,13 @@ Encore
   .addEntry('notfound', './assets/js/notfound.js')
   .addEntry('help_api', './assets/js/help_api.js')
   .addEntry('support', './assets/js/support.js')
+  .addEntry('modal_social_network', './assets/js/modal_social_network.js')
   //D3-celestial
   .addEntry('skymap', './assets/js/skymap.js')
   .addEntry('leaflet', './assets/js/leaflet.js')
   .addEntry('tags', './assets/js/tags.js')
   // Component
-  .addEntry('modal_social_network', './assets/js/modal_social_network.js')
+
   // debug
   .addEntry('astrobin', './assets/js/astrobin.js')
 

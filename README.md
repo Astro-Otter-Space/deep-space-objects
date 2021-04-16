@@ -1,6 +1,6 @@
 # Deep Space Objects
 Atlas for deep space objects (Symfony 5 / Elastic Search / Vue.js)
-Version 1.1.0
+Version 1.2.1
 
 Installation
 ==

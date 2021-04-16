@@ -6,8 +6,8 @@
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
-  display: none;
   opacity: 0;
+  z-index: 100;
 
   //&:target {
   //  visibility: visible;
@@ -16,13 +16,16 @@
 }
 
 .popup {
-  margin: 10em auto;
+  margin: 7em auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 50%;
+  width: 40%;
   position: relative;
   transition: all 5s ease-in-out;
+  @media($mq-phone) {
+    width: 90%;
+  }
 
   h2 {
     margin-top: 0;
@@ -43,16 +46,37 @@
     }
   }
 
-  .content {
-    max-height: 30%;
-    overflow: auto;
+  &__container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    //grid-template-rows: 4em 4em 4em 4em;
+    gap: 1em 1em;
+    grid-template-areas:
+      "popup__title_1 popup__title_1"
+      "popup__content_1 popup__content_2"
+      "popup__title_2 popup__title_2"
+      "popup__content_3 popup__content_4";
+    @media($mq-phone) {
+      gap: 0.5em 0.5em;
+      margin: 0.2em;
+    }
+    border-bottom: 1px solid $bgd-dark;
+    margin: 0.5em;
+  }
 
-    &__left {
-      float: left;
-    }
-    &__right {
-      border-left: 1px solid $bgd-grey;
-      float: right;
-    }
+  &__content {
+    text-align: center;
+  }
+
+  &__title_1 { grid-area: popup__title_1; }
+  &__content_1 { grid-area: popup__content_1; }
+  &__content_2 { grid-area: popup__content_2; }
+  &__title_2 { grid-area: popup__title_2; }
+  &__content_3 { grid-area: popup__content_3; }
+  &__content_4 { grid-area: popup__content_4; }
+
+  &__footer {
+    margin: 0.5em 0;
+    display: flex;
   }
 }

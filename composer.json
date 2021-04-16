@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "license": "proprietary",
     "require": {
         "php": "^7.4.0",

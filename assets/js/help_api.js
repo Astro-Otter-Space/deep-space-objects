@@ -23,28 +23,3 @@ new Vue({
     }
   }
 });
-
-/**
-new Vue({
-  el: "#btnCatalog",
-  name: "btn-catalog",
-  methods: {
-    openSimplert: function(event) {
-      let customObjet = JSON.parse(event.target.dataset.filters);
-      this.$refs.simplert.openSimplert(customObjet)
-    }
-  }
-});
-
-new Vue({
-  el: "#btnType",
-  name: "btn-type",
-  methods: {
-    openSimplert: function(event) {
-      let customObjet = JSON.parse(event.target.dataset.filters);
-      this.$refs.simplert.openSimplert(customObjet)
-    }
-  }
-});
-
-**/

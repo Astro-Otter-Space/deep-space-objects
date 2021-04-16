@@ -1,29 +1,30 @@
-const fadeOut = (el) => {
-  el.style.opacity = 1;
-
-  (function fade() {
-    if ((el.style.opacity -= .1) < 0) {
-      el.style.display = "none";
-    } else {
-      requestAnimationFrame(fade);
+/**
+ * FadeIn function
+ * @param el
+ * @param duration
+ */
+export const fadeIn = (el, duration) => {
+  console.log("Run fadeIn");
+  (function increment(value = 0) {
+    el.style.opacity = String(value);
+    if (el.style.opacity !== '1') {
+      setTimeout(() => {
+        increment(value + 0.1);
+      }, duration / 10);
     }
   })();
 };
 
-const fadeIn = (el, display) => {
-  el.style.opacity = 0;
-  el.style.display = display || "block";
-
-  (function fade() {
-    var val = parseFloat(el.style.opacity);
-    if (!((val += .1) > 1)) {
-      el.style.opacity = val;
-      requestAnimationFrame(fade);
-    }
+/**
+ * FadeOut function
+ * @param el
+ * @param duration
+ */
+export const fadeOut = (el, duration) => {
+  console.log("Close with fadeOut");
+  (function decrement() {
+    (el.style.opacity -= 0.1) < 0 ? el.style.display = 'none' : setTimeout(() => {
+      decrement();
+    }, duration / 10);
   })();
 };
-
-export default {
-  fadeIn: fadeIn,
-  fadeOut: fadeOut
-}
