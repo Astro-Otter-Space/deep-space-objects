@@ -25,7 +25,7 @@ new Vue({
     }
   },
   beforeMount() {
-    document.addEventListener("touchend", this.hidePopin);
+    // document.addEventListener("touchend", this.hidePopin);
   },
   mounted() {
     this.$nextTick(() => {
