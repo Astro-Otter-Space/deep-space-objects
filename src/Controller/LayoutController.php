@@ -81,7 +81,7 @@ class LayoutController extends AbstractController
                 ];
             }, $listLocales),
             'currentLocale' => $currentLocale,
-            'leftSideMenu' => $this->buildMenu($currentLocale, ['lastUpdate' ,'catalog', 'constellation', 'observations', 'addObservations', 'scheduleObs']),
+            'leftSideMenu' => $this->buildMenu($currentLocale, ['lastUpdate' , 'catalog', 'constellation', 'contact']),
             'notification' => [
                 'label' => $this->translator->trans('last_update_title'),
                 'path' => $router->generate(sprintf('last_update_dso.%s', $currentLocale))
@@ -126,11 +126,11 @@ class LayoutController extends AbstractController
                 'icon_class' => 'shape',
                 'subMenu' => $this->buildSubMenu($locale, ['messier', 'ngc', 'ic', 'sh'])
             ],
-            /*'constellation' => [
+            'constellation' => [
                 'label' => $this->translator->trans('constId', ['%count%' => 2]),
                 'path' => $routerInterface->generate(sprintf('constellation_list.%s', $locale)),
                 'icon_class' => 'constellation'
-            ],*/
+            ],
             'map' => [
                 'label' => $this->translator->trans('skymap'),
                 'path' => $routerInterface->generate(sprintf('skymap.%s', $locale)),

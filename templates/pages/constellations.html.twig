@@ -28,7 +28,7 @@
 
   <div id="appListConst"
       data-constellations
-      data-title-const="{{ pageTitle }}"
+      data-title-const="{{ 'constId'|trans({'%count%': list_constellation|length}) }}"
       data-list-const="{{ list_constellation|json_encode }}"
       data-imgcover="{{ pageImage }}"
       data-filter="{{ tabFilterConstellation|json_encode }}"
