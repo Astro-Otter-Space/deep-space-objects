@@ -138,21 +138,9 @@ dso.desc.seo: "\"%title%\" est un est objet de type %type% (magnitude apparente 
 info: Informations
 desigs: Autres désignations
 magnitude: Magnitude
-constellation: >-
-    {count, plural,
-        one   {Constellation}
-        other {Constellations}
-    }
-const_id: >-
-    {count, plural,
-        one   {Constellation}
-        other {Constellations}
-    }
-constId: >-
-    {count, plural,
-        one   {Constellation}
-        other {Constellations}
-    }
+constellation: Constellation|Constellations
+const_id: Constellation|Constellations
+constId: Constellation|Constellations
 dim: Dimension
 dimExp: Dimension angulaire en minutes d'arcs
 distAl: Distance (années-lumière)

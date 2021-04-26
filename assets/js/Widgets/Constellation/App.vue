@@ -8,9 +8,9 @@
     </div>
     <section class="Dso__main">
       <div class="Dso__container">
-        <breadcrumbs
-          :links="linksBreadcrumbs"
-        ></breadcrumbs>
+<!--        <breadcrumbs-->
+<!--          :links="linksBreadcrumbs"-->
+<!--        ></breadcrumbs>-->
 
         <h1 class="Dso__title">
           {{ title }}
