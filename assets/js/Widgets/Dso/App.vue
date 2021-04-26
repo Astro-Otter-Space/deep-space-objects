@@ -9,32 +9,41 @@
     </div>
     <section class="Dso__main">
       <div v-bind:class="getHeaderClass()">
+        <!--Title-->
+        <h1 class="Dso__title">
+          {{ title }}
+        </h1>
 
         <!-- Breadcrumbs -->
         <breadcrumbs
           :links="linksBreadcrumbs"
         ></breadcrumbs>
 
-        <!--Title-->
-        <h1 class="Dso__title">
-          {{ title }}
-        </h1>
         <div class="Dso__text">
-          <svgicon name="clock" width="16" height="16"></svgicon>
-          <span v-html="lastUpdate"></span>
+          <div v-if="imagePositionMap">
+            <img style="filter: grayscale(100%);" v-bind:src="imagePositionMap" v-bind:class="classVignette" v-bind:alt="altImage" />
+          </div>
+
+          <div>
+            <div class="Dso__description" v-if="0 < description.length">
+              {{description}}
+            </div>
+            <svgicon name="clock" width="16" height="16"></svgicon>
+            <span v-html="lastUpdate"></span>
+          </div>
         </div>
 
         <div class="share-network-list">
           <ShareNetwork
             v-for="network in networks"
-              :network="network.network"
-              :key="network.network"
-              :style="{backgroundColor: network.color}"
-              :url="sharing.url"
-              :title="sharing.title"
-              :description="sharing.description"
-              :hashtags="sharing.hashtags"
-              :twitterUser="sharing.twitterUser"
+            :network="network.network"
+            :key="network.network"
+            :style="{backgroundColor: network.color}"
+            :url="sharing.url"
+            :title="sharing.title"
+            :description="sharing.description"
+            :hashtags="sharing.hashtags"
+            :twitterUser="sharing.twitterUser"
           >
             <svgicon v-bind:name="network.network" width="30" height="30"></svgicon>
             <span>{{ network.name }}</span>
@@ -43,9 +52,7 @@
 
         <!--Description-->
         <a id="#description"></a>
-        <div class="Dso__description" v-if="0 < description.length">
-          {{description}}
-        </div>
+
 
         <!--Table data-->
         <a id="#information"></a>
@@ -118,6 +125,7 @@
   import Breadcrumbs from "../App/Breadcrumbs";
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
+  let coverImageMap = document.querySelector('div[data-dso-widget]').dataset.imgcovermap;
   let coverImageAlt = document.querySelector('div[data-dso-widget]').dataset.imgcoveralt;
   let images = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.images);
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
@@ -146,6 +154,7 @@
       return {
         imageCover: coverImage,
         imageCoverAlt: coverImageAlt,
+        imagePositionMap: coverImageMap,
         imagesDso: images,
         linksBreadcrumbs: breadcrumbsData,
         title: title,
@@ -177,7 +186,8 @@
           { network: 'messenger', name: 'Messenger', color: '#2529d8' },
           { network: 'pinterest', name: 'Pinterest', color: '#bd081c' },
           { network: 'email', name: 'Email', color: '#333333' },
-        ]
+        ],
+        classVignette: "Vignettes__vignette"
       }
     },
     // TODO : better way

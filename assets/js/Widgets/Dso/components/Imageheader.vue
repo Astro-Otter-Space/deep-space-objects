@@ -8,10 +8,15 @@
       v-bind:class="headerLazyBackground"
     >
       <div slot="content" slot-scope="{ visible }">
-        <p>{{ title }}</p>
-        <figure>
-          <img :src="coverImage" v-bind:class="headerImgCover" v-bind:alt="altImage" />
-        </figure>
+        <div v-bind:class="headerImgCover" >
+          <figure>
+            <img :src="coverImage" v-bind:alt="altImage" />
+          </figure>
+        </div>
+<!--        <div v-bind:class="headerTitleCover">-->
+<!--          <h1 v-bind:class="headerTitle" v-html="title"></h1>-->
+<!--        </div>-->
+
       </div>
     </lazy-background>
   </div>
@@ -26,7 +31,12 @@
         visible: true,
         headerBackground: 'AppHeader__background',
         headerLazyBackground: 'AppHeader__LazyBackgroundImage',
-        headerImgCover: 'AppHeader__imgCover'
+        headerImgCover: 'AppHeader__imgCover',
+        // headerImgCoverLeft: 'AppHeader__imgCoverLeft',
+        // headerImgCoverRight: 'AppHeader__imgCoverRight',
+        // headerTitleCover: 'AppHeader__titleCover',
+        // headerTitle: 'AppHeader__title'
+        vignette: "Vignettes__vignette"
       };
     },
     props: {

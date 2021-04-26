@@ -14,6 +14,7 @@
     data-dso-widget
     data-imgcover="{{ dso.astrobin.url_regular|default('default') }}"
     data-imgcoveralt="{{ imgCoverAlt|default('') }}"
+    data-imgcovermap="{{ dso.astrobin.url_skyplot|default(null) }}"
     data-dso="{{ dsoData|json_encode }}"
     data-title="{{ dso.title }}"
     data-last-update="{{ 'last_update_item'|trans({ '%date%': lastUpdate}) }}"

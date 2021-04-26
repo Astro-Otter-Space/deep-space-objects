@@ -10,10 +10,17 @@
     color: $color-text-dark;
     border-bottom: 1px solid $bgd-dark;
     margin-bottom: 0.2em;
+    text-align: center;
   }
 
   &__text {
-    margin: 0.5em 0 1em 0;
+    margin: 1em;
+    display: flex;
+    @media($mq-phone) {
+      margin: 0.2em;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   &__container {

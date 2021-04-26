@@ -8,7 +8,6 @@
   }
 
   &__imgCover {
-    //width: 25%;
     height: 100%;
     max-width: none;
     max-height: none;
@@ -17,6 +16,48 @@
     left: 50%;
     transform: translate(-50%, 0);
   }
+
+  &__imgCoverLeft {
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    display: block;
+    position: absolute;
+    left: 40%;
+    transform: translate(-50%, 0);
+    width: 50%;
+  }
+
+  &__imgCoverRight {
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    display: block;
+    position: absolute;
+    width: 50%;
+    left: 40%;
+
+    &:first-child {
+      filter: grayscale(100%);
+    }
+  }
+
+  &__titleCover {
+    width: 33%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background-color: $bgd-cards;
+    right: 20%;
+    text-align: center;
+  }
+  &__title {
+    color: $color-text;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+  }
+
 }
 
 .lazy-background {
