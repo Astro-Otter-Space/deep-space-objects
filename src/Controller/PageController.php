@@ -256,10 +256,10 @@ class PageController extends AbstractController
             $this->translator->trans('type'),
             'Constellation',
             $this->translator->trans('magnitude'),
-            $this->translator->trans('distAl'),
-            $this->translator->trans('ra'),
             $this->translator->trans('dec'),
-
+            $this->translator->trans('ra'),
+            $this->translator->trans('distPc'),
+            $this->translator->trans('distAl')
         ];
 
         // Retrieve list filters
@@ -286,10 +286,11 @@ class PageController extends AbstractController
                 $dso->getDescription(),
                 $this->translator->trans($dso->getType()),
                 $dso->getConstellation()->title(),
-                $dso->getMagnitude(),
-                $dso->distanceLightYears(),
+                $dso->getMagnitude() ?? 999,
                 $dso->getDeclinaison(),
                 $dso->getRightAscencion(),
+                $dso->distanceLightYears() ?? 0,
+                $dso->distanceParsecs() ?? 0
             ];
         }, iterator_to_array($listDso));
 
