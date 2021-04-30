@@ -250,15 +250,16 @@ class PageController extends AbstractController
         $filters = [];
 
         $header = [
-            'Id',
-            $this->translator->trans('desigs'),
             'Name',
+            $this->translator->trans('desigs'),
+            'Description',
             $this->translator->trans('type'),
             'Constellation',
             $this->translator->trans('magnitude'),
+            $this->translator->trans('distAl'),
             $this->translator->trans('ra'),
             $this->translator->trans('dec'),
-            $this->translator->trans('distAl')
+
         ];
 
         // Retrieve list filters
@@ -278,12 +279,12 @@ class PageController extends AbstractController
 
         [$listDsoId,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
         $listDso = $dsoManager->buildListDso($listDsoId);
-        $data = array_map(static function(DTOInterface $dso) {
+        $data = array_map(function(DTOInterface $dso) {
             return [
                 $dso->title(),
                 implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getDescription(),
-                $dso->getType(),
+                $this->translator->trans($dso->getType()),
                 $dso->getConstellation()->title(),
                 $dso->getMagnitude(),
                 $dso->distanceLightYears(),
