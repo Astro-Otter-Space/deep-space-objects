@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Classes\Utils;
 use App\Entity\BDD\ApiUser;
 use App\Entity\BDD\Contact;
+use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
@@ -277,7 +278,7 @@ class PageController extends AbstractController
 
         [$listDsoId,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
         $listDso = $dsoManager->buildListDso($listDsoId);
-        $data = array_map(function(Dso $dso) {
+        $data = array_map(function(DTOInterface $dso) {
             return [
                 $dso->getId(),
                 implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
