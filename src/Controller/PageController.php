@@ -270,7 +270,7 @@ class PageController extends AbstractController
             });
         }
 
-        [$listDso,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE);
+        [$listDso,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
         $data = array_map(function(Dso $dso) {
             return [
                 $dso->getId(),
