@@ -278,17 +278,17 @@ class PageController extends AbstractController
 
         [$listDsoId,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
         $listDso = $dsoManager->buildListDso($listDsoId);
-        $data = array_map(function(DTOInterface $dso) {
+        $data = array_map(static function(DTOInterface $dso) {
             return [
-                $dso->getId(),
+                $dso->title(),
                 implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
-                $dso->getAlt(),
-                $this->translator->trans(sprintf('type.%s', $dso->getType())),
-                $dso->getConstId(),
-                $dso->getMag(),
-                $dso->getRa(),
-                $dso->getDec(),
-                $dso->getDistAl()
+                $dso->getDescription(),
+                $dso->getType(),
+                $dso->getConstellatio()->getTitle(),
+                $dso->getMagnitude(),
+                $dso->distanceLightYears(),
+                $dso->getDeclinaison(),
+                $dso->getRightAscencion(),
             ];
         }, iterator_to_array($listDso));
 
