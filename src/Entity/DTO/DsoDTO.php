@@ -42,9 +42,9 @@ final class DsoDTO implements DTOInterface
     private ?string $astrobinId;
     private $astrobin;
     private ?array $geometry;
-    private string $dim;
-    private string $declinaison;
-    private string $rightAscencion;
+    private ?string $dim;
+    private ?string $declinaison;
+    private ?string $rightAscencion;
 
     /**
      * DsoDTO constructor.
@@ -173,11 +173,9 @@ final class DsoDTO implements DTOInterface
             : implode (Utils::DATA_CONCAT_GLUE, [$this->getAlt(), $desig]);
 
         // If title still empty, we put Id
-        $title = (empty($title))
+        return (empty($title))
             ? $this->getName()
             : $title;
-
-        return $title;
     }
 
     /**
@@ -415,7 +413,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return bool|string
      */
     public function distanceParsecs()
     {

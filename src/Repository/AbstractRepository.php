@@ -59,6 +59,10 @@ abstract class AbstractRepository
         $this->urlGeneratorHelper = $urlGeneratorHelper;
     }
 
+    abstract protected function getEntity();
+    abstract protected function getDTO();
+    abstract protected function getIndex();
+
     /**
      * @return mixed
      */
@@ -92,17 +96,17 @@ abstract class AbstractRepository
     public function buildDTO(Document $document): DTOInterface
     {
         $entity = $this->getEntity();
+        $dto = $this->getDTO();
 
         $normalizer = [new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter())];
         $encoder = [new JsonEncoder()];
         $serializer = new Serializer($normalizer, $encoder);
 
-        /** @var $object */
-        $object = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
-        $dto = $this->getDTO();
+        /** @var $hydratedEntity */
+        $hydratedEntity = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
 
         /** @var DTOInterface $dto */
-        $dto = new $dto($object, $this->getLocale(), $document->getId());
+        $dto = new $dto($hydratedEntity, $this->getLocale(), $document->getId());
 
         $dto
             ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
@@ -211,7 +215,4 @@ abstract class AbstractRepository
         return $responseBulk->isOk();
     }
 
-    abstract protected function getEntity();
-    abstract protected function getDTO();
-    abstract protected function getIndex();
 }
