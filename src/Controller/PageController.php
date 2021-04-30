@@ -8,8 +8,10 @@ use App\Entity\BDD\Contact;
 use App\Entity\ES\Dso;
 use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
+use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use App\Service\MailService;
+use AstrobinWs\Exceptions\WsException;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
@@ -235,11 +237,14 @@ class PageController extends AbstractController
      *     "pt": "/download-data",
      * }, name="download_data")
      * @param Request $request
+     * @param DsoManager $dsoManager
      *
      * @return StreamedResponse
-     * @throws \Exception
+     * @throws WsException
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
-    public function download(Request $request): StreamedResponse
+    public function download(Request $request, DsoManager $dsoManager): StreamedResponse
     {
         $filters = [];
 
@@ -270,7 +275,8 @@ class PageController extends AbstractController
             });
         }
 
-        [$listDso,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
+        [$listDsoId,,] = $this->dsoRepository->setLocale($request->getLocale())->getObjectsCatalogByFilters(0, $filters, DsoRepository::MAX_SIZE, true);
+        $listDso = $dsoManager->buildListDso($listDsoId);
         $data = array_map(function(Dso $dso) {
             return [
                 $dso->getId(),
