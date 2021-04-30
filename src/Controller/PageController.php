@@ -284,7 +284,7 @@ class PageController extends AbstractController
                 implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getDescription(),
                 $dso->getType(),
-                $dso->getConstellatio()->getTitle(),
+                $dso->getConstellation()->title(),
                 $dso->getMagnitude(),
                 $dso->distanceLightYears(),
                 $dso->getDeclinaison(),
