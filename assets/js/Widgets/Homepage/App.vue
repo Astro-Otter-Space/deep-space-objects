@@ -58,7 +58,7 @@
         placeholder: (deviceDetect.isMobileOnly) ? searchPlaceholderMobile : searchPlaceholder,
         classesSearchAutocomplete: {
           wrapper: 'AppSearch__wrapper',
-          input: (deviceDetect.isMobileOnly) ? 'AppSearch__inputText AppSearch__inputTextHome' : 'AppSearch__inputText',
+          input: 'AppSearch__inputText AppSearch__inputTextHome', //(deviceDetect.isMobileOnly) ? 'AppSearch__inputText AppSearch__inputTextHome' : 'AppSearch__inputText',
           list: 'AppSearch__list'
         },
         urlSearchHome: urlSearchHome,

@@ -29,7 +29,7 @@
   }
 
   &__inputText {
-    padding: .5rem 1rem;
+    padding: .5rem 1rem 0.5rem 3rem;
     width: inherit;
     border: 1px lightgray;
     border-radius: 0.3rem;
@@ -40,7 +40,6 @@
     color: $color-text-dark;
     @media($mq-phone) {
       border-radius: 2em;
-      padding: .5rem 1rem 0.5rem 3rem;
     }
 
     &::placeholder {
