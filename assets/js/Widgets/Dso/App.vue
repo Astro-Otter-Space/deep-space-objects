@@ -28,8 +28,10 @@
             <div class="Dso__description" v-if="0 < description.length">
               {{description}}
             </div>
-            <svgicon name="clock" width="16" height="16"></svgicon>
-            <span v-html="lastUpdate"></span>
+            <div>
+              <svgicon name="clock" width="16" height="16"></svgicon>
+              <span v-html="lastUpdate"></span>
+            </div>
           </div>
         </div>
 
