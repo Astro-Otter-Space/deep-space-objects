@@ -7,6 +7,7 @@ astrobin.message: This product uses the AstroBin API but is not endorsed or cert
 astrobin.credit: &copy; Astrobin crédit
 error.message: Erreur %error%, peut-être êtes-vous tombé dans un trou noir :) ?
 more: Plus d'informations
+add_favorite: Ajouter aux favoris
 hem.all: Tous
 hem.zo: Zodiaque
 hem.no: Hémisphère nord

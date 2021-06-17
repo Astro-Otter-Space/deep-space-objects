@@ -8,6 +8,13 @@
 {% set pageImageDesc = imgCoverAlt %}
 {% set lastUpdate = dso.updatedAt|date('dateFormatLong'|trans) %}
 {#https://coxpi.draftium.site/#}
+{% set labels = {
+  'last_update_item': 'last_update_item'|trans({ '%date%': lastUpdate}),
+  'skymap': 'skymap'|trans,
+  'galery': 'galery'|trans,
+  'astrobin_msg': 'astrobin.message'|trans,
+  'add_favorite': 'add_favorite'|trans
+} %}
 
 {% block content %}
   <div id="appDso"
@@ -17,16 +24,13 @@
     data-imgcovermap="{{ dso.astrobin.url_skyplot|default(null) }}"
     data-dso="{{ dsoData|json_encode }}"
     data-title="{{ dso.title }}"
-    data-last-update="{{ 'last_update_item'|trans({ '%date%': lastUpdate}) }}"
     data-description="{{ dso.description }}"
-    data-title-map="{{ 'skymap'|trans }}"
-    data-title-gallery="{{ 'galery'|trans }}"
     data-images="{{ images|json_encode }}"
-    data-astrobin-msg="{{ 'astrobin.message'|trans }}"
     data-title-const="{{ dso.constellation.title }}"
     data-dso-const="{{ dso_by_const|json_encode }}"
     data-filter="{{ list_types_filters|json_encode }}"
     data-breadcrumbs="{{ breadcrumbs|json_encode }}"
+    data-labels="{{ labels|json_encode }}"
   >
   </div>
   <div id="geojson"

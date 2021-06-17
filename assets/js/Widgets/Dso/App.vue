@@ -29,8 +29,14 @@
               {{description}}
             </div>
             <div>
-              <svgicon name="clock" width="16" height="16"></svgicon>
-              <span v-html="lastUpdate"></span>
+              <div>
+                <svgicon name="clock" width="16" height="16"></svgicon>
+                <span v-html="labels.last_update_item"></span>
+              </div>
+              <div>
+                <svgicon name="star" width="16" height="16"></svgicon>
+                <a v-on:click="addToFavorites">{{labels.add_favorite}}</a>
+              </div>
             </div>
           </div>
         </div>
@@ -72,17 +78,17 @@
         <!--Slider-->
         <a id="#gallery"></a>
         <div class="Dso__slider" v-if="0 < imagesDso.length">
-          <h3 class="Dso__title">{{ titleGallery }}</h3>
+          <h3 class="Dso__title">{{labels.galery}}</h3>
           <images-dso-slider
             :fluxImages="imagesDso"
           />
-          <div class="Dso__text" v-html="astrobinMsg"></div>
+          <div class="Dso__text" v-html="labels.astrobin_msg"></div>
         </div>
 
         <!--Sky Map-->
         <a id="#map"></a>
         <div class="Dso__list">
-          <h3 class="Dso__title">{{ titleMap }}</h3>
+          <h3 class="Dso__title">{{labels.skymap}}</h3>
           <div class="map" id="map"></div>
           <legend><a href="https://github.com/ofrohn/d3-celestial" target="_blank" rel="noopener">Map by ofrohn/d3-celestial</a></legend>
         </div>
@@ -133,14 +139,12 @@
   let title = document.querySelector('div[data-dso-widget]').dataset.title;
   let breadcrumbsData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.breadcrumbs);
   let description = document.querySelector('div[data-dso-widget]').dataset.description;
-  let lastUpdate = document.querySelector('div[data-dso-widget]').dataset.lastUpdate;
   let titleConst = document.querySelector('div[data-dso-widget]').dataset.titleConst;
-  let titleGallery = document.querySelector('div[data-dso-widget]').dataset.titleGallery;
-  let titleMap = document.querySelector('div[data-dso-widget]').dataset.titleMap;
   let tabData = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dso);
   let astrobinMsg = document.querySelector('div[data-dso-widget]').dataset.astrobinMsg;
   let dsoList = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.dsoConst);
   let filters = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.filter);
+  let labels = JSON.parse(document.querySelector('div[data-dso-widget]').dataset.labels);
 
   export default {
     name: "App",
@@ -160,17 +164,14 @@
         imagesDso: images,
         linksBreadcrumbs: breadcrumbsData,
         title: title,
-        lastUpdate: lastUpdate,
-        titleGallery: titleGallery,
+        labels: labels,
         titleConst: titleConst,
-        titleMap: titleMap,
         gridColumns: ['col0', 'col1'],
         gridData: tabData,
         classTable: "Dso__table",
         classTr: "Dso__tr",
         classTd: "Dso__td",
         description: description,
-        astrobinMsg: astrobinMsg,
         itemsDso: dsoList,
         filters: filters,
         bugAstrobin: false,
@@ -179,7 +180,7 @@
           url: document.querySelector("link[rel='canonical']").href,
           description: description,
           hashtags: 'astronomy',
-          twitterUser: '@otter_astro'
+          twitterUser: 'otter_astro'
         },
         networks: [
           { network: 'facebook', name: 'Facebook', color: '#1877f2' },
@@ -196,11 +197,23 @@
     // https://nehalist.io/directly-injecting-data-to-vue-apps-with-symfony-twig/
     // https://stackoverflow.com/questions/42269260/how-to-get-the-values-of-data-attributes-in-vuejs
     methods: {
-      getHeaderClass: function() {
+      getHeaderClass: function () {
         if (this.imageCover !== '/build/images/default_large.jpg') {
           return 'Dso__container';
         } else {
           return 'Dso__container Dso__noHeader';
+        }
+      },
+      addToFavorites: function () {
+        if (window.sidebar) {        // Firefox
+          window.sidebar.addPanel(this.sharing.url, this.sharing.title);
+        } else {
+          if (window.external && ('AddFavorite' in window.external)) {
+            // Internet Explorer
+            window.external.AddFavorite(this.sharing.url, this.sharing.title);
+          } else {  // Opera, Google Chrome and Safari
+            alert("Your browser doesn't support this example!");
+          }
         }
       }
     }

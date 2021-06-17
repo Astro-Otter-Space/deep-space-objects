@@ -7,6 +7,7 @@ astrobin.message: This product uses the AstroBin API but is not endorsed or cert
 astrobin.credit: &copy; Astrobin credit
 error.message: Error %error%, maybe you fall in a black hole :) ?
 more: More informations
+add_favorite: Add to favorite
 hem.all: All
 hem.zo: Zodiac
 hem.no: Northern hemisphere
