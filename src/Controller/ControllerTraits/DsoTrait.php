@@ -60,7 +60,7 @@ trait DsoTrait
     }
 
     /**
-     * @param $listDso
+     * @param ListDso $listDso
      *
      * @return array
      */
