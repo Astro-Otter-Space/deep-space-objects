@@ -1,134 +1,93 @@
-# Sources :
-# - https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
-# - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
 ARG PHP_VERSION=7.4
 ARG TIMEZONE
 
-FROM php:${PHP_VERSION}-fpm
-MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
-USER root
+# "php" stage
+FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
 
-# Utils
-RUN apt-get update && \
-    apt-get install -y \
-    acl \
-    curl \
-    less \
-    vim \
-    libicu-dev \
-    libmemcached-dev \
-    zlib1g-dev \
-    libc-client-dev \
-    openssl \
-    wget \
-    nano \
-    libzip-dev \
-    zip \
-    pax-utils \
-    sudo \
-    gnupg \
-    unzip \
-    libpng-dev \
-    libsodium-dev \
-    ca-certificates \
-    apt-transport-https
+RUN apk add --no-cache \
+		acl \
+		fcgi \
+		file \
+		gettext \
+		git \
+		gnu-libiconv \
+	;
 
-# Install
-RUN docker-php-ext-configure intl
-RUN docker-php-ext-install pdo pdo_mysql
-RUN docker-php-ext-install intl
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install sodium
+# install gnu-libiconv and set LD_PRELOAD env to make iconv work fully on Alpine image.
+# see https://github.com/docker-library/php/issues/240#issuecomment-763112749
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 
-# OPCACHE
-RUN docker-php-ext-configure opcache --enable-opcache \
-    && docker-php-ext-install opcache
+ARG APCU_VERSION=5.1.20
+RUN set -eux; \
+	apk add --no-cache --virtual .build-deps \
+		$PHPIZE_DEPS \
+		icu-dev \
+		libzip-dev \
+		zlib-dev \
+	; \
+	\
+	docker-php-ext-configure zip; \
+	docker-php-ext-install -j$(nproc) \
+		intl \
+		zip \
+	; \
+	pecl install \
+		apcu-${APCU_VERSION} \
+	; \
+	pecl clear-cache; \
+	docker-php-ext-enable \
+		apcu \
+		opcache \
+	; \
+	\
+	runDeps="$( \
+		scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
+			| tr ',' '\n' \
+			| sort -u \
+			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
+	)"; \
+	apk add --no-cache --virtual .phpexts-rundeps $runDeps; \
+	\
+	apk del .build-deps
 
-# APCU
-RUN pecl install apcu && docker-php-ext-enable apcu
+COPY docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+RUN chmod +x /usr/local/bin/docker-healthcheck
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer --version \
-    && chmod 755 /usr/local/bin/composer
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
-# Change uid and gid nginx user
-#RUN usermod -u ${SITE_UID} www-data \
-#    && groupmod -g ${SITE_UID} www-data
+RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+COPY conf.d/symfony.prod.ini $PHP_INI_DIR/conf.d/symfony.ini
 
-# Create directeories and add rights
-RUN mkdir -p /var/www/.composer && \
-    mkdir -p /var/www/.npm
-#    && chown -R www-data:www-data /var/www
+COPY php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 
-# Set timezone
-RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
-RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini
-RUN "date"
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
-# memcached
-#RUN pecl install memcached-3.0.4 \
-#    && docker-php-ext-enable memcached
-RUN set -ex \
-    && rm -rf /var/lib/apt/lists/* \
-    && MEMCACHED="`mktemp -d`" \
-    && curl -skL https://github.com/php-memcached-dev/php-memcached/archive/master.tar.gz | tar zxf - --strip-components 1 -C $MEMCACHED \
-    && docker-php-ext-configure $MEMCACHED \
-    && docker-php-ext-install $MEMCACHED \
-    && rm -rf $MEMCACHED
+VOLUME /var/run/php
 
-RUN { \
-		echo 'opcache.enable= 1'; \
-		echo 'opcache.enable_cli=1'; \
-		# Symfony requirements
-		echo 'opcache.memory_consumption=256'; \
-        echo 'opcache.max_wasted_percentage=10'; \
-		echo 'opcache.validate_timestamps=0'; \
-		# Optimize
-		echo 'opcache.max_accelerated_files=10000'; \
-		echo 'opcache.interned_strings_buffer=8'; \
-		echo 'opcache.save_comments=1'; \
-		echo 'opcache.revalidate_freq=1'; \
-		#echo 'opcache.fast_shutdown=1'; \
-	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Others
-RUN docker-php-ext-install -j$(nproc) mbstring ; \
-    \
-    runDeps="$( \
-        scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
-            | tr ',' '\n' \
-            | sort -u \
-            | awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-    )";
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Conf PHP
-RUN { \
-		echo 'realpath_cache_size=4096k'; \
-		echo 'realpath_cache_ttl=7200'; \
-    } > /usr/local/etc/php/conf.d/php.ini
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-# Install XDebug
-#RUN pecl install xdebug
-#RUN docker-php-ext-enable xdebug
+WORKDIR /srv/app
 
-# Errors
-RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+###> recipes ###
+###< recipes ###
 
-# XDEBUG
-#RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
-# Custom options
-RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
-RUN echo "memory_limit= 2G" >> /usr/local/etc/php/conf.d/030-custom.ini
+COPY . .
+
+RUN set -eux; \
+	mkdir -p var/cache var/log; \
+	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
+	composer dump-autoload --classmap-authoritative --no-dev; \
+	composer symfony:dump-env prod; \
+	composer run-script --no-dev post-install-cmd; \
+	chmod +x bin/console; sync
+VOLUME /srv/app/var
+
 
 # NPM & Node
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
@@ -147,21 +106,10 @@ RUN apt-get remove -y cmdtest
 RUN apt-get update
 RUN apt-get install -y yarn
 
-# Clear archives in apt cache folder
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-#RUN chmod +x /usr/local/bin/docker-entrypoint
-#ENTRYPOINT ["docker-entrypoint"]
-
-# Add user for Symfony application
-#RUN addgroup --gid ${SITE_GID} www && adduser --uid ${SITE_UID} --gid www www
-RUN addgroup --system --gid 1000 site && \
-    adduser --system --uid 1000 --gid 1000 site
-
-# Copy existing application directory permissions
-COPY --chown=site:site . /var/www/deep-space-objects
-USER site
-
-EXPOSE 9000
+ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+
+
+COPY --from=symfony_php /var/www/deep-space-objects/public public/

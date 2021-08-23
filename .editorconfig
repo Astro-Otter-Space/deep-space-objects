@@ -15,3 +15,11 @@ insert_final_newline = true
 
 [*.{js,css,scss,twig,vue,json,conf}]
 indent_size = 2
+
+[docker-compose{,.*}.{yaml,yml}]
+indent_style = space
+indent_size = 2
+
+[Dockerfile]
+indent_style = tab
+indent_size = 4
