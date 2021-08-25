@@ -8,7 +8,6 @@ volumes:
     es_data:
         driver: local
     db_data: {}
-    php_socket:
 
 services:
     # PHP
@@ -26,11 +25,9 @@ services:
             timeout: 3s
             retries: 3
             start_period: 30s
-        user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
         container_name: dso_php
         hostname: php
         volumes:
-            - php_socket:/var/run/php
             - ./:/var/www/deep-space-objects:rw,cached
             - ./docker/php7-fpm/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
             - "$SSH_AUTH_SOCK:/ssh-agent:ro"
@@ -39,7 +36,6 @@ services:
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
-        working_dir: /var/www/deep-space-objects
         links:
           - mail
         networks:
