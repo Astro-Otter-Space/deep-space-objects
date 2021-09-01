@@ -1,10 +1,15 @@
 # From https://github.com/dunglas/symfony-docker/blob/8efe315479755076cfc6ad737ce5300486d9a9f8/Dockerfile
+###################
+# Node
+###################
+#ARG NODE_VERSION=14
+#FROM node:${NODE_VERSION}-alpine AS symfony_assets_builder
+#WORKDIR /var/www/deep-space-objects
 
+###################
+# PHP
+##################
 ARG PHP_VERSION=7.4
-
-#ENV PHP_EXTENTIONS \
-#   intl \
-#   zip
 
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine3.13 AS symfony_php
@@ -35,6 +40,7 @@ RUN set -eux; \
     	curl \
     	json \
     	pdo \
+    	pdo_mysql \
 	    intl \
 	    zip \
 	; \
@@ -60,7 +66,7 @@ RUN set -eux; \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
-COPY docker/php7-fpm/conf.d/symfony.dev.ini $PHP_INI_DIR/conf.d/symfony.ini
+COPY conf.d/symfony.dev.ini $PHP_INI_DIR/conf.d/symfony.ini
 
 RUN set -eux; \
 	{ \
@@ -72,43 +78,29 @@ RUN set -eux; \
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-WORKDIR /var/www/deep-space-objects
+WORKDIR /srv/app
 
 COPY . .
 
 RUN set -eux; \
-	mkdir -p var/cache var/log; \
-#	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
-#	composer dump-autoload --classmap-authoritative --no-dev; \
-#	composer symfony:dump-env dev; \
-#	composer run-script --no-dev post-install-cmd; sync
-VOLUME /var/www/deep-space-objects/var
+	composer install --prefer-dist --no-progress --no-scripts --no-interaction; \
+	composer dump-autoload --classmap-authoritative; \
+	composer symfony:dump-env dev; \
+	composer run-script post-install-cmd; \
+	chmod +x bin/console; sync
+VOLUME /srv/app/var
 
-COPY docker/php7-fpm/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+COPY docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
-COPY docker/php7-fpm/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
-# NPM & Node
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
-RUN apt-get install -y nodejs npm \
-  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
-
-# build tools
-RUN apt-get install -y build-essential
-
-# yarn package manager
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# bugfix: remove cmdtest to install yarn correctly.
-RUN apt-get remove -y cmdtest
-RUN apt-get update
-RUN apt-get install -y yarn
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
-COPY --from=symfony_php /var/www/deep-space-objects/public public/
+WORKDIR /srv/app
+#COPY --from=symfony_php /var/www/deep-space-objects/public public/
+#COPY --from=symfony_assets_builder /var/www/deep-space-objects/public/build public/build

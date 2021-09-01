@@ -20,22 +20,18 @@ Copy path of deepskyobjects_local.csr and deepskyobjects_local.key in .env file.
 
 ### Launch docker stack
  ```
- docker-compose build
+docker-compose build --no-cache --pull
  ```
 
 ### Add hosts into hosts file
- `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "deepskyobjects.local" >> /etc/hosts`
-
+ `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.local" >> /etc/hosts`
 
 ### Start Docker stack on :
-
 ```
-docker-compose up -d
-docker exec -ti dso_php bash
+SERVER_NAME="symfony.local" docker-compose up -d
 ```
 
 ### Install dependencies
-
 ```
 cd deep-space-objects
 # Install PHP components

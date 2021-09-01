@@ -24,7 +24,7 @@ services:
         container_name: dso_php
         hostname: php
         volumes:
-            - ./:/var/www/deep-space-objects:rw,cached
+            - ./:/srv/app:rw,cached
             - ./docker/php7-fpm/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
             - "$SSH_AUTH_SOCK:/ssh-agent:ro"
         env_file:
@@ -52,7 +52,7 @@ services:
         depends_on:
             - php
         volumes:
-            - .:/var/www/deep-space-objects
+            - .:/srv/app
             - ./logs/nginx/:/var/log/nginx:cached
             #- /etc/letsencrypt/:/etc/letsencrypt/
         env_file:
@@ -87,7 +87,7 @@ services:
         image: mariadb:10.3
         container_name: dso_database
         hostname: database
-        restart: always
+        restart: unless-stopped
         volumes:
             - db_data:/var/lib/mysql
         environment:
