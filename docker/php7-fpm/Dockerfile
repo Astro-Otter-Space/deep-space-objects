@@ -1,10 +1,13 @@
 # From https://github.com/dunglas/symfony-docker/blob/8efe315479755076cfc6ad737ce5300486d9a9f8/Dockerfile
 
 ARG PHP_VERSION=7.4
-ARG TIMEZONE
+
+#ENV PHP_EXTENTIONS \
+#   intl \
+#   zip
 
 # "php" stage
-FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
+FROM php:${PHP_VERSION}-fpm-alpine3.13 AS symfony_php
 
 RUN apk add --no-cache \
         acl \
@@ -19,13 +22,19 @@ ARG APCU_VERSION=5.1.19
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
 	    $PHPIZE_DEPS \
+    	curl-dev \
 	    icu-dev \
+    	libmemcached-dev \
 	    libzip-dev \
 	    zlib-dev \
+    	# libonig-dev \ If need to install mbstring
 	; \
 	\
 	docker-php-ext-configure zip; \
 	docker-php-ext-install -j$(nproc) \
+    	curl \
+    	json \
+    	pdo \
 	    intl \
 	    zip \
 	; \
@@ -65,6 +74,16 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 WORKDIR /var/www/deep-space-objects
 
+COPY . .
+
+RUN set -eux; \
+	mkdir -p var/cache var/log; \
+#	composer install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction; \
+#	composer dump-autoload --classmap-authoritative --no-dev; \
+#	composer symfony:dump-env dev; \
+#	composer run-script --no-dev post-install-cmd; sync
+VOLUME /var/www/deep-space-objects/var
+
 COPY docker/php7-fpm/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
@@ -91,3 +110,5 @@ RUN apt-get install -y yarn
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+COPY --from=symfony_php /var/www/deep-space-objects/public public/
