@@ -1,128 +1,131 @@
 version: "3.4"
 
 networks:
-    dso_stack:
-        driver: bridge
+  dso_stack:
+    driver: bridge
 
 volumes:
-    es_data:
-        driver: local
-    db_data: {}
+  es_data:
+    driver: local
+  db_data:
+  public:
 
 services:
-    # PHP
-    php:
-        build:
-            context: docker/php7-fpm
-            target: symfony_php
-        restart: unless-stopped
-        healthcheck:
-            interval: 10s
-            timeout: 3s
-            retries: 3
-            start_period: 30s
-        container_name: dso_php
-        hostname: php
-        volumes:
-            - ./:/srv/app:rw,cached
-            - ./docker/php7-fpm/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
-            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
-        env_file:
-          - ".env"
-        environment:
-            - SSH_AUTH_SOCK=/ssh-agent
-            - TERM=xterm-color
-        links:
-          - mail
-        networks:
-          - dso_stack
+  database:
+    image: mariadb:10.3
+    container_name: dso_database
+    hostname: database
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    networks:
+      - dso_stack
 
-    # NGINX
-    nginx:
-        build:
-            context: docker/nginx
-            args:
-                NGINX_HOST: ${NGINX_HOST}
-                UID: ${SITE_UID}
-        container_name: dso_nginx
-        hostname: nginx
-        ports:
-            - "80:80"
-            - "443:443"
-        depends_on:
-            - php
-        volumes:
-            - .:/srv/app
-            - ./logs/nginx/:/var/log/nginx:cached
-            #- /etc/letsencrypt/:/etc/letsencrypt/
-        env_file:
-            - .env
-        environment:
-            - NGINX_HOST=${NGINX_HOST}
-        networks:
-            - dso_stack
+  memcached:
+    image: memcached:latest
+    hostname: memcached
+    container_name: dso_memcached
+    networks:
+      - dso_stack
 
-    # ElasticSearch
-    elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.8.5
-        container_name: dso_elasticsearch
-        hostname: elasticsearch
-        volumes:
-            - es_data:/usr/share/elasticsearch/data
-        environment:
-            - cluster.name=demo
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-        ports:
-            - "9200:9200"
-        networks:
-            - dso_stack
+  php:
+    build:
+      context: docker/php7-fpm
+      target: symfony_php
+    restart: unless-stopped
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    container_name: dso_php
+    hostname: php
+    volumes:
+      - ./:/srv/app:rw,cached
+      - ./docker/php7-fpm/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
+      - "$SSH_AUTH_SOCK:/ssh-agent:ro"
+    env_file:
+      - ".env"
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+      - TERM=xterm-color
+    links:
+      - mail
+    networks:
+      - dso_stack
 
-    # MySQL
-    database:
-        image: mariadb:10.3
-        container_name: dso_database
-        hostname: database
-        restart: unless-stopped
-        volumes:
-            - db_data:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USER}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
-        ports:
-          - "3307:3306"
-        networks:
-          - dso_stack
+  # NGINX
+  nginx:
+    build:
+      context: docker/nginx
+      args:
+        NGINX_HOST: ${NGINX_HOST}
+        UID: ${SITE_UID}
+    container_name: dso_nginx
+    hostname: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php
+    volumes:
+      - .:/srv/app
+      - ./logs/nginx/:/var/log/nginx:cached
+      #- /etc/letsencrypt/:/etc/letsencrypt/
+    env_file:
+      - .env
+    environment:
+      - NGINX_HOST=${NGINX_HOST}
+    networks:
+      - dso_stack
 
-    #MAIL - SMTP Server
-    mail:
-        image: bytemark/smtp
-        container_name: dso_mail
-        restart: always
-        networks:
-          - dso_stack
+  # ElasticSearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.5
+    container_name: dso_elasticsearch
+    hostname: elasticsearch
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=demo
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    networks:
+      - dso_stack
 
-    # Kibana
-    kibana:
-        image: docker.elastic.co/kibana/kibana:6.8.5
-        container_name: dso_kibana
-        links:
-            - elasticsearch
-        ports:
-            - "5601:5601"
-        networks:
-            - dso_stack
 
-    # memcached
-    memcached:
-        image: memcached:latest
-        hostname: memcached
-        container_name: dso_memcached
-        networks:
-            - dso_stack
+
+  #MAIL - SMTP Server
+  mail:
+    image: bytemark/smtp
+    container_name: dso_mail
+    restart: always
+    networks:
+      - dso_stack
+
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.8.5
+    container_name: dso_kibana
+    links:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    networks:
+      - dso_stack
+
+  # memcached
+
