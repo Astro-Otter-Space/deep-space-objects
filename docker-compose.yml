@@ -88,7 +88,7 @@ services:
 
   # ElasticSearch
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.5
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.16
     container_name: dso_elasticsearch
     hostname: elasticsearch
     volumes:
@@ -118,7 +118,7 @@ services:
 
   # Kibana
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.8.5
+    image: docker.elastic.co/kibana/kibana:6.8.16
     container_name: dso_kibana
     links:
       - elasticsearch

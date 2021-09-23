@@ -82,13 +82,13 @@ WORKDIR /srv/app
 
 COPY . .
 
-RUN set -eux; \
+#RUN set -eux; \
 #	mkdir -p var/cache var/log; \
 #	composer install --prefer-dist --no-scripts --no-interaction; \
-	composer dump-autoload --classmap-authoritative ; \
+#	composer dump-autoload --classmap-authoritative ; \
 #	composer symfony:dump-env prod; \
 #	composer run-script post-install-cmd;
-	chmod +x bin/console; sync
+#	chmod +x bin/console; sync
 VOLUME /srv/app/var
 
 COPY docker-healthcheck.sh /usr/local/bin/docker-healthcheck
