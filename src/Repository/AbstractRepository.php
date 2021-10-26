@@ -129,11 +129,9 @@ abstract class AbstractRepository
 
         $this->client->getIndex($this->getIndex());
 
-        /** @var Query\Term $term */
-        $matchQuery = new Query\Match();
+        $matchQuery = new Query\MatchQuery();
         $matchQuery->setField('id', $id);
 
-        /** @var Search $search */
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
@@ -141,21 +139,20 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param $searchTerm
-     * @param $listSearchFields
+     * @param string $searchTerm
+     * @param array $listSearchFields
+     *
      * @return ResultSet
      */
-    public function requestBySearchTerms($searchTerm, $listSearchFields): ResultSet
+    public function requestBySearchTerms(string $searchTerm, array $listSearchFields): ResultSet
     {
         $this->client->getIndex($this->getIndex());
 
-        /** @var Query\MultiMatch $query */
         $query = new Query\MultiMatch();
         $query->setFields($listSearchFields);
         $query->setQuery($searchTerm);
         $query->setType('phrase_prefix');
 
-        /** @var Search $search */
         $search = new Search($this->client);
         $search->addIndex($this->getIndex());
 
@@ -171,10 +168,8 @@ abstract class AbstractRepository
     {
         /** @var Index $elasticIndex */
         $elasticIndex = $this->client->getIndex($this->getIndex());
-        /** @var Type $elasticType */
         $elasticType = $elasticIndex->getType('_doc');
 
-        /** @var Response $response */
         $response = $elasticType->addDocument($document);
 
         $elasticIndex->refresh();
@@ -183,30 +178,30 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param $listItems
+     * @param array $listItems
      *
      * @return bool
      */
     public function bulkImport(array $listItems): bool
     {
-        /** @var Bulk $bulk */
         $bulk = new Bulk($this->client);
         $bulk->setIndex($this->getIndex())->setType('_doc');
 
         foreach ($listItems as $doc) {
             /** @var Document $doc */
             $docEs = new Document($doc['idDoc'], $doc['data']);
-
+            $action = null;
             if ('update' === $doc['mode']) {
                 $action = new Bulk\Action\UpdateDocument($docEs);
 
             } else if ('create' === $doc['mode']) {
                 $action = new Bulk\Action\CreateDocument($docEs);
             }
-            $bulk->addAction($action);
+            if (!is_null($action)) {
+                $bulk->addAction($action);
+            }
         }
 
-        /** @var Bulk\ResponseSet $responseBulk */
         $responseBulk = $bulk->send();
 
         // Refresh index

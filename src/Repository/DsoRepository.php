@@ -62,11 +62,12 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Get aggregates proprieties
+     *
      * @param bool $onlyKeys
      *
      * @return array
      */
-    public function getListAggregates($onlyKeys = false): array
+    public function getListAggregates(bool $onlyKeys): array
     {
         if ($onlyKeys) {
             return array_merge(array_keys(self::$listAggregates), array_keys(self::$listAggregatesRange));
@@ -179,13 +180,12 @@ class DsoRepository extends AbstractRepository
     /**
      * Search autocomplete
      *
-     * @param $searchTerm
+     * @param string $searchTerm
      *
      * @return array
      */
-    public function getObjectsBySearchTerms($searchTerm): array
+    public function getObjectsBySearchTerms(string $searchTerm): array
     {
-        $listDsoId = [];
         if ('en' !== $this->getLocale()) {
             self::$listSearchFields[] = sprintf('alt_%s', $this->getLocale());
             self::$listSearchFields[] = sprintf('alt_%s.keyword', $this->getLocale());
@@ -202,10 +202,11 @@ class DsoRepository extends AbstractRepository
      * Catalog Research, with|without filters
      * Get aggregates
      *
-     * @param $from
-     * @param $filters
+     * @param int $from
+     * @param array $filters
      * @param int|null $to
      * @param bool $hydrate
+     *
      * @return array
      */
     public function getObjectsCatalogByFilters(int $from, array $filters, ?int $to, ?bool $hydrate): array
@@ -223,10 +224,8 @@ class DsoRepository extends AbstractRepository
 
             // Add filters
             foreach ($filters as $type => $val) {
-                /** @var Query\Term $mustQuery */
                 $mustQuery = new Query\Term();
 
-                /** @var Query\Range $rangeQuery */
                 $rangeQuery = new Query\Range();
 
                 $field = ('magnitude' === $type) ? self::$listAggregatesRange[$type]['field'] : self::$listAggregates[$type]['field'];
@@ -268,7 +267,6 @@ class DsoRepository extends AbstractRepository
 
         // Aggregates
         array_walk(self::$listAggregates, static function($tab, $type) use($query) {
-            /** @var Terms $aggregation */
             $aggregation = new Terms($type);
             $aggregation->setField($tab['field']);
             $aggregation->setSize($tab['size']);
@@ -292,7 +290,6 @@ class DsoRepository extends AbstractRepository
         });
 
 
-        /** @var Search $search */
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
         $nbItems = $results->getTotalHits();
