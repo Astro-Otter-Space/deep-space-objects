@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Classes;
 
 use App\Command\ConvertCoordinatesCommand;
 use DateTimeInterface;
+use App\Classes\StringSanitization;
 
 /**
  * Class Utils
@@ -285,16 +288,18 @@ final class Utils
      */
     public static function camelCaseUrlTransform($input): string
     {
-        /** @var \Transliterator $transliterator */
-        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
-        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z0-9]+)!', $transliterator->transliterate($input), $matches);
-
-        $ret = $matches[0];
-        foreach ($ret as &$match) {
-            $match = $match === strtoupper($match) ? strtolower($match) : lcfirst($match);
-        }
-
-        return implode(trim(self::GLUE_DASH), $ret);
+//        /** @var \Transliterator $transliterator */
+//        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+//        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z0-9]+)!', $transliterator->transliterate($input), $matches);
+//
+//        $ret = $matches[0];
+//        foreach ($ret as &$match) {
+//            $match = $match === strtoupper($match) ? strtolower($match) : lcfirst($match);
+//        }
+//
+//        return implode(trim(self::GLUE_DASH), $ret);
+        $sanitization = new StringSanitization;
+        return $sanitization($input);
     }
 
     /**
