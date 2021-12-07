@@ -15,8 +15,11 @@
         "id": {
           "type": "text",
           "fields": {
-            "raw": {
-              "type": "keyword"
+            "sort": {
+              "type": "icu_collation_keyword",
+              "index": true,
+              "language": "en",
+              "country": "EN"
             }
           },
           "copy_to": "suggest"
@@ -30,7 +33,7 @@
           }
         },
         "order": {
-          "type": "text",
+          "type": "integer",
           "fields": {
             "keyword": {
               "type": "keyword"
