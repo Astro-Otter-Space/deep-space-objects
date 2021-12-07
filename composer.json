@@ -8,6 +8,10 @@
         "ext-iconv": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "composer/package-versions-deprecated": "1.11.99.4",
+        "doctrine/doctrine-bundle": "^2",
+        "doctrine/doctrine-migrations-bundle": "^2",
+        "doctrine/orm": "^2",
         "excelwebzone/recaptcha-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^3.0",
         "hamhamfonfon/astrobin-ws": "^2.2",
@@ -27,7 +31,6 @@
         "symfony/intl": "^5.3",
         "symfony/mailer": "5.3.*",
         "symfony/monolog-bundle": "^3.6",
-        "symfony/orm-pack": "^1.0",
         "symfony/process": "5.3.*",
         "symfony/requirements-checker": "^1.1",
         "symfony/security-bundle": "^5.3",
@@ -90,7 +93,7 @@
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "symfony/maker-bundle": "^1.12",
-        "symfony/profiler-pack": "^1.0",
-        "symfony/var-dumper": "^5.2"
+        "symfony/var-dumper": "^5.2",
+        "symfony/web-profiler-bundle": "5.3.*"
     }
 }

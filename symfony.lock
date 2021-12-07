@@ -376,9 +376,6 @@
     "symfony/options-resolver": {
         "version": "v4.2.0"
     },
-    "symfony/orm-pack": {
-        "version": "v1.0.5"
-    },
     "symfony/password-hasher": {
         "version": "v5.3.4"
     },
@@ -411,9 +408,6 @@
     },
     "symfony/process": {
         "version": "v4.4.2"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v4.2.0"
