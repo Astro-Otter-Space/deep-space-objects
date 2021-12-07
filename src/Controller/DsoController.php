@@ -9,6 +9,7 @@ use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Managers\DsoManager;
+use App\Repository\AbstractRepository;
 use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
@@ -272,7 +273,7 @@ class DsoController extends AbstractController
         if ($request->query->has('page')) {
             $page = (int)filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
             if (is_int($page)) {
-                $from = (DsoRepository::SIZE)*($page-1);
+                $from = (AbstractRepository::SIZE)*($page-1);
             }
         }
 

@@ -260,7 +260,7 @@ class DsoRepository extends AbstractRepository
 
         // Sort
         $query->addSort([
-            'order.keyword' => [
+            'id.keyword' => [
                 'order' => parent::SORT_ASC
             ]
         ]);
