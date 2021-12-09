@@ -154,7 +154,7 @@ class ConvertSrcToBulkCommand extends Command
                                 return self::$method($id);
                             }
 
-                            return "%s".$findKey."%s";
+                            return "%s" . $findKey . "%s"; // why %s ?
                         }, $line);
 
                         /**
@@ -169,7 +169,7 @@ class ConvertSrcToBulkCommand extends Command
                                 ];
 
                             } elseif ('full' === $typeImport) {
-                                $bulkLine =$this->buildCreateLine($type, $id);
+                                $bulkLine = $this->buildCreateLine($type, $id);
                                 fwrite($handle, $bulkLine . PHP_EOL);
                                 fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                             }
@@ -309,17 +309,21 @@ class ConvertSrcToBulkCommand extends Command
     }
 
     /**
+     * @param string $id
+     *
      * @return string
      */
-    public static function md5ForId($id): string {
+    public static function md5ForId(string $id): string
+    {
         return md5($id);
     }
 
     /**
-     * @param $id
+     * @param string|null $id
+     *
      * @return string
      */
-    public static function getCatalog($id): string
+    public static function getCatalog(?string $id): string
     {
         if (!is_null($id)) {
             return Utils::getCatalogMapping()[substr($id, 0, 2)] ?? Utils::UNASSIGNED;
@@ -330,8 +334,13 @@ class ConvertSrcToBulkCommand extends Command
     /**
      * @return void
      */
-    public static function getItemOrder(): void
+    public static function getItemOrder(string $id): ?int
     {
+        if (preg_match('/NGC(\w+)/', $id, $match)) {
+           return (int)$match[1];
+        }
+
+        return null;
     }
 
 }

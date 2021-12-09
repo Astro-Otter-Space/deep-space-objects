@@ -17,9 +17,10 @@
           "fields": {
             "sort": {
               "type": "icu_collation_keyword",
-              "index": true,
-              "language": "en",
-              "country": "EN"
+              "index": false,
+              "language": "de",
+              "country": "DE",
+              "variant": "@collation=phonebook"
             }
           },
           "copy_to": "suggest"
