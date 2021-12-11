@@ -5,6 +5,7 @@
 namespace App\Command;
 
 use App\Repository\DsoRepository;
+use App\Service\AstrobinService;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Response\AstrobinResponse;
@@ -26,8 +27,7 @@ class CheckAstrobinImageCommand extends Command
     protected MailService $mailHelper;
     protected string $senderMail;
     protected string $receiverMail;
-    protected string $astrobinApiKey;
-    protected string $astrobinApiSecret;
+    protected AstrobinService $astrobinService;
 
     /**
      * CheckAstrobinImageCommand constructor.
@@ -36,17 +36,15 @@ class CheckAstrobinImageCommand extends Command
      * @param MailService $mailHelper
      * @param string $senderMail
      * @param string $receiverMail
-     * @param string $astrobinApiKey
-     * @param string $astrobinApiSecret
+     * @param AstrobinService $astrobinService
      */
-    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail, string $astrobinApiKey, string $astrobinApiSecret)
+public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail, AstrobinService $astrobinService)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
         $this->senderMail = $senderMail;
         $this->receiverMail = $receiverMail;
-        $this->astrobinApiKey = $astrobinApiKey;
-        $this->astrobinApiSecret = $astrobinApiSecret;
+        $this->astrobinService = $astrobinService;
         parent::__construct();
     }
 
@@ -72,11 +70,11 @@ class CheckAstrobinImageCommand extends Command
         $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
         if (0 < count($listDsoAstrobin)) {
             /** @var GetImage $image */
-            $image = new GetImage($this->astrobinApiKey, $this->astrobinApiSecret);
+
             foreach ($listDsoAstrobin as $dsoId => $astrobinId) {
                 try {
                     /** @var AstrobinResponse $result */
-                    $result = $image->getById((string)$astrobinId);
+                    $result = $this->astrobinService->getAstrobinImage((string)$astrobinId);
                 } catch (WsException $e) {
                     $failedAstrobinId[Response::HTTP_NOT_FOUND][$dsoId] = $astrobinId;
                 }
