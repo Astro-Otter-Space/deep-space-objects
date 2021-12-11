@@ -26,6 +26,8 @@ class CheckAstrobinImageCommand extends Command
     protected MailService $mailHelper;
     protected string $senderMail;
     protected string $receiverMail;
+    protected string $astrobinApiKey;
+    protected string $astrobinApiSecret;
 
     /**
      * CheckAstrobinImageCommand constructor.
@@ -34,13 +36,17 @@ class CheckAstrobinImageCommand extends Command
      * @param MailService $mailHelper
      * @param string $senderMail
      * @param string $receiverMail
+     * @param string $astrobinApiKey
+     * @param string $astrobinApiSecret
      */
-    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail)
+    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail, string $astrobinApiKey, string $astrobinApiSecret)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
         $this->senderMail = $senderMail;
         $this->receiverMail = $receiverMail;
+        $this->astrobinApiKey = $astrobinApiKey;
+        $this->astrobinApiSecret = $astrobinApiSecret;
         parent::__construct();
     }
 
@@ -65,10 +71,9 @@ class CheckAstrobinImageCommand extends Command
         $failedAstrobinId = [];
         $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
         if (0 < count($listDsoAstrobin)) {
+            /** @var GetImage $image */
+            $image = new GetImage($this->astrobinApiKey, $this->astrobinApiSecret);
             foreach ($listDsoAstrobin as $dsoId => $astrobinId) {
-                /** @var GetImage $image */
-                $image = new GetImage($astrobinApiKey, $astrobinApiSecret);
-
                 try {
                     /** @var AstrobinResponse $result */
                     $result = $image->getById((string)$astrobinId);
