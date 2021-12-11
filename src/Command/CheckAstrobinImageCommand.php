@@ -9,7 +9,6 @@ use App\Service\AstrobinService;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Response\AstrobinResponse;
-use AstrobinWs\Services\GetImage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,7 +37,7 @@ class CheckAstrobinImageCommand extends Command
      * @param string $receiverMail
      * @param AstrobinService $astrobinService
      */
-public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail, AstrobinService $astrobinService)
+    public function __construct(DsoRepository $dsoRepository, MailService $mailHelper, string $senderMail, string $receiverMail, AstrobinService $astrobinService)
     {
         $this->dsoRepository = $dsoRepository;
         $this->mailHelper = $mailHelper;
@@ -69,8 +68,6 @@ public function __construct(DsoRepository $dsoRepository, MailService $mailHelpe
         $failedAstrobinId = [];
         $listDsoAstrobin = $this->dsoRepository->getAstrobinId(null);
         if (0 < count($listDsoAstrobin)) {
-            /** @var GetImage $image */
-
             foreach ($listDsoAstrobin as $dsoId => $astrobinId) {
                 try {
                     /** @var AstrobinResponse $result */
