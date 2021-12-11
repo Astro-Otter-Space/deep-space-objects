@@ -64,6 +64,8 @@
         urlSearchHome: urlSearchHome,
         images: [
           '/build/images/background/bg-1.webp',
+          '/build/images/background/bg-1.webp',
+          '/build/images/background/bg-1.webp',
         ],
         listVignettes: listVignettes,
         isMobile: deviceDetect.isMobileOnly

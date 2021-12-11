@@ -131,19 +131,19 @@ RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
 RUN echo "memory_limit= 2G" >> /usr/local/etc/php/conf.d/030-custom.ini
 
 # NPM & Node
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash
-RUN apt-get install -y nodejs npm \
-  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
+#RUN apt-get install -y nodejs npm \
+#  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 12
 
 # build tools
-RUN apt-get install -y build-essential
+#RUN apt-get install -y build-essential
 
 # yarn package manager
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 # bugfix: remove cmdtest to install yarn correctly.
-RUN apt-get remove -y cmdtest
+#RUN apt-get remove -y cmdtest
 RUN apt-get update
 RUN apt-get install -y yarn
 
