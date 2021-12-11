@@ -63,11 +63,7 @@
         },
         urlSearchHome: urlSearchHome,
         images: [
-          //'/build/images/background/bg-0.webp',
           '/build/images/background/bg-1.webp',
-          '/build/images/background/bg-6.webp',
-          '/build/images/background/bg-3.webp',
-          '/build/images/background/bg-4.webp'
         ],
         listVignettes: listVignettes,
         isMobile: deviceDetect.isMobileOnly
