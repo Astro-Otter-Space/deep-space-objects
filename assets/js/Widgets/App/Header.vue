@@ -20,21 +20,13 @@
         </a>
       </span>
 
-      <nav id="headerMenu" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
-        <!--Search-->
-        <li v-if="!this.isHome">
-          <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
-            <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
-          </a>
-        </li>
-
+      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <li class="header__drop" v-if="!this.isNewData" data-hide="mobile">
           <a v-bind:title="notification.label" v-bind:href="notification.path">
             <svgicon name="bell" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
 
-        <!-- data -->
         <li class="header__drop" data-hide="mobile">
           <a v-on:click="displayDropMenu" v-bind:title="titleData">
             <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
@@ -62,13 +54,22 @@
             <svgicon name="constellation" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
         </li>
+      </nav>
 
-        <!-- Dark/day mod -->
-        <!-- li>
-          <a v-on:click="switchTheme(theme)" v-bind:title="titleSwitchMode">
-            <svgicon v-bind:name="theme" width="30" height="30" color="#e9e9e9"></svgicon>
+      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
+        <!--Search-->
+        <li v-if="!this.isHome">
+          <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
+            <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
           </a>
-        </li -->
+        </li>
+
+        <!-- dark mode -->
+        <div class="mode-toggle" @click="themeToggle" :class="darkDark">
+          <div class="toggle">
+            <div id="dark-mode" type="checkbox"></div>
+          </div>
+        </div>
 
         <!--Languages-->
         <li class="header__drop">
@@ -168,18 +169,19 @@
         titleSwitchLang: labelsTrans.switchLang,
         // titleSwitchMode: labelsTrans.nightMode,
         titleData: labelsTrans.titleData,
-        isMobile: deviceDetect.isMobileOnly
+        isMobile: deviceDetect.isMobileOnly,
+        darkMode: false
       }
     },
     watch: {
       theme: {
-        handler: function(newTheme) {
+        handler: (newTheme) => {
           themeLocalStorage.save(newTheme)
         }
       }
     },
     methods: {
-      displayDropMenu: function(event) {
+      displayDropMenu: (event) => {
         if (event) {
           let item = null;
           if("a" === event.target.localName) {
@@ -202,10 +204,13 @@
             }
           });
 
-          var lis = document.getElementById("headerMenu").getElementsByTagName("li");
-          Array.from(lis).forEach((e) => {
-            e.style.marginTop = 0;
-          });
+          let navHeaders = document.querySelectorAll('[data-menu="header"]');
+          navHeaders.forEach(navHeader => {
+            const lis = navHeader.getElementsByTagName("li");
+            Array.from(lis).forEach(e => {
+              e.style.marginTop = 0;
+            });
+          })
 
           (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
 
@@ -213,9 +218,8 @@
             //item.nextSibling.nextSibling.style.marginTop = drop_menu.clientHeight + "px";
           }
         }
-
       },
-      displaySearchHeader: function(hide) {
+      displaySearchHeader: (hide) => {
         this.hide = !hide;
         if (true === this.hide) {
           this.$nextTick(() => {
@@ -223,16 +227,24 @@
           });
         }
       },
-      isHomepage: function() {
+      isHomepage: () => {
         this.isHome = this.currentRoute === this.homeRoute;
       },
-      openSlideMenu: function () {
+      openSlideMenu: () => {
         this.$refs.slideMenu.$children[0].openMenu();
       },
-      /*switchTheme: function(theme) {
-        this.theme = ("moon" !== theme) ? "moon" : "moon-empty";
-        this.titleSwitchMode = ("moon" !== theme) ? titleNightMode : titleDayMode;
-      }*/
+      themeToggle: () => {
+        if(this.darkMode || document.querySelector('body').classList.contains('night')) {
+          console.log('Remove dark mode');
+        } else {
+          console.log('Add dark mode');
+        }
+      }
+    },
+    computed: {
+      darkDark() {
+        return this.darkMode && 'darkmode-toggled';
+      }
     },
     beforeMount() {
       this.currentFlag = 'flag_' + this.currentLocale;

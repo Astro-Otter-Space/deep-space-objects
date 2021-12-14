@@ -12,6 +12,7 @@
 @import "components/Breadcrumbs";
 @import "components/ShareNetwork";
 @import "components/Popup";
+@import "components/switchDakeMode";
 // Components Homepage
 @import "components/Homeslider.scss";
 @import "components/Searchautocomplete.scss";
@@ -24,10 +25,16 @@
 @import "components/VueFlux";
 // List
 @import "components/Filters";
+
+$dark: #171717;
 body {
   font-family: $font;
   font-size: large;
   background-color: $bgd-dark;
   margin: 0;
   overflow-x: hidden;
+
+  &.night {
+    background-color: $bgd-night-dark;
+  }
 }
