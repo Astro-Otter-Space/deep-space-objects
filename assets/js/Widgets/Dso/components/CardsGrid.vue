@@ -24,24 +24,25 @@
         <div class="appGridFacet__list" v-if="showFacets && 0 < Object.keys(listFacets).length">
           <div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
 
-              <h3 class="Dso__title">
-                {{facets.name}}
-                <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
-                  <svgicon name="cross" width="20" height="20"></svgicon>
+            <facet
+              :list-items="facets"
+            ></facet>
+
+            <!-- h3 class="Dso__title">
+              {{facets.name}}
+              <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
+                <svgicon name="cross" width="20" height="20"></svgicon>
+              </a>
+            </h3>
+
+            <ul>
+              <li v-for="facet in facets.list" v-if="0 < facets.list.length" class="appGridFacet__item">
+                <a v-bind:href="facet.full_url" v-bind:title="facet.value">
+                  {{facet.value}}
+                  <span class="appGridFacet__badge">{{facet.number}}</span>
                 </a>
-
-                <!-- svgicon name="down" width="20" height="20" class="" v-if="!showBlockFacets" v-on:click="toggleBlockFacets()"></svgicon>
-                <svgicon name="up" width="20" height="20" class=""  v-if="showBlockFacets" v-on:click="toggleBlockFacets()"></svgicon -->
-              </h3>
-
-              <ul>
-                <li v-for="facet in facets.list" v-if="0 < facets.list.length" class="appGridFacet__item">
-                  <a v-bind:href="facet.full_url" v-bind:title="facet.value">
-                    {{facet.value}}
-                    <span class="appGridFacet__badge">{{facet.number}}</span>
-                  </a>
-                </li>
-              </ul>
+              </li>
+            </ul -->
           </div>
         </div>
       </transition>
@@ -73,9 +74,12 @@
 
 <script>
   import axios from 'axios';
+  import facets from './facet'
+  import Facet from "./facet";
 
   export default {
     name: "CardsGrid",
+    components: {Facet},
     data() {
       return {
         listDso: [],
@@ -128,7 +132,7 @@
       isLoaded: function() {
         this.isActive = true;
       },
-      m_percentage: function(value) {
+      m_percentage: function (value) {
         return parseInt((value * 100) / this.$data.maxPlayCount);d
       },
       changeGridGap: function() {
@@ -138,7 +142,7 @@
         document.querySelector('main').style.setProperty('--grid-min', this.gridMin + 'px');
       },
       changeGridItems: function() {
-        var gridItemSetting = this.gridItems;
+        let gridItemSetting = this.gridItems;
         if (this.gridItems === 0) {
           gridItemSetting = 'auto-fill';
         }
@@ -159,7 +163,7 @@
       },
       toggleBlockFacets: function() {
         this.showBlockFacets = !this.showBlockFacets;
-      }
+      },
     },
     computed: {
 

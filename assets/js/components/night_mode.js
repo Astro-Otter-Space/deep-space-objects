@@ -1,9 +1,7 @@
 const CLASS_NIGHT_MODE = 'night';
 
 const day_mode = () => {
-  document.querySelectorAll('.' + CLASS_NIGHT_MODE).forEach(el => {
-    el.classList.remove(CLASS_NIGHT_MODE)
-  })
+
 };
 
 const night_mode = () => {
@@ -16,11 +14,7 @@ const night_mode = () => {
 };
 
 const set_mode = (value) => {
-  if (CLASS_NIGHT_MODE === value) {
-    localStorage.setItem('astro.otter.mode', value);
-  } else {
-    localStorage.clear();
-  }
+
 };
 
 export default {

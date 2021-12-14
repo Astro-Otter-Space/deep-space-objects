@@ -11,6 +11,9 @@
 
   &__notHome {
     background-color: $bgd-dark;
+    &.night {
+      background-color: $bgd-night-layout;
+    }
   }
 
   &__barSlideMenu {

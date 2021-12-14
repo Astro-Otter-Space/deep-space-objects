@@ -7,10 +7,10 @@
         :alt-image="imageCoverAlt"
       />
     </div>
-    <section class="Dso__main">
+    <section class="Dso__main" data-dark-mode>
       <div v-bind:class="getHeaderClass()">
         <!--Title-->
-        <h1 class="Dso__title">
+        <h1 class="Dso__title" data-dark-mode>
           {{ title }}
         </h1>
 
@@ -19,13 +19,13 @@
           :links="linksBreadcrumbs"
         ></breadcrumbs>
 
-        <div class="Dso__text">
+        <div class="Dso__text" data-dark-mode>
           <div v-if="imagePositionMap">
             <img style="filter: grayscale(100%);" v-bind:src="imagePositionMap" v-bind:class="classVignette" v-bind:alt="altImage" />
           </div>
 
           <div>
-            <div class="Dso__description" v-if="0 < description.length">
+            <div class="Dso__description" v-if="0 < description.length" data-dark-mode>
               {{description}}
             </div>
             <div>
@@ -167,6 +167,7 @@
         labels: labels,
         titleConst: titleConst,
         gridColumns: ['col0', 'col1'],
+        altImage: '',
         gridData: tabData,
         classTable: "Dso__table",
         classTr: "Dso__tr",
@@ -197,14 +198,14 @@
     // https://nehalist.io/directly-injecting-data-to-vue-apps-with-symfony-twig/
     // https://stackoverflow.com/questions/42269260/how-to-get-the-values-of-data-attributes-in-vuejs
     methods: {
-      getHeaderClass: function () {
+      getHeaderClass: function() {
         if (this.imageCover !== '/build/images/default_large.jpg') {
           return 'Dso__container';
         } else {
           return 'Dso__container Dso__noHeader';
         }
       },
-      addToFavorites: function () {
+      addToFavorites: function() {
         if (window.sidebar) {        // Firefox
           window.sidebar.addPanel(this.sharing.url, this.sharing.title);
         } else {

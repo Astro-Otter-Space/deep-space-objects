@@ -9,21 +9,28 @@
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3>
-            {{ nbItems }}
             <a v-bind:href="urlDownloadData" title="Download data">
               <svgicon name="file-download" width="30" height="30" color="#2B2A34"></svgicon>
             </a>
+            &nbsp;|&nbsp;
+            {{ nbItems }}
+            &nbsp;|&nbsp;
+            <span class="checkbox-select__title">Filters</span>
             <svgicon name="down" width="20" height="20" v-if="!showFacets" v-on:click="toggleFacets()"></svgicon>
             <svgicon name="up" width="20" height="20" v-if="showFacets" v-on:click="toggleFacets()"></svgicon>
+
+            <!-- div class="checkbox-select__trigger" :class="{ isActive: activeTrigger }" v-on:click="showDropdown()">
+              <span class="checkbox-select__title">Filters</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z"/></svg>
+            </div -->
           </h3>
 
-          <ul v-if="listFilters.length" class="Filters__list">
+          <!-- ul v-if="listFilters.length" class="Filters__list">
             <li v-for="filter in listFilters" class="Filters__badge">
               {{filter.label}}
               <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
             </li>
-          </ul>
-
+          </ul -->
           <cards-grid
             :show-controls="false"
             :items="itemsDso"
@@ -89,6 +96,8 @@
         currentPage: currentPage,
         totalPage: totalPage,
         listFilters: listFilters,
+        dropdown: false,
+        activeTrigger: false,
         listFacets: listFacets,
         showFacets: showFacets,
         pagination: pagination,
@@ -101,6 +110,17 @@
       },
       toggleFacets: function() {
         this.showFacets = !this.showFacets;
+      },
+      showDropdown: () => {
+        if (this.dropdown === false) {
+          this.dropdown = true;
+          this.activeTrigger = true;
+          TweenMax.fromTo("#dropdown", 0.55, { autoAlpha: 0, y: -10 },  { autoAlpha: 1, y: 0, ease: Power2.easeOut });
+        } else {
+          this.dropdown = false;
+          this.activeTrigger = false;
+          TweenMax.to("#dropdown", 0.2, {autoAlpha: 0, y: -10,ease: Power2.easeOut });
+        }
       }
     }
   }

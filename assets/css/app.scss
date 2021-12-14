@@ -37,13 +37,15 @@ $mq-from-tablet-plus: mq-build($minw: $start-tablet + 1);
 
 // Background Colors
 $bgd-dark: #3e3d40;
-$bgd-night-dark: #161b22;
 $bgd-cards: #2B2A34;
 $bgd-white: #ffffff;
 $bgd-grey: #595959;
 $bgd-light-grey: #f8f8f8;
 $bgd-error: #f8d7da;
 $bgd-success: #d4edda;
+// Dark mode
+$bgd-night-layout: #161b22;
+$bgd-night-main: #0D1117;
 
 // Border
 $border-light-grey: #939598;

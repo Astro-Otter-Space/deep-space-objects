@@ -1,7 +1,10 @@
 <template>
-  <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']">
+  <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']" data-dark-mode>
 
-    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu">
+    <Slide :burgerIcon="true" disableOutsideClick ref="slideMenu" >
+      <!-- dark mode -->
+      <dark-mode></dark-mode>
+
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
@@ -10,26 +13,24 @@
 
     <div class="header__wrap">
       <!-- Open Menu-->
-      <span v-on:click="openSlideMenu()" class="header__barSlideMenu" v-bind:title="titleOpenMenu" v-if="isMobile">
-        <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
-      </span>
+      <nav v-on:click="openSlideMenu()"  data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" style="">
+        <span class="header__barSlideMenu" v-bind:title="titleOpenMenu">
+          <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
+        </span>
+      </nav>
 
-      <span class="h1 h1__title">
-        <a v-bind:href="homepageRoute" v-bind:title="title">
-          <span itemprop="name">{{title}}</span>
-        </a>
-      </span>
-
-      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
-        <li class="header__drop" v-if="!this.isNewData" data-hide="mobile">
-          <a v-bind:title="notification.label" v-bind:href="notification.path">
-            <svgicon name="bell" width="30" height="30" color="#e9e9e9"></svgicon>
+      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" data-dark-mode>
+        <span class="h1 h1__title">
+          <a v-bind:href="homepageRoute" v-bind:title="title">
+            <span itemprop="name">{{title}}</span>
           </a>
-        </li>
+        </span>
+      </nav>
 
+      <!-- nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
         <li class="header__drop" data-hide="mobile">
           <a v-on:click="displayDropMenu" v-bind:title="titleData">
-            <svgicon name="galaxy-cluster" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="galaxy-cluster" width="40" height="40" color="#e9e9e9"></svgicon>
           </a>
           <ul class="header__drop_menu">
             <li v-for="menu in menuData">
@@ -47,34 +48,26 @@
               </ul>
             </li>
           </ul>
-        </li>
+        </li-->
 
-        <li class="header__drop" data-hide="mobile">
+        <!-- li class="header__drop" data-hide="mobile">
           <a v-bind:title="constellation.label" v-bind:href="constellation.path">
-            <svgicon name="constellation" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="constellation" width="40" height="40" color="#e9e9e9"></svgicon>
           </a>
         </li>
-      </nav>
+      </nav -->
 
-      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
-        <!--Search-->
+      <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" data-dark-mode>
         <li v-if="!this.isHome">
           <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
-            <svgicon name="search" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="search" width="40" height="40" color="#e9e9e9"></svgicon>
           </a>
         </li>
-
-        <!-- dark mode -->
-        <div class="mode-toggle" @click="themeToggle" :class="darkDark">
-          <div class="toggle">
-            <div id="dark-mode" type="checkbox"></div>
-          </div>
-        </div>
 
         <!--Languages-->
         <li class="header__drop">
           <a v-on:click="displayDropMenu" v-bind:title="titleSwitchLang">
-            <svgicon name="globe" width="30" height="30" color="#e9e9e9"></svgicon>
+            <svgicon name="globe" width="40" height="40" color="#e9e9e9"></svgicon>
             <svgicon v-bind:name="currentFlag" width="15" height="15" original class="floatFlag"></svgicon>
           </a>
           <ul class="header__drop_menu">
@@ -107,40 +100,29 @@
   let homeRoute = document.getElementById('appHeader').dataset.homeRoute;
   let leftSideMenu = JSON.parse(document.getElementById('appHeader').dataset.menuMobile);
   let notification = JSON.parse(document.getElementById('appHeader').dataset.notification);
-  let menuData = JSON.parse(document.getElementById('appHeader').dataset.menuData);
   let constellation = JSON.parse(document.getElementById('appHeader').dataset.constellation);
   let routeSf = document.getElementById('appHeader').dataset.route;
   let listLocales = JSON.parse(document.getElementById('appHeader').dataset.locales);
   let currentLocale = document.getElementById('appHeader').dataset.currentlocale;
   let urlSearch = document.getElementById('appHeader').dataset.searchRoute;
   let labelsTrans = JSON.parse(document.getElementById('appHeader').dataset.labels);
-  // let titleNightMode = labelsTrans.nightMode;
-  // let titleDayMode = labelsTrans.dayMode;
 
   import searchautocomplete from './../Homepage/components/Searchautocomplete';
   import { Slide } from 'vue-burger-menu';
   import './../Icons/index';
   import deviceDetect from 'mobile-device-detect';
+  import darkMode from './darkMode';
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
   });
 
-  let KEY_THEME = 'theme';
-  const themeLocalStorage = {
-    fetch: function () {
-      return localStorage.getItem(KEY_THEME) || 'moon';
-    },
-    save: function (theme) {
-      localStorage.setItem(KEY_THEME, theme);
-    }
-  };
-
   export default {
     name: "Header",
     components: {
       searchautocomplete,
-      Slide
+      Slide,
+      darkMode
     },
     data() {
       return {
@@ -149,12 +131,10 @@
         notification: notification,
         constellation: constellation,
         isNewData: false,
-        menuData: menuData,
         title: labelsTrans.title,
         listLocales: listLocales,
         currentLocale: currentLocale,
         currentFlag: 'flag_en',
-        theme: themeLocalStorage.fetch(),
         currentRoute: routeSf,
         homeRoute: 'homepage',
         hide: false,
@@ -173,15 +153,8 @@
         darkMode: false
       }
     },
-    watch: {
-      theme: {
-        handler: (newTheme) => {
-          themeLocalStorage.save(newTheme)
-        }
-      }
-    },
     methods: {
-      displayDropMenu: (event) => {
+      displayDropMenu: function(event) {
         if (event) {
           let item = null;
           if("a" === event.target.localName) {
@@ -210,7 +183,7 @@
             Array.from(lis).forEach(e => {
               e.style.marginTop = 0;
             });
-          })
+          });
 
           (!drop_menu.classList.contains("header__display")) ? drop_menu.classList.add("header__display") : drop_menu.classList.remove("header__display");
 
@@ -219,7 +192,7 @@
           }
         }
       },
-      displaySearchHeader: (hide) => {
+      displaySearchHeader: function(hide) {
         this.hide = !hide;
         if (true === this.hide) {
           this.$nextTick(() => {
@@ -227,13 +200,13 @@
           });
         }
       },
-      isHomepage: () => {
+      isHomepage: function() {
         this.isHome = this.currentRoute === this.homeRoute;
       },
-      openSlideMenu: () => {
+      openSlideMenu: function() {
         this.$refs.slideMenu.$children[0].openMenu();
       },
-      themeToggle: () => {
+      themeToggle: function() {
         if(this.darkMode || document.querySelector('body').classList.contains('night')) {
           console.log('Remove dark mode');
         } else {
@@ -252,10 +225,13 @@
     }
   }
 
-  function closeAllMenu() {
-    const lis = document.getElementById("headerMenu").getElementsByTagName("li");
-    Array.from(lis).forEach(function(e){
-      e.style.marginTop = 0;
+  const closeAllMenu = () => {
+    let navHeaders = document.querySelectorAll('[data-menu="header"]');
+    navHeaders.forEach(navHeader => {
+      const lis = navHeader.getElementsByTagName("li");
+      Array.from(lis).forEach(e => {
+        e.style.marginTop = 0;
+      });
     });
 
     const drop_menus = document.getElementsByClassName("header__drop_menu");

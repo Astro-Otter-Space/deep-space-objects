@@ -12,7 +12,7 @@
 @import "components/Breadcrumbs";
 @import "components/ShareNetwork";
 @import "components/Popup";
-@import "components/switchDakeMode";
+@import "components/switchDarkMode";
 // Components Homepage
 @import "components/Homeslider.scss";
 @import "components/Searchautocomplete.scss";
@@ -35,6 +35,6 @@ body {
   overflow-x: hidden;
 
   &.night {
-    background-color: $bgd-night-dark;
+    background-color: $bgd-night-layout;
   }
 }
