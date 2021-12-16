@@ -30,6 +30,11 @@ h3 {
 input {
   padding: 2px;
   overflow: visible;
+
+  &.night {
+    background-color: $bgd-night-input;
+    color: $color-night-text;
+  }
 }
 
 table {
@@ -40,6 +45,11 @@ table {
 td {
   background-color: $bgd-grey;
   color: $color-text;
+
+  &.night {
+    background-color: $bgd-night-td;
+    color: $color-night-text;
+  }
 }
 
 th, td {

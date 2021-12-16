@@ -81,12 +81,13 @@
     li {
       line-height: 1.8em;
       padding-left: 1em;
-
+      border-bottom: 1px solid;
       a {
         text-decoration: none;
         color: $color-text;
 
         .autocomplete-anchor-label {
+          font-size: 0.9em;
           display: block;
         }
       }
