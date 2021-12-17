@@ -12,7 +12,7 @@
   &__notHome {
     background-color: $bgd-dark;
     &.night {
-      background-color: $bgd-night-layout;
+      background-color: $bgd-night-section;
     }
   }
 
@@ -51,6 +51,9 @@
     flex-direction: row;
     &__notHome {
       background: $bgd-dark;
+      &.night {
+        background-color: $bgd-night-section;
+      }
     }
 
     li {
@@ -159,6 +162,9 @@
     background-color: $bgd-grey;
     width: inherit;
     transition: 0.33s;
+    &.night {
+      background-color: $bgd-night-menu;
+    }
   }
 
 }

@@ -15,6 +15,9 @@
     text-decoration: none;
     color: $color-text-dark;
     cursor: pointer;
+    &.night {
+      color: $color-night-text-dark;
+    }
 
     &:after {
       content: "\203A";

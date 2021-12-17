@@ -24,6 +24,9 @@
     border-radius: 4px;
     overflow: hidden;
     animation: mouseOut 0.3s ease-in;
+    &.night {
+      background-color: $bgd-night-cards;
+    }
     .image {
       position: relative;
       width: 100%;

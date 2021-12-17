@@ -17,7 +17,7 @@
     text-align: center;
 
     &.night {
-      color: $color-text;
+      color: $color-night-text;
     }
   }
 
@@ -52,7 +52,8 @@
       line-height: 1.5em;
     }
     &.night {
-      color: #8B949E;
+      color: $color-night-text;
+      background-color: $bgd-night-main;
     }
   }
 
@@ -85,10 +86,6 @@
     border-bottom: 1px solid $bgd-white;
     @media($mq-phone) {
       font-size: 0.9rem;
-    }
-    &.night {
-      background-color: $bgd-night-layout;
-      color: #8B949E
     }
     a {
       color: $color-text;

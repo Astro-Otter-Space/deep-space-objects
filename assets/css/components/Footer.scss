@@ -5,10 +5,16 @@
   color: $color-text;
   width: 100%;
   background-color: $bgd-dark;
+  &.night {
+    background-color: $bgd-night-section;
+  }
 
   &__isHome {
     position: fixed;
     background-color: transparent;
+    &.night {
+      background-color: transparent;
+    }
   }
 
   &__wrapper {

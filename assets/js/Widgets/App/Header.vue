@@ -13,7 +13,7 @@
 
     <div class="header__wrap">
       <!-- Open Menu-->
-      <nav v-on:click="openSlideMenu()"  data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" style="">
+      <nav v-on:click="openSlideMenu()" data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" style="">
         <span class="header__barSlideMenu" v-bind:title="titleOpenMenu">
           <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
         </span>
