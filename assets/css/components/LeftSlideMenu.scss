@@ -42,7 +42,10 @@
 body {
   &.bm-overlay {
     .bm-menu {
-      width: 100% !important;
+      width: 300px !important;
+      @media ($mq-phone) {
+        width: 100% !important;
+      }
     }
   }
 }
@@ -86,4 +89,7 @@ body {
   margin-left: 1em !important;
   color: $color-text !important;
   font-weight: 100 !important;
+  display: flex;
+  align-content: space-around;
+  flex-wrap: wrap;
 }

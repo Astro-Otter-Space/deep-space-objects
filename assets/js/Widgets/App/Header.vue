@@ -213,11 +213,6 @@
         }
       }
     },
-    computed: {
-      darkDark() {
-        return this.darkMode && 'darkmode-toggled';
-      }
-    },
     beforeMount() {
       this.currentFlag = 'flag_' + this.currentLocale;
       this.isHomepage();
