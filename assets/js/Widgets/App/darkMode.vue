@@ -1,10 +1,17 @@
 <template>
-  <div class="mode-toggle" @click="modeToggle" :class="darkDark">
-    <div class="toggle">
-      <div id="dark-mode" type="checkbox"></div>
+  <div>
+    <div class="mode-toggle" @click="modeToggle" :class="darkDark">
+      <div class="toggle">
+        <div id="dark-mode" type="checkbox"></div>
+      </div>
+
     </div>
-    <span v-html="label"></span>
+
+    <div>
+      <span v-html="label"></span>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -25,25 +32,41 @@ export default {
         'body',
         '.header__notHome',
         '.header__search',
+        '.AppSearch__inputText',
+        '.AppSearch__list ul',
         '.bm-menu',
         '.Dso__main',
-        '.Dso__title',
+        '.Dso__Form',
         '.Dso__description',
         'footer.footer'
       ].forEach(item => {
         if (null !== document.querySelector(item)) {
             document.querySelector(item).classList.add(CLASS_NIGHT_MODE);
+        } else {
+          console.log('Item "' + item + '" not found');
         }
       });
 
-      // Header + menu
-      document.querySelectorAll('.header__menu__notHome').forEach(el => el.classList.add(CLASS_NIGHT_MODE));
-      document.querySelectorAll('td').forEach(td => td.classList.add(CLASS_NIGHT_MODE));
-      document.querySelectorAll('.breadcrumb a').forEach(link => link.classList.add(CLASS_NIGHT_MODE));
-      // Left Menu
-      document.querySelectorAll('span.bm-burger-bars').forEach(bar => bar.classList.add(CLASS_NIGHT_MODE))
-      // Main
-      document.querySelectorAll('article.card').forEach(el => el.classList.add(CLASS_NIGHT_MODE));
+      [
+        '.header__menu__notHome',
+        '.breadcrumb a',
+        'span.bm-burger-bars',
+        '.header__drop_menu',
+        '.header__search',
+        '.AppSearch__list li a',
+        '.Dso__title',
+        'Dso__td',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textare',
+        'td',
+        'a'
+      ].forEach(item => {
+        if (null !== document.querySelectorAll(item) && 0 < document.querySelectorAll(item).length) {
+          document.querySelectorAll(item).forEach(el => el.classList.add(CLASS_NIGHT_MODE));
+        }
+      });
 
       // Form & inputs
 
@@ -86,10 +109,10 @@ export default {
     }
   },
   mounted() {
-    if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
-      console.log('Init dark mode at load');
-      this.dark()
-    }
+    // if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
+    //   console.log('Init dark mode at load');
+    //   this.dark()
+    // }
   }
 }
 </script>

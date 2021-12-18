@@ -7,6 +7,7 @@
   background-color: $bgd-dark;
   &.night {
     background-color: $bgd-night-section;
+    color: $color-night-text;
   }
 
   &__isHome {
@@ -68,6 +69,9 @@
         text-decoration: none;
         background: none;
         color: $color-text;
+        &.night {
+          color: $color-night-text;
+        }
       }
     }
 

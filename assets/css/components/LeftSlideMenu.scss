@@ -62,6 +62,10 @@ body {
   &.night {
     background-color: $bgd-night-menu !important;
   }
+
+  hr {
+    margin: 0;
+  }
 }
 
 .bm-overlay {

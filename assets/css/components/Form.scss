@@ -7,6 +7,11 @@
     @media ($mq-phone) {
       padding-right: 0.2em;
     }
+
+    &.night {
+      background-color: $bgd-night-main;
+      color: $color-night-text-dark;
+    }
   }
 }
 
@@ -89,6 +94,11 @@
     color: $color-text-dark;
     font-size: 0.8em;
     line-height: 20px;
+
+    &.night {
+      background-color: $bgd-night-input;
+      color: $color-night-text-dark;
+    }
   }
 
   /*&__input[type="email"]:before {
@@ -149,6 +159,6 @@
   &__info {
     color: #856404;
     background-color: #fff3cd;
-    border-color: 1px solid #ffeeba;
+    border: 1px solid #ffeeba;
   }
 }

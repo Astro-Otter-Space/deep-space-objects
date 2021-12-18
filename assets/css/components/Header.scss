@@ -93,6 +93,9 @@
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
     margin: 0;
     right: 0;
+    &.night {
+      background-color: $bgd-night-menu;
+    }
 
     li {
       margin: 0;

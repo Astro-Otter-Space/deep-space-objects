@@ -2,13 +2,12 @@
   <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']" data-dark-mode>
 
     <Slide :burgerIcon="true" disableOutsideClick ref="slideMenu" >
-      <!-- dark mode -->
-      <dark-mode></dark-mode>
-
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
-        <svgicon v-bind:name="menu.icon_class" width="30" height="30" color="#e9e9e9"></svgicon>
+        <svgicon v-bind:name="menu.icon_class" width="36" height="36" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
       </a>
+      <!-- dark mode -->
+      <dark-mode></dark-mode>
     </Slide>
 
     <div class="header__wrap">
@@ -82,7 +81,7 @@
       </nav>
     </div>
 
-    <div class="header__search" v-if="hide">
+    <div class="header__search" v-show="hide">
       <transition>
         <searchautocomplete
           ref="search"

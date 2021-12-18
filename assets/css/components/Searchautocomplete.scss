@@ -54,6 +54,16 @@
     &::-ms-clear {
       display: none; width:0; height:0;
     }
+
+    &.night {
+      background-color: $bgd-night-input;
+      &::-ms-input-placeholder { /* Microsoft Edge */
+        color: $color-night-text-dark;
+      }
+      &::placeholder {
+        color: $color-night-text-dark
+      }
+    }
   }
 
   &__inputTextObservation {
@@ -72,6 +82,10 @@
       min-width: 15%;
       margin-top: 10px;
       opacity: 0.8;
+
+      &.night {
+        background-color: $bgd-night-section;
+      }
     }
 
     ul:before {
@@ -85,7 +99,9 @@
       a {
         text-decoration: none;
         color: $color-text;
-
+        &.night {
+          color: $color-night-text;
+        }
         .autocomplete-anchor-label {
           font-size: 0.9em;
           display: block;
@@ -94,9 +110,15 @@
 
       &:hover {
         background-color: $bgd-white;
+        &.night {
+          background-color: $bgd-night-section;;
+        }
       }
       a:hover {
         color: $color-text-dark;
+        &.night {
+          color: $color-night-text-dark;
+        }
       }
     }
   }

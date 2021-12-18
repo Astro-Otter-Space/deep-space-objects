@@ -92,6 +92,10 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    &.night {
+      background-color: $bgd-night-td;
+    }
   }
 
   // Slider VueFlux
