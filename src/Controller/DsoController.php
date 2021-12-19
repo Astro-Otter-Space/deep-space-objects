@@ -263,7 +263,7 @@ class DsoController extends AbstractController
     public function catalog(Request $request): Response
     {
         $page = self::DEFAULT_PAGE;
-        $from = DsoRepository::FROM;
+        $from = AbstractRepository::FROM;
         $filters = $listAggregations = [];
         $ordering = Utils::getOrderCatalog();
 
@@ -272,9 +272,7 @@ class DsoController extends AbstractController
 
         if ($request->query->has('page')) {
             $page = (int)filter_var($request->query->get('page'), FILTER_SANITIZE_NUMBER_INT);
-            if (is_int($page)) {
-                $from = (AbstractRepository::SIZE)*($page-1);
-            }
+            $from = (AbstractRepository::SIZE)*($page-1);
         }
 
         if (0 < $request->query->count()) {
