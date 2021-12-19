@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="appGridFilter" v-if="showControls == true">
+    <div class="appGridFilter" v-if="showControls === true">
       <div class="appGridFilter__filter">
         <label v-for="control in listFilters" class="appGridFilter__btn-radio">
           <input type="radio"
@@ -21,14 +21,14 @@
 
     <div id="appGrid">
       <transition tag="facets" name="list-facets">
-        <div class="appGridFacet__list" v-if="showFacets && 0 < Object.keys(listFacets).length">
+        <div class="appGridFacet__list" v-show="showFacets && 0 < Object.keys(listFacets).length">
           <div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
 
-            <facet
-              :list-items="facets"
-            ></facet>
+            <!-- facet
+              :list-items="listFacets"
+            ></facet -->
 
-            <!-- h3 class="Dso__title">
+            <h3 class="Dso__title">
               {{facets.name}}
               <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
                 <svgicon name="cross" width="20" height="20"></svgicon>
@@ -42,7 +42,7 @@
                   <span class="appGridFacet__badge">{{facet.number}}</span>
                 </a>
               </li>
-            </ul -->
+            </ul>
           </div>
         </div>
       </transition>
