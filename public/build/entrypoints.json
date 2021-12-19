@@ -1,14 +1,5 @@
 {
   "entrypoints": {
-    "observations": {
-      "js": [
-        "/build/runtime.js",
-        "/build/observations.js"
-      ],
-      "css": [
-        "/build/observations.css"
-      ]
-    },
     "app": {
       "js": [
         "/build/runtime.js",
@@ -16,6 +7,12 @@
       ],
       "css": [
         "/build/app.css"
+      ]
+    },
+    "home": {
+      "js": [
+        "/build/runtime.js",
+        "/build/home.js"
       ]
     },
     "dso": {
@@ -75,10 +72,13 @@
         "/build/event.js"
       ]
     },
-    "home": {
+    "observations": {
       "js": [
         "/build/runtime.js",
-        "/build/home.js"
+        "/build/observations.js"
+      ],
+      "css": [
+        "/build/observations.css"
       ]
     },
     "notfound": {
