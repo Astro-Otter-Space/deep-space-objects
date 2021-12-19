@@ -23,7 +23,7 @@ export default {
   name: "darkMode",
   data() {
     return {
-      darkMode: false,
+      darkMode: (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) || false,
       label: 'Light mode'
     }
   },
@@ -60,11 +60,21 @@ export default {
       return this.darkMode && 'darkmode-toggled'
     }
   },
+  /*watch: {
+
+  },*/
   mounted() {
-    // if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
-    //   console.log('Init dark mode at load');
-    //   this.dark()
-    // }
+    // Apply dark mode on mount
+    if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
+      this.dark();
+
+      // for DOM element not mounted like Dso__main etc...
+      document.onreadystatechange = () => {
+        if ("complete" === document.readyState ) {
+          this.dark();
+        }
+      }
+    }
   }
 }
 </script>

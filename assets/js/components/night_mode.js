@@ -42,12 +42,15 @@ const night_mode = () => {
     '.header__drop_menu',
     '.header__search',
     '.AppSearch__list li a',
+    '.header__menu li a',
+    '.header__drop_menu a',
     '.Dso__title',
+    'Dso__list a',
     'Dso__td',
     'article.card',
     '.Form__input',
     '.Form__select',
-    '.Form__textare',
+    '.Form__textarea',
     'td',
     'a'
   ].forEach(item => {

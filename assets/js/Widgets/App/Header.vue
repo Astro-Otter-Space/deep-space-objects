@@ -1,22 +1,27 @@
 <template>
   <header v-bind:class="[ !this.isHome  ? 'header__notHome': '', 'header']" data-dark-mode>
 
-    <Slide :burgerIcon="true" disableOutsideClick ref="slideMenu" >
+    <Slide :burgerIcon="false" disableOutsideClick ref="slideMenu" >
       <a v-for="menu in leftSideMenu" v-bind:href="menu.path" v-bind:title="menu.label">
         <svgicon v-bind:name="menu.icon_class" width="36" height="36" color="#e9e9e9"></svgicon>
         <span>{{menu.label}}</span>
       </a>
+<!--      <ul v-if="menu.subMenu && 0 < menu.subMenu.length" class="header__drop_submenu">-->
+<!--        <li v-for="sub in menu.subMenu" class="header__drop_submenu_li">-->
+<!--          <a v-bind:href="sub.path" v-bind:title="sub.label" class="header__drop_submenu_a">-->
+<!--            <span>{{ sub.label }}</span>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
       <!-- dark mode -->
       <dark-mode></dark-mode>
     </Slide>
 
     <div class="header__wrap">
       <!-- Open Menu-->
-      <nav v-on:click="openSlideMenu()" data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" style="">
-        <span class="header__barSlideMenu" v-bind:title="titleOpenMenu">
-          <svgicon name="bars" width="30" height="30" color="#e9e9e9"></svgicon>
-        </span>
-      </nav>
+     <nav v-on:click="openSlideMenu()" v-bind:title="titleOpenMenu" data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
+       <svgicon name="bars" width="40" height="40" color="#e9e9e9"></svgicon>
+     </nav>
 
       <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" data-dark-mode>
         <span class="h1 h1__title">
@@ -26,58 +31,30 @@
         </span>
       </nav>
 
-      <!-- nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']">
-        <li class="header__drop" data-hide="mobile">
-          <a v-on:click="displayDropMenu" v-bind:title="titleData">
-            <svgicon name="galaxy-cluster" width="40" height="40" color="#e9e9e9"></svgicon>
-          </a>
-          <ul class="header__drop_menu">
-            <li v-for="menu in menuData">
-              <a v-bind:href="menu.path" v-bind:title="menu.label">
-                <svgicon v-bind:name="menu.icon_class" width="20" height="20" original></svgicon>
-                <span>{{ menu.label }}</span>
-              </a>
-
-              <ul v-if="menu.subMenu && 0 < menu.subMenu.length" class="header__drop_submenu">
-                <li v-for="sub in menu.subMenu" class="header__drop_submenu_li">
-                  <a v-bind:href="sub.path" v-bind:title="sub.label" class="header__drop_submenu_a">
-                    <span>{{ sub.label }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li-->
-
-        <!-- li class="header__drop" data-hide="mobile">
-          <a v-bind:title="constellation.label" v-bind:href="constellation.path">
-            <svgicon name="constellation" width="40" height="40" color="#e9e9e9"></svgicon>
-          </a>
-        </li>
-      </nav -->
-
       <nav data-menu="header" v-bind:class="[ !this.isHome  ? 'header__menu__notHome': '', 'header__menu']" data-dark-mode>
-        <li v-if="!this.isHome">
-          <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
-            <svgicon name="search" width="40" height="40" color="#e9e9e9"></svgicon>
-          </a>
-        </li>
+        <ul class="header__wrap__sup_ul">
+          <li v-if="!this.isHome">
+            <a v-on:click="displaySearchHeader(hide)" v-bind:title="placeholder">
+              <svgicon name="search" width="40" height="40" color="#e9e9e9"></svgicon>
+            </a>
+          </li>
 
-        <!--Languages-->
-        <li class="header__drop">
-          <a v-on:click="displayDropMenu" v-bind:title="titleSwitchLang">
-            <svgicon name="globe" width="40" height="40" color="#e9e9e9"></svgicon>
-            <svgicon v-bind:name="currentFlag" width="15" height="15" original class="floatFlag"></svgicon>
-          </a>
-          <ul class="header__drop_menu">
-            <li v-for="locale in listLocales">
-              <a v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label" rel="alternate">
-                <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
-                <span>{{ locale.label }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
+          <!--Languages-->
+          <li class="header__drop">
+            <a v-on:click="displayDropMenu" v-bind:title="titleSwitchLang">
+              <svgicon name="globe" width="40" height="40" color="#e9e9e9"></svgicon>
+              <svgicon v-bind:name="currentFlag" width="15" height="15" original class="floatFlag"></svgicon>
+            </a>
+            <ul class="header__drop_menu">
+              <li v-for="locale in listLocales">
+                <a v-bind:href="locale.path" v-bind:hreflang="locale.locale" :key="locale.locale" v-bind:title="locale.label" rel="alternate">
+                  <svgicon v-bind:name="locale.flag" width="20" height="20" original></svgicon>
+                  <span>{{ locale.label }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </nav>
     </div>
 
