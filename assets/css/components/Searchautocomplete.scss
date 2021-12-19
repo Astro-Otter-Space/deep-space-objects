@@ -26,6 +26,16 @@
 
   &__inputTextHome {
     background: $bgd-light-grey url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iIzVGNjM2OCI+PHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0E2LjQ3MSA2LjQ3MSAwIDAgMCAxNiA5LjUgNi41IDYuNSAwIDEgMCA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==) no-repeat left 0.5em center;
+
+    &.night {
+      background-color: $bgd-night-input;
+      &::-ms-input-placeholder { /* Microsoft Edge */
+        color: $color-night-text-dark;
+      }
+      &::placeholder {
+        color: $color-night-text-dark
+      }
+    }
   }
 
   &__inputText {
@@ -64,10 +74,6 @@
         color: $color-night-text-dark
       }
     }
-  }
-
-  &__inputTextObservation {
-    border: 1px solid $bgd-grey;
   }
 
   &__list {

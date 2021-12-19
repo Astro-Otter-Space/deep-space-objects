@@ -20,6 +20,7 @@ const night_mode = () => {
     'body',
     '.header__notHome',
     '.header__search',
+    '.AppSearch__inputTextHome',
     '.AppSearch__inputText',
     '.AppSearch__list ul',
     '.bm-menu',
@@ -30,8 +31,6 @@ const night_mode = () => {
   ].forEach(item => {
     if (null !== document.querySelector(item)) {
       document.querySelector(item).classList.add(CLASS_NIGHT_MODE);
-    } else {
-      console.log('Item "' + item + '" not found');
     }
   });
 
