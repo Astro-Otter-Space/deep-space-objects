@@ -319,11 +319,11 @@ final class Utils
     }
 
     /**
-     * @param $ra
+     * @param string $ra
      *
      * @return float|null
      */
-    public static function raToLon($ra):? float
+    public static function raToLon(string $ra): ?float
     {
         $lon = null;
         preg_match_all(ConvertCoordinatesCommand::REGEX, $ra, $matches, PREG_PATTERN_ORDER);
@@ -340,11 +340,11 @@ final class Utils
     }
 
     /**
-     * @param $dec
+     * @param string $dec
      *
      * @return float|null
      */
-    public static function decToLat($dec):? float
+    public static function decToLat(string $dec): ?float
     {
         $lat = null;
 
