@@ -327,16 +327,12 @@ final class Utils
     {
         $lon = null;
         preg_match_all(ConvertCoordinatesCommand::REGEX, $ra, $matches, PREG_PATTERN_ORDER);
-        if (!is_null($ra)) {
-            $h = (float)$matches[0][0];
-            $mn = (float)$matches[0][1];
-            $sec = (float)$matches[0][2];
+        $h = (float)$matches[0][0];
+        $mn = (float)$matches[0][1];
+        $sec = (float)$matches[0][2];
 
-            $lon = ($h + ($mn/60) + ($sec/3600))*15;
-            $lon = ($lon > 180) ? $lon-360 : $lon;
-        }
-
-        return $lon;
+        $lon = ($h + ($mn/60) + ($sec/3600))*15;
+        return ($lon > 180) ? $lon-360 : $lon;
     }
 
     /**
@@ -347,22 +343,18 @@ final class Utils
     public static function decToLat(string $dec): ?float
     {
         $lat = null;
-
         preg_match_all(ConvertCoordinatesCommand::REGEX, $dec, $matches, PREG_PATTERN_ORDER);
-        if (!is_null($dec)) {
+        $deg = (float)$matches[0][0];
+        $isNegative = $deg < 0;
 
-            $deg = (float)$matches[0][0];
-            $isNegative = $deg < 0;
+        $deg = (float)str_replace('-', '', $matches[0][0]);
+        $mn = (float)$matches[0][1];
+        $sec = (float)$matches[0][2];
 
-            $deg = (float)str_replace('-', '', $matches[0][0]);
-            $mn = (float)$matches[0][1];
-            $sec = (float)$matches[0][2];
+        $lat = $deg + $mn/60 + $sec/3600;
 
-            $lat = $deg + $mn/60 + $sec/3600;
+        $lat = ($isNegative)? '-' . $lat: $lat;
 
-            $lat = ($isNegative)? '-' . $lat: $lat;
-        }
-
-        return $lat;
+        return (float)$lat;
     }
 }
