@@ -5,7 +5,7 @@
         <label v-for="control in listFilters" class="appGridFilter__btn-radio">
           <input type="radio"
                  name="appGridFilter__radio-grp"
-                 v-model="itemselect"
+                 v-model="itemSelect"
                  :id="control.value"
                  :value="control.value"
           />
@@ -20,14 +20,25 @@
     </div>
 
     <div id="appGrid">
+
       <transition tag="facets" name="list-facets">
-        <div class="appGridFacet__list" v-show="showFacets && 0 < Object.keys(listFacets).length">
-          <div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
+        <aside style="float: left; width: 15em;">
+          <div v-for="typeFacet in listFacets" v-bind:data-type="typeFacet.name">
+            <facet
+              :nameFacet="typeFacet.name"
+              :list-items="typeFacet.list"
+          ></facet>
+          </div>
+        </aside>
+       <!-- div class="appGridFacet__list" v-show="showFacets">-->
 
-            <!-- facet
-              :list-items="listFacets"
-            ></facet -->
-
+<!--          <div v-for="typeFacet in listFacets">-->
+<!--            <facet-->
+<!--              :nameFacet="typeFacet.name"-->
+<!--              :list-items="typeFacet.list"-->
+<!--            ></facet>-->
+<!--          </div>-->
+          <!-- div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
             <h3 class="Dso__title">
               {{facets.name}}
               <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
@@ -44,11 +55,11 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div-->
       </transition>
 
       <transition-group tag="main" name="card">
-        <article v-for="(item, index) in listDso" :key="index + 0" class="card" v-show="(itemselect === item.filter) || (itemselect == 1)">
+        <article v-for="(item, index) in listDso" :key="index" class="card" v-show="(itemSelect === item.filter) || (itemSelect === 1)">
           <a v-bind:href="item.url" v-bind:title="item.value">
             <div class="image">
               <figure>
@@ -74,7 +85,6 @@
 
 <script>
   import axios from 'axios';
-  import facets from './facet'
   import Facet from "./facet";
 
   export default {
@@ -89,7 +99,7 @@
         gridGap: 30,
         gridMin: 175,
         gridItems: 20,
-        itemselect: 1,
+        itemSelect: 1,
         offset: 10,
         showBlockFacets: false
       }
@@ -112,7 +122,7 @@
         type: Object
       },
       showFacets: {
-        default: false,
+        default: true,
         type: Boolean
       },
       showAjax: {

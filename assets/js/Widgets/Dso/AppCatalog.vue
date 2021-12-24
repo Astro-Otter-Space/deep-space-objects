@@ -9,15 +9,12 @@
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
           <h3>
-            <a v-bind:href="urlDownloadData" title="Download data">
+            <!-- a v-bind:href="urlDownloadData" title="Download data">
               <svgicon name="file-download" width="30" height="30" color="#2B2A34"></svgicon>
-            </a>
-            &nbsp;|&nbsp;
+            </a
+            &nbsp;|&nbsp; -->
             {{ nbItems }}
             &nbsp;|&nbsp;
-            <span class="checkbox-select__title">Filters</span>
-            <svgicon name="down" width="20" height="20" v-if="!showFacets" v-on:click="toggleFacets()"></svgicon>
-            <svgicon name="up" width="20" height="20" v-if="showFacets" v-on:click="toggleFacets()"></svgicon>
 
             <!-- div class="checkbox-select__trigger" :class="{ isActive: activeTrigger }" v-on:click="showDropdown()">
               <span class="checkbox-select__title">Filters</span>
@@ -75,7 +72,7 @@
   let currentPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.page);
   let totalPage = parseInt(document.querySelector(DATA_SELECTOR).dataset.totalPage);
   let nbItems = document.querySelector(DATA_SELECTOR).dataset.totalDso;
-  let showFacets = false;
+  let showFacets = true;
   let pagination = JSON.parse(document.querySelector(DATA_SELECTOR).dataset.pagination);
   let urlDownloadData = document.querySelector(DATA_SELECTOR).dataset.download;
 
@@ -96,8 +93,6 @@
         currentPage: currentPage,
         totalPage: totalPage,
         listFilters: listFilters,
-        dropdown: false,
-        activeTrigger: false,
         listFacets: listFacets,
         showFacets: showFacets,
         pagination: pagination,
@@ -105,23 +100,12 @@
       }
     },
     methods: {
-      removePills: function(id) {
+      removePills: (id) => {
         this.pills.splice(id, 1);
       },
-      toggleFacets: function() {
-        this.showFacets = !this.showFacets;
-      },
-      showDropdown: () => {
-        if (this.dropdown === false) {
-          this.dropdown = true;
-          this.activeTrigger = true;
-          TweenMax.fromTo("#dropdown", 0.55, { autoAlpha: 0, y: -10 },  { autoAlpha: 1, y: 0, ease: Power2.easeOut });
-        } else {
-          this.dropdown = false;
-          this.activeTrigger = false;
-          TweenMax.to("#dropdown", 0.2, {autoAlpha: 0, y: -10,ease: Power2.easeOut });
-        }
-      }
+      // toggleFacets: function() {
+      //   this.showFacets = !this.showFacets;
+      // }
     }
   }
 </script>

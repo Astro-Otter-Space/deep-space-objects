@@ -13,18 +13,19 @@ textarea, input {
     margin:100px auto 0;
   }
   &__trigger {
-    border-radius: 10px;
-    background: #fff
-    url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
-    repeat;
+    //border-radius: 10px;
+    //background: #fff
+    //url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
+    //repeat;
     position: relative;
+    margin: 0.5em 0;
     z-index: 1;
-    box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.13);
-    height: 86px;
+    //box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.13);
+    //height: 86px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 0 25px;
+    //padding: 0 25px;
     transition: all 0.4s ease;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -35,18 +36,18 @@ textarea, input {
       height:70px;
     }
     &.isActive {
-      border-radius: 10px 10px 0 0;
-      background: #f2f2f2
-      url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
-      repeat;
+      //border-radius: 10px 10px 0 0;
+      //background: #f2f2f2
+      //url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
+      //repeat;
       svg {
         transform: rotate(-180deg);
       }
     }
     &:hover {
-      background: #f4f4f4
-      url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
-      repeat;
+      //background: #f4f4f4
+      //url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
+      //repeat;
     }
     svg {
       width: 28px;
@@ -69,14 +70,15 @@ textarea, input {
   &__dropdown {
     opacity: 0;
     visibility: hidden;
-    background: #fff
-    url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
-    repeat;
+    //background: #fff
+    //url("http://res.cloudinary.com/dnhvfgp9c/image/upload/v1521734636/bcg-pattern.png")
+    //repeat;
     position: absolute;
     left: 0;
     right: 0;
-    box-shadow: 0 12px 15px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 8px 8px;
+    border: 1px solid red;
+    //box-shadow: 0 12px 15px 6px rgba(0, 0, 0, 0.1);
+    //border-radius: 0 0 8px 8px;
     overflow: hidden;
     padding-bottom: 25px;
     &:after,
@@ -91,6 +93,7 @@ textarea, input {
     &:after {
       opacity: 0;
       background: #000;
+
       left: -200px;
       width: 200px;
       background-color: #2980b9;
@@ -131,7 +134,7 @@ textarea, input {
       border-style: solid;
       border-color: #000;
       font-size: 16px;
-      font-family: "Roboto Slab", serif;
+      //font-family: "Roboto Slab", serif;
       background: transparent;
     }
     ::-webkit-input-placeholder {
@@ -181,7 +184,7 @@ textarea, input {
 
   &__check-wrapp {
     position: relative;
-    padding: 0 25px;
+    padding: 0 0.5em;
     margin-bottom: 5px;
     @media only screen and (max-width: 600px) {
       padding: 0 15px;
