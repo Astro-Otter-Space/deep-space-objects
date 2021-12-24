@@ -8,26 +8,26 @@
 
         <!--List-->
         <div class="Dso__list" v-if="0 < itemsDso.length">
-          <h3>
-            <!-- a v-bind:href="urlDownloadData" title="Download data">
-              <svgicon name="file-download" width="30" height="30" color="#2B2A34"></svgicon>
-            </a
-            &nbsp;|&nbsp; -->
-            {{ nbItems }}
-            &nbsp;|&nbsp;
+          <div class="Dso__catalog_header">
+            <h3>
+              <!-- a v-bind:href="urlDownloadData" title="Download data">
+                <svgicon name="file-download" width="30" height="30" color="#2B2A34"></svgicon>
+              </a -->
+              {{ nbItems }}
+              <span v-show="0 < listFilters.length" >
+                &nbsp;|&nbsp;
+                Filters
+              </span>
+            </h3>
 
-            <!-- div class="checkbox-select__trigger" :class="{ isActive: activeTrigger }" v-on:click="showDropdown()">
-              <span class="checkbox-select__title">Filters</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z"/></svg>
-            </div -->
-          </h3>
+            <ul v-if="listFilters.length" class="Filters__list">
+              <li v-for="filter in listFilters" class="Filters__badge">
+                {{filter.label}}
+                <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
+              </li>
+            </ul>
 
-          <!-- ul v-if="listFilters.length" class="Filters__list">
-            <li v-for="filter in listFilters" class="Filters__badge">
-              {{filter.label}}
-              <a v-bind:href="filter.delete_url"><svgicon name="cross" width="15" height="15" color="#1ed760"></svgicon></a>
-            </li>
-          </ul -->
+          </div>
           <cards-grid
             :show-controls="false"
             :items="itemsDso"

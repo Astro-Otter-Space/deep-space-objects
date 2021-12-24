@@ -126,6 +126,7 @@ final class Utils
         'mar',
         'may',
         'mel',
+        'mgc',
         'mkw',
         'mzl',
         'mrk',

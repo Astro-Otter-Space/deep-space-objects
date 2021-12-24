@@ -18,45 +18,15 @@
         </label>
       </div>
     </div>
-
     <div id="appGrid">
-
-      <transition tag="facets" name="list-facets">
-        <aside style="float: left; width: 15em;">
-          <div v-for="typeFacet in listFacets" v-bind:data-type="typeFacet.name">
-            <facet
-              :nameFacet="typeFacet.name"
-              :list-items="typeFacet.list"
+      <transition-group tag="aside" name="facets" v-show="0 !== listFacets.length">
+        <div v-for="(typeFacet, indexFacet) in listFacets" v-bind:data-type="typeFacet.name" :key="indexFacet" >
+          <facet
+            :nameFacet="typeFacet.name"
+            :list-items="typeFacet.list"
           ></facet>
-          </div>
-        </aside>
-       <!-- div class="appGridFacet__list" v-show="showFacets">-->
-
-<!--          <div v-for="typeFacet in listFacets">-->
-<!--            <facet-->
-<!--              :nameFacet="typeFacet.name"-->
-<!--              :list-items="typeFacet.list"-->
-<!--            ></facet>-->
-<!--          </div>-->
-          <!-- div v-for="facets in listFacets" v-bind:data-type="facets.name" class="AppGridFacet__blockFacets">
-            <h3 class="Dso__title">
-              {{facets.name}}
-              <a v-bind:href="facets.delete_url" v-if="facets.delete_url" class="appGridFacet__removeFilter" title="Remove filters">
-                <svgicon name="cross" width="20" height="20"></svgicon>
-              </a>
-            </h3>
-
-            <ul>
-              <li v-for="facet in facets.list" v-if="0 < facets.list.length" class="appGridFacet__item">
-                <a v-bind:href="facet.full_url" v-bind:title="facet.value">
-                  {{facet.value}}
-                  <span class="appGridFacet__badge">{{facet.number}}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div-->
-      </transition>
+        </div>
+      </transition-group>
 
       <transition-group tag="main" name="card">
         <article v-for="(item, index) in listDso" :key="index" class="card" v-show="(itemSelect === item.filter) || (itemSelect === 1)">

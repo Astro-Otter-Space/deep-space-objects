@@ -21,6 +21,21 @@
     }
   }
 
+  &__catalog_header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+
+    ul {
+      width: auto;
+      margin: unset;
+      padding: unset;
+    }
+  }
+
   &__text {
     margin: 1em;
     display: flex;

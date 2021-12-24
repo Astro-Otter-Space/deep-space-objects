@@ -4,7 +4,6 @@
   --grid-items: auto-fill;
 }
 
-
 #appGrid aside {
   width: 15em;
   float: left;
@@ -117,7 +116,7 @@
         position: relative;
         display: block;
         height: 2px;
-        background: rgb(30, 215, 96);
+        background: $line-stroke-green;
       }
     }
   }
@@ -141,7 +140,7 @@
 .appGridBtn {
   padding: 0.5em 1.2em;
   background: $bgd-dark;
-  color: rgb(30, 215, 96);
+  color: $line-stroke-green; //rgb(30, 215, 96);
   text-align: center;
   text-decoration: none;
   font-size: 1.2em;
@@ -149,7 +148,7 @@
   margin: auto;
   display: block;
   &:hover {
-    background: rgb(30, 215, 96);
+    background: $line-stroke-green; //rgb(30, 215, 96);
     color: $bgd-dark;
   }
 }
@@ -193,7 +192,7 @@
         stroke: $bgd-grey;
       }
       path {
-        stroke: #1ed760;
+        stroke: $line-stroke-green;
         &.inner {
           stroke-width: 6;
           stroke-dasharray: 19;
@@ -283,7 +282,7 @@
 
   &__badge {
     background: $bgd-dark;
-    color: #1ed760;
+    color: $line-stroke-green;
     border-radius: 10px;
     font-size: 0.8em;
     padding: 0.2em 0.5em;
