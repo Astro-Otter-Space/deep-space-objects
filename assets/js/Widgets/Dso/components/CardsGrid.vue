@@ -71,7 +71,6 @@
         gridItems: 20,
         itemSelect: 1,
         offset: 10,
-        listFacetsLength: 0,
         showBlockFacets: false
       }
     },
