@@ -19,7 +19,7 @@
       </div>
     </div>
     <div id="appGrid">
-      <transition-group tag="aside" name="facets" v-show="0 !== listFacets.length">
+      <transition-group tag="aside" name="facets" v-bind:class="getAsideClass()">
         <div v-for="(typeFacet, indexFacet) in listFacets" v-bind:data-type="typeFacet.name" :key="indexFacet" >
           <facet
             :nameFacet="typeFacet.name"
@@ -71,6 +71,7 @@
         gridItems: 20,
         itemSelect: 1,
         offset: 10,
+        listFacetsLength: 0,
         showBlockFacets: false
       }
     },
@@ -113,7 +114,7 @@
         this.isActive = true;
       },
       m_percentage: function (value) {
-        return parseInt((value * 100) / this.$data.maxPlayCount);d
+        return parseInt((value * 100) / this.$data.maxPlayCount);
       },
       changeGridGap: function() {
         document.querySelector('main').style.setProperty('--grid-gap', this.gridGap + 'px');
@@ -144,9 +145,9 @@
       toggleBlockFacets: function() {
         this.showBlockFacets = !this.showBlockFacets;
       },
-    },
-    computed: {
-
+      getAsideClass: function() {
+        return (0 < Object.values(this.listFacets).length) ? 'appGrid__aside': 'appGrid__aside_empty';
+      }
     },
     filters: {
       percentage: function(value) {
