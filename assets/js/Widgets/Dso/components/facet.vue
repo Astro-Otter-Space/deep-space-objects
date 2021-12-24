@@ -10,7 +10,7 @@
 
     <div data-type="dropdown" class="checkbox-select__dropdown" :class="{ activeSearch: showLoader }">
       <div class="checkbox-select__search-wrapp">
-        <input type="search" @focus="showLoader = true" @blur="showLoader = false" placeholder="search..." v-model="search">
+        <input type="search" @focus="showLoader = true" @blur="showLoader = false" placeholder="search..." v-model="search" class="Form__input">
       </div>
 
       <ul id="customScroll" class="Form__list checkbox-select__filters-wrapp" data-simplebar-auto-hide="false">
