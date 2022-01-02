@@ -294,7 +294,6 @@ class DsoController extends AbstractController
             ->setLocale($request->getLocale())
             ->getObjectsCatalogByFilters($from, $filters, null, true);
 
-        natcasesort($listDsoId);
         $listDso = $this->dsoManager->buildListDso($listDsoId);
 
         // List facets
