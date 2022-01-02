@@ -301,6 +301,7 @@ class DsoRepository extends AbstractRepository
         $listDsoId = array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];
         }, $results->getResults());
+        natcasesort($listDsoId);
 
         $listAggregations = [];
         foreach ($results->getAggregations() as $type=>$aggregations) {
@@ -314,7 +315,7 @@ class DsoRepository extends AbstractRepository
             return ((array_search($k1, $listSort, true) > array_search($k2, $listSort, true)) ? 1 : -1);
         });
 
-        return [natcasesort($listDsoId), $listAggregations, $nbItems];
+        return [$listDsoId, $listAggregations, $nbItems];
     }
 
     /**
