@@ -258,11 +258,11 @@ class DsoRepository extends AbstractRepository
         $query->setFrom($from)->setSize($size);
 
         // Sort
-        /*$query->addSort([
+        $query->addSort([
             'id.raw' => [
                 'order' => parent::SORT_ASC
             ]
-        ]);*/
+        ]);
 
         // Aggregates
         array_walk(self::$listAggregates, static function($tab, $type) use($query) {
