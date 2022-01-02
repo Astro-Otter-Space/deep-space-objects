@@ -214,7 +214,6 @@ class DsoRepository extends AbstractRepository
         $this->client->getIndex(self::INDEX_NAME);
         $size = (is_null($to)) ? parent::SIZE : $to;
 
-        /** @var Query $query */
         $query = new Query();
 
         // BUILD FILTERS
@@ -301,7 +300,6 @@ class DsoRepository extends AbstractRepository
         $listDsoId = array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];
         }, $results->getResults());
-        natcasesort($listDsoId);
 
         $listAggregations = [];
         foreach ($results->getAggregations() as $type=>$aggregations) {
