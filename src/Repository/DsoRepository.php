@@ -259,11 +259,11 @@ class DsoRepository extends AbstractRepository
         $query->setFrom($from)->setSize($size);
 
         // Sort
-        $query->addSort([
+        /*$query->addSort([
             'id.raw' => [
                 'order' => parent::SORT_ASC
             ]
-        ]);
+        ]);*/
 
         // Aggregates
         array_walk(self::$listAggregates, static function($tab, $type) use($query) {
@@ -314,7 +314,7 @@ class DsoRepository extends AbstractRepository
             return ((array_search($k1, $listSort, true) > array_search($k2, $listSort, true)) ? 1 : -1);
         });
 
-        return [$listDsoId, $listAggregations, $nbItems];
+        return [natcasesort($listDsoId), $listAggregations, $nbItems];
     }
 
     /**
@@ -325,15 +325,11 @@ class DsoRepository extends AbstractRepository
      */
     public function getUpdatedAfter(\DateTimeInterface $lastUpdate): array
     {
-        /** @var ListDso $dsoList */
-        $dsoList = new ListDso();
-
         $this->client->getIndex(self::INDEX_NAME);
 
         $now = new \DateTime('now');
         $now->setTimezone(new \DateTimeZone('Europe/paris'));
 
-        /** @var Query $query */
         $query = new Query();
 
         /** @var Query\BoolQuery $boolQuery */
@@ -352,7 +348,6 @@ class DsoRepository extends AbstractRepository
 
         $query->setFrom(0)->setSize(self::MAX_SIZE);
 
-        /** @var Search $search */
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 
