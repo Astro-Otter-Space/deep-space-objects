@@ -77,11 +77,11 @@
 </template>
 
 <script>
-
+  import {default as mode} from './../../components/night_mode';
   import ImageHeader from './../Dso/components/Imageheader';
   import Breadcrumbs from "../App/Breadcrumbs";
   import CardsGrid from './../Dso/components/CardsGrid';
-  import { color } from './../../legendSkyMap';
+  import { color } from '../../legendSkyMap';
   import './../Icons/up';
   import BackToTop from 'vue-backtotop';
 
@@ -134,6 +134,27 @@
           { network: 'email', name: 'Email', color: '#333333' },
         ]
       }
+    },
+    mounted() {
+      let listItems = [
+        '.Dso__main',
+        '.Dso__Form',
+        '.Dso__description',
+      ];
+
+      let listMultiItems = [
+        '.Dso__title',
+        '.Dso__list a',
+        '.Dso__td',
+        '.appGridFacet__item a',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textarea',
+        'td',
+        'a'
+      ];
+      mode.setNightMode(listItems, listMultiItems);
     }
   }
 </script>

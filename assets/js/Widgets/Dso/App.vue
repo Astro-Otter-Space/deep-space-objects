@@ -131,6 +131,7 @@
   import './../Icons/clock';
   import BackToTop from 'vue-backtotop';
   import Breadcrumbs from "../App/Breadcrumbs";
+  import {default as mode} from './../../components/night_mode';
 
   let coverImage = document.querySelector('div[data-dso-widget]').dataset.imgcover;
   let coverImageMap = document.querySelector('div[data-dso-widget]').dataset.imgcovermap;
@@ -217,6 +218,27 @@
           }
         }
       }
+    },
+    mounted() {
+      let listItems = [
+        '.Dso__main',
+        '.Dso__Form',
+        '.Dso__description',
+      ];
+
+      let listMultiItems = [
+        '.Dso__title',
+        '.Dso__list a',
+        '.Dso__td',
+        '.appGridFacet__item a',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textarea',
+        'td',
+        'a'
+      ];
+      mode.setNightMode(listItems, listMultiItems);
     }
   }
 </script>

@@ -57,6 +57,7 @@
   let title = document.querySelector('div[data-last-update]').dataset.title;
   let breadcrumbsData = JSON.parse(document.querySelector('div[data-last-update]').dataset.breadcrumbs);
   let dsoList = JSON.parse(document.querySelector('div[data-last-update]').dataset.listDso);
+  import {default as mode} from './../../components/night_mode';
 
   export default {
     name: "App",
@@ -69,6 +70,27 @@
         urlShare: document.querySelector("link[rel='canonical']").href,
         description: ""
       }
+    },
+    mounted() {
+      let listItems = [
+        '.Dso__main',
+        '.Dso__Form',
+        '.Dso__description',
+      ];
+
+      let listMultiItems = [
+        '.Dso__title',
+        '.Dso__list a',
+        '.Dso__td',
+        '.appGridFacet__item a',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textarea',
+        'td',
+        'a'
+      ];
+      mode.setNightMode(listItems, listMultiItems);
     }
   }
 </script>

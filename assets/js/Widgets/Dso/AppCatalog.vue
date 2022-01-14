@@ -55,6 +55,7 @@
 
   const DATA_SELECTOR = 'div[data-catalog-widget]';
 
+  import {default as mode} from './../../components/night_mode';
   import ImageHeader from './components/Imageheader'
   import CardsGrid from './components/CardsGrid'
   import Pagination from './../App/Pagination'
@@ -106,6 +107,27 @@
       // toggleFacets: function() {
       //   this.showFacets = !this.showFacets;
       // }
+    },
+    mounted() {
+      let listItems = [
+        '.Dso__main',
+        '.Dso__Form',
+        '.Dso__description',
+      ];
+
+      let listMultiItems = [
+        '.Dso__title',
+        '.Dso__list a',
+        '.Dso__td',
+        '.appGridFacet__item a',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textarea',
+        'td',
+        'a'
+      ];
+      mode.setNightMode(listItems, listMultiItems);
     }
   }
 </script>

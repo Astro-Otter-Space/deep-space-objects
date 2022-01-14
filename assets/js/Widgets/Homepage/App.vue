@@ -74,7 +74,7 @@
     },
     mounted() {
       if (null !== mode.isNightMode()) {
-        mode.setNightMode();
+        mode.setNightMode(['.AppSearch__inputTextHome'], ['.AppSearch__list li a']);
       }
     }
   }

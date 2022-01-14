@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     dark: function() {
-      mode.setNightMode();
+      mode.setNightMode([], []);
 
       this.darkMode = true
       this.$emit('dark')
@@ -60,12 +60,9 @@ export default {
       return this.darkMode && 'darkmode-toggled'
     }
   },
-  /*watch: {
-
-  },*/
   mounted() {
     // Apply dark mode on mount
-    if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
+    /*if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
       this.dark();
 
       // for DOM element not mounted like Dso__main etc...
@@ -74,7 +71,7 @@ export default {
           this.dark();
         }
       }
-    }
+    }*/
   }
 }
 </script>

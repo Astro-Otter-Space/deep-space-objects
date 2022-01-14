@@ -35,6 +35,7 @@
 <script>
   import './../Icons/index';
   import buttonsLinks from "./buttonsLinks";
+  import {default as mode} from './../../components/night_mode'
 
   let labels = JSON.parse(document.getElementById('appFooter').dataset.labels);
   let shareButtons = JSON.parse(document.getElementById('appFooter').dataset.share);
@@ -70,6 +71,15 @@
     },
     beforeMount() {
       this.isHomepage()
+    },
+    mounted() {
+      if (null !== mode.isNightMode()) {
+        let listItems = [
+          'footer.footer'
+        ];
+        let listMultiItems = ['footer.footer'];
+        mode.setNightMode(listItems, listMultiItems);
+      }
     }
   }
 </script>

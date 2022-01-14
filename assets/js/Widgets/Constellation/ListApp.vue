@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import {default as mode} from './../../components/night_mode';
   import ImageHeader from './../Dso/components/Imageheader';
   import CardsGrid from './../Dso/components/CardsGrid';
   import './../Icons/up';
@@ -54,6 +55,27 @@
         listConstellations: listConstellations,
         controls: listFilter
       }
+    },
+    mounted() {
+      let listItems = [
+        '.Dso__main',
+        '.Dso__Form',
+        '.Dso__description',
+      ];
+
+      let listMultiItems = [
+        '.Dso__title',
+        '.Dso__list a',
+        '.Dso__td',
+        '.appGridFacet__item a',
+        'article.card',
+        '.Form__input',
+        '.Form__select',
+        '.Form__textarea',
+        'td',
+        'a'
+      ];
+      mode.setNightMode(listItems, listMultiItems);
     }
   }
 </script>

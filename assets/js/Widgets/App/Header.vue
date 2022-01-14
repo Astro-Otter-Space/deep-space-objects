@@ -88,6 +88,7 @@
   import './../Icons/index';
   import deviceDetect from 'mobile-device-detect';
   import darkMode from './darkMode';
+  import {default as mode} from './../../components/night_mode'
 
   window.addEventListener("resize", function(event) {
     closeAllMenu();
@@ -193,6 +194,29 @@
     beforeMount() {
       this.currentFlag = 'flag_' + this.currentLocale;
       this.isHomepage();
+    },
+    mounted() {
+      if (null !== mode.isNightMode()) {
+        let listItems = [
+          'body',
+          '.header__notHome',
+          '.header__search',
+          '.AppSearch__inputText',
+          '.AppSearch__list ul',
+          '.bm-menu',
+        ];
+        let listMultiItems = [
+          '.header__menu__notHome',
+          '.breadcrumb a',
+          'span.bm-burger-bars',
+          '.header__drop_menu',
+          '.header__search',
+          '.AppSearch__list li a',
+          '.header__menu li a',
+          '.header__drop_menu a',
+        ];
+        mode.setNightMode(listItems, listMultiItems);
+      }
     }
   }
 
