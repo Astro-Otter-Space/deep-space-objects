@@ -39,7 +39,7 @@
   import Searchautocomplete from "./components/Searchautocomplete"
   import Vignette from "./components/Vignette";
   import deviceDetect from 'mobile-device-detect';
-  import nightMode from './../../components/night_mode'
+  import {default as mode} from './../../components/night_mode'
 
   let homeTitle = document.getElementById('appHome').dataset.homeTitle;
   let searchPlaceholder = document.getElementById('appHome').dataset.searchPlaceholder;
@@ -51,8 +51,7 @@
     name: "App",
     components: {
       Searchautocomplete,
-      Vignette,
-      nightMode
+      Vignette
     },
     data() {
       return {
@@ -73,14 +72,9 @@
         isMobile: deviceDetect.isMobileOnly
       }
     },
-    methods: {
-      test: function() {
-        console.log('coucou coucou');
-      }
-    },
     mounted() {
-      if (null !== nightMode.isNightMode()) {
-        nightMode.setNightMode();
+      if (null !== mode.isNightMode()) {
+        mode.setNightMode();
       }
     }
   }
