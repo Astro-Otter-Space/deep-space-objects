@@ -79,8 +79,8 @@
       }
     },
     mounted() {
-      if (null !== nightMode.isNightMode) {
-        nightMode.nightMode();
+      if (null !== nightMode.isNightMode()) {
+        nightMode.setNightMode();
       }
     }
   }

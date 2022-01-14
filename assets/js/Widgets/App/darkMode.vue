@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     dark: function() {
-      mode.nightMode();
+      mode.setNightMode();
 
       this.darkMode = true
       this.$emit('dark')
@@ -37,7 +37,7 @@ export default {
     },
 
     light: function() {
-      mode.dayMode();
+      mode.setDayMode();
       this.darkMode = false
       this.$emit('light')
       this.label = 'Light mode';

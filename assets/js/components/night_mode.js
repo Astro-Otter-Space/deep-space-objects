@@ -1,5 +1,9 @@
 const CLASS_NIGHT_MODE = 'night';
 
+/**
+ * Store mode
+ * @param value
+ */
 const store_mode = (value) => {
   if (CLASS_NIGHT_MODE === value) {
     localStorage.setItem('astro.otter.mode', value);
@@ -8,18 +12,32 @@ const store_mode = (value) => {
   }
 };
 
+
+/**
+ * check if value exist
+ * @returns {string}
+ */
 const is_night_mode = () => {
   return localStorage.getItem('astro.otter.mode');
-}
+};
 
+/**
+ * Remove class night
+ * @returns {null}
+ */
 const set_day_mode = () => {
   document.querySelectorAll('.' + CLASS_NIGHT_MODE).forEach(el => {
     el.classList.remove(CLASS_NIGHT_MODE)
   });
   store_mode(null);
+  return null;
 };
 
-const set_night_mode = () => {
+/**
+ * Apply class 'nigh' on items
+ * @returns {null}
+ */
+const set_night_mode = (listItems, listMultiItems) => {
   [
     'body',
     '.header__notHome',
@@ -64,10 +82,12 @@ const set_night_mode = () => {
   });
 
   store_mode(CLASS_NIGHT_MODE);
+
+  return null;
 };
 
 export default {
-  nightMode: set_night_mode(),
-  dayMode: set_day_mode(),
+  setNightMode: set_night_mode(),
+  setDayMode: set_day_mode(),
   isNightMode: is_night_mode()
 }
