@@ -62,16 +62,14 @@ export default {
   },
   mounted() {
     // Apply dark mode on mount
-    /*if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
-      this.dark();
-
+    if (CLASS_NIGHT_MODE === localStorage.getItem('astro.otter.mode')) {
       // for DOM element not mounted like Dso__main etc...
       document.onreadystatechange = () => {
         if ("complete" === document.readyState ) {
-          this.dark();
+          mode.setNightMode([], ['article.card', 'a', 'td']);
         }
       }
-    }*/
+    }
   }
 }
 </script>
