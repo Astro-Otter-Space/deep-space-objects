@@ -35,6 +35,10 @@ textarea, input {
       padding: 0 15px;
       height:70px;
     }
+    @media ($mq-phone) {
+      padding: 0.5em;
+      height: auto;
+    }
     &.isActive {
       //border-radius: 10px 10px 0 0;
       //background: #f2f2f2
