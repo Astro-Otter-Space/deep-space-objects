@@ -8,14 +8,18 @@ const store_mode = (value) => {
   }
 };
 
-const day_mode = () => {
+const is_night_mode = () => {
+  return localStorage.getItem('astro.otter.mode');
+}
+
+const set_day_mode = () => {
   document.querySelectorAll('.' + CLASS_NIGHT_MODE).forEach(el => {
     el.classList.remove(CLASS_NIGHT_MODE)
   });
   store_mode(null);
 };
 
-const night_mode = () => {
+const set_night_mode = () => {
   [
     'body',
     '.header__notHome',
@@ -63,6 +67,7 @@ const night_mode = () => {
 };
 
 export default {
-  nightMode: night_mode,
-  dayMode: day_mode
+  nightMode: set_night_mode(),
+  dayMode: set_day_mode(),
+  isNightMode: is_night_mode()
 }
