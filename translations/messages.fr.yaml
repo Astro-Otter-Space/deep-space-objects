@@ -130,8 +130,8 @@ es: Espagnol
 de: Allemand
 # Homepage
 homepage.message: Découvrez les merveilles et mystères de l'univers
-homepage.desc: "%sitename% est un atlas céleste contenant plus de 9500 objets du ciel profond, regroupés par différents catalogue ou type d'objet. Cherchez, découvrez et émerveillez-vous : l'univers est merveilleux"
-home.search.placeholder: "Rechercher une galaxy, une nébuleuse, une constellation..."
+homepage.desc: "%sitename% est un atlas céleste contenant plus de 9600 objets du ciel profond, regroupés par différents catalogue ou type d'objet. Cherchez, découvrez et émerveillez-vous : l'univers est merveilleux"
+home.search.placeholder: "Rechercher une galaxie, une nébuleuse, une constellation..."
 home.search.placeholder_mobile: "Rechercher..."
 dayImage: L'image du jour
 # View full
@@ -147,7 +147,7 @@ dim: Dimension
 dimExp: Dimension angulaire en minutes d'arcs
 distAl: Distance (années-lumière)
 distPc: Distance (parsec)
-imagesGall: Gallerie d'images
+imagesGall: Galerie d'images
 constImgGall: Dans la même constellation
 typeImgGall: Objects de type "%type%"
 mag: Magnitude
