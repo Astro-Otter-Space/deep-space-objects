@@ -7,6 +7,7 @@ use App\DataTransformer\DsoDataTransformer;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use AstrobinWs\Exceptions\WsException;
+use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +49,7 @@ class  SearchController extends AbstractController
      * @return JsonResponse
      * @throws WsException
      * @throws \JsonException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function searchAjax(Request $request, DsoDataTransformer $dsoDataTransformer, ConstellationDataTransformer $constellationDataTransformer): JsonResponse
     {
@@ -84,6 +85,9 @@ class  SearchController extends AbstractController
      * @param Request $request
      *
      * @return JsonResponse $data
+     * @throws WsException
+     * @throws \JsonException
+     * @throws ReflectionException
      */
     public function searchDsoForObservation(Request $request): JsonResponse
     {
@@ -138,7 +142,7 @@ class  SearchController extends AbstractController
      *     name="list_stars"
      * )
      * @param Request $request
-     * @param $id
+     * @param string $id
      *
      * @return JsonResponse
      * @throws \JsonException
