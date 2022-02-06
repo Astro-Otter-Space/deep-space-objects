@@ -118,7 +118,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'discoverYear' => $dto->getDiscoverYear(),
             'ra' => $dto->getRightAscencion(),
             'dec' => $dto->getDeclinaison(),
-            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
+            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('<a href="%s" title="%s">"%s" %s %s</a>', $dto->getAstrobinUser()->website, $dto->getAstrobinUser()->username, $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
         ];
 
         return array_filter($data, static function($value) {
