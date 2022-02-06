@@ -58,8 +58,9 @@
       "popup__title_2 popup__title_2"
       "popup__content_3 popup__content_4";
     @media($mq-phone) {
-      gap: 0.5em 0.5em;
-      margin: 0.2em;
+      gap: 0.2em 0.2em;
+      margin: 0.2em 0;
+      text-align: justify;
     }
     border-bottom: 1px solid $bgd-dark;
     margin: 0.5em;
@@ -79,5 +80,8 @@
   &__footer {
     margin: 0.5em 0;
     display: flex;
+    @media($mq-phone) {
+      margin: 0.3em 0;
+    }
   }
 }
