@@ -106,6 +106,23 @@ final class DsoDataTransformer extends AbstractDataTransformer
             ]
         );
 
+        $astrobinCredit = static function(DTOInterface $dto) {
+            if (is_null($dto->getAstrobinId())) {
+                return '';
+            }
+
+            if (!is_null($dto->getAstrobinUser())) {
+                return sprintf(
+                    '<a href="%s" title="%s">%s</a>',
+                    $dto->getAstrobinUser()->website,
+                    $dto->getAstrobinUser()->username,
+                    implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username])
+                );
+            }
+
+            return implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobin()->user]);
+        };
+
         $data = [
             'catalog' => $catalogs,
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
@@ -118,7 +135,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'discoverYear' => $dto->getDiscoverYear(),
             'ra' => $dto->getRightAscencion(),
             'dec' => $dto->getDeclinaison(),
-            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('<a href="%s" title="%s">"%s" %s %s</a>', $dto->getAstrobinUser()->website, $dto->getAstrobinUser()->username, $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
+            'astrobin.credit' => $astrobinCredit($dto)
         ];
 
         return array_filter($data, static function($value) {
