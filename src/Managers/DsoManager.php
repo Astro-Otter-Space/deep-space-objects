@@ -19,6 +19,7 @@ use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Response\AstrobinError;
+use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Response\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -96,8 +97,13 @@ class DsoManager
                 $dso->setAstrobin($astrobinImage);
 
                 // add astrobin user
-                $astrobinUser = $this->astrobinService->getAstrobinUser($astrobinImage->user);
-                $dso->setAstrobinUser($astrobinUser);
+                if ($astrobinImage->user) {
+                    $astrobinUser = $this->astrobinService->getAstrobinUser($astrobinImage->user);
+                    $dso->setAstrobinUser($astrobinUser);
+                } else {
+                    $dso->setAstrobinUser(null);
+                }
+
 
                 // add Constellation
                 $constellationDto = $this->constellationRepository

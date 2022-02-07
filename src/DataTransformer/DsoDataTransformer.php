@@ -113,14 +113,18 @@ final class DsoDataTransformer extends AbstractDataTransformer
 
             if (!is_null($dto->getAstrobinUser())) {
                 return sprintf(
-                    '<a href="%s" title="%s">%s</a>',
+                    '<a href="%s" title="%s" target="_blank">%s</a>',
                     $dto->getAstrobinUser()->website,
                     $dto->getAstrobinUser()->username,
                     implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username])
                 );
             }
 
-            return implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobin()->user]);
+            return sprintf(
+                '<a href="https://www.astrobin.com/users/%s" target="_blank">%s</a>',
+                $dto->getAstrobin()->user,
+                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobin()->user])
+            );
         };
 
         $data = [
