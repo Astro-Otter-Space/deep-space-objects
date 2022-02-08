@@ -112,18 +112,23 @@ final class DsoDataTransformer extends AbstractDataTransformer
             }
 
             if (!is_null($dto->getAstrobinUser())) {
-                return sprintf(
-                    '<a href="%s" title="%s" target="_blank">%s</a>',
-                    $dto->getAstrobinUser()->website,
-                    $dto->getAstrobinUser()->username,
-                    implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username])
-                );
+
+                if ('' !== $dto->getAstrobinUser()->website) {
+                    return sprintf(
+                        '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a> (<a href="%s" target="_blank"></a>)',
+                        $dto->getAstrobinUser()->username,
+                        $dto->getAstrobinUser()->username,
+                        implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
+                        $dto->getAstrobinUser()->website
+                    );
+                }
             }
 
             return sprintf(
-                '<a href="https://www.astrobin.com/users/%s" target="_blank">%s</a>',
-                $dto->getAstrobin()->user,
-                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobin()->user])
+                '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a>',
+                $dto->getAstrobinUser()->username,
+                $dto->getAstrobinUser()->username,
+                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
             );
         };
 
