@@ -10,6 +10,7 @@ use App\Repository\DsoRepository;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Services\GetImage;
+use AstrobinWs\Services\GetUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,6 @@ class DebugController extends AbstractController
      * @param string $id
      *
      * @return Response
-     * @throws WsException
      * @throws WsResponseException
      * @throws \JsonException
      * @throws \ReflectionException
@@ -38,13 +38,15 @@ class DebugController extends AbstractController
     public function debugAstrobinImage(Request $request, string $id): Response
     {
         $imageWs = new GetImage(null, null);
+        $userWs = new GetUser(null, null);
         try {
             $image = $imageWs->getById($id);
+            $user = $userWs->getByUsername($image->user, 1);
         } catch (WsException $e) {
             var_dump($e->getMessage());
         }
 
-        return $this->render('pages/debug.html.twig', ['data' => $image]);
+        return $this->render('pages/debug.html.twig', ['image' => $image, 'user' => $user]);
     }
 
     /**

@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block layout %}
-  <pre>{{ data|json_encode }}</pre>
+  <pre>
+    {{ image|json_encode }}
+    {{ user|json_encode }}
+  </pre>
 {% endblock %}
