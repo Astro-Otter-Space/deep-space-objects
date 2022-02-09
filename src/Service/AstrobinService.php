@@ -11,8 +11,10 @@ use AstrobinWs\Response\AstrobinError;
 use AstrobinWs\Response\AstrobinResponse;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Response\ListImages;
+use AstrobinWs\Response\User;
 use AstrobinWs\Services\GetImage;
 use App\Classes\Utils;
+use AstrobinWs\Services\GetUser;
 use JsonException;
 
 /**
@@ -22,7 +24,7 @@ use JsonException;
 final class AstrobinService
 {
     private GetImage $imageWs;
-
+    private GetUser $userWs;
     private CachePoolInterface $cachePool;
 
     /**
@@ -35,6 +37,7 @@ final class AstrobinService
     public function __construct(string $astrobinApiKey, string $astrobinApiSecret, CachePoolInterface $cachePool)
     {
         $this->imageWs = new GetImage($astrobinApiKey, $astrobinApiSecret);
+        $this->userWs = new GetUser($astrobinApiKey, $astrobinApiSecret);
         $this->cachePool = $cachePool;
     }
 
@@ -100,6 +103,20 @@ final class AstrobinService
         }
 
         return $listImages;
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return AstrobinResponse|null
+     */
+    public function getAstrobinUser(string $username): ?AstrobinResponse
+    {
+        try {
+            return $this->userWs->getByUsername($username, 1);
+        } catch (WsResponseException|JsonException|WsException|\ReflectionException $e) {
+            return null;
+        }
     }
 }
 

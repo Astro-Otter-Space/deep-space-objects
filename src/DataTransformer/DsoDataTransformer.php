@@ -106,6 +106,32 @@ final class DsoDataTransformer extends AbstractDataTransformer
             ]
         );
 
+        $astrobinCredit = static function(DTOInterface $dto) {
+            if (is_null($dto->getAstrobinId())) {
+                return '';
+            }
+
+            if (!is_null($dto->getAstrobinUser())) {
+                if ('' !== $dto->getAstrobinUser()->website) {
+                    return sprintf(
+                        '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a> (<a href="%s" target="_blank">%s</a>)',
+                        $dto->getAstrobinUser()->username,
+                        $dto->getAstrobinUser()->username,
+                        implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
+                        $dto->getAstrobinUser()->website,
+                        $dto->getAstrobinUser()->website
+                    );
+                }
+            }
+
+            return sprintf(
+                '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a>',
+                $dto->getAstrobinUser()->username,
+                $dto->getAstrobinUser()->username,
+                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
+            );
+        };
+
         $data = [
             'catalog' => $catalogs,
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
@@ -118,7 +144,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'discoverYear' => $dto->getDiscoverYear(),
             'ra' => $dto->getRightAscencion(),
             'dec' => $dto->getDeclinaison(),
-            'astrobin.credit' => (!is_null($dto->getAstrobinId())) ? sprintf('"%s" %s %s', $dto->getAstrobin()->title, Utils::DATA_CONCAT_GLUE, $dto->getAstrobin()->user ) : ''
+            'astrobin.credit' => $astrobinCredit($dto)
         ];
 
         return array_filter($data, static function($value) {

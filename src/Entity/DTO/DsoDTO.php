@@ -5,6 +5,7 @@ namespace App\Entity\DTO;
 use App\Classes\Utils;
 use App\Entity\ES\Dso;
 use AstrobinWs\Response\Image;
+use AstrobinWs\Response\User;
 
 /**
  * Class DsoDTO
@@ -40,7 +41,8 @@ final class DsoDTO implements DTOInterface
     private ?string $discover;
     private ?int $discoverYear;
     private ?string $astrobinId;
-    private $astrobin;
+    private Image $astrobin;
+    private ?User  $astrobinUser;
     private ?array $geometry;
     private ?string $dim;
     private ?string $declinaison;
@@ -477,6 +479,26 @@ final class DsoDTO implements DTOInterface
         $this->astrobin = $astrobin;
         return $this;
     }
+
+    /**
+     * @return User|null
+     */
+    public function getAstrobinUser(): ?User
+    {
+        return $this->astrobinUser;
+    }
+
+    /**
+     * @param User|null $astrobinUser
+     *
+     * @return DsoDTO
+     */
+    public function setAstrobinUser(?User $astrobinUser): DsoDTO
+    {
+        $this->astrobinUser = $astrobinUser;
+        return $this;
+    }
+
 
     /**
      * @return mixed
