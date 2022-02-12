@@ -132,8 +132,8 @@ de: German
 # Homepage
 homepage.message: Discover wonders and mysteries of the universe
 homepage.desc: "%sitename% is a celestial atlas containing more than 9600 deep sky objects, grouped by different catalog or type of object. Search, discover and marvel."
-home.search.placeholder: "Research a galaxy, a nebula, a constellation..."
-home.search.placeholder_mobile: "Research..."
+home.search.placeholder: "Search a galaxy, a nebula, a constellation..."
+home.search.placeholder_mobile: "Search..."
 dayImage: Image of the day
 # View full
 dso.title.seo: "%title%, %type%"

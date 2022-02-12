@@ -131,8 +131,8 @@ de: Allemand
 # Homepage
 homepage.message: Découvrez les merveilles et mystères de l'univers
 homepage.desc: "%sitename% est un atlas céleste contenant plus de 9600 objets du ciel profond, regroupés par différents catalogue ou type d'objet. Cherchez, découvrez et émerveillez-vous : l'univers est merveilleux"
-home.search.placeholder: "Rechercher une galaxie, une nébuleuse, une constellation..."
-home.search.placeholder_mobile: "Rechercher..."
+home.search.placeholder: "Chercher une galaxie, une nébuleuse, une constellation..."
+home.search.placeholder_mobile: "Chercher..."
 dayImage: L'image du jour
 # View full
 dso.title.seo: "%title%, %type%"
