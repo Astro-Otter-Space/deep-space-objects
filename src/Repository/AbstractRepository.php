@@ -30,10 +30,9 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 abstract class AbstractRepository
 {
-    protected $locale;
+    protected string $locale;
 
-    /** @var Search  */
-    protected $client;
+    protected Client $client;
 
     protected SerializerInterface $serializer;
     protected UrlGenerateHelper $urlGeneratorHelper;
