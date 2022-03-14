@@ -9,6 +9,7 @@ use DateTimeInterface;
 use App\Classes\StringSanitization;
 
 /**
+ * @todo : create invokable classes or single services
  * Class Utils
  *
  * @package App\Classes
@@ -128,6 +129,7 @@ final class Utils
         'mel',
         'mgc',
         'mkw',
+        'mwp',
         'mzl',
         'mrk',
         'ocl',
