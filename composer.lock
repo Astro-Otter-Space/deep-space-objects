@@ -2289,23 +2289,23 @@
         },
         {
             "name": "hamhamfonfon/astrobin-ws",
-            "version": "2.3.2",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HamHamFonFon/Astrobin-WebServices.git",
-                "reference": "68da6f5ab4e8531aff280a5e4115cc29ff0ae322"
+                "reference": "cdfbd6db72287ede1b957753a768427e3fd4bec0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-WebServices/zipball/68da6f5ab4e8531aff280a5e4115cc29ff0ae322",
-                "reference": "68da6f5ab4e8531aff280a5e4115cc29ff0ae322",
+                "url": "https://api.github.com/repos/HamHamFonFon/Astrobin-WebServices/zipball/cdfbd6db72287ede1b957753a768427e3fd4bec0",
+                "reference": "cdfbd6db72287ede1b957753a768427e3fd4bec0",
                 "shasum": ""
             },
             "require": {
                 "ext-ctype": "*",
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7.0",
-                "php": ">=7.3.0"
+                "php": ">=7.4.0"
             },
             "require-dev": {
                 "dg/bypass-finals": "^1.3",
@@ -2340,9 +2340,9 @@
             ],
             "support": {
                 "issues": "https://github.com/HamHamFonFon/Astrobin-WebServices/issues",
-                "source": "https://github.com/HamHamFonFon/Astrobin-WebServices/tree/2.3.2"
+                "source": "https://github.com/HamHamFonFon/Astrobin-WebServices/tree/2.4.1"
             },
-            "time": "2022-02-06T13:40:44+00:00"
+            "time": "2022-03-19T19:48:31+00:00"
         },
         {
             "name": "jms/metadata",
