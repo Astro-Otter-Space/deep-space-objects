@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"email"}, groups={"api_user"}, message="registration.constraint.unique")
  */
-class ApiUser implements UserInterface
+class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
 {
 
     /**

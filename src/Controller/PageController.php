@@ -14,16 +14,15 @@ use App\Repository\DsoRepository;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Cache\InvalidArgumentException;
+use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\MemcachedAdapter;
-use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
@@ -182,10 +181,12 @@ class PageController extends AbstractController
      * }, name="help_api_page")
      *
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param ManagerRegistry $doctrine
+     * @param UserPasswordHasherInterface $passwordEncoder
+     *
      * @return Response
      */
-    public function helpApiPage(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function helpApiPage(Request $request, ManagerRegistry $doctrine,  UserPasswordHasherInterface $passwordEncoder): Response
     {
         $isValid = false;
         $apiUser = new ApiUser();
@@ -200,11 +201,10 @@ class PageController extends AbstractController
         $registerApiUserForm->handleRequest($request);
         if ($registerApiUserForm->isSubmitted()) {
             if ($registerApiUserForm->isValid()) {
-                /** @var EntityManagerInterface $em */
-                $em = $this->getDoctrine()->getManager();
+                $em = $doctrine->getManager();
 
                 $apiUser->setPassword(
-                    $passwordEncoder->encodePassword($apiUser, $registerApiUserForm->get('rawPassword')->getData())
+                    $passwordEncoder->hashPassword($apiUser, $registerApiUserForm->get('rawPassword')->getData())
                 );
 
                 $em->persist($apiUser);
@@ -213,7 +213,6 @@ class PageController extends AbstractController
                 $isValid = true;
                 $this->addFlash('form.success', 'form.api.success');
             } else {
-                $isValid = false;
                 $this->addFlash('form.failed', 'form.error.message');
             }
         }
@@ -324,7 +323,7 @@ class PageController extends AbstractController
      *   "pt": "/skymap"
      * }, name="skymap")
      */
-    public function skymap(): Response
+    public function skymap(Request $request): Response
     {
         $response = $this->render('pages/skymap.html.twig', []);
         $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
