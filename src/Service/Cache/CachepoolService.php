@@ -29,10 +29,9 @@ final class CachepoolService implements CachePoolInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return bool|mixed
-     * @throws InvalidArgumentException
      */
     public function getItem(string $key): ?string
     {
@@ -42,11 +41,10 @@ final class CachepoolService implements CachePoolInterface
 
 
     /**
-     * @param $key
+     * @param string $key
      * @param $value
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
     public function saveItem(string $key, $value): bool
     {
@@ -57,10 +55,9 @@ final class CachepoolService implements CachePoolInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
     public function hasItem(string $key): bool
     {
@@ -68,10 +65,9 @@ final class CachepoolService implements CachePoolInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
      * @return bool
-     * @throws InvalidArgumentException
      */
     public function deleteItem(string $key): bool
     {

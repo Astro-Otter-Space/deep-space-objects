@@ -24,11 +24,14 @@ framework:
         # Other options include:
         default_memcached_provider: '%env(resolve:MEMCACHED_URL)%'
         pools:
-            app.cache.dso:
+            cache.memcached.dso:
                 adapter: cache.adapter.memcached
                 public: false
                 default_lifetime: 31536000 # 1 year
-
+            # cache.redis.dso:
+            #    adapter: cache.adapter.redis
+            #    public: false
+            #    default_lifetime: 31536000
         # Redis
         #app: cache.adapter.redis
         #default_redis_provider: redis://localhost

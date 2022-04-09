@@ -72,7 +72,7 @@ services:
     # Cache pool
     App\Service\Cache\CachepoolService:
         arguments:
-            $cachePool: '@app.cache.dso'
+            $cachePool: '@cache.memcached.dso'
 
     App\Service\MailService:
         autowire: true
