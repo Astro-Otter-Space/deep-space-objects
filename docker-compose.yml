@@ -134,10 +134,9 @@ services:
         networks:
             - dso_stack
 
-    redis:
-        image: redis:latest
-        hostname: redis
-        container_name: dsl_redis
-        networks:
-            -dso_stack:
-                 -
+#    redis:
+#        image: redis:latest
+#        hostname: redis
+#        container_name: dsl_redis
+#        networks:
+#            - dso_stack
