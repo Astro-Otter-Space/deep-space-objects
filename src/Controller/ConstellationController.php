@@ -10,6 +10,7 @@ use App\Entity\DTO\DTOInterface;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -29,7 +30,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ConstellationController extends AbstractController
 {
-    use DsoTrait;
+    use DsoTrait, SymfonyServicesTrait;
 
     private ConstellationManager $constellationManager;
     private DsoManager $dsoManager;
@@ -39,13 +40,11 @@ class ConstellationController extends AbstractController
      *
      * @param ConstellationManager $constellationManager
      * @param DsoManager $dsoManager
-     * @param TranslatorInterface $translator
      */
-    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager, TranslatorInterface $translator)
+    public function __construct(ConstellationManager $constellationManager, DsoManager $dsoManager)
     {
         $this->constellationManager = $constellationManager;
         $this->dsoManager = $dsoManager;
-        $this->setTranslator($translator);
     }
 
     /**

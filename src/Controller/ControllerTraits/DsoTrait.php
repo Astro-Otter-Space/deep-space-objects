@@ -20,21 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 trait DsoTrait
 {
+
     private array $listFilters = [];
-
-    private TranslatorInterface $translator;
-
-    /**
-     * @param TranslatorInterface $translator
-     *
-     * @return DsoTrait
-     */
-    public function setTranslator(TranslatorInterface $translator): self
-    {
-        $this->translator = $translator;
-        return $this;
-    }
-
 
     /**
      * @param ListDso|array $listDso
@@ -131,14 +118,6 @@ trait DsoTrait
                     $breadcrumbs['level_2'] = [
                         'label' => $this->translator->trans('constId', ['%count%' => 2]),
                         'url' => $router->generate('constellation_list')
-                    ];
-                    break;
-
-                case Event::class:
-                case Observation::class:
-                    $breadcrumbs['level_2'] = [
-                        'label' => $this->translator->trans('listObservations'),
-                        'url' => $router->generate('observation_list')
                     ];
                     break;
             }

@@ -12,6 +12,7 @@ use App\Managers\DsoManager;
 use App\Repository\AbstractRepository;
 use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Response\Image;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +37,7 @@ class DsoController extends AbstractController
 {
     public const DEFAULT_PAGE = 1;
 
-    use DsoTrait;
+    use DsoTrait, SymfonyServicesTrait;
 
     private DsoManager $dsoManager;
     private DsoRepository $dsoRepository;
@@ -48,104 +49,13 @@ class DsoController extends AbstractController
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param DsoDataTransformer $dataTransformer
-     * @param TranslatorInterface $translator
      */
-    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer, TranslatorInterface $translator)
+    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer)
     {
         $this->dsoManager = $dsoManager;
         $this->dsoRepository = $dsoRepository;
         $this->dsoDataTransformer = $dataTransformer;
-        $this->setTranslator($translator);
     }
-
-    /**
-     * @Route({
-     *  "en": "/catalog/{id}",
-     *  "fr": "/catalogue/{id}",
-     *  "es": "/catalogo/{id}",
-     *  "pt": "/catalogo/{id}",
-     *  "de": "/katalog/{id}"
-     * }, name="dso_show")
-     *
-     * @param Request $request
-     * @param string $id
-     * @param AstrobinService $astrobinService
-     *
-     * @return Response
-     * @throws JsonException
-     * @throws ReflectionException
-     * @throws WsException
-     */
-    public function show(Request $request, string $id, AstrobinService $astrobinService): Response
-    {
-        $separator = trim(Utils::URL_CONCAT_GLUE);
-
-        [$idDso, ] = explode($separator, $id);
-
-        $dso = $this->dsoManager->getDso($idDso);
-        $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
-
-        if (!is_null($dso)) {
-            /** @var DsoDTO|DTOInterface */
-            $params['dso'] = $dso;
-            $params['dsoData'] = $this->dsoManager->formatVueData($dso);
-            $params['constTitle'] = $dso->getConstellation()->title() ?? "";
-            $params['last_update'] = $dso->getUpdatedAt();
-
-            // Image cover
-            $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
-
-            // List of Dso from same constellation
-            $listDso = $this->dsoManager->getListDsoFromConst($dso->getConstellation()->getId(), $dso->getId(), 0, 20);
-
-            $params['dso_by_const'] = $this->dsoDataTransformer->listVignettesView($listDso);
-            $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
-
-            // Map
-            $params['geojson_dso'] = [
-                "type" => "FeatureCollection",
-                "features" => [$dso->geoJson()]
-            ];
-            $params['geojson_center'] = $dso->getGeometry()['coordinates'];
-
-            // List images
-            $images = $astrobinService->listImagesBy($dso->getId());
-            if (!is_null($images)) {
-                if (1 < $images->count) {
-                    $listImages = array_map(static function(Image $image) {
-                        return $image->url_regular;
-                    }, iterator_to_array($images));
-                } elseif(1 === $images->count) {
-                    $listImages = [$images->getIterator()->current()->url_regular];
-                }
-            }
-
-            $params['images'] = $listImages ?? []; //array_filter($listImages);
-        } else {
-            throw new NotFoundException('Object not found');
-        }
-
-        $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->get('router'), $dso->title());
-
-        $response = $this->render('pages/dso.html.twig', $params);
-
-        // cache expiration
-        $response->setPublic();
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
-        $response->headers->addCacheControlDirective('must-revalidate', true);
-
-        // cache validation
-        $response->setLastModified($dso->getUpdatedAt());
-
-        $listDsoIdHeaders = [
-            md5(sprintf('%s_%s', $id, $request->getLocale())),
-            md5(sprintf('%s_cover', $id))
-        ];
-        $response->headers->set('x-dso-id', implode(' ', $listDsoIdHeaders));
-
-        return $response;
-    }
-
 
     /**
      * Get last updated items
