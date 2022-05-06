@@ -11,7 +11,7 @@
      data-search-placeholder="{{ 'home.search.placeholder'|trans }}"
      data-search-placeholder-mobile="{{ 'home.search.placeholder_mobile'|trans|trim }}"
   ></div>
-  {{ render_esi(controller('App\\Controller\\HomeController::vignettesDso')) }}
+  {{ render_esi(controller('App\\Controller\\Layout\\VignetteHomeDso::__invoke')) }}
 {% endblock %}
 
 {% block javascripts %}

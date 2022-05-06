@@ -15,8 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class PageController
- * @package App\Controller
+ *
  */
 class Download extends AbstractController
 {

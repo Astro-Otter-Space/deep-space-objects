@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\ControllerTraits\LayoutTrait;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Managers\ConstellationManager;
@@ -27,6 +28,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class LayoutController extends AbstractController
 {
+    use LayoutTrait;
+
     public const HTTP_TTL = 31556952;
 
     /** @var TranslatorInterface  */

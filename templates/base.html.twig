@@ -83,7 +83,7 @@
       {% endblock %}
     {% endblock %}
 
-    {{ render_esi(controller('App\\Controller\\LayoutController::modalSocialNetwork')) }}
+    {{ render_esi(controller('App\\Controller\\Layout\\modalSocialNetwork::__invoke')) }}
 
     {% block javascripts %}
       {{ encore_entry_script_tags('app') }}
