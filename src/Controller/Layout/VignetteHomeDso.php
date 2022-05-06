@@ -1,51 +1,38 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Layout;
 
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
+use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class HomeController
- * @package App\Controller
- */
-class HomeController extends AbstractController
+class VignetteHomeDso extends AbstractController
 {
-    private DsoManager $dsoManager;
 
     public const DSO_VIGNETTES = 3;
 
     /**
-     * HomeController constructor.
-     *
+     * @param Request $request
      * @param DsoManager $dsoManager
-     */
-    public function __construct(DsoManager $dsoManager)
-    {
-        $this->dsoManager = $dsoManager;
-    }
-
-
-    /**
-     * @var Request $request
      * @param DsoDataTransformer $dataTransformer
      *
      * @return Response
-     * @throws \AstrobinWs\Exceptions\WsException
+     * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
-
      */
-    public function vignettesDso(Request $request, DsoDataTransformer $dataTransformer): Response
+    public function __invoke(
+        Request $request,
+        DsoManager $dsoManager,
+        DsoDataTransformer $dataTransformer
+    ): Response
     {
-        $vignettes = $this->dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
+        $vignettes = $dsoManager->randomDsoWithImages(self::DSO_VIGNETTES);
         $params['vignettes'] = $dataTransformer->listVignettesView($vignettes);
 
-        /** @var Response $response */
         $response = new Response();
         $response->setPublic();
 

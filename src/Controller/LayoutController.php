@@ -216,45 +216,6 @@ class LayoutController extends AbstractController
 
 
     /**
-     * @param string|null $githubLink
-     * @param string|null $facebookLink
-     * @param string|null $twitterLink
-     *
-     * @return array
-     */
-    private function ctaFooter(?string $githubLink, ?string $facebookLink, ?string $twitterLink): array
-    {
-        $tab = [];
-        if ($facebookLink) {
-            $tab['facebook'] = [
-                'label' => ucfirst('facebook'),
-                'path' => $facebookLink,
-                'blank' => true,
-                'icon_class' => 'facebook'
-            ];
-        }
-
-        if ($twitterLink) {
-            $tab['twitter'] = [
-                'label' => ucfirst('twitter'),
-                'path' => $twitterLink,
-                'blank' => true,
-                'icon_class' => 'twitter'
-            ];
-        }
-
-        if ($githubLink) {
-            $tab['github'] = [
-                'label' => ucfirst('github'),
-                'path' => $githubLink,
-                'blank' => true,
-                'icon_class' => 'github'
-            ];
-        }
-        return $tab;
-    }
-
-    /**
      * @Route("/sitemap.xml", name="sitemap", defaults={"_format"="xml"})
      *
      * @param Request $request
@@ -459,42 +420,4 @@ class LayoutController extends AbstractController
         return $jsonResponse;
     }
 
-    /**
-     * @param Request $request
-     * @param string|null $paypalLink
-     * @param string|null $tipeeeLink
-     * @param string|null $facebookLink
-     * @param string|null $twitterLink
-     *
-     * @return Response
-     */
-    public function modalSocialNetwork(Request $request, ?string $paypalLink, ?string $tipeeeLink, ?string $facebookLink, ?string $twitterLink): Response
-    {
-        $displayPopupPage = $this->getParameter('displayPopupPage') ?? 2;
-        $popupState = $this->getParameter('popupState') ?? 'disabled';
-
-        ['facebook' => $facebook, 'twitter' => $twitter] = $this->ctaFooter(null, $facebookLink, $twitterLink);
-
-        $params = [
-            'popupState' => $popupState,
-            'displayPage' => $displayPopupPage,
-            'facebook' =>  $facebook,
-            'twitter' => $twitter,
-            'paypal' => [
-                'label' => ucfirst('paypal'),
-                'path' => $paypalLink,
-                'blank' => true,
-                'icon_class' => 'paypal'
-            ],
-            'tipeee' => [
-                'label' => ucfirst('tipeee'),
-                'path' => $tipeeeLink,
-                'blank' => true,
-                'icon_class' => 'tipeee'
-            ],
-            'description' => null,
-            'pageImage200' => '/build/images/logos/astro_otter_200-200.png'
-        ];
-        return $this->render('includes/components/modal_social_network.html.twig', $params);
-    }
 }
