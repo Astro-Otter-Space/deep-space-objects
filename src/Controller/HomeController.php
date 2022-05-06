@@ -29,23 +29,6 @@ class HomeController extends AbstractController
         $this->dsoManager = $dsoManager;
     }
 
-    /**
-     * Homepage
-     *
-     * @Route("/", name="homepage")
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function homepage(Request $request): Response
-    {
-        /** @var Response $response */
-        $response = $this->render('pages/home.html.twig', ['currentLocale' => $request->getLocale()]);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
-        $response->setPublic();
-
-        return $response;
-    }
 
     /**
      * @var Request $request

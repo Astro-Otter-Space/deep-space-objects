@@ -4,29 +4,20 @@ namespace App\Controller;
 
 use App\Classes\Utils;
 use App\Entity\BDD\ApiUser;
-use App\Entity\BDD\Contact;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
-use App\Forms\ContactFormType;
 use App\Forms\RegisterApiUsersFormType;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
-use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Intl\Countries;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -44,130 +35,11 @@ class PageController extends AbstractController
      *
      * @param DsoRepository $dsoRepository
      * @param TranslatorInterface $translator
-     * @param LoggerInterface $logger
      */
-    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translator, LoggerInterface $logger)
+    public function __construct(DsoRepository $dsoRepository, TranslatorInterface $translator)
     {
         $this->dsoRepository = $dsoRepository;
         $this->translator = $translator;
-        $this->logger = $logger;
-    }
-
-    /**
-     * @Route({
-     *     "fr": "/contactez-nous",
-     *     "en": "/contact-us",
-     *     "de": "/kontaktiere-uns",
-     *     "es": "/contactenos",
-     *     "pt": "/contate-nos"
-     * }, name="contact")
-     *
-     * @param Request $request
-     * @param MailService $mailService
-     * @param string $receiverMail
-     *
-     * @return Response
-     */
-    public function contact(Request $request, MailService $mailService, string $receiverMail): Response
-    {
-        /** @var Router $router */
-        $router = $this->get('router');
-
-        $isValid = false;
-        $optionsForm = [
-            'method' => 'POST',
-            'action' => $router->generate('contact'),
-            'attr' => [
-                'novalidate' => 'novalidate'
-            ]
-        ];
-
-        /** @var Contact $contact */
-        $contact = new Contact();
-        $contactForm = $this->createForm(ContactFormType::class, $contact, $optionsForm);
-
-        $contactForm->handleRequest($request);
-        if ($contactForm->isSubmitted()) {
-            if ($contactForm->isValid()) {
-                /** @var Contact $contactData */
-                $contactData = $contactForm->getData();
-                $contactData->setLabelCountry(Countries::getName($contactData->getCountry(), $request->getLocale()));
-
-                $templates = [
-                    'html' => 'includes/emails/contact.html.twig',
-                    'text' => 'includes/emails/contact.txt.twig'
-                ];
-
-                $subject = '[Contact] - ' . $this->translator->trans(Utils::listTopicsContact()[$contactData->getTopic()]);
-                $content['contact'] = $contactData;
-
-                try {
-                    $mailService->sendMail($contactData->getEmail(), $receiverMail, $subject, $templates, $content);
-                    $sendMail = true;
-                } catch(TransportExceptionInterface $e) {
-                    $this->logger->error(sprintf('Error sending mail : %s', $e->getMessage()));
-                    $sendMail = false;
-                }
-
-                if (true === $sendMail) {
-                    $this->addFlash('form.success','form.ok.sending');
-                    $isValid = true;
-                } else {
-                    $this->addFlash('form.failed','form.error.sending');
-                }
-            } else {
-                $this->addFlash('form.failed','form.error.message');
-            }
-        }
-
-        $result['formContact'] = $contactForm->createView();
-        $result['is_valid'] = $isValid;
-
-        /** @var Response $response */
-        $response = $this->render('pages/contact.html.twig', $result);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
-        $response->setPublic();
-
-        return $response;
-    }
-
-    /**
-     * @Route({
-     *     "fr": "/mentions-legales",
-     *     "en": "/legal-notice",
-     *     "de": "/legal-notice",
-     *     "es": "/legal-notice",
-     *     "pt": "/legal-notice"
-     * }, name="legal_notice")
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function legalnotice(Request $request): Response
-    {
-        $result = [];
-
-        /** @var RouterInterface $router */
-        $router = $this->get('router');
-
-        $result['title'] = $this->translator->trans('legal_notice.title');
-        $result['first_line'] = $this->translator->trans('legal_notice.line_first', ['%dso%' => $this->translator->trans('dso')]);
-        $result['second_line'] = $this->translator->trans('legal_notice.line_sec');
-        $result['host'] = [
-            'name' => $this->translator->trans('legal_notice.host.name'),
-            'adress' => $this->translator->trans('legal_notice.host.adress'),
-            'cp' => $this->translator->trans('legal_notice.host.cp'),
-            'city' => $this->translator->trans('legal_notice.host.city'),
-            'country' => $this->translator->trans('legal_notice.host.country')
-        ];
-        $result['third_line'] = $this->translator->trans('legal_notice.contact', ['%url_contact%' => $router->generate(sprintf('contact.%s', $request->getLocale())), '%label_contact%' => $this->translator->trans('contact.title')]);
-
-        /** @var Response $response */
-        $response = $this->render('pages/random.html.twig', $result);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
-
-        return $response;
     }
 
 
@@ -412,11 +284,4 @@ class PageController extends AbstractController
         return new Response(print_r(array_values($notIndexedItems)));
     }
 
-    /**
-     * @Route("/dmcupphiirjvaesw", name="debug")
-     */
-    public function debug(): void
-    {
-        echo phpinfo();
-    }
 }
