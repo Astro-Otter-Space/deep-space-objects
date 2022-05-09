@@ -53,6 +53,7 @@ class Download extends AbstractController
      */
     public function __invoke(Request $request, DsoManager $dsoManager): StreamedResponse
     {
+        $filters = [];
         $header = [
             'Name',
             $this->translator->trans('desigs'),
