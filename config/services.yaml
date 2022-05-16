@@ -24,17 +24,17 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
-            $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
             $defaultLocale: "%locale%"
-            $listLocales: '%app_locales%'
-            $githubLink: '%github.link%'
-            $paypalLink: '%paypal.link%'
             $facebookLink: '%facebook.link%'
-            $twitterLink: '%twitter.link%'
-            $tipeeeLink: '%tipeee.link%'
-            $senderMail: '%env(SENDER_MAIL)%'
+            $githubLink: '%github.link%'
+            $kernelProjectDir: '%kernel.project_dir%'
+            $listLocales: '%app_locales%'
+            $locale: "@=service('request_stack').getCurrentRequest().getLocale()"
+            $paypalLink: '%paypal.link%'
             $receiverMail: '%env(GMAIL_MAIL)%'
-
+            $senderMail: '%env(SENDER_MAIL)%'
+            $tipeeeLink: '%tipeee.link%'
+            $twitterLink: '%twitter.link%'
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']

@@ -65,6 +65,15 @@ class DsoManager
     }
 
     /**
+     * @return DsoRepository
+     */
+    public function getDsoRepository(): DsoRepository
+    {
+        return $this->dsoRepository;
+    }
+
+
+    /**
      * Build a complete Dso Entity, with Astrobin image and URL
      *
      * @param string $id

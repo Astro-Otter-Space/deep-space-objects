@@ -76,6 +76,7 @@ class  SearchController extends AbstractController
     }
 
     /**
+     * @deprecated
      * @Route(
      *     "/_search_dso_observation",
      *     options={"expose"=true},
