@@ -156,8 +156,9 @@ final class DsoDataTransformer extends AbstractDataTransformer
     /**
      * Build a "table" of data (translated if needed) from DTO with translated label
      * todo : move to parent method ?
+     *
      * @param DTOInterface $dto
-     * @param $listFields
+     * @param array $listFields
      *
      * @return array
      */
