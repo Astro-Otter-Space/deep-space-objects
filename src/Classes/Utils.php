@@ -128,6 +128,7 @@ final class Utils
         'may',
         'mel',
         'mgc',
+        'mcg',
         'mkw',
         'mwp',
         'mzl',
