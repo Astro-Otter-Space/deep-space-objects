@@ -19,9 +19,10 @@ class LocaleSubscriber implements EventSubscriberInterface
 
     /**
      * LocaleSubscriber constructor.
+     *
      * @param string $defaultLocale
      */
-    public function __construct($defaultLocale = 'en')
+    public function __construct(string $defaultLocale = 'en')
     {
         $this->defaultLocale = $defaultLocale;
     }
@@ -31,7 +32,6 @@ class LocaleSubscriber implements EventSubscriberInterface
      */
     public function onKernelRequest(RequestEvent $event): void
     {
-        /** @var Request $request */
         $request = $event->getRequest();
 
         if (!$request->hasPreviousSession()) {
