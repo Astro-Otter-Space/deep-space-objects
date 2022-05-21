@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Layout;
 
 use App\Controller\ControllerTraits\LayoutTrait;
-use App\Controller\LayoutController;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Header extends AbstractController
 {
+    public const HTTP_TTL = 31556952;
 
     use SymfonyServicesTrait, LayoutTrait;
 
+    /**
+     * @param Request $request
+     * @param string $listLocales
+     *
+     * @return Response
+     */
     public function __invoke(Request $request, string $listLocales): Response
     {
         /** @var Request $mainRequest */
@@ -60,7 +66,7 @@ class Header extends AbstractController
         ];
 
         $response = new Response();
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setSharedMaxAge(self::HTTP_TTL);
 
         return $this->render('includes/layout/header.html.twig', $result, $response);
     }

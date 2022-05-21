@@ -113,7 +113,6 @@ class DsoManager
                     $dso->setAstrobinUser(null);
                 }
 
-
                 // add Constellation
                 $constellationDto = $this->constellationRepository
                     ->setLocale($this->locale)
@@ -208,7 +207,10 @@ class DsoManager
      */
     public function getListDsoFromConst(string $constellationId, ?string $excludedId, int $offset, int $limit): ListDso
     {
-        $listDsoIdByConst = $this->dsoRepository->setLocale($this->locale)->getObjectsByConstId($constellationId, $excludedId, $offset, $limit);
+        $listDsoIdByConst = $this->dsoRepository
+            ->setLocale($this->locale)
+            ->getObjectsByConstId($constellationId, $excludedId, $offset, $limit);
+
         return $this->buildListDso($listDsoIdByConst);
     }
 

@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Pages;
 
-use App\Controller\LayoutController;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LegalNotice extends AbstractController
 {
-
+    public const HTTP_TTL = 31556952;
     use SymfonyServicesTrait;
 
     /**
@@ -50,7 +51,7 @@ class LegalNotice extends AbstractController
         ]);
 
         $response = $this->render('pages/random.html.twig', $result);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setSharedMaxAge(self::HTTP_TTL);
 
         return $response;
     }

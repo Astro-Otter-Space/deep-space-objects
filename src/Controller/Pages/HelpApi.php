@@ -2,7 +2,6 @@
 
 namespace App\Controller\Pages;
 
-use App\Controller\LayoutController;
 use App\Entity\BDD\ApiUser;
 use App\Forms\RegisterApiUsersFormType;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
@@ -15,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HelpApi extends AbstractController
 {
+    public const HTTP_TTL = 31556952;
     use SymfonyServicesTrait;
 
     /**
@@ -72,7 +72,7 @@ class HelpApi extends AbstractController
 
         $response = $this->render('pages/help_api.html.twig', $result);
         $response->setPublic();
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setSharedMaxAge(self::HTTP_TTL);
 
         return $response;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Pages;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,9 +40,6 @@ class HelpAstroOtter extends AbstractController
                 'icon_class' => 'tipeee'
             ]
         ];
-
-
-        //$response->setPublic()->setSharedMaxAge(LayoutController::HTTP_TTL);
 
         return $this->render('pages/support.html.twig', $params);
     }

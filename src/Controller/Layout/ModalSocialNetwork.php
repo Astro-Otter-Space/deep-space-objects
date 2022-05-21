@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Layout;
 
 use App\Controller\ControllerTraits\LayoutTrait;
@@ -7,16 +9,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ *
+ */
 class ModalSocialNetwork extends AbstractController
 {
     use LayoutTrait;
 
+    /**
+     * @param Request $request
+     * @param string|null $paypalLink
+     * @param string|null $tipeeeLink
+     * @param string|null $facebookLink
+     * @param string|null $twitterLink
+     *
+     * @return Response
+     */
     public function __invoke(
         Request $request,
         ?string $paypalLink,
         ?string $tipeeeLink,
         ?string $facebookLink,
-        ?string $twitterLink): Response
+        ?string $twitterLink
+    ): Response
     {
         $displayPopupPage = $this->getParameter('displayPopupPage') ?? 2;
         $popupState = $this->getParameter('popupState') ?? 'disabled';

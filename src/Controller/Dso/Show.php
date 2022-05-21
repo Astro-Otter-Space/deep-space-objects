@@ -6,7 +6,6 @@ namespace App\Controller\Dso;
 
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
-use App\Controller\LayoutController;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
@@ -28,6 +27,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class Show extends AbstractController
 {
+    public const HTTP_TTL = 31556952;
+
     use DsoTrait, SymfonyServicesTrait;
 
     /**
@@ -105,7 +106,7 @@ class Show extends AbstractController
 
         // cache expiration
         $response->setPublic();
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setSharedMaxAge(self::HTTP_TTL);
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
         // cache validation

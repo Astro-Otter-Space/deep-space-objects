@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Constellation;
 
-use App\Controller\LayoutController;
 use App\DataTransformer\ConstellationDataTransformer;
 use App\Managers\ConstellationManager;
 use ReflectionException;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class AllConstellations extends AbstractController
 {
+    public const HTTP_TTL = 31556952;
 
     /**
      * @Route("/constellations", name="constellation_list")
@@ -36,7 +38,7 @@ final class AllConstellations extends AbstractController
         $result['list_constellation'] = $constellationDataTransformer->listVignettesView($listConstellations);
 
         $response = $this->render('pages/constellations.html.twig', $result);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
+        $response->setSharedMaxAge(self::HTTP_TTL)->setPublic();
 
         return $response;
     }

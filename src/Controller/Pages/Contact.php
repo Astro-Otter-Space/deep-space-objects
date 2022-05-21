@@ -3,7 +3,6 @@
 namespace App\Controller\Pages;
 
 use App\Classes\Utils;
-use App\Controller\LayoutController;
 use App\Forms\ContactFormType;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
 use App\Service\MailService;
@@ -22,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class Contact extends AbstractController
 {
     use SymfonyServicesTrait;
-
+    public const HTTP_TTL = 31556952;
     private LoggerInterface $logger;
 
     /**
@@ -100,7 +99,7 @@ class Contact extends AbstractController
         $result['is_valid'] = $isValid;
 
         $response = $this->render('pages/contact.html.twig', $result);
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL);
+        $response->setSharedMaxAge(self::HTTP_TTL);
         $response->setPublic();
 
         return $response;

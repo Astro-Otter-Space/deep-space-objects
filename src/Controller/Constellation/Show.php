@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Constellation;
 
 use App\Controller\ControllerTraits\DsoTrait;
-use App\Controller\LayoutController;
 use App\DataTransformer\DsoDataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
@@ -24,6 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class Show extends AbstractController
 {
+    public const HTTP_TTL = 31556952;
 
     use SymfonyServicesTrait, DsoTrait;
 
@@ -89,7 +89,7 @@ final class Show extends AbstractController
 
         $response = $this->render('pages/constellation.html.twig', $result);
         $response->headers->set('X-Constellation-Id', $constellation->getElasticSearchId());
-        $response->setSharedMaxAge(LayoutController::HTTP_TTL)->setPublic();
+        $response->setSharedMaxAge(self::HTTP_TTL)->setPublic();
 
         return $response;
     }
