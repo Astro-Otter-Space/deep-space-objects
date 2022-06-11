@@ -2,133 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Dso;
 
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
-use App\Entity\BDD\UpdateData;
 use App\Managers\DsoManager;
 use App\Repository\AbstractRepository;
 use App\Repository\DsoRepository;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
-use Doctrine\ORM\EntityManagerInterface;
-use \JsonException;
-use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class DsoController
- * @package App\Controller
+ *
  */
-class DsoController extends AbstractController
+class Catalog extends AbstractController
 {
     public const DEFAULT_PAGE = 1;
 
     use DsoTrait, SymfonyServicesTrait;
-
-    private DsoManager $dsoManager;
-    private DsoRepository $dsoRepository;
-    private DsoDataTransformer $dsoDataTransformer;
-
-    /**
-     * DsoController constructor.
-     *
-     * @param DsoManager $dsoManager
-     * @param DsoRepository $dsoRepository
-     * @param DsoDataTransformer $dataTransformer
-     */
-    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dataTransformer)
-    {
-        $this->dsoManager = $dsoManager;
-        $this->dsoRepository = $dsoRepository;
-        $this->dsoDataTransformer = $dataTransformer;
-    }
-
-    /**
-     * Get last updated items
-     *
-     * @param Request $request
-     * @param EntityManagerInterface $doctrineManager
-     *
-     * @return Response
-     * @throws ReflectionException|WsException
-     * @throws \JsonException
-     * @Route({
-     *   "en": "/last-update",
-     *   "fr": "/mises-a-jour"
-     * }, name="last_update_dso")
-     */
-    public function getLastUpdatedDso(Request $request, EntityManagerInterface $doctrineManager): Response
-    {
-        $listDso = $this->dsoManager->getListDsoLastUpdated();
-
-        /** @var UpdateData $lastUpdateData */
-        $lastUpdateData = $doctrineManager->getRepository(UpdateData::class)->findOneBy([], ['date' => 'DESC']);
-
-        $lastUpdateDate = $lastUpdateData->getDate()->format($this->translator->trans('dateFormatLong'));
-
-        $title = $this->translator->trans('last_update_item', ['%date%' => $lastUpdateDate]);
-        $titleBr = $this->translator->trans('last_update_title');
-        $params = [
-            'title' => $title,
-            'breadcrumbs' => $this->buildBreadcrumbs(null, $this->router, $titleBr),
-            'list_dso' => $this->dsoDataTransformer->listVignettesView($listDso)
-        ];
-
-        $response = $this->render('pages/last_dso_updated.html.twig', $params);
-        $response->setSharedMaxAge(0)
-            ->setLastModified(new \DateTime('now'));
-
-        return $response;
-    }
-
-
-    /**
-     * @Route("/geodata/dso/{id}", name="dso_geo_data", options={"expose": true})
-     * @param string $id
-     *
-     * @return JsonResponse
-     * @throws WsException
-     * @throws ReflectionException|JsonException
-     */
-    public function geoJson(string $id): JsonResponse
-    {
-        $dso = $this->dsoManager->getDso($id);
-        $geoJsonData = $dso->geoJson();
-
-        $jsonResponse = new JsonResponse($geoJsonData, Response::HTTP_OK);
-        $jsonResponse->setPublic();
-        $jsonResponse->setSharedMaxAge(0);
-
-        return $jsonResponse;
-    }
-
-    /**
-     * @Route({
-     *  "en": "/catalogs/{catalog}",
-     *  "fr": "/catalogues/{catalog}",
-     *  "es": "/catalogos/{catalog}",
-     *  "pt": "/catalogos/{catalog}",
-     *  "de": "/kataloge/{catalog}"
-     * }, name="dso_catalog_redirect")
-     *
-     * @param Request $request
-     * @param string|null $catalog
-     *
-     * @return RedirectResponse
-     */
-    public function catalogRedirect(Request $request, ?string $catalog): RedirectResponse
-    {
-        return $this->redirectToRoute('dso_catalog', ['catalog' => $catalog]);
-    }
-
 
     /**
      * @Route({
@@ -140,14 +36,17 @@ class DsoController extends AbstractController
      * }, name="dso_catalog")
      *
      * @param Request $request
+     * @param DsoManager $dsoManager
+     * @param DsoRepository $dsoRepository
+     * @param DsoDataTransformer $dsoDataTransformer
      *
      * @return Response
-     * @throws ReflectionException
-     * @throws WsException
-     * @throws JsonException
      */
-    public function catalog(
-        Request $request
+    public function __invoke(
+        Request $request,
+        DsoManager $dsoManager,
+        DsoRepository $dsoRepository,
+        DsoDataTransformer $dsoDataTransformer
     ): Response
     {
         $page = self::DEFAULT_PAGE;
@@ -161,7 +60,7 @@ class DsoController extends AbstractController
         }
 
         if (0 < $request->query->count()) {
-            $authorizedFilters = $this->dsoRepository->getListAggregates(true);
+            $authorizedFilters = $dsoRepository->getListAggregates(true);
 
             // Removed unauthorized keys
             $filters = array_filter($request->query->all(), static function($key) use($authorizedFilters) {
@@ -175,11 +74,15 @@ class DsoController extends AbstractController
         }
 
         // Search results
-        [$listDsoId, $listAggregates, $nbItems] = $this->dsoRepository
+        [$listDsoId, $listAggregates, $nbItems] = $dsoRepository
             ->setLocale($request->getLocale())
             ->getObjectsCatalogByFilters($from, $filters, null, true);
 
-        $listDso = $this->dsoManager->buildListDso($listDsoId);
+        try {
+            $listDso = $dsoManager->buildListDso($listDsoId);
+        } catch (WsException|\JsonException|\ReflectionException $e) {
+            $listDso = [];
+        }
 
         // List facets
         $allQueryParameters = $request->query->all();
@@ -197,7 +100,7 @@ class DsoController extends AbstractController
             $routeDelete = '';
             if (array_key_exists($type, $filters)) {
                 $routeDelete = $this->router->generate(
-                  'dso_catalog',
+                    'dso_catalog',
                     array_diff_key(
                         $request->query->all(),
                         [$type => $filters[$type]]
@@ -226,7 +129,7 @@ class DsoController extends AbstractController
         }
 
         // Params
-        $result['list_dso'] = $this->dsoDataTransformer->listVignettesView($listDso);
+        $result['list_dso'] = $dsoDataTransformer->listVignettesView($listDso);
         $result['list_facets'] = $listAggregations;
         $result['nb_items'] = (int)$nbItems;
         $result['current_page'] = $page;
@@ -239,8 +142,8 @@ class DsoController extends AbstractController
 
         unset($queryAll['page']);
         $result['pagination'] = [
-          'prev' => (self::DEFAULT_PAGE < $page) ? $this->router->generate('dso_catalog', array_merge($queryAll, ['page' => $page-1])): null,
-          'next' => ($nbPages > $page) ? $this->router->generate('dso_catalog', array_merge($queryAll, ['page' => $page+1])): null
+            'prev' => (self::DEFAULT_PAGE < $page) ? $this->router->generate('dso_catalog', array_merge($queryAll, ['page' => $page-1])): null,
+            'next' => ($nbPages > $page) ? $this->router->generate('dso_catalog', array_merge($queryAll, ['page' => $page+1])): null
         ];
 
         // Description
@@ -261,5 +164,4 @@ class DsoController extends AbstractController
 
         return $response;
     }
-
 }

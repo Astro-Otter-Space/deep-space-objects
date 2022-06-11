@@ -45,6 +45,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
     }**/
 
     /**
+     * @todo : create classe
      * @param ListDso $listDso
      *
      * @return array
@@ -111,24 +112,26 @@ final class DsoDataTransformer extends AbstractDataTransformer
                 return '';
             }
 
-            if (!is_null($dto->getAstrobinUser())) {
-                if ('' !== $dto->getAstrobinUser()->website) {
+            $astrobinUser = $dto->getAstrobinUser();
+
+            if (!is_null($astrobinUser)) {
+                if ('' !== $astrobinUser->website) {
                     return sprintf(
                         '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a> (<a href="%s" target="_blank">%s</a>)',
-                        $dto->getAstrobinUser()->username,
-                        $dto->getAstrobinUser()->username,
-                        implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
-                        $dto->getAstrobinUser()->website,
-                        $dto->getAstrobinUser()->website
+                        $astrobinUser->username,
+                        $astrobinUser->username,
+                        implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $astrobinUser->username]),
+                        $astrobinUser->website,
+                        $astrobinUser->website
                     );
                 }
             }
 
             return sprintf(
                 '<a href="https://www.astrobin.com/users/%s" title="%s" target="_blank">%s</a>',
-                $dto->getAstrobinUser()->username,
-                $dto->getAstrobinUser()->username,
-                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $dto->getAstrobinUser()->username]),
+                $astrobinUser->username,
+                $astrobinUser->username,
+                implode(Utils::DATA_CONCAT_GLUE, [$dto->getAstrobin()->title, $astrobinUser->username]),
             );
         };
 

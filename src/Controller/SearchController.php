@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class SearchController
  * @package App\Controller
  */
-class  SearchController extends AbstractController
+class SearchController extends AbstractController
 {
 
     /**
