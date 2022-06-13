@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ByConstellationIdAjax extends AbstractController
 {
-    use SymfonyServicesTrait, DsoTrait;
+    use DsoTrait, SymfonyServicesTrait;
 
     /**
      * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
