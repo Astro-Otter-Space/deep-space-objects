@@ -6,6 +6,7 @@ use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
 use App\Repository\AbstractRepository;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ByConstellationIdAjax extends AbstractController
 {
-    use DsoTrait;
+    use DsoTrait, SymfonyServicesTrait;
 
     /**
      * @Route("/_get_dso_by_constellation/{constId}", name="get_dso_by_const_ajax")
