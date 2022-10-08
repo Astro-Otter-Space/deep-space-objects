@@ -15,26 +15,6 @@ framework:
         log: true
 
     trusted_hosts: '%env(TRUSTED_HOSTS)%'
-    cache:
-        # Put the unique name of your app here: the prefix seed
-        # is used to compute stable namespaces for cache keys.
-        prefix_seed: dso
-
-        # The app cache caches to the filesystem by default.
-        # Other options include:
-        default_memcached_provider: '%env(resolve:MEMCACHED_URL)%'
-        pools:
-            app.cache.dso:
-                adapter: cache.adapter.memcached
-                public: false
-                default_lifetime: 31536000 # 1 year
-
-        # Redis
-        #app: cache.adapter.redis
-        #default_redis_provider: redis://localhost
-
-        # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
-#        app: cache.adapter.apcu
     form: true
     validation: { enable_annotations: true }
 

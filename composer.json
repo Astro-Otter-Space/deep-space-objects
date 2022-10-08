@@ -14,7 +14,7 @@
         "doctrine/orm": "^2",
         "excelwebzone/recaptcha-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^3.0",
-        "hamhamfonfon/astrobin-ws": "^2.2",
+        "hamhamfonfon/astrobin-ws": "^2.4",
         "jms/serializer-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.6",
         "ruflin/elastica": "^6.0",

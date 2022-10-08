@@ -1,0 +1,17 @@
+framework:
+    cache:
+        # Put the unique name of your app here: the prefix seed
+        # is used to compute stable namespaces for cache keys.
+        prefix_seed: dso
+
+        # The app cache caches to the filesystem by default.
+        # Other options include:
+        default_redis_provider: '%env(resolve:MEMCACHED_URL)%'
+        pools:
+            app.cache.dso:
+                adapter: cache.adapter.redis
+                public: false
+                default_lifetime: 31536000 # 1 year
+
+        # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
+#        app: cache.adapter.apcu

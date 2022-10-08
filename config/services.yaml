@@ -14,7 +14,8 @@ parameters:
     tipeee.link: '%env(TIPEEE_PAGE)%'
     astrobinApiKey: '%env(ASTROBIN_API_KEY)%'
     astrobinApiSecret: '%env(ASTROBIN_API_SECRET)%'
-    memcachedUrl: '%env(MEMCACHED_URL)%'
+#    memcachedUrl: '%env(MEMCACHED_URL)%'
+    redisUrl: '%env(REDIS_URL)%'
     displayPopupPage: 2
     popupState: "enabled"
 
