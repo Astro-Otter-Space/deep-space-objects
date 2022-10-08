@@ -126,7 +126,7 @@ services:
         networks:
             - dso_stack
 
-    # memcached
+    # redis
     redis:
         image: redis:6.0-alpine
         hostname: redis

@@ -6,7 +6,7 @@ framework:
 
         # The app cache caches to the filesystem by default.
         # Other options include:
-        default_redis_provider: '%env(resolve:MEMCACHED_URL)%'
+        default_redis_provider: '%env(resolve:REDIS_URL)%'
         pools:
             app.cache.dso:
                 adapter: cache.adapter.redis

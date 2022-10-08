@@ -220,7 +220,6 @@
                 "cache",
                 "caching",
                 "couchdb",
-                "memcached",
                 "php",
                 "redis",
                 "xcache"
