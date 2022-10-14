@@ -275,9 +275,9 @@ final class Utils
      *
      * @param int|float|null $number
      *
-     * @return float|bool|int|string
+     * @return float|bool|int|string|null
      */
-    public static function numberFormatByLocale(int|float|null $number): float|bool|int|string
+    public static function numberFormatByLocale(int|float|null $number): float|bool|int|string|null
     {
         if (!is_numeric($number)) {
             return $number;
