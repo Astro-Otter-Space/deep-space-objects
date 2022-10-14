@@ -273,11 +273,11 @@ final class Utils
     /**
      * Format number from locale
      *
-     * @param int|float $number
+     * @param int|float|null $number
      *
      * @return float|bool|int|string
      */
-    public static function numberFormatByLocale(int|float $number): float|bool|int|string
+    public static function numberFormatByLocale(int|float|null $number): float|bool|int|string
     {
         if (!is_numeric($number)) {
             return $number;

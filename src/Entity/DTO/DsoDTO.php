@@ -411,6 +411,7 @@ final class DsoDTO implements DTOInterface
 
     public function distanceLightYears(): bool|string|null
     {
+
         return Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
     }
 
