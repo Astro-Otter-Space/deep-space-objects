@@ -10,6 +10,7 @@ use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
 use Elastica\Exception\NotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -22,14 +23,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class DsoController
+ * Class GeoJson
  *
  * @package App\Api\Controller
  */
 final class DataController extends AbstractFOSRestController
 {
 
-    use DsoTrait;
+    use DsoTrait, SymfonyServicesTrait;
 
     public const JSON_FORMAT = 'json';
 
@@ -52,13 +53,11 @@ final class DataController extends AbstractFOSRestController
      * @param DsoManager $dsoManager
      * @param DsoRepository $dsoRepository
      * @param DsoDataTransformer $dsoDataTransformer
-     * @param TranslatorInterface $translator
      */
-    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dsoDataTransformer, TranslatorInterface $translator)
+    public function __construct(DsoManager $dsoManager, DsoRepository $dsoRepository, DsoDataTransformer $dsoDataTransformer)
     {
         $this->dsoRepository = $dsoRepository;
         $this->dsoDataTransformer = $dsoDataTransformer;
-        $this->setTranslator($translator);
         $this->dsoManager = $dsoManager;
     }
 

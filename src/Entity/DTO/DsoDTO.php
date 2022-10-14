@@ -239,7 +239,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return array|string|null
+     * @return array
      */
     public function getCatalogs(): array
     {
@@ -247,7 +247,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param array|string|null $catalogs
+     * @param array $catalogs
      *
      * @return DsoDTO
      */
@@ -277,7 +277,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAlt(): ?string
     {
@@ -336,7 +336,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    public function getMagnitude()
+    public function getMagnitude(): mixed
     {
         return $this->magnitude;
     }
@@ -372,7 +372,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return null|ConstellationDTO|DTOInterface
+     * @return DTOInterface|null
      */
     public function getConstellation(): ?DTOInterface
     {
@@ -393,7 +393,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return mixed
      */
-    private function getDistAl()
+    private function getDistAl(): mixed
     {
         return $this->distAl;
     }
@@ -403,28 +403,28 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDistAl($distAl): DsoDTO
+    public function setDistAl(mixed $distAl): DsoDTO
     {
         $this->distAl = $distAl;
         return $this;
     }
 
-    public function distanceLightYears()
+    public function distanceLightYears(): bool|string|null
     {
-        return Utils::numberFormatByLocale($this->distAl);
+        return Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
     }
 
     /**
      * @return bool|string
      */
-    public function distanceParsecs()
+    public function distanceParsecs(): bool|string
     {
-        return Utils::numberFormatByLocale(Utils::PARSEC * $this->getDistAl());
+        return Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
     }
 
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getDiscover(): ?string
     {
@@ -443,7 +443,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getDiscoverYear(): ?int
     {
@@ -501,7 +501,7 @@ final class DsoDTO implements DTOInterface
 
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getAstrobinId(): ?string
     {
@@ -556,7 +556,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getDim(): ?string
     {
@@ -575,7 +575,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getDeclinaison(): ?string
     {

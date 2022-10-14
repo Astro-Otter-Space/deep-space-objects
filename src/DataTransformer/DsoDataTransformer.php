@@ -91,7 +91,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
     /**
      * Convert Dso into Array
      *
-     * @param DsoDTO|DTOInterface $dto
+     * @param DTOInterface $dto
      *
      * @return array|null
      */

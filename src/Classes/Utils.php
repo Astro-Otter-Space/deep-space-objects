@@ -273,12 +273,15 @@ final class Utils
     /**
      * Format number from locale
      *
-     * @param $number
+     * @param int|float $number
      *
-     * @return bool|string
+     * @return float|bool|int|string
      */
-    public static function numberFormatByLocale($number)
+    public static function numberFormatByLocale(int|float $number): float|bool|int|string
     {
+        if (!is_numeric($number)) {
+            return $number;
+        }
         $numberFormat = new \NumberFormatter(\Locale::getDefault(), \NumberFormatter::DECIMAL);
         return $numberFormat->format($number);
     }
