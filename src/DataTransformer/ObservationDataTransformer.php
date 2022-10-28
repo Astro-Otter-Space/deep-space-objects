@@ -15,13 +15,13 @@ use App\Entity\ES\Observation;
 final class ObservationDataTransformer extends AbstractDataTransformer
 {
     /**
-     * @param $dto
+     * @param DTOInterface $dto
      *
-     * @return mixed|void
+     * @return array
      */
     public function longView(DTOInterface $dto): array
     {
-        $data = [
+        /*$data = [
             'user' => $dto->getUsername(),
             'location' => $dto->getLocationLabel(),
             'instrument' => $dto->getInstrument(),
@@ -34,7 +34,9 @@ final class ObservationDataTransformer extends AbstractDataTransformer
 
         return array_filter($data, static function($value) {
             return (false === empty($value));
-        });
+        });*/
+
+        return [];
     }
 
 }
