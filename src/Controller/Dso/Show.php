@@ -67,12 +67,8 @@ class Show extends AbstractController
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
         $params['dsoData'] = $dsoManager->formatVueData($dso);
 
-        // Image cover
-        $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
-
         // List of Dso from same constellation
         $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), $id, 0, 20);
-
         $params['dso_by_const'] = $dsoDataTransformer->listVignettesView($listDso);
         $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
 
@@ -82,21 +78,6 @@ class Show extends AbstractController
             "features" => [$dso->getGeoJson()]
         ];
         $params['geojson_center'] = $dso->getDso()->getGeometry()['coordinates'];
-
-        // List images
-        $images = $astrobinService->listImagesBy($id);
-        if (!is_null($images)) {
-            if (1 < $images->count) {
-                $listImages = array_map(static function(Image $image) {
-                    return $image->url_regular;
-                }, iterator_to_array($images));
-            } elseif(1 === $images->count) {
-                $listImages = [$images->getIterator()->current()->url_regular];
-            }
-        }
-
-        $params['images'] = $listImages ?? []; //array_filter($listImages);
-
 
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->router, $dso->title());
 

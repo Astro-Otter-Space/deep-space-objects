@@ -42,10 +42,11 @@ final class DsoDTO implements DTOInterface
     private ?string $astrobinId;
     private Image $astrobin;
     private ?User  $astrobinUser;
+    private ?string $imgCoverAlt;
     private ?string $dim;
     private ?string $declinaison;
     private ?string $rightAscencion;
-    private array $gallery;
+    private ?array $gallery;
     private array $geoJson;
     /**
      * @var mixed|string
@@ -492,6 +493,23 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getImgCoverAlt(): ?string
+    {
+        return $this->imgCoverAlt;
+    }
+
+    /**
+     * @param string|null $imgCoverAlt
+     * @return DsoDTO
+     */
+    public function setImgCoverAlt(?string $imgCoverAlt): DsoDTO
+    {
+        $this->imgCoverAlt = $imgCoverAlt;
+        return $this;
+    }
 
     /**
      * @return array
@@ -568,6 +586,25 @@ final class DsoDTO implements DTOInterface
         $this->rightAscencion = $rightAscencion;
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getGallery(): array
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param array|null $gallery
+     * @return DsoDTO
+     */
+    public function setGallery(?array $gallery): self
+    {
+        $this->gallery = $gallery;
+        return $this;
+    }
+
 
     /**
      * @return \DateTimeInterface|null

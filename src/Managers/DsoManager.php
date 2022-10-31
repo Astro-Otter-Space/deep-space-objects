@@ -111,12 +111,25 @@ class DsoManager
                     $astrobinUser = $this->astrobinService->getAstrobinUser($astrobinImage->user);
                 }
 
+                // Add astrobin Gallery
+                $images = $this->astrobinService->listImagesBy($id);
+                $listImages = null;
+                if (!is_null($images)) {
+                    if (1 < $images->count) {
+                        $listImages = array_map(static function(Image $image) {
+                            return $image->url_regular;
+                        }, iterator_to_array($images));
+                    } elseif(1 === $images->count) {
+                        $listImages = [$images->getIterator()->current()->url_regular];
+                    }
+                }
+
                 // add Constellation
                 $constellationDto = $this->constellationRepository
                     ->setLocale($this->locale)
                     ->getObjectById($dso->getConstellationId());
 
-                $dso = $this->dsoDataTransformer->dsoToDto($dso, $constellationDto, $astrobinImage, $astrobinUser);
+                $dso = $this->dsoDataTransformer->dsoToDto($dso, $constellationDto, $astrobinImage, $astrobinUser, $listImages);
 
                 $this->cacheUtils->saveItem($idMd5, serialize($dso));
 

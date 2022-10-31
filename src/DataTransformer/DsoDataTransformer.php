@@ -53,7 +53,8 @@ final class DsoDataTransformer extends AbstractDataTransformer
         DsoDTO $dsoDto,
         Constellation $constellation,
         $astrobinImage,
-        $astrobinUser
+        $astrobinUser,
+        ?array $galleryImages
     ): DTOInterface
     {
         $dso = $dsoDto->getDso();
@@ -104,9 +105,12 @@ final class DsoDataTransformer extends AbstractDataTransformer
         if (!is_nan($astrobinImage)) {
             $dsoDto->setAstrobin($astrobinImage);
             $dsoDto->setAstrobinUser($astrobinUser);
+            $imgCoverAlt = ($astrobinImage->title) ? sprintf('"%s" by %s', $astrobinImage->title, $astrobinImage->user) : null;
+            $dsoDto->setImgCoverAlt($imgCoverAlt);
         }
 
         // Add gallery
+        $dsoDto->setGallery($galleryImages);
 
         // Add GeoJson
         $geoJson =  [
