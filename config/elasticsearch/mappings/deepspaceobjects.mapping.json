@@ -10,6 +10,7 @@
     }
   },
   "mappings": {
+<<<<<<< HEAD
     "_doc": {
       "properties": {
         "id": {
@@ -27,141 +28,136 @@
             "keyword": {
               "type": "keyword"
             }
+=======
+    "properties": {
+      "id": {
+        "type": "text",
+        "fields": {
+          "sort": {
+            "type": "icu_collation_keyword",
+            "index": false,
+            "language": "de",
+            "country": "DE",
+            "variant": "@collation=phonebook"
+>>>>>>> 4081bae0 (Fix mapping ES 7)
           }
         },
-        "order": {
-          "type": "integer",
-          "fields": {
-            "keyword": {
-              "type": "keyword"
-            }
+        "copy_to": "suggest"
+      },
+      "catalog": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
           }
-        },
-        "updated_at": {
-          "type": "date",
-          "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
-        },
-        "geometry": {
-          "type": "geo_shape"
-        },
-        "desigs": {
-          "type": "keyword",
-          "normalizer": "lowercase_normalizer",
-          "copy_to": "suggest"
-        },
-        "alt": {
-          "properties": {
-            "alt" :{
-              "type": "text",
-              "fields": {
-                "en": {
-                  "type": "text",
-                  "analyzer": "english"
-                },
-                "fr": {
-                  "type": "text",
-                  "analyzer": "french"
-                },
-                "es": {
-                  "type": "text",
-                  "analyzer": "spanish"
-                },
-                "de": {
-                  "type": "text",
-                  "analyzer": "german"
-                },
-                "pt": {
-                  "type": "text",
-                  "analyzer": "portuguese"
-                },
-                "it": {
-                  "type": "text",
-                  "analyzer": "italian"
-                }
-              }
-            }
-          }
-        },
-        "description": {
-          "properties": {
-            "description" :{
-              "type": "text",
-              "fields": {
-                "en": {
-                  "type": "text",
-                  "analyzer": "english"
-                },
-                "fr": {
-                  "type": "text",
-                  "analyzer": "french"
-                },
-                "es": {
-                  "type": "text",
-                  "analyzer": "spanish"
-                },
-                "de": {
-                  "type": "text",
-                  "analyzer": "german"
-                },
-                "pt": {
-                  "type": "text",
-                  "analyzer": "portuguese"
-                },
-                "it": {
-                  "type": "text",
-                  "analyzer": "italian"
-                }
-              }
-            }
-          }
-        },
-        "type": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword"
-            }
-          }
-        },
-        "mag": {
-          "type": "float"
-        },
-        "const_id": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword"
-            }
-          }
-        },
-        "dim": {
-          "type": "text"
-        },
-        "cl": {
-          "type": "text"
-        },
-        "dist_al": {
-          "type": "float"
-        },
-        "discover": {
-          "type": "text"
-        },
-        "discover_year": {
-          "type": "float"
-        },
-        "ra": {
-          "type": "text"
-        },
-        "dec": {
-          "type": "text"
-        },
-        "astrobin_id": {
-          "type": "text"
-        },
-        "suggest": {
-          "type" : "completion"
         }
-      }
+      },
+      "order": {
+        "type": "integer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "updated_at": {
+        "type": "date",
+        "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
+      },
+      "geometry": { "type": "geo_shape" },
+      "desigs": {
+        "type": "keyword",
+        "normalizer": "lowercase_normalizer",
+        "copy_to": "suggest"
+      },
+      "alt": {
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "en": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "fr": {
+            "type": "text",
+            "analyzer": "french"
+          },
+          "es": {
+            "type": "text",
+            "analyzer": "spanish"
+          },
+          "de": {
+            "type": "text",
+            "analyzer": "german"
+          },
+          "pt": {
+            "type": "text",
+            "analyzer": "portuguese"
+          },
+          "it": {
+            "type": "text",
+            "analyzer": "italian"
+          }
+        }
+      },
+      "description": {
+        "properties": {
+          "language": {
+            "type": "keyword"
+          },
+          "en": {
+            "type": "text",
+            "analyzer": "english"
+          },
+          "fr": {
+            "type": "text",
+            "analyzer": "french"
+          },
+          "es": {
+            "type": "text",
+            "analyzer": "spanish"
+          },
+          "de": {
+            "type": "text",
+            "analyzer": "german"
+          },
+          "pt": {
+            "type": "text",
+            "analyzer": "portuguese"
+          },
+          "it": {
+            "type": "text",
+            "analyzer": "italian"
+          }
+        }
+      },
+      "type": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "mag": { "type": "float" },
+      "const_id": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "dim": { "type": "text" },
+      "cl": { "type": "text" },
+      "dist_al": { "type": "float" },
+      "discover": { "type": "text" },
+      "discover_year": { "type": "float" },
+      "ra": { "type": "text" },
+      "dec": { "type": "text" },
+      "astrobin_id": { "type": "text" },
+      "suggest": { "type" : "completion" }
     }
   }
 }
