@@ -34,7 +34,7 @@ final class DsoDTO implements DTOInterface
     private string $type;
     private int $magnitude;
     private string $constellationId;
-    private ConstellationDsoDTO $constellation;
+    private ConstellationDTO|DTOInterface $constellation;
     private float $distAl;
     private float $distPc;
     private ?string $discover;
@@ -345,11 +345,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param ConstellationDsoDTO $constellation
+     * @param DTOInterface $constellation
      *
      * @return DsoDTO
      */
-    public function setConstellation(ConstellationDsoDTO $constellation): DsoDTO
+    public function setConstellation(DTOInterface $constellation): DsoDTO
     {
         $this->constellation = $constellation;
         return $this;

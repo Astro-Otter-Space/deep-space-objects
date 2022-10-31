@@ -31,7 +31,6 @@ final class UrlGenerateHelper
      */
     public function __construct(RouterInterface $router)
     {
-        $this->router = $router;
     }
 
     /**
@@ -48,8 +47,6 @@ final class UrlGenerateHelper
         $url = '';
         if ($entity instanceof DsoDTO
             || $entity instanceof ConstellationDTO
-//            || $entity instanceof Observation
-//            || $entity instanceof Event
         ) {
             $id = strtolower($entity->getId());
 
@@ -86,16 +83,6 @@ final class UrlGenerateHelper
 
                     $url = $this->router->generate($route, $params, $typeUrl);
                     break;
-
-               /* case ObservationRepository::INDEX_NAME:
-                    $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
-                    $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
-                    break;
-
-                case EventRepository::INDEX_NAME:
-                    $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
-                    $url = $this->router->generate('event_show', ['name' => $name], $typeUrl);
-                    break;*/
 
                 default:
                     $url = $this->router->generate('homepage');

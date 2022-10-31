@@ -10,6 +10,7 @@ use App\Entity\DTO\DTOInterface;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\ListDso;
+use App\Helpers\UrlGenerateHelper;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,31 +24,23 @@ final class DsoDataTransformer extends AbstractDataTransformer
 {
     private TranslatorInterface $translator;
     private RouterInterface $router;
+    protected UrlGenerateHelper $urlGeneratorHelper;
 
     /**
      * DsoDataTransformer constructor.
      *
      * @param TranslatorInterface $translator
      * @param RouterInterface $router
+     * @param UrlGenerateHelper $urlGeneratorHelper
      */
     public function __construct(
         TranslatorInterface $translator,
-        RouterInterface $router
+        RouterInterface $router,
+        UrlGenerateHelper $urlGeneratorHelper
     )
     {
-        $this->translator = $translator;
-        $this->router = $router;
     }
 
-    /**public function searchView(DTOInterface $dto): array
-    {
-        $ajaxValue = (!empty($otherDesigs)) ? sprintf('%s (%s)', $title, implode(Utils::GLUE_DASH, $otherDesigs)) : $title;
-        return [
-            'id' => $dto->getId(),
-            'value' => $dto->title(),
-            'ajaxValue' => $ajaxValue,
-        ];
-    }**/
 
     public function dsoToDto(
         DsoDTO $dsoDto,
@@ -70,12 +63,15 @@ final class DsoDataTransformer extends AbstractDataTransformer
         $distAl = Utils::numberFormatByLocale($dso->getDistAl()) ?? (string)$dso->getDistAl();
         $distPc = Utils::numberFormatByLocale(Utils::PARSEC * (int)$dso->getDistAl()) ?? (Utils::PARSEC * (int)$dso->getDistAl());
 
-        $constellationForDso = (new ConstellationDsoDTO())
-            ->setId($constellation->getId())
-            ->setName('')
-            ->setUrl(
-                $this->router->generate('', [])
-            );
+        $absoluteUrl = $this->urlGeneratorHelper->generateUrl($dsoDto, Router::ABSOLUTE_URL, $dsoDto->getLocale());
+        $relativeUrl = $this->urlGeneratorHelper->generateUrl($dsoDto, Router::ABSOLUTE_PATH, $dsoDto->getLocale());
+
+        // Add meta data
+        $dsoDto
+            ->setAbsoluteUrl($absoluteUrl)
+            ->setRelativeUrl($relativeUrl)
+            ->setUpdatedAt($dso->getUpdatedAt())
+        ;
 
         // Add data
         $dsoDto
@@ -96,10 +92,10 @@ final class DsoDataTransformer extends AbstractDataTransformer
             ->setName($name)
             ->setRightAscencion($dso->getRa())
             ->setType($dso->getType())
-            ->setUpdatedAt($dso->getUpdatedAt());
+        ;
 
         // Add constellation
-        $dsoDto->setConstellation($constellationForDso);
+        $dsoDto->setConstellation($constellation);
 
         // Set astrobin
         if (!is_nan($astrobinImage)) {

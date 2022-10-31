@@ -64,7 +64,6 @@ class Show extends AbstractController
         }
 
         $constellation = $dso->getConstellation();
-        $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
         $params['dsoData'] = $dsoManager->formatVueData($dso);
 
         // List of Dso from same constellation

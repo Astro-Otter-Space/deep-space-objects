@@ -2,11 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
-use App\Entity\ES\Observation;
 use App\Helpers\UrlGenerateHelper;
 use Elastica\Bulk;
 use Elastica\Client;
@@ -16,8 +12,6 @@ use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
-use Elastica\Type;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -51,7 +45,11 @@ abstract class AbstractRepository
      * @param SerializerInterface $serializer
      * @param UrlGenerateHelper $urlGeneratorHelper
      */
-    public function __construct(Client $client, SerializerInterface $serializer, UrlGenerateHelper $urlGeneratorHelper)
+    public function __construct(
+        Client $client,
+        SerializerInterface $serializer,
+        UrlGenerateHelper $urlGeneratorHelper
+    )
     {
         $this->client = $client;
         $this->serializer = $serializer;
@@ -63,14 +61,11 @@ abstract class AbstractRepository
     abstract protected function getIndex();
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getLocale(): string
     {
-        if (is_null($this->locale)) {
-            $this->locale = 'en';
-        }
-        return $this->locale;
+        return $this->locale ?? 'en';
     }
 
     /**
@@ -106,12 +101,6 @@ abstract class AbstractRepository
 
         /** @var DTOInterface $dto */
         return new $dto($hydratedEntity, $this->getLocale(), $document->getId());
-//
-//        $dto
-//            ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
-//            ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
-//
-//        return $dto;
     }
 
     /**
@@ -122,11 +111,7 @@ abstract class AbstractRepository
      */
     protected function findById($id): ResultSet
     {
-        /** @var Constellation|Dso $entity */
-        $entityName = $this->getEntity();
-        $entity = new $entityName;
-
-        $this->client->getIndex($this->getIndex());
+        //$this->client->getIndex($this->getIndex());
 
         $matchQuery = new Query\MatchQuery();
         $matchQuery->setField('id', $id);
@@ -134,7 +119,9 @@ abstract class AbstractRepository
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
-        return $search->addIndex($this->getIndex())->search($matchQuery);
+        return $search
+            ->addIndex($this->getIndex())
+            ->search($matchQuery);
     }
 
     /**
@@ -145,7 +132,7 @@ abstract class AbstractRepository
      */
     public function requestBySearchTerms(string $searchTerm, array $listSearchFields): ResultSet
     {
-        $this->client->getIndex($this->getIndex());
+//        $this->client->getIndex($this->getIndex());
 
         $query = new Query\MultiMatch();
         $query->setFields($listSearchFields);

@@ -54,7 +54,14 @@ class DsoManager
      * @param ConstellationRepository $constellationRepository
      * @param AstrobinService $astrobinService
      */
-    public function __construct(DsoRepository $dsoRepository, CachePoolInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository, AstrobinService $astrobinService)
+    public function __construct(
+        DsoRepository $dsoRepository,
+        CachePoolInterface $cacheUtils,
+        ?string $locale,
+        DsoDataTransformer $dsoDataTransformer,
+        ConstellationRepository $constellationRepository,
+        AstrobinService $astrobinService
+    )
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinService = $astrobinService;
