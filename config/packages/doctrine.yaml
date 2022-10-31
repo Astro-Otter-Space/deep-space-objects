@@ -13,12 +13,12 @@ doctrine:
         default_table_options:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
-        url: '%env(DATABASE_URL)%'
-#        host: '%env(DATABASE_HOST)%'
-#        port: '%env(DATABASE_PORT)%'
-#        user: '%env(DATABASE_USER)%'
-#        password: '%env(DATABASE_PASSWORD)%'
-#        dbname: '%env(DATABASE_PORT)%'
+#        url: '%env(DATABASE_URL)%'
+        host: '%env(DATABASE_HOST)%'
+        port: '%env(DATABASE_PORT)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
+        dbname: '%env(DATABASE_PORT)%'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
