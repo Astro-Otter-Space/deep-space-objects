@@ -1,21 +1,21 @@
-version: '3'
+version: '3.4'
 
 networks:
     dso_stack:
         driver: bridge
 
 volumes:
-    es_data:
-        driver: local
-    es_plugins:
-        driver: local
+    php_socket:
     db_data: {}
+    es_data: {}
+    es_plugins: {}
 
 services:
     # PHP
     php:
         build:
-            context: docker/php7-fpm
+            context: .
+            target: app_php_dev
             args:
                 TIMEZONE: ${TIMEZONE}
         user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
@@ -23,18 +23,20 @@ services:
         container_name: dso_php
         hostname: php
         volumes:
-            - ".:/var/www/deep-space-objects:rw"
-            -  "./docker/php7-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf"
-            - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
+            - php_socket:/var/run/php
+            - "./:/var/www/deep-space-objects:rw"
+            - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
             - "$SSH_AUTH_SOCK:/ssh-agent:ro"
         env_file:
           - ".env"
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
-        working_dir: /var/www/deep-space-objects
         links:
           - mail
+        extra_hosts:
+            # Ensure that host.docker.internal is correctly defined on Linux
+            - host.docker.internal:host-gateway
         networks:
           - dso_stack
 
@@ -97,11 +99,8 @@ services:
         restart: always
         volumes:
             - db_data:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USER}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
+        env_file:
+            - .env
         ports:
           - "3307:3306"
         networks:
@@ -117,7 +116,7 @@ services:
 
     # Kibana
     kibana:
-        image: docker.elastic.co/kibana/kibana:6.8.5
+        image: docker.elastic.co/kibana/kibana:7.17.7
         container_name: dso_kibana
         links:
             - elasticsearch
