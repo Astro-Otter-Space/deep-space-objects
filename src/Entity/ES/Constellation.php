@@ -8,15 +8,15 @@ namespace App\Entity\ES;
  */
 class Constellation
 {
-    private $id;
-    private $geometry;
-    private $geometryLine;
-    private $gen;
-    private $alt;
-    private $description;
-    private $rank;
-    private $order;
-    private $loc;
+    private string $id;
+    private array $geometry;
+    private array $geometryLine;
+    private ?string $gen;
+    private ?array $alt;
+    private ?array $description;
+    private float $rank;
+    private float $order;
+    private ?string $loc;
 
     /**
      * @return string
@@ -76,7 +76,7 @@ class Constellation
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getGen(): ?string
     {
@@ -95,7 +95,7 @@ class Constellation
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getAlt(): ?array
     {
@@ -114,7 +114,7 @@ class Constellation
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getDescription(): ?array
     {
@@ -171,7 +171,7 @@ class Constellation
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getLoc(): ?string
     {

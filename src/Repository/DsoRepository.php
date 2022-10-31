@@ -86,7 +86,6 @@ class DsoRepository extends AbstractRepository
      */
     public function getObjectById(string $id): ?DTOInterface
     {
-        /** @var ResultSet $resultDocument */
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
             $document = $resultDocument->getDocuments()[0];
@@ -404,7 +403,6 @@ class DsoRepository extends AbstractRepository
 
         //dump($query->getQuery()->toArray());
 
-        /** @var Search $search */
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 

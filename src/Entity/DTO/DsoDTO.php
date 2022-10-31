@@ -17,8 +17,6 @@ final class DsoDTO implements DTOInterface
     /**
      * META
      */
-    private string $id;
-    private string $elasticSearchId;
     private string $relativeUrl;
     private string $absoluteUrl;
     private string $locale;
@@ -29,24 +27,30 @@ final class DsoDTO implements DTOInterface
      * Data
      */
     private string $name;
-    private $catalogs;
+    private array $catalogs;
     private array $desigs;
     private ?string $alt;
     private ?string $description;
     private string $type;
-    private $magnitude;
+    private int $magnitude;
     private string $constellationId;
-    private $constellation;
-    private $distAl;
+    private ConstellationDsoDTO $constellation;
+    private float $distAl;
+    private float $distPc;
     private ?string $discover;
     private ?int $discoverYear;
     private ?string $astrobinId;
     private Image $astrobin;
     private ?User  $astrobinUser;
-    private ?array $geometry;
     private ?string $dim;
     private ?string $declinaison;
     private ?string $rightAscencion;
+    private array $gallery;
+    private array $geoJson;
+    /**
+     * @var mixed|string
+     */
+    private string $elasticSearchId;
 
     /**
      * DsoDTO constructor.
@@ -57,37 +61,9 @@ final class DsoDTO implements DTOInterface
      */
     public function __construct(Dso $dso, string $locale, string $elasticId)
     {
-        $fieldAlt = ('en' !== $locale) ? sprintf('alt_%s', $locale) : 'alt';
-        $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
-
-        $description = $dso->getDescription()[$fieldDescription] ?? null;
-        $alt = $dso->getAlt()[$fieldAlt] ?? null;
-
-        $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
-        $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
-
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
-            ->setId(strtolower($dso->getId()))
-            ->setAlt($alt)
-            ->setAstrobinId($dso->getAstrobinId())
-            ->setConstellationId($dso->getConstId())
-            ->setCatalogs($catalogs)
-            ->setDesigs($dso->getDesigs())
-            ->setDeclinaison($dso->getDec())
-            ->setDescription($description)
-            ->setDesigs($dso->getDesigs())
-            ->setDim($dso->getDim())
-            ->setDiscover($dso->getDiscover())
-            ->setDiscoverYear($dso->getDiscoverYear())
-            ->setDistAl($dso->getDistAl())
-            ->setGeometry($dso->getGeometry())
-            ->setMagnitude($dso->getMag())
-            ->setName($name)
-            ->setRightAscencion($dso->getRa())
-            ->setType($dso->getType())
-            ->setUpdatedAt($dso->getUpdatedAt())
         ;
     }
 
@@ -100,11 +76,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $locale
+     * @param string $locale
      *
      * @return DsoDTO
      */
-    public function setLocale($locale): DsoDTO
+    public function setLocale(string $locale): DsoDTO
     {
         $this->locale = $locale;
         return $this;
@@ -122,22 +98,11 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return Dso
      */
-    public function getId(): string
+    public function getDso(): Dso
     {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     *
-     * @return DsoDTO
-     */
-    public function setId(string $id): DsoDTO
-    {
-        $this->id = $id;
-        return $this;
+        return $this->dso;
     }
 
     /**
@@ -156,7 +121,7 @@ final class DsoDTO implements DTOInterface
      */
     public function guid(): string
     {
-        return md5(sprintf('%s_%s', $this->getId(), $this->locale));
+        return md5(sprintf('%s_%s', $this->getDso()->getId(), $this->locale));
     }
 
     /**
@@ -266,11 +231,10 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $desigs
-     *
-     * @return DsoDTO
+     * @param array $desigs
+     * @return $this
      */
-    public function setDesigs($desigs): DsoDTO
+    public function setDesigs(array $desigs): DsoDTO
     {
         $this->desigs = $desigs;
         return $this;
@@ -334,19 +298,19 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
+     * @return int|null
      */
-    public function getMagnitude(): mixed
+    public function getMagnitude(): ?int
     {
         return $this->magnitude;
     }
 
     /**
-     * @param mixed $magnitude
+     * @param int|null $magnitude
      *
      * @return DsoDTO
      */
-    public function setMagnitude($magnitude): DsoDTO
+    public function setMagnitude(?int $magnitude): DsoDTO
     {
         $this->magnitude = $magnitude;
         return $this;
@@ -372,7 +336,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return DTOInterface|null
+     * @return ConstellationDsoDTO|null
      */
     public function getConstellation(): ?DTOInterface
     {
@@ -380,47 +344,56 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $constellation
+     * @param ConstellationDsoDTO $constellation
      *
      * @return DsoDTO
      */
-    public function setConstellation(DTOInterface $constellation): DsoDTO
+    public function setConstellation(ConstellationDsoDTO $constellation): DsoDTO
     {
         $this->constellation = $constellation;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    private function getDistAl(): mixed
+    private function getDistAl(): float
     {
         return $this->distAl;
     }
 
     /**
-     * @param mixed $distAl
+     * @param float $distAl
      *
      * @return DsoDTO
      */
-    public function setDistAl(mixed $distAl): DsoDTO
+    public function setDistAl(float $distAl): DsoDTO
     {
         $this->distAl = $distAl;
         return $this;
     }
 
-    public function distanceLightYears(): bool|string|null
-    {
 
-        return Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
+    public function getDistPc(): float
+    {
+        return $this->distPc;
     }
 
-    /**
-     * @return bool|string
-     */
+    public function setDistPc(float $distPc): self
+    {
+        $this->distPc = $distPc;
+        return $this;
+    }
+
+
+    public function distanceLightYears(): string|null
+    {
+        return $this->getDistAl();
+    }
+
     public function distanceParsecs(): bool|string
     {
-        return Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
+        return $this->getDistPc();
     }
 
 
@@ -433,7 +406,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @param mixed $discover
+     * @param string|null $discover
      *
      * @return DsoDTO
      */
@@ -500,7 +473,6 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
-
     /**
      * @return string|null
      */
@@ -520,41 +492,25 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
-    public function getGeometry(): ?array
-    {
-        return $this->geometry;
-    }
-
-    /**
-     * @param mixed $geometry
-     *
-     * @return DsoDTO
-     */
-    public function setGeometry(array $geometry): self
-    {
-        $this->geometry = $geometry;
-        return $this;
-    }
 
     /**
      * @return array
      */
-    public function geoJson(): array
+    public function getGeoJson(): array
     {
-        return  [
-            "type" => "Feature",
-            "id" => $this->getId(),
-            "geometry" => $this->getGeometry(),
-            "properties" => [
-                "name" => $this->title(),
-                "type" => substr($this->getType(), strrpos($this->getType() ,'.')+1),
-                "mag" => $this->getMagnitude()
-            ]
-        ];
+        return $this->geoJson;
     }
+
+    /**
+     * @param array $geoJson
+     * @return DsoDTO
+     */
+    public function setGeoJson(array $geoJson): self
+    {
+        $this->geoJson = $geoJson;
+        return $this;
+    }
+
 
     /**
      * @return string|null

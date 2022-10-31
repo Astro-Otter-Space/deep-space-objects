@@ -105,13 +105,13 @@ abstract class AbstractRepository
         $hydratedEntity = $serializer->deserialize(json_encode($document->getData(), JSON_THROW_ON_ERROR), $entity, 'json');
 
         /** @var DTOInterface $dto */
-        $dto = new $dto($hydratedEntity, $this->getLocale(), $document->getId());
-
-        $dto
-            ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
-            ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
-
-        return $dto;
+        return new $dto($hydratedEntity, $this->getLocale(), $document->getId());
+//
+//        $dto
+//            ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
+//            ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
+//
+//        return $dto;
     }
 
     /**

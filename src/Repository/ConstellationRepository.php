@@ -109,7 +109,7 @@ final class ConstellationRepository extends AbstractRepository
     }
 
     /**
-     * @return Constellation
+     * @return string
      */
     public function getEntity(): string
     {

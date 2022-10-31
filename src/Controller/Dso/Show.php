@@ -66,14 +66,12 @@ class Show extends AbstractController
         $constellation = $dso->getConstellation();
         $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
         $params['dsoData'] = $dsoManager->formatVueData($dso);
-        $params['constTitle'] = $constellation->title() ?? "";
-        $params['last_update'] = $dso->getUpdatedAt();
 
         // Image cover
         $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
         // List of Dso from same constellation
-        $listDso = $dsoManager->getListDsoFromConst($dso->getConstellation()->getId(), $dso->getId(), 0, 20);
+        $listDso = $dsoManager->getListDsoFromConst($constellation->getId(), $id, 0, 20);
 
         $params['dso_by_const'] = $dsoDataTransformer->listVignettesView($listDso);
         $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
@@ -81,12 +79,12 @@ class Show extends AbstractController
         // Map
         $params['geojson_dso'] = [
             "type" => "FeatureCollection",
-            "features" => [$dso->geoJson()]
+            "features" => [$dso->getGeoJson()]
         ];
-        $params['geojson_center'] = $dso->getGeometry()['coordinates'];
+        $params['geojson_center'] = $dso->getDso()->getGeometry()['coordinates'];
 
         // List images
-        $images = $astrobinService->listImagesBy($dso->getId());
+        $images = $astrobinService->listImagesBy($id);
         if (!is_null($images)) {
             if (1 < $images->count) {
                 $listImages = array_map(static function(Image $image) {
@@ -114,7 +112,6 @@ class Show extends AbstractController
 
         $listDsoIdHeaders = [
             md5(sprintf('%s_%s', $id, $request->getLocale())),
-            md5(sprintf('%s_cover', $id))
         ];
         $response->headers->set('x-dso-id', implode(' ', $listDsoIdHeaders));
 

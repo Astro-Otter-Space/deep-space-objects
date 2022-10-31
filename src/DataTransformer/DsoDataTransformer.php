@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\DataTransformer;
 
 use App\Classes\Utils;
+use App\Entity\DTO\ConstellationDsoDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\DTO\DsoDTO;
+use App\Entity\ES\Constellation;
 use App\Entity\ES\ListDso;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,7 +30,10 @@ final class DsoDataTransformer extends AbstractDataTransformer
      * @param TranslatorInterface $translator
      * @param RouterInterface $router
      */
-    public function __construct(TranslatorInterface $translator, RouterInterface $router)
+    public function __construct(
+        TranslatorInterface $translator,
+        RouterInterface $router
+    )
     {
         $this->translator = $translator;
         $this->router = $router;
@@ -43,6 +48,81 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'ajaxValue' => $ajaxValue,
         ];
     }**/
+
+    public function dsoToDto(
+        DsoDTO $dsoDto,
+        Constellation $constellation,
+        $astrobinImage,
+        $astrobinUser
+    ): DTOInterface
+    {
+        $dso = $dsoDto->getDso();
+
+        $fieldAlt = ('en' !== $dsoDto->getLocale()) ? sprintf('alt_%s',  $dsoDto->getLocale()) : 'alt';
+        $fieldDescription = ('en' !==  $dsoDto->getLocale()) ? sprintf('description_%s',  $dsoDto->getLocale()): 'description';
+
+        $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
+        $description = $dso->getDescription()[$fieldDescription] ?? null;
+        $alt = $dso->getAlt()[$fieldAlt] ?? null;
+        $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
+
+        $distAl = Utils::numberFormatByLocale($dso->getDistAl()) ?? (string)$dso->getDistAl();
+        $distPc = Utils::numberFormatByLocale(Utils::PARSEC * (int)$dso->getDistAl()) ?? (Utils::PARSEC * (int)$dso->getDistAl());
+
+        $constellationForDso = (new ConstellationDsoDTO())
+            ->setId($constellation->getId())
+            ->setName('')
+            ->setUrl(
+                $this->router->generate('', [])
+            );
+
+        // Add data
+        $dsoDto
+            ->setAlt($alt)
+            ->setAstrobinId($dso->getAstrobinId())
+            ->setConstellationId($dso->getConstId())
+            ->setCatalogs($catalogs)
+            ->setDesigs($dso->getDesigs())
+            ->setDeclinaison($dso->getDec())
+            ->setDescription($description)
+            ->setDesigs($dso->getDesigs())
+            ->setDim($dso->getDim())
+            ->setDiscover($dso->getDiscover())
+            ->setDiscoverYear($dso->getDiscoverYear())
+            ->setDistAl($distAl)
+            ->setDistPc($distPc)
+            ->setMagnitude($dso->getMag())
+            ->setName($name)
+            ->setRightAscencion($dso->getRa())
+            ->setType($dso->getType())
+            ->setUpdatedAt($dso->getUpdatedAt());
+
+        // Add constellation
+        $dsoDto->setConstellation($constellationForDso);
+
+        // Set astrobin
+        if (!is_nan($astrobinImage)) {
+            $dsoDto->setAstrobin($astrobinImage);
+            $dsoDto->setAstrobinUser($astrobinUser);
+        }
+
+        // Add gallery
+
+        // Add GeoJson
+        $geoJson =  [
+            "type" => "Feature",
+            "id" => $dsoDto->getDso()->getId(),
+            "geometry" => $dsoDto->getDso()->getGeometry(),
+            "properties" => [
+                "name" => $dsoDto->title(),
+                "type" => substr($dsoDto->getType(), strrpos($dsoDto->getType() ,'.')+1),
+                "mag" => $dsoDto->getMagnitude()
+            ]
+        ];
+        $dsoDto->setGeoJson($geoJson);
+
+        return $dsoDto;
+    }
 
     /**
      * @todo : create classe
