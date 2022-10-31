@@ -14,8 +14,8 @@ services:
     # PHP
     php:
         build:
-            context: .
-            target: app_php_dev
+            context: docker/php
+            target: app_php
             args:
                 TIMEZONE: ${TIMEZONE}
         user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
@@ -23,8 +23,8 @@ services:
         container_name: dso_php
         hostname: php
         volumes:
+            - ./:/var/www/deep-space-objects
             - php_socket:/var/run/php
-            - "./:/var/www/deep-space-objects:rw"
             - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
             - "$SSH_AUTH_SOCK:/ssh-agent:ro"
         env_file:
@@ -32,8 +32,8 @@ services:
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
-        links:
-          - mail
+#        links:
+#          - mail
         extra_hosts:
             # Ensure that host.docker.internal is correctly defined on Linux
             - host.docker.internal:host-gateway
@@ -67,15 +67,15 @@ services:
 
     # ElasticSearch
     elasticsearch:
-        build:
-            context: ./docker/elasticsearch
-            dockerfile: Dockerfile
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.7
         container_name: dso_elasticsearch
         hostname: elasticsearch
         volumes:
             - es_data:/usr/share/elasticsearch/data
             - es_plugins:/usr/share/elasticsearch/plugins
         environment:
+            - xpack.security.enabled=false
+            - discovery.type=single-node
             - cluster.name=demo
             - bootstrap.memory_lock=true
             - http.cors.enabled=true
@@ -86,8 +86,26 @@ services:
             memlock:
                 soft: -1
                 hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
+        cap_add:
+            - IPC_LOCK
         ports:
             - "9200:9200"
+        networks:
+            - dso_stack
+
+    # Kibana
+    kibana:
+        image: docker.elastic.co/kibana/kibana:7.17.7
+        container_name: dso_kibana
+        environment:
+            - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+        links:
+            - elasticsearch
+        ports:
+            - "5601:5601"
         networks:
             - dso_stack
 
@@ -107,30 +125,21 @@ services:
           - dso_stack
 
     #MAIL - SMTP Server
-    mail:
-        image: bytemark/smtp
-        container_name: dso_mail
-        restart: always
-        networks:
-          - dso_stack
+#    mail:
+#        image: bytemark/smtp
+#        container_name: dso_mail
+#        restart: always
+#        networks:
+#          - dso_stack
 
-    # Kibana
-    kibana:
-        image: docker.elastic.co/kibana/kibana:7.17.7
-        container_name: dso_kibana
-        links:
-            - elasticsearch
-        ports:
-            - "5601:5601"
-        networks:
-            - dso_stack
+
 
     # redis
     redis:
         image: redis:6.0-alpine
         hostname: redis
         container_name: dso_redis
-            - ALLOW_EMPTY_PASSWORD=yes
+        restart: always
         ports:
             - '6379:6379'
         networks:

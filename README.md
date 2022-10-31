@@ -24,7 +24,7 @@ Copy path of deepskyobjects_local.csr and deepskyobjects_local.key in .env file.
  ```
 
 ### Add hosts into hosts file
- `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "deepskyobjects.local" >> /etc/hosts`
+ `sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "astro-otter.local" >> /etc/hosts`
 
 
 ### Start Docker stack on :
@@ -87,12 +87,9 @@ yarn install
 yarn encore prod
 ```
 
-Elastic Search
+Elastic Search 7.17.x
 ==
-
-Because of [removal of mappings type in ES 6.X](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), we create many indexes, each one got his own mapping.
-
-### Create index with mappings and import data
+### Create index with mappings and import data (not in docker)
 ```
 curl -X DELETE "elasticsearch:9200/deepspaceobjects"
 curl -X DELETE "elasticsearch:9200/constellations"

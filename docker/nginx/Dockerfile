@@ -24,7 +24,6 @@ RUN rm /etc/nginx/sites-enabled/default
 
 # Add certificate SSL
 #RUN certbot --nginx certonly
-
 RUN usermod -u ${UID} www-data
 
 # Run Nginx
