@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
-class Sitemap extends AbstractController
+final class Sitemap extends AbstractController
 {
 
     use SymfonyServicesTrait;
@@ -141,8 +141,7 @@ class Sitemap extends AbstractController
         /** @var ConstellationDTO $constellation */
         foreach ($listConstellation as $constellation) {
             $params['urls'][$constellation->getId()] = [
-                'loc' => $constellation->absoluteUrl(),
-                'lastmod' => null
+                'loc' => $constellation->absoluteUrl()
                 /*'urlLoc' => array_merge(...array_map(function ($locale) use ($constellation) {
                     return [$locale => $this->urlGenerateHelper->generateUrl($constellation, Router::ABSOLUTE_URL, $locale)];
                 }, $listLocales))*/
