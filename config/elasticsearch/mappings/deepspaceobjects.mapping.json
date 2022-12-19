@@ -15,11 +15,8 @@
         "id": {
           "type": "text",
           "fields": {
-            "sort": {
-              "type": "icu_collation_keyword",
-              "index": true,
-              "language": "en",
-              "country": "EN"
+            "raw": {
+              "type": "keyword"
             }
           },
           "copy_to": "suggest"
