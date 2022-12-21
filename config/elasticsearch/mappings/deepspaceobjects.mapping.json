@@ -10,36 +10,12 @@
     }
   },
   "mappings": {
-<<<<<<< HEAD
-    "_doc": {
-      "properties": {
-        "id": {
-          "type": "text",
-          "fields": {
-            "raw": {
-              "type": "keyword"
-            }
-          },
-          "copy_to": "suggest"
-        },
-        "catalog": {
-          "type": "text",
-          "fields": {
-            "keyword": {
-              "type": "keyword"
-            }
-=======
     "properties": {
       "id": {
         "type": "text",
         "fields": {
-          "sort": {
-            "type": "icu_collation_keyword",
-            "index": false,
-            "language": "de",
-            "country": "DE",
-            "variant": "@collation=phonebook"
->>>>>>> 4081bae0 (Fix mapping ES 7)
+          "raw": {
+            "type": "keyword"
           }
         },
         "copy_to": "suggest"
@@ -62,9 +38,11 @@
       },
       "updated_at": {
         "type": "date",
-        "format": "yyyy-MM-dd||yyyy-MM-dd'T'HH:mm:ssZ"
+        "format": "strict_date_optional_time||epoch_second"
       },
-      "geometry": { "type": "geo_shape" },
+      "geometry": {
+        "type": "geo_shape"
+      },
       "desigs": {
         "type": "keyword",
         "normalizer": "lowercase_normalizer",
@@ -140,7 +118,9 @@
           }
         }
       },
-      "mag": { "type": "float" },
+      "mag": {
+        "type": "float"
+      },
       "const_id": {
         "type": "text",
         "fields": {
@@ -149,15 +129,33 @@
           }
         }
       },
-      "dim": { "type": "text" },
-      "cl": { "type": "text" },
-      "dist_al": { "type": "float" },
-      "discover": { "type": "text" },
-      "discover_year": { "type": "float" },
-      "ra": { "type": "text" },
-      "dec": { "type": "text" },
-      "astrobin_id": { "type": "text" },
-      "suggest": { "type" : "completion" }
+      "dim": {
+        "type": "text"
+      },
+      "cl": {
+        "type": "text"
+      },
+      "dist_al": {
+        "type": "float"
+      },
+      "discover": {
+        "type": "text"
+      },
+      "discover_year": {
+        "type": "float"
+      },
+      "ra": {
+        "type": "text"
+      },
+      "dec": {
+        "type": "text"
+      },
+      "astrobin_id": {
+        "type": "text"
+      },
+      "suggest": {
+        "type": "completion"
+      }
     }
   }
 }
