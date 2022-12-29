@@ -10,15 +10,7 @@ ARG PHP_VERSION=8.1
 # Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
-# Allow to use development versions of Symfony
-ARG STABILITY="stable"
-ENV STABILITY ${STABILITY}
-
-# Allow to select Symfony version
-ARG SYMFONY_VERSION=""
-ENV SYMFONY_VERSION ${SYMFONY_VERSION}
-
-ENV APP_ENV=prod
+ENV APP_ENV=dev
 
 WORKDIR /var/www/deep-space-objects
 
@@ -80,7 +72,7 @@ RUN set -eux; \
 
 # copy sources
 COPY --link  . .
-RUN rm -Rf docker/
+#RUN rm -Rf docker/
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
@@ -90,20 +82,3 @@ RUN set -eux; \
 		composer run-script --no-dev post-install-cmd; \
 		chmod +x bin/console; sync; \
     fi
-
-# Dev image
-FROM app_php AS app_php_dev
-
-ENV APP_ENV=dev XDEBUG_MODE=off
-VOLUME /var/www/deep-space-objects
-
-RUN rm $PHP_INI_DIR/conf.d/app.prod.ini; \
-	mv "$PHP_INI_DIR/php.ini" "$PHP_INI_DIR/php.ini-production"; \
-	mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-COPY --link docker/php/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
-
-RUN set -eux; \
-	install-php-extensions xdebug
-
-RUN rm -f .env.local.php

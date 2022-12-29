@@ -18,20 +18,23 @@ services:
             target: app_php
             args:
                 TIMEZONE: ${TIMEZONE}
-        user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
         restart: unless-stopped
-        container_name: dso_php
-        hostname: php
         volumes:
             - ./:/var/www/deep-space-objects
             - php_socket:/var/run/php
             - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
-            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
+        healthcheck:
+            interval: 10s
+            timeout: 3s
+            retries: 3
+            start_period: 30s
         env_file:
           - ".env"
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
+        container_name: dso_php
+        hostname: php
 #        links:
 #          - mail
         extra_hosts:
