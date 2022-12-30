@@ -8,12 +8,12 @@ FROM node:${NODE_VERSION}-alpine AS symfony_assets_builder
 WORKDIR /var/www/deep-space-objects
 #RUN mkdir public
 
-COPY ${SOURCE_DIR}/package.json ${SOURCE_DIR}/yarn.lock ./
+COPY package.json yarn.lock ./
 
 RUN yarn install
 
-#COPY ../../assets assets/
-COPY ${SOURCE_DIR}/webpack.config.js ./
+COPY assets assets/
+COPY webpack.config.js ./
 
 #RUN yarn build
 
@@ -57,19 +57,19 @@ RUN set -eux; \
 ###< recipes ###
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY --link conf.d/app.ini $PHP_INI_DIR/conf.d/
-COPY --link conf.d/app.prod.ini $PHP_INI_DIR/conf.d/
+COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
+COPY --link docker/php/conf.d/app.prod.ini $PHP_INI_DIR/conf.d/
 
-COPY --link php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY --link docker/php/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 RUN mkdir -p /var/run/php
 
-COPY --link docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+COPY --link docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
-COPY --link docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+COPY --link docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+RUN chmod +x /usr/local/bin/docker-healthcheck
 
 #COPY --from=symfony_assets_builder /var/www/deep-space-objects/public/build public/build
 ENTRYPOINT ["docker-entrypoint"]
@@ -85,6 +85,7 @@ COPY --from=composer:2 --link /usr/bin/composer /usr/bin/composer
 COPY composer.* symfony.* ./
 RUN set -eux; \
     if [ -f composer.json ]; then \
+        composer config --json extra.symfony.docker 'true'; \
 		composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
 		composer clear-cache; \
     fi

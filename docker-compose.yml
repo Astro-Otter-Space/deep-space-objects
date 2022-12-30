@@ -14,15 +14,15 @@ services:
     # PHP
     php:
         build:
-            context: docker/php
+            context: .
+            dockerfile: php.Dockerfile
             target: app_php
             args:
                 TIMEZONE: ${TIMEZONE}
-                SOURCE_DIR: ${PWD}
         restart: unless-stopped
         volumes:
-            - ./:/var/www/deep-space-objects
             - php_socket:/var/run/php
+            - ./:/var/www/deep-space-objects
             - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
         healthcheck:
             interval: 10s
