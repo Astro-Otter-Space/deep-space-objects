@@ -1,17 +1,33 @@
 #syntax=docker/dockerfile:1.4
+ARG PHP_VERSION=8.1
+ARG NODE_VERSION=14
+
+# node "stage"
+FROM node:${NODE_VERSION}-alpine AS symfony_assets_builder
+
+WORKDIR /var/www/deep-space-objects
+#RUN mkdir public
+
+COPY ${SOURCE_DIR}/package.json ${SOURCE_DIR}/yarn.lock ./
+
+RUN yarn install
+
+#COPY ../../assets assets/
+COPY ${SOURCE_DIR}/webpack.config.js ./
+
+#RUN yarn build
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION=8.1
+
 
 # Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
 ENV APP_ENV=dev
-
 WORKDIR /var/www/deep-space-objects
 
 # php extensions installer: https://github.com/mlocati/docker-php-extension-installer
@@ -55,6 +71,7 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 COPY --link docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
+#COPY --from=symfony_assets_builder /var/www/deep-space-objects/public/build public/build
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 

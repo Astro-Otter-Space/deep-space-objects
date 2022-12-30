@@ -18,6 +18,7 @@ services:
             target: app_php
             args:
                 TIMEZONE: ${TIMEZONE}
+                SOURCE_DIR: ${PWD}
         restart: unless-stopped
         volumes:
             - ./:/var/www/deep-space-objects
