@@ -32,6 +32,7 @@
         "symfony/mailer": "5.4.*",
         "symfony/monolog-bundle": "^3.6",
         "symfony/process": "5.4.*",
+        "symfony/proxy-manager-bridge": "^5.4",
         "symfony/requirements-checker": "^1.1",
         "symfony/security-bundle": "^5.4",
         "symfony/serializer": "^5.4",
