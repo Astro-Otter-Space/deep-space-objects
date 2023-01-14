@@ -9,12 +9,30 @@ fi
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	# Install the project the first time PHP is started
 	# After the installation, the following block can be deleted
+#	if [ ! -f composer.json ]; then
+#		CREATION=1
+#
+#		rm -Rf tmp/
+#
+#		cd tmp
+#		composer require "php:>=$PHP_VERSION"
+#		composer config --json extra.symfony.docker 'true'
+#		cp -Rp . ..
+#		cd -
+#
+#		rm -Rf tmp/
+#	fi
+
 	if [ "$APP_ENV" != 'prod' ]; then
 		composer install --prefer-dist --no-progress --no-interaction
 	fi
 
 	if grep -q ^DATABASE_URL= .env; then
 		# After the installation, the following block can be deleted
+		if [ "$CREATION" = "1" ]; then
+			echo "To finish the installation please press Ctrl+C to stop Docker Compose and run: docker compose up --build"
+			sleep infinity
+		fi
 
 		echo "Waiting for db to be ready..."
 		ATTEMPTS_LEFT_TO_REACH_DATABASE=60

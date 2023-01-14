@@ -15,44 +15,44 @@ services:
     php:
         build:
             context: .
-            dockerfile: php.Dockerfile
             target: app_php
-            args:
-                TIMEZONE: ${TIMEZONE}
         restart: unless-stopped
         volumes:
             - php_socket:/var/run/php
             - ./:/var/www/deep-space-objects
-            - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
         healthcheck:
             interval: 10s
             timeout: 3s
             retries: 3
             start_period: 30s
         env_file:
-          - ".env"
+            - ".env"
         environment:
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-color
         container_name: dso_php
-        hostname: php
-#        links:
-#          - mail
         extra_hosts:
-            # Ensure that host.docker.internal is correctly defined on Linux
             - host.docker.internal:host-gateway
         networks:
-          - dso_stack
-
+            - dso_stack
+    # Node JS / assets
+    node:
+        build:
+            context: .
+            target: app_node
+        volumes:
+            - ./:/var/www/deep-space-objects
+        ports:
+            - target: 8000
     # NGINX
     nginx:
         build:
-            context: docker/nginx
+            context: .
+            target: app_nginx
             args:
                 NGINX_HOST: ${NGINX_HOST}
                 UID: ${SITE_UID}
         container_name: dso_nginx
-        hostname: nginx
         ports:
             - "80:80"
             - "443:443"

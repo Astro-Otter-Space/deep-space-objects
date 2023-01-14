@@ -2,20 +2,18 @@
 ARG PHP_VERSION=8.1
 ARG NODE_VERSION=14
 
-# node "stage"
-FROM node:${NODE_VERSION}-alpine AS symfony_assets_builder
+#######################
+# Node
+#######################
+FROM node:${NODE_VERSION}-alpine AS app_node
 
 WORKDIR /var/www/deep-space-objects
 #RUN mkdir public
 
-COPY package.json yarn.lock ./
-
-RUN yarn install
-
-COPY assets assets/
-COPY webpack.config.js ./
-
-#RUN yarn build
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
 # The different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
@@ -23,16 +21,15 @@ COPY webpack.config.js ./
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 
-
-# Prod image
+#######################
+# PHP
+#######################
 FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
 ENV APP_ENV=dev
 WORKDIR /var/www/deep-space-objects
 
-# php extensions installer: https://github.com/mlocati/docker-php-extension-installer
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
-RUN chmod +x /usr/local/bin/install-php-extensions
+COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -41,6 +38,10 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+        libsodium-dev \
+        curl \
+        openssl \
+        apt-transport-https \
 	;
 
 RUN set -eux; \
@@ -51,6 +52,8 @@ RUN set -eux; \
 		opcache \
         pdo \
         pdo_mysql \
+        gd \
+        sodium \
     ;
 
 ###> recipes ###
@@ -69,9 +72,8 @@ RUN chmod +x /usr/local/bin/docker-healthcheck
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
 COPY --link docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
-RUN chmod +x /usr/local/bin/docker-healthcheck
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
-#COPY --from=symfony_assets_builder /var/www/deep-space-objects/public/build public/build
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
@@ -102,3 +104,41 @@ RUN set -eux; \
 		composer run-script --no-dev post-install-cmd; \
 		chmod +x bin/console; sync; \
     fi
+
+COPY --from=app_php --link /var/www/deep-space-objects/public public/
+
+#######################
+# Nginx
+#######################
+FROM debian:stretch as app_nginx
+ARG NGINX_HOST
+ARG UID
+
+# Install nginx
+RUN apt-get update && apt-get install -y nginx wget
+
+# Instal certbot for SSL
+#RUN apt-get install certbot python-certbot-nginx -t stretch-backports
+
+# Configure Nginx
+ADD nginx.conf /etc/nginx/
+
+ADD symfony.conf /etc/nginx/sites-available/
+#RUN envsubst "${NGINX_HOST}" < /etc/nginx/sites-available/default.template > /etc/nginx/sites-available/symfony.conf && nginx -g 'daemon off;'
+RUN sed "/server_name nginx_host;/c\    server_name ${NGINX_HOST};" -i /etc/nginx/sites-available/symfony.conf
+RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
+
+# Configure the virtual host
+RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony
+RUN rm /etc/nginx/sites-enabled/default
+
+# Add certificate SSL
+#RUN certbot --nginx certonly
+RUN usermod -u ${UID} www-data
+
+# Run Nginx
+CMD ["nginx"]
+
+# Expose ports
+EXPOSE 80
+EXPOSE 443
