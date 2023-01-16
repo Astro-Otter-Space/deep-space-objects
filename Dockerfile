@@ -105,7 +105,7 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
-COPY --from=app_php --link /var/www/deep-space-objects/public public/
+#COPY --from=app_php --link /var/www/deep-space-objects/public public/
 
 #######################
 # Nginx
@@ -121,9 +121,9 @@ RUN apt-get update && apt-get install -y nginx wget
 #RUN apt-get install certbot python-certbot-nginx -t stretch-backports
 
 # Configure Nginx
-ADD nginx.conf /etc/nginx/
+ADD docker/nginx/nginx.conf /etc/nginx/
 
-ADD symfony.conf /etc/nginx/sites-available/
+ADD docker/nginx/symfony.conf /etc/nginx/sites-available/
 #RUN envsubst "${NGINX_HOST}" < /etc/nginx/sites-available/default.template > /etc/nginx/sites-available/symfony.conf && nginx -g 'daemon off;'
 RUN sed "/server_name nginx_host;/c\    server_name ${NGINX_HOST};" -i /etc/nginx/sites-available/symfony.conf
 RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/upstream.conf
