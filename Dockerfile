@@ -41,7 +41,6 @@ RUN apk add --no-cache \
         libsodium-dev \
         curl \
         openssl \
-        apt-transport-https \
 	;
 
 RUN set -eux; \
@@ -71,7 +70,7 @@ RUN chmod +x /usr/local/bin/docker-healthcheck
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
-COPY --link docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+COPY --link docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
