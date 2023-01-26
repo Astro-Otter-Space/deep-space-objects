@@ -17,7 +17,7 @@
         "hamhamfonfon/astrobin-ws": "^2.4",
         "jms/serializer-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "ruflin/elastica": "^6.0",
+        "ruflin/elastica": "^7.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "^5.4",
         "symfony/console": "^5.4",
