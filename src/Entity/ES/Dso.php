@@ -10,62 +10,25 @@ namespace App\Entity\ES;
  */
 class Dso
 {
-    /** @var string */
-    private $id;
-
-    /** @var array|string */
-    private $catalog;
-
-    /** @var int */
-    private $order;
-
-    /** @var string */
-    private $updatedAt;
-
-    /** @var array */
-    private $desigs;
-
-    /** @var array */
-    private $alt;
-
-    /** @var array */
-    private $description;
-
-    /** @var string */
-    private $type;
-
-    /** @var string */
-    private $constId;
-
-    /** @var float */
-    private $mag;
-
-    /** @var string */
-    private $dim;
-
-    /** @var string */
-    private $cl;
-
-    /** @var float */
-    private $distAl;
-
-    /** @var string */
-    private $discover;
-
-    /** @var float */
-    private $discoverYear;
-
-    /** @var string */
-    private $ra;
-
-    /** @var string */
-    private $dec;
-
-    /** @var string */
-    private $astrobinId;
-
-    /** @var array */
-    private $geometry;
+    private string $id;
+    private string|array $catalog;
+    private int $order;
+    private string $updatedAt;
+    private array $desigs;
+    private array $alt;
+    private array $description;
+    private string $type;
+    private string $constId;
+    private float $mag;
+    private string $dim;
+    private string $cl;
+    private float $distAl;
+    private string $discover;
+    private float $discoverYear;
+    private string $ra;
+    private string $dec;
+    private string $astrobinId;
+    private array $geometry;
 
     /**
      * @return string
@@ -89,7 +52,7 @@ class Dso
     /**
      * @return array|string
      */
-    public function getCatalog()
+    public function getCatalog(): array|string
     {
         return $this->catalog;
     }
@@ -99,14 +62,14 @@ class Dso
      *
      * @return Dso
      */
-    public function setCatalog($catalog): Dso
+    public function setCatalog(array|string|null $catalog): Dso
     {
         $this->catalog = $catalog;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getOrder(): ?int
     {
@@ -118,14 +81,14 @@ class Dso
      *
      * @return Dso
      */
-    public function setOrder($order): Dso
+    public function setOrder(int|string|null $order): Dso
     {
         $this->order = (int)$order;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUpdatedAt(): ?string
     {
@@ -144,7 +107,7 @@ class Dso
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getDesigs(): ?array
     {
@@ -156,14 +119,14 @@ class Dso
      *
      * @return Dso
      */
-    public function setDesigs($desigs): Dso
+    public function setDesigs(?array $desigs): Dso
     {
         $this->desigs = (is_array($desigs)) ? $desigs: [$desigs];
         return $this;
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getAlt(): ?array
     {
@@ -182,7 +145,7 @@ class Dso
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getDescription(): ?array
     {
@@ -201,7 +164,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getType(): ?string
     {
@@ -220,7 +183,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getConstId(): ?string
     {
@@ -239,7 +202,7 @@ class Dso
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getMag(): ?float
     {
@@ -258,7 +221,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDim(): ?string
     {
@@ -277,7 +240,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCl(): ?string
     {
@@ -296,7 +259,7 @@ class Dso
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getDistAl(): ?float
     {
@@ -315,7 +278,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDiscover(): ?string
     {
@@ -334,7 +297,7 @@ class Dso
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getDiscoverYear(): ?float
     {
@@ -353,7 +316,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getRa(): ?string
     {
@@ -372,7 +335,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDec(): ?string
     {
@@ -391,7 +354,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAstrobinId(): ?string
     {
@@ -410,7 +373,7 @@ class Dso
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getGeometry(): ?array
     {

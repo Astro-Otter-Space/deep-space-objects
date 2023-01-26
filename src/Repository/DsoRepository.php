@@ -11,6 +11,7 @@ use Elastica\Aggregation\Range;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
+use Elastica\Query\MatchQuery;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Search;
@@ -57,7 +58,6 @@ class DsoRepository extends AbstractRepository
     ];
 
     public const INDEX_NAME = 'deepspaceobjects';
-
     public const ASTROBIN_FIELD = 'astrobin_id';
 
     /**
@@ -78,15 +78,12 @@ class DsoRepository extends AbstractRepository
 
     /**
      * Retrieve object by his Id
-     *
      * @param string $id
-     *
      * @return DTOInterface|null
      * @throws \JsonException
      */
     public function getObjectById(string $id): ?DTOInterface
     {
-        /** @var ResultSet $resultDocument */
         $resultDocument = $this->findById(ucfirst($id));
         if (0 < $resultDocument->getTotalHits()) {
             $document = $resultDocument->getDocuments()[0];
@@ -115,19 +112,14 @@ class DsoRepository extends AbstractRepository
             $limit = (int)parent::SIZE;
         }
 
-        $this->client->getIndex(self::INDEX_NAME);
-
-        /** @var Query $query */
         $query = new Query();
 
-        /** @var Query\Term $mustQuery */
         $mustQuery = new Query\Term();
         $mustQuery->setTerm('const_id', strtolower($constId));
 
         $mustNotQuery = new Query\Term();
         $mustNotQuery->setTerm('id', strtolower($excludedId));
 
-        /** @var Query\BoolQuery $boolQuery */
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addMust($mustQuery)
             ->addMustNot($mustNotQuery);
@@ -138,7 +130,6 @@ class DsoRepository extends AbstractRepository
             [
                 'mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
             ]
-
         );
 
         /** @var Search $search */
@@ -161,7 +152,6 @@ class DsoRepository extends AbstractRepository
      */
     public function getLastUpdated(): array
     {
-        /** @var Query $query */
         $query = new Query();
 
         $query->setFrom(0)->setSize(self::SIZE);
@@ -331,7 +321,6 @@ class DsoRepository extends AbstractRepository
 
         $query = new Query();
 
-        /** @var Query\BoolQuery $boolQuery */
         $boolQuery = new Query\BoolQuery();
 
         /** @var Range $range */
@@ -378,21 +367,18 @@ class DsoRepository extends AbstractRepository
     {
         $listAstrobinId = [];
 
-        /** @var Query $query */
         $query = new Query();
 
-        /** @var Query\BoolQuery $boolQuery */
         $boolQuery = new Query\BoolQuery();
 
-        /** @var Query\Exists $mustQuery */
         $mustQuery = new Query\Exists(self::ASTROBIN_FIELD);
         $boolQuery->addMust($mustQuery);
 
-        if (!is_null($listAstrobinId) && (is_array($listExcludedAstrobinId) && 0 < count($listExcludedAstrobinId))) {
+        if ((is_array($listExcludedAstrobinId) && 0 < count($listExcludedAstrobinId))) {
             /** @var Query\Match $astrobinMatchQuery */
 
             foreach ($listExcludedAstrobinId as $astrobinId) {
-                $astrobinMatchQuery = new Query\Match();
+                $astrobinMatchQuery = new MatchQuery();
                 $astrobinMatchQuery->setField(self::ASTROBIN_FIELD, $astrobinId);
 
                 $boolQuery->addMustNot($astrobinMatchQuery);
@@ -404,7 +390,6 @@ class DsoRepository extends AbstractRepository
 
         //dump($query->getQuery()->toArray());
 
-        /** @var Search $search */
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
 

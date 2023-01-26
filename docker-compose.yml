@@ -1,138 +1,135 @@
-version: '3'
-
-networks:
-    dso_stack:
-        driver: bridge
-
-volumes:
-    es_data:
-        driver: local
-    es_plugins:
-        driver: local
-    db_data: {}
+version: "3.4"
 
 services:
-    # PHP
-    php:
-        build:
-            context: docker/php7-fpm
-            args:
-                TIMEZONE: ${TIMEZONE}
-        user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
-        restart: unless-stopped
-        container_name: dso_php
-        hostname: php
-        volumes:
-            - ".:/var/www/deep-space-objects:rw"
-            -  "./docker/php7-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf"
-            - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
-            - "$SSH_AUTH_SOCK:/ssh-agent:ro"
-        env_file:
-          - ".env"
-        environment:
-            - SSH_AUTH_SOCK=/ssh-agent
-            - TERM=xterm-color
-        working_dir: /var/www/deep-space-objects
-        links:
-          - mail
-        networks:
-          - dso_stack
+  # PHP
+  php:
+    build:
+      context: .
+      target: app_php
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/deep-space-objects
+      - php_socket:/var/run/php
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    env_file:
+      - ".env"
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+      - TERM=xterm-color
+    container_name: dso_php
+    extra_hosts:
+      - host.docker.internal:host-gateway
+  # Node JS / assets
+#  node:
+#    build:
+#      context: .
+#      target: app_node
+#    volumes:
+#      - ./:/var/www/deep-space-objects
+#    ports:
+#      -   target: 8000
+  # NGINX
+  nginx:
+    build:
+      context: .
+      target: app_nginx
+      args:
+        NGINX_HOST: ${NGINX_HOST}
+        UID: ${SITE_UID}
+    container_name: dso_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/deep-space-objects
+      - ./logs/nginx/:/var/log/nginx:cached
+      #- /etc/letsencrypt/:/etc/letsencrypt/
+    env_file:
+      - .env
+    environment:
+      - NGINX_HOST=${NGINX_HOST}
+  # ElasticSearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.7
+    container_name: dso_elasticsearch
+    hostname: elasticsearch
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+      - es_plugins:/usr/share/elasticsearch/plugins
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - cluster.name=demo
+      - bootstrap.memory_lock=true
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "9200:9200"
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.7
+    container_name: dso_kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    links:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+  # MySQL
+  database:
+    image: mariadb:10.3
+    container_name: dso_db
+    hostname: database
+    cap_add:
+      - SYS_NICE
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql/
+      #- ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - ".env"
+    environment:
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+  #MAIL - SMTP Server
+  #    mail:
+  #        image: bytemark/smtp
+  #        container_name: dso_mail
+  #        restart: always
+  #        networks:
+  #          - dso_stack
+  # redis
+  redis:
+    image: redis:6.0-alpine
+    hostname: redis
+    container_name: dso_redis
+    restart: always
+    ports:
+      - '6379:6379'
 
-    # NGINX
-    nginx:
-        build:
-            context: docker/nginx
-            args:
-                NGINX_HOST: ${NGINX_HOST}
-                UID: ${SITE_UID}
-        container_name: dso_nginx
-        hostname: nginx
-        ports:
-            - "80:80"
-            - "443:443"
-        depends_on:
-            - php
-        volumes:
-            - .:/var/www/deep-space-objects
-            - ./logs/nginx/:/var/log/nginx:cached
-            #- /etc/letsencrypt/:/etc/letsencrypt/
-        env_file:
-            - .env
-        environment:
-            - NGINX_HOST=${NGINX_HOST}
-        networks:
-            - dso_stack
-
-    # ElasticSearch
-    elasticsearch:
-        build:
-            context: ./docker/elasticsearch
-            dockerfile: Dockerfile
-        container_name: dso_elasticsearch
-        hostname: elasticsearch
-        volumes:
-            - es_data:/usr/share/elasticsearch/data
-            - es_plugins:/usr/share/elasticsearch/plugins
-        environment:
-            - cluster.name=demo
-            - bootstrap.memory_lock=true
-            - http.cors.enabled=true
-            - http.cors.allow-origin=*
-            - http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-        ports:
-            - "9200:9200"
-        networks:
-            - dso_stack
-
-    # MySQL
-    database:
-        image: mariadb:10.3
-        container_name: dso_database
-        hostname: database
-        restart: always
-        volumes:
-            - db_data:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USER}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
-        ports:
-          - "3307:3306"
-        networks:
-          - dso_stack
-
-    #MAIL - SMTP Server
-    mail:
-        image: bytemark/smtp
-        container_name: dso_mail
-        restart: always
-        networks:
-          - dso_stack
-
-    # Kibana
-    kibana:
-        image: docker.elastic.co/kibana/kibana:6.8.5
-        container_name: dso_kibana
-        links:
-            - elasticsearch
-        ports:
-            - "5601:5601"
-        networks:
-            - dso_stack
-
-    # redis
-    redis:
-        image: redis:6.0-alpine
-        hostname: redis
-        container_name: dso_redis
-            - ALLOW_EMPTY_PASSWORD=yes
-        ports:
-            - '6379:6379'
-        networks:
-            - dso_stack
+volumes:
+  php_socket:
+  db_data: { }
+  es_data: { }
+  es_plugins: { }

@@ -1,6 +1,8 @@
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.*.local
+/.env
+.env
 /public/bundles/
 /var/
 /vendor/
@@ -15,7 +17,6 @@ yarn-error.log
 
 /logs/
 /.idea/
-/.env
 config/elasticsearch/bulk/*.json
 
 ###> lexik/jwt-authentication-bundle ###

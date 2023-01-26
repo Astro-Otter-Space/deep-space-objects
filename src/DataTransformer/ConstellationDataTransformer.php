@@ -39,7 +39,6 @@ final class ConstellationDataTransformer extends AbstractDataTransformer
      */
     public function vignetteView(ConstellationDTO $constellationDTO): array
     {
-        /** @var Image $image */
         $image = new Image();
         $image->url_regular = $constellationDTO->getImage();
         $image->user = $constellationDTO->title();

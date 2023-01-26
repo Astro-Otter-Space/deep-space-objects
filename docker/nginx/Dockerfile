@@ -24,7 +24,6 @@ RUN rm /etc/nginx/sites-enabled/default
 
 # Add certificate SSL
 #RUN certbot --nginx certonly
-
 RUN usermod -u ${UID} www-data
 
 # Run Nginx
@@ -33,13 +32,3 @@ CMD ["nginx"]
 # Expose ports
 EXPOSE 80
 EXPOSE 443
-
-# generate certificate
-#RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -subj "/C=FR/ST=Montpellier/L=Montpellier/O=Global Security/OU=IT Department/CN=example.com"
-
-#
-#RUN openssl req -x509 -out localhost.crt -keyout localhost.key \
-#      -newkey rsa:2048 -nodes -days 365 -sha256 \
-#      -subj '/CN=localhost'
-
-

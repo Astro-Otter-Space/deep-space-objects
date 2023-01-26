@@ -19,9 +19,7 @@ final class ConstellationRepository extends AbstractRepository
 {
 
     public const INDEX_NAME = 'constellations';
-
     public const URL_MAP = '/build/images/const_maps/%s.gif';
-
     public const URL_IMG = '/build/images/const_thumbs/%s.jpg';
 
     private static array $listSearchFields = [
@@ -109,7 +107,7 @@ final class ConstellationRepository extends AbstractRepository
     }
 
     /**
-     * @return Constellation
+     * @return string
      */
     public function getEntity(): string
     {
