@@ -83,13 +83,16 @@ ENV PATH="${PATH}:/root/.composer/vendor/bin"
 COPY --from=composer:2 --link /usr/bin/composer /usr/bin/composer
 
 # prevent the reinstallation of vendors at every changes in the source code
+# prevent the reinstallation of vendors at every changes in the source code
 COPY composer.* symfony.* ./
 RUN set -eux; \
     if [ -f composer.json ]; then \
-        composer config --json extra.symfony.docker 'true'; \
-		composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
-		composer clear-cache; \
+        RUN rm compose.lock \
+        RUN rm -rf vendor/* \
     fi
+#		composer install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress; \
+#		composer clear-cache; \
+
 
 # copy sources
 COPY --link  . .
