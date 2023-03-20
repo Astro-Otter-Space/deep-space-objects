@@ -53,7 +53,7 @@ class SearchAutocomplete extends AbstractController
                 $listDso = $dsoManager->searchDsoByTerms($searchTerm, null);
             } catch (WsException|\JsonException|\ReflectionException $e) {
             } finally {
-                $dataDso = (is_null($listDso)) ? $dsoDataTransformer->listVignettesView($listDso) : [];
+                $dataDso = (!is_null($listDso)) ? $dsoDataTransformer->listVignettesView($listDso) : [];
             }
 
             try {
