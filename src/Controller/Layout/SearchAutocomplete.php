@@ -47,12 +47,13 @@ class SearchAutocomplete extends AbstractController
     {
         $data = [];
         if ($request->query->has('q')) {
+            $listDso = null;
             $searchTerm = strtolower(filter_var($request->query->get('q'), FILTER_SANITIZE_STRING));
             try {
                 $listDso = $dsoManager->searchDsoByTerms($searchTerm, null);
             } catch (WsException|\JsonException|\ReflectionException $e) {
             } finally {
-                $dataDso = $dsoDataTransformer->listVignettesView($listDso);
+                $dataDso = (is_null($listDso)) ? $dsoDataTransformer->listVignettesView($listDso) : [];
             }
 
             try {
