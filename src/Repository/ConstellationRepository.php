@@ -26,7 +26,6 @@ final class ConstellationRepository extends AbstractRepository
 
     private static array $listSearchFields = [
         'id',
-        'id.raw',
         'gen',
         'alt.alt'
     ];

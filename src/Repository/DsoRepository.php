@@ -23,7 +23,6 @@ class DsoRepository extends AbstractRepository
 {
     private static array $listSearchFields = [
         'id',
-        'id.raw',
         'desigs',
         'alt.alt',
         'discover'
