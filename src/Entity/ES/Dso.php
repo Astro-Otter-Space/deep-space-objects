@@ -16,17 +16,17 @@ class Dso
     private string $updatedAt;
     private array $desigs;
     private array $alt;
-    private array $description;
-    private string $type;
-    private string $constId;
-    private float $mag;
-    private string $dim;
-    private string $cl;
-    private float $distAl;
-    private string $discover;
-    private float $discoverYear;
-    private string $ra;
-    private string $dec;
+    private ?array $description;
+    private ?string $type;
+    private ?string $constId;
+    private ?float $mag;
+    private ?string $dim;
+    private ?string $cl;
+    private ?float $distAl;
+    private ?string $discover;
+    private ?float $discoverYear;
+    private ?string $ra;
+    private ?string $dec;
     private string $astrobinId;
     private array $geometry;
 
