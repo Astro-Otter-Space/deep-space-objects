@@ -5,6 +5,7 @@
 namespace App\Command;
 
 use App\Classes\Utils;
+use App\Service\ConvertCoordinates;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,14 +37,15 @@ class ConvertCoordinatesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $lon = $lat = 0;
+        $convertCoordinates = new ConvertCoordinates;
         if (true === $input->hasOption('ra')) {
-            $raOption = $input->getOption('ra');
-            $lon = Utils::raToLon($raOption);
+            $value = $input->getOption('ra') ?: 0;
+            $lon = $convertCoordinates('raToLon', $value);
         }
 
         if (true === $input->hasOption('dec')) {
-            $decOption = $input->getOption('dec');
-            $lat = Utils::decToLat($decOption);
+            $value = $input->getOption('dec') ?: 0;
+            $lat = $convertCoordinates('decToLat', $value);
         }
 
         $output->writeln([$lon, $lat]);

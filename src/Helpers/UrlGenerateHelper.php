@@ -6,14 +6,6 @@ use App\Classes\Utils;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
-use App\Entity\ES\Constellation;
-use App\Entity\ES\Dso;
-use App\Entity\ES\Event;
-use App\Entity\ES\Observation;
-use App\Repository\ConstellationRepository;
-use App\Repository\DsoRepository;
-use App\Repository\EventRepository;
-use App\Repository\ObservationRepository;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -48,8 +40,6 @@ final class UrlGenerateHelper
         $url = '';
         if ($entity instanceof DsoDTO
             || $entity instanceof ConstellationDTO
-//            || $entity instanceof Observation
-//            || $entity instanceof Event
         ) {
             $id = strtolower($entity->getId());
 
@@ -86,17 +76,6 @@ final class UrlGenerateHelper
 
                     $url = $this->router->generate($route, $params, $typeUrl);
                     break;
-
-               /* case ObservationRepository::INDEX_NAME:
-                    $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
-                    $url = $this->router->generate('observation_show', ['name' => $name], $typeUrl);
-                    break;
-
-                case EventRepository::INDEX_NAME:
-                    $name = Utils::camelCaseUrlTransform($entity->fieldsUrl());
-                    $url = $this->router->generate('event_show', ['name' => $name], $typeUrl);
-                    break;*/
-
                 default:
                     $url = $this->router->generate('homepage');
             }

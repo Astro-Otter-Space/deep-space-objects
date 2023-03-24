@@ -7,16 +7,9 @@ use App\Entity\ES\Dso;
 use AstrobinWs\Response\Image;
 use AstrobinWs\Response\User;
 
-/**
- * Class DsoDTO
- *
- * @package App\Entity\DTO
- */
 final class DsoDTO implements DTOInterface
 {
-    /**
-     * META
-     */
+
     private string $id;
     private string $elasticSearchId;
     private string $relativeUrl;
@@ -24,19 +17,15 @@ final class DsoDTO implements DTOInterface
     private string $locale;
     private ?string $updatedAt;
     private Dso $dso;
-
-    /**
-     * Data
-     */
     private string $name;
-    private $catalogs;
+    private array $catalogs;
     private array $desigs;
     private ?string $alt;
     private ?string $description;
     private string $type;
-    private $magnitude;
+    private mixed $magnitude;
     private string $constellationId;
-    private $constellation;
+    private ?DTOInterface $constellation;
     private $distAl;
     private ?string $discover;
     private ?int $discoverYear;

@@ -14,53 +14,52 @@ class Contact
 {
 
     /**
-     * @var
+     * @var string
      * @Assert\NotBlank(message="contact.constraint.not_blank")
      */
-    private $firstname;
+    private string $firstname;
 
     /**
-     * @var
+     * @var string
      * @Assert\NotBlank(message="contact.constraint.not_blank")
      */
-    private $lastname;
+    private string $lastname;
 
     /**
-     * @var
+     * @var string
      * @Assert\NotBlank(message="contact.constraint.not_blank")
      * @Assert\Email(message="contact.constraint.email")
      */
-    private $email;
+    private string $email;
 
     /**
-     * @var
+     * @var string
      * @Assert\Country(message="contact.constraint.country")
      */
-    private $country;
+    private string $country;
 
     /**
-     * @var
+     * @var string
      * @Assert\NotBlank(message="contact.constraint.not_blank")
      * @Assert\Choice(callback="getValidTopics", message="contact.constraint.topic")
      */
-    private $topic;
+    private string $topic;
 
     /**
-     * @var
+     * @var string
      * @Assert\Blank(message="contact.constraint.invalid_form")
      */
-    private $pot2Miel;
+    private string $pot2Miel;
 
     /**
-     * @var
+     * @var string
      */
-    private $message;
+    private string $message;
 
     /**
-     * @var
+     * @var string
      */
-    private $labelCountry;
-
+    private string $labelCountry;
 
     /**
      * @return mixed
@@ -139,9 +138,9 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getTopic()
+    public function getTopic(): string
     {
         return $this->topic;
     }
@@ -151,7 +150,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setTopic($topic): self
+    public function setTopic(mixed $topic): self
     {
         $this->topic = $topic;
         return $this;
@@ -170,16 +169,16 @@ class Contact
      *
      * @return Contact
      */
-    public function setMessage($message): self
+    public function setMessage(mixed $message): self
     {
         $this->message = $message;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getPot2Miel()
+    public function getPot2Miel(): string
     {
         return $this->pot2Miel;
     }
@@ -187,7 +186,7 @@ class Contact
     /**
      * @param mixed $pot2Miel
      */
-    public function setPot2Miel($pot2Miel): void
+    public function setPot2Miel(mixed $pot2Miel): void
     {
         $this->pot2Miel = $pot2Miel;
     }
@@ -205,7 +204,7 @@ class Contact
      *
      * @return Contact
      */
-    public function setLabelCountry($labelCountry): self
+    public function setLabelCountry(mixed $labelCountry): self
     {
         $this->labelCountry = $labelCountry;
         return $this;

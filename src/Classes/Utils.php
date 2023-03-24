@@ -324,44 +324,4 @@ final class Utils
     {
         return self::$listPublics;
     }
-
-    /**
-     * @param string $ra
-     *
-     * @return float|null
-     */
-    public static function raToLon(string $ra): ?float
-    {
-        $lon = null;
-        preg_match_all(ConvertCoordinatesCommand::REGEX, $ra, $matches, PREG_PATTERN_ORDER);
-        $h = (float)$matches[0][0];
-        $mn = (float)$matches[0][1];
-        $sec = (float)$matches[0][2];
-
-        $lon = ($h + ($mn/60) + ($sec/3600))*15;
-        return ($lon > 180) ? $lon-360 : $lon;
-    }
-
-    /**
-     * @param string $dec
-     *
-     * @return float|null
-     */
-    public static function decToLat(string $dec): ?float
-    {
-        $lat = null;
-        preg_match_all(ConvertCoordinatesCommand::REGEX, $dec, $matches, PREG_PATTERN_ORDER);
-        $deg = (float)$matches[0][0];
-        $isNegative = $deg < 0;
-
-        $deg = (float)str_replace('-', '', $matches[0][0]);
-        $mn = (float)$matches[0][1];
-        $sec = (float)$matches[0][2];
-
-        $lat = $deg + $mn/60 + $sec/3600;
-
-        $lat = ($isNegative)? '-' . $lat: $lat;
-
-        return (float)$lat;
-    }
 }

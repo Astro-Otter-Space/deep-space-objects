@@ -35,13 +35,13 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
      * @Assert\Email(mode="html5", groups={"api_user"}, message="contact.constraint.email")
      * @Assert\NotBlank(groups={"api_user"}, message="contact.constraint.not_blank")
      */
-    private $email;
+    private mixed $email;
 
     /**
      * @var
      * @ORM\Column(length=128, type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @var
@@ -52,12 +52,12 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
     /**
      * @ORM\Column(type="json", name="roles")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string $pot2Miel
      */
-    private $pot2Miel;
+    private string $pot2Miel;
 
     /**
      * @var
@@ -97,7 +97,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
      *
      * @return ApiUser
      */
-    public function setRawPassword($rawPassword): self
+    public function setRawPassword(mixed $rawPassword): self
     {
         $this->rawPassword = $rawPassword;
         return $this;
@@ -106,7 +106,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
     /**
      * @return mixed
      */
-    public function getRawPassword()
+    public function getRawPassword(): mixed
     {
         return $this->rawPassword;
     }
@@ -133,7 +133,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
     /**
      * @return string|null
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
@@ -151,7 +151,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
      *
      * @return ApiUser
      */
-    public function setEmail($email): self
+    public function setEmail(mixed $email): self
     {
         $this->email = $email;
         return $this;
@@ -170,7 +170,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
      *
      * @return ApiUser
      */
-    public function setPot2Miel($pot2Miel): self
+    public function setPot2Miel(mixed $pot2Miel): self
     {
         $this->pot2Miel = $pot2Miel;
         return $this;
@@ -181,7 +181,7 @@ class ApiUser implements UserInterface, \Symfony\Component\Security\Core\User\Pa
      *
      * @return ApiUser
      */
-    public function setIsActive($isActive): self
+    public function setIsActive(mixed $isActive): self
     {
         $this->isActive = $isActive;
         return $this;

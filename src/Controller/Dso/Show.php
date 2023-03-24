@@ -22,9 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- *
- */
+
 class Show extends AbstractController
 {
     public const HTTP_TTL = 31556952;
@@ -64,16 +62,13 @@ class Show extends AbstractController
         }
 
         $constellation = $dso->getConstellation();
-        $params['desc'] = implode(Utils::GLUE_DASH, $dso->getDesigs());
         $params['dsoData'] = $dsoManager->formatVueData($dso);
-        $params['constTitle'] = $constellation->title() ?? "";
-        $params['last_update'] = $dso->getUpdatedAt();
 
         // Image cover
         $params['imgCoverAlt'] = ($dso->getAstrobin()->title) ? sprintf('"%s" by %s', $dso->getAstrobin()->title, $dso->getAstrobin()->user) : null;
 
         // List of Dso from same constellation
-        $listDso = $dsoManager->getListDsoFromConst($dso->getConstellation()->getId(), $dso->getId(), 0, 20);
+        $listDso = $dsoManager->getListDsoFromConst($dso->getConstellation()->getId(), $id, 0, 20);
 
         $params['dso_by_const'] = $dsoDataTransformer->listVignettesView($listDso);
         $params['list_types_filters'] = $this->buildFiltersWithAll($listDso) ?? [];
@@ -98,8 +93,6 @@ class Show extends AbstractController
         }
 
         $params['images'] = $listImages ?? []; //array_filter($listImages);
-
-
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->router, $dso->title());
 
         $response = $this->render('pages/dso.html.twig', $params);
