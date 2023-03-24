@@ -2,7 +2,6 @@
 
 namespace App\Entity\ES;
 
-use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
 use Traversable;
 
@@ -18,7 +17,7 @@ class ListDso implements \IteratorAggregate
     /**
      * @return \ArrayIterator|Traversable
      */
-    public function getIterator()
+    public function getIterator(): Traversable|\ArrayIterator
     {
         return new \ArrayIterator($this->listDso);
     }

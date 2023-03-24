@@ -12,12 +12,12 @@ use Traversable;
 class ListConstellation implements \IteratorAggregate
 {
     /** @var array|Traversable */
-    protected $listConstellation = [];
+    protected array|Traversable $listConstellation = [];
 
     /**
      * @return \ArrayIterator|Traversable
      */
-    public function getIterator()
+    public function getIterator(): Traversable|\ArrayIterator
     {
         return new \ArrayIterator($this->listConstellation);
     }
