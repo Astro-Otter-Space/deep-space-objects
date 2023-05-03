@@ -14,7 +14,7 @@ class Dso
     private string|array $catalog;
     private int $order;
     private string $updatedAt;
-    private array $desigs;
+    private array|string $desigs;
     private array $alt;
     private ?array $description = null;
     private ?string $type = null;
@@ -109,7 +109,7 @@ class Dso
     /**
      * @return array|null
      */
-    public function getDesigs(): ?array
+    public function getDesigs(): array|string|null
     {
         return $this->desigs;
     }
@@ -119,7 +119,7 @@ class Dso
      *
      * @return Dso
      */
-    public function setDesigs(?array $desigs): Dso
+    public function setDesigs(array|string|null $desigs): Dso
     {
         $this->desigs = (is_array($desigs)) ? $desigs: [$desigs];
         return $this;
