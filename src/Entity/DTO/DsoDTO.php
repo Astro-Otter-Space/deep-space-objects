@@ -19,7 +19,7 @@ final class DsoDTO implements DTOInterface
     private Dso $dso;
     private string $name;
     private array $catalogs;
-    private array $desigs;
+    private array|string $desigs;
     private ?string $alt;
     private ?string $description;
     private string $type;
@@ -249,7 +249,7 @@ final class DsoDTO implements DTOInterface
     /**
      * @return array
      */
-    public function getDesigs(): array
+    public function getDesigs(): array|string
     {
         return $this->desigs;
     }
@@ -259,7 +259,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setDesigs($desigs): DsoDTO
+    public function setDesigs(array|string $desigs): DsoDTO
     {
         $this->desigs = $desigs;
         return $this;
