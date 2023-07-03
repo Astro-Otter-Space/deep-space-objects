@@ -11,7 +11,7 @@ namespace App\Entity\ES;
 class Dso
 {
     private string $id;
-    private string|array $catalog;
+    private string|array|null $catalog;
     private int $order;
     private string $updatedAt;
     private array|string $desigs;
@@ -52,7 +52,7 @@ class Dso
     /**
      * @return array|string
      */
-    public function getCatalog(): array|string
+    public function getCatalog(): array|string|null
     {
         return $this->catalog;
     }
