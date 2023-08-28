@@ -7,7 +7,7 @@ namespace App\DataTransformer;
 use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\ListConstellation;
-use AstrobinWs\Response\Image;
+use AstrobinWs\Response\DTO\Item\Image;
 
 /**
  * Class CollectionDataTransformer

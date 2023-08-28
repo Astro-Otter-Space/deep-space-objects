@@ -8,7 +8,7 @@ use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
 use App\Service\MailService;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Response\AstrobinResponse;
+use AstrobinWs\Response\DTO\AstrobinResponse;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -4,8 +4,8 @@ namespace App\Entity\DTO;
 
 use App\Classes\Utils;
 use App\Entity\ES\Dso;
-use AstrobinWs\Response\Image;
-use AstrobinWs\Response\User;
+use AstrobinWs\Response\DTO\Item\Image;
+use AstrobinWs\Response\DTO\Item\User;
 
 final class DsoDTO implements DTOInterface
 {
@@ -30,7 +30,7 @@ final class DsoDTO implements DTOInterface
     private ?string $discover;
     private ?int $discoverYear;
     private ?string $astrobinId;
-    private Image $astrobin;
+    private ?Image $astrobin;
     private ?User  $astrobinUser;
     private ?array $geometry;
     private ?string $dim;

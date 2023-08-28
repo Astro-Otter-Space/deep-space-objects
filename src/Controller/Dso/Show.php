@@ -12,7 +12,7 @@ use App\Managers\DsoManager;
 use App\Service\AstrobinService;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Response\Image;
+use AstrobinWs\Response\DTO\Item\Image;
 use Elastica\Exception\NotFoundException;
 use JsonException;
 use ReflectionException;

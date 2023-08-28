@@ -18,10 +18,10 @@ use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
 use AstrobinWs\Exceptions\WsException;
-use AstrobinWs\Response\AstrobinError;
-use AstrobinWs\Response\AstrobinResponse;
-use AstrobinWs\Response\Image;
-use AstrobinWs\Response\User;
+use AstrobinWs\Response\DTO\AstrobinError;
+use AstrobinWs\Response\DTO\AstrobinResponse;
+use AstrobinWs\Response\DTO\Item\Image;
+use AstrobinWs\Response\DTO\Item\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
