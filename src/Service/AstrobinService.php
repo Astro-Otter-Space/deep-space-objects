@@ -10,11 +10,11 @@ use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Response\DTO\AstrobinError;
 use AstrobinWs\Response\DTO\AstrobinResponse;
 use AstrobinWs\Response\DTO\Item\Image;
-use AstrobinWs\Response\ListImages;
+use AstrobinWs\Response\DTO\Collection\ListImages;
 use AstrobinWs\Response\DTO\Item\User;
 use AstrobinWs\Services\GetImage;
-use App\Classes\Utils;
 use AstrobinWs\Services\GetUser;
+use App\Classes\Utils;
 use JsonException;
 
 /**
