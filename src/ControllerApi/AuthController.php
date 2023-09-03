@@ -33,8 +33,7 @@ class AuthController extends AbstractController
         /** @var ObjectManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        $email = $request->request->get('email');
-        $rawPassword = $request->request->get('rawPassword');
+        ['email' => $email, 'rawPassword' => $rawPassword] = $request->toArray();
 
         /** @var ApiUser $user */
         $user = new ApiUser();
