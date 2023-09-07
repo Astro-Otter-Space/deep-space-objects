@@ -66,7 +66,7 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\Get("/dso/id/{id}", name="api_object_dso")
+     * @Rest\Get("/dso/{id}", name="api_object_dso")
      *
      * @param string $id
      *
@@ -84,15 +84,7 @@ final class DataController extends AbstractFOSRestController
 
         $serializer = new Serializer($normalizers, $encoders);
 
-        /** @var DsoDTO|null $data */
-//        $data = $this->dsoDataTransformer->longView($dso);
-//        $data['image'] = $dso->getAstrobin();
-//        $data['geojson_dso'] = [
-//            "type" => "FeatureCollection",
-//            "features" => [$dso->geoJson()]
-//        ];
-//        $data['geojson_center'] = $dso->getGeometry()['coordinates'];
-        $formatedData = $serializer->normalize($dso); // $this->buildJsonApi($data, $codeHttp);
+        $formatedData = $serializer->normalize($dso);
 
         $view = $this->view($formatedData, $codeHttp);
         $view->setFormat(self::JSON_FORMAT);
