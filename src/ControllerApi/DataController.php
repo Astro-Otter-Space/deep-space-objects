@@ -5,7 +5,6 @@ namespace App\ControllerApi;
 use App\Classes\Utils;
 use App\Controller\ControllerTraits\DsoTrait;
 use App\DataTransformer\DsoDataTransformer;
-use App\Entity\DTO\DTOInterface;
 use App\Entity\DTO\DsoDTO;
 use App\Managers\DsoManager;
 use App\Repository\ConstellationRepository;
@@ -21,6 +20,10 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class GeoJson
@@ -69,22 +72,27 @@ final class DataController extends AbstractFOSRestController
      *
      * @return Response
      * @throws \ReflectionException
+     * @throws \JsonException
      */
     public function getDso(string $id): Response
     {
-        /** @var DTOInterface $dso */
         $dso = $this->dsoManager->getDso($id);
-
-        if (is_null($dso)) {
-            throw new NotFoundException(sprintf("%s is not an correct item", $id));
-        }
-
         $codeHttp = Response::HTTP_OK;
 
-        /** @var DsoDTO|null $data */
-        $data = $this->dsoDataTransformer->longView($dso);
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
 
-        $formatedData = $this->buildJsonApi($data, $codeHttp);
+        $serializer = new Serializer($normalizers, $encoders);
+
+        /** @var DsoDTO|null $data */
+//        $data = $this->dsoDataTransformer->longView($dso);
+//        $data['image'] = $dso->getAstrobin();
+//        $data['geojson_dso'] = [
+//            "type" => "FeatureCollection",
+//            "features" => [$dso->geoJson()]
+//        ];
+//        $data['geojson_center'] = $dso->getGeometry()['coordinates'];
+        $formatedData = $serializer->normalize($dso); // $this->buildJsonApi($data, $codeHttp);
 
         $view = $this->view($formatedData, $codeHttp);
         $view->setFormat(self::JSON_FORMAT);
