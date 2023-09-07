@@ -66,7 +66,7 @@ final class DataController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\Get("/dso/{id}", name="api_object_dso")
+     * @Rest\Get("/dso/id/{id}", name="api_object_dso")
      *
      * @param string $id
      *
