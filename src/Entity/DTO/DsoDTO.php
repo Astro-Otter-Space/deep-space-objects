@@ -15,27 +15,27 @@ final class DsoDTO implements DTOInterface
     private string $relativeUrl;
     private string $absoluteUrl;
     private string $locale;
-    private ?string $updatedAt;
+    private ?string $updatedAt = null;
     private Dso $dso;
     private string $name;
     private array $catalogs;
     private array|string $desigs;
-    private ?string $alt;
-    private ?string $description;
+    private ?string $alt = null;
+    private ?string $description = null;
     private string $type;
     private mixed $magnitude;
     private string $constellationId;
     private ?DTOInterface $constellation;
     private $distAl;
-    private ?string $discover;
-    private ?int $discoverYear;
-    private ?string $astrobinId;
-    private ?Image $astrobin;
-    private ?User  $astrobinUser;
-    private ?array $geometry;
-    private ?string $dim;
-    private ?string $declinaison;
-    private ?string $rightAscencion;
+    private ?string $discover = null;
+    private ?int $discoverYear = null;
+    private ?string $astrobinId = null;
+    private ?Image $astrobin = null;
+    private ?User  $astrobinUser = null;
+    private ?array $geometry = null;
+    private ?string $dim = null;
+    private ?string $declinaison = null;
+    private ?string $rightAscencion = null;
 
     /**
      * DsoDTO constructor.
@@ -93,7 +93,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setLocale($locale): DsoDTO
+    public function setLocale(mixed $locale): DsoDTO
     {
         $this->locale = $locale;
         return $this;
@@ -247,7 +247,7 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return array
+     * @return array|string
      */
     public function getDesigs(): array|string
     {
@@ -335,7 +335,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setMagnitude($magnitude): DsoDTO
+    public function setMagnitude(mixed $magnitude): DsoDTO
     {
         $this->magnitude = $magnitude;
         return $this;
@@ -607,6 +607,9 @@ final class DsoDTO implements DTOInterface
      */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
+        if (is_null($this->updatedAt)) {
+            return new \DateTime();
+        }
         $updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
         return (false !== $updatedAt) ? $updatedAt : null;
     }
@@ -616,7 +619,7 @@ final class DsoDTO implements DTOInterface
      *
      * @return DsoDTO
      */
-    public function setUpdatedAt(string $updatedAt): DsoDTO
+    public function setUpdatedAt(?string $updatedAt): DsoDTO
     {
         $this->updatedAt = $updatedAt;
         return $this;
