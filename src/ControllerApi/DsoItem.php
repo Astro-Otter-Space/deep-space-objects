@@ -54,7 +54,7 @@ class DsoItem extends AbstractFOSRestController
         $formatedData = $serializer->normalize($dso);
 
         $view = $this->view($formatedData, $codeHttp);
-        $view->setFormat(DataController::JSON_FORMAT);
+        $view->setFormat('json');
 
         return $this->handleView($view);
     }

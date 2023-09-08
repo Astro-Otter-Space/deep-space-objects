@@ -93,7 +93,7 @@ class DsoCollection extends AbstractFOSRestController
         $formatedData = $serializer->normalize($listDso->getIterator()->getArrayCopy());
 
         $view = $this->view($formatedData, Response::HTTP_OK);
-        $view->setFormat(DataController::JSON_FORMAT);
+        $view->setFormat('json');
 
         return $this->handleView($view);
     }
