@@ -27,14 +27,14 @@ class DsoCollection extends AbstractFOSRestController
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
-     * @param ParamFetcher $paramFetcher
+     * @param ParamFetcherInterface $paramFetcher
      * @param DsoManager $dsoManager
-     * @return Response
+     * @return View
      */
     public function __invoke(
-        ParamFetcher $paramFetcher,
+        ParamFetcherInterface $paramFetcher,
         DsoManager $dsoManager
-    ): Response
+    ): View
     {
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');

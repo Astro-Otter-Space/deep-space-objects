@@ -25,11 +25,11 @@ class DsoItem extends AbstractFOSRestController
      *
      * @param string $id
      * @param DsoManager $dsoManager
-     * @return Response
+     * @return View
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function __invoke(string $id, DsoManager $dsoManager): Response
+    public function __invoke(string $id, DsoManager $dsoManager): View
     {
         $dso = $dsoManager->getDso($id);
         $codeHttp = Response::HTTP_OK;
