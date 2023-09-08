@@ -6,6 +6,10 @@ use App\Managers\ConstellationManager;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConstellationItem extends AbstractFOSRestController
 {
