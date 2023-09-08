@@ -5,11 +5,15 @@ namespace App\ControllerApi;
 use App\Classes\Utils;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Exception\InvalidParameterException;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,11 +32,11 @@ class DsoCollection extends AbstractFOSRestController
     /**
      * @Route("/dso/list", name="api_get_dso_collection", methods={"GET"})
      *
-     * @Rest\QueryParam(name="constellation", requirements="\w+", default="")
-     * @Rest\QueryParam(name="catalog", requirements="\w+", default="")
-     * @Rest\QueryParam(name="type", requirements="\w+",default="")
-     * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
-     * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
+     * @QueryParam(name="constellation", requirements="\w+", default="")
+     * @QueryParam(name="catalog", requirements="\w+", default="")
+     * @QueryParam(name="type", requirements="\w+",default="")
+     * @QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
+     * @QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
      * @param ParamFetcherInterface $paramFetcher
      * @return View
