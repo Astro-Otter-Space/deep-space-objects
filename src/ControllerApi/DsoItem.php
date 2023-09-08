@@ -18,18 +18,15 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * 
+ *
  */
 class DsoItem extends AbstractFOSRestController
 {
     use DsoTrait, SymfonyServicesTrait;
 
-    private DsoManager $dsoManager;
-
-    public function __construct(DsoManager $dsoManager)
-    {
-        $this->dsoManager = $dsoManager;
-    }
+    public function __construct(
+        private DsoManager $dsoManager
+    ) { }
 
     /**
      * @Rest\Get("/dso/item/{id}", name="api_get_dso_item")
@@ -39,7 +36,7 @@ class DsoItem extends AbstractFOSRestController
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function getDsoItem(string $id): View
+    public function getDsoItemAction(string $id): View
     {
         try {
             $dso = $this->dsoManager->getDso($id);

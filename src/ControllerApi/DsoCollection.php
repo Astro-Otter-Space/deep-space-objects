@@ -4,6 +4,7 @@ namespace App\ControllerApi;
 
 use App\Classes\Utils;
 use App\Managers\DsoManager;
+use App\Repository\DsoRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Exception\InvalidParameterException;
@@ -18,6 +19,12 @@ use Symfony\Component\Serializer\Serializer;
 
 class DsoCollection extends AbstractFOSRestController
 {
+
+    public function __construct(
+        private DsoManager $dsoManager,
+        private DsoRepository $dsoRepository
+    ) { }
+
     /**
      * @Rest\Get("/dso/list", name="api_get_dso_collection")
      *
@@ -28,12 +35,10 @@ class DsoCollection extends AbstractFOSRestController
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
      * @param ParamFetcherInterface $paramFetcher
-     * @param DsoManager $dsoManager
      * @return View
      */
-    public function getDsoList(
+    public function getDsoListAction(
         ParamFetcherInterface $paramFetcher,
-        DsoManager $dsoManager
     ): View
     {
         $offset = (int)$paramFetcher->get('offset');
@@ -71,7 +76,7 @@ class DsoCollection extends AbstractFOSRestController
             ->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
         try {
-            $listDso = $dsoManager->buildListDso($listDsoId);
+            $listDso = $this->dsoManager->buildListDso($listDsoId);
         } catch (\JsonException|\ReflectionException $e) {
             $listDso = null;
         }
