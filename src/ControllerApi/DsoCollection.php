@@ -48,6 +48,7 @@ class DsoCollection extends AbstractFOSRestController
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
 
+        $filters = [];
         $constellation = ("" !== $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
         if (!is_null($constellation)) {
             $filters['constellation'] = $constellation;
