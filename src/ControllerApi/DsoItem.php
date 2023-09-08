@@ -56,7 +56,7 @@ class DsoItem extends AbstractFOSRestController
 
         $view = View::create();
         $view->setData($formatedData);
-
+        $view->setFormat('json');
         return $view;
     }
 }
