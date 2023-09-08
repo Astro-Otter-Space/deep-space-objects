@@ -3,9 +3,6 @@
 namespace App\ControllerApi;
 
 use App\Classes\Utils;
-use App\ControllerApi\Dso\JsonEncoder;
-use App\ControllerApi\Dso\ObjectNormalizer;
-use App\ControllerApi\Dso\Serializer;
 use App\Managers\DsoManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -14,6 +11,10 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class DsoCollection extends AbstractFOSRestController
 {
