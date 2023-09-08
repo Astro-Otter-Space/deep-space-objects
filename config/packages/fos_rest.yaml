@@ -5,6 +5,7 @@ fos_rest:
     allowed_methods_listener:  true
     routing_loader: false
     view:
+        format: json
         view_response_listener:  true
 #    exception:
 #        codes:
