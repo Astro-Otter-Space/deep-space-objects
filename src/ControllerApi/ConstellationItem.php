@@ -15,7 +15,7 @@ class ConstellationItem extends AbstractFOSRestController
     ) {}
 
     /**
-     * @Route("/constellation/item/{id}, name="api_get_item_constellation", methods={"GET"})
+     * @Route("/constellation/item/{id}", name="api_get_item_constellation", methods={"GET"})
      * @param string $id
      * @return View
      */
