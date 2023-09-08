@@ -107,7 +107,7 @@ class Dso
     }
 
     /**
-     * @return array|null
+     * @return array|string|null
      */
     public function getDesigs(): array|string|null
     {
@@ -115,7 +115,7 @@ class Dso
     }
 
     /**
-     * @param array|null $desigs
+     * @param array|string|null $desigs
      *
      * @return Dso
      */
@@ -145,7 +145,7 @@ class Dso
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getDescription(): ?array
     {
@@ -164,7 +164,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getType(): ?string
     {
@@ -183,7 +183,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getConstId(): ?string
     {
@@ -202,7 +202,7 @@ class Dso
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getMag(): ?float
     {
@@ -221,7 +221,7 @@ class Dso
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDim(): ?string
     {

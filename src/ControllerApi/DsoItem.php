@@ -42,7 +42,7 @@ class DsoItem extends AbstractFOSRestController
         try {
             $dso = $this->dsoManager->getDso($id);
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('Document "%s" not find.', $id));
+            throw new NotFoundHttpException(sprintf('DSO "%s" not find.', $id));
         }
 
         $encoders = [new JsonEncoder()];
