@@ -106,7 +106,7 @@ final class DataController extends AbstractFOSRestController
      *
      * @return View
      *
-     * @Rest\Get("/dso/by_type/{type}", name="api_get_dso_by_type")
+     * @Rest\Get("/dso/list/type/{type}", name="api_get_dso_by_type")
      * @Rest\QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @Rest\QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      */
