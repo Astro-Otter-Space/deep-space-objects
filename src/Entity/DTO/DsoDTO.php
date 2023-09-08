@@ -6,6 +6,7 @@ use App\Classes\Utils;
 use App\Entity\ES\Dso;
 use AstrobinWs\Response\DTO\Item\Image;
 use AstrobinWs\Response\DTO\Item\User;
+use DateTimeInterface;
 
 final class DsoDTO implements DTOInterface
 {
@@ -603,19 +604,19 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface
     {
         if (is_null($this->updatedAt)) {
-            return new \DateTime();
+            return new \DateTime('now');
         }
         $updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
-        return (false !== $updatedAt) ? $updatedAt : null;
+        return (false !== $updatedAt) ? $updatedAt : (new \DateTime('now'));
     }
 
     /**
-     * @param mixed $updatedAt
+     * @param ?string $updatedAt
      *
      * @return DsoDTO
      */

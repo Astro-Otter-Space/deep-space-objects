@@ -45,8 +45,6 @@ class DsoItem extends AbstractFOSRestController
             throw new NotFoundHttpException(sprintf('Document "%s" not find.', $id));
         }
 
-        $codeHttp = Response::HTTP_OK;
-
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
