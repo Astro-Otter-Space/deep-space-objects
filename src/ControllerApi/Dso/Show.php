@@ -20,7 +20,7 @@ class Show extends AbstractFOSRestController
     use DsoTrait, SymfonyServicesTrait;
 
     /**
-     * @Rest\Get("/dso/{id}", name="api_get_dso_item")
+     * @Rest\Get("/dso/item/{id}", name="api_get_dso_item")
      *
      * @param string $id
      * @param DsoManager $dsoManager
