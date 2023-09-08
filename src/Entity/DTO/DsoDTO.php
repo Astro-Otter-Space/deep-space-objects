@@ -6,11 +6,10 @@ use App\Classes\Utils;
 use App\Entity\ES\Dso;
 use AstrobinWs\Response\DTO\Item\Image;
 use AstrobinWs\Response\DTO\Item\User;
-use DateTimeInterface;
+use DateTime;
 
 final class DsoDTO implements DTOInterface
 {
-
     private string $id;
     private string $elasticSearchId;
     private string $relativeUrl;
@@ -604,15 +603,15 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return DateTimeInterface
+     * @return DateTime
      */
-    public function getUpdatedAt(): DateTimeInterface
+    public function getUpdatedAt(): DateTime
     {
         if (is_null($this->updatedAt)) {
-            return new \DateTime('now');
+            return new DateTime('now');
         }
-        $updatedAt = \DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
-        return (false !== $updatedAt) ? $updatedAt : (new \DateTime('now'));
+        $updatedAt = DateTime::createFromFormat(Utils::FORMAT_DATE_ES, $this->updatedAt);
+        return (false !== $updatedAt) ? $updatedAt : (new DateTime('now'));
     }
 
     /**
