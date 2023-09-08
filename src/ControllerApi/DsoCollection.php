@@ -31,7 +31,7 @@ class DsoCollection extends AbstractFOSRestController
      * @param DsoManager $dsoManager
      * @return View
      */
-    public function __invoke(
+    public function getDsoList(
         ParamFetcherInterface $paramFetcher,
         DsoManager $dsoManager
     ): View
