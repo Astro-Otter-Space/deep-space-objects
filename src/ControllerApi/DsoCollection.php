@@ -1,9 +1,11 @@
 <?php
 
-namespace App\ControllerApi\Dso;
+namespace App\ControllerApi;
 
 use App\Classes\Utils;
-use App\ControllerApi\DataController;
+use App\ControllerApi\Dso\JsonEncoder;
+use App\ControllerApi\Dso\ObjectNormalizer;
+use App\ControllerApi\Dso\Serializer;
 use App\Managers\DsoManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -13,7 +15,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
-class Collection extends AbstractFOSRestController
+class DsoCollection extends AbstractFOSRestController
 {
     /**
      * @Rest\Get("/dso/list", name="api_get_dso_collection")

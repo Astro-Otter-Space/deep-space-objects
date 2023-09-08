@@ -1,21 +1,20 @@
 <?php
 
-namespace App\ControllerApi\Dso;
+namespace App\ControllerApi;
 
 use App\Controller\ControllerTraits\DsoTrait;
-use App\ControllerApi\DataController;
 use App\Managers\DsoManager;
 use App\Service\InjectionTrait\SymfonyServicesTrait;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 
-class Show extends AbstractFOSRestController
+class DsoItem extends AbstractFOSRestController
 {
     use DsoTrait, SymfonyServicesTrait;
 
