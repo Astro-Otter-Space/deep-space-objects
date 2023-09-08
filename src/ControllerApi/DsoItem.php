@@ -33,6 +33,7 @@ class DsoItem extends AbstractFOSRestController
      *
      * @param string $id
      * @return View
+     *
      * @throws \JsonException
      * @throws \ReflectionException
      */
@@ -53,9 +54,9 @@ class DsoItem extends AbstractFOSRestController
 
         $formatedData = $serializer->normalize($dso);
 
-        $view = $this->view($formatedData, $codeHttp);
-        $view->setFormat('json');
+        $view = View::create();
+        $view->setData($formatedData);
 
-        return $this->handleView($view);
+        return $view;
     }
 }
