@@ -15,26 +15,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * 
+ */
 class DsoItem extends AbstractFOSRestController
 {
     use DsoTrait, SymfonyServicesTrait;
+
+    private DsoManager $dsoManager;
+
+    public function __construct(DsoManager $dsoManager)
+    {
+        $this->dsoManager = $dsoManager;
+    }
 
     /**
      * @Rest\Get("/dso/item/{id}", name="api_get_dso_item")
      *
      * @param string $id
-     * @param DsoManager $dsoManager
      * @return View
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function getDsoItem(
-        string $id,
-        DsoManager $dsoManager
-    ): View
+    public function getDsoItem(string $id): View
     {
-        $dso = $dsoManager->getDso($id);
+        try {
+            $dso = $this->dsoManager->getDso($id);
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException(sprintf('Document "%s" not find.', $id));
+        }
+
         $codeHttp = Response::HTTP_OK;
 
         $encoders = [new JsonEncoder()];
