@@ -91,7 +91,7 @@ class DsoCollection extends AbstractFOSRestController
 
         $serializer = new Serializer($normalizers, $encoders);
         $formatedData = $serializer->normalize($listDso->getIterator()->getArrayCopy());
-        
+
         $view = View::create();
         $view->setData($formatedData);
 
