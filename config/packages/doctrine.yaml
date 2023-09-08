@@ -1,12 +1,12 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        url: '%env(DATABASE_URL)%'
         #driver: pdo_mysql
         charset: utf8mb4
         default_table_options:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
-        #host: '%env(DATABASE_HOST)%'
+#        host: '%env(DATABASE_HOST)%'
         #port: '%env(DATABASE_PORT)%'
         #user: '%env(DATABASE_USER)%'
         #password: '%env(DATABASE_PASSWORD)%'
