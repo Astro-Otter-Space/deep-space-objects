@@ -57,12 +57,19 @@
           <div class="Dso__description">
             <p><strong>{{ 'api.objects.id'|trans }} :</strong></p>
             <pre>
-              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_object_dso', {id: "M31"})) }}</code>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_get_dso_item', {id: "M31"})) }}</code>
             </pre>
           </div>
 
+        <div class="Dso__description">
+          <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
+          <pre>
+              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_get_dso_collection', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
+            </pre>
+        </div>
+
           <div class="Dso__description">
-            <p><strong>{{ 'api.objects.catalog'|trans }} :</strong></p>
+            <p><strong>[DEPRACATED] {{ 'api.objects.catalog'|trans }} :</strong></p>
             <pre>
               <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}</code>
             </pre>
@@ -79,7 +86,7 @@
 
 
           <div class="Dso__description">
-            <p><strong>{{ 'api.objects.const'|trans }} :</strong></p>
+            <p><strong>[DEPRACATED] {{ 'api.objects.const'|trans }} :</strong></p>
             <pre>
               <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}</code>
             </pre>
@@ -96,7 +103,7 @@
 
 
           <div class="Dso__description">
-            <p><strong>{{ 'api.objects.type'|trans }} :</strong></p>
+            <p><strong>[DEPRACATED] {{ 'api.objects.type'|trans }} :</strong></p>
             <pre>
               <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}</code>
             </pre>
@@ -111,12 +118,7 @@
             </div>
           </div>
 
-          <div class="Dso__description">
-            <p><strong>{{ 'api.objects.multi'|trans }}</strong></p>
-            <pre>
-              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_dso_get_items', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
-            </pre>
-          </div>
+
 
       </div>
     </section>
