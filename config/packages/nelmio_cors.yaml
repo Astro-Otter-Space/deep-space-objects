@@ -1,23 +1,23 @@
-nelmio_cors:
-    defaults:
-        allow_credentials: false
-        allow_origin: [ ]
-        allow_headers: [ ]
-        allow_methods: [ ]
-        expose_headers: [ ]
-        origin_regex: true
-        max_age: 3600
-    paths:
-        '^/api/':
-            allow_origin: ['*']
-            allow_headers: ['Content-Type', 'Authorization', 'Accept', 'Origin']
-            allow_methods: [ 'GET', 'POST', 'OPTIONS' ]
-            expose_headers: true
-            max_age: 3600
-        '^/':
-            origin_regex: true
-            allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
-            allow_headers: ['Content-Type', 'Authorization', 'Accept', 'Origin']
-            allow_methods: [ 'GET', 'POST', 'OPTIONS' ]
-            max_age: 3600
-            hosts: ['^api\.']
+#nelmio_cors:
+#    defaults:
+#        allow_credentials: false
+#        allow_origin: [ ]
+#        allow_headers: [ ]
+#        allow_methods: [ ]
+#        expose_headers: [ ]
+#        origin_regex: true
+#        max_age: 3600
+#    paths:
+#        '^/api/':
+#            allow_origin: ['*']
+#            allow_headers: ['Content-Type', 'Authorization', 'Accept', 'Origin']
+#            allow_methods: [ 'GET', 'POST', 'OPTIONS' ]
+#            expose_headers: true
+#            max_age: 3600
+#        '^/':
+#            origin_regex: true
+#            allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
+#            allow_headers: ['Content-Type', 'Authorization', 'Accept', 'Origin']
+#            allow_methods: [ 'GET', 'POST', 'OPTIONS' ]
+#            max_age: 3600
+#            hosts: ['^api\.']
