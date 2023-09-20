@@ -322,18 +322,18 @@ final class ConstellationDTO implements DTOInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCover(): string
+    public function getCover(): ?string
     {
         return $this->cover;
     }
 
     /**
-     * @param string $cover
+     * @param string|null $cover
      * @return ConstellationDTO
      */
-    public function setCover(string $cover): ConstellationDTO
+    public function setCover(?string $cover): ConstellationDTO
     {
         $this->cover = $cover;
         return $this;
