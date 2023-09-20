@@ -24,8 +24,10 @@ final class ConstellationDTO implements DTOInterface
     private string $locale;
     private array $geometry;
     private array $geometryLine;
-    private $image;
-    private $map;
+    private string $image;
+    private string $map;
+    private string $cover;
+//    private $map
     private ?string $generic;
     private ?string $alt = null;
     private ?string $description = null;
@@ -44,20 +46,18 @@ final class ConstellationDTO implements DTOInterface
         $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
         $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $locale): 'alt';
 
-        if ($constellation instanceof Constellation) {
-            $this->setConstellation($constellation)
-                ->setElasticSearchId($elasticId)
-                ->setLocale($locale)
-                ->setId($constellation->getId())
-                ->setAlt($constellation->getAlt()[$fieldAlt])
-                ->setDescription($constellation->getDescription()[$fieldDescription])
-                ->setGeneric($constellation->getGen())
-                ->setKind($constellation->getLoc())
-                ->setGeometry($constellation->getGeometry())
-                ->setGeometryLine($constellation->getGeometryLine());
-        } else {
-            throw new InvalidArgumentException("Error init constellation");
-        }
+        $this->setConstellation($constellation)
+            ->setElasticSearchId($elasticId)
+            ->setLocale($locale)
+            ->setId($constellation->getId())
+            ->setAlt($constellation->getAlt()[$fieldAlt])
+            ->setDescription($constellation->getDescription()[$fieldDescription])
+            ->setGeneric($constellation->getGen())
+            ->setKind($constellation->getLoc())
+            ->setGeometry($constellation->getGeometry())
+            ->setGeometryLine($constellation->getGeometryLine())
+            ->setCover(sprintf('assets/images/constellations/cover/%s.jpg', strtolower($constellation->getId())))
+        ;
     }
 
 
@@ -318,6 +318,24 @@ final class ConstellationDTO implements DTOInterface
     public function setKind(?string $kind): ConstellationDTO
     {
         $this->kind = $kind;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCover(): string
+    {
+        return $this->cover;
+    }
+
+    /**
+     * @param string $cover
+     * @return ConstellationDTO
+     */
+    public function setCover(string $cover): ConstellationDTO
+    {
+        $this->cover = $cover;
         return $this;
     }
 
