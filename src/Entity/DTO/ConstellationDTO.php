@@ -24,9 +24,9 @@ final class ConstellationDTO implements DTOInterface
     private string $locale;
     private array $geometry;
     private array $geometryLine;
-    private string $image;
-    private string $map;
-    private string $cover;
+    private ?string $image;
+    private ?string $map;
+    private ?string $cover;
 //    private $map
     private ?string $generic;
     private ?string $alt = null;
