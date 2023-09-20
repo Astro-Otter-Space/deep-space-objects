@@ -56,7 +56,7 @@ final class ConstellationDTO implements DTOInterface
             ->setKind($constellation->getLoc())
             ->setGeometry($constellation->getGeometry())
             ->setGeometryLine($constellation->getGeometryLine())
-            ->setCover(sprintf('assets/images/constellations/cover/%s.jpg', strtolower($constellation->getId())))
+            ->setCover(sprintf('%s.jpg', strtolower($constellation->getId())))
         ;
     }
 
