@@ -18,6 +18,7 @@ final class DsoDTO implements DTOInterface
     private ?string $updatedAt = null;
     private Dso $dso;
     private string $name;
+    private string $fullNameAlt;
     private array $catalogs;
     private array|string $desigs;
     private ?string $alt = null;
@@ -205,6 +206,15 @@ final class DsoDTO implements DTOInterface
         $this->absoluteUrl = $url;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAlt(): string
+    {
+        return $this->title();
+    }
+
 
 
     /**
