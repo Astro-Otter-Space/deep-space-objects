@@ -53,7 +53,7 @@ final class DsoDTO implements DTOInterface
         $description = $dso->getDescription()[$fieldDescription] ?? null;
         $alt = $dso->getAlt()[$fieldAlt] ?? null;
 
-        $name = $this->title(); // (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
+        $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
         $this->setDso($dso)
