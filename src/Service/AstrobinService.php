@@ -74,9 +74,7 @@ final class AstrobinService
     /**
      * @param string $subject
      *
-     * @return AstrobinError|AstrobinResponse|ListImages|null
-     * @throws JsonException
-     * @throws \ReflectionException
+     * @return AstrobinResponse|null
      */
     public function listImagesBy(string $subject): ?AstrobinResponse
     {

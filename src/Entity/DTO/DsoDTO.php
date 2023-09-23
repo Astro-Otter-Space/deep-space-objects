@@ -52,7 +52,7 @@ final class DsoDTO implements DTOInterface
         $description = $dso->getDescription()[$fieldDescription] ?? null;
         $alt = $dso->getAlt()[$fieldAlt] ?? null;
 
-        $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
+        $name = $this->title(); // (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
         $this->setDso($dso)
@@ -157,7 +157,6 @@ final class DsoDTO implements DTOInterface
         $desig = (is_array($this->getDesigs())) ? current($this->getDesigs()) : $this->getDesigs();
 
         // If Alt is set, we merge desig and alt
-
         $fieldAlt = ('en' !== $this->locale) ? sprintf('alt_%s', $this->locale): 'alt';
         $title = (empty($this->getAlt()))
             ? $desig
@@ -400,7 +399,6 @@ final class DsoDTO implements DTOInterface
 
     public function distanceLightYears(): bool|string|null
     {
-
         return Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
     }
 
