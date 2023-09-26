@@ -100,6 +100,7 @@ class DsoManager
         } else {
             /** @var DsoDTO|DTOInterface $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
+            $dso->setTypeLabel($this->translator->trans($dso->getType()));
             if (!is_null($dso)) {
                 // Add astrobin image
                 $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());

@@ -24,6 +24,7 @@ final class DsoDTO implements DTOInterface
     private ?string $alt = null;
     private ?string $description = null;
     private string $type;
+    private string $typeLabel;
     private mixed $magnitude;
     private string $constellationId;
     private ?DTOInterface $constellation;
@@ -45,7 +46,11 @@ final class DsoDTO implements DTOInterface
      * @param string $locale
      * @param string $elasticId
      */
-    public function __construct(Dso $dso, string $locale, string $elasticId)
+    public function __construct(
+        Dso $dso,
+        string $locale,
+        string $elasticId
+    )
     {
         $fieldAlt = ('en' !== $locale) ? sprintf('alt_%s', $locale) : 'alt';
         $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
@@ -215,8 +220,6 @@ final class DsoDTO implements DTOInterface
         return $this->title();
     }
 
-
-
     /**
      * @return mixed
      */
@@ -328,6 +331,24 @@ final class DsoDTO implements DTOInterface
     public function setType(string $type): DsoDTO
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeLabel(): string
+    {
+        return $this->typeLabel;
+    }
+
+    /**
+     * @param string $typeLabel
+     * @return DsoDTO
+     */
+    public function setTypeLabel(string $typeLabel): DsoDTO
+    {
+        $this->typeLabel = $typeLabel;
         return $this;
     }
 
