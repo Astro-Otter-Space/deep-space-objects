@@ -17,6 +17,7 @@ use App\Helpers\UrlGenerateHelper;
 use App\Repository\ConstellationRepository;
 use App\Repository\DsoRepository;
 use App\Service\AstrobinService;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Response\DTO\AstrobinError;
 use AstrobinWs\Response\DTO\AstrobinResponse;
@@ -31,14 +32,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DsoManager
 {
-    use ManagerTrait;
+    use ManagerTrait, SymfonyServicesTrait;
 
     private static array $listFieldToTranslate = ['catalog', 'type', 'constId', 'astrobin'];
 
     private DsoRepository $dsoRepository;
     private AstrobinService $astrobinService;
     private UrlGenerateHelper $urlGenerateHelper;
-    private TranslatorInterface $translator;
     private CachePoolInterface $cacheUtils;
     private string $locale;
     private DsoDataTransformer $dsoDataTransformer;
@@ -53,8 +53,16 @@ class DsoManager
      * @param DsoDataTransformer $dsoDataTransformer
      * @param ConstellationRepository $constellationRepository
      * @param AstrobinService $astrobinService
+     * @param $
      */
-    public function __construct(DsoRepository $dsoRepository, CachePoolInterface $cacheUtils, ?string $locale, DsoDataTransformer $dsoDataTransformer, ConstellationRepository $constellationRepository, AstrobinService $astrobinService)
+    public function __construct(
+        DsoRepository $dsoRepository,
+        CachePoolInterface $cacheUtils,
+        ?string $locale,
+        DsoDataTransformer $dsoDataTransformer,
+        ConstellationRepository $constellationRepository,
+        AstrobinService $astrobinService
+    )
     {
         $this->dsoRepository = $dsoRepository;
         $this->astrobinService = $astrobinService;
