@@ -76,7 +76,7 @@ class DsoCollection extends AbstractFOSRestController
             $value = filter_var($value, FILTER_SANITIZE_STRING);
         });
 
-        [$listDsoId, ,] = $this->dsoRepository
+        [$listDsoId, , $nbItems] = $this->dsoRepository
             ->setLocale('en')
             ->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
@@ -90,7 +90,10 @@ class DsoCollection extends AbstractFOSRestController
         $normalizers = [new ObjectNormalizer()];
 
         $serializer = new Serializer($normalizers, $encoders);
-        $formatedData = $serializer->normalize($listDso->getIterator()->getArrayCopy());
+        $formatedData = $serializer->normalize([
+            'data' => $listDso->getIterator()->getArrayCopy(),
+            'total' =>  $nbItems ?? 0
+        ]);
 
         $view = View::create();
         $view->setData($formatedData);
