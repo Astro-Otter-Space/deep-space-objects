@@ -223,11 +223,8 @@ class DsoRepository extends AbstractRepository
             // Add filters
             foreach ($filters as $type => $val) {
                 $mustQuery = new Query\Term();
-
                 $rangeQuery = new Query\Range();
-
                 $field = ('magnitude' === $type) ? self::$listAggregatesRange[$type]['field'] : self::$listAggregates[$type]['field'];
-
                 if ('magnitude' === $type) {
                     $keyRange = array_search($val, array_column(self::$listAggregatesRange[$type]['ranges'], 'key'), true);
                     $range = self::$listAggregatesRange[$type]['ranges'][$keyRange];
@@ -240,7 +237,6 @@ class DsoRepository extends AbstractRepository
                     }
 
                     $rangeQuery->addField($field, $paramRange);
-
                     $boolQuery->addMust($rangeQuery);
                 } else {
                     // truc à la con, à modifer ds les données sources
@@ -287,7 +283,6 @@ class DsoRepository extends AbstractRepository
             $query->addAggregation($aggregationRange);
         });
 
-
         $search = new Search($this->client);
         $results = $search->addIndex(self::INDEX_NAME)->search($query);
         $nbItems = $results->getTotalHits();
@@ -303,7 +298,10 @@ class DsoRepository extends AbstractRepository
         $listAggregations = [];
         foreach ($results->getAggregations() as $type=>$aggregations) {
             $listAggregations[$type] = array_map(static function($item) {
-                return [$item['key'] => $item['doc_count']];
+                return [
+                    'name' => $item['key'],
+                    'count' => $item['doc_count']
+                ];
             }, $aggregations['buckets']);
         }
 
