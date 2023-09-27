@@ -297,12 +297,12 @@ class DsoRepository extends AbstractRepository
         }, $results->getResults());
 
         $listAggregations = [];
-        foreach ($results->getAggregations() as $type=>$aggregations) {
+        foreach ($results->getAggregations() as $type => $aggregations) {
             $listAggregations[$type] = array_map(function($item) use($type) {
                 return [
                     'name' => $item['key'],
                     'count' => $item['doc_count'],
-                    'label' => sprintf('%s (%s)', $this->translator->trans(sprintf('%s.%s', $type, $item['key'])), $item['doc_count'])
+                    'label' => sprintf('%s (%s)', $this->translator->trans(sprintf('%s.%s', $type, strtolower($item['key']))), $item['doc_count'])
                 ];
             }, $aggregations['buckets']);
         }
