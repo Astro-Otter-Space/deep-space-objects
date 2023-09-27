@@ -92,7 +92,7 @@ class Show extends AbstractController
             }
         }
 
-        $params['images'] = $listImages ?? []; //array_filter($listImages);
+        $params['images'] = $listImages ?? null; //array_filter($listImages);
         $params['breadcrumbs'] = $this->buildBreadcrumbs($dso, $this->router, $dso->title());
 
         $response = $this->render('pages/dso.html.twig', $params);
