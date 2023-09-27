@@ -7,6 +7,7 @@ use App\Entity\DTO\DsoDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Dso;
 use App\Entity\ES\ListDso;
+use App\Service\InjectionTrait\SymfonyServicesTrait;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
@@ -21,6 +22,7 @@ use Elastica\Search;
  */
 class DsoRepository extends AbstractRepository
 {
+    use SymfonyServicesTrait;
     private static array $listSearchFields = [
         'id',
         'desigs',
@@ -137,7 +139,6 @@ class DsoRepository extends AbstractRepository
             [
                 'mag' => ['order' => parent::SORT_ASC, 'mode' => 'avg'],
             ]
-
         );
 
         /** @var Search $search */
@@ -297,10 +298,11 @@ class DsoRepository extends AbstractRepository
 
         $listAggregations = [];
         foreach ($results->getAggregations() as $type=>$aggregations) {
-            $listAggregations[$type] = array_map(static function($item) {
+            $listAggregations[$type] = array_map(function($item) use($type) {
                 return [
                     'name' => $item['key'],
-                    'count' => $item['doc_count']
+                    'count' => $item['doc_count'],
+                    'label' => sprintf('%s (%s)', $this->translator->trans(sprintf('%s.%s', $type, $item['key'])), $item['doc_count'])
                 ];
             }, $aggregations['buckets']);
         }
@@ -414,7 +416,6 @@ class DsoRepository extends AbstractRepository
         }
         return $listAstrobinId;
     }
-
 
     /**
      * get random Dso
