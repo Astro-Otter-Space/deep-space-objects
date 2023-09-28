@@ -64,6 +64,9 @@ class DsoCollection extends AbstractFOSRestController
         }
 
         $type = ("" !== $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
+        if ('all' === $type) {
+            $type = null;
+        }
         if (!is_null($type)) {
             if (in_array($type, Utils::getListTypeDso(), true)) {
                 $filters['type'] = $type;
