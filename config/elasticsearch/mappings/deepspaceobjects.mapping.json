@@ -47,10 +47,10 @@
         "type": "text",
         "fields": {
           "keyword": {
-            "type": "keyword"
+            "type": "keyword",
+            "normalizer": "lowercase_normalizer"
           }
         },
-        "normalizer": "lowercase_normalizer",
         "copy_to": "suggest"
       },
       "alt": {
