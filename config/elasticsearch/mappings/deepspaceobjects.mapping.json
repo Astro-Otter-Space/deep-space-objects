@@ -44,7 +44,12 @@
         "type": "geo_shape"
       },
       "desigs": {
-        "type": "keyword",
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        },
         "normalizer": "lowercase_normalizer",
         "copy_to": "suggest"
       },
