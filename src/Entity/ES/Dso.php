@@ -15,7 +15,7 @@ class Dso
     private int $order;
     private string $updatedAt;
     private array|string $desigs;
-    private array $alt;
+    private ?array $alt = null;
     private ?array $description = null;
     private ?string $type = null;
     private ?string $constId = null;
