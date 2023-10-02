@@ -83,8 +83,10 @@ class DsoCollection extends AbstractFOSRestController
         }
 
         // Magnitude
-        $filters['magnitude'] = ("" !== $paramFetcher->get('magnitude')) ? $paramFetcher->get('magnitude') : null;
-
+        $magnitude = ("" !== $paramFetcher->get('magnitude')) ? $paramFetcher->get('magnitude') : null;
+        if (!is_null($magnitude)) {
+            $filters['magnitude'] = $magnitude;
+        }
 
         $authorizedFilters = $dsoRepository->getListAggregates(true);
         $filters = array_filter($filters, static function($key) use($authorizedFilters) {
