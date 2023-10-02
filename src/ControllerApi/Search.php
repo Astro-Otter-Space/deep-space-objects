@@ -5,6 +5,7 @@ namespace App\ControllerApi;
 use App\Managers\ConstellationManager;
 use App\Managers\DsoManager;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
