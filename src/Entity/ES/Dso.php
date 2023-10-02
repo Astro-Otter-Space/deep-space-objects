@@ -50,7 +50,7 @@ class Dso
     }
 
     /**
-     * @return array|string
+     * @return array|string|null
      */
     public function getCatalog(): array|string|null
     {
