@@ -12,6 +12,7 @@ use FOS\RestBundle\View\View;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class Search extends AbstractFOSRestController
@@ -44,13 +45,14 @@ class Search extends AbstractFOSRestController
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $listDso = $serializer->normalize($listDso->getIterator()->getArrayCopy(), null, ['groups' => 'search']);
+            $arrayDso = $listDso->getIterator()->getArrayCopy();
+            $listDso = $serializer->normalize($arrayDso, null, [AbstractNormalizer::GROUPS => 'search']);
         }
 
 
         $formatedData = [...$listDso, []];
         $view = View::create();
-        $view->setData($formatedData);
+        $view->setData(array_filter($formatedData));
         $view->setFormat('json');
         return $view;
     }
