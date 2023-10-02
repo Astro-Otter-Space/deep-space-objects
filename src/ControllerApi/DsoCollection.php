@@ -34,26 +34,32 @@ class DsoCollection extends AbstractFOSRestController
      *
      * @QueryParam(name="constellation", requirements="\w+", default="")
      * @QueryParam(name="catalog", requirements="\w+", default="")
-     * @QueryParam(name="type", requirements="\w+",default="")
+     * @QueryParam(name="type", requirements="\w+", default="")
+     * @QueryParam(name="magnitude", requirements="\w+", default="")
      * @QueryParam(name="offset", requirements="\d+", default="", description="Index start pagination")
      * @QueryParam(name="limit", requirements="\d+", default="20", description="Index end pagination")
      *
      * @param ParamFetcherInterface $paramFetcher
+     * @param DsoRepository $dsoRepository
      * @return View
      */
     public function getDsoListAction(
         ParamFetcherInterface $paramFetcher,
+        DsoRepository $dsoRepository
     ): View
     {
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
 
         $filters = [];
+
+        // Constellation
         $constellation = ("" !== $paramFetcher->get('constellation')) ? $paramFetcher->get('constellation') : null;
         if (!is_null($constellation)) {
             $filters['constellation'] = $constellation;
         }
 
+        // Catalog
         $catalog = ("" !== $paramFetcher->get('catalog')) ? $paramFetcher->get('catalog') : null;
         if (!is_null($catalog)) {
             if (in_array($catalog, Utils::getOrderCatalog(), true)) {
@@ -63,6 +69,7 @@ class DsoCollection extends AbstractFOSRestController
             }
         }
 
+        // Type
         $type = ("" !== $paramFetcher->get('type')) ? $paramFetcher->get('type') : null;
         if ('all' === $type) {
             $type = null;
@@ -74,6 +81,15 @@ class DsoCollection extends AbstractFOSRestController
                 throw new InvalidParameterException("Parameter \"$type\" for type does not exist");
             }
         }
+
+        // Magnitude
+        $filters['magnitude'] = ("" !== $paramFetcher->get('magnitude')) ? $paramFetcher->get('magnitude') : null;
+
+
+        $authorizedFilters = $dsoRepository->getListAggregates(true);
+        $filters = array_filter($filters, static function($key) use($authorizedFilters) {
+            return in_array($key, $authorizedFilters, true);
+        }, ARRAY_FILTER_USE_KEY);
 
         array_walk($filters, static function (&$value, $key) {
             $value = filter_var($value, FILTER_SANITIZE_STRING);
