@@ -59,7 +59,9 @@ class SearchAutocomplete extends AbstractController
             try {
                 $listConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
             } catch (\JsonException $e) {
-            } finally {$dataConstellation = $constellationDataTransformer->listVignettesView($listConstellation);$listConstellation = new ListConstellation();
+            } finally {
+                $dataConstellation = $constellationDataTransformer->listVignettesView($listConstellation);
+                $listConstellation = new ListConstellation();
             }
             $data = array_merge($dataDso, $dataConstellation);
         }
