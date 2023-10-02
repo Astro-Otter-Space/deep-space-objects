@@ -239,14 +239,11 @@ class DsoManager
      * Get list Dso by search terms
      *
      * @param string $searchTerms
-     * @param string|null $typeReturn >
-     *
      * @return mixed
-     * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function searchDsoByTerms(string $searchTerms, ?string $typeReturn): ListDso
+    public function searchDsoByTerms(string $searchTerms): ListDso
     {
         $resultDsoId = $this->dsoRepository->setLocale($this->locale)->getObjectsBySearchTerms($searchTerms);
         return $this->buildListDso($resultDsoId);

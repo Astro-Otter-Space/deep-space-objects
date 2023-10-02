@@ -40,11 +40,11 @@ class Search extends AbstractFOSRestController
         $serializer = new Serializer($normalizers, $encoders);
 
         try {
-            $listDso = $dsoManager->searchDsoByTerms($searchTerm, null);
+            $listDso = $dsoManager->searchDsoByTerms($searchTerm);
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $listDso = $serializer->normalize($listDso->getIterator()->getArrayCopy());
+            $listDso = $serializer->normalize($listDso->getIterator()->getArrayCopy(), null, ['groups' => 'search']);
         }
 
 
