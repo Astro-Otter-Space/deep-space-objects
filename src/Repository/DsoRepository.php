@@ -143,7 +143,7 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $search = $search->addIndex(self::INDEX_NAME)->search($query);
+        $search = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         $listDsoId = [];
         if (0 < $search->count()) {
@@ -170,7 +170,7 @@ class DsoRepository extends AbstractRepository
         ]);
 
         $search = new Search($this->client);
-        $result = $search->addIndex(self::INDEX_NAME)->search($query);
+        $result = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         return array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];
@@ -285,7 +285,7 @@ class DsoRepository extends AbstractRepository
         });
 
         $search = new Search($this->client);
-        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndexByName(self::INDEX_NAME)->search($query);
         $nbItems = $results->getTotalHits();
 
         if (false === $hydrate) {
@@ -347,7 +347,7 @@ class DsoRepository extends AbstractRepository
         $query->setFrom(0)->setSize(self::MAX_SIZE);
 
         $search = new Search($this->client);
-        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         return array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];
@@ -405,7 +405,7 @@ class DsoRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         if (0 < $results->getTotalHits()) {
             /** @var Document $document */
@@ -448,7 +448,7 @@ class DsoRepository extends AbstractRepository
         $query->setQuery($score);
 
         $search = new Search($this->client);
-        $results = $search->addIndex(self::INDEX_NAME)->search($query);
+        $results = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         return array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];

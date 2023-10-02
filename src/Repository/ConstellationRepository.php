@@ -65,7 +65,7 @@ final class ConstellationRepository extends AbstractRepository
 
         /** @var Search $search */
         $search = new Search($this->client);
-        $result = $search->addIndex(self::INDEX_NAME)->search($query);
+        $result = $search->addIndexByName(self::INDEX_NAME)->search($query);
 
         return array_map(static function(Result $doc) {
             return $doc->getDocument()->getData()['id'];

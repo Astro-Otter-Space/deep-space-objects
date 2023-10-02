@@ -134,7 +134,7 @@ abstract class AbstractRepository
         $search = new Search($this->client);
 
         /** @var ResultSet $resultSet */
-        return $search->addIndex($this->getIndex())->search($matchQuery);
+        return $search->addIndexByName($this->getIndex())->search($matchQuery);
     }
 
     /**
@@ -153,7 +153,7 @@ abstract class AbstractRepository
         $query->setType('phrase_prefix');
 
         $search = new Search($this->client);
-        $search->addIndex($this->getIndex());
+        $search->addIndexByName($this->getIndex());
 
         return $search->search($query);
     }
