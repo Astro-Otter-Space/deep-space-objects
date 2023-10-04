@@ -80,7 +80,7 @@ final class DsoDTO implements DTOInterface
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
         $dsoDesigs = $dso->getDesigs();
-        $desigs = (true === is_array($dsoDesigs)) ? array_shift($dsoDesigs) : [$dsoDesigs];
+//        $desigs = (true === is_array($dsoDesigs)) ? array_filter($dsoDesigs, fn($d) => $d !== $dso->) : [$dsoDesigs];
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
@@ -89,7 +89,7 @@ final class DsoDTO implements DTOInterface
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
             ->setCatalogs($catalogs)
-            ->setDesigs($desigs)
+            ->setDesigs($dsoDesigs)
             ->setDeclinaison($dso->getDec())
             ->setDescription($description)
             ->setDim($dso->getDim())
