@@ -100,12 +100,7 @@ final class DsoDTO implements DTOInterface
             ->setMagnitude($dso->getMag())
             ->setName($name)
             ->setRightAscencion($dso->getRa())
-            ->setType(
-                substr(
-                    $dso->getType(),
-                    strpos($dso->getType(), '.')+1
-                )
-            )
+            ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
         ;
     }
