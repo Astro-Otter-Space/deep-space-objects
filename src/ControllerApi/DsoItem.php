@@ -41,12 +41,6 @@ class DsoItem extends AbstractFOSRestController
     {
         try {
             $dso = $this->dsoManager->getDso($id);
-            $dso->setType(
-                substr(
-                    $dso->getType(),
-                    strpos($dso->getType(), '.')+1
-                )
-            );
         } catch (\Exception $e) {
             throw new NotFoundHttpException(sprintf('DSO "%s" not find.', $id));
         }

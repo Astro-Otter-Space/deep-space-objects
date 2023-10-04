@@ -108,7 +108,11 @@ class DsoManager
         } else {
             /** @var DsoDTO|DTOInterface $dso */
             $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
-            $dso->setTypeLabel($this->translator->trans($dso->getType()));
+            $dso->setTypeLabel($this->translator->trans(sprintf('type.%s', $dso->getType())));
+            $catalogs = $dso->getCatalogs();
+            array_walk($catalogs, fn(string &$c) => $c = $this->translator->trans(sprintf('catalog.%s', $c)));
+            $dso->setCatalogsLabel($catalogs);
+
             if (!is_null($dso)) {
                 // Add astrobin image
                 $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());

@@ -29,6 +29,7 @@ final class DsoDTO implements DTOInterface
      */
     private string $fullNameAlt;
     private array $catalogs;
+    private ?array $catalogsLabel;
     private array|string $desigs;
     private ?string $alt = null;
     private ?string $description = null;
@@ -78,6 +79,8 @@ final class DsoDTO implements DTOInterface
         $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
+        $dsoDesigs = $dso->getDesigs();
+        $desigs = (true === is_array($dsoDesigs)) ? array_shift($dsoDesigs) : [$dsoDesigs];
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
@@ -86,10 +89,9 @@ final class DsoDTO implements DTOInterface
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
             ->setCatalogs($catalogs)
-            ->setDesigs($dso->getDesigs())
+            ->setDesigs($desigs)
             ->setDeclinaison($dso->getDec())
             ->setDescription($description)
-            ->setDesigs($dso->getDesigs())
             ->setDim($dso->getDim())
             ->setDiscover($dso->getDiscover())
             ->setDiscoverYear($dso->getDiscoverYear())
@@ -98,7 +100,12 @@ final class DsoDTO implements DTOInterface
             ->setMagnitude($dso->getMag())
             ->setName($name)
             ->setRightAscencion($dso->getRa())
-            ->setType($dso->getType())
+            ->setType(
+                substr(
+                    $dso->getType(),
+                    strpos($dso->getType(), '.')+1
+                )
+            )
             ->setUpdatedAt($dso->getUpdatedAt())
         ;
     }
@@ -276,6 +283,24 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
+     * @return array
+     */
+    public function getCatalogsLabel(): array
+    {
+        return $this->catalogsLabel;
+    }
+
+    /**
+     * @param array|null $catalogsLabel
+     * @return DsoDTO
+     */
+    public function setCatalogsLabel(?array $catalogsLabel): DsoDTO
+    {
+        $this->catalogsLabel = $catalogsLabel;
+        return $this;
+    }
+
+    /**
      * @return array|string
      */
     public function getDesigs(): array|string
@@ -337,7 +362,7 @@ final class DsoDTO implements DTOInterface
      */
     public function getType(): string
     {
-        return sprintf('type.%s', $this->type);
+        return $this->type;
     }
 
     /**

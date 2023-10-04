@@ -81,9 +81,15 @@ final class DsoDataTransformer extends AbstractDataTransformer
             'value' => $title,
             'ajaxValue' => $ajaxValue,
             'subValue' => implode(Utils::GLUE_DASH, $otherDesigs),
-            'label' => implode(Utils::GLUE_DASH, array_filter([$this->translator->trans($dto->getType()) , $dto->getConstellation()->title()])),
+            'label' => implode(
+                Utils::GLUE_DASH,
+                array_filter([
+                    $this->translator->trans(sprintf('type.%s', $dto->getType())),
+                    $dto->getConstellation()->title()
+                ])
+            ),
             'url' => $dto->relativeUrl(),
-            'filter' => substr($dto->getType(), strrpos($dto->getType() ,'.')+1),
+            'filter' => $dto->getType(),
             'image' => $dto->getAstrobin()
         ];
     }
@@ -138,7 +144,7 @@ final class DsoDataTransformer extends AbstractDataTransformer
         $data = [
             'catalog' => $catalogs,
             'desigs' => implode(Utils::DATA_CONCAT_GLUE, array_filter($dto->getDesigs())),
-            'type' => $dto->getType(),
+            'type' => sprintf('type.%s', $dto->getType()),
             'constId' => sprintf('<a href="%s" title="%s">%s</a>', $routeConstellation, $dto->getConstellation()->title(), $dto->getConstellation()->title()),
             'mag' => $dto->getMagnitude(),
             'distAl' => $dto->distanceLightYears(),

@@ -89,7 +89,7 @@ class Download extends AbstractController
                 $dso->title(),
                 implode(Utils::COMA_GLUE, array_filter($dso->getDesigs())),
                 $dso->getDescription(),
-                $this->translator->trans($dso->getType()),
+                $this->translator->trans(sprintf('type.%s', $dso->getType())),
                 $dso->getConstellation()->title(),
                 $dso->getMagnitude() ?? 999,
                 $dso->getDeclinaison(),

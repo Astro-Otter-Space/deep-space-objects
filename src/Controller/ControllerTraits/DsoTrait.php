@@ -28,17 +28,15 @@ trait DsoTrait
      *
      * @return array
      */
-    protected function buildFilters(ListDso $listDso): array
+    protected function buildFilters(array|ListDso $listDso): array
     {
         if (0 < $listDso->getIterator()->count()) {
-            $listDso = ($listDso instanceof ListDso) ? iterator_to_array($listDso) : $listDso;
+            $listDso = iterator_to_array($listDso);
 
             $this->listFilters = array_map(function(DTOInterface $dsoData) {
-                $fullType = $dsoData->getType();
-                $subType = substr($dsoData->getType(), strrpos($dsoData->getType() ,'.')+1);
                 return [
-                    'value' => $subType,
-                    'label' => $this->translator->trans($fullType)
+                    'value' => $dsoData->getType(),
+                    'label' => $this->translator->trans(sprintf('type.%s', $dsoData->getType()))
                 ];
             }, $listDso);
         }
