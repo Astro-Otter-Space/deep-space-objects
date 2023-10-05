@@ -184,7 +184,8 @@ abstract class AbstractRepository
     public function bulkImport(array $listItems): bool
     {
         $bulk = new Bulk($this->client);
-        $bulk->setIndex($this->getIndex())->setType('_doc');
+        $elasticIndex = $this->client->getIndex($this->getIndex());
+        $bulk->setIndex($elasticIndex)->setType('_doc');
 
         foreach ($listItems as $doc) {
             /** @var Document $doc */
