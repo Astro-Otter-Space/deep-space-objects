@@ -185,7 +185,7 @@ abstract class AbstractRepository
     {
         $bulk = new Bulk($this->client);
         $elasticIndex = $this->client->getIndex($this->getIndex());
-        $bulk->setIndex($elasticIndex)->setType('_doc');
+        $bulk->setIndex($elasticIndex);
 
         foreach ($listItems as $doc) {
             /** @var Document $doc */
