@@ -44,11 +44,11 @@
             <p>{{ 'api.get_token.desc'|trans }}</p>
             <ul>
               <li>{{ 'api.refresh.token_1'|trans({'%urlLogin%': absolute_url(path('api_auth_login'))}) }}</li>
-              <li>{{ 'api.refresh.token_2'|trans({'%urlRefresh%': absolute_url(path('gesdinet_jwt_refresh_token'))}) }}</li>
+{#              <li>{{ 'api.refresh.token_2'|trans({'%urlRefresh%': absolute_url(path('gesdinet_jwt_refresh_token'))}) }}</li>#}
             </ul>
             <pre>
               <code>
-                curl -X POST -d refresh_token='REFRESH_TOKEN' '{{ absolute_url(path('gesdinet_jwt_refresh_token')) }}'
+{#                curl -X POST -d refresh_token='REFRESH_TOKEN' '{{ absolute_url(path('gesdinet_jwt_refresh_token')) }}'#}
               </code>
             </pre>
           </div>
@@ -67,59 +67,6 @@
               <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_get_dso_collection', {catalog: "messier", constellation: "Ori", offset: 5, limit:5})) }}</code>
             </pre>
         </div>
-
-          <div class="Dso__description">
-            <p><strong>[DEPRACATED] {{ 'api.objects.catalog'|trans }} :</strong></p>
-            <pre>
-              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_catalog', {catalog: "messier"})) }}</code>
-            </pre>
-            <div id="btnCatalog">
-              {{ 'api.data.filters'|trans }}
-              <svgicon name="down" width="20" height="20" v-if="!showCatalog" v-on:click="toggleCatalog()"></svgicon>
-              <svgicon name="up" width="20" height="20" v-if="showCatalog" v-on:click="toggleCatalog()"></svgicon>
-
-              <div class="appGridFacet__list" v-if="showCatalog">
-                {{ build_api_filter('catalog').message|raw }}
-              </div>
-            </div>
-          </div>
-
-
-          <div class="Dso__description">
-            <p><strong>[DEPRACATED] {{ 'api.objects.const'|trans }} :</strong></p>
-            <pre>
-              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_constellation', {constellation: "Ori"})) }}</code>
-            </pre>
-            <div id="btnConst">
-              {{ 'api.data.filters'|trans }}
-              <svgicon name="down" width="20" height="20" v-if="!showConstellation" v-on:click="toggleConstellation()"></svgicon>
-              <svgicon name="up" width="20" height="20" v-if="showConstellation" v-on:click="toggleConstellation()"></svgicon>
-
-              <div class="appGridFacet__list" v-if="showConstellation">
-                {{ build_api_filter('constellation').message|raw }}
-              </div>
-            </div>
-          </div>
-
-
-          <div class="Dso__description">
-            <p><strong>[DEPRACATED] {{ 'api.objects.type'|trans }} :</strong></p>
-            <pre>
-              <code>curl  -X GET -H 'Authorization: Bearer YOUR-TOKEN' {{ absolute_url(path('api_objects_by_type', {type: "pn"})) }}</code>
-            </pre>
-            <div id="btnType">
-              {{ 'api.data.filters'|trans }}
-              <svgicon name="down" width="20" height="20" v-if="!showType" v-on:click="toggleType()"></svgicon>
-              <svgicon name="up" width="20" height="20" v-if="showType" v-on:click="toggleType()"></svgicon>
-
-              <div class="appGridFacet__list" v-if="showType">
-                {{ build_api_filter('type').message|raw }}
-              </div>
-            </div>
-          </div>
-
-
-
       </div>
     </section>
   </div>
