@@ -56,8 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
-    private int|float|null $distanceLightYear = null;
-    private int|float|null $distanceParsec = null;
+    private string|null $distanceLightYear = null;
+    private string|null $distanceParsec = null;
     /**
      * DsoDTO constructor.
      *
@@ -101,8 +101,8 @@ final class DsoDTO implements DTOInterface
             ->setDiscover($dso->getDiscover())
             ->setDiscoverYear($dso->getDiscoverYear())
             ->setDistAl($dso->getDistAl())
-            ->setDistanceLightYear((float)$distanceLy)
-            ->setDistanceParsec((float)$distancePc)
+            ->setDistanceLightYear($distanceLy)
+            ->setDistanceParsec($distancePc)
             ->setGeometry($dso->getGeometry())
             ->setMagnitude($dso->getMag())
             ->setName($name)
@@ -416,42 +416,40 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return float|int|null
+     * @return string|null
      */
-    public function getDistanceLightYear(): float|int|null
+    public function getDistanceLightYear(): ?string
     {
         return $this->distanceLightYear;
     }
 
     /**
-     * @param float|int|null $distanceLightYear
+     * @param string|null $distanceLightYear
      * @return DsoDTO
      */
-    public function setDistanceLightYear(float|int|null $distanceLightYear): DsoDTO
+    public function setDistanceLightYear(string|null $distanceLightYear): DsoDTO
     {
         $this->distanceLightYear = $distanceLightYear;
         return $this;
     }
 
     /**
-     * @return float|int|null
+     * @return string|null
      */
-    public function getDistanceParsec(): float|int|null
+    public function getDistanceParsec(): ?string
     {
         return $this->distanceParsec;
     }
 
     /**
-     * @param float|int|null $distanceParsec
+     * @param string|null $distanceParsec
      * @return DsoDTO
      */
-    public function setDistanceParsec(float|int|null $distanceParsec): DsoDTO
+    public function setDistanceParsec(string|null $distanceParsec): DsoDTO
     {
         $this->distanceParsec = $distanceParsec;
         return $this;
     }
-
-
 
     /**
      * @return mixed
