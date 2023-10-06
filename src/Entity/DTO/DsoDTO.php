@@ -56,8 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
-    private ?float $distanceLightYear;
-    private ?int $distanceParsec;
+    private ?float $distanceLightYear = 0;
+    private ?int $distanceParsec = 0;
     /**
      * DsoDTO constructor.
      *
@@ -83,7 +83,7 @@ final class DsoDTO implements DTOInterface
         $dsoDesigs = $dso->getDesigs();
 //        $desigs = (true === is_array($dsoDesigs)) ? array_filter($dsoDesigs, fn($d) => $d !== $dso->) : [$dsoDesigs];
 
-        $distanceLy = Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
+        $distanceLy = Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
         $distancePc = Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
 
         $this->setDso($dso)
