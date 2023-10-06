@@ -87,7 +87,7 @@ class Catalog extends AbstractController
         // List facets
         $allQueryParameters = $request->query->all();
         foreach ($listAggregates as $type => $listFacets) {
-            $typeTr = $this->translator->trans($type, ['%count%' => count($listFacets['count'])]);
+            $typeTr = $this->translator->trans($type, ['%count%' => $listFacets['count']]);
             $listFacetsByType = array_map(function($facet) use ($allQueryParameters, $type) {
                 return [
                     'code' => key($facet),

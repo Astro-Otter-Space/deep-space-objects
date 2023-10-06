@@ -94,8 +94,8 @@ class Download extends AbstractController
                 $dso->getMagnitude() ?? 999,
                 $dso->getDeclinaison(),
                 $dso->getRightAscencion(),
-                $dso->distanceLightYears() ?? 0,
-                $dso->distanceParsecs() ?? 0
+                $dso->getDistanceLightYear() ?? 0,
+                $dso->getDistanceParsec() ?? 0
             ];
         }, iterator_to_array($listDso));
 
