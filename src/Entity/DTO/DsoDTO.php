@@ -56,8 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
-    private ?float $distanceLightYear = null;
-    private ?int $distanceParsec = null;
+    private int|float|null $distanceLightYear = null;
+    private int|float|null $distanceParsec = null;
     /**
      * DsoDTO constructor.
      *
@@ -416,36 +416,36 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return float|null
+     * @return float|int|null
      */
-    public function getDistanceLightYear(): ?float
+    public function getDistanceLightYear(): float|int|null
     {
         return $this->distanceLightYear;
     }
 
     /**
-     * @param float|null $distanceLightYear
+     * @param float|int|null $distanceLightYear
      * @return DsoDTO
      */
-    public function setDistanceLightYear(?float $distanceLightYear): DsoDTO
+    public function setDistanceLightYear(float|int|null $distanceLightYear): DsoDTO
     {
         $this->distanceLightYear = $distanceLightYear;
         return $this;
     }
 
     /**
-     * @return int|null
+     * @return float|int|null
      */
-    public function getDistanceParsec(): ?int
+    public function getDistanceParsec(): float|int|null
     {
         return $this->distanceParsec;
     }
 
     /**
-     * @param int|null $distanceParsec
+     * @param float|int|null $distanceParsec
      * @return DsoDTO
      */
-    public function setDistanceParsec(?int $distanceParsec): DsoDTO
+    public function setDistanceParsec(float|int|null $distanceParsec): DsoDTO
     {
         $this->distanceParsec = $distanceParsec;
         return $this;
