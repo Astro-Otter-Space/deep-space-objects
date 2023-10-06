@@ -56,8 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
-    private ?float $distanceLightYear = 0;
-    private ?int $distanceParsec = 0;
+    private ?float $distanceLightYear = null;
+    private ?int $distanceParsec = null;
     /**
      * DsoDTO constructor.
      *
