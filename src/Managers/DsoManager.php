@@ -90,6 +90,7 @@ class DsoManager
      * @throws WsException
      * @throws \JsonException
      * @throws \ReflectionException
+     * @throws \Exception
      */
     private function buildDso(string $id): \Generator
     {
@@ -106,43 +107,45 @@ class DsoManager
                 $dso = $dsoFromCache;
             }
         } else {
-            /** @var DsoDTO|DTOInterface $dso */
-            $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
+            try {
+                /** @var DsoDTO|DTOInterface $dso */
+                $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
+            } catch (\Exception $e) {
+                throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
+            }
+
             $dso->setTypeLabel($this->translator->trans(sprintf('type.%s', $dso->getType())));
             $catalogs = $dso->getCatalogs();
             array_walk($catalogs, fn(string &$c) => $c = $this->translator->trans(sprintf('catalog.%s', $c)));
             $dso->setCatalogsLabel($catalogs);
 
-            if (!is_null($dso)) {
-                // Add astrobin image
-                $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());
-                $dso->setAstrobin($astrobinImage);
+            // Add astrobin image
+            $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());
+            $dso->setAstrobin($astrobinImage);
 
-                // add astrobin user
-                if ($astrobinImage->user) {
-                    $astrobinUser = $this->astrobinService->getAstrobinUser($astrobinImage->user);
-                    $dso->setAstrobinUser($astrobinUser);
-                } else {
-                    $dso->setAstrobinUser(null);
-                }
-
-                // add Constellation
-                $constellationDto = $this->constellationRepository
-                    ->setLocale($this->locale)
-                    ->getObjectById($dso->getConstellationId());
-
-                if ($constellationDto instanceof ConstellationDTO) {
-                    $dso->setConstellation($constellationDto);
-                }
-
-                $this->cacheUtils->saveItem($idMd5, serialize($dso));
-
-                if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
-                    $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
-                }
+            // add astrobin user
+            if ($astrobinImage->user) {
+                $astrobinUser = $this->astrobinService->getAstrobinUser($astrobinImage->user);
+                $dso->setAstrobinUser($astrobinUser);
             } else {
-                throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
+                $dso->setAstrobinUser(null);
             }
+
+            // add Constellation
+            $constellationDto = $this->constellationRepository
+                ->setLocale($this->locale)
+                ->getObjectById($dso->getConstellationId());
+
+            if ($constellationDto instanceof ConstellationDTO) {
+                $dso->setConstellation($constellationDto);
+            }
+
+            $this->cacheUtils->saveItem($idMd5, serialize($dso));
+
+            if ($dso->getAstrobin()->url_hd !== basename(Utils::IMG_DEFAULT)) {
+                $this->cacheUtils->saveItem($idMd5Cover, serialize($dso->getAstrobin()));
+            }
+
         }
 
         yield $dso;
