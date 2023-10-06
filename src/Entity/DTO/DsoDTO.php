@@ -46,7 +46,6 @@ final class DsoDTO implements DTOInterface
     private mixed $magnitude;
     private string $constellationId;
     private ?DTOInterface $constellation;
-    private $distAl;
     private ?string $discover = null;
     private ?int $discoverYear = null;
     private ?string $astrobinId = null;
@@ -57,6 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
+    private ?float $distanceLightYear;
+    private ?int $distanceParsec;
     /**
      * DsoDTO constructor.
      *
@@ -81,6 +82,10 @@ final class DsoDTO implements DTOInterface
 
         $dsoDesigs = $dso->getDesigs();
 //        $desigs = (true === is_array($dsoDesigs)) ? array_filter($dsoDesigs, fn($d) => $d !== $dso->) : [$dsoDesigs];
+
+        $distanceLy = Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
+        $distancePc = Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
+
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
@@ -96,6 +101,8 @@ final class DsoDTO implements DTOInterface
             ->setDiscover($dso->getDiscover())
             ->setDiscoverYear($dso->getDiscoverYear())
             ->setDistAl($dso->getDistAl())
+            ->setDistanceLightYear($distanceLy)
+            ->setDistanceParsec($distancePc)
             ->setGeometry($dso->getGeometry())
             ->setMagnitude($dso->getMag())
             ->setName($name)
@@ -409,6 +416,44 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
+     * @return float|null
+     */
+    public function getDistanceLightYear(): ?float
+    {
+        return $this->distanceLightYear;
+    }
+
+    /**
+     * @param float|null $distanceLightYear
+     * @return DsoDTO
+     */
+    public function setDistanceLightYear(?float $distanceLightYear): DsoDTO
+    {
+        $this->distanceLightYear = $distanceLightYear;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDistanceParsec(): ?int
+    {
+        return $this->distanceParsec;
+    }
+
+    /**
+     * @param int|null $distanceParsec
+     * @return DsoDTO
+     */
+    public function setDistanceParsec(?int $distanceParsec): DsoDTO
+    {
+        $this->distanceParsec = $distanceParsec;
+        return $this;
+    }
+
+
+
+    /**
      * @return mixed
      */
     public function getConstellationId(): string
@@ -465,12 +510,17 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
+    /**
+     * @deprecated
+     * @return bool|string|null
+     */
     public function distanceLightYears(): bool|string|null
     {
         return Utils::numberFormatByLocale($this->distAl) ?? (string)$this->distAl;
     }
 
     /**
+     * @deprecated
      * @return bool|string
      */
     public function distanceParsecs(): bool|string
