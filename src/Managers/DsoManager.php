@@ -111,7 +111,11 @@ class DsoManager
                 /** @var DsoDTO|DTOInterface $dso */
                 $dso = $this->dsoRepository->setLocale($this->locale)->getObjectById($id);
             } catch (\Exception $e) {
-                throw new NotFoundHttpException(sprintf("DSO ID %s not found", $id));
+                throw new NotFoundHttpException(sprintf("DSO %s is not found", $id));
+            }
+
+            if (is_null($dso)) {
+                throw new NotFoundHttpException(sprintf("DSO %s is not found", $id));
             }
 
             $dso->setTypeLabel($this->translator->trans(sprintf('type.%s', $dso->getType())));
