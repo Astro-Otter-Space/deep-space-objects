@@ -81,10 +81,9 @@ final class DsoDTO implements DTOInterface
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
         $dsoDesigs = $dso->getDesigs();
-//        $desigs = (true === is_array($dsoDesigs)) ? array_filter($dsoDesigs, fn($d) => $d !== $dso->) : [$dsoDesigs];
 
         $distanceLy = $dso->getDistAl(); //Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
-        $distancePc = bcmul((string)Utils::PARSEC, (string)$this->getDistAl(), 2); // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
+        $distancePc = Utils::PARSEC*$distanceLy; // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
 
         $this->setDso($dso)
             ->setLocale($locale)

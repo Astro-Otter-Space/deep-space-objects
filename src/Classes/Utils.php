@@ -249,7 +249,7 @@ final class Utils
      * @param $input
      * @return bool|string
      */
-    public static function utf8_encode_deep(&$input)
+    public static function utf8_encode_deep(&$input): bool|string
     {
         if (is_string($input)) {
             $input = utf8_encode($input);
