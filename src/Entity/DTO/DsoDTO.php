@@ -56,8 +56,8 @@ final class DsoDTO implements DTOInterface
     private ?string $declinaison = null;
     private ?string $rightAscencion = null;
 
-    private string|null $distanceLightYear = null;
-    private string|null $distanceParsec = null;
+    private int|null $distanceLightYear = null;
+    private int|float|null $distanceParsec = null;
     /**
      * DsoDTO constructor.
      *
@@ -83,8 +83,8 @@ final class DsoDTO implements DTOInterface
         $dsoDesigs = $dso->getDesigs();
 //        $desigs = (true === is_array($dsoDesigs)) ? array_filter($dsoDesigs, fn($d) => $d !== $dso->) : [$dsoDesigs];
 
-        $distanceLy = Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
-        $distancePc = Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
+        $distanceLy = (int)$dso->getDistAl(); //Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
+        $distancePc = Utils::PARSEC * (int)$this->getDistAl(); // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
 
         $this->setDso($dso)
             ->setLocale($locale)
@@ -416,36 +416,36 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getDistanceLightYear(): ?string
+    public function getDistanceLightYear(): ?int
     {
         return $this->distanceLightYear;
     }
 
     /**
-     * @param string|null $distanceLightYear
+     * @param int|null $distanceLightYear
      * @return DsoDTO
      */
-    public function setDistanceLightYear(string|null $distanceLightYear): DsoDTO
+    public function setDistanceLightYear(int|null $distanceLightYear): DsoDTO
     {
         $this->distanceLightYear = $distanceLightYear;
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return int|float|null
      */
-    public function getDistanceParsec(): ?string
+    public function getDistanceParsec(): int|float|null
     {
         return $this->distanceParsec;
     }
 
     /**
-     * @param string|null $distanceParsec
+     * @param int|float|null $distanceParsec
      * @return DsoDTO
      */
-    public function setDistanceParsec(string|null $distanceParsec): DsoDTO
+    public function setDistanceParsec(int|float|null $distanceParsec): DsoDTO
     {
         $this->distanceParsec = $distanceParsec;
         return $this;
