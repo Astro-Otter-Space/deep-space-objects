@@ -247,9 +247,9 @@ final class Utils
 
     /**
      * @param $input
-     * @return bool|string
+     * @return array|bool|string
      */
-    public static function utf8_encode_deep(&$input): bool|string
+    public static function utf8_encode_deep(&$input): array|bool|string
     {
         if (is_string($input)) {
             $input = utf8_encode($input);
@@ -261,7 +261,6 @@ final class Utils
             unset($value);
         } else if (is_object($input)) {
             $vars = array_keys(get_object_vars($input));
-
             foreach ($vars as $var) {
                 self::utf8_encode_deep($input->$var);
             }
