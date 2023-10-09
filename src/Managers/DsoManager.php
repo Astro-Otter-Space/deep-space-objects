@@ -119,8 +119,8 @@ class DsoManager
             }
 
             $dso->setTypeLabel($this->translator->trans(sprintf('type.%s', $dso->getType())));
-            $catalogs = $dso->getCatalogs();
-            if (!is_null($catalogs)) {
+            $catalogs = array_filter($dso->getCatalogs());
+            if (!empty($catalogs)) {
                 array_walk($catalogs, fn(string &$c) => $c = $this->translator->trans(sprintf('catalog.%s', $c)));
                 $dso->setCatalogsLabel($catalogs);
             } else {
