@@ -28,7 +28,7 @@ final class DsoDTO implements DTOInterface
      * @Groups({"search"})
      */
     private string $fullNameAlt;
-    private array $catalogs;
+    private ?array $catalogs;
     private ?array $catalogsLabel;
     private array|string $desigs;
     private ?string $alt = null;
@@ -265,19 +265,19 @@ final class DsoDTO implements DTOInterface
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getCatalogs(): array
+    public function getCatalogs(): ?array
     {
         return $this->catalogs;
     }
 
     /**
-     * @param array $catalogs
+     * @param array|null $catalogs
      *
      * @return DsoDTO
      */
-    public function setCatalogs(array $catalogs): DsoDTO
+    public function setCatalogs(?array $catalogs): DsoDTO
     {
         $this->catalogs = $catalogs;
         return $this;

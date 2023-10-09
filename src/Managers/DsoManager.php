@@ -120,14 +120,12 @@ class DsoManager
 
             $dso->setTypeLabel($this->translator->trans(sprintf('type.%s', $dso->getType())));
             $catalogs = $dso->getCatalogs();
-            try {
+            if (!is_null($catalogs)) {
                 array_walk($catalogs, fn(string &$c) => $c = $this->translator->trans(sprintf('catalog.%s', $c)));
                 $dso->setCatalogsLabel($catalogs);
-            } catch (\Exception $e) {
-                var_dump($e->getMessage());
-                $dso->setCatalogsLabel('');
+            } else {
+                $dso->setCatalogsLabel(null);
             }
-
 
             // Add astrobin image
             $astrobinImage = $this->astrobinService->getAstrobinImage($dso->getAstrobinId());
