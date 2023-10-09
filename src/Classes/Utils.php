@@ -247,9 +247,9 @@ final class Utils
 
     /**
      * @param $input
-     * @return array|bool|string
+     * @return mixed
      */
-    public static function utf8_encode_deep(&$input): array|bool|string
+    public static function utf8_encode_deep(&$input): mixed
     {
         if (is_string($input)) {
             $input = utf8_encode($input);
