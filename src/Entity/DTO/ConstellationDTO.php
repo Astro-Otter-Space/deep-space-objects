@@ -7,6 +7,7 @@ namespace App\Entity\DTO;
 use App\Entity\ES\Constellation;
 use App\Repository\ConstellationRepository;
 use Psr\Log\InvalidArgumentException;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ConstellationDTO
@@ -28,7 +29,9 @@ final class ConstellationDTO implements DTOInterface
     private ?string $map;
     private ?string $cover;
 //    private $map
+    #[Groups(['search'])]
     private ?string $generic;
+    #[Groups(['search'])]
     private ?string $alt = null;
     private ?string $description = null;
     private $kind;

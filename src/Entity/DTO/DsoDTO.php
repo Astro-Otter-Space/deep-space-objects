@@ -23,14 +23,16 @@ final class DsoDTO implements DTOInterface
     #[Groups(['search'])]
     private string $name;
 
+    #[Groups(['search'])]
     private string $fullNameAlt;
     private ?array $catalogs;
+    #[Groups(['search'])]
     private ?array $catalogsLabel;
     private array|string $desigs;
     private ?string $alt = null;
     private ?string $description = null;
-
     private string $type;
+    #[Groups(['search'])]
     private string $typeLabel;
     private mixed $magnitude;
     private string $constellationId;
