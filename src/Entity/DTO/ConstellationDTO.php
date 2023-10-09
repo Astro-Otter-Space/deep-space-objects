@@ -15,9 +15,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 final class ConstellationDTO implements DTOInterface
 {
-    /**
-     * META
-     */
+
+    #[Groups(['search'])]
     private string $id;
     private string $elasticSearchId;
     private string $absoluteUrl;

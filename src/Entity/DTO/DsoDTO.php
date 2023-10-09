@@ -20,10 +20,7 @@ final class DsoDTO implements DTOInterface
     private string $locale;
     private ?string $updatedAt = null;
     private Dso $dso;
-
-    #[Groups(['search'])]
     private string $name;
-
     #[Groups(['search'])]
     private string $fullNameAlt;
     private ?array $catalogs;
@@ -73,7 +70,7 @@ final class DsoDTO implements DTOInterface
         $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
-        $dsoDesigs = $dso->getDesigs();
+        $dsoDesigs = array_filter($dso->getDesigs(), static fn($desig) => !in_array($name, $dso->getDesigs(), true));
 
         $distanceLy = $dso->getDistAl(); //Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
         $distancePc = Utils::PARSEC*$distanceLy; // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
