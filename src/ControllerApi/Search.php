@@ -59,7 +59,6 @@ class Search extends AbstractFOSRestController
             throw new WsException($e->getMessage());
         } finally {
             $listConstellation = $serializer->normalize($listConstellation, null, ['groups' => 'search']);
-            dump($listConstellation);
         }
 
 
