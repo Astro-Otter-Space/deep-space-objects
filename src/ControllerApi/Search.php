@@ -48,7 +48,7 @@ class Search extends AbstractFOSRestController
 //            $arrayDso = $listDso->getIterator()->getArrayCopy();
             $dso = $listDso->getIterator()->current();
             dump(
-                $serializer->normalizer($dso, null, [AbstractNormalizer::GROUPS => 'search'])
+                $serializer->normalize($dso, null, [AbstractNormalizer::GROUPS => 'search'])
             );
 //            $listDso = $serializer->normalize($listDso->getIterator()->current(), null, [AbstractNormalizer::GROUPS => 'search']);
         }
