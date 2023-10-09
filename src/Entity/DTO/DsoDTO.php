@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 final class DsoDTO implements DTOInterface
 {
+    #[Groups(['search'])]
     private string $id;
     private string $elasticSearchId;
     private string $relativeUrl;
@@ -26,8 +27,8 @@ final class DsoDTO implements DTOInterface
     #[Groups(['search'])]
     private string $fullNameAlt;
     private ?array $catalogs;
-    #[Groups(['search'])]
     private ?array $catalogsLabel;
+    #[Groups(['search'])]
     private array|string $desigs;
     private ?string $alt = null;
     private ?string $description = null;

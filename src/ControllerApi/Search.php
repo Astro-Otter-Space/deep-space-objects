@@ -39,7 +39,6 @@ class Search extends AbstractFOSRestController
         $searchTerm = strtolower(filter_var($paramFetcher->get('term'), FILTER_SANITIZE_STRING));
         $dsoItems = $constellationItems = [];
 
-
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new ObjectNormalizer($classMetadataFactory)];
 
@@ -51,10 +50,8 @@ class Search extends AbstractFOSRestController
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-//            $arrayDso = $listDso->getIterator()->getArrayCopy();
-            $dso = $listDso->getIterator()->current();
             dump(
-                $serializer->normalize($dso, null, ['groups' => 'search'])
+                $serializer->normalize($listDso, null, ['groups' => 'search'])
             );
 //            $listDso = $serializer->normalize($listDso->getIterator()->current(), null, [AbstractNormalizer::GROUPS => 'search']);
         }
