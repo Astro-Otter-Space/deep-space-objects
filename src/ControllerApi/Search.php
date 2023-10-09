@@ -50,9 +50,8 @@ class Search extends AbstractFOSRestController
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $serializer->normalize($listDso, null, ['groups' => 'search']);
+            $listDso = $serializer->normalize($listDso, null, ['groups' => 'search']);
         }
-
 
         $formatedData = [...$listDso, []];
         $view = View::create();
