@@ -70,7 +70,7 @@ final class DsoDTO implements DTOInterface
         $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
-        $dsoDesigs = array_filter($dso->getDesigs(), static fn($desig) => !in_array($name, $dso->getDesigs(), true));
+        $dsoDesigs = array_filter($dso->getDesigs(), static fn($desig) => $desig !== $name);
 
         $distanceLy = $dso->getDistAl(); //Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
         $distancePc = Utils::PARSEC*$distanceLy; // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
