@@ -43,7 +43,7 @@ class Search extends AbstractFOSRestController
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new ObjectNormalizer($classMetadataFactory)];
 
-        $encoders = null; // [new JsonEncoder()];
+        $encoders = [/*new JsonEncoder()*/];
         $serializer = new Serializer($normalizers, $encoders);
 
         try {
