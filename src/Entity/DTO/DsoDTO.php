@@ -37,6 +37,7 @@ final class DsoDTO implements DTOInterface
     private string $typeLabel;
     private mixed $magnitude;
     private string $constellationId;
+    #[Groups(['search'])]
     private ?DTOInterface $constellation;
     private ?string $discover = null;
     private ?int $discoverYear = null;
