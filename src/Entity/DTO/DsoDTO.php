@@ -9,6 +9,7 @@ use AstrobinWs\Response\DTO\Item\User;
 use DateTime;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 final class DsoDTO implements DTOInterface
 {
     private string $id;
@@ -18,30 +19,18 @@ final class DsoDTO implements DTOInterface
     private string $locale;
     private ?string $updatedAt = null;
     private Dso $dso;
-    /**
-     * @var string
-     * @Groups({"search"})
-     */
+
+    #[Groups(['search'])]
     private string $name;
-    /**
-     * @var string
-     * @Groups({"search"})
-     */
+
     private string $fullNameAlt;
     private ?array $catalogs;
     private ?array $catalogsLabel;
     private array|string $desigs;
     private ?string $alt = null;
     private ?string $description = null;
-    /**
-     * @var string
-     * @Groups({"search"})
-     */
+
     private string $type;
-    /**
-     * @var string
-     * @Groups({"search"})
-     */
     private string $typeLabel;
     private mixed $magnitude;
     private string $constellationId;
