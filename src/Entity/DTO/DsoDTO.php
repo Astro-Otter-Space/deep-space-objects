@@ -27,6 +27,8 @@ final class DsoDTO implements DTOInterface
     private ?array $catalogsLabel;
     #[Groups(['search'])]
     private array|string $desigs;
+    #[Groups(['search'])]
+    private array|string $otherDesigs;
     private ?string $alt = null;
     private ?string $description = null;
     private string $type;
@@ -68,7 +70,7 @@ final class DsoDTO implements DTOInterface
         $alt = $dso->getAlt()[$fieldAlt] ?? null;
 
         $name = (is_array($dso->getDesigs())) ? current($dso->getDesigs()): $dso->getDesigs();
-        $dsoDesigs = array_filter($dso->getDesigs(), static fn(string $desig) => $desig !== $name);
+        $othersDsoDesigs = array_filter($dso->getDesigs(), static fn(string $desig) => $desig !== $name);
 
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
@@ -83,7 +85,8 @@ final class DsoDTO implements DTOInterface
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
             ->setCatalogs($catalogs)
-            ->setDesigs($dsoDesigs)
+            ->setDesigs($dso->getDesigs())
+            ->setOtherDesigs($othersDsoDesigs)
             ->setDeclinaison($dso->getDec())
             ->setDescription($description)
             ->setDim($dso->getDim())
@@ -307,6 +310,24 @@ final class DsoDTO implements DTOInterface
     public function setDesigs(array|string $desigs): DsoDTO
     {
         $this->desigs = $desigs;
+        return $this;
+    }
+
+    /**
+     * @return array|string
+     */
+    public function getOtherDesigs(): array|string
+    {
+        return $this->otherDesigs;
+    }
+
+    /**
+     * @param array|string $otherDesigs
+     * @return DsoDTO
+     */
+    public function setOtherDesigs(array|string $otherDesigs): DsoDTO
+    {
+        $this->otherDesigs = $otherDesigs;
         return $this;
     }
 
