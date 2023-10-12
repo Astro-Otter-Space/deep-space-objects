@@ -91,7 +91,7 @@ class Catalog extends AbstractController
             $listFacetsByType = array_map(function($facet) use ($allQueryParameters, $type) {
                 return [
                     'code' => key($facet),
-                    'value' => $this->translator->trans(sprintf('%s.%s', $type, strtolower(key($facet['name'])))),
+                    'value' => $this->translator->trans(sprintf('%s.%s', $type, strtolower($facet['name']))),
                     'number' => reset($facet),
                     'full_url' => $this->router->generate('dso_catalog', array_merge($allQueryParameters, [$type => key($facet)]))
                 ];
