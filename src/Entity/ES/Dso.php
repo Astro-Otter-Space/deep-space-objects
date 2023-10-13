@@ -11,7 +11,7 @@ namespace App\Entity\ES;
 class Dso
 {
     private string $id;
-    private string|array|null $catalog;
+    private string|array|null $catalog = null;
     private int $order;
     private string $updatedAt;
     private array|string $desigs;
