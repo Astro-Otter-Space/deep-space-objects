@@ -23,7 +23,7 @@ final class DsoDTO implements DTOInterface
     private string $name;
     #[Groups(['search'])]
     private string $fullNameAlt;
-    private ?array $catalogs;
+    private ?array $catalogs = null;
     private ?array $catalogsLabel;
     #[Groups(['search'])]
     private array|string $desigs;

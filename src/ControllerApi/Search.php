@@ -37,7 +37,6 @@ class Search extends AbstractFOSRestController
     ): View
     {
         $searchTerm = strtolower(filter_var($paramFetcher->get('term'), FILTER_SANITIZE_STRING));
-        $dsoItems = $constellationItems = [];
 
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new ObjectNormalizer($classMetadataFactory)];
