@@ -38,7 +38,7 @@ class Search extends AbstractFOSRestController
     {
         $searchTerm = strtolower(htmlspecialchars($paramFetcher->get('term')));
 
-        dump($searchTerm);
+        dump($paramFetcher->get('term'), $searchTerm);
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $normalizers = [new ObjectNormalizer($classMetadataFactory)];
 
