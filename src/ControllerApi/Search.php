@@ -23,7 +23,7 @@ class Search extends AbstractFOSRestController
 
     /**
      * @Route("/search", name="api_search_collection", methods={"GET"})
-     * @QueryParam(name="term", requirements="[a-zA-Z0-9-_%\s]+", default="")
+     * @QueryParam(name="term", requirements="[a-zA-Z0-9-_.%\s]+", default="")
      *
      * @param ParamFetcherInterface $paramFetcher
      * @param DsoManager $dsoManager
