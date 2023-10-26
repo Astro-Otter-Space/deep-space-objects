@@ -44,25 +44,26 @@ class Contact extends AbstractFOSRestController
         ConstraintViolationListInterface $validationErrors
     ): View
     {
+        $view = View::create();
         $contact->setLabelCountry(Countries::getName($contact->getCountry(), $request->getLocale()));
-        dump($contact, $validationErrors);
+        if (0 < count($validationErrors)) {
+            $view->setStatusCode(500);
+        }
+
         $templates = [
             'html' => 'includes/emails/contact.html.twig',
             'text' => 'includes/emails/contact.txt.twig'
         ];
         $subject = '[Contact] - ' . $this->translator->trans(Utils::listTopicsContact()[$contact->getTopic()]);
         $content['contact'] = $contact;
-        $view = View::create();
 
         try {
             $this->mailService->sendMail($contact->getEmail(), $this->receiverMail, $subject, $templates, $content);
-            $view->setStatusCode(201)->setFormat('json');
+            $view->setStatusCode(Response::HTTP_CREATED)->setFormat('json');
         } catch(TransportExceptionInterface $e) {
             $view->setStatusCode(500);
         }
 
-
-        $view->setStatusCode(201)->setFormat('json');
         return $view;
     }
 }
