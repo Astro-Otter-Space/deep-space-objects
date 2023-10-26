@@ -43,7 +43,6 @@ class Contact extends AbstractFOSRestController
         ConstraintViolationListInterface $validationErrors
     ): View
     {
-        $errors = $this->$this->validator->validate($contact);
         dump($contact, $validationErrors);
 
         $templates = [
