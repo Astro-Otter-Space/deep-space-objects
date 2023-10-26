@@ -62,7 +62,7 @@ class Contact
     private string $labelCountry;
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getFirstname(): ?string
     {
@@ -81,7 +81,7 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getLastname(): ?string
     {
@@ -100,7 +100,7 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getEmail(): ?string
     {
@@ -119,7 +119,7 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getCountry(): ?string
     {
@@ -157,7 +157,7 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getMessage(): ?string
     {
