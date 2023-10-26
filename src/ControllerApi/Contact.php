@@ -43,8 +43,8 @@ class Contact extends AbstractFOSRestController
         ConstraintViolationListInterface $validationErrors
     ): View
     {
+        $contact->setLabelCountry(Countries::getName($contact->getCountry(), $request->getLocale()));
         dump($contact, $validationErrors);
-
         $templates = [
             'html' => 'includes/emails/contact.html.twig',
             'text' => 'includes/emails/contact.txt.twig'

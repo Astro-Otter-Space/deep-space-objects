@@ -192,7 +192,7 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getLabelCountry(): ?string
     {
