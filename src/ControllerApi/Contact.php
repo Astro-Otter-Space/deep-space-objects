@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class Contact extends AbstractFOSRestController
 {
@@ -33,6 +34,7 @@ class Contact extends AbstractFOSRestController
      * @param Request $request
      * @param ContactEntity $contact
      * @param ConstraintViolationListInterface $validationErrors
+     *
      * @return View
      */
     public function __invoke(
