@@ -1,6 +1,6 @@
 # Read the documentation: https://fosrestbundle.readthedocs.io/en/3.x/
 fos_rest:
-    param_fetcher_listener:  force
+    param_fetcher_listener: force
     body_listener: true
     body_converter:
         enabled: true
