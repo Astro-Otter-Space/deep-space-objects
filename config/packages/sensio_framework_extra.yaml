@@ -1,3 +1,2 @@
 sensio_framework_extra:
-    request:
-      {  enable: true, converters: true, auto_convert: true }
+    request: { enable: true, converters: true, auto_convert: true }
