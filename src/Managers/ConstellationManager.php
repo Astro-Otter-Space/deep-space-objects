@@ -54,7 +54,7 @@ readonly class ConstellationManager
      */
     private function buildListConstellation(array $listConstIds): ListConstellation
     {
-        $getConstellation = function() use($listConstIds){
+        $getConstellation = function() use($listConstIds) {
             foreach ($listConstIds as $constellationId) {
                 yield from $this->buildConstellation($constellationId);
             }
@@ -95,7 +95,7 @@ readonly class ConstellationManager
     {
         $resultAllConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
         if (true === $onlyId) {
-            return array_map(static fn($c) => $c->id, $resultAllConstellation);
+            return array_map('mb_strtolower', $resultAllConstellation);
         }
         return $this->buildListConstellation($resultAllConstellation);
     }
@@ -103,7 +103,7 @@ readonly class ConstellationManager
     /**
      * @param string $id
      *
-     * @return ConstellationDTO
+     * @return ConstellationDTO|null
      * @throws \JsonException
      */
     public function getConstellationById(string $id): ?ConstellationDTO
