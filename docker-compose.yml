@@ -15,7 +15,7 @@ services:
     # PHP
     php:
         build:
-            context: docker/php7-fpm
+            context: docker/php8-fpm
             args:
                 TIMEZONE: ${TIMEZONE}
         user: "${SITE_UID:-1000}:${SITE_GID:-1000}"
@@ -24,8 +24,8 @@ services:
         hostname: php
         volumes:
             - ".:/var/www/deep-space-objects:rw"
-            -  "./docker/php7-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf"
-            - "./docker/php7-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
+            -  "./docker/php8-fpm/pool.d/application.conf:/opt/docker/etc/php/fpm/pool.d/application.conf"
+            - "./docker/php8-fpm/www.conf:/usr/local/etc/php-fpm.d/www.conf"
             - "$SSH_AUTH_SOCK:/ssh-agent:ro"
         env_file:
           - ".env"
@@ -60,6 +60,7 @@ services:
             - .env
         environment:
             - NGINX_HOST=${NGINX_HOST}
+            - UID=${SITE_UID}
         networks:
             - dso_stack
 
@@ -117,7 +118,7 @@ services:
 
     # Kibana
     kibana:
-        image: docker.elastic.co/kibana/kibana:6.8.5
+        image: docker.elastic.co/kibana/kibana:7.17.14
         container_name: dso_kibana
         links:
             - elasticsearch
@@ -128,11 +129,13 @@ services:
 
     # redis
     redis:
-        image: redis:6.0-alpine
-        hostname: redis
-        container_name: dso_redis
-            - ALLOW_EMPTY_PASSWORD=yes
-        ports:
-            - '6379:6379'
-        networks:
-            - dso_stack
+      image: "redis:latest"
+      hostname: redis
+      container_name: dso_redis
+      environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+      restart: always
+      ports:
+        - '6379:6379'
+      networks:
+        - dso_stack

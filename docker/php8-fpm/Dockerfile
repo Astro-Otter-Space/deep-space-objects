@@ -1,13 +1,8 @@
-# Sources :
-# - https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
-# - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
 ARG PHP_VERSION=8.2
 ARG TIMEZONE
 
 FROM php:${PHP_VERSION}-fpm
 MAINTAINER HamHamFonFon <balistik.fonfon@gmail.com>
-USER root
-
 # Utils
 RUN apt-get update && \
     apt-get install -y \
@@ -15,6 +10,7 @@ RUN apt-get update && \
     curl \
     less \
     vim \
+    git \
     libicu-dev \
     libmemcached-dev \
     zlib1g-dev \
@@ -48,14 +44,16 @@ RUN docker-php-ext-configure opcache --enable-opcache \
 # APCU
 RUN pecl install apcu && docker-php-ext-enable apcu
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer --version \
-    && chmod 755 /usr/local/bin/composer
+# Create a group with GID 1000
+RUN groupadd -g 1000 sitegroup
 
-# Change uid and gid nginx user
-#RUN usermod -u ${SITE_UID} www-data \
-#    && groupmod -g ${SITE_UID} www-data
+# Create a user named "site" with UID 1000 and GID 1000
+RUN useradd -ms /bin/bash --uid 1000 --gid 1000 site
+USER site
+
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Create directeories and add rights
 RUN mkdir -p /var/www/.composer && \
@@ -120,48 +118,20 @@ RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebu
 RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-# XDEBUG
-#RUN echo "xdebug.remote_enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN echo "xdebug.max_nesting_level=500" >> /usr/local/etc/php/conf.d/030-custom.ini
 # Custom options
 RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
 RUN echo "memory_limit= 2G" >> /usr/local/etc/php/conf.d/030-custom.ini
 
 # NPM & Node
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
-#RUN apt-get install -y nodejs npm \
-#  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 12
-
-# build tools
-#RUN apt-get install -y build-essential
-
-# yarn package manager
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-
-# bugfix: remove cmdtest to install yarn correctly.
-#RUN apt-get remove -y cmdtest
-RUN apt-get update
-RUN apt-get install -y yarn
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
 
 # Clear archives in apt cache folder
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-#RUN chmod +x /usr/local/bin/docker-entrypoint
-#ENTRYPOINT ["docker-entrypoint"]
-
-# Add user for Symfony application
-#RUN addgroup --gid ${SITE_GID} www && adduser --uid ${SITE_UID} --gid www www
-RUN addgroup --system --gid 1000 site && \
-    adduser --system --uid 1000 --gid 1000 site
-
 # Copy existing application directory permissions
 COPY --chown=site:site . /var/www/deep-space-objects
-USER site
 
 EXPOSE 9000
 CMD ["php-fpm"]
