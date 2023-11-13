@@ -19,6 +19,7 @@
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/cors-bundle": "^2.3",
         "ruflin/elastica": "^7.0",
+        "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "^5.4",
         "symfony/console": "^5.4",
         "symfony/dotenv": "^5.4",
