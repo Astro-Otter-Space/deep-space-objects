@@ -11,11 +11,11 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-readonly class ConstellationItem extends AbstractFOSRestController
+class ConstellationItem extends AbstractFOSRestController
 {
 
     public function __construct(
-        private ConstellationManager $constellationManager
+        private readonly ConstellationManager $constellationManager
     ) {}
 
     /**
