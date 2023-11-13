@@ -32,7 +32,7 @@ class ConstellationCollection extends AbstractFOSRestController
     public function getConstellationsCollection(): View
     {
         try {
-            $listConstellations = $this->constellationManager->getAllConstellations();
+            $listConstellations = $this->constellationManager->getAllConstellations(null);
         } catch (\Exception $e) {
             throw new NotFoundHttpException('Constellations list not found');
         }

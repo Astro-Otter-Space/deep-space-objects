@@ -136,7 +136,7 @@ final class Sitemap extends AbstractController
         }*/
 
 
-        $listConstellation = $constellationManager->getAllConstellations();
+        $listConstellation = $constellationManager->getAllConstellations(null);
 
         /** @var ConstellationDTO $constellation */
         foreach ($listConstellation as $constellation) {

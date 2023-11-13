@@ -34,7 +34,7 @@ final class AllConstellations extends AbstractController
     ): Response
     {
         $result = [];
-        $listConstellations = $constellationManager->getAllConstellations();
+        $listConstellations = $constellationManager->getAllConstellations(null);
         $result['list_constellation'] = $constellationDataTransformer->listVignettesView($listConstellations);
 
         $response = $this->render('pages/constellations.html.twig', $result);

@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ConstellationItem extends AbstractFOSRestController
+readonly class ConstellationItem extends AbstractFOSRestController
 {
 
     public function __construct(
@@ -22,9 +22,15 @@ class ConstellationItem extends AbstractFOSRestController
      * @Route("/constellation/item/{id}", name="api_get_item_constellation", methods={"GET"})
      * @param string $id
      * @return View
+     * @throws \JsonException
+     * @throws \ReflectionException
      */
     public function getConstellationItemAction(string $id): View
     {
+        if (!in_array($id, $this->constellationManager->getAllConstellations(true), true)) {
+            throw new NotFoundHttpException(sprintf('Constellation "%s" not find.', $id));
+        }
+
         try {
             $constellation = $this->constellationManager->getConstellationById($id);
         } catch (\Exception $e) {

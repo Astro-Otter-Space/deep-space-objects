@@ -10,12 +10,8 @@ use App\Repository\ConstellationRepository;
  * Class ConstellationManager
  * @package App\Managers
  */
-class ConstellationManager
+readonly class ConstellationManager
 {
-    /** @var ConstellationRepository  */
-    private ConstellationRepository $constellationRepository;
-    /** @var string */
-    private string $locale;
 
     /**
      * ConstellationManager constructor.
@@ -23,12 +19,11 @@ class ConstellationManager
      * @param ConstellationRepository $constellationRepository
      * @param string $locale
      */
-    public function __construct(ConstellationRepository $constellationRepository, string $locale)
-    {
-        $this->constellationRepository = $constellationRepository;
-        $this->locale = $locale;
-    }
-
+    public function __construct(
+        private ConstellationRepository $constellationRepository,
+        private string                  $locale
+    )
+    { }
 
     /**
      * Build a constellation entity from ElasticSearch request by $id
@@ -91,13 +86,17 @@ class ConstellationManager
 
 
     /**
-     * @return ListConstellation
+     * @param bool $onlyId
+     * @return ListConstellation|array
      * @throws \JsonException
      * @throws \ReflectionException
      */
-    public function getAllConstellations(): ListConstellation
+    public function getAllConstellations(?bool $onlyId): ListConstellation|array
     {
         $resultAllConstellation = $this->constellationRepository->setLocale($this->locale)->getAllConstellation();
+        if (true === $onlyId) {
+            return array_map(static fn($c) => $c->id, $resultAllConstellation);
+        }
         return $this->buildListConstellation($resultAllConstellation);
     }
 
