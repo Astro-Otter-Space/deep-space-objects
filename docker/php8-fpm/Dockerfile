@@ -1,7 +1,7 @@
 # Sources :
 # - https://framagit.org/nicolasunivlr/docker-symfony4/blob/master/php7-fpm/Dockerfile
 # - https://github.com/NafaaAzaiez/symfony-rest-api-init/blob/master/Dockerfile
-ARG PHP_VERSION=7.4
+ARG PHP_VERSION=8.2
 ARG TIMEZONE
 
 FROM php:${PHP_VERSION}-fpm
@@ -131,7 +131,7 @@ RUN echo "short_open_tag = Off" >> /usr/local/etc/php/conf.d/030-custom.ini
 RUN echo "memory_limit= 2G" >> /usr/local/etc/php/conf.d/030-custom.ini
 
 # NPM & Node
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
 #RUN apt-get install -y nodejs npm \
 #  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 12
 
