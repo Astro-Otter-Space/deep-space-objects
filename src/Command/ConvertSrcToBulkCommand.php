@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class ConvertSrcToBulkCommand extends Command
 {
-    protected static $defaultName = "dso:convert-bulk";
+    protected static string $defaultName = "dso:convert-bulk";
 
     private string $kernelRoute;
     private CachePoolInterface $cacheUtil;
@@ -80,8 +80,8 @@ class ConvertSrcToBulkCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
-     * @throws \Exception
+     * @return int
+     * @throws \JsonException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -206,7 +206,12 @@ class ConvertSrcToBulkCommand extends Command
                         /**
                          * STEP 2 : import data
                          */
-                        $bulk = $this->dsoRepository->bulkImport($bulkData);
+                        try {
+                            $bulk = $this->dsoRepository->bulkImport($bulkData);
+                        } catch (\Exception $e) {
+                            $output->writeln($e->getMessage());
+                        }
+
 
                         if (true === $bulk) {
                             $output->writeln('Wait indexing new data...');
