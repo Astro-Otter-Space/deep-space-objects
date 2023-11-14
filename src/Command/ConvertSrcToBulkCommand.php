@@ -117,7 +117,7 @@ class ConvertSrcToBulkCommand extends Command
                 $data = $this->openFile($inputFile);
                 $bulkData = [];
                 if (JSON_ERROR_NONE === json_last_error()) {
-                    $handle = fopen($outputFilename, 'w');
+                    $handle = fopen($outputFilename, 'wb');
 
                     /**
                      * STEP 1 : build bulk
@@ -167,7 +167,7 @@ class ConvertSrcToBulkCommand extends Command
                             } elseif ('full' === $typeImport) {
                                 $bulkLine = $this->buildCreateLine($type, $id);
                                 fwrite($handle, $bulkLine . PHP_EOL);
-                                fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
+                                fwrite($handle, mb_convert_encoding($lineReplace, 'ISO-8859-1') . PHP_EOL);
                             }
 
                             $output->writeln(sprintf('[%s] item %s', $mode, $id));
@@ -184,7 +184,7 @@ class ConvertSrcToBulkCommand extends Command
                                     $bulkData[] = [
                                         'idDoc' => self::md5ForId($id),
                                         'mode' => 'update',
-                                        'data' => json_decode(utf8_decode($lineReplace), true, 512, JSON_THROW_ON_ERROR)
+                                        'data' => json_decode(mb_convert_encoding($lineReplace, 'ISO-8859-1'), true, 512, JSON_THROW_ON_ERROR)
                                     ];
                                     $output->writeln(sprintf('[%s] item %s', $mode, $id));
                                 }
@@ -194,7 +194,6 @@ class ConvertSrcToBulkCommand extends Command
                                 fwrite($handle, $bulkLine . PHP_EOL);
                                 fwrite($handle, utf8_decode($lineReplace) . PHP_EOL);
                             }
-
                         }
                     }
 
@@ -206,8 +205,8 @@ class ConvertSrcToBulkCommand extends Command
                             $bulk = $this->dsoRepository->bulkImport($bulkData);
                         } catch (\Exception $e) {
                             $output->writeln($e->getMessage());
+                            $output->writeln($bulkData);
                         }
-
 
                         if (true === $bulk) {
                             $output->writeln('Wait indexing new data...');
