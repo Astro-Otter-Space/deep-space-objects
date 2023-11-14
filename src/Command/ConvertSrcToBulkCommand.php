@@ -1,15 +1,11 @@
 <?php
 
-//declare(strict_types=1);
-
 namespace App\Command;
 
 use App\Service\Cache\CachePoolInterface;
 use App\Classes\Utils;
 use App\Entity\BDD\UpdateData;
 use App\Entity\DTO\DsoDTO;
-use App\Entity\ES\Dso;
-use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -25,7 +21,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class ConvertSrcToBulkCommand extends Command
 {
-    protected static string $defaultName = "dso:convert-bulk";
+    protected static $defaultName = "dso:convert-bulk";
 
     private string $kernelRoute;
     private CachePoolInterface $cacheUtil;
