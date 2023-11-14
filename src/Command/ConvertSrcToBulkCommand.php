@@ -205,7 +205,6 @@ class ConvertSrcToBulkCommand extends Command
                             $bulk = $this->dsoRepository->bulkImport($bulkData);
                         } catch (\Exception $e) {
                             $output->writeln($e->getMessage());
-                            $output->writeln($bulkData);
                         }
 
                         if (true === $bulk) {
@@ -255,6 +254,7 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         } else {
                             $output->writeln("No bulk import");
+                            $output->writeln($bulkData);
                         }
                     }
 
