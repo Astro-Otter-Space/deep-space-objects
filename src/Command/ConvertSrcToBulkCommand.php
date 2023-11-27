@@ -94,12 +94,10 @@ class ConvertSrcToBulkCommand extends Command
         if ($input->hasArgument('type') && in_array($input->getArgument('type'), self::$listIndexType, true)) {
 
             $type = $input->getArgument('type');
-
             $inputFilename = sprintf('%s.src.json', $type);
             $inputFile = $this->kernelRoute . self::PATH_SOURCE . $inputFilename;
 
             $outputFilename = $this->kernelRoute . self::BULK_SOURCE . sprintf('%s.bulk.json', $type);
-
             $outputDirName = dirname($outputFilename);
 
             if (!file_exists($outputDirName)) {
@@ -161,7 +159,7 @@ class ConvertSrcToBulkCommand extends Command
                                 $bulkData[] = [
                                     'idDoc' => self::md5ForId($id),
                                     'mode' => 'create',
-                                    'data' => json_decode(utf8_decode($lineReplace), true, 512, JSON_THROW_ON_ERROR)
+                                    'data' => json_decode(mb_convert_encoding($lineReplace, 'ISO-8859-1'), true, 512, JSON_THROW_ON_ERROR)
                                 ];
 
                             } elseif ('full' === $typeImport) {
@@ -201,6 +199,7 @@ class ConvertSrcToBulkCommand extends Command
                         /**
                          * STEP 2 : import data
                          */
+                        $bulk = false;
                         try {
                             $bulk = $this->dsoRepository->bulkImport($bulkData);
                         } catch (\Exception $e) {
@@ -254,7 +253,6 @@ class ConvertSrcToBulkCommand extends Command
                             }
                         } else {
                             $output->writeln("No bulk import");
-                            $output->writeln($bulkData);
                         }
                     }
 
