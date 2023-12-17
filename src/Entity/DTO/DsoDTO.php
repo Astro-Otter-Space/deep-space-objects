@@ -41,6 +41,7 @@ final class DsoDTO implements DTOInterface
     private ?string $discover = null;
     private ?int $discoverYear = null;
     private ?string $astrobinId = null;
+    #[Groups(['search'])]
     private ?Image $astrobin = null;
     private ?User  $astrobinUser = null;
     private ?array $geometry = null;
