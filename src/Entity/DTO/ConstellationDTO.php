@@ -16,7 +16,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 final class ConstellationDTO implements DTOInterface
 {
 
-    #[Groups(['search'])]
     private string $id;
     private string $elasticSearchId;
     private string $absoluteUrl;
@@ -24,10 +23,11 @@ final class ConstellationDTO implements DTOInterface
     private string $locale;
     private array $geometry;
     private array $geometryLine;
+    #[Groups(['search'])]
     private ?string $image;
     private ?string $map;
+    #[Groups(['search'])]
     private ?string $cover;
-//    private $map
     #[Groups(['search'])]
     private ?string $generic;
     #[Groups(['search'])]
