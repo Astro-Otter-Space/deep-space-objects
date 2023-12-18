@@ -46,7 +46,7 @@ class Search extends AbstractFOSRestController
 
         try {
             $listDso = $dsoManager->searchDsoByTerms($searchTerm);
-            var_dump($listDso);
+            echo '<pre>'; var_dump($listDso); echo '</pre>';
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
