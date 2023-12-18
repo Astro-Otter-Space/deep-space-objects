@@ -60,7 +60,7 @@ class Search extends AbstractFOSRestController
             $listConstellation = $serializer->normalize($listConstellation, null, ['groups' => 'search']);
         }
 
-        $formatedData = ['dsos' => $listDso, 'constellations' => listConstellation];
+        $formatedData = ['dsos' => $listDso, 'constellations' => $listConstellation];
         $view = View::create();
         $view->setData(array_filter($formatedData));
         $view->setFormat('json');
