@@ -46,7 +46,6 @@ class Search extends AbstractFOSRestController
 
         try {
             $listDso = $dsoManager->searchDsoByTerms($searchTerm);
-            echo '<pre>'; var_dump($listDso); echo '</pre>';
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
@@ -61,7 +60,7 @@ class Search extends AbstractFOSRestController
             $listConstellation = $serializer->normalize($listConstellation, null, ['groups' => 'search']);
         }
 
-
+	echo '<pre>'; var_dump(...$listDso); echo '</pre>';
         $formatedData = [...$listDso, []];
         $view = View::create();
         $view->setData(array_filter($formatedData));

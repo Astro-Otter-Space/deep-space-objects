@@ -19,6 +19,7 @@ final class DsoDTO implements DTOInterface
     private string $absoluteUrl;
     private string $locale;
     private ?string $updatedAt = null;
+    #[Groups(['search'])]
     private Dso $dso;
     private string $name;
     #[Groups(['search'])]
@@ -40,9 +41,11 @@ final class DsoDTO implements DTOInterface
     private ?DTOInterface $constellation;
     private ?string $discover = null;
     private ?int $discoverYear = null;
+    #[Groups(['search'])]
     private ?string $astrobinId = null;
     #[Groups(['search'])]
     private ?Image $astrobin = null;
+    #[Groups(['search'])]
     private ?User  $astrobinUser = null;
     private ?array $geometry = null;
     private ?string $dim = null;
