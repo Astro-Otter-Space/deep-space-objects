@@ -61,7 +61,7 @@ class Search extends AbstractFOSRestController
         }
 
 
-        $formatedData = [...$listDso, []];
+        $formatedData = ['dsos' => ...$listDso, 'constellations' => []];
         $view = View::create();
         $view->setData(array_filter($formatedData));
         $view->setFormat('json');
