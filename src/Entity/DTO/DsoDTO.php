@@ -19,7 +19,6 @@ final class DsoDTO implements DTOInterface
     private string $absoluteUrl;
     private string $locale;
     private ?string $updatedAt = null;
-    #[Groups(['search'])]
     private Dso $dso;
     private string $name;
     #[Groups(['search'])]
