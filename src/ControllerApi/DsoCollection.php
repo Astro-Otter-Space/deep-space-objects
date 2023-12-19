@@ -50,7 +50,7 @@ class DsoCollection extends AbstractFOSRestController
         DsoRepository $dsoRepository
     ): View
     {
-        $request->setLocale($request->query->get('_locale') ?? 'en');
+        $request->setLocale($request->query->get('_locale'));
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
         $filters = [];
@@ -116,7 +116,8 @@ class DsoCollection extends AbstractFOSRestController
         $formatedData = $serializer->normalize([
             'data' => $listDso->getIterator()->getArrayCopy(),
             'filters' => $aggregates,
-            'total' =>  $nbItems ?? 0
+            'total' =>  $nbItems ?? 0,
+            '_locale' => $request->query->get('_locale')
         ]);
 
         $view = View::create();
