@@ -50,7 +50,7 @@ class DsoCollection extends AbstractFOSRestController
         DsoRepository $dsoRepository
     ): View
     {
-        var_dump($request->attributes->get('_locale'));
+        var_dump($request->attributes->get('_locale'), $request->query->get('_locale'));
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
         $filters = [];
