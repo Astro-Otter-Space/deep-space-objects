@@ -15,6 +15,7 @@ use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -32,7 +33,6 @@ class DsoCollection extends AbstractFOSRestController
     /**
      * @Route("/dso/list", name="api_get_dso_collection", methods={"GET"})
      *
-     * @QueryParam(name="language", requirements="\w+", default="en")
      * @QueryParam(name="constellation", requirements="\w+", default="")
      * @QueryParam(name="catalog", requirements="\w+", default="")
      * @QueryParam(name="type", requirements="\w+", default="")
@@ -45,13 +45,13 @@ class DsoCollection extends AbstractFOSRestController
      * @return View
      */
     public function getDsoListAction(
+        Request $request,
         ParamFetcherInterface $paramFetcher,
         DsoRepository $dsoRepository
     ): View
     {
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
-	$locale = (string)$paramFetcher->get('language') ?? 'en';
         $filters = [];
 
         // Constellation
@@ -99,7 +99,7 @@ class DsoCollection extends AbstractFOSRestController
         });
 
         [$listDsoId, $aggregates, $nbItems] = $this->dsoRepository
-            ->setLocale($locale)
+            ->setLocale($request->getLocale())
             ->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
         try {
