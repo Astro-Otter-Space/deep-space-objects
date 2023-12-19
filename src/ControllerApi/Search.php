@@ -49,16 +49,16 @@ class Search extends AbstractFOSRestController
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $listDso = $serializer->normalize($listDso, null, ['groups' => 'search']);
+            $listDso = (0 < iterator_count($listDso)) ? $serializer->normalize($listDso, null, ['groups' => 'search']) : [];
         }
 
         try {
             $listConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
-            var_dump(iterator_count($listConstellation));
+            var_dump();
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $listConstellation = $serializer->normalize($listConstellation, null, ['groups' => 'search']);
+            $listConstellation = (0 < iterator_count($listConstellation)) ? $serializer->normalize($listConstellation, null, ['groups' => 'search']) : [];
         }
 
         $formatedData = ['dsos' => $listDso, 'constellations' => $listConstellation];
