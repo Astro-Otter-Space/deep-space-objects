@@ -54,7 +54,7 @@ class Search extends AbstractFOSRestController
 
         try {
             $listConstellation = $constellationManager->searchConstellationsByTerms($searchTerm);
-            var_dump($listConstellation);
+            var_dump(iterator_count($listConstellation));
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
