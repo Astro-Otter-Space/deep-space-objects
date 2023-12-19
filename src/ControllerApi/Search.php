@@ -49,7 +49,7 @@ class Search extends AbstractFOSRestController
         } catch (\Exception $e) {
             throw new WsException($e->getMessage());
         } finally {
-            $listDso = (0 < iterator_count($listDso)) ? $serializer->normalize($listDso, null, ['groups' => 'search']) ?? [];
+            $listDso = $serializer->normalize($listDso, null, ['groups' => 'search']) ?? [];
         }
 
         try {
