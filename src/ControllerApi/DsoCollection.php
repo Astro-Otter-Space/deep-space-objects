@@ -32,6 +32,7 @@ class DsoCollection extends AbstractFOSRestController
     /**
      * @Route("/dso/list", name="api_get_dso_collection", methods={"GET"})
      *
+     * @QueryParam(name="locale", requirements="\w+", default="en")
      * @QueryParam(name="constellation", requirements="\w+", default="")
      * @QueryParam(name="catalog", requirements="\w+", default="")
      * @QueryParam(name="type", requirements="\w+", default="")
@@ -50,7 +51,7 @@ class DsoCollection extends AbstractFOSRestController
     {
         $offset = (int)$paramFetcher->get('offset');
         $limit = (int)$paramFetcher->get('limit');
-
+	$locale = (string)$paramFetcher->get('locale') ?? 'en';
         $filters = [];
 
         // Constellation
@@ -98,7 +99,7 @@ class DsoCollection extends AbstractFOSRestController
         });
 
         [$listDsoId, $aggregates, $nbItems] = $this->dsoRepository
-            ->setLocale('en')
+            ->setLocale($locale)
             ->getObjectsCatalogByFilters($offset, $filters, $limit, true);
 
         try {
