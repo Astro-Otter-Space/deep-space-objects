@@ -38,7 +38,8 @@ services:
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
-        tags: [kernel.event_subscriber]
+        tags: 
+            - { name: 'kernel.event_subscriber' }
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
