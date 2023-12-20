@@ -3,4 +3,4 @@ sensio_framework_extra:
     router:
         annotations: true
         defaults:
-        locale: '%locale%'
+            locale: '%locale%'
