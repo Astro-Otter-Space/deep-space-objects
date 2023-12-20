@@ -17,13 +17,4 @@ web_controllers:
 rest_controller:
     resource: ../../src/ControllerApi/
     type: annotation
-    prefix: 
-        en: /api
-        fr: /api/{_locale}
-        de: /api/{_locale}
-        es: /api/{_locale}
-        pt: /api/{_locale}
-    requirements:
-        _locale: '%app_locales%'
-    defaults:
-        _locale: '%locale%'
+    prefix: /api
