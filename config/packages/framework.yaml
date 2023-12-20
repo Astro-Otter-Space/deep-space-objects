@@ -18,4 +18,4 @@ framework:
     form: true
     validation: { enable_annotations: true }
     set_locale_from_accept_language: true
-    set_content_language_from_locale: false
+    set_content_language_from_locale: true
