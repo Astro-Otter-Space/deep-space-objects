@@ -61,7 +61,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::REQUEST => [
-                ['onKernelRequest', 17]
+                ['onKernelRequest', 0]
             ]
         ];
     }
