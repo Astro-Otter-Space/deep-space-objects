@@ -17,4 +17,6 @@ framework:
     trusted_hosts: '%env(TRUSTED_HOSTS)%'
     form: true
     validation: { enable_annotations: true }
-
+    set_locale_from_query: true
+    set_locale_from_accept_language: false
+    set_content_language_from_locale: false
