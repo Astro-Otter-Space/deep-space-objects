@@ -15,17 +15,14 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocaleSubscriber implements EventSubscriberInterface
 {
 
-    private string $defaultLocale;
-
     /**
      * LocaleSubscriber constructor.
      *
      * @param string $defaultLocale
      */
-    public function __construct(string $defaultLocale = 'en')
-    {
-        $this->defaultLocale = $defaultLocale;
-    }
+    public function __construct(
+        private string $defaultLocale = 'en'
+    ) { }
 
     /**
      * @param RequestEvent $event
@@ -41,7 +38,7 @@ class LocaleSubscriber implements EventSubscriberInterface
         $path = $request->getPathInfo();
         $pathParts = explode('/', trim($path, '/'));
         
-        if (in_array('api', $pathParts, true)) {
+        if (in_array('v1', $pathParts, true)) {
             if ($locale = $request->query->get('_locale')) {
                 $request->getSession()->set('_locale', $locale);
             }

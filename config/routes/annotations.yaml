@@ -17,4 +17,4 @@ web_controllers:
 rest_controller:
     resource: ../../src/ControllerApi/
     type: annotation
-    prefix: /api
+    prefix: /v1
