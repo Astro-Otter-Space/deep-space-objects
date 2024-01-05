@@ -32,9 +32,9 @@ class DebugController extends AbstractController
     {
     
     	try {
-    		$publish = $publishService->publish('coucou');
+    	    $publish = $publishService->publish('coucou');
     	} catch (\Exception $e) {
-    		echo '<pre>'; print_r($e->message);
+    	    echo '<pre>'; print_r($e->message);
     	}
     	
 	return new Response(json_encode($publish));
