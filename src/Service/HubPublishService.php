@@ -11,7 +11,7 @@ class HubPublishService
 {
 
 	public function __construct(
-		protected ?string $mercureUrl;
+		protected ?string $mercureUrl,
 		private HubInterface $hub
 	) { }
 	
