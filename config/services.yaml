@@ -91,6 +91,10 @@ services:
             $astrobinApiKey: '%astrobinApiKey%'
             $astrobinApiSecret: '%astrobinApiSecret%'
 
+    App\Service\NotificationService:
+        autowire: true
+        autoconfigure: true    
+
     # Exception listener
     App\EventListener\ExceptionListener:
         arguments: ['@twig', '%kernel.environment%']

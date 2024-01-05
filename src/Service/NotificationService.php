@@ -10,6 +10,8 @@ use Symfony\Component\Mercure\Update;
 class NotificationService
 {
 
+    private static string $topic = 'notifications/all';
+
     public function __construct(
         HubInterface $hub,
         protected ?string $mercureUrl,
@@ -21,7 +23,7 @@ class NotificationService
     )
     {
         $update = new Update(
-	    $this->mercureUrl,
+	    sprintf('%s/%s', $this->mercureUrl, self::$topic),
 	    json_encode(['message' => $message, 'date' => new \DateTime('now')])
         );
 
