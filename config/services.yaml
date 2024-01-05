@@ -34,7 +34,6 @@ services:
             string $senderMail: '%env(SENDER_MAIL)%'
             string $tipeeeLink: '%tipeee.link%'
             string $twitterLink: '%twitter.link%'
-            string $mercureUrl: '%mercureUrl%'
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
         tags: 
