@@ -28,11 +28,11 @@ class DebugController extends AbstractController
     /**
      * @Route("/publish", name="debug_mercure_publisher")
      */
-    public function debugPublish(Request $request, HubPublishService $publishService): Response
+    public function debugPublish(Request $request, NotificationService $notificationService): Response
     {
     
     	try {
-    	    $publish = $publishService->publish('coucou');
+    	    $publish = $notificationService->send('coucou');
     	} catch (\Exception $e) {
     	    echo '<pre>'; print_r($e->message);
     	}

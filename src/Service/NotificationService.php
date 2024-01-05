@@ -7,7 +7,7 @@ use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 
 
-class HubPublishService
+class NotificationService
 {
 
     public function __construct(
@@ -16,7 +16,7 @@ class HubPublishService
     ) { }
 	
 
-    public function publish(
+    public function send(
         string $message
     )
     {
