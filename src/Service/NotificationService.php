@@ -15,7 +15,9 @@ class NotificationService
     public function __construct(
         HubInterface $hub,
         protected ?string $mercureUrl,
-    ) { }
+    ) { 
+        $this->hub = $hub;
+    }
 	
 
     public function send(
