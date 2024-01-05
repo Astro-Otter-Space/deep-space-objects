@@ -7,7 +7,7 @@ namespace App\Controller;
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
-use App\Service\HubPublishService;
+use App\Service\NotificationService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Services\GetImage;
