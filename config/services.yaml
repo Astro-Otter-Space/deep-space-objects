@@ -94,6 +94,8 @@ services:
     App\Service\NotificationService:
         autowire: true
         autoconfigure: true    
+        arguments:
+            $mercureUrl: '%env(MERCURE_PUBLIC_URL)%'	
 
     # Exception listener
     App\EventListener\ExceptionListener:
