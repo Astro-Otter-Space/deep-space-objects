@@ -1,0 +1,12 @@
+mercure:
+  hubs:
+    default:
+      url: https://mercure.astro-otter.space/.well-known/mercure
+      jwt:
+        secret: '!ChangeMe!'
+        publish: ['foo', 'https://example.com/foo']
+        subscribe: ['bar', 'https://example.com/bar']
+        algorithm: 'hmac.sha256'
+        provider: 'My\Provider'
+        factory: 'My\Factory'
+        value: 'my.jwt'
