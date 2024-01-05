@@ -31,6 +31,7 @@
         "symfony/http-client": "5.4.*",
         "symfony/intl": "^5.4",
         "symfony/mailer": "5.4.*",
+        "symfony/mercure": "^0.6.4",
         "symfony/monolog-bundle": "^3.6",
         "symfony/process": "5.4.*",
         "symfony/requirements-checker": "^1.1",
