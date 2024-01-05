@@ -34,10 +34,10 @@ class DebugController extends AbstractController
     	try {
     	    $publish = $notificationService->send('coucou');
     	} catch (\Exception $e) {
-    	    echo '<pre>'; print_r($e->message);
+    	    echo '<pre>Error: '; print_r($e->message);
     	}
     	
-	return new Response(json_encode($publish));
+	return new Response($publish);
     }
 
     /**
