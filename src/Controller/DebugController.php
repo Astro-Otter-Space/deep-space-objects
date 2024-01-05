@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\DataTransformer\DsoDataTransformer;
 use App\Managers\DsoManager;
 use App\Repository\DsoRepository;
+use App\Service\HubPublishService;
 use AstrobinWs\Exceptions\WsException;
 use AstrobinWs\Exceptions\WsResponseException;
 use AstrobinWs\Services\GetImage;
@@ -24,6 +25,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class DebugController extends AbstractController
 {
 
+    /**
+     * @Route("/publish", name="debug_mercure_publisher")
+     */
+    public function debugPublish(Request $request, HubPublishService $publishService): Response
+    {
+    
+    	try {
+    		$publish = $publishService->publish('coucou');
+    	} catch (\Exception $e) {
+    		echo '<pre>'; print_r($e->message);
+    	}
+    	
+	return new Response(json_encode($publish));
+    }
 
     /**
      * @Route("/astrobin/image/{id}", name="debug_astrobin_image")
