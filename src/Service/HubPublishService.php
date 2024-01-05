@@ -22,7 +22,7 @@ class HubPublishService
 	{
 		$update = new Update(
 			$this->mercureUrl,
-			json_encode(['message' => $message, 'date' => new DateTime('now'))
+			json_encode(['message' => $message, 'date' => new DateTime('now')])
 		);
 		
 		try { 
