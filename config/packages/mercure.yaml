@@ -1,5 +1,0 @@
-mercure:
-    hubs:
-        default:
-          url: 'https://mercure.astro-otter.space/.well-known/mercure'
-          jwt: '%env(MERCURE_PUBLISHER_JWT_KEY)%'

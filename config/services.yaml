@@ -17,7 +17,8 @@ parameters:
     redisUrl: '%env(REDIS_URL)%'
     displayPopupPage: 2
     popupState: "enabled"
-
+    mercureUrl: '%env(MERCURE_PUBLIC_URL)%'
+    mercureJwt: '%env(MERCURE_PUBLISHER_JWT_KEY)%'  
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -35,7 +36,8 @@ services:
             string $senderMail: '%env(SENDER_MAIL)%'
             string $tipeeeLink: '%tipeee.link%'
             string $twitterLink: '%twitter.link%'
-
+            string $mercureUrl: '%mercureUrl%'
+            string $mercureJwt: '%mercureJwt%'  
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
         tags: 
