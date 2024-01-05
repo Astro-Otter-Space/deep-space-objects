@@ -14,7 +14,6 @@ class NotificationService
 
     public function __construct(
         HubInterface $hub,
-        protected ?string $mercureUrl,
     ) { 
         $this->hub = $hub;
     }
@@ -25,7 +24,7 @@ class NotificationService
     )
     {
         $update = new Update(
-	    sprintf('%s/%s', $this->mercureUrl, self::$topic),
+	    sprintf('%s/%s', 'https://api.astro-otter.space', self::$topic),
 	    json_encode(['message' => $message, 'date' => new \DateTime('now')])
         );
 

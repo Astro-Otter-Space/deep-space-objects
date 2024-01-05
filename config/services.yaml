@@ -17,7 +17,6 @@ parameters:
     redisUrl: '%env(REDIS_URL)%'
     displayPopupPage: 2
     popupState: "enabled"
-    mercureUrl: '%env(MERCURE_PUBLIC_URL)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -93,9 +92,7 @@ services:
 
     App\Service\NotificationService:
         autowire: true
-        autoconfigure: true    
-        arguments:
-            $mercureUrl: '%env(MERCURE_PUBLIC_URL)%'	
+        autoconfigure: true	
 
     # Exception listener
     App\EventListener\ExceptionListener:
