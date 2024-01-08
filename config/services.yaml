@@ -52,6 +52,8 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+    App\Controller\DebugController:
+        arguments: ['@profiler']
 
     App\ControllerApi\:
         resource: '../src/ControllerApi'
