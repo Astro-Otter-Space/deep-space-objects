@@ -34,7 +34,6 @@ services:
             string $senderMail: '%env(SENDER_MAIL)%'
             string $tipeeeLink: '%tipeee.link%'
             string $twitterLink: '%twitter.link%'
-    Symfony\Component\HttpKernel\Profiler\Profiler: '@profiler'
             
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']
@@ -52,8 +51,6 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-    App\Controller\DebugController:
-        arguments: ['@profiler']
 
     App\ControllerApi\:
         resource: '../src/ControllerApi'
