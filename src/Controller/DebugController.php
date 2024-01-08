@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Controller;
 
 use App\DataTransformer\DsoDataTransformer;
@@ -24,9 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DebugController extends AbstractController
 {
 
-    /**
-     * @Route("/publish", name="debug_mercure_publisher")
-     */
+    #[Route('/publish', name='debug_mercure_publisher')]
     public function debugPublish(
         Request $request, 
         NotificationService $notificationService
