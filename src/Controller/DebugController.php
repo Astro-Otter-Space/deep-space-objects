@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /**
  * Class DebugController
@@ -28,9 +28,9 @@ class DebugController extends AbstractController
     /**
      * @Route("/publish", name="debug_mercure_publisher")
      */
-    public function debugPublish(Request $request, NotificationService $notificationService): Response
+    public function debugPublish(Request $request, ?Profiler $profiler, NotificationService $notificationService): Response
     {
-    
+    	$profiler->enable();
     	try {
     	    $publish = $notificationService->send('coucou');
     	    echo '<pre>Send: '; var_dump($publish);
