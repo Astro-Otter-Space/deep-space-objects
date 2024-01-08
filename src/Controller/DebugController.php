@@ -33,6 +33,7 @@ class DebugController extends AbstractController
     
     	try {
     	    $publish = $notificationService->send('coucou');
+    	    echo '<pre>Send: '; var_dump($publish);
     	} catch (\Exception $e) {
     	    echo '<pre>Error: '; var_dump($e);
     	}
