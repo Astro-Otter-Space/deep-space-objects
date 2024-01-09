@@ -39,7 +39,7 @@ class DebugController extends AbstractController
     	    echo '<pre>Error: '; var_dump($e);
     	}
     	
-	return new JsonResponse([$publish, $message);
+	return new JsonResponse([$publish, $message]);
     }
 
     /**
