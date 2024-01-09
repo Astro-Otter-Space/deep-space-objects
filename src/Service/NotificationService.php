@@ -23,7 +23,7 @@ class NotificationService
         string $message
     )
     {
-        $jwt = $hub->getProvider();
+        $jwt = $this->hub->getProvider();
     
     	var_dump($hub, $jwt);
     
