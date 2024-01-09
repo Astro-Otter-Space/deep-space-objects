@@ -23,10 +23,6 @@ class NotificationService
         string $message
     )
     {
-        $jwt = $this->hub->getProvider();
-    
-    	var_dump($hub, $jwt);
-    
         $update = new Update(
 	    sprintf('%s/%s', 'https://api.astro-otter.space', self::$topic),
 	    json_encode(['message' => $message, 'date' => (new \DateTime('now'))->format('Y-m-d H:i:s')])
