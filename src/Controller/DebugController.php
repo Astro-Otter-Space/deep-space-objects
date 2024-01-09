@@ -26,12 +26,15 @@ class DebugController extends AbstractController
     #[Route('/publish', name:'debug_mercure_publisher')]
     public function debugPublish(
         Request $request, 
-        NotificationService $notificationService
+        NotificationService $notificationService,
+        DsoManager $dsoManager
     ): Response
     {
+    	$randomDso = $dsoManager->randomDsoWithImages(1);
+    
     	try {
     	    $message = [
-    	      'message' => 'New update for M31 Orion nebula.',
+    	      'message' => 'New update for ' . randomDso->current()->getName(),
     	      'date' => (new \DateTime('now'))->format('Y-m-d H:i:s')
     	    ];
     	    $publish = $notificationService->send($message);
