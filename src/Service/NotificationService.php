@@ -20,12 +20,12 @@ class NotificationService
 	
 
     public function send(
-        string $message
+        array $message
     )
     {
         $update = new Update(
 	    sprintf('%s/%s', 'https://api.astro-otter.space', self::$topic),
-	    json_encode(['message' => $message, 'date' => (new \DateTime('now'))->format('Y-m-d H:i:s')])
+	    json_encode($message)
         );
 
         return $this->hub->publish($update);

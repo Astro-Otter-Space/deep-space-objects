@@ -13,6 +13,7 @@ use AstrobinWs\Services\GetUser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,12 +30,16 @@ class DebugController extends AbstractController
     ): Response
     {
     	try {
-    	    $publish = $notificationService->send('New update for M42 Orion nebula.');
+    	    $message = [
+    	      'message' => 'New update for M31 Orion nebula.',
+    	      'date' => (new \DateTime('now'))->format('Y-m-d H:i:s')
+    	    ];
+    	    $publish = $notificationService->send($message);
     	} catch (\Exception $e) {
     	    echo '<pre>Error: '; var_dump($e);
     	}
     	
-	return new Response($publish);
+	return new JsonResponse([$publish, );
     }
 
     /**
