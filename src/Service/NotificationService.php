@@ -23,7 +23,6 @@ class NotificationService
         string $message
     )
     {
-    	$url = $request->getScheme() . '://' . $request->getHost() . '/.well-known/mercure';
         $jwt = $hub->getProvider();
     
     	var_dump($hub, $jwt);
