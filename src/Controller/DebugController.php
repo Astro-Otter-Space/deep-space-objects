@@ -36,7 +36,7 @@ class DebugController extends AbstractController
     	    $message = [
                 'message' => 'New update for ' . $randomDso->getIterator()->current()->getName(),
                 'date' => (new \DateTime('now'))->format('Y-m-d H:i:s'),
-                'type' >= array_rand(['success', 'info', 'error']);
+                'type' => array_rand(['success', 'info', 'error'])
     	    ];
     	    $publish = $notificationService->send($message);
     	} catch (\Exception $e) {
