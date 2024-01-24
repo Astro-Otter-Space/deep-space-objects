@@ -32,11 +32,13 @@ class DebugController extends AbstractController
     {
     	$randomDso = $dsoManager->randomDsoWithImages(1);
 
+        $arrayType = ['success', 'info', 'error'];
+        $randKey = array_rand($arrayType, 1);
     	try {
     	    $message = [
                 'message' => 'New update for ' . $randomDso->getIterator()->current()->getName(),
                 'date' => (new \DateTime('now'))->format('Y-m-d H:i:s'),
-                'type' => array_rand(['success', 'info', 'error'])
+                'type' => $arrayType[$randKey]
     	    ];
     	    $publish = $notificationService->send($message);
     	} catch (\Exception $e) {
