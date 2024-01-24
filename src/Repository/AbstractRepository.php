@@ -2,12 +2,12 @@
 
 namespace App\Repository;
 
-use App\Entity\DTO\ConstellationDTO;
 use App\Entity\DTO\DTOInterface;
 use App\Entity\ES\Constellation;
 use App\Entity\ES\Dso;
 use App\Entity\ES\Observation;
 use App\Helpers\UrlGenerateHelper;
+use App\Service\NotificationService;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
@@ -37,6 +37,8 @@ abstract class AbstractRepository
     protected SerializerInterface $serializer;
     protected UrlGenerateHelper $urlGeneratorHelper;
 
+    private NotificationService $notificationService;
+
     public const FROM = 0;
     public const SMALL_SIZE = 10;
     public const SIZE = 20;
@@ -50,12 +52,19 @@ abstract class AbstractRepository
      * @param Client $client
      * @param SerializerInterface $serializer
      * @param UrlGenerateHelper $urlGeneratorHelper
+     * @param NotificationService $notificationService
      */
-    public function __construct(Client $client, SerializerInterface $serializer, UrlGenerateHelper $urlGeneratorHelper)
+    public function __construct(
+        Client $client,
+        SerializerInterface $serializer,
+        UrlGenerateHelper $urlGeneratorHelper,
+        NotificationService $notificationService,
+    )
     {
         $this->client = $client;
         $this->serializer = $serializer;
         $this->urlGeneratorHelper = $urlGeneratorHelper;
+        $this->notificationService = $notificationService;
     }
 
     abstract protected function getEntity();
@@ -159,6 +168,7 @@ abstract class AbstractRepository
     }
 
     /**
+     * @deprecated
      * @param Document $document
      *
      * @return Response
@@ -196,12 +206,21 @@ abstract class AbstractRepository
             $action = null;
             if ('update' === $doc['mode']) {
                 $action = new Bulk\Action\UpdateDocument($docEs);
+                $notification = [
+                    'message' => sprintf('"%s" have been updated', $doc['data']['id']),
+                    'type' => 'info'
+                ];
 
             } else if ('create' === $doc['mode']) {
                 $action = new Bulk\Action\CreateDocument($docEs);
+                $notification = [
+                    'message' => sprintf('New object have been added: "%s"', $doc['data']['id']),
+                    'type' => 'success'
+                ];
             }
             if (!is_null($action)) {
                 $bulk->addAction($action);
+                $this->notificationService->send($notification);
             }
         }
 

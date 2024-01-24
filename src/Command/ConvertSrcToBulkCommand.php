@@ -49,7 +49,12 @@ class ConvertSrcToBulkCommand extends Command
      * @param DsoRepository $dsoRepository
      * @param $listLocales
      */
-    public function __construct(KernelInterface $kernel, CachePoolInterface $cacheUtil, EntityManagerInterface $em, DsoRepository $dsoRepository, $listLocales)
+    public function __construct(
+        KernelInterface $kernel,
+        CachePoolInterface $cacheUtil,
+        EntityManagerInterface $em,
+        DsoRepository $dsoRepository,
+        $listLocales)
     {
         $this->kernelRoute = $kernel->getProjectDir();
         $this->cacheUtil = $cacheUtil;
