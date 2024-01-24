@@ -208,6 +208,7 @@ abstract class AbstractRepository
                 $action = new Bulk\Action\UpdateDocument($docEs);
                 $notification = [
                     'message' => sprintf('"%s" have been updated', $doc['data']['id']),
+                    'date' => (new \DateTime())->format('Y-m-d H:i:s'),
                     'type' => 'info'
                 ];
 
@@ -215,6 +216,7 @@ abstract class AbstractRepository
                 $action = new Bulk\Action\CreateDocument($docEs);
                 $notification = [
                     'message' => sprintf('New object have been added: "%s"', $doc['data']['id']),
+                    'date' => (new \DateTime())->format('Y-m-d H:i:s'),
                     'type' => 'success'
                 ];
             }
