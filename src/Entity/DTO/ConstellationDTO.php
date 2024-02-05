@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\DTO;
 
+use App\Classes\Utils;
 use App\Entity\ES\Constellation;
 use App\Repository\ConstellationRepository;
 use Psr\Log\InvalidArgumentException;
@@ -32,6 +33,8 @@ final class ConstellationDTO implements DTOInterface
     private ?string $generic;
     #[Groups(['search'])]
     private ?string $alt = null;
+    #[Groups(['search'])]
+    private ?string $urlName;
     private ?string $description = null;
     private $kind;
     private $constellation;
@@ -48,11 +51,13 @@ final class ConstellationDTO implements DTOInterface
         $fieldDescription = ('en' !== $locale) ? sprintf('description_%s', $locale): 'description';
         $fieldAlt = ('en' !== $locale) ?  sprintf('alt_%s', $locale): 'alt';
 
+        $alt = $constellation->getAlt()[$fieldAlt];
         $this->setConstellation($constellation)
             ->setElasticSearchId($elasticId)
             ->setLocale($locale)
             ->setId($constellation->getId())
-            ->setAlt($constellation->getAlt()[$fieldAlt])
+            ->setAlt($alt)
+            ->setUrlName(Utils::camelCaseUrlTransform($alt))
             ->setDescription($constellation->getDescription()[$fieldDescription])
             ->setGeneric($constellation->getGen())
             ->setKind($constellation->getLoc())
@@ -209,6 +214,16 @@ final class ConstellationDTO implements DTOInterface
         return $this;
     }
 
+    public function getUrlName(): ?string
+    {
+        return $this->urlName;
+    }
+
+    public function setUrlName(?string $urlName): ConstellationDTO
+    {
+        $this->urlName = $urlName;
+        return $this;
+    }
 
     /**
      * @return mixed

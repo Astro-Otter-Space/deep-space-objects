@@ -28,7 +28,7 @@ final class DsoDTO implements DTOInterface
     private Dso $dso;
     private string $name;
     #[Groups(['search'])]
-    private string $urlName;
+    private ?string $urlName;
     #[Groups(['search'])]
     private string $fullNameAlt;
     private ?array $catalogs = null;
@@ -269,12 +269,12 @@ final class DsoDTO implements DTOInterface
         return $this;
     }
 
-    public function getUrlName(): string
+    public function getUrlName(): ?string
     {
         return $this->urlName;
     }
 
-    public function setUrlName(string $urlName): DsoDTO
+    public function setUrlName(?string $urlName): DsoDTO
     {
         $this->urlName = $urlName;
         return $this;
