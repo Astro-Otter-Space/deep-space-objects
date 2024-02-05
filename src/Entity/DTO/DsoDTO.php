@@ -15,6 +15,7 @@ final class DsoDTO implements DTOInterface
     #[Groups(['search'])]
     private string $id;
     private string $elasticSearchId;
+    #[Groups(['search'])]
     private string $relativeUrl;
     private string $absoluteUrl;
     private string $locale;
@@ -104,6 +105,7 @@ final class DsoDTO implements DTOInterface
             ->setRightAscencion($dso->getRa())
             ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
+            ->setRelativeUrl(sprintf('/test/%s', $dso->getId()))
         ;
     }
 
