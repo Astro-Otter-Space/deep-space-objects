@@ -15,13 +15,20 @@ final class DsoDTO implements DTOInterface
     #[Groups(['search'])]
     private string $id;
     private string $elasticSearchId;
-    #[Groups(['search'])]
+    /**
+     * @deprecated
+     */
     private string $relativeUrl;
+    /**
+     * @deprecated
+     */
     private string $absoluteUrl;
     private string $locale;
     private ?string $updatedAt = null;
     private Dso $dso;
     private string $name;
+    #[Groups(['search'])]
+    private string $urlName;
     #[Groups(['search'])]
     private string $fullNameAlt;
     private ?array $catalogs = null;
@@ -78,13 +85,14 @@ final class DsoDTO implements DTOInterface
 
         $catalogs = (!is_array($dso->getCatalog())) ? [$dso->getCatalog()] : $dso->getCatalog();
 
-        $distanceLy = $dso->getDistAl(); //Utils::numberFormatByLocale($dso->getDistAl()) ?? (int)$dso->getDistAl();
-        $distancePc = Utils::PARSEC*$distanceLy; // Utils::numberFormatByLocale(Utils::PARSEC * (int)$this->getDistAl()) ?? (Utils::PARSEC * (int)$this->getDistAl());
+        $distanceLy = $dso->getDistAl();
+        $distancePc = Utils::PARSEC*$distanceLy;
 
         $this->setDso($dso)
             ->setLocale($locale)
             ->setElasticSearchId($elasticId)
             ->setId(strtolower($dso->getId()))
+            ->setUrlName(Utils::camelCaseUrlTransform($alt))
             ->setAlt($alt)
             ->setAstrobinId($dso->getAstrobinId())
             ->setConstellationId($dso->getConstId())
@@ -105,7 +113,6 @@ final class DsoDTO implements DTOInterface
             ->setRightAscencion($dso->getRa())
             ->setType($dso->getType())
             ->setUpdatedAt($dso->getUpdatedAt())
-            ->setRelativeUrl(sprintf('/test/%s', $dso->getId()))
         ;
     }
 
@@ -259,6 +266,17 @@ final class DsoDTO implements DTOInterface
     public function setName(string $name): DsoDTO
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getUrlName(): string
+    {
+        return $this->urlName;
+    }
+
+    public function setUrlName(string $urlName): DsoDTO
+    {
+        $this->urlName = $urlName;
         return $this;
     }
 

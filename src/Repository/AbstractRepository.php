@@ -116,6 +116,9 @@ abstract class AbstractRepository
         /** @var DTOInterface $dto */
         $dto = new $dto($hydratedEntity, $this->getLocale(), $document->getId());
 
+        /**
+         * Only for previous version
+         */
         $dto
             ->setAbsoluteUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_URL, $dto->getLocale()))
             ->setRelativeUrl($this->urlGeneratorHelper->generateUrl($dto, Router::ABSOLUTE_PATH, $dto->getLocale()));
