@@ -288,11 +288,11 @@ final class Utils
 
     /**
      * Transform a string name into URL name
-     * @param $input
+     * @param string $input
      *
      * @return string
      */
-    public static function camelCaseUrlTransform($input): string
+    public static function camelCaseUrlTransform(string $input): string
     {
 //        /** @var \Transliterator $transliterator */
 //        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
@@ -304,6 +304,10 @@ final class Utils
 //        }
 //
 //        return implode(trim(self::GLUE_DASH), $ret);
+        if (empty($input)) {
+            return $input;
+        }
+
         $sanitization = new StringSanitization;
         return $sanitization($input);
     }

@@ -14,18 +14,18 @@ class NotificationService
 
     public function __construct(
         HubInterface $hub,
-    ) { 
+    ) {
         $this->hub = $hub;
     }
-	
+
 
     public function send(
         array $message
-    )
+    ): string
     {
         $update = new Update(
-	    sprintf('%s/%s', 'https://api.astro-otter.space', self::$topic),
-	    json_encode($message)
+            sprintf('%s/%s', 'https://api.astro-otter.space', self::$topic),
+            json_encode($message)
         );
 
         return $this->hub->publish($update);
