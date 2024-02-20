@@ -1,7 +1,7 @@
 # Deep Space Objects
 
 UPDATE 20/02/2024: this project will be deprecated as soon as possible. Frontend is temporaly deported into [Astro-Otter-Fo](https://github.com/HamHamFonFon/Astro-Otter-Fo)
-and backend+frontend transform into API Rest with API Platform / Vue 3 + nuxt in [Astro-Otter repository](https://github.com/HamHamFonFon/Astro-Otter)
+and backend+frontend redactored into API Platform / Vue3 + nuxt in [Astro-Otter repository](https://github.com/HamHamFonFon/Astro-Otter)
 
 
 Atlas for deep space objects (Symfony 5 / Elastic Search / Vue.js)
