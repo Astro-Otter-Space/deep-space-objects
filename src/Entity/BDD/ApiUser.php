@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package App\Entity
  *
  * @ORM\Entity()
- * @ORM\Table(name="api_users")
+ * @ORM\Table(name="api_users_legacy")
  * @ORM\EntityListeners({"App\EventListener\GenerateTokenListener"})
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"email"}, groups={"api_user"}, message="registration.constraint.unique")
