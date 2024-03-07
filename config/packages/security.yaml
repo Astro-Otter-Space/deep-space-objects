@@ -20,12 +20,14 @@ security:
             stateless: true
             anonymous: true
         api_login:
-            pattern: ^/v1/auth/login
+            pattern: ^/v1/auth
             stateless: true
             anonymous: true
             provider: api_entity_provider
             json_login:
-                check_path: /v1/auth/login
+                check_path: /v1/auth
+                username_path: email
+                password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
@@ -49,6 +51,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/v1/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/v1/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/v1/auth, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/v1/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/v1, roles: IS_AUTHENTICATED_FULLY}
